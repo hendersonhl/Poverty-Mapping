@@ -51,7 +51,7 @@ Below is a list of the scripts created for this project and a description of eac
 	Inputs:
 		~/Data/true_psu.csv
 		~/Data/direct_psu.csv
-                 ~/Results/hyperopt_census_psu.csv
+		~/Results/hyperopt_census_psu.csv
 	
 	Outputs: Generates results without saving
 
@@ -61,7 +61,7 @@ Below is a list of the scripts created for this project and a description of eac
 
 	Inputs:
 		~/Data/census_trim.dta
-                 ~/Results/hyperopt_census_mun.csv
+		~/Results/hyperopt_census_mun.csv
 	
 	Outputs: Generates results without saving
 
@@ -74,7 +74,7 @@ Below is a list of the scripts created for this project and a description of eac
 		~/Data/my_samples_pps_psu@.dta
 
 	Outputs:
-                 ~/Results/hyperopt_census_hh.csv
+		~/Results/hyperopt_census_hh.csv
 
 (7) xgboost_mun.py: Implements the directed hyperparameter search (hyperopt) for the municipality-level data. Generates predictions and feature importances for each sample. 
 
