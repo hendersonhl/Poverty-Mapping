@@ -20,8 +20,8 @@ Below is a list of the scripts created for this project and a description of eac
 	Dependencies: None
 
 	Inputs:
-		~/Results/true_mun.csv
-		~/Results/true_psu.csv
+		~/Data/true_mun.csv
+		~/Data/true_psu.csv
 		~/Results/bart_census_mun.csv
 		~/Results/bart_gis_mun.csv
 		~/Results/bart_all_mun.csv
@@ -31,15 +31,15 @@ Below is a list of the scripts created for this project and a description of eac
 		~/Results/baseline_all_mun.csv
 		~/Results/baseline_census_psu.csv
 
-	Outputs: Creates plots without saving
+	Outputs: Generates plots without saving
 
 (3) bart_psu.r: Implements BART for the PSU-level data and generates predictions for each sample. Also includes an illustration that calculates uncertainty intervals for the predictions. 
 
 	Dependencies: bart, matrixStats
 
 	Inputs:
-		~/xgboost/01_data/intermediate/svydata_python_psu.csv
-		~/xgboost/01_data/intermediate/xmatrix_python_psu.csv
+		~/Data/svydata_python_psu.csv
+		~/Data/xmatrix_python_psu.csv
 	
 	Outputs:
 		~/Results/bart_census_psu.csv
@@ -49,32 +49,40 @@ Below is a list of the scripts created for this project and a description of eac
 	Dependencies: pandas, numpy, statsmodels 
 
 	Inputs:
+		~/Data/true_psu.csv
+		~/Data/direct_psu.csv
+                 ~/Results/hyperopt_census_psu.csv
 	
-	Outputs:
+	Outputs: Generates results without saving
 
 (5) targeting.do: Conducts targeting exercises to examine the implications of using different poverty  maps/estimates for distributing assistance. All exercises are at the municipality level.
 
 	Dependencies: None
 
 	Inputs:
+		~/Data/census_trim.dta
+                 ~/Results/hyperopt_census_mun.csv
 	
-	Outputs:
+	Outputs: Generates results without saving
 
 (6) xgboost_hh.py: Implements the directed hyperparameter search (hyperopt) for the household-level data. Generates predictions for each sample. 
 
-	Dependencies: 
+	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
 	Inputs:
+		~/Data/census_trim.dta
+		~/Data/my_samples_pps_psu@.dta
 
 	Outputs:
+                 ~/Results/hyperopt_census_hh.csv
 
 (7) xgboost_mun.py: Implements the directed hyperparameter search (hyperopt) for the municipality-level data. Generates predictions and feature importances for each sample. 
 
 	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
 	Inputs: 
-		~/xgboost/01_data/intermediate/svydata_mun.csv
-		~/xgboost/01_data/intermediate/xmatrix_mun.csv
+		~/Data/svydata_mun.csv
+		~/Data/xmatrix_mun.csv
 
 	Outputs: 
 		~/Results/hyperopt_census_mun.csv
@@ -89,8 +97,8 @@ Below is a list of the scripts created for this project and a description of eac
 	Dependencies: matplotlib, pandas, numpy 
 
 	Inputs:
-		~/Results/true_mun.csv
-		~/Results/true_psu.csv
+		~/Data/true_mun.csv
+		~/Data/true_psu.csv
 		~/Results/hyperopt_census_mun.csv
 		~/Results/hyperopt_gis_mun.csv
 		~/Results/hyperopt_all_mun.csv
@@ -111,8 +119,8 @@ Below is a list of the scripts created for this project and a description of eac
 	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
 	Inputs:
-		~/xgboost/01_data/intermediate/svydata_python_psu.csv
-		~/xgboost/01_data/intermediate/xmatrix_python_psu.csv
+		~/Data/svydata_python_psu.csv
+		~/Data/xmatrix_python_psu.csv
 
 	Outputs:
 		~/Results/hyperopt_census_psu.csv
