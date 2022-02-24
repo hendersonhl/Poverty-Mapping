@@ -19,13 +19,13 @@ global pline = 715
 capture program drop distribute
 program define distribute
     version 17.0
-    args id prate hhsize transfer people pop
+    args muni prate hhsize transfer people pop
 	
 	* Initial distribution 
 	* Note: Here we sort municipalities by poverty rates and distribute 
 	* to the poorest municipalities, ignoring that some HHs in the marginal
 	* municipality will receive a transfer and some will not.
-	gsort -`prate' `id'     
+	gsort -`prate' `muni'     
 	gen cumsum = sum(`hhsize')  
 	gen amount = hhsize * `transfer' if cumsum <= `people'
 	
@@ -34,9 +34,9 @@ program define distribute
 	* municipality to be shared equally among all HHs in that municipality.
 	* The marginal municipality will be the one with only a fraction of HHs
 	* receiving transfers.
-	bysort `id': egen treated = count(amount)
-    bysort `id': replace treated = treated/_N
-    bysort `id': egen cumamt = total(amount)
+	bysort `muni': egen treated = count(amount)
+    bysort `muni': replace treated = treated/_N
+    bysort `muni': egen cumamt = total(amount)
     replace amount = `hhsize' * (cumamt/`pop') if treated > 0 & treated < 1
 
 	* Update income per capita
@@ -52,14 +52,14 @@ end
 
 * Open census data and create select variables
 use $inputs/census_trim.dta, clear
-rename HID_mun id
-label var id "Municipality identifier"
+rename HID_mun muni
+label var muni "Municipality identifier"
 gen incpc = hhinc/hhsize  
 label var incpc "Income per capita (pre-transfer)"   
-bysort id: egen pop = total(hhsize)  
+bysort muni: egen pop = total(hhsize)  
 label var pop "Municipality population"
-order id incpc hhsize pop poor
-keep id-pop
+order muni incpc hhsize pop poor
+keep muni-pop
 
 * Calculate budget and transfer amount
 * Note: The budget is the total amount of money needed to eradicate income
@@ -78,10 +78,10 @@ global people = $budget/$transfer
 
 * Lowest achievable poverty rate based on uniform transfer amount
 replace fgt = fgt * hhsize
-bysort id: egen num_poor = total(fgt)
+bysort muni: egen num_poor = total(fgt)
 gen prate = num_poor/pop   // Municipality-level poverty rates
 drop fgt num_poor
-distribute id prate hhsize $transfer $people pop  // Distribute transfers
+distribute muni prate hhsize $transfer $people pop  // Distribute transfers
 gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
 qui sum poor [aw = hhsize]
 global prate_low = `r(mean)'   // Lowest achievable poverty rate
@@ -96,21 +96,19 @@ drop prate poor incpc_new
 * on municipality-level data with the census covariates.
 preserve      // Prepare for merging in xgboost estimates
 import delimited "$results/hyperopt_census_mun.csv", clear 
-drop v1
-rename mimun id
-sort id 
+sort muni 
 tempfile xgboost
 save `xgboost'
 restore
-sort id
-merge m:1 id using `xgboost'   // Merge in xgboost estimates
+sort muni
+merge m:1 muni using `xgboost'   // Merge in xgboost estimates
 drop _merge
 
 * Calculate post-transfer poverty rates
 matrix results = J(500, 1, .)
-forvalues i = 1/500 {
+forvalues i = 1/3 {
 	disp "************* Beginning iteration `i' *************"
-    distribute id yhat_`i' hhsize $transfer $people pop  // Distribute transfers
+    distribute muni yhat_`i' hhsize $transfer $people pop  // Distribute transfers
 	gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
     qui sum poor [aw = hhsize]
 	matrix results[`i', 1] = `r(mean)'  // Store achieved poverty rates

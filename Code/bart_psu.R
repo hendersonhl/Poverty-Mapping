@@ -2,6 +2,7 @@
 rm(list = ls())
 library(BART)
 library(matrixStats)
+library(dplyr)
 set.seed(123)
 
 # Directories
@@ -58,10 +59,13 @@ for (i in 1:500){
 # Collapse results to municipality level
 hhsize = file.path(inpath, "true_psu.csv", fsep = "/")
 hhsize = read.csv(hhsize)[c("hhsize")]
+prediction = cbind(prediction, hhsize)
 prediction["HID"] = prediction["HID"]/1000
-
-
-
+names(prediction)[names(prediction) == 'HID'] <- 'muni'
+prediction$muni <- as.integer(prediction$muni)
+prediction = prediction %>% group_by(muni) %>% 
+  summarise_at(vars(starts_with('yhat')), 
+  list(~weighted.mean(., hhsize))) %>% as.data.frame()
 
 # Save results
 results = paste0("bart_", "census", "_psu.csv")
