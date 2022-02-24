@@ -5,8 +5,8 @@ library(matrixStats)
 set.seed(123)
 
 # Directories
-inpath = "/Users/hendersonhl/Documents/OneDrive/xgboost/01_data/intermediate"
-outpath = "/Users/hendersonhl/Documents/World Bank/Results"
+inpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
+outpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
 
 # Input datasets
 svy = file.path(inpath, "svydata_mun.csv", fsep = "/")
@@ -63,6 +63,7 @@ for (i in 1:500){
 
 # Save results
 if (covars == ""){covars = "all"}
+names(prediction)[names(prediction) == 'MiMun'] <- 'muni'
 results = paste0("bart_", covars, "_mun.csv")
 results = file.path(outpath, results, fsep = "/")
 write.csv(prediction, results, row.names = FALSE)

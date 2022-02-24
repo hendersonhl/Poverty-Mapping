@@ -7,8 +7,8 @@ clear all
 set more off
 
 * Set globals
-global inputs "/Users/hendersonhl/Documents/OneDrive/xgboost/01_data/input/"
-global results "/Users/hendersonhl/Documents/World Bank/Results/"
+global inputs "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
+global results "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
 global pline = 715
 
 * Define function to distribute transfers

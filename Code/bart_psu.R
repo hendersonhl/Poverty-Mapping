@@ -5,8 +5,8 @@ library(matrixStats)
 set.seed(123)
 
 # Directories
-inpath = "/Users/hendersonhl/Documents/OneDrive/xgboost/01_data/intermediate"
-outpath = "/Users/hendersonhl/Documents/World Bank/Results"
+inpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
+outpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
 
 # Input datasets
 svy = file.path(inpath, "svydata_python_psu.csv", fsep = "/")
@@ -54,6 +54,14 @@ for (i in 1:500){
     prediction = cbind(prediction, y_pred)
     colnames(prediction)[i + 1] = name
 }
+
+# Collapse results to municipality level
+hhsize = file.path(inpath, "true_psu.csv", fsep = "/")
+hhsize = read.csv(hhsize)[c("hhsize")]
+prediction["HID"] = prediction["HID"]/1000
+
+
+
 
 # Save results
 results = paste0("bart_", "census", "_psu.csv")

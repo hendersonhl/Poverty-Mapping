@@ -7,8 +7,8 @@ from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 import time
 
 # Directories
-inpath = '/Users/hendersonhl/Documents/OneDrive/xgboost/01_data/input/'
-outpath = '/Users/hendersonhl/Documents/World Bank/Results/'
+inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
+outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Input datasets
 census = pd.read_stata(inpath + 'census_trim.dta')
@@ -79,13 +79,23 @@ for i in range(1,501):
     print(f"Iteration completed in {end - start:0.4f} seconds")
 
     # Save results
-    name = 'yhat_' + str(i)
+    # Note: The feature importance used here is 'gain'. By design, these
+    # will sum to one.
+    name1 = 'yhat_' + str(i)
+    name2 = 'imp_' + str(i)
     if (i==1): 
-        prediction = pd.DataFrame({name: y_pred})
+        prediction = pd.DataFrame({name1: y_pred})
+        importance = pd.DataFrame({'variables': x_census.columns, 
+                                name2: model.feature_importances_})
     else:
-        prediction = pd.concat([prediction, pd.DataFrame({name: y_pred})], axis = 1)
+        prediction = pd.concat([prediction, pd.DataFrame({name1: y_pred})], axis = 1)
+        importance = pd.concat([importance, pd.DataFrame({name2: 
+                                model.feature_importances_})], axis = 1)
             
 # Save results
 prediction = pd.concat([hid, prediction], axis = 1)
-prediction = prediction.groupby(['HID']).mean()   # Collapse to municipality level
+prediction = prediction.rename(columns={"HID": "muni"})
+prediction['muni'] = prediction['muni'].astype(int)
+prediction = prediction.groupby(['muni']).mean()   # Collapse to municipality level
 prediction.to_csv(outpath + 'hyperopt_census_hh.csv')
+importance.to_csv(outpath + 'importance_census_hh.csv', index = False)

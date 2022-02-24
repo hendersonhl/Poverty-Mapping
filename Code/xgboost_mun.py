@@ -7,8 +7,8 @@ from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 import time
 
 # Directories
-inpath = '/Users/hendersonhl/Documents/OneDrive/xgboost/01_data/intermediate/'
-outpath = '/Users/hendersonhl/Documents/World Bank/Results/'
+inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
+outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Input datasets
 svy = pd.read_csv(inpath + 'svydata_mun.csv', header = 0)
@@ -95,9 +95,10 @@ for i in range(1,501):
             
 # Save results
 prediction = pd.concat([hid, prediction], axis = 1)
+prediction = prediction.rename(columns={"MiMun": "muni"})
 if covars=='': covars = 'all'
-prediction.to_csv(outpath + 'hyperopt_' + covars + '_mun.csv')
-importance.to_csv(outpath + 'importance_' + covars + '_mun.csv')
+prediction.to_csv(outpath + 'hyperopt_' + covars + '_mun.csv', index = False)
+importance.to_csv(outpath + 'importance_' + covars + '_mun.csv', index = False)
 
 
 
