@@ -7,8 +7,8 @@ clear all
 set more off
 
 * Set globals
-global inputs "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
-global results "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
+global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
+global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
 global pline = 715
 
 * Define function to distribute transfers
@@ -51,7 +51,7 @@ end
 *==========================================
 
 * Open census data and create select variables
-use $inputs/census_trim.dta, clear
+use $inpath/census_trim.dta, clear
 rename HID_mun muni
 label var muni "Municipality identifier"
 gen incpc = hhinc/hhsize  
@@ -95,7 +95,7 @@ drop prate poor incpc_new
 * Note: This part is illustrative and only uses the xgboost results based
 * on municipality-level data with the census covariates.
 preserve      // Prepare for merging in xgboost estimates
-import delimited "$results/hyperopt_census_mun.csv", clear 
+import delimited "$outpath/hyperopt_census_mun.csv", clear 
 sort muni 
 tempfile xgboost
 save `xgboost'
@@ -106,7 +106,7 @@ drop _merge
 
 * Calculate post-transfer poverty rates
 matrix results = J(500, 1, .)
-forvalues i = 1/3 {
+forvalues i = 1/3 {    // Only do 3 iterations as an illustration
 	disp "************* Beginning iteration `i' *************"
     distribute muni yhat_`i' hhsize $transfer $people pop  // Distribute transfers
 	gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
