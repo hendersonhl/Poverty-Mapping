@@ -4,27 +4,37 @@ import numpy as np
 import statsmodels.formula.api as sm
 
 # Directory
-outpath = '/Users/hendersonhl/Documents/World Bank/Results/'
+inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
+outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Select results to plot
-# Note: All results are generated at the PSU level.
+# Note: Use 'mun', 'psu', or 'hh' for the level variable to select the level 
+# at which predictions were made (all predictions are already aggregated to 
+# the municipality). If using 'psu' or 'hh' set covars to 'census'. If using 
+# 'mun' set covars to 'census' for census variables, 'gis' for GIS variables, 
+# and 'all' for all variables.
+level = 'mun'
+covars = 'census'
 indicator = 'poor' 
 
 # Import true poverty indicators
-true = pd.read_csv(outpath + 'true_psu.csv', header = 0)
-true = true[['HID', indicator]]
+# Note: All calculations are based on municipality-level data
+true = pd.read_csv(inpath + 'true_mun.csv', header = 0)
+true = true.rename(columns={'MiMun': 'muni'})
+true = true[['muni', indicator]]
 
 # Import xgboost estimates and merge onto truth
-hyperopt = pd.read_csv(outpath + 'hyperopt_census_psu.csv', header = 0)
-cols = list(hyperopt)[2:]    # Reshape wide to long
-hyperopt = pd.melt(hyperopt, id_vars='HID', value_vars=cols)
+hyperopt = pd.read_csv(outpath + 'hyperopt_' + covars + '_' + level + '.csv', 
+    header = 0)
+cols = list(hyperopt)[1:]    # Reshape wide to long
+hyperopt = pd.melt(hyperopt, id_vars='muni', value_vars=cols)
 hyperopt = hyperopt.rename(columns={"value": "yhat", "variable": "sim_sample"})
 hyperopt['sim_sample'] = np.repeat(np.arange(1,501), true.shape[0])
 results = pd.merge(hyperopt, true)
 
 # Import direct estimates and merge onto truth
-direct = pd.read_csv(outpath + 'direct_psu.csv', header = 0)
-results = pd.merge(results, direct, on=['HID', 'sim_sample'], how = 'outer')
+direct = pd.read_csv(inpath + 'direct_mun.csv', header = 0)
+results = pd.merge(results, direct, on=['muni', 'sim_sample'], how = 'outer')
 results['svysample'] = np.where(results['dpoor'].isnull(), 0, 1)
 
 # Calculate r-squared for true and xgboost estimates (svysample = 0)
