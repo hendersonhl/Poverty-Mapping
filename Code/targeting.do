@@ -6,6 +6,9 @@
 clear all
 set more off
 
+* Install gtools to get hashsort command for faster sorting
+* ssc install gtools
+
 * Set globals
 global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
 global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
@@ -25,7 +28,7 @@ program define distribute
 	* Note: Here we sort municipalities by poverty rates and distribute 
 	* to the poorest municipalities, ignoring that some HHs in the marginal
 	* municipality will receive a transfer and some will not.
-	gsort -`prate' `muni'     
+	hashsort -`prate' `muni'     
 	gen cumsum = sum(`hhsize')  
 	gen amount = hhsize * `transfer' if cumsum <= `people'
 	
