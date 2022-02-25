@@ -35,7 +35,7 @@ Below is a list of the scripts created for this project and a description of eac
 
 (3) bart_psu.r: Implements BART for the PSU-level data and generates predictions for each sample. Also includes an illustration that calculates uncertainty intervals for the predictions. 
 
-	Dependencies: bart, matrixStats
+	Dependencies: bart, matrixStats, dplyr
 
 	Inputs:
 		~/Data/svydata_python_psu.csv
