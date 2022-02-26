@@ -2,12 +2,12 @@
 * Program setup
 *==========================================
 
+* Install gtools for faster sorting
+* ssc install gtools
+
 * Set up
 clear all
 set more off
-
-* Install gtools to get hashsort command for faster sorting
-* ssc install gtools
 
 * Set globals
 global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
@@ -28,23 +28,22 @@ program define distribute
 	* Note: Here we sort municipalities by poverty rates and distribute 
 	* to the poorest municipalities, ignoring that some HHs in the marginal
 	* municipality will receive a transfer and some will not.
-	hashsort -`prate' `muni'     
-	gen cumsum = sum(`hhsize')  
-	gen amount = hhsize * `transfer' if cumsum <= `people'
+	qui hashsort -`prate' `muni'     
+	qui gen cumsum = sum(`hhsize')  
+	qui gen amount = hhsize * `transfer' if cumsum <= `people'
 	
 	* Adjustment to marginal municipality
 	* Note: Here we redistribute any transfers given to the marginal 
 	* municipality to be shared equally among all HHs in that municipality.
 	* The marginal municipality will be the one with only a fraction of HHs
 	* receiving transfers.
-	bysort `muni': egen treated = count(amount)
-    bysort `muni': replace treated = treated/_N
-    bysort `muni': egen cumamt = total(amount)
-    replace amount = `hhsize' * (cumamt/`pop') if treated > 0 & treated < 1
+	qui bysort `muni': gegen treated = total(sign(amount) / _N)
+    qui bysort `muni': egen cumamt = total(amount)
+    qui replace amount = `hhsize' * (cumamt/`pop') if treated > 0 & treated < 1
 
 	* Update income per capita
-	replace amount = 0 if amount==.
-    gen incpc_new = incpc + amount/`hhsize'
+	qui replace amount = 0 if amount==.
+    qui gen incpc_new = incpc + amount/`hhsize'
 	drop cumsum treated cumamt amount
 
 end
