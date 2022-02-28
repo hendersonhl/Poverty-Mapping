@@ -12,7 +12,7 @@ set more off
 * Set globals
 global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
 global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
-global pline = 715
+global pline = 714.67
 
 * Define function to distribute transfers
 * Note: The arguments for the function are: the muncipality identifier, 
