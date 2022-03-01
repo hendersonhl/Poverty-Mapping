@@ -91,9 +91,14 @@ for i in range(1,501):
 # Weighted average function for aggregating to municipality level
 def weighted(x, cols, w="hhsize"):
     return pd.Series(np.average(x[cols], weights=x[w], axis=0), cols)
+
+# Save results at PSU level
+prediction = pd.concat([hid, prediction], axis = 1)
+prediction = prediction.rename(columns={"HID": "muni"})
+prediction.to_csv(outpath + 'hyperopt_census_psu(disagreggated).csv', index = False)
+prediction = prediction.rename(columns={"muni": "HID"}) # Prep for merge
             
 # Collapse to municipality level
-prediction = pd.concat([hid, prediction], axis = 1)
 hhsize = pd.read_csv(inpath + 'true_psu.csv', header=0)[['HID', 'hhsize']]
 prediction = pd.merge(prediction, hhsize, on='HID')
 prediction['HID'] = (prediction['HID']/1000).astype(int)  # Fix identifier
@@ -106,11 +111,3 @@ prediction.to_csv(outpath + 'hyperopt_census_psu.csv')
 importance.to_csv(outpath + 'importance_census_psu.csv', index = False)
 
 
-
-# Collapse to municipality level if at PSU level
-if level == 'psu':
-    baseline['HID'] = (baseline['HID']/1000).astype(int)  # Fix identifier
-    hyperopt['HID'] = (hyperopt['HID']/1000).astype(int)
-    cols = list(baseline)[2:-1]
-    baseline = baseline.groupby(baseline.HID).apply(weighted, cols)
-    hyperopt = hyperopt.groupby(hyperopt.HID).apply(weighted, cols)
