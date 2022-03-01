@@ -57,7 +57,7 @@ Below is a list of the scripts created for this project and a description of eac
 
 (5) targeting.do: Conducts targeting exercises to examine the implications of using different poverty  maps/estimates for distributing assistance. All exercises are at the municipality level.
 
-	Dependencies: None
+	Dependencies: gtools
 
 	Inputs:
 		~/Data/census_trim.dta
@@ -124,6 +124,7 @@ Below is a list of the scripts created for this project and a description of eac
 
 	Outputs:
 		~/Results/hyperopt_census_psu.csv
+		~/Results/hyperopt_census_psu(disaggregated).csv
 		~/Results/importance_census_psu.csv
 
 
