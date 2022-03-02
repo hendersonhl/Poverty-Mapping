@@ -94,9 +94,7 @@ def weighted(x, cols, w="hhsize"):
 
 # Save results at PSU level
 prediction = pd.concat([hid, prediction], axis = 1)
-prediction = prediction.rename(columns={"HID": "muni"})
 prediction.to_csv(outpath + 'hyperopt_census_psu(disaggreggated).csv', index = False)
-prediction = prediction.rename(columns={"muni": "HID"}) # Prep for merge
             
 # Collapse to municipality level
 hhsize = pd.read_csv(inpath + 'true_psu.csv', header=0)[['HID', 'hhsize']]
