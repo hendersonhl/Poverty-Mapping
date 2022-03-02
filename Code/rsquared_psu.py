@@ -17,24 +17,15 @@ true = true[['HID', indicator]]
 
 # Import xgboost estimates and merge onto truth
 hyperopt = pd.read_csv(outpath + 'hyperopt_census_psu(disaggregated).csv', header = 0)
-cols = list(hyperopt)[2:]    # Reshape wide to long
+cols = list(hyperopt)[1:]    # Reshape wide to long
 hyperopt = pd.melt(hyperopt, id_vars='HID', value_vars=cols)
 hyperopt = hyperopt.rename(columns={"value": "yhat", "variable": "sim_sample"})
 hyperopt['sim_sample'] = np.repeat(np.arange(1,501), true.shape[0])
 results = pd.merge(hyperopt, true)
 
-# Import xgboost estimates and merge onto truth
-hyperopt = pd.read_csv(outpath + 'hyperopt_' + covars + '_' + level + '.csv', 
-    header = 0)
-cols = list(hyperopt)[1:]    # Reshape wide to long
-hyperopt = pd.melt(hyperopt, id_vars='muni', value_vars=cols)
-hyperopt = hyperopt.rename(columns={"value": "yhat", "variable": "sim_sample"})
-hyperopt['sim_sample'] = np.repeat(np.arange(1,501), true.shape[0])
-results = pd.merge(hyperopt, true)
-
 # Import direct estimates and merge onto truth
-direct = pd.read_csv(inpath + 'direct_mun.csv', header = 0)
-results = pd.merge(results, direct, on=['muni', 'sim_sample'], how = 'outer')
+direct = pd.read_csv(inpath + 'direct_psu.csv', header = 0)
+results = pd.merge(results, direct, on=['HID', 'sim_sample'], how = 'outer')
 results['svysample'] = np.where(results['dpoor'].isnull(), 0, 1)
 
 # Calculate r-squared for true and xgboost estimates (svysample = 0)
