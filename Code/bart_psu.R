@@ -61,7 +61,7 @@ hhsize = file.path(inpath, "true_psu.csv", fsep = "/")
 hhsize = read.csv(hhsize)[c("hhsize")]
 prediction = cbind(prediction, hhsize)
 prediction["HID"] = prediction["HID"]/1000
-names(prediction)[names(prediction) == 'HID'] <- 'muni'
+names(prediction)[names(prediction) == "HID"] <- "muni"
 prediction$muni <- as.integer(prediction$muni)
 prediction = prediction %>% group_by(muni) %>% 
   summarise_at(vars(starts_with('yhat')), 

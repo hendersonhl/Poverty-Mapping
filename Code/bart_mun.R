@@ -63,7 +63,7 @@ for (i in 1:500){
 
 # Save results
 if (covars == ""){covars = "all"}
-names(prediction)[names(prediction) == 'MiMun'] <- 'muni'
+names(prediction)[names(prediction) == "MiMun"] <- "muni"
 results = paste0("bart_", covars, "_mun.csv")
 results = file.path(outpath, results, fsep = "/")
 write.csv(prediction, results, row.names = FALSE)
