@@ -21,7 +21,6 @@ Below is a list of the scripts created for this project and a description of eac
 
 	Inputs:
 		~/Data/true_mun.csv
-		~/Data/true_psu.csv
 		~/Results/bart_census_mun.csv
 		~/Results/bart_gis_mun.csv
 		~/Results/bart_all_mun.csv
@@ -44,18 +43,33 @@ Below is a list of the scripts created for this project and a description of eac
 	Outputs:
 		~/Results/bart_census_psu.csv
 
-(4) rsquared.py: Calculates r-squared values from regressions of true poverty headcounts on various estimates of poverty headcounts. All regressions are at the PSU level.
+(4) rsquared_mun.py: Calculates r-squared values from regressions of true poverty headcounts on various estimates of poverty headcounts. All regressions are at the municipality level.
+
+	Dependencies: pandas, numpy, statsmodels 
+
+	Inputs:
+		~/Data/true_mun.csv
+		~/Data/direct_mun.csv
+		~/Results/hyperopt_census_mun.csv
+		~/Results/hyperopt_gis_mun.csv
+		~/Results/hyperopt_census_mun.csv
+		~/Results/hyperopt_census_psu.csv
+		~/Results/hyperopt_census_hh.csv
+	
+	Outputs: Generates results without saving
+
+(5) rsquared_psu.py: Calculates r-squared values from regressions of true poverty headcounts on various estimates of poverty headcounts. All regressions are at the PSU level.
 
 	Dependencies: pandas, numpy, statsmodels 
 
 	Inputs:
 		~/Data/true_psu.csv
 		~/Data/direct_psu.csv
-		~/Results/hyperopt_census_psu.csv
+		~/Results/hyperopt_census_psu(disaggregated).csv
 	
 	Outputs: Generates results without saving
 
-(5) targeting.do: Conducts targeting exercises to examine the implications of using different poverty  maps/estimates for distributing assistance. All exercises are at the municipality level.
+(6) targeting.do: Conducts targeting exercises to examine the implications of using different poverty  maps/estimates for distributing assistance. All exercises are at the municipality level.
 
 	Dependencies: gtools
 
@@ -65,7 +79,7 @@ Below is a list of the scripts created for this project and a description of eac
 	
 	Outputs: Generates results without saving
 
-(6) xgboost_hh.py: Implements the directed hyperparameter search (hyperopt) for the household-level data. Generates predictions for each sample. 
+(7) xgboost_hh.py: Implements the directed hyperparameter search (hyperopt) for the household-level data. Generates predictions for each sample. 
 
 	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
@@ -76,7 +90,7 @@ Below is a list of the scripts created for this project and a description of eac
 	Outputs:
 		~/Results/hyperopt_census_hh.csv
 
-(7) xgboost_mun.py: Implements the directed hyperparameter search (hyperopt) for the municipality-level data. Generates predictions and feature importances for each sample. 
+(8) xgboost_mun.py: Implements the directed hyperparameter search (hyperopt) for the municipality-level data. Generates predictions and feature importances for each sample. 
 
 	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
@@ -92,29 +106,29 @@ Below is a list of the scripts created for this project and a description of eac
 		~/Results/importance_gis_mun.csv
 		~/Results/importance_all_mun.csv
 
-(8) xgboost_plots.py: Summarizes and plots the mean squared error, bias, and feature importance for the xgboost simulations. The mean squared error and bias plots compare the results of the hyperopt implementation to the brute force grid search (baseline).
+(9) xgboost_plots.py: Summarizes and plots the mean squared error, bias, and feature importance for the xgboost simulations. The mean squared error and bias plots compare the results of the hyperopt implementation to the brute force grid search (baseline).
 
 	Dependencies: matplotlib, pandas, numpy 
 
 	Inputs:
 		~/Data/true_mun.csv
-		~/Data/true_psu.csv
 		~/Results/hyperopt_census_mun.csv
 		~/Results/hyperopt_gis_mun.csv
 		~/Results/hyperopt_all_mun.csv
 		~/Results/hyperopt_census_psu.csv
+		~/Results/hyperopt_census_hh.csv
 		~/Results/baseline_census_mun.csv
 		~/Results/baseline_gis_mun.csv
 		~/Results/baseline_all_mun.csv
-		~/Results/baseline_census_psu.csv
 		~/Results/importance_census_mun.csv
 		~/Results/importance_gis_mun.csv
 		~/Results/importance_all_mun.csv
 		~/Results/importance_census_psu.csv
+		~/Results/importance_census_hh.csv
 
 	Outputs: Creates plots without saving
 
-(9) xgboost_psu.py: Implements the directed hyperparameter search (hyperopt) for the PSU-level data. Generates predictions and feature importances for each sample. 
+(10) xgboost_psu.py: Implements the directed hyperparameter search (hyperopt) for the PSU-level data. Generates predictions and feature importances for each sample. 
 
 	Dependencies: xgboost, numpy, pandas, sklearn, hyperopt, time
 
