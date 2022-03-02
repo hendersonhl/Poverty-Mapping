@@ -2,46 +2,41 @@
 rm(list = ls())
 set.seed(123)
 
-# Directory
-outpath = "/Users/hendersonhl/Documents/World Bank/Results"
+# Directories
+inpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
+outpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
 
 # Select results to plot
-# Note: Use "mun" or "psu" for the level variable to select the level at
-# which to plot the results. If using "psu" set covars to "census". If using 
-# "mun" set covars to "census" for census variables, "gis" for GIS variables, 
-# and "all" for all variables.
+# Note: Use "mun" or "psu" for the level variable to select the level at which predictions 
+# were made (all predictions are already aggregated to the municipality). If using "psu" 
+# set covars to "census". If using "mun" set covars to "census" for census variables, "gis" 
+# for GIS variables, and "all" for all variables.
 level = "mun"
 covars = "census"
-
-# Set poverty indicator and unit identifier
 indicator = "poor" 
-if (level == "mun"){
-    hid = "MiMun"  
-} else {
-    hid = "HID"
-}
 
 # Import true poverty indicators
-true = paste0("true", "_", level, ".csv")
-true = file.path(outpath, true, fsep = "/")
+true = paste0("true_mun", ".csv")
+true = file.path(inpath, true, fsep = "/")
 true = read.csv(true)
-true = true[, c(hid, indicator)]
+names(true)[names(true) == "MiMun"] <- "muni"
+true = true[, c("muni", indicator)]
 
 # Import BART results
 bart = paste0("bart_", covars, "_", level, ".csv")
 bart = file.path(outpath, bart, fsep = "/")
 bart = read.csv(bart)
-bart = merge(bart, true, by = hid)
+bart = merge(bart, true, by = "muni")
 
 # Import baseline results
-baseline = paste0("baseline_", covars, "_", level, ".csv")
+# Note: Always use the municipality files for the baseline estimates.
+baseline = paste0("baseline_", covars, "_mun", ".csv")
 baseline = file.path(outpath, baseline, fsep = "/")
 baseline = read.csv(baseline) 
-baseline[1] = NULL   # Remove row labels
-baseline = merge(baseline, true, by = hid)
+baseline = merge(baseline, true, by = "muni")
 
 # Calculate MSE and bias for baseline results
-# Note: This calculates MSE for each municipality
+# Note: This calculates MSE and bias for each municipality
 mse_baseline = data.frame(matrix(ncol = 0, nrow = nrow(baseline)))
 for (i in 1:500){
   name = paste0('yhat_', i)  
@@ -53,7 +48,7 @@ bias_baseline = rowMeans(baseline[-c(1, ncol(baseline))]) - baseline[indicator]
 bias_baseline = unlist(bias_baseline)
 
 # Calculate MSE and bias for BART results
-# Note: This calculates MSE for each municipality
+# Note: This calculates MSE and bias for each municipality
 mse_bart = data.frame(matrix(ncol = 0, nrow = nrow(baseline)))
 for (i in 1:500){
   name = paste0('yhat_', i)  
