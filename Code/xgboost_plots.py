@@ -4,44 +4,33 @@ import pandas as pd
 import numpy as np
 
 # Directory
-outpath = '/Users/hendersonhl/Documents/World Bank/Results/'
+inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
+outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Select results to plot
-# Note: Use 'mun' or 'psu' for the level variable to select the level at
-# which to plot the results. If using 'psu' set covars to 'census'. If using 
+# Note: Use 'mun', 'psu', or 'hh' for the level variable to select the level 
+# at which predictions were made (all predictions are already aggregated to 
+# the municipality). If using 'psu' or 'hh' set covars to 'census'. If using 
 # 'mun' set covars to 'census' for census variables, 'gis' for GIS variables, 
 # and 'all' for all variables.
 level = 'mun'
-covars = 'all'
+covars = 'census'
 indicator = 'poor' 
 
-# Weighted average function for aggregated to municipality level
-def weighted(x, cols, w="hhsize"):
-    return pd.Series(np.average(x[cols], weights=x[w], axis=0), cols)
-
 # Import true poverty indicators
-true = pd.read_csv(outpath + 'true_' + level + '.csv', header = 0)
-if level == 'mun':      # Keep only the chosen outcome
-    true = true[['MiMun', indicator]]
-else:
-    true = true[['HID', indicator, 'hhsize']]
-    
+true = pd.read_csv(inpath + 'true_mun.csv', header = 0)
+true = true.rename(columns={'MiMun': 'muni'})
+true = true[['muni', indicator]]
+
 # Import all estimates and merge onto truth
-baseline = pd.read_csv(outpath + 'baseline_' + covars + '_' + level + '.csv', header = 0)
+# Note: Always use the municipality files for the baseline estimates.
+baseline = pd.read_csv(outpath + 'baseline_' + covars + '_mun' + '.csv', header = 0)
 baseline = pd.merge(baseline, true)
 hyperopt = pd.read_csv(outpath + 'hyperopt_' + covars + '_' + level + '.csv', header = 0)
 hyperopt = pd.merge(hyperopt, true)
 
-# Collapse to municipality level if at PSU level
-if level == 'psu':
-    baseline['HID'] = (baseline['HID']/1000).astype(int)  # Fix identifier
-    hyperopt['HID'] = (hyperopt['HID']/1000).astype(int)
-    cols = list(baseline)[2:-1]
-    baseline = baseline.groupby(baseline.HID).apply(weighted, cols)
-    hyperopt = hyperopt.groupby(hyperopt.HID).apply(weighted, cols)
-
 # Calculate MSE and bias for baseline results
-# Note: This calculates MSE for each municipality
+# Note: This calculates MSE and bias for each municipality
 mse_baseline = pd.DataFrame()
 for i in range(1,501):
     name = 'yhat_' + str(i)
@@ -51,7 +40,7 @@ mse_baseline = np.mean(mse_baseline, axis = 1)
 bias_baseline = baseline.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - baseline.loc[:, 'poor']
 
 # Calculate MSE and bias for HYPEROPT results
-# Note: This calculates MSE for each municipality
+# Note: This calculates MSE and bias for each municipality
 mse_hyperopt = pd.DataFrame()
 for i in range(1,501):
     name = 'yhat_' + str(i)
