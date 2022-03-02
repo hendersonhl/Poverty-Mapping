@@ -8,20 +8,20 @@ inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
 outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Select results to plot
-# Note: Use 'mun', 'psu', or 'hh' for the level variable to select the level 
-# at which predictions were made (all predictions are already aggregated to 
-# the municipality). If using 'psu' or 'hh' set covars to 'census'. If using 
-# 'mun' set covars to 'census' for census variables, 'gis' for GIS variables, 
-# and 'all' for all variables.
-level = 'mun'
-covars = 'census'
+# Note: All results are generated at the PSU level.
 indicator = 'poor' 
 
 # Import true poverty indicators
-# Note: All calculations are based on municipality-level data
-true = pd.read_csv(inpath + 'true_mun.csv', header = 0)
-true = true.rename(columns={'MiMun': 'muni'})
-true = true[['muni', indicator]]
+true = pd.read_csv(inpath + 'true_psu.csv', header = 0)
+true = true[['HID', indicator]]
+
+# Import xgboost estimates and merge onto truth
+hyperopt = pd.read_csv(outpath + 'hyperopt_census_psu(disaggregated).csv', header = 0)
+cols = list(hyperopt)[2:]    # Reshape wide to long
+hyperopt = pd.melt(hyperopt, id_vars='HID', value_vars=cols)
+hyperopt = hyperopt.rename(columns={"value": "yhat", "variable": "sim_sample"})
+hyperopt['sim_sample'] = np.repeat(np.arange(1,501), true.shape[0])
+results = pd.merge(hyperopt, true)
 
 # Import xgboost estimates and merge onto truth
 hyperopt = pd.read_csv(outpath + 'hyperopt_' + covars + '_' + level + '.csv', 
