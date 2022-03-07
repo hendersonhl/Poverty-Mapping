@@ -114,28 +114,26 @@ use `pretrans', clear
 	merge m:1 muni using `xgboost', keepusing(yhat*)
 		drop if _m==2
 		drop _m
-		
+	
 	forval z = 1/500{
-		qui:replace yhat_`z' = yhat_`z' + incpc
+		qui:replace yhat_`z' = 1-(yhat_`z' + incpc)/$pline
 	}
 	
-gen pline = $pline
-gen all=1
+
 keep hhsize yhat_*
 
-putmata Y = (yhat_*), replace
+unab myhat:yhat_*
+mata: st_view(Y=.,.,tokens("`myhat'"))
 putmata wt = hhsize, replace
 local pline = $pline
 count 
 local top = r(N)
-clear
-mata:
-wt = wt/quadsum(wt)
-Y  = (1:-(Y:/`pline'))
-fgt0 = quadcolsum((Y:>0):*wt)
-fgt1 = quadcolsum(Y:*(Y:>0):*wt)
-fgt2 = quadcolsum(Y:*Y:*(Y:>0):*wt)
 
+mata:
+
+fgt0 = mean((Y:>0),wt)
+fgt1 = mean((Y:*(Y:>0)),wt)
+fgt2 = mean((Y:*Y:*(Y:>0)),wt)
 //Poverty
 mean((fgt0\fgt1\fgt2)')
 
