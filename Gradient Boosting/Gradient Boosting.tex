@@ -1,0 +1,233 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Preamble %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare document class and miscellaneous packages
+\documentclass[english]{article}
+\usepackage{natbib}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage[margin=1in]{geometry}
+\interfootnotelinepenalty=10000
+
+%Hyper-references
+\usepackage{hyperref}
+\hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, 
+urlcolor=black, pdftex}
+
+\begin{document}
+
+\doublespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Body %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Originally developed by \citet{friedman2001greedy}, gradient boosting machines are a family of 
+machine-learning techniques that combine a large number of weak learners to form 
+a stronger ensemble prediction.
+Unlike some common ensemble techniques (e.g., random forests) that simply average models
+in the ensemble, gradient boosting adds models to the ensemble sequentially by fitting new
+weak learners to the negative gradient of some chosen loss function.
+With the classic squared-error loss function, this amounts to sequentially fitting new models to 
+the current residuals of the ensemble.%
+\footnote{See \citet{natekin2013gradient} for an accessible introduction to gradient boosting.}
+Extreme gradient boosting (EGB) is a particularly popular implementation of gradient boosting
+that uses classification and regression trees as the base models or weak learners.
+The popularity of EGB is due to the fact that it is fast, scalable, and has been shown to outperform 
+competing methods across a wide range of problems \citep{chen2016xgboost}.
+
+Classification and regression trees are based on a sequential binary splitting of the covariate space that
+serves to partition the data into subsamples that are increasingly homogeneous in terms of the outcome 
+variable.
+A tree begins with a single root node that is split into two child nodes according to some decision
+rule.
+A decision rule pertains to a single explanatory variable and observations are assigned to the 
+child nodes depending on whether they meet some condition associated with the explanatory
+variable.%
+\footnote{For example, for a continuous explanatory variable, one determines whether a given
+observations falls above or below some numeric cutoff.} 
+The child nodes can be further split into new child nodes based on different decision rules that
+involve other explanatory variables and cutoff points. 
+Any child node that is not further split is referred to as a terminal node or leaf, and each leaf is
+associated with a parameter that provides a prediction for the subsample associated
+with that leaf.
+For any given observation, the ensemble prediction used by EGB is the sum of that observation's
+predictions across all trees in the ensemble.
+
+In what follows, we discuss the key features of the EGB algorithm, drawing on the presentation provided 
+in \citet{chen2016xgboost}.
+Let $y_i$ denote the outcome of interest (e.g., poverty headcounts) for observation or entity $i$, and let 
+$x_i$ denote a vector of explanatory variables.
+In line with the above, the predicted value of the outcome $\hat{y}_i$ is given by the sum of predictions
+across the individual trees in the ensemble:
+\begin{equation}
+\hat{y}_i = \sum_t f_t(x_i)
+\end{equation}
+where the trees are indexed by $t$ and $f_t(x_i)$ gives the prediction of a given tree as a function of 
+$x_i$.
+To build the trees used in the model, EGB minimizes the following regularized objective function:
+\begin{equation}
+\mathcal{L} = \sum_i l(y_i, \hat{y}_i) + \sum_t r(f_t)
+\end{equation}
+where $l(y_i, \hat{y}_i)$ is the loss associated with the $i^{th}$ observation and $r(f_t)$ is a 
+regularization term that serves to mitigate overfitting.
+In our implementation, we use the classic squared-error loss such that $l(y_i, \hat{y}_i) = 
+(y_i - \hat{y}_i)^2$.
+
+EGB uses the following specification of the regularization term:
+\begin{equation}
+r(f_t) = \gamma M_t +  \frac{1}{2}\lambda \sum_j m_{tj}^2
+\end{equation}
+where $M_t$ is the total number of leaves in tree $t$, $m_{tj}$ is the prediction
+associated with the $j^{th}$ leaf in a given tree, and $\gamma$ and $\lambda$ are 
+hyperparameters that must be chosen by the user (we discuss our selection of
+hyperparameters below).
+The regularization term serves to mitigate overfitting by penalizing complicated trees 
+and smoothing the predictions associated with each tree.
+That is, the method relies on a large number of weak learners and the regularization 
+term helps control the complexity of the learners.
+It is important to note that the above specification of the regularization term is only one of many 
+possible specifications, though \citet{chen2016xgboost} claim that it is simpler than the
+leading alternatives and easier to parallelize.
+Further note that when the hyperparameters are set to zero, the objective function becomes
+equivalent to that used in traditional gradient tree boosting.
+
+To minimize the objective function, the model is trained in a sequential manner, building one
+tree at a time. 
+The objective function at iteration $t$ can be written as follows:
+\begin{equation}
+\mathcal{L}_t = \sum_i l(y_i, \hat{y}_i^{t-1} + f_t(x_i)) + r(f_t)
+\end{equation}
+where $\hat{y}_i^t = \hat{y}_i^{t-1} + f_t(x_i)$.
+Each iteration then adds the tree $f_t(x_i)$ that greedily minimizes the objective function at that
+iteration.
+More specifically, EGB uses a second-order Taylor series expansion to approximate the loss
+function at any given iteration:
+\begin{equation}
+\tilde{\mathcal{L}}_t = \sum_i \left\{g(y_i, \hat{y}_i^{t-1}) f_t(x_i) 
++ \frac{1}{2}h(y_i, \hat{y}_i^{t-1}) f_t(x_i)^2 \right\} + r(f_t)
+\label{eq:approx}
+\end{equation}
+where $g(\cdot, \cdot)$ and $h(\cdot, \cdot)$ denote the first- and second-order derivatives of the 
+loss function $l(y_i, \hat{y}_i^{t-1})$ with respect to $\hat{y}_i^{t-1}$.
+That is, the point $\hat{y}_i^{t-1}$ is taken as the basis for the expansion.
+The above conveniently omits the first term of the series $l(y_i, \hat{y}_i^{t-1})$ because it is a constant.
+
+The EGB algorithm is based on a re-expression of Eq.\ (\ref{eq:approx}).
+Let $s_j$ denote the set of observations that belong to the $j^{th}$ leaf of the tree being built at 
+iteration $t$.
+Substituting in the explicit form of the regularization term and noting that all observation that belong to 
+the same leaf receive the same prediction $m_{tj}$, we can write
+\begin{equation}
+\tilde{\mathcal{L}}_t = \sum_j \sum_{i \in s_j} \left\{g(y_i, \hat{y}_i^{t-1}) m_{tj}
++ \frac{1}{2}h(y_i, \hat{y}_i^{t-1}) m_{tj}^2 \right\} + \gamma M_t +  \frac{1}{2}\lambda \sum_j m_{tj}^2
+\end{equation}
+or, equivalently,
+\begin{equation}
+\tilde{\mathcal{L}}_t = \sum_j \left\{G_j m_{tj} + \frac{1}{2}(H_j + \lambda)m_{tj}^2  \right\} + \gamma M_t
+\end{equation}
+where $G_j$ and $H_j$ represent the sums over $g(\cdot, \cdot)$ and $h(\cdot, \cdot)$ for all observations
+in $s_j$.
+Note that the summation in the above is over $j$, which indexes the leaves in the tree.
+
+For a given tree structure, we can find the optimal prediction values by minimizing the objective function 
+with respect to $m_{tj}$, which yields $m_{tj}^* = - G_j/(H_j + \lambda)$.
+With a squared-error loss function, where $g(y_i, \hat{y}_i^{t-1}) = -2(y_i - \hat{y}_i^{t-1})$ and 
+$h(y_i, \hat{y}_i^{t-1}) = 2$, the optimal prediction values are effectively the (penalized) average of the 
+residuals associated with a given leaf.
+We can then substitute the optimal prediction values into the objective function to obtain the following: 
+\begin{equation}
+\tilde{\mathcal{L}}_t^* = - \frac{1}{2}\sum_j \frac{G_j^2}{H_j + \lambda} + \gamma M_t
+\end{equation}
+which gives us the minimal objective function for a given tree structure.
+Ideally, one would enumerate all possible tree structures and then use the tree associated with 
+the smallest value of the (minimized) objective function, but this is often intractable.
+EGB instead implements an alternative approach that seeks to minimize the objective at a given iteration 
+by greedily optimizing one level of the tree at a time.
+
+To this end, consider splitting a node in a given tree into ``left'' and ``right'' child nodes based on some
+candidate splitting rule.
+Let $G_L$ and $G_R$ represent $G_j$ for the left and right child nodes, respectively.
+Similarly, let $H_L$ and $H_R$ represent $H_j$ for the child nodes.
+We can then find the reduction in the objective function as follows:
+\begin{equation}
+\Delta \tilde{\mathcal{L}}_t^* = \frac{1}{2}\left\{\frac{G_L^2}{H_L + \lambda}  + \frac{G_R^2}{H_R + \lambda}
+- \frac{(G_L + G_R)^2}{H_L + H_R + \lambda} \right\} - \gamma
+\label{eq:gain}
+\end{equation}
+where the first two terms in parentheses capture the loss associated with the child nodes and the third
+term captures the loss associated with the parent node being split.
+When splitting a node in any given tree, EGB then evaluates Eq.\ (\ref{eq:gain}) for every possible split
+rule for every available explanatory variable and chooses the split associated with the maximal reduction in 
+the objective function.%
+\footnote{This is known as the ``exact greedy algorithm.'' 
+EGB also has an approximate algorithm that can be used for large datasets.
+See \citet{chen2016xgboost} for details.}
+EGB then continues to split nodes in a given tree until a stopping criterion is met (e.g., a user-specified
+maximum tree depth).
+Once a given tree is built, EGB then moves to building the next tree in the ensemble and continues to do
+so until reaching the user-specified number of trees to build.
+
+The above references several hyperparameters that must be chosen by the user, including the 
+hyperparameters in the regularization term (i.e., $\gamma$ and $\lambda$), the maximum tree depth, and 
+the number of trees in the ensemble. 
+There are two additional hyperparameters that can be used to further prevent overfitting.
+First, one can use column or feature subsampling where each tree in the ensemble is built based on a
+(uniformly) random subset of all explanatory variables.
+This procedure can also speed up the algorithm because it reduces the number of covariates that 
+must be searched across when creating new splits.
+Second, one can use shrinkage by scaling the predictions associated with each tree by a factor $\eta$,
+which is often called the learning rate.
+The predicted value of the outcome at iteration $t$ is then given by $\hat{y}_i^t = 
+\hat{y}_i^{t-1} + \eta f_t(x_i)$.
+Shrinkage reduces the influence of each tree so that no individual tree has too much influence on the
+ensemble prediction.
+
+One possible approach to hyperparameter selection is to use a grid search where the user (1) specifies
+the domain of the hyperparameters, (2) applies the model to every combination of hyperparameters,
+and (3) selects the hyperparameters that perform the best in terms of some metric (e.g., mean squared
+prediction error in the validation dataset).
+Grid search, however, is computationally inefficient because hyperparameter proposals are uninformed
+by previous evaluations, meaning that the procedure spends considerable time evaluating suboptimal
+hyperparameters.
+We instead use a Bayesian hyperparameter optimization procedure, which sequentially updates a probability 
+model that relates the hyperparameter space to the performance metric and then uses the model to 
+intelligently explore the hyperparameter space \citep{bergstra2011algorithms}.
+Specifically, our implementation of gradient boosting relies on the open-source library XGBoost, which
+we combine with the Hyperopt library that conducts Bayesian hyperparameter optimization using
+the tree-structured Parzen estimator.
+
+% Notation
+% g, G: Gradient
+% gamma: Hyperparameter on the number of leaves
+% h, H: Hessian
+% i: Indexes observations
+% j: Indexes for the leaves
+% l: Loss function
+% lambda: Hyperparameters on the leaf weights
+% m: Prediction values
+% r: Regularization function
+% s: Set of observations in a given leaf
+% t: Indexes trees
+% x: Explanatory variables
+% y: Outcome
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% References %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Start fresh page
+\newpage
+\cleardoublepage
+
+%Declare the style of the bibliography
+\bibliographystyle{apalike}
+\bibliography{References}
+
+\end{document}
