@@ -64,7 +64,7 @@ for i in range(1,501):
     X = pd.merge(x, y, on='MiMun')     # Merge y and x for simulation i
     y = X[indicator]                   # Set y as poverty headcount
     X = X.drop(columns = ['MiMun', 'sim_sample', 'e_y', 'poor', 'gap', 'gap2'])  
-    X = X.loc[:, X.columns.str.startswith(covars)]  # Set X as census predictors
+    X = X.loc[:, X.columns.str.startswith(covars)]  # Set X as chosen predictors
                            
     # Run HYPEROPT function
     # Note: This procedure calls the y and X currently stored

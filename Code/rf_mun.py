@@ -1,7 +1,7 @@
 # Import libraries
-import xgboost as xgb
 import numpy as np
 import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import cross_val_score
 from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
 import time
@@ -11,13 +11,17 @@ inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
 outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
 # Input datasets
-svy = pd.read_csv (inpath + 'svydata_python_psu.csv', header=0)
-x = pd.read_csv (inpath + 'xmatrix_python_psu.csv', header=0)
-x = x.drop('HID_automobile', axis = 1)   # HID_automobile is missing all data
+svy = pd.read_csv(inpath + 'svydata_mun.csv', header = 0)
+x = pd.read_csv(inpath + 'xmatrix_mun.csv', header = 0)
+x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all data
 
 # Filtering covariates
-x_census = x.loc[:, x.columns.str.startswith('HID_')]
-hid = x['HID']
+# Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
+# for all variables
+covars = 'census'
+x_census = x.drop(columns = ['MiMun'])  # If covars = '' need to drop 'MiMun'
+x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
+hid = x['MiMun']
 
 # Choose outcome variable 
 indicator = 'poor' 
@@ -25,21 +29,22 @@ indicator = 'poor'
 # Parameter space
 # Note: To expand the parameter space, add the new component here, but also
 # create an entry in the model specification in the tuning function. The 
-# parameter listing is here: xgboost.readthedocs.io/en/stable/parameter.html
+# parameter listing is here: 
+# scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html
 space = {'n_estimators': hp.choice("n_estimators", [5, 10, 20, 30, 40, 50, 60]), 
         'max_depth': hp.quniform("max_depth", 2, 10, 1), 
-        'colsample_bytree': hp.quniform('colsample_bytree', 0.25, 1, 0.25), 
-        'eta': hp.quniform('eta', 0.1, 0.4, 0.1)
+        'max_features': hp.quniform('max_features', 0.25, 1, 0.25), 
+        'min_samples_leaf': hp.quniform('min_samples_leaf', 1, 10, 1)
         }
 
 # Hyperparameter tuning function
 # Note: This function uses the currently stored y and X.
 def tuning(space):
-    model = xgb.XGBRegressor(random_state = 123, n_jobs = 1,
+    model = RandomForestRegressor(random_state = 123, n_jobs = 1,
         n_estimators = int(space['n_estimators']), 
         max_depth = int(space['max_depth']),
-        colsample_bytree = space['colsample_bytree'],
-        eta = space['eta']
+        max_features = space['max_features'],
+        min_samples_leaf = int(space['min_samples_leaf'])
         )
     mse = -cross_val_score(model, X, y, cv = 3, scoring="neg_mean_squared_error", 
         n_jobs = -1).mean()
@@ -57,10 +62,11 @@ def best(trials):
 for i in range(1,501):
     print("Simulation number:", i)
     y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i
-    X = pd.merge(x, y, on='HID')       # Merge y and x for simulation i
+    X = pd.merge(x, y, on='MiMun')     # Merge y and x for simulation i
     y = X[indicator]                   # Set y as poverty headcount
-    X = X.loc[:, X.columns.str.startswith('HID_')]  # Set X as chosen predictors
-                           
+    X = X.drop(columns = ['MiMun', 'sim_sample', 'e_y', 'poor', 'gap', 'gap2'])  
+    X = X.loc[:, X.columns.str.startswith(covars)]  # Set X as chosen predictors
+                               
     # Run HYPEROPT function
     # Note: This procedure calls the y and X currently stored
     start = time.perf_counter()   # Start timer
@@ -75,37 +81,37 @@ for i in range(1,501):
     print(f"Iteration completed in {end - start:0.4f} seconds")
         
     # Save results
-    # Note: The feature importance used here is 'gain'. By design, these
-    # will sum to one.
+    # Note: The impurity-based feature importances will sum to one by design.
     name1 = 'yhat_' + str(i)
     name2 = 'imp_' + str(i)
     if (i==1): 
         prediction = pd.DataFrame({name1: y_pred})
         importance = pd.DataFrame({'variables': x_census.columns, 
-                                   name2: model.feature_importances_})
+                                name2: model.feature_importances_})
     else:
         prediction = pd.concat([prediction, pd.DataFrame({name1: y_pred})], axis = 1)
         importance = pd.concat([importance, pd.DataFrame({name2: 
-                                   model.feature_importances_})], axis = 1)
+                                model.feature_importances_})], axis = 1)
             
-# Weighted average function for aggregating to municipality level
-def weighted(x, cols, w="hhsize"):
-    return pd.Series(np.average(x[cols], weights=x[w], axis=0), cols)
-
-# Save results at PSU level
-prediction = pd.concat([hid, prediction], axis = 1)
-prediction.to_csv(outpath + 'hyperopt_census_psu(disaggregated).csv', index = False)
-            
-# Collapse to municipality level
-hhsize = pd.read_csv(inpath + 'true_psu.csv', header=0)[['HID', 'hhsize']]
-prediction = pd.merge(prediction, hhsize, on='HID')
-prediction['HID'] = (prediction['HID']/1000).astype(int)  # Fix identifier
-prediction = prediction.rename(columns={"HID": "muni"})
-cols = list(prediction)[1:-1]
-prediction = prediction.groupby(prediction.muni).apply(weighted, cols)
-
 # Save results
-prediction.to_csv(outpath + 'hyperopt_census_psu.csv')
-importance.to_csv(outpath + 'importance_census_psu.csv', index = False)
+prediction = pd.concat([hid, prediction], axis = 1)
+prediction = prediction.rename(columns={"MiMun": "muni"})
+if covars=='': covars = 'all'
+prediction.to_csv(outpath + 'rf_' + covars + '_mun.csv', index = False)
+importance.to_csv(outpath + 'rf_importance_' + covars + '_mun.csv', index = False)
+
+
+
+
+
+    
+    
+
+
+        
+        
+
+
+
 
 
