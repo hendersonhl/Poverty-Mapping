@@ -68,7 +68,7 @@ for i in range(1,5):
     trials = Trials()
     params = fmin(fn = tuning, space = space, algo = tpe.suggest, 
         max_evals = 200, trials = trials)  # Run HYPEROPT
-    print(params)   # Print the best parameters
+    print(params)   # Print the best parameters 
     model = best(trials)
     model.fit(X, y)   # Fit the best model and get predictions
     y_pred = model.predict(x_census)
