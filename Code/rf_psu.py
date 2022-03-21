@@ -55,7 +55,7 @@ def best(trials):
     return best['result']['model']
 
 # Predictions using xgboost
-for i in range(1,5):
+for i in range(1,501):
     print("Simulation number:", i)
     y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i
     X = pd.merge(x, y, on='HID')       # Merge y and x for simulation i
