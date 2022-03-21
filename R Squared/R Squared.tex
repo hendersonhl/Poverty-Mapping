@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Preamble %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Declare document class and miscellaneous packages
+\documentclass[english]{article}
+\usepackage{natbib}
+\usepackage[leqno]{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage[margin=1in]{geometry}
+\interfootnotelinepenalty=10000
+
+%Hyper-references
+\usepackage{hyperref}
+\hypersetup{colorlinks, citecolor=black, filecolor=black, linkcolor=black, 
+urlcolor=black, pdftex}
+
+\begin{document}
+
+\doublespacing
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Body %%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% This write-up is based on the post at the following URL:
+% https://stats.stackexchange.com/questions/238878/how-do-errors-in-variables-affect-the-r2
+
+Let $y_i^t$ denote the true poverty rate for some geographical entity $i = 1, 2, \ldots, N$.
+Further, let $y_i^d$ and $y_i^m$ denote the direct and model-based estimates of the poverty rate, 
+respectively.
+The standard method for assessing the predictive performance of model-based poverty estimates is
+to calculate the $R^2$ from a regression like the following:
+\begin{equation}
+y_i^m = \alpha + \beta y_i^d + \varepsilon_i
+\label{eq:reg}
+\end{equation}
+where we emphasize that the above is a regression of the model-based estimates on the direct
+estimates rather than the true poverty rates.
+The relationship between the direct estimates and the true poverty rates can be expressed as follows:
+\begin{equation}
+y_i^d = y_i^t + \eta_i
+\end{equation}
+where we assume that $\eta$ is a mean-zero error term that is independent of $y_i^t$.
+We further assume that $\eta$ and $\varepsilon$ are independent.
+
+The estimated $R^2$ from the above regression can be written as
+\begin{equation}
+\hat{R}^2 = 1 - \frac{\sum_i(\hat{\alpha} + \hat{\beta}y_i^d - y_i^m)^2}{\sum_i (y_i^m - \bar{y}^m)^2}
+\end{equation}
+where $\hat{\alpha}$ and $\hat{\beta}$ are the coefficient estimates.
+Noting that $\hat{\alpha} = \bar{y}^m - \hat{\beta}\bar{y}^d$, we can write
+\begin{equation}
+\hat{R}^2 = 1 - \frac{\sum_i(\bar{y}^m - \hat{\beta}\bar{y}^d + \hat{\beta}y_i^d - 
+y_i^m)^2}{\sum_i (y_i^m - \bar{y}^m)^2}
+\end{equation}
+or 
+\begin{equation}
+\hat{R}^2 = 1 - \frac{\sum_i\left[\hat{\beta}(y_i^d  - \bar{y}^d) - (y_i^m - \bar{y}^m)
+ \right]^2}{\sum_i (y_i^m - \bar{y}^m)^2}.
+\end{equation}
+In what follows, our objective is to understand how the above $\hat{R}^2$ relates to the ``true'' $R^2$ 
+one would obtain from a regression of $y_i^m$ on $y_i^t$.
+
+We first note that
+\begin{equation}
+\text{plim } \frac{N}{\sum_i (y_i^m - \bar{y}^m)^2} = \frac{1}{\sigma_m^2}
+\label{eq:num}
+\end{equation}
+where $\sigma_m^2$ is the variance of the model-based poverty estimates.
+Further, we can write
+\begin{equation}
+\text{plim }\frac{\sum_i\left[\hat{\beta}(y_i^d  - \bar{y}^d) - (y_i^m - \bar{y}^m)
+ \right]^2}{N} =  \sigma_m^2 - \beta^2 \frac{\sigma_t^4}{\sigma_d^2}
+ \label{eq:den}
+\end{equation}
+where $\sigma_t^2$ and $\sigma_d^2$ represent the variances of the true poverty rates and the direct 
+estimates, respectively.
+Combining Eqs.\ (\ref{eq:num}) and (\ref{eq:den}), we then have the following:
+\begin{align}
+\label{eq:r2}
+\text{plim }\hat{R}^2 &= 1 - \frac{\sigma_m^2 - \beta^2 \frac{\sigma_t^4}{\sigma_d^2}}{\sigma_m^2} \\  \nonumber
+& =  \beta^2 \frac{\sigma_t^4}{\sigma_d^2 \sigma_m^2} \\ \nonumber
+& = \beta^2 \frac{\sigma_t^4}{\sigma_d^2 \sigma_m^2}\left(\frac{\sigma_t^2}{\sigma_t^2}\right) \\  \nonumber
+& = \beta^2 \frac{\sigma_t^2}{ \sigma_m^2}\left(\frac{\sigma_t^2}{\sigma_d^2}\right) \\  \nonumber
+& = R^2 \left(\frac{\sigma_t^2}{\sigma_d^2}\right)
+\end{align}
+where, for the last step in the above, we know that $R^2 = \beta^2 \sigma_t^2 / \sigma_m^2$, which is 
+the ``true'' value of the $R^2$.
+
+Given that $\sigma_d^2 = \sigma_t^2 + \sigma_\eta^2$, we can re-express Eq.\ (\ref{eq:r2}) as follows:
+\begin{equation}
+\hat{R}^2 = R^2 \left(\frac{\sigma_d^2 - \sigma_\eta^2}{\sigma_d^2}\right)
+\end{equation}
+where $\sigma_\eta^2$ denotes the variance of $\eta$.
+In the above, we see that $\hat{R}^2 = R^2$ when $\sigma_\eta^2 = 0$ or, equivalently, when
+$y_i^d = y_i^t$ for all $i$.
+It is, however, well known that direct estimates provide noisy estimates of true poverty rates, 
+meaning that $\sigma_\eta^2$ will generally be non-zero.
+When $\sigma_\eta^2 > 0$, we then see that that $\hat{R}^2$ will be biased downward and the
+magnitude of the bias will be determined by the size of $(\sigma_d^2 - \sigma_\eta^2)/ \sigma_d^2$.
+We thus conclude that validation exercises based on regressions of the form in Eq.\ (\ref{eq:reg}) will
+tend to mischaracterize the performance of model-based approaches to poverty mapping, with the 
+resulting estimates of $R^2$ being systematically biased downward.
+
+
+
+
+
+\end{document}
