@@ -7,74 +7,135 @@ import numpy as np
 inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
 outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
 
-# Select results to plot
-# Note: Use 'mun' or 'psu' for the level variable to select the level 
-# at which predictions were made (all predictions are already aggregated to 
-# the municipality). If using 'psu' set covars to 'census'. If using 
-# 'mun' set covars to 'census' for census variables, 'gis' for GIS variables, 
-# and 'all' for all variables.
-level = 'psu'
-covars = 'census'
-indicator = 'poor' 
-
 # Import true poverty indicators
 true = pd.read_csv(inpath + 'true_mun.csv', header = 0)
 true = true.rename(columns={'MiMun': 'muni'})
-true = true[['muni', indicator]]
+true = true[['muni', 'poor']]
 
-# Import estimates and merge onto truth
-gb = pd.read_csv(outpath + 'hyperopt_' + covars + '_' + level + '.csv', header = 0)
-gb = pd.merge(gb, true)
-bart = pd.read_csv(outpath + 'bart_' + covars + '_' + level + '.csv', header = 0)
-bart = pd.merge(bart, true)
-rf = pd.read_csv(outpath + 'rf_' + covars + '_' + level + '.csv', header = 0)
-rf = pd.merge(rf, true)
+# Import gradient boosting estimates and merge onto truth
+gb_census = pd.read_csv(outpath + 'hyperopt_census_mun.csv', header = 0)
+gb_census = pd.merge(gb_census, true)
+gb_gis = pd.read_csv(outpath + 'hyperopt_gis_mun.csv', header = 0)
+gb_gis = pd.merge(gb_gis, true)
+gb_all = pd.read_csv(outpath + 'hyperopt_all_mun.csv', header = 0)
+gb_all = pd.merge(gb_all, true)
+
+# Import BART estimates and merge onto truth
+bart_census = pd.read_csv(outpath + 'bart_census_mun.csv', header = 0)
+bart_census = pd.merge(bart_census, true)
+bart_gis = pd.read_csv(outpath + 'bart_gis_mun.csv', header = 0)
+bart_gis = pd.merge(bart_gis, true)
+bart_all = pd.read_csv(outpath + 'bart_all_mun.csv', header = 0)
+bart_all = pd.merge(bart_all, true)
+
+# Import random forest estimates and merge onto truth
+rf_census = pd.read_csv(outpath + 'rf_census_mun.csv', header = 0)
+rf_census = pd.merge(rf_census, true)
+rf_gis = pd.read_csv(outpath + 'rf_gis_mun.csv', header = 0)
+rf_gis = pd.merge(rf_gis, true)
+rf_all = pd.read_csv(outpath + 'rf_all_mun.csv', header = 0)
+rf_all = pd.merge(rf_all, true)
 
 # Calculate MSE and bias for gradient boosting results
-# Note: This calculates MSE and bias for each municipality
 mse_gb = pd.DataFrame()
 for i in range(1,501):
     name = 'yhat_' + str(i)
-    mse = (gb[name] - gb[indicator])**2
+    mse = (gb_census[name] - gb_census['poor'])**2
     mse_gb = pd.concat((mse_gb, mse), axis = 1)    
-mse_gb = np.mean(mse_gb, axis = 1)
-bias_gb = gb.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - gb.loc[:, 'poor']
+mse_gb_census = np.mean(mse_gb, axis = 1)
+bias_gb_census = gb_census.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - gb_census.loc[:, 'poor']
+
+mse_gb = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (gb_gis[name] - gb_gis['poor'])**2
+    mse_gb = pd.concat((mse_gb, mse), axis = 1)    
+mse_gb_gis = np.mean(mse_gb, axis = 1)
+bias_gb_gis = gb_gis.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - gb_gis.loc[:, 'poor']
+
+mse_gb = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (gb_all[name] - gb_all['poor'])**2
+    mse_gb = pd.concat((mse_gb, mse), axis = 1)    
+mse_gb_all = np.mean(mse_gb, axis = 1)
+bias_gb_all = gb_gis.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - gb_gis.loc[:, 'poor']
 
 # Calculate MSE and bias for BART results
 mse_bart = pd.DataFrame()
 for i in range(1,501):
     name = 'yhat_' + str(i)
-    mse = (bart[name] - bart[indicator])**2
+    mse = (bart_census[name] - bart_census['poor'])**2
     mse_bart = pd.concat((mse_bart, mse), axis = 1)    
-mse_bart = np.mean(mse_bart, axis = 1)
-bias_bart = bart.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - bart.loc[:, 'poor']
+mse_bart_census = np.mean(mse_bart, axis = 1)
+bias_bart_census = bart_census.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - bart_census.loc[:, 'poor']
+
+mse_bart = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (bart_gis[name] - bart_gis['poor'])**2
+    mse_bart = pd.concat((mse_bart, mse), axis = 1)    
+mse_bart_gis = np.mean(mse_bart, axis = 1)
+bias_bart_gis = bart_gis.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - bart_gis.loc[:, 'poor']
+
+mse_bart = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (bart_all[name] - bart_all['poor'])**2
+    mse_bart = pd.concat((mse_bart, mse), axis = 1)    
+mse_bart_all = np.mean(mse_bart, axis = 1)
+bias_bart_all = bart_all.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - bart_all.loc[:, 'poor']
 
 # Calculate MSE and bias for random forest results
 mse_rf = pd.DataFrame()
 for i in range(1,501):
     name = 'yhat_' + str(i)
-    mse = (rf[name] - rf[indicator])**2
+    mse = (rf_census[name] - rf_census['poor'])**2
     mse_rf = pd.concat((mse_rf, mse), axis = 1)    
-mse_rf = np.mean(mse_rf, axis = 1)
-bias_rf = rf.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - rf.loc[:, 'poor']
+mse_rf_census = np.mean(mse_rf, axis = 1)
+bias_rf_census = rf_census.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - rf_census.loc[:, 'poor']
+
+mse_rf = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (rf_gis[name] - rf_gis['poor'])**2
+    mse_rf = pd.concat((mse_rf, mse), axis = 1)    
+mse_rf_gis = np.mean(mse_rf, axis = 1)
+bias_rf_gis = rf_gis.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - rf_gis.loc[:, 'poor']
+
+mse_rf = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (rf_all[name] - rf_all['poor'])**2
+    mse_rf = pd.concat((mse_rf, mse), axis = 1)    
+mse_rf_all = np.mean(mse_rf, axis = 1)
+bias_rf_all = rf_all.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - rf_all.loc[:, 'poor']
 
 # Boxplot for MSE  
 plt.figure(figsize = (10, 7))
-results = pd.concat((mse_gb, mse_bart, mse_rf), axis = 1) 
-plt.boxplot(results, labels = ['GB', 'BART', 'RF'])
-plt.ylabel('Mean Squared Error')
-print(np.mean(mse_gb))
-print(np.mean(mse_bart))
-print(np.mean(mse_rf))
+results = pd.concat((mse_gb_census, mse_bart_census, mse_rf_census,
+                     mse_gb_gis, mse_bart_gis, mse_rf_gis,
+                     mse_gb_all, mse_bart_all, mse_rf_all,), axis = 1) 
+labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 
+          'GB (GIS)', 'BART (GIS)', 'RF (GIS)',
+          'GB (All)', 'BART (All)', 'RF (All)',]
+plt.boxplot(results, sym = '', labels = labels, vert = False)
+plt.gca().invert_yaxis()
+plt.xlabel('Mean Squared Error')
 
-# Boxplot for bias 
-plt.figure(figsize =(10, 7))
-results = pd.concat((bias_gb, bias_bart, bias_rf), axis = 1) 
-plt.boxplot(results, labels = ['GB', 'BART', 'RF'])
-plt.ylabel('Bias')
-print(np.mean(bias_gb))
-print(np.mean(bias_bart))
-print(np.mean(bias_rf))
+
+# Boxplot for bias  
+plt.figure(figsize = (10, 7))
+results = pd.concat((bias_gb_census, bias_bart_census, bias_rf_census,
+                     bias_gb_gis, bias_bart_gis, bias_rf_gis,
+                     bias_gb_all, bias_bart_all, bias_rf_all,), axis = 1) 
+labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 
+          'GB (GIS)', 'BART (GIS)', 'RF (GIS)',
+          'GB (All)', 'BART (All)', 'RF (All)',]
+plt.boxplot(results, sym = '', labels = labels, vert = False)
+plt.gca().invert_yaxis()
+plt.xlabel('Bias')
+
 
 
 
