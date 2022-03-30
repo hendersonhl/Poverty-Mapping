@@ -97,5 +97,5 @@ prediction = pd.concat([hid, prediction], axis = 1)
 prediction = prediction.rename(columns={"HID": "muni"})
 prediction['muni'] = prediction['muni'].astype(int)
 prediction = prediction.groupby(['muni']).mean()   # Collapse to municipality level
-prediction.to_csv(outpath + 'hyperopt_census_hh.csv')
-importance.to_csv(outpath + 'importance_census_hh.csv', index = False)
+prediction.to_csv(outpath + 'gb_census_hh.csv')
+importance.to_csv(outpath + 'gb_importance_census_hh.csv', index = False)

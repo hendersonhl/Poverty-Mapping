@@ -94,7 +94,7 @@ def weighted(x, cols, w="hhsize"):
 
 # Save results at PSU level
 prediction = pd.concat([hid, prediction], axis = 1)
-prediction.to_csv(outpath + 'hyperopt_census_psu(disaggregated).csv', index = False)
+prediction.to_csv(outpath + 'gb_census_psu(disaggregated).csv', index = False)
             
 # Collapse to municipality level
 hhsize = pd.read_csv(inpath + 'true_psu.csv', header=0)[['HID', 'hhsize']]
@@ -105,7 +105,7 @@ cols = list(prediction)[1:-1]
 prediction = prediction.groupby(prediction.muni).apply(weighted, cols)
 
 # Save results
-prediction.to_csv(outpath + 'hyperopt_census_psu.csv')
-importance.to_csv(outpath + 'importance_census_psu.csv', index = False)
+prediction.to_csv(outpath + 'gb_census_psu.csv')
+importance.to_csv(outpath + 'gb_importance_census_psu.csv', index = False)
 
 
