@@ -19,7 +19,7 @@ x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all d
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = 'census'
+covars = ''
 x_census = x.drop(columns = ['MiMun'])  # If covars = '' need to drop 'MiMun'
 x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
 x_census = StandardScaler().fit_transform(x_census) # Standardize the covariates

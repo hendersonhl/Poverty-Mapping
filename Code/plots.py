@@ -13,11 +13,11 @@ true = true.rename(columns={'MiMun': 'muni'})
 true = true[['muni', 'poor']]
 
 # Import gradient boosting estimates and merge onto truth
-gb_census = pd.read_csv(outpath + 'hyperopt_census_mun.csv', header = 0)
+gb_census = pd.read_csv(outpath + 'gb_census_mun.csv', header = 0)
 gb_census = pd.merge(gb_census, true)
-gb_gis = pd.read_csv(outpath + 'hyperopt_gis_mun.csv', header = 0)
+gb_gis = pd.read_csv(outpath + 'gb_gis_mun.csv', header = 0)
 gb_gis = pd.merge(gb_gis, true)
-gb_all = pd.read_csv(outpath + 'hyperopt_all_mun.csv', header = 0)
+gb_all = pd.read_csv(outpath + 'gb_all_mun.csv', header = 0)
 gb_all = pd.merge(gb_all, true)
 
 # Import BART estimates and merge onto truth
@@ -35,6 +35,14 @@ rf_gis = pd.read_csv(outpath + 'rf_gis_mun.csv', header = 0)
 rf_gis = pd.merge(rf_gis, true)
 rf_all = pd.read_csv(outpath + 'rf_all_mun.csv', header = 0)
 rf_all = pd.merge(rf_all, true)
+
+# Import lasso estimates and merge onto truth
+lasso_census = pd.read_csv(outpath + 'lasso_census_mun.csv', header = 0)
+lasso_census = pd.merge(lasso_census, true)
+lasso_gis = pd.read_csv(outpath + 'lasso_gis_mun.csv', header = 0)
+lasso_gis = pd.merge(lasso_gis, true)
+lasso_all = pd.read_csv(outpath + 'lasso_all_mun.csv', header = 0)
+lasso_all = pd.merge(lasso_all, true)
 
 # Calculate MSE and bias for gradient boosting results
 mse_gb = pd.DataFrame()
@@ -111,27 +119,51 @@ for i in range(1,501):
 mse_rf_all = np.mean(mse_rf, axis = 1)
 bias_rf_all = rf_all.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - rf_all.loc[:, 'poor']
 
+# Calculate MSE and bias for lasso results
+mse_lasso = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (lasso_census[name] - lasso_census['poor'])**2
+    mse_lasso = pd.concat((mse_lasso, mse), axis = 1)    
+mse_lasso_census = np.mean(mse_lasso, axis = 1)
+bias_lasso_census = lasso_census.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - lasso_census.loc[:, 'poor']
+
+mse_lasso = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (lasso_gis[name] - lasso_gis['poor'])**2
+    mse_lasso = pd.concat((mse_lasso, mse), axis = 1)    
+mse_lasso_gis = np.mean(mse_lasso, axis = 1)
+bias_lasso_gis = lasso_gis.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - lasso_gis.loc[:, 'poor']
+
+mse_lasso = pd.DataFrame()
+for i in range(1,501):
+    name = 'yhat_' + str(i)
+    mse = (lasso_all[name] - lasso_all['poor'])**2
+    mse_lasso = pd.concat((mse_lasso, mse), axis = 1)    
+mse_lasso_all = np.mean(mse_lasso, axis = 1)
+bias_lasso_all = lasso_all.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - lasso_all.loc[:, 'poor']
+
 # Boxplot for MSE  
 plt.figure(figsize = (10, 7))
-results = pd.concat((mse_gb_census, mse_bart_census, mse_rf_census,
-                     mse_gb_gis, mse_bart_gis, mse_rf_gis,
-                     mse_gb_all, mse_bart_all, mse_rf_all,), axis = 1) 
-labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 
-          'GB (GIS)', 'BART (GIS)', 'RF (GIS)',
-          'GB (All)', 'BART (All)', 'RF (All)',]
+results = pd.concat((mse_gb_census, mse_bart_census, mse_rf_census, mse_lasso_census,
+                     mse_gb_gis, mse_bart_gis, mse_rf_gis, mse_lasso_gis,
+                     mse_gb_all, mse_bart_all, mse_rf_all, mse_lasso_all), axis = 1) 
+labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 'LASSO (Census)', 
+          'GB (GIS)', 'BART (GIS)', 'RF (GIS)', 'LASSO (GIS)',
+          'GB (All)', 'BART (All)', 'RF (All)', 'LASSO (All)']
 plt.boxplot(results, sym = '', labels = labels, vert = False)
 plt.gca().invert_yaxis()
 plt.xlabel('Mean Squared Error')
 
-
 # Boxplot for bias  
 plt.figure(figsize = (10, 7))
-results = pd.concat((bias_gb_census, bias_bart_census, bias_rf_census,
-                     bias_gb_gis, bias_bart_gis, bias_rf_gis,
-                     bias_gb_all, bias_bart_all, bias_rf_all,), axis = 1) 
-labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 
-          'GB (GIS)', 'BART (GIS)', 'RF (GIS)',
-          'GB (All)', 'BART (All)', 'RF (All)',]
+results = pd.concat((bias_gb_census, bias_bart_census, bias_rf_census, bias_lasso_census,
+                     bias_gb_gis, bias_bart_gis, bias_rf_gis, bias_lasso_gis,
+                     bias_gb_all, bias_bart_all, bias_rf_all, bias_lasso_all), axis = 1) 
+labels = ['GB (Census)', 'BART (Census)', 'RF (Census)', 'LASSO (Census)', 
+          'GB (GIS)', 'BART (GIS)', 'RF (GIS)', 'LASSO (GIS)',
+          'GB (All)', 'BART (All)', 'RF (All)', 'LASSO (All)']
 plt.boxplot(results, sym = '', labels = labels, vert = False)
 plt.gca().invert_yaxis()
 plt.xlabel('Bias')
