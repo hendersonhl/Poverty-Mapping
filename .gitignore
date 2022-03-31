@@ -11,3 +11,4 @@ Results/rf_census_psu(disaggregated).csv
 *.log
 *.gz
 *.lyx~
+Results/lasso_census_psu(disaggregated).csv
