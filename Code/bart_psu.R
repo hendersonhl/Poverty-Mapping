@@ -24,7 +24,7 @@ hid = x["HID"]
 # Choose outcome variable 
 indicator = "poor"
 
-# Predictions for all samples using BART
+# Predictions
 prediction = hid
 for (i in 1:500){
     sim = paste0("Simulation number:", i)
@@ -38,14 +38,13 @@ for (i in 1:500){
     # Run BART and get predictions
     #post = gbart(X, y, x_census)  # Default burn-in is 100 and default returned samples is 1000
     post = bartMachineCV(X, y, k_folds = 3, k_cvs = c(2, 3), nu_q_cvs = list(c(3, 0.9))) 
-    proc.time() - ptm
-    name = paste0("yhat_", i)
-    y_pred = post$yhat.test.mean 
+    y_pred = predict(post, x_census)
     
     # Store results
     name = paste0("yhat_", i)
     prediction = cbind(prediction, y_pred)
     colnames(prediction)[i + 1] = name
+    proc.time() - ptm
 }
 
 # Collapse results to municipality level

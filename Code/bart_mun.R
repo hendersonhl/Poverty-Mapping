@@ -28,7 +28,7 @@ hid = x["MiMun"]
 # Choose outcome variable 
 indicator = "poor"
 
-# Predictions for all samples using BART
+# Predictions
 prediction = hid
 for (i in 1:500){
     sim = paste0("Simulation number:", i)
