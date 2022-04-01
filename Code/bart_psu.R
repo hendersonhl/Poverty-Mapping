@@ -1,8 +1,9 @@
 # Set up
 rm(list = ls())
-library(BART)
+options(java.parameters = "-Xmx15000m")  # Sets memory for bartMachine
+library(bartMachine)
+set_bart_machine_num_cores(4)
 library(matrixStats)
-library(dplyr)
 set.seed(123)
 
 # Directories
@@ -23,22 +24,11 @@ hid = x["HID"]
 # Choose outcome variable 
 indicator = "poor"
 
-# Illustrate prediction intervals in BART
-y = svy[svy$sim_sample == 1, ]     # Get all outcomes for one sample
-X = merge(x, y, by = "HID") 
-y = X[, indicator]                 # Set y as poverty headcount
-X = X[, grepl("HID_", names(X))]   # Set X as chosen predictors
-post = gbart(X, y, x_census)       # Default burn-in is 100 and default returned samples is 1000
-y_preds = post$yhat.test           # Get all posterior samples
-interval = colQuantiles(y_preds, probs = c(0.05, 0.95))  # Get credible interval
-y_pred = post$yhat.test.mean   # Get predictions (i.e., posterior means)
-prediction = cbind(hid, y_pred, interval)  # Combine into one dataframe
-head(prediction)
-
 # Predictions for all samples using BART
 prediction = hid
 for (i in 1:500){
     sim = paste0("Simulation number:", i)
+    ptm <- proc.time()
     print(sim)
     y = svy[svy$sim_sample == i, ]     # Get all outcomes for simulation i
     X = merge(x, y, by = "HID") 
@@ -46,7 +36,9 @@ for (i in 1:500){
     X = X[, grepl("HID_", names(X))]   # Set X as chosen predictors
     
     # Run BART and get predictions
-    post = gbart(X, y, x_census)  # Default burn-in is 100 and default returned samples is 1000
+    #post = gbart(X, y, x_census)  # Default burn-in is 100 and default returned samples is 1000
+    post = bartMachineCV(X, y, k_folds = 3, k_cvs = c(2, 3), nu_q_cvs = list(c(3, 0.9))) 
+    proc.time() - ptm
     name = paste0("yhat_", i)
     y_pred = post$yhat.test.mean 
     

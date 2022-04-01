@@ -58,7 +58,7 @@ def best(trials):
     best = valid[idx]
     return best['result']['model']
 
-# Predictions using xgboost
+# Predictions
 for i in range(1,501):
     print("Simulation number:", i)
     y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i

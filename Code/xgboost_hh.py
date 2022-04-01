@@ -57,7 +57,7 @@ def best(trials):
     best = valid[idx]
     return best['result']['model']
 
-# Predictions using xgboost
+# Predictions
 for i in range(1,501):
     print("Simulation number:", i)
     samp = samples.loc[samples['sim_sample'] == i]  # Get HH identifiers in sample i
