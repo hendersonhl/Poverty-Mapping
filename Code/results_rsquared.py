@@ -22,7 +22,7 @@ direct = pd.read_csv(inpath + 'direct_mun.csv', header = 0)
 results = pd.merge(results, direct, on=['muni', 'sim_sample'], how = 'outer')
 results['svysample'] = np.where(results['dpoor'].isnull(), 0, 1)
 
-# Merge in results from all models
+# Merge in results
 model = ['gb_census_mun', 'gb_gis_mun', 'gb_all_mun', 'gb_census_psu',  
          'bart_census_mun', 'bart_gis_mun', 'bart_all_mun', 'bart_census_psu', 
          'rf_census_mun', 'rf_gis_mun', 'rf_all_mun', 'rf_census_psu', 
@@ -35,8 +35,21 @@ for i in model:
     res = res.rename(columns={"value": i, "variable": "sim_sample"})
     res['sim_sample'] = np.repeat(np.arange(1,501), true.shape[0])
     results = pd.merge(results, res, on=['muni', 'sim_sample'], how = 'outer')
-
+    
+# Add in results from traditional estimators
+res_uc = pd.read_stata(inpath + 'uceb19.dta')
+res_uc = res_uc[['Unit','avg_fgt0__6744898','nsim']]
+res_uc.columns = ['muni', 'uc', 'sim_sample']
+res_uc['muni'] = res_uc['muni'].astype(int)
+results = pd.merge(results, res_uc, on=['muni', 'sim_sample'], how = 'outer')
+res_eb = pd.read_stata(inpath + 'h3no19.dta')
+res_eb = res_eb[['Unit','avg_fgt0__6744898','nsim']]
+res_eb.columns = ['muni', 'eb', 'sim_sample']
+res_eb['muni'] = res_eb['muni'].astype(int)
+results = pd.merge(results, res_eb, on=['muni', 'sim_sample'], how = 'outer')
+    
 # Calculate r-squared values
+model = model + ['eb', 'uc']
 rsquared = pd.DataFrame()
 rsquared['sim_sample'] = np.arange(1,501)
 for i in model:     # Loop over all models and samples
