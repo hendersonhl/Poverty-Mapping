@@ -1,5 +1,4 @@
 # Import libraries
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
@@ -227,18 +226,29 @@ for i in range(1,501):
 mse_ols_psu = np.mean(mse_ols, axis = 1)
 bias_ols_psu = ols_psu.loc[:, 'yhat_1':'yhat_500'].mean(axis = 1) - ols_psu.loc[:, 'poor']
 
+# Bring in results from traditional estimators 
+trad = pd.read_stata(inpath + 'accumulate_results.dta')
+mse_eb = trad[trad['method'] == 'h3no']['fgt0_mse']
+mse_eb.reset_index(drop=True, inplace=True)
+mse_uc = trad[trad['method'] == 'uceb']['fgt0_mse']
+bias_eb = trad[trad['method'] == 'h3no']['fgt0_bias_reg']
+bias_eb.reset_index(drop=True, inplace=True)
+bias_uc = trad[trad['method'] == 'uceb']['fgt0_bias_reg']
+
 # Combine MSE results
 mse = true['muni']
 mse = pd.concat([mse, mse_gb_census, mse_gb_gis, mse_gb_all, mse_gb_psu,
                  mse_bart_census, mse_bart_gis, mse_bart_all, mse_bart_psu,
                  mse_rf_census, mse_rf_gis, mse_rf_all, mse_rf_psu,
                  mse_lasso_census, mse_lasso_gis, mse_lasso_all, mse_lasso_psu,
-                 mse_ols_census, mse_ols_gis, mse_ols_all, mse_ols_psu], axis = 1)
+                 mse_ols_census, mse_ols_gis, mse_ols_all, mse_ols_psu,
+                 mse_eb, mse_uc], axis = 1, ignore_index = True)
 mse.columns = ['muni', 'mse_gb_census',' mse_gb_gis', 'mse_gb_all', 'mse_gb_psu',
                'mse_bart_census', 'mse_bart_gis', 'mse_bart_all', 'mse_bart_psu',
                'mse_rf_census', 'mse_rf_gis', 'mse_rf_all', 'mse_rf_psu',
                'mse_lasso_census', 'mse_lasso_gis', 'mse_lasso_all', 'mse_lasso_psu',
-               'mse_ols_census', 'mse_ols_gis', 'mse_ols_all', 'mse_ols_psu']
+               'mse_ols_census', 'mse_ols_gis', 'mse_ols_all', 'mse_ols_psu',
+               'mse_eb', 'mse_uc']
 
 # Combine bias results
 bias = true['muni']
@@ -246,12 +256,19 @@ bias = pd.concat([bias, bias_gb_census, bias_gb_gis, bias_gb_all, bias_gb_psu,
                  bias_bart_census, bias_bart_gis, bias_bart_all, bias_bart_psu,
                  bias_rf_census, bias_rf_gis, bias_rf_all, bias_rf_psu,
                  bias_lasso_census, bias_lasso_gis, bias_lasso_all, bias_lasso_psu,
-                 bias_ols_census, bias_ols_gis, bias_ols_all, bias_ols_psu], axis = 1)
+                 bias_ols_census, bias_ols_gis, bias_ols_all, bias_ols_psu,
+                 bias_eb, bias_uc], axis = 1, ignore_index = True)
 bias.columns = ['muni', 'bias_gb_census',' bias_gb_gis', 'bias_gb_all', 'bias_gb_psu',
                'bias_bart_census', 'bias_bart_gis', 'bias_bart_all', 'bias_bart_psu',
                'bias_rf_census', 'bias_rf_gis', 'bias_rf_all', 'bias_rf_psu',
                'bias_lasso_census', 'bias_lasso_gis', 'bias_lasso_all', 'bias_lasso_psu',
-               'bias_ols_census', 'bias_ols_gis', 'bias_ols_all', 'bias_ols_psu']
+               'bias_ols_census', 'bias_ols_gis', 'bias_ols_all', 'bias_ols_psu',
+               'bias_eb', 'bias_uc']
+
+# Save results
+mse.to_csv(outpath + 'results_mse.csv', index = False)
+bias.to_csv(outpath + 'results_bias.csv', index = False)
+
 
 
 
