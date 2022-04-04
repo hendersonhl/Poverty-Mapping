@@ -4,6 +4,7 @@ options(java.parameters = "-Xmx15000m")  # Sets memory for bartMachine
 library(bartMachine)
 set_bart_machine_num_cores(4)
 library(matrixStats)
+library(dplyr)
 set.seed(123)
 
 # Directories

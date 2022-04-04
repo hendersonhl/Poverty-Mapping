@@ -20,7 +20,7 @@ x <- subset(x, select = -c(census_automobile))  # census_automobile is missing a
 # Filtering covariates
 # Note: Use "census" for census variables, "gis" for GIS variables, and "" 
 # for all variables
-covars = "census"
+covars = ""
 x_census = x[-c(1)]   # If covars = "" must drop "MiMun"
 x_census = x_census[, grepl(covars, names(x_census))]
 hid = x["MiMun"]
