@@ -10,8 +10,8 @@ clear all
 set more off
 
 * Set globals
-global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/"
-global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/"
+global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
+global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
 global pline = 714.67
 
 * Define function to distribute transfers
@@ -90,34 +90,59 @@ global prate_low = `r(mean)'   // Lowest achievable poverty rate
 drop prate poor incpc_new
 
 *==========================================
-* Poverty reductions based on xgboost
+* Poverty reductions 
 *==========================================
 
-* Merge in xgboost estimates
-* Note: This part is illustrative and only uses the xgboost results based
-* on municipality-level data with the census covariates.
-preserve      // Prepare for merging in xgboost estimates
-import delimited "$outpath/hyperopt_census_mun.csv", clear 
-sort muni 
-tempfile xgboost
-save `xgboost'
-restore
-sort muni
-merge m:1 muni using `xgboost'   // Merge in xgboost estimates
-drop _merge
+* Set up loop
+local model gb_census_mun gb_gis_mun gb_all_mun gb_census_psu
+matrix results = J(500, 4, .)
+matrix colnames results = `model'
 
-* Calculate post-transfer poverty rates
-matrix results = J(500, 1, .)
-forvalues i = 1/3 {    // Only do 3 iterations as an illustration
-	disp "************* Beginning iteration `i' *************"
-    distribute muni yhat_`i' hhsize $transfer $people pop  // Distribute transfers
-	gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
-    qui sum poor [aw = hhsize]
-	matrix results[`i', 1] = `r(mean)'  // Store achieved poverty rates
-	drop poor incpc_new	
+* Start timer
+timer clear 1
+timer on 1
+
+* Loop over models
+foreach i of local model {
+	
+	* Merge in results from each model
+    preserve      
+    import delimited "$outpath/`i'.csv", clear 
+    sort muni 
+    tempfile results 
+    save `results'
+    restore
+    sort muni
+    merge m:1 muni using `results'  
+    drop _merge
+	
+	* Calculate results for each sample
+    forvalues j = 1/3 {    // Only do 3 iterations as an illustration
+	    disp "***** Beginning iteration `j' for `i' *****"
+        distribute muni yhat_`j' hhsize $transfer $people pop  // Distribute transfers
+	    gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
+        qui sum poor [aw = hhsize]
+	    matrix results[`j', colnumb(results, "`i'")] = `r(mean)' 
+	    drop poor incpc_new	
+     }
+	 
+	 * Reset
+     drop yhat_*	
 }
-drop yhat_*
-matrix list results
+
+timer off 1
+timer list 1
+
+* Save results
+clear
+svmat results, names(col)
+gen sim_sample = _n
+order sim_sample
+outsheet using "$outpath/results_targeting.csv", comma replace
+ 
+
+
+
 
 
 
