@@ -93,17 +93,45 @@ drop prate poor incpc_new
 * Poverty reductions 
 *==========================================
 
-* Set up loop
-local model gb_census_mun gb_gis_mun gb_all_mun gb_census_psu
-matrix results = J(500, 4, .)
-matrix colnames results = `model'
+* Prep results from traditional estimators
+preserve
+use "$inpath/h3no19.dta", clear   // EB results
+keep Unit avg_fgt0 nsim
+rename Unit muni
+rename avg_fgt0 yhat
+rename nsim sim_sample
+order muni sim_sample yhat
+sort muni sim_sample
+reshape wide yhat, i(muni) j(sim_sample)
+rename yhat* yhat_*
+outsheet using "$outpath/eb.csv", comma replace
+use "$inpath/uceb19.dta", clear   // Unit-context results
+keep Unit avg_fgt0 nsim
+rename Unit muni
+rename avg_fgt0 yhat
+rename nsim sim_sample
+order muni sim_sample yhat
+sort muni sim_sample
+reshape wide yhat, i(muni) j(sim_sample)
+rename yhat* yhat_*
+outsheet using "$outpath/uc.csv", comma replace
+restore
 
-* Start timer
-timer clear 1
-timer on 1
+* Set up loop
+local model gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
+    bart_census_mun bart_gis_mun bart_all_mun bart_census_psu ///
+	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
+	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
+	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc
+matrix results = J(500, 22, .)
+matrix colnames results = `model'
 
 * Loop over models
 foreach i of local model {
+	
+	* Start timer
+    timer clear 1
+    timer on 1
 	
 	* Merge in results from each model
     preserve      
@@ -117,7 +145,7 @@ foreach i of local model {
     drop _merge
 	
 	* Calculate results for each sample
-    forvalues j = 1/3 {    // Only do 3 iterations as an illustration
+    forvalues j = 1/500 {    // Only do 3 iterations as an illustration
 	    disp "***** Beginning iteration `j' for `i' *****"
         distribute muni yhat_`j' hhsize $transfer $people pop  // Distribute transfers
 	    gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
@@ -126,12 +154,11 @@ foreach i of local model {
 	    drop poor incpc_new	
      }
 	 
-	 * Reset
-     drop yhat_*	
+	 * Reset and print computation time
+     drop yhat_*
+	 timer off 1
+     timer list 1
 }
-
-timer off 1
-timer list 1
 
 * Save results
 clear
