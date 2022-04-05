@@ -8,11 +8,12 @@
 * Set up
 clear all
 set more off
+set matsize 11000
+set more off
 
-* Set globals
+* Set file paths
 global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
 global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
-global pline = 714.67
 
 * Define function to distribute transfers
 * Note: The arguments for the function are: the muncipality identifier, 
@@ -21,7 +22,6 @@ global pline = 714.67
 * for each municipality. 
 capture program drop distribute
 program define distribute
-    version 17.0
     args muni prate hhsize transfer people pop
 	
 	* Initial distribution 
@@ -56,12 +56,16 @@ end
 use $inpath/census_trim.dta, clear
 rename HID_mun muni
 label var muni "Municipality identifier"
-gen incpc = hhinc/hhsize  
+gen double incpc = hhinc/hhsize  
 label var incpc "Income per capita (pre-transfer)"   
 bysort muni: egen pop = total(hhsize)  
 label var pop "Municipality population"
 order muni incpc hhsize pop poor
 keep muni-pop
+
+* Set poverty line
+sum incpc [aw=hhsize], detail
+global pline = `r(p25)'    // Poverty line at 25th percentile
 
 * Calculate budget and transfer amount
 * Note: The budget is the total amount of money needed to eradicate income
@@ -90,7 +94,7 @@ global prate_low = `r(mean)'   // Lowest achievable poverty rate
 drop prate poor incpc_new
 
 *==========================================
-* Poverty reductions 
+* Poverty reductions for all models
 *==========================================
 
 * Prep results from traditional estimators
@@ -133,29 +137,27 @@ foreach i of local model {
     timer clear 1
     timer on 1
 	
-	* Merge in results from each model
+	* Store results from each model
     preserve      
     import delimited "$outpath/`i'.csv", clear 
     sort muni 
     tempfile results 
     save `results'
     restore
-    sort muni
-    merge m:1 muni using `results'  
-    drop _merge
 	
 	* Calculate results for each sample
     forvalues j = 1/500 {    // Only do 3 iterations as an illustration
 	    disp "***** Beginning iteration `j' for `i' *****"
+		merge m:1 muni using `results', keepusing(yhat_`j') // Merge in estimates
+        drop _merge
         distribute muni yhat_`j' hhsize $transfer $people pop  // Distribute transfers
 	    gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
         qui sum poor [aw = hhsize]
 	    matrix results[`j', colnumb(results, "`i'")] = `r(mean)' 
-	    drop poor incpc_new	
+	    drop poor incpc_new	yhat_`j'
      }
 	 
-	 * Reset and print computation time
-     drop yhat_*
+	 * Print computation time
 	 timer off 1
      timer list 1
 }
