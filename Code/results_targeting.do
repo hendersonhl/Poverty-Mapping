@@ -9,7 +9,6 @@
 clear all
 set more off
 set matsize 11000
-set more off
 
 * Set file paths
 global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
