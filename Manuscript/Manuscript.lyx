@@ -29,7 +29,7 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\spacing single
+\spacing double
 \use_hyperref false
 \papersize default
 \use_geometry true
@@ -43,9 +43,9 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
-\biblio_style plain
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -137,7 +137,662 @@ Detailed discussion of gradient boosting
 \end_layout
 
 \begin_layout Itemize
-Discussion of hyperparameter tuning
+Discussion of hyperparameter tuning 
+\end_layout
+
+\begin_layout Standard
+Originally developed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "friedman2001greedy"
+literal "false"
+
+\end_inset
+
+, gradient boosting machines are a family of machine-learning techniques
+ that combine a large number of weak learners to form a stronger ensemble
+ prediction.
+ Unlike some common ensemble techniques (e.g., random forests) that simply
+ average models in the ensemble, gradient boosting adds models to the ensemble
+ sequentially by fitting new weak learners to the negative gradient of some
+ chosen loss function.
+ With the classic squared-error loss function, this amounts to sequentially
+ fitting new models to the current residuals of the ensemble.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "natekin2013gradient"
+literal "false"
+
+\end_inset
+
+ for an accessible introduction to gradient boosting.
+\end_layout
+
+\end_inset
+
+ Extreme gradient boosting (EGB) is a particularly popular implementation
+ of gradient boosting that uses classification and regression trees as the
+ base models or weak learners.
+ The popularity of EGB is due to the fact that it is fast, scalable, and
+ has been shown to outperform competing methods across a wide range of problems
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Classification and regression trees are based on a sequential binary splitting
+ of the covariate space that serves to partition the data into subsamples
+ that are increasingly homogeneous in terms of the outcome variable.
+ A tree begins with a single root node that is split into two child nodes
+ according to some decision rule.
+ A decision rule pertains to a single explanatory variable and observations
+ are assigned to the child nodes depending on whether they meet some condition
+ associated with the explanatory variable.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For example, for a continuous explanatory variable, one determines whether
+ a given observations falls above or below some numeric cutoff.
+\end_layout
+
+\end_inset
+
+ The child nodes can be further split into new child nodes based on different
+ decision rules that involve other explanatory variables and cutoff points.
+ Any child node that is not further split is referred to as a terminal node
+ or leaf, and each leaf is associated with a parameter that provides a predictio
+n for the subsample associated with that leaf.
+ For any given observation, the ensemble prediction used by EGB is the sum
+ of that observation's predictions across all trees in the ensemble.
+\end_layout
+
+\begin_layout Standard
+In what follows, we discuss the key features of the EGB algorithm, drawing
+ on the presentation provided in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ denote the outcome of interest (e.g., poverty headcounts) for observation
+ or entity 
+\begin_inset Formula $i$
+\end_inset
+
+, and let 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ denote a vector of explanatory variables.
+ In line with the above, the predicted value of the outcome 
+\begin_inset Formula $\hat{y}_{i}$
+\end_inset
+
+ is given by the sum of predictions across the individual trees in the ensemble:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{y}_{i}=\sum_{t}f_{t}(x_{i})
+\end{equation}
+
+\end_inset
+
+where the trees are indexed by 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{t}(x_{i})$
+\end_inset
+
+ gives the prediction of a given tree as a function of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+.
+ To build the trees used in the model, EGB minimizes the following regularized
+ objective function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}=\sum_{i}l(y_{i},\hat{y}_{i})+\sum_{t}r(f_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $l(y_{i},\hat{y}_{i})$
+\end_inset
+
+ is the loss associated with the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation and 
+\begin_inset Formula $r(f_{t})$
+\end_inset
+
+ is a regularization term that serves to mitigate overfitting.
+ In our implementation, we use the classic squared-error loss such that
+ 
+\begin_inset Formula $l(y_{i},\hat{y}_{i})=(y_{i}-\hat{y}_{i})^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+EGB uses the following specification of the regularization term: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+r(f_{t})=\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is the total number of leaves in tree 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+ is the prediction associated with the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ leaf in a given tree, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are hyperparameters that must be chosen by the user (we discuss our selection
+ of hyperparameters below).
+ The regularization term serves to mitigate overfitting by penalizing complicate
+d trees and smoothing the predictions associated with each tree.
+ That is, the method relies on a large number of weak learners and the regulariz
+ation term helps control the complexity of the learners.
+ It is important to note that the above specification of the regularization
+ term is only one of many possible specifications, though 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+ claim that it is simpler than the leading alternatives and easier to paralleliz
+e.
+ Further note that when the hyperparameters are set to zero, the objective
+ function becomes equivalent to that used in traditional gradient tree boosting.
+\end_layout
+
+\begin_layout Standard
+To minimize the objective function, the model is trained in a sequential
+ manner, building one tree at a time.
+ The objective function at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+ can be written as follows: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}_{t}=\sum_{i}l(y_{i},\hat{y}_{i}^{t-1}+f_{t}(x_{i}))+r(f_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+f_{t}(x_{i})$
+\end_inset
+
+.
+ Each iteration then adds the tree 
+\begin_inset Formula $f_{t}(x_{i})$
+\end_inset
+
+ that greedily minimizes the objective function at that iteration.
+ More specifically, EGB uses a second-order Taylor series expansion to approxima
+te the loss function at any given iteration:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{i}\left\{ g(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})^{2}\right\} +r(f_{t})\label{eq:approx}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $g(\cdot,\cdot)$
+\end_inset
+
+ and 
+\begin_inset Formula $h(\cdot,\cdot)$
+\end_inset
+
+ denote the first- and second-order derivatives of the loss function 
+\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\end_inset
+
+.
+ That is, the point 
+\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\end_inset
+
+ is taken as the basis for the expansion.
+ The above conveniently omits the first term of the series 
+\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\end_inset
+
+ because it is a constant.
+\end_layout
+
+\begin_layout Standard
+The EGB algorithm is based on a re-expression of Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:approx"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ denote the set of observations that belong to the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ leaf of the tree being built at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Substituting in the explicit form of the regularization term and noting
+ that all observation that belong to the same leaf receive the same prediction
+ 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+, we can write 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in s_{j}}\left\{ g(y_{i},\hat{y}_{i}^{t-1})m_{tj}+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\end{equation}
+
+\end_inset
+
+or, equivalently,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\left\{ G_{j}m_{tj}+\frac{1}{2}(H_{j}+\lambda)m_{tj}^{2}\right\} +\gamma M_{t}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{j}$
+\end_inset
+
+ represent the sums over 
+\begin_inset Formula $g(\cdot,\cdot)$
+\end_inset
+
+ and 
+\begin_inset Formula $h(\cdot,\cdot)$
+\end_inset
+
+ for all observations in 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+.
+ Note that the summation in the above is over 
+\begin_inset Formula $j$
+\end_inset
+
+, which indexes the leaves in the tree.
+\end_layout
+
+\begin_layout Standard
+For a given tree structure, we can find the optimal prediction values by
+ minimizing the objective function with respect to 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+, which yields 
+\begin_inset Formula $m_{tj}^{*}=-G_{j}/(H_{j}+\lambda)$
+\end_inset
+
+.
+ With a squared-error loss function, where 
+\begin_inset Formula $g(y_{i},\hat{y}_{i}^{t-1})=-2(y_{i}-\hat{y}_{i}^{t-1})$
+\end_inset
+
+ and 
+\begin_inset Formula $h(y_{i},\hat{y}_{i}^{t-1})=2$
+\end_inset
+
+, the optimal prediction values are effectively the (penalized) average
+ of the residuals associated with a given leaf.
+ We can then substitute the optimal prediction values into the objective
+ function to obtain the following: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}^{*}=-\frac{1}{2}\sum_{j}\frac{G_{j}^{2}}{H_{j}+\lambda}+\gamma M_{t}
+\end{equation}
+
+\end_inset
+
+which gives us the minimal objective function for a given tree structure.
+ Ideally, one would enumerate all possible tree structures and then use
+ the tree associated with the smallest value of the (minimized) objective
+ function, but this is often intractable.
+ EGB instead implements an alternative approach that seeks to minimize the
+ objective at a given iteration by greedily optimizing one level of the
+ tree at a time.
+\end_layout
+
+\begin_layout Standard
+To this end, consider splitting a node in a given tree into 
+\begin_inset Quotes eld
+\end_inset
+
+left
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+right
+\begin_inset Quotes erd
+\end_inset
+
+ child nodes based on some candidate splitting rule.
+ Let 
+\begin_inset Formula $G_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{R}$
+\end_inset
+
+ represent 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+ for the left and right child nodes, respectively.
+ Similarly, let 
+\begin_inset Formula $H_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{R}$
+\end_inset
+
+ represent 
+\begin_inset Formula $H_{j}$
+\end_inset
+
+ for the child nodes.
+ We can then find the reduction in the objective function as follows: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta\tilde{\mathcal{L}}_{t}^{*}=\frac{1}{2}\left\{ \frac{G_{L}^{2}}{H_{L}+\lambda}+\frac{G_{R}^{2}}{H_{R}+\lambda}-\frac{(G_{L}+G_{R})^{2}}{H_{L}+H_{R}+\lambda}\right\} -\gamma\label{eq:gain}
+\end{equation}
+
+\end_inset
+
+where the first two terms in parentheses capture the loss associated with
+ the child nodes and the third term captures the loss associated with the
+ parent node being split.
+ When splitting a node in any given tree, EGB then evaluates Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gain"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) for every possible split rule for every available explanatory variable
+ and chooses the split associated with the maximal reduction in the objective
+ function.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is known as the 
+\begin_inset Quotes eld
+\end_inset
+
+exact greedy algorithm.
+\begin_inset Quotes erd
+\end_inset
+
+ EGB also has an approximate algorithm that can be used for large datasets.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+ for details.
+\end_layout
+
+\end_inset
+
+ EGB then continues to split nodes in a given tree until a stopping criterion
+ is met (e.g., a user-specified maximum tree depth).
+ Once a given tree is built, EGB then moves to building the next tree in
+ the ensemble and continues to do so until reaching the user-specified number
+ of trees to build.
+\end_layout
+
+\begin_layout Standard
+The above references several hyperparameters that must be chosen by the
+ user, including the hyperparameters in the regularization term (i.e., 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+), the maximum tree depth, and the number of trees in the ensemble.
+ There are two additional hyperparameters that can be used to further prevent
+ overfitting.
+ First, one can use column or feature subsampling where each tree in the
+ ensemble is built based on a (uniformly) random subset of all explanatory
+ variables.
+ This procedure can also speed up the algorithm because it reduces the number
+ of covariates that must be searched across when creating new splits.
+ Second, one can use shrinkage by scaling the predictions associated with
+ each tree by a factor 
+\begin_inset Formula $\eta$
+\end_inset
+
+, which is often called the learning rate.
+ The predicted value of the outcome at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+ is then given by 
+\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+\eta f_{t}(x_{i})$
+\end_inset
+
+.
+ Shrinkage reduces the influence of each tree so that no individual tree
+ has too much influence on the ensemble prediction.
+\end_layout
+
+\begin_layout Standard
+One possible approach to hyperparameter selection is to use a grid search
+ where the user (1) specifies the domain of the hyperparameters, (2) applies
+ the model to every combination of hyperparameters, and (3) selects the
+ hyperparameters that perform the best in terms of some metric (e.g., mean
+ squared prediction error in the validation dataset).
+ Grid search, however, is computationally inefficient because hyperparameter
+ proposals are uninformed by previous evaluations, meaning that the procedure
+ spends considerable time evaluating suboptimal hyperparameters.
+ We instead use a Bayesian hyperparameter optimization procedure, which
+ sequentially updates a probability model that relates the hyperparameter
+ space to the performance metric and then uses the model to intelligently
+ explore the hyperparameter space 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bergstra2011algorithms"
+literal "false"
+
+\end_inset
+
+.
+ Specifically, our implementation of gradient boosting relies on the open-source
+ library XGBoost, which we combine with the Hyperopt library that conducts
+ Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Notation 
+\end_layout
+
+\begin_layout Plain Layout
+g, G: Gradient 
+\end_layout
+
+\begin_layout Plain Layout
+gamma: Hyperparameter on the number of leaves 
+\end_layout
+
+\begin_layout Plain Layout
+h, H: Hessian 
+\end_layout
+
+\begin_layout Plain Layout
+i: Indexes observations 
+\end_layout
+
+\begin_layout Plain Layout
+j: Indexes for the leaves 
+\end_layout
+
+\begin_layout Plain Layout
+l: Loss function 
+\end_layout
+
+\begin_layout Plain Layout
+lambda: Hyperparameters on the leaf weights 
+\end_layout
+
+\begin_layout Plain Layout
+m: Prediction values 
+\end_layout
+
+\begin_layout Plain Layout
+r: Regularization function 
+\end_layout
+
+\begin_layout Plain Layout
+s: Set of observations in a given leaf 
+\end_layout
+
+\begin_layout Plain Layout
+t: Indexes trees 
+\end_layout
+
+\begin_layout Plain Layout
+x: Explanatory variables 
+\end_layout
+
+\begin_layout Plain Layout
+y: Outcome
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -203,6 +858,166 @@ Performance of alternative methods in terms of R-squared, MSE, bias, and
  poverty reduction
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s5_rsquared.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across simulations for select models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s5_mse.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error across municipalities for select models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s5_bias.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias across municipalities for select models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s5_poverty.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poverty rates across simulations for select models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Alternative covariates
 \end_layout
@@ -225,6 +1040,206 @@ Present performance comparisons
 Present variable importance results
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s6_rsquared.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across simulations using alternative covariate specifications
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s6_mse.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error across municipalities for alternative covariate specification
+s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s6_bias.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias across municipalities for alternative covariate specifications
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s5_poverty.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poverty rates across simulations for alternative covariate specifications
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s6_importance.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variable importance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Alternative models
 \end_layout
@@ -242,6 +1257,166 @@ Provide a brief overview of the alternative methods (i.e., lasso, random forest,
 \begin_layout Itemize
 Present performance of alternative methods in terms of R-squared, MSE, bias,
  and poverty reduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s7_rsquared.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across simulations for alternative models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s7_mse.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error across municipalities for alternative models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+afdasdfas
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s7_bias.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias across municipalities for alternative models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename s7_poverty.pdf
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poverty rates across simulations for alternative models
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -268,12 +1443,16 @@ Discuss limitations of the paper
 Discuss directions for future research
 \end_layout
 
-\begin_layout Section
-References
-\end_layout
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "References"
+options "apalike"
 
-\begin_layout Section
-Appendix
+\end_inset
+
+
 \end_layout
 
 \end_body

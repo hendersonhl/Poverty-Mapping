@@ -23,7 +23,7 @@ replace model = "Unit-Context" if model=="_uc"
 gen order = 1 if model=="Empirical Best" 
 replace order = 2 if model=="Unit-Context" 
 replace order = 3 if model=="Gradient Boosting" 
-graph hbox True Direct, ytitle(R-squared) scheme(s1mono) over(model, sort(order)) ///
+graph hbox True Direct, ytitle({it:R}{sup: 2}) scheme(s1mono) over(model, sort(order)) ///
     nooutside note("")
 graph export "$outpath/s5_rsquared.pdf", as(pdf) replace
 
@@ -73,7 +73,7 @@ keep gb_census_mun_true gb_gis_mun_true gb_all_mun_true
 label var gb_census_mun_true "Census"
 label var gb_gis_mun_true "GIS"
 label var gb_all_mun_true "All"
-graph hbox gb_census_mun_true gb_gis_mun_true gb_all_mun_true, ytitle(R-squared) ///
+graph hbox gb_census_mun_true gb_gis_mun_true gb_all_mun_true, ytitle({it:R}{sup: 2}) ///
     scheme(s1mono) box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) ///
 	legend(off) showyvars nooutside note("")
 graph export "$outpath/s6_rsquared.pdf", as(pdf) replace
@@ -136,7 +136,7 @@ label var rf_all_mun_true "Random Forest"
 label var lasso_all_mun_true "Lasso"
 label var ols_all_mun_true "OLS"
 graph hbox gb_all_mun_true rf_all_mun_true bart_all_mun_true lasso_all_mun_true ///
-    ols_all_mun_true, ytitle(R-squared) scheme(s1mono) box(1, color(gray)) ///
+    ols_all_mun_true, ytitle({it:R}{sup: 2}) scheme(s1mono) box(1, color(gray)) ///
 	box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) box(5, color(gray)) ///
 	legend(off) showyvars nooutside note("")
 graph export "$outpath/s7_rsquared.pdf", as(pdf) replace
