@@ -124,20 +124,28 @@ Outline of the paper
 Machine learning
 \end_layout
 
-\begin_layout Itemize
-Brief overview of machine learning 
-\end_layout
+\begin_layout Standard
+The goal of machine learning is to develop high-performance algorithms for
+ prediction, classification, and clustering/grouping tasks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "varian2014big,athey2018impact,athey2019machine"
+literal "false"
 
-\begin_layout Itemize
-Brief discussion of machine-learning methods commonly used 
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Detailed discussion of gradient boosting
-\end_layout
-
-\begin_layout Itemize
-Discussion of hyperparameter tuning 
+.
+ Such tasks can be divided into supervised and unsupervised learning problems.
+ While unsupervised learning focuses on identifying clusters of observations
+ that are similar in terms of their features, supervised learning uses a
+ set of features to predict some outcome of interest.
+ Supervised learning can be further divided into regression and classification
+ tasks, where regression is concerned with predicting continuous outcomes
+ and classification focuses on categorical outcomes.
+ While there are many machine-learning methods used for regression and classific
+ation tasks (e.g., lasso, random forests, or support vector machines), here
+ we fix ideas by focusing on a method that has been particularly popular
+ for poverty mapping: gradient boosting.
 \end_layout
 
 \begin_layout Standard
@@ -739,6 +747,34 @@ Notation
 \end_layout
 
 \begin_layout Plain Layout
+a: Superscript for actual or true poverty rate
+\end_layout
+
+\begin_layout Plain Layout
+alpha: Intercept in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+B: Bias
+\end_layout
+
+\begin_layout Plain Layout
+beta: Coefficient in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+d: Superscript for direct estimate
+\end_layout
+
+\begin_layout Plain Layout
+epsilon: Error term in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+eta: Error term in true regression
+\end_layout
+
+\begin_layout Plain Layout
 g, G: Gradient 
 \end_layout
 
@@ -771,11 +807,23 @@ m: Prediction values
 \end_layout
 
 \begin_layout Plain Layout
+p: Superscript for predicted poverty rate
+\end_layout
+
+\begin_layout Plain Layout
 r: Regularization function 
 \end_layout
 
 \begin_layout Plain Layout
+R: R-squared
+\end_layout
+
+\begin_layout Plain Layout
 s: Set of observations in a given leaf 
+\end_layout
+
+\begin_layout Plain Layout
+sigma: Variance
 \end_layout
 
 \begin_layout Plain Layout
@@ -799,20 +847,354 @@ y: Outcome
 Validation methods
 \end_layout
 
-\begin_layout Itemize
-Describe the standard validation method: R-squared
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ denote the actual or true poverty indicator for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ geographical entity.
+ Further, let 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+ denote the direct esimate and model-based prediction of the poverty indicator,
+ respectively.
+ The standard method for assessing the predictive performance of model-based
+ poverty estimates is to calculate the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression like the following:
 \end_layout
 
-\begin_layout Itemize
-Discuss the bias associated with R-squared based on direct estimates
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=\alpha+\beta y_{i}^{p}+\varepsilon_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are the regression coefficients and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ represents the error term.
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for the above regression can be written as follows:
 \end_layout
 
-\begin_layout Itemize
-Discuss mean squared error and bias
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\varepsilon}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{d}^{2}$
+\end_inset
+
+ is the variance of the direct estimate and 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ thus conveys information about how much of the variance of the direct estimate
+ is explained by the model-based prediction.
 \end_layout
 
-\begin_layout Itemize
-Discuss method for understanding performance in terms of poverty reduction
+\begin_layout Standard
+While unbiased, direct estimates can be highly imprecise estimates of true
+ poverty indicators.
+ Ideally, one would assess the performance of model-based predictions on
+ the basis of the true poverty indicators themselves.
+ That is, model-based predictions are more appropriately assessed using
+ the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from the following regression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{a}=\alpha+\beta y_{i}^{p}+\eta_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\eta$
+\end_inset
+
+ represents the error term.
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for this regression can written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{a}^{2}$
+\end_inset
+
+ is the variance of the true poverty indicator and 
+\begin_inset Formula $\sigma_{\eta}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\eta$
+\end_inset
+
+.
+ In what follows, we characterize the bias of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ when it is used to assess true quantity of interest, 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}+\omega_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is a mean-zero error term with variance 
+\begin_inset Formula $\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ That is, the direct estimate of the poverty indicator is an unbiased, but
+ noisy estimate of the true poverty indicator.
+ Note that the preceding equation implies that 
+\begin_inset Formula $\varepsilon_{i}=\eta_{i}+\omega_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}=\sigma_{\eta}^{2}+\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+, we then define the bias as 
+\begin_inset Formula 
+\begin{equation}
+B=R_{a}^{2}-R_{d}^{2}.\label{eq:bias}
+\end{equation}
+
+\end_inset
+
+Substituting Eqs.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2direct"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2true"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) into our expression for the bias, we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+B=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\eta}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\eta}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\label{eq:bias_res}
+\end{equation}
+
+\end_inset
+
+Finally, we can substitute Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias_res"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) into Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and rearrange:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right),\label{eq:relationship}
+\end{equation}
+
+\end_inset
+
+which estabilishes a basic relationship between 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:relationship"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) above, we see that 
+\begin_inset Formula $R_{d}^{2}=R_{a}^{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\sigma_{\omega}^{2}=0$
+\end_inset
+
+ or, equivalently, when 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ In the presence of measurement error or when 
+\begin_inset Formula $\sigma_{\omega}^{2}>0$
+\end_inset
+
+, we then see that that 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will be biased downward and the magnitude of the bias will be determined
+ by the size of 
+\begin_inset Formula $(\sigma_{d}^{2}-\sigma_{\omega}^{2})/\sigma_{d}^{2}$
+\end_inset
+
+.
+ We thus conclude that validation exercises based on 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will tend to mischaracterize the performance of model-based approaches
+ to poverty mapping, with the resulting estimates being systematically biased
+ downward.
+ This characterization of the bias associated with 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ is especially critical for the common practice of comparing models across
+ contexts because the variances of the direct estimates and measurement
+ errors will generally differ across datasets.
+ In particular, a poorly performing model applied to a low bias setting
+ may yield an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ that is higher than an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ from a strong model applied to a high bias setting.
+ That is, the presence of bias can reverse the rank ordering of models when
+ comparisons are made across contexts.
 \end_layout
 
 \begin_layout Section
@@ -1441,6 +1823,13 @@ Discuss limitations of the paper
 
 \begin_layout Itemize
 Discuss directions for future research
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
