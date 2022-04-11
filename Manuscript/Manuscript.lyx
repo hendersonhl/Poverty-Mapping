@@ -865,7 +865,7 @@ Let
 \begin_inset Formula $y_{i}^{p}$
 \end_inset
 
- denote the direct esimate and model-based prediction of the poverty indicator,
+ denote the direct estimate and model-based prediction of the poverty indicator,
  respectively.
  The standard method for assessing the predictive performance of model-based
  poverty estimates is to calculate the 
@@ -1068,7 +1068,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-B=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\eta}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\eta}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\label{eq:bias_res}
+B=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\eta}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\eta}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}.\label{eq:bias_res}
 \end{equation}
 
 \end_inset
@@ -1112,7 +1112,7 @@ R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2
 
 \end_inset
 
-which estabilishes a basic relationship between 
+which establishes a basic relationship between 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
@@ -1159,7 +1159,7 @@ noprefix "false"
 \begin_inset Formula $\sigma_{\omega}^{2}>0$
 \end_inset
 
-, we then see that that 
+, we then see that 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
@@ -1175,7 +1175,17 @@ noprefix "false"
 
  will tend to mischaracterize the performance of model-based approaches
  to poverty mapping, with the resulting estimates being systematically biased
- downward.
+ downward (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:standard_implementation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for estimates of the bias).
  This characterization of the bias associated with 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
@@ -1195,6 +1205,7 @@ noprefix "false"
  from a strong model applied to a high bias setting.
  That is, the presence of bias can reverse the rank ordering of models when
  comparisons are made across contexts.
+ 
 \end_layout
 
 \begin_layout Section
@@ -1224,6 +1235,13 @@ Mention that estimates can be calculated at both the PSU and municipality
 
 \begin_layout Section
 The standard implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:standard_implementation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
