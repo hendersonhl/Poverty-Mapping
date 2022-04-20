@@ -763,6 +763,10 @@ beta: Coefficient in direct estimate regression
 \end_layout
 
 \begin_layout Plain Layout
+c: Notation in affine transformation
+\end_layout
+
+\begin_layout Plain Layout
 d: Superscript for direct estimate
 \end_layout
 
@@ -807,6 +811,10 @@ m: Prediction values
 \end_layout
 
 \begin_layout Plain Layout
+N: Number of observations
+\end_layout
+
+\begin_layout Plain Layout
 p: Superscript for predicted poverty rate
 \end_layout
 
@@ -845,6 +853,31 @@ y: Outcome
 
 \begin_layout Section
 Validation methods
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+To do: 
+\end_layout
+
+\begin_layout Plain Layout
+- Introductory paragraph citing literature
+\end_layout
+
+\begin_layout Plain Layout
+- How is R-squared calculated? In sample or out of sample? Or both?
+\end_layout
+
+\begin_layout Plain Layout
+- MSE decomposition issue
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -896,6 +929,16 @@ where
 \end_inset
 
  represents the error term.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Note that any regression of this form can only be estimated for the sampled
+ entities with direct estimates.
+\end_layout
+
+\end_inset
+
  The 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -933,8 +976,16 @@ where
 \end_layout
 
 \begin_layout Standard
-While unbiased, direct estimates can be highly imprecise estimates of true
- poverty indicators.
+While unbiased, direct estimates can be imprecise estimates of true poverty
+ indicators 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+.
  Ideally, one would assess the performance of model-based predictions on
  the basis of the true poverty indicators themselves.
  That is, model-based predictions are more appropriately assessed using
@@ -990,7 +1041,7 @@ where
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- when it is used to assess true quantity of interest, 
+ when it is used to assess true quantity of interest 
 \begin_inset Formula $R_{a}^{2}$
 \end_inset
 
@@ -1011,8 +1062,9 @@ Let
 \end_inset
 
 .
- That is, the direct estimate of the poverty indicator is an unbiased, but
- noisy estimate of the true poverty indicator.
+ That is, we view this as a classical measurement error problem where the
+ direct estimate of the poverty indicator is a noisy estimate of the true
+ poverty indicator.
  Note that the preceding equation implies that 
 \begin_inset Formula $\varepsilon_{i}=\eta_{i}+\omega_{i}$
 \end_inset
@@ -1101,18 +1153,18 @@ noprefix "false"
 
 \end_inset
 
-) and rearrange:
+) and rearrange, which gives
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right),\label{eq:relationship}
+R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right)\label{eq:relationship}
 \end{equation}
 
 \end_inset
 
-which establishes a basic relationship between 
+and establishes a basic relationship between 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
@@ -1121,6 +1173,16 @@ which establishes a basic relationship between
 \end_inset
 
 .
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+ for additional mathematical details.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1169,11 +1231,11 @@ noprefix "false"
 \end_inset
 
 .
- We thus conclude that validation exercises based on 
+ Validation exercises based on 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- will tend to mischaracterize the performance of model-based approaches
+ will thus tend to mischaracterize the performance of model-based approaches
  to poverty mapping, with the resulting estimates being systematically biased
  downward (see Section 
 \begin_inset CommandInset ref
@@ -1203,8 +1265,186 @@ noprefix "false"
 \end_inset
 
  from a strong model applied to a high bias setting.
- That is, the presence of bias can reverse the rank ordering of models when
+ The presence of bias can thus reverse the rank ordering of models when
  comparisons are made across contexts.
+ 
+\end_layout
+
+\begin_layout Standard
+There is an additional form of bias in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that can lead to overoptimistic conclusions related to model validity.
+ To illustrate this, note that 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+ in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2true"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is mathematically equivalent to the squared (Pearson) correlation coefficient
+ between 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+.
+ A well-known property of the correlation coefficient is that it is invariant
+ to any positive affine transformation of its arguments, implying that the
+ squared correlation coefficient is invariant to any affine transformation
+ of its arguments 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gujarati2003basic"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+More specifically, the correlation coefficient is invariant to any 
+\shape italic
+positive
+\shape default
+ affine transformation because it changes signs when one of its arguments
+ is scaled by some negative constant.
+ The 
+\shape italic
+squared
+\shape default
+ correlation coefficient is then invariant to any affine transformation.
+\end_layout
+
+\end_inset
+
+ We can thus write
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}(y_{i}^{a},y_{i}^{p})=R_{a}^{2}(y_{i}^{a},c_{1}+c_{2}y_{i}^{p})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ are some arbitrary constants.
+ The primary implication of the above is that it implies that the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is insensitive to bias in the model-based poverty estimates.
+ For example, consider some unbiased poverty estimate 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+, meaning that 
+\begin_inset Formula $E(y_{i}^{u}-y_{i}^{a})=0.$
+\end_inset
+
+ Now consider another estimate 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ up to some locational shift, implying that 
+\begin_inset Formula $y_{i}^{b}=y_{i}^{u}+c$
+\end_inset
+
+ and 
+\begin_inset Formula $E(y_{i}^{b}-y_{i}^{a})=c$
+\end_inset
+
+.
+ While 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ is biased (i.e., it will systematically over- or under-estimate poverty),
+ it will achieve an 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A final issue related to 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric is that it is affected by the variance of the true
+ poverty measures.
+ To see this, consider the following re-expression of 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{p}-y_{i}^{a})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{p},y_{i}^{a})}{\text{{Var}}(y_{i}^{a})}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of geographical entities.
+ The above shows that 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be viewed as a normalized version of the mean squared error with the
+ variance of the true poverty indicator used as the normalization factor.
+ This approach to normalization, however, can be misleading when comparing
+ models across contexts (i.e., across countries or regions within a country).
+ Specifically, consider two models that perform equally well in that they
+ achieve the same mean squared error.
+ However, assume that one model is applied to a context where the variance
+ of 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ is large and the other is applied to a low variance context.
+ The above then implies that the model applied to the high variance context
+ will achieve a higher 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, even though the performance of the two models is arguably identical.
  
 \end_layout
 
