@@ -799,6 +799,10 @@ j: Indexes for the leaves
 \end_layout
 
 \begin_layout Plain Layout
+k, K: Index for the various poverty estimates for a given entity
+\end_layout
+
+\begin_layout Plain Layout
 l: Loss function 
 \end_layout
 
@@ -872,7 +876,7 @@ To do:
 \end_layout
 
 \begin_layout Plain Layout
-- MSE decomposition issue
+- Poverty simulations
 \end_layout
 
 \end_inset
@@ -1236,8 +1240,11 @@ noprefix "false"
 \end_inset
 
  will thus tend to mischaracterize the performance of model-based approaches
- to poverty mapping, with the resulting estimates being systematically biased
- downward (see Section 
+ to poverty mapping, with the resulting estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ being biased downward (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:standard_implementation"
@@ -1352,11 +1359,11 @@ where
 \end_inset
 
  are some arbitrary constants.
- The primary implication of the above is that it implies that the 
+ The implication of the above is that it implies that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- is insensitive to bias in the model-based poverty estimates.
+ is insensitive to systematic bias in the model-based poverty estimates.
  For example, consider some unbiased poverty estimate 
 \begin_inset Formula $y_{i}^{u}$
 \end_inset
@@ -1413,7 +1420,7 @@ A final issue related to
 :
 \begin_inset Formula 
 \begin{equation}
-R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{p}-y_{i}^{a})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{p},y_{i}^{a})}{\text{{Var}}(y_{i}^{a})}
+R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{a}-\alpha-\beta y_{i}^{p})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{a},\alpha+\beta y_{i}^{p})}{\text{{Var}}(y_{i}^{a})}
 \end{equation}
 
 \end_inset
@@ -1446,6 +1453,171 @@ where
 
 , even though the performance of the two models is arguably identical.
  
+\end_layout
+
+\begin_layout Standard
+Rather than relying on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric, one can avoid regression-based model assessement
+ altogether by calculating the mean squared error directly:
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2},\label{eq:mse}
+\end{equation}
+
+\end_inset
+
+which avoids the normalization issue and provides a more direct understanding
+ of the expected squared error of the estimates.
+ The mean squared error in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is also sensitive to systematic biases in the predictions.
+ Reconsidering the biased and unbiased poverty estimates described above
+ (i.e., 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+), we can write 
+\begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+c,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+c^{2}$
+\end_inset
+
+.
+ Systematic biases in the estimates will thus be penalized by the direct
+ mean squared error criterion.
+ Further, with multiple estimates for each entity, one can calculate entity-spec
+ific mean squared errors, which can be decomposed into parts associated
+ with the bias and variance of the estimates.
+ Where 
+\begin_inset Formula $y_{ik}^{p}$
+\end_inset
+
+ denotes estimate 
+\begin_inset Formula $k=1,2,\ldots,K$
+\end_inset
+
+ for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ entity, we have
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}
+\end{equation}
+
+\end_inset
+
+where the first term on the right-hand side of the above captures the variance
+ of the estimates for entity 
+\begin_inset Formula $i$
+\end_inset
+
+ and the second term captures the (squared) bias.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hastie2009elements"
+literal "false"
+
+\end_inset
+
+ for derivation and detailed discussion of the bias-variance decomposition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+While understanding the error of the poverty estimates is useful, the ultimate
+ concern with poverty mapping is to understand how different methodological
+ choices affect poverty alleviation.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+, we propose simulating a hypothetical poverty-alleviation program that
+ distributes resources to households according to a given poverty map.
+ In addition to the map, the procedure requires true household-level incomes
+ from a census-type dataset for a given country.
+ The procedure is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true household-level incomes, calculate the poverty headcount
+ and poverty gap for the country as a whole for some chosen poverty line.
+ Using the poverty gap measure, determine the budget required to completely
+ eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget
+ by the number of people living in poor households.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the poverty map, order the geographical entitities according to their
+ estimated poverty headcounts, from most to least poor.
+ For the poorest region, augment the per capita income of all household's
+ by an amount equal to the transfer (i.e., each household receives an amount
+ equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest region, the
+ third poorest region, and so on until there is not enough resources to
+ cover all households in a given region.
+ For this marginal region, distribute the remaining budget equally among
+ individuals in that region.
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the post-transfer household incomes, calculate an updated poverty
+ headcount to assess the effects of the distribution scheme on poverty alleviati
+on.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -5bp
+\end_inset
+
+The above procedure can be implemented for alternative poverty maps to examine
+ the effect of methodological choices on poverty alleviation.
 \end_layout
 
 \begin_layout Section
