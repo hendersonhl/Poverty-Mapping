@@ -860,28 +860,109 @@ Validation methods
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
+The coefficient of determination or 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is the most commonly used metric for validating poverty maps generated
+ using machine-learning methods.
+ The standard validation procedure follows four steps: (1) using representative
+ survey data calculate direct, sample-based poverty measures at some geographic
+ level of interest, (2) train a machine-learning model on a random subsample
+ of the geographic units, (3) generate model-based poverty estimates for
+ the non-sampled or test regions, and (4) calculate the out-of-sample 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by regressing the direct poverty measures for the test regions on the predicted
+ poverty measures.
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-To do: 
-\end_layout
+Rather than relying on a single training-test split of the data, some studies
+ use cross-validation and report the average 
+\begin_inset Formula $R^{2}$
+\end_inset
 
-\begin_layout Plain Layout
-- Introductory paragraph citing literature
-\end_layout
+ across various training-test splits.
+ For examples of the above procedure, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "blumenstock2015predicting"
+literal "false"
 
-\begin_layout Plain Layout
-- How is R-squared calculated? In sample or out of sample? Or both?
-\end_layout
+\end_inset
 
-\begin_layout Plain Layout
-- Poverty simulations
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hersh2021open"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_inset
 
+ It is important to emphasize that the poverty measures used in this procedure
+ are often direct, sample-based estimates rather than the true poverty measures
+ for the regions of interest.
+ Further, the calculated 
+\begin_inset Formula $R^{2}$
+\end_inset
 
+ values are often interpreted with reference to the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ values reached by other studies using data from different contexts.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For example, see ...
+\end_layout
+
+\end_inset
+
+ In what follows, we critically assess this validation procedure and discuss
+ some alternative validation metrics.
 \end_layout
 
 \begin_layout Standard
@@ -905,7 +986,7 @@ Let
  denote the direct estimate and model-based prediction of the poverty indicator,
  respectively.
  The standard method for assessing the predictive performance of model-based
- poverty estimates is to calculate the 
+ poverty estimates calculates the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -1041,11 +1122,11 @@ where
 \end_inset
 
 .
- In what follows, we characterize the bias of 
+ We are specifically interested in characterizing the bias of 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- when it is used to assess true quantity of interest 
+ when it is used to assess true quantity of interest, 
 \begin_inset Formula $R_{a}^{2}$
 \end_inset
 
