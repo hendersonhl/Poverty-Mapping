@@ -2,7 +2,7 @@
 
 This repository contains all the code necessary to replicate the results in "Poverty mapping in the age of machine learning". 
 
-All code for the project is located in the "Code" folder. There are two types of scripts. First, there are several scripts whose file name is a combination of a method name and some unit of analysis. These scripts implement the corresponding method at the listed unit of analysis. For example, "xgboost_mun.py" implements gradient boosting using data at the municipality level. There are scripts for Bayesian additive regression trees, lasso, ordinary least squares, random forest, and gradient boosting. Each method is implemented at the municipality and PSU level.
+All code for the project is located in the "Code" folder. There are two types of scripts. First, there are several scripts whose file name is a combination of a method name and some unit of analysis. These scripts implement the corresponding method at the listed unit of analysis. For example, "xgboost_mun.py" implements gradient boosting using data at the municipality level. There are scripts for Bayesian additive regression trees, lasso, ordinary least squares, random forest, and gradient boosting. Each method is implemented at the municipality and PSU level, potentially with different covariate specifications.
 
 Second, there are several scripts that aggregate the results from the various methods. The script "results_mse.py" calculates the mean squared error and bias for each method, "results_plots.do" generates select plots, "results_rsquared.py" calculates the R-squared from regressions of the true poverty indicators on the predictions from various methods, and 
 "results_targeting.do" implements the targeting simulations.
