@@ -879,7 +879,6 @@ The coefficient of determination or
 
  by regressing the observed poverty measures from the testing data on the
  predicted poverty measures for the same geographic units.
- 
 \begin_inset Foot
 status open
 
@@ -1015,7 +1014,7 @@ status open
 
 \begin_layout Plain Layout
 Note that any regression of this form can only be estimated for the sampled
- entities with direct estimates.
+ regions with direct estimates.
 \end_layout
 
 \end_inset
@@ -1429,7 +1428,7 @@ noprefix "false"
  A well-known property of the correlation coefficient is that it is invariant
  to any positive affine transformation of its arguments, implying that the
  squared correlation coefficient is invariant to any affine transformation
- of its arguments 
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gujarati2003basic"
@@ -1684,8 +1683,42 @@ literal "false"
 
 , we propose simulating a hypothetical poverty-alleviation program that
  distributes resources to households according to a given poverty map.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other studies that have conducted targeting simulations.
+ 
+\end_layout
+
+\end_inset
+
  In addition to the map, the procedure requires true household-level incomes
- from a census-type dataset for a given country.
+ from a census-type dataset.
  The procedure is as follows:
 \end_layout
 
@@ -1719,7 +1752,7 @@ Using the poverty map, order the geographical entitities according to their
  Continue this distribution procedure for the second poorest region, the
  third poorest region, and so on until there is not enough resources to
  cover all households in a given region.
- For this marginal region, distribute the remaining budget equally among
+ For the marginal region, distribute the remaining budget equally among
  individuals in that region.
 \end_layout
 
