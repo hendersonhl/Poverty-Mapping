@@ -866,35 +866,31 @@ The coefficient of determination or
 
  is the most commonly used metric for validating poverty maps generated
  using machine-learning methods.
- The standard validation procedure follows four steps: (1) using representative
- survey data calculate direct, sample-based poverty measures at some geographic
- level of interest, (2) train a machine-learning model on a random subsample
- of the geographic units, (3) generate model-based poverty estimates for
- the non-sampled or test regions, and (4) calculate the out-of-sample 
+ The standard validation procedure can be summarized in four steps: (1)
+ using representative survey data calculate a poverty measure for the geographic
+ unit of interest (e.g., village or cluster) and merge the poverty measure
+ with features from some passively-collected data source (e.g., mobile phone
+ data or satellite imagery); (2) randomly split the dataset into training
+ and testing subsamples; (3) fit a machine-learning model to the training
+ data and use the model to predict poverty in the testing data; (4) calculate
+ the out-of-sample 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- by regressing the direct poverty measures for the test regions on the predicted
- poverty measures.
+ by regressing the observed poverty measures from the testing data on the
+ predicted poverty measures for the same geographic units.
+ 
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Rather than relying on a single training-test split of the data, some studies
- use cross-validation and report the average 
+Rather than relying on a single training-testing split of the data, many
+ studies use cross-validation and report the average 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- across various training-test splits.
+ across various training-testing splits.
  For examples of the above procedure, see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "blumenstock2015predicting"
-literal "false"
-
-\end_inset
-
-, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "jean2016combining"
@@ -921,7 +917,15 @@ literal "false"
 , 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "hersh2021open"
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
 literal "false"
 
 \end_inset
@@ -929,13 +933,23 @@ literal "false"
 , or 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "lee2020high"
+key "chi2022microestimates"
 literal "false"
 
 \end_inset
 
 .
- 
+ Note that a few studies use a similar procedure, but fit the machine-learning
+ model to household-level data and then aggregate the model's predictions
+ to the geographic unit of interest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting,hersh2021open,aiken2022machine"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -943,24 +957,6 @@ literal "false"
  It is important to emphasize that the poverty measures used in this procedure
  are often direct, sample-based estimates rather than the true poverty measures
  for the regions of interest.
- Further, the calculated 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- values are often interpreted with reference to the 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- values reached by other studies using data from different contexts.
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-For example, see ...
-\end_layout
-
-\end_inset
-
  In what follows, we critically assess this validation procedure and discuss
  some alternative validation metrics.
 \end_layout
@@ -1336,13 +1332,13 @@ noprefix "false"
 \end_inset
 
  for estimates of the bias).
- This characterization of the bias associated with 
+ One implication of the above is that 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- is especially critical for the common practice of comparing models across
- contexts because the variances of the direct estimates and measurement
- errors will generally differ across datasets.
+ is context-dependent and will generally be influenced by the design of
+ the survey data (e.g., larger sample sizes will tend to reduce measurement
+ error, all else equal).
  In particular, a poorly performing model applied to a low bias setting
  may yield an estimate of 
 \begin_inset Formula $R_{d}^{2}$
@@ -1355,7 +1351,45 @@ noprefix "false"
  from a strong model applied to a high bias setting.
  The presence of bias can thus reverse the rank ordering of models when
  comparisons are made across contexts.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for this type of cross-context comparison of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ values.
  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1517,8 +1551,12 @@ where
 
  can be viewed as a normalized version of the mean squared error with the
  variance of the true poverty indicator used as the normalization factor.
- This approach to normalization, however, can be misleading when comparing
- models across contexts (i.e., across countries or regions within a country).
+ This approach to normalization produces an additional source of context-depende
+nce in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
  Specifically, consider two models that perform equally well in that they
  achieve the same mean squared error.
  However, assume that one model is applied to a context where the variance
