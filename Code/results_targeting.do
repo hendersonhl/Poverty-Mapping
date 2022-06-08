@@ -99,9 +99,9 @@ drop prate poor incpc_new
 * Prep results from traditional estimators
 preserve
 use "$inpath/h3no19.dta", clear   // EB results
-keep Unit avg_fgt0 nsim
+keep Unit avg_fgt0_* nsim
 rename Unit muni
-rename avg_fgt0 yhat
+rename avg_fgt0_* yhat
 rename nsim sim_sample
 order muni sim_sample yhat
 sort muni sim_sample
@@ -109,9 +109,9 @@ reshape wide yhat, i(muni) j(sim_sample)
 rename yhat* yhat_*
 outsheet using "$outpath/eb.csv", comma replace
 use "$inpath/uceb19.dta", clear   // Unit-context results
-keep Unit avg_fgt0 nsim
+keep Unit avg_fgt0_* nsim
 rename Unit muni
-rename avg_fgt0 yhat
+rename avg_fgt0_* yhat
 rename nsim sim_sample
 order muni sim_sample yhat
 sort muni sim_sample
