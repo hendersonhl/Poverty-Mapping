@@ -55,7 +55,7 @@ end
 use $inpath/census_trim.dta, clear
 rename HID_mun muni
 label var muni "Municipality identifier"
-gen double incpc = hhinc/hhsize  
+rename e_y incpc
 label var incpc "Income per capita (pre-transfer)"   
 bysort muni: egen pop = total(hhsize)  
 label var pop "Municipality population"
@@ -166,7 +166,7 @@ clear
 svmat results, names(col)
 gen sim_sample = _n
 order sim_sample
-outsheet using "$outpath/results_targeting.csv", comma replace
+outsheet using "$outpath/results_targeting_500_june07.csv", comma replace
  
 
 
