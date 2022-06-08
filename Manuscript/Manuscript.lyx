@@ -96,6 +96,153 @@ Poverty Mapping in the Age of Machine Learning
 Introduction
 \end_layout
 
+\begin_layout Standard
+Poverty maps are a useful way to illustrate poverty estimates at a local
+ level.
+ These estimates are then used by policy makers to determine where the limited
+ funds at their disposal should be allocated.
+ However, estimates of poverty at the local level which are sufficiently
+ precise to avoid errors of inclusion and exclusion are not readily available.
+\end_layout
+
+\begin_layout Standard
+Household surveys measuring living standards provide population statistics,
+ like poverty rates or mean expenditures, for a given country.
+ Such household surveys may also provide estimates that are sufficiently
+ reliable for large areas in a given country.
+ However, household surveys suffer from three considerable flaws which hamper
+ poverty monitoring and alleviation efforts across the globe.
+ The first is related to time.
+ Household surveys in many developing countries are conducted infrequently,
+ in some cases more than a decade may go by before a new survey is conducted.
+ A second drawback of household surveys for the purposes of poverty monitoring
+ is that household surveys can only be disaggregated up to a certain point
+ before the estimates lose validity.
+ The final drawback of household surveys is that these surveys may not cover
+ all the locations of interest to policy makers who are trying to determine
+ which areas should be prioritized.
+ 
+\end_layout
+
+\begin_layout Standard
+The drawbacks related to disaggregation and coverage are often addressed
+ through small area estimation.
+ Small area estimation is a branch of statistics focused on obtaining estimates
+ of higher quality than those obtained directly from the household survey.
+ These small area estimation techniques often combine data from household
+ surveys and auxiliary information from censuses, registers, or others to
+ produce estimates of higher quality for areas with small sample sizes than
+ those from survey data alone.
+ To achieve these gains in quality it is necessary to rely on model assumptions
+ which must be thoroughly checked.
+ 
+\end_layout
+
+\begin_layout Standard
+Unit-level models for small area estimation will often yield the largest
+ gains in quality.
+ Under unit-level models a linear relationship is assumed between welfare
+ and a set of household and individual level characteristics.
+ The parameters obtained from such a linear relationship are used to simulate
+ welfare for every unit in the census data.
+ From the simulated welfare vector it is possible to obtain poverty headcount
+ rates and other indicators.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For a thorough discussion on small area estimation for poverty headcount
+ rates see Corral et al.
+ (2022) - GUIDELINES TO SAE
+\end_layout
+
+\end_inset
+
+ Perhaps the first unit-level model for small area estimation of poverty
+ indicators was proposed by <ELL 2003>, this quickly became popular across
+ the globe and is perhaps the most applied methodology for poverty mapping.
+ The empirical best (EB) method for poverty mapping was introduced by <Molina
+ and Rao 2010> which relies on similar model assumptions but due to EB yields
+ estimates with considerably greater precision than ELL and represents a
+ considerable upgrade as noted in validations with simulated and real world
+ data (<Corral et al.
+ 2021 Map of poor>).
+\end_layout
+
+\begin_layout Standard
+The drawback with unit-level models is that they rely on covariates that
+ have similar moments of the distribution, otherwise estimates are likely
+ biased.
+ This is most likely to occur when census data and survey data correspond
+ to different years, but it may also occur in other instances where the
+ data are misaligned.
+ This represents a limitation to the usefulness of unit-level small area
+ estimates since in most developing countries census data is collected once
+ every ten years.
+ When unit-level models are not possible there is no fully vetted methodology
+ that may yield sufficiently precise small area estimates of poverty.
+\end_layout
+
+\begin_layout Standard
+Traditionally in off-census years area-level models such as the one proposed
+ by Fay and Herriot (1979) and sub-area-level models proposed by Torabi
+ and Rao (2014) are the go to methods.
+ Area-level models rely on aggregate data at the area level and consequently
+ do not rely on contemporary census data to obtain small area estimates.
+ Despite their desirable features, the gains in precision offered by these
+ models is limited (See XXX and XXX).
+ 
+\end_layout
+
+\begin_layout Standard
+Considerable efforts have been devoted to methods which can be applied for
+ poverty mapping in off-census years.
+ One proposed method attempts to combine the best features of unit-level
+ models and area-level models (Nguyen 2012, Pape XXX, Masaaki XXX), called
+ unit-context models.
+ Specifically, the method models household level welfare from a household
+ survey using only aggregate data.
+ Aggregate data may come from a recent or previous census, administrative
+ data, or GIS data.
+ The latter data has become a selling point of many recent poverty maps,
+ particularly poverty maps with estimates obtained from machine learning
+ methods.
+ 
+\end_layout
+
+\begin_layout Standard
+Poverty maps constructed from machine learning methods have gained considerable
+ popularity in academic literature and policy circles.
+ Although these machine learning based estimates are often called poverty
+ maps, in reality these often obtain estimates of an asset index.
+ Although highly correlated to poverty, asset indexes are not the same as
+ a welfare aggregate.
+ Despite this, the methods have become very popular and during the COVID-19
+ pandemic were applied by governments desperately in need for any sort of
+ relevant information to assist their targeting efforts to reach those most
+ in need.
+\end_layout
+
+\begin_layout Standard
+With this backdrop this paper builds upon the work from Corral et al.
+ (2021) who validate small area estimation models using the Mexican Intra-censal
+ survey data.
+ Specifically, this paper adds to the validation exercise by Corral et al.
+ (2021) by including machine learning based estimates of poverty.
+ The goal is to compare the quality of machine learning based estimates
+ of poverty for small areas to traditional small area based estimates of
+ poverty all applied to the same data.
+ As far as we are aware this is the first validation of machine learning
+ based methods where the quality of the estimates are measured against other
+ estimation methods and where the true poverty rate for each small area
+ domain is known, This, in our view, is also a much more thorough validation
+ approach than the one often used in the literature.
+\end_layout
+
+\begin_layout Standard
+The findings are surprising...
+\end_layout
+
 \begin_layout Itemize
 Motivation
 \end_layout
@@ -121,6 +268,28 @@ Outline of the paper
 \end_layout
 
 \begin_layout Section
+Methods and validation approach
+\end_layout
+
+\begin_layout Standard
+This section provides a brief overview of the methodologies applied.
+ Also, since the reason for obtaining highly disaggregated poverty estimates
+ is to improve the targeting of resources, the methods are compared by their
+ prowess for poverty reduction using the Mexican Intra-censal survey.
+ The simulation presented builds upon the simulation presented by (Elbers
+ et al.
+ 2007) with one key difference: because there true poverty rates for each
+ small area are known, the efficiency yielded by the use of different methods
+ is compared to an optimal level of efficiency.
+\end_layout
+
+\begin_layout Standard
+The section highlights how small area estimation based poverty estimates
+ differ from machine learning based poverty estimates.
+ 
+\end_layout
+
+\begin_layout Subsection
 Machine learning
 \end_layout
 
@@ -855,8 +1024,8 @@ y: Outcome
 
 \end_layout
 
-\begin_layout Section
-Validation methods
+\begin_layout Subsubsection
+Validation methods for machine learning based estimates
 \end_layout
 
 \begin_layout Standard
@@ -867,20 +1036,20 @@ The coefficient of determination or
  is the most commonly used metric for validating poverty maps generated
  using machine-learning methods.
  The standard validation procedure can be summarized in four steps: (1)
- using representative survey data calculate a poverty measure for the geographic
- unit of interest (e.g., village or cluster) and merge the poverty measure
- with features from some passively-collected data source (e.g., mobile phone
- data or satellite imagery); (2) randomly split the dataset into training
- and testing subsamples; (3) fit a machine-learning model to the training
- data and use the model to predict poverty in the testing data; (4) calculate
- the out-of-sample 
+ using survey data calculate a poverty measure for the geographic unit of
+ interest (e.g., village or cluster) and merge the poverty measure with features
+ from some passively-collected data source (e.g., mobile phone data or satellite
+ imagery); (2) randomly split the dataset into training and testing subsamples;
+ (3) fit a machine-learning model to the training data and use the model
+ to predict poverty in the testing data; (4) calculate the out-of-sample
+ 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  by regressing the observed poverty measures from the testing data on the
  predicted poverty measures for the same geographic units.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Rather than relying on a single training-testing split of the data, many
@@ -1438,7 +1607,7 @@ literal "false"
 
 .
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 More specifically, the correlation coefficient is invariant to any 
@@ -1578,7 +1747,7 @@ Rather than relying on
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a performance metric, one can avoid regression-based model assessement
+ as a performance metric, one can avoid regression-based model assessment
  altogether by calculating the mean squared error directly:
 \begin_inset Formula 
 \begin{equation}
@@ -1669,6 +1838,122 @@ literal "false"
 
 \end_layout
 
+\begin_layout Subsection
+Small area estimation
+\end_layout
+
+\begin_layout Standard
+The purpose of this section is to give readers a brief introduction to the
+ small area estimation methods applied in the proposed validation exercises.
+ Opposite to machine learning methods, under unit-level based small area
+ estimation there is an assumed underlying model for welfare generation.
+ The model used under the EB method of Molina and Rao (2010) and ELL is
+ a nested error model originally proposed by Battesse Harter and Fuller
+ (XXXX, BHF).
+ For the estimation of poverty and welfare, the ELL and EB methods assume
+ the transformed welfare 
+\begin_inset Formula $y_{ch}$
+\end_inset
+
+ for each household 
+\begin_inset Formula $h$
+\end_inset
+
+ in the population within each location 
+\begin_inset Formula $c$
+\end_inset
+
+ is linearly related to a 
+\begin_inset Formula $1\times K$
+\end_inset
+
+ vector of characteristics (or correlates) 
+\begin_inset Formula $x_{ch}$
+\end_inset
+
+ for that household, according to the nested error model: 
+\begin_inset Formula 
+\begin{equation}
+y_{ch}=x_{ch}\beta+\eta_{c}+e_{ch},\:h=1,\ldots,N_{c},\,c=1,\ldots,C.\label{eq:1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here 
+\begin_inset Formula $\eta_{c}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{ch}$
+\end_inset
+
+ are respectively location and household-specific idiosyncratic errors,
+ assumed to be independent from each other, satisfying: 
+\begin_inset Formula 
+\[
+\eta_{c}\stackrel{iid}{\sim}N\left(0,\sigma_{\eta}^{2}\right),\:e_{ch}\stackrel{iid}{\sim}N\left(0,\sigma_{e}^{2}\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the variances 
+\begin_inset Formula $\sigma_{\eta}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{e}^{2}$
+\end_inset
+
+ are unknown.
+ Here, 
+\begin_inset Formula $C$
+\end_inset
+
+ is the number of locations in which the population is divided and 
+\begin_inset Formula $N_{c}$
+\end_inset
+
+ is the number of households in location 
+\begin_inset Formula $c$
+\end_inset
+
+, for 
+\begin_inset Formula $c=1,\ldots,C$
+\end_inset
+
+.
+ Finally, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the 
+\begin_inset Formula $K\times1$
+\end_inset
+
+ vector of coefficients.
+\end_layout
+
+\begin_layout Standard
+It is evident that the dependent variable of the model is not the poverty
+ status of a given household.
+ Instead, the method attempts to replicate the welfare distribution based
+ on an assumed data generating process.
+ From the parameters obtained from the model fit using the household survey
+ data
+\end_layout
+
+\begin_layout Subsection
+Targeting efficiency of the methods
+\end_layout
+
 \begin_layout Standard
 While understanding the error of the poverty estimates is useful, the ultimate
  concern with poverty mapping is to understand how different methodological
@@ -1732,19 +2017,20 @@ literal "false"
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using the true household-level incomes, calculate the poverty headcount
- and poverty gap for the country as a whole for some chosen poverty line.
+Using the true household-level per capita incomes, calculate the poverty
+ headcount and poverty gap for the country as a whole for some chosen poverty
+ line.
  Using the poverty gap measure, determine the budget required to completely
  eradicate poverty.
  Calculate an individual-level transfer amount by dividing the total budget
- by the number of people living in poor households.
+ by the number of people living in poverty.
  
 \end_layout
 
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using the poverty map, order the geographical entitities according to their
+Using the poverty map, order the geographical entities according to their
  estimated poverty headcounts, from most to least poor.
  For the poorest region, augment the per capita income of all household's
  by an amount equal to the transfer (i.e., each household receives an amount
