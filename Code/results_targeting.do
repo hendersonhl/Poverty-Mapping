@@ -87,7 +87,7 @@ bysort muni: egen num_poor = total(fgt)
 gen prate = num_poor/pop   // Municipality-level poverty rates
 drop fgt num_poor
 distribute muni prate hhsize $transfer $people pop  // Distribute transfers
-gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
+gen poor = (incpc_new < $pline)   // Calculate post-transfer poverty
 qui sum poor [aw = hhsize]
 global prate_low = `r(mean)'   // Lowest achievable poverty rate
 drop prate poor incpc_new
@@ -150,7 +150,7 @@ foreach i of local model {
 		merge m:1 muni using `results', keepusing(yhat_`j') // Merge in estimates
         drop _merge
         distribute muni yhat_`j' hhsize $transfer $people pop  // Distribute transfers
-	    gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
+	    gen poor = (incpc_new < $pline)   // Calculate post-transfer poverty
         qui sum poor [aw = hhsize]
 	    matrix results[`j', colnumb(results, "`i'")] = `r(mean)' 
 	    drop poor incpc_new	yhat_`j'
