@@ -55,7 +55,7 @@ end
 use $inpath/census_trim.dta, clear
 rename HID_mun muni
 label var muni "Municipality identifier"
-gen double incpc = hhinc/hhsize  
+rename e_y incpc
 label var incpc "Income per capita (pre-transfer)"   
 bysort muni: egen pop = total(hhsize)  
 label var pop "Municipality population"
@@ -87,7 +87,7 @@ bysort muni: egen num_poor = total(fgt)
 gen prate = num_poor/pop   // Municipality-level poverty rates
 drop fgt num_poor
 distribute muni prate hhsize $transfer $people pop  // Distribute transfers
-gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
+gen poor = (incpc_new < $pline)   // Calculate post-transfer poverty
 qui sum poor [aw = hhsize]
 global prate_low = `r(mean)'   // Lowest achievable poverty rate
 drop prate poor incpc_new
@@ -99,9 +99,9 @@ drop prate poor incpc_new
 * Prep results from traditional estimators
 preserve
 use "$inpath/h3no19.dta", clear   // EB results
-keep Unit avg_fgt0 nsim
+keep Unit avg_fgt0_* nsim
 rename Unit muni
-rename avg_fgt0 yhat
+rename avg_fgt0_* yhat
 rename nsim sim_sample
 order muni sim_sample yhat
 sort muni sim_sample
@@ -109,9 +109,9 @@ reshape wide yhat, i(muni) j(sim_sample)
 rename yhat* yhat_*
 outsheet using "$outpath/eb.csv", comma replace
 use "$inpath/uceb19.dta", clear   // Unit-context results
-keep Unit avg_fgt0 nsim
+keep Unit avg_fgt0_* nsim
 rename Unit muni
-rename avg_fgt0 yhat
+rename avg_fgt0_* yhat
 rename nsim sim_sample
 order muni sim_sample yhat
 sort muni sim_sample
@@ -125,8 +125,8 @@ local model gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
     bart_census_mun bart_gis_mun bart_all_mun bart_census_psu ///
 	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
 	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
-	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc
-matrix results = J(500, 22, .)
+	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc hyperopt_census_mun
+matrix results = J(500, 23, .)
 matrix colnames results = `model'
 
 * Loop over models
@@ -150,7 +150,7 @@ foreach i of local model {
 		merge m:1 muni using `results', keepusing(yhat_`j') // Merge in estimates
         drop _merge
         distribute muni yhat_`j' hhsize $transfer $people pop  // Distribute transfers
-	    gen poor = (incpc_new <= $pline)   // Calculate post-transfer poverty
+	    gen poor = (incpc_new < $pline)   // Calculate post-transfer poverty
         qui sum poor [aw = hhsize]
 	    matrix results[`j', colnumb(results, "`i'")] = `r(mean)' 
 	    drop poor incpc_new	yhat_`j'
@@ -166,7 +166,7 @@ clear
 svmat results, names(col)
 gen sim_sample = _n
 order sim_sample
-outsheet using "$outpath/results_targeting.csv", comma replace
+outsheet using "$outpath/results_targeting_500_june07.csv", comma replace
  
 
 
