@@ -2,9 +2,6 @@
 * Program setup
 *==========================================
 
-* Install gtools for faster sorting
-* ssc install gtools
-
 * Set up
 clear all
 set more off
@@ -47,6 +44,7 @@ save `pretrans'
 groupfunction [aw=hhsize], mean(fgt0 fgt1 fgt2 incpc) rawsum(hhsize) by(muni)
 rename hhsize pop
 
+preserve
 	//Alrighty begin the transfer
 	gsort -fgt0
 	gen double transfer = pop*$transfer_pc
@@ -61,6 +59,42 @@ rename hhsize pop
 	lab var transfer "transfer per capita for the municipality"
 tempfile idealtrans
 save `idealtrans'
+restore
+
+preserve
+	//Alrighty begin the transfer
+	gsort -fgt1
+	gen double transfer = pop*$transfer_pc
+	gen double cummul=sum(transfer)
+	//Indicate over budget
+	gen double overbudget= cummul>$budget & cummul!=.
+	replace transfer=0 if overbudget==1
+	gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
+	//Places the transfer budget for the municipality at the margin
+	replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
+	replace transfer = transfer/pop
+	lab var transfer "transfer per capita for the municipality"
+tempfile idealtrans_fgt1
+save `idealtrans_fgt1'
+restore
+
+preserve
+	//Alrighty begin the transfer
+	gsort -fgt2
+	gen double transfer = pop*$transfer_pc
+	gen double cummul=sum(transfer)
+	//Indicate over budget
+	gen double overbudget= cummul>$budget & cummul!=.
+	replace transfer=0 if overbudget==1
+	gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
+	//Places the transfer budget for the municipality at the margin
+	replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
+	replace transfer = transfer/pop
+	lab var transfer "transfer per capita for the municipality"
+tempfile idealtrans_fgt2
+save `idealtrans_fgt2'
+restore
+
 *=========================================================================
 //Bring in the transfer to the Census population and get new poverty rates
 *=========================================================================
@@ -70,20 +104,68 @@ use `pretrans', clear
 		drop _m
 		
 	egen double incpc_trans = rsum(incpc transfer)
+	drop transfer
+	
+	merge m:1 muni using `idealtrans_fgt1', keepusing(transfer)
+		drop if _m==2
+		drop _m
+		
+	egen double incpc_trans_gap = rsum(incpc transfer)
+	drop transfer
+	
+	merge m:1 muni using `idealtrans_fgt2', keepusing(transfer)
+		drop if _m==2
+		drop _m
+		
+	egen double incpc_trans_sev = rsum(incpc transfer)
+	drop transfer
+	
 	
 gen pline = $pline
 gen all=1
-sp_groupfunction [aw=hhsize], poverty(incpc_trans incpc) povertyline(pline) by(all)
+sp_groupfunction [aw=hhsize], poverty(incpc_trans incpc_trans_gap incpc_trans_sev incpc) povertyline(pline) by(all)
 
 //Best output
 list
-tempfile idealresult
-save `idealresult'
+save "$outpath/True_result.dta", replace
 
+*=========================================================================
+//prep results for traditional
+*=========================================================================
+* Prep results from traditional estimators
+preserve
+use "$inpath/h3no19.dta", clear   // EB results
+keep Unit avg_fgt0_* nsim
+rename Unit muni
+rename avg_fgt0_* yhat
+rename nsim sim_sample
+order muni sim_sample yhat
+sort muni sim_sample
+reshape wide yhat, i(muni) j(sim_sample)
+rename yhat* yhat_*
+outsheet using "$outpath/eb.csv", comma replace
+use "$inpath/uceb19.dta", clear   // Unit-context results
+keep Unit avg_fgt0_* nsim
+rename Unit muni
+rename avg_fgt0_* yhat
+rename nsim sim_sample
+order muni sim_sample yhat
+sort muni sim_sample
+reshape wide yhat, i(muni) j(sim_sample)
+rename yhat* yhat_*
+outsheet using "$outpath/uc.csv", comma replace
+restore
 *=========================================================================
 //Ok, now to the model based estimates...
 *=========================================================================
-import delimited "$outpath/hyperopt_census_mun.csv", clear 
+local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
+    bart_census_mun bart_gis_mun bart_all_mun bart_census_psu ///
+	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
+	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
+	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc hyperopt_census_mun
+	
+foreach model of local themodels{
+	import delimited "$outpath/`model'.csv", clear 
 	//include population
 	merge 1:1 muni using `idealtrans', keepusing(pop)
 		drop if _m==2
@@ -105,39 +187,47 @@ import delimited "$outpath/hyperopt_census_mun.csv", clear
 		}
 	}
 	
-tempfile xgboost
-save `xgboost'
+	tempfile `model'
+	save ``model''
+}
 *=========================================================================
 //Bring in the transfer to the Census population and get new poverty rates
 *=========================================================================
-use `pretrans', clear
-	merge m:1 muni using `xgboost', keepusing(yhat*)
-		drop if _m==2
-		drop _m
+
+foreach model of local themodels{	
+	use `pretrans', clear
+		merge m:1 muni using ``model'', keepusing(yhat*)
+			drop if _m==2
+			drop _m
+		
+		forval z = 1/500{
+			qui:replace yhat_`z' = 1-(yhat_`z' + incpc)/${pline}
+		}
+		
 	
-	forval z = 1/500{
-		qui:replace yhat_`z' = 1-(yhat_`z' + incpc)/$pline
-	}
+	keep hhsize yhat_*
 	
+	unab myhat:yhat_*
+	mata: st_view(Y=.,.,tokens("`myhat'"))
+	putmata wt = hhsize, replace
+	
+	mata: fgt0 = mean((Y:>0),wt)'
+	mata: fgt1 = mean((Y:*(Y:>0)),wt)'
+	mata: fgt2 = mean((Y:*Y:*(Y:>0)),wt)'
+	clear
+	set obs 500
+	gen model = "`model'"
+	gen sim = _n
+	getmata fgt0 = fgt0 fgt1 = fgt1 fgt2 = fgt2  
 
-keep hhsize yhat_*
+	cap append using `all'
+	tempfile all
+	save `all'	
+}
 
-unab myhat:yhat_*
-mata: st_view(Y=.,.,tokens("`myhat'"))
-putmata wt = hhsize, replace
-local pline = $pline
-count 
-local top = r(N)
+use `all', clear
 
-mata:
-
-fgt0 = mean((Y:>0),wt)
-fgt1 = mean((Y:*(Y:>0)),wt)
-fgt2 = mean((Y:*Y:*(Y:>0)),wt)
-//Poverty
-mean((fgt0\fgt1\fgt2)')
-
-end
+save "$outpath/Results_transfer.dta", replace
 
 
 
