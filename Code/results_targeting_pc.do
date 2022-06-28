@@ -7,6 +7,7 @@ clear all
 set more off
 
 * Set globals
+if (lower("`c(username)'")=="wb378870")    global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
 if (lower("`c(username)'")=="paul corral") global main "C:\Users\Paul Corral\Documents\GitHub\Poverty-Mapping"
 if (lower("`c(username)'")=="hendersonhl") global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
 
@@ -226,8 +227,42 @@ foreach model of local themodels{
 }
 
 use `all', clear
+use "$outpath/Results_transfer.dta", clear
+drop  model_t dtype level
+local bart BART
+local eb CensusEB
+local uc Unit-Context
+local rf Random forest
+local gb XGboost
+local lasso lasso
+local ols OLS
+local hyperopt HyperOpt
+
+local census Census agg.
+local gis GIS
+local all Mixed
+
+local models bart eb uc rf gb lasso ols hyperopt
+local types census gis all
+
+gen model_t = ""
+foreach m of local models{
+	replace model_t = "``m''" if regexm(model,"`m'")
+}
+
+gen dtype = ""
+foreach d of local types{
+	replace dtype = "``d''" if regexm(model,"_`d'_")
+}
+replace dtype = "Census microdata" if missing(dtype)
+
+gen level = "PSU" if regexm(model,"psu")
+replace level = "Municipality" if regexm(model,"mun")
+replace level = "HH level" if missing(level)
 
 save "$outpath/Results_transfer.dta", replace
+
+export delimited using "$outpath/results_transfer.csv", replace 
 
 
 
