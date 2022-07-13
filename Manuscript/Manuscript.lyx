@@ -97,12 +97,23 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Poverty maps are a useful way to illustrate poverty estimates at a local
- level.
+Methodological advances and the availability of satellite derived data as
+ well as a litany of other sources of data have led to considerable innovations
+ in the area of poverty mapping.
+ Machine learning approaches coupled with these innovative data sources
+ are now often used to yield a granular picture of poverty across the globe,
+ and many of these poverty maps are feeding into policy making.
+ 
+\end_layout
+
+\begin_layout Standard
+Poverty maps are attractive since they are a useful way to illustrate poverty
+ estimates at a local level.
  These estimates are then used by policy makers to determine where the limited
  funds at their disposal should be allocated.
  However, estimates of poverty at the local level which are sufficiently
- precise to avoid errors of inclusion and exclusion are not readily available.
+ precise to minimize errors of inclusion and exclusion are not always readily
+ available.
 \end_layout
 
 \begin_layout Standard
@@ -114,13 +125,13 @@ Household surveys measuring living standards provide population statistics,
  poverty monitoring and alleviation efforts across the globe.
  The first is related to time.
  Household surveys in many developing countries are conducted infrequently,
- in some cases more than a decade may go by before a new survey is conducted.
+ in some cases more than a decade may pass before a new survey is conducted.
  A second drawback of household surveys for the purposes of poverty monitoring
- is that household surveys can only be disaggregated up to a certain point
- before the estimates lose validity.
- The final drawback of household surveys is that these surveys may not cover
- all the locations of interest to policy makers who are trying to determine
- which areas should be prioritized.
+ at the local level is that household surveys can only be disaggregated
+ up to a certain point before the estimates lose validity.
+ The third and final drawback of household surveys is that these surveys
+ may not cover all the locations of interest to policy makers who are trying
+ to determine which areas should be prioritized.
  
 \end_layout
 
@@ -131,15 +142,18 @@ The drawbacks related to disaggregation and coverage are often addressed
  of higher quality than those obtained directly from the household survey.
  These small area estimation techniques often combine data from household
  surveys and auxiliary information from censuses, registers, or others to
- produce estimates of higher quality for areas with small sample sizes than
- those from survey data alone.
- To achieve these gains in quality it is necessary to rely on model assumptions
- which must be thoroughly checked.
+ produce estimates for areas with small sample sizes of higher quality than
+ is possible from survey data alone.
+ Since there is no such thing as a free lunch, to achieve these gains in
+ quality it is necessary to rely on model assumptions which must be thoroughly
+ checked.
  
 \end_layout
 
 \begin_layout Standard
-Unit-level models for small area estimation will often yield the largest
+In the context of poverty, small area estimation can be split into unit-level
+ models and area-level models.
+ Unit-level models for small area estimation will often yield the largest
  gains in quality.
  Under unit-level models a linear relationship is assumed between welfare
  and a set of household and individual level characteristics.
@@ -152,27 +166,80 @@ status collapsed
 
 \begin_layout Plain Layout
 For a thorough discussion on small area estimation for poverty headcount
- rates see Corral et al.
- (2022) - GUIDELINES TO SAE
+ rates see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "sae_guide"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "mcn2021"
+literal "false"
+
+\end_inset
+
+.
+ For a thorough discussion on small area estimation see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
 
  Perhaps the first unit-level model for small area estimation of poverty
- indicators was proposed by <ELL 2003>, this quickly became popular across
- the globe and is perhaps the most applied methodology for poverty mapping.
- The empirical best (EB) method for poverty mapping was introduced by <Molina
- and Rao 2010> which relies on similar model assumptions but due to EB yields
- estimates with considerably greater precision than ELL and represents a
- considerable upgrade as noted in validations with simulated and real world
- data (<Corral et al.
- 2021 Map of poor>).
+ indicators was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jesko1998"
+literal "false"
+
+\end_inset
+
+ which was later refined by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2003micro"
+literal "false"
+
+\end_inset
+
+, this method quickly became popular across the globe and is perhaps the
+ most applied methodology for poverty mapping.
+ The empirical best (EB) method for poverty mapping was introduced by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+ which relies on similar model assumptions but due to EB yields estimates
+ with considerably greater precision than ELL and represents a considerable
+ upgrade as noted in validations with simulated and real world data (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
 The drawback with unit-level models is that they rely on covariates that
- have similar moments of the distribution, otherwise estimates are likely
- biased.
+ should have similar moments of the distribution across the data used, otherwise
+ estimates are likely biased.
  This is most likely to occur when census data and survey data correspond
  to different years, but it may also occur in other instances where the
  data are misaligned.
@@ -185,12 +252,35 @@ The drawback with unit-level models is that they rely on covariates that
 
 \begin_layout Standard
 Traditionally in off-census years area-level models such as the one proposed
- by Fay and Herriot (1979) and sub-area-level models proposed by Torabi
- and Rao (2014) are the go to methods.
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+ and sub-area-level models proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "torabi2014small"
+literal "false"
+
+\end_inset
+
+ are the go to methods.
  Area-level models rely on aggregate data at the area level and consequently
- do not rely on contemporary census data to obtain small area estimates.
+ do not require contemporary census data to obtain small area estimates.
  Despite their desirable features, the gains in precision offered by these
- models is limited (See XXX and XXX).
+ models is limited (see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina_morales2009"
+literal "false"
+
+\end_inset
+
+).
  
 \end_layout
 
@@ -198,13 +288,20 @@ Traditionally in off-census years area-level models such as the one proposed
 Considerable efforts have been devoted to methods which can be applied for
  poverty mapping in off-census years.
  One proposed method attempts to combine the best features of unit-level
- models and area-level models (Nguyen 2012, Pape XXX, Masaaki XXX), called
- unit-context models.
+ models and area-level models (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "doi:10.1080/00220388.2012.682983,lange2018small,masaki2020small"
+literal "false"
+
+\end_inset
+
+), called unit-context models.
  Specifically, the method models household level welfare from a household
  survey using only aggregate data.
  Aggregate data may come from a recent or previous census, administrative
  data, or GIS data.
- The latter data has become a selling point of many recent poverty maps,
+ The latter data have become a selling point of many recent poverty maps,
  particularly poverty maps with estimates obtained from machine learning
  methods.
  
@@ -216,27 +313,69 @@ Poverty maps constructed from machine learning methods have gained considerable
  Although these machine learning based estimates are often called poverty
  maps, in reality these often obtain estimates of an asset index.
  Although highly correlated to poverty, asset indexes are not the same as
- a welfare aggregate.
+ a welfare aggregate (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "FilmerScott"
+literal "false"
+
+\end_inset
+
+).
  Despite this, the methods have become very popular and during the COVID-19
  pandemic were applied by governments desperately in need for any sort of
  relevant information to assist their targeting efforts to reach those most
  in need.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vishwanath"
+literal "false"
+
+\end_inset
+
+ for an application in Nigeria.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-With this backdrop this paper builds upon the work from Corral et al.
- (2021) who validate small area estimation models using the Mexican Intra-censal
+With this backdrop, the present research builds upon the work from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ who validate small area estimation models using the Mexican Intra-censal
  survey data.
- Specifically, this paper adds to the validation exercise by Corral et al.
- (2021) by including machine learning based estimates of poverty.
+ Specifically, this paper adds to the validation exercise by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ by including machine learning based estimates of poverty.
  The goal is to compare the quality of machine learning based estimates
  of poverty for small areas to traditional small area based estimates of
- poverty all applied to the same data.
+ poverty in a scenario where every method is applied to the same data.
  As far as we are aware this is the first validation of machine learning
  based methods where the quality of the estimates are measured against other
  estimation methods and where the true poverty rate for each small area
- domain is known, This, in our view, is also a much more thorough validation
- approach than the one often used in the literature.
+ domain is known, and thus yields empirical measures of design based bias
+ and mean squared errors.
+ This, in our view, is also a much more thorough validation approach than
+ the one often used in the literature.
 \end_layout
 
 \begin_layout Standard
@@ -273,20 +412,41 @@ Methods and validation approach
 
 \begin_layout Standard
 This section provides a brief overview of the methodologies applied.
+ The section first provides an overview of gradient boosting since the method
+ is popular for poverty mapping.
+ Then a brief discussion on previously implemented validation approaches
+ for machine learning based estimates is discussed.
+ Unit-level methods that combine survey and census data to obtain poverty
+ estimates are then discussed.
  Also, since the reason for obtaining highly disaggregated poverty estimates
  is to improve the targeting of resources, the methods are compared by their
  prowess for poverty reduction using the Mexican Intra-censal survey.
- The simulation presented builds upon the simulation presented by (Elbers
- et al.
- 2007) with one key difference: because there true poverty rates for each
- small area are known, the efficiency yielded by the use of different methods
+ The simulation presented builds upon the simulation presented by (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+) with one key difference: because the true poverty rates for each small
+ area are known, the efficiency yielded by the use of different methods
  is compared to an optimal level of efficiency.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 The section highlights how small area estimation based poverty estimates
  differ from machine learning based poverty estimates.
  
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -336,7 +496,7 @@ literal "false"
  With the classic squared-error loss function, this amounts to sequentially
  fitting new models to the current residuals of the ensemble.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See 
@@ -378,7 +538,7 @@ Classification and regression trees are based on a sequential binary splitting
  are assigned to the child nodes depending on whether they meet some condition
  associated with the explanatory variable.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 For example, for a continuous explanatory variable, one determines whether
@@ -877,6 +1037,16 @@ The above references several hyperparameters that must be chosen by the
 \end_inset
 
 .
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+We're using iteration and tree for t, I presume this is correct but wanted
+ to be sure.
+\end_layout
+
+\end_inset
+
  Shrinkage reduces the influence of each tree so that no individual tree
  has too much influence on the ensemble prediction.
 \end_layout
@@ -909,7 +1079,7 @@ literal "false"
 
 \begin_layout Standard
 \begin_inset Note Comment
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Notation 
@@ -1229,14 +1399,18 @@ While unbiased, direct estimates can be imprecise estimates of true poverty
  indicators 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "rodas2021pull"
+key "corral2020pull"
 literal "false"
 
 \end_inset
 
 .
  Ideally, one would assess the performance of model-based predictions on
- the basis of the true poverty indicators themselves.
+ the basis of the true poverty indicators (
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+) themselves.
  That is, model-based predictions are more appropriately assessed using
  the 
 \begin_inset Formula $R^{2}$
@@ -1248,13 +1422,13 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-y_{i}^{a}=\alpha+\beta y_{i}^{p}+\eta_{i}
+y_{i}^{a}=\alpha+\beta y_{i}^{p}+e_{i}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $\eta$
+\begin_inset Formula $e$
 \end_inset
 
  represents the error term.
@@ -1268,7 +1442,7 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
+R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{e}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
 \end{equation}
 
 \end_inset
@@ -1278,11 +1452,11 @@ where
 \end_inset
 
  is the variance of the true poverty indicator and 
-\begin_inset Formula $\sigma_{\eta}^{2}$
+\begin_inset Formula $\sigma_{e}^{2}$
 \end_inset
 
  is the variance of 
-\begin_inset Formula $\eta$
+\begin_inset Formula $e$
 \end_inset
 
 .
@@ -1315,11 +1489,11 @@ Let
  direct estimate of the poverty indicator is a noisy estimate of the true
  poverty indicator.
  Note that the preceding equation implies that 
-\begin_inset Formula $\varepsilon_{i}=\eta_{i}+\omega_{i}$
+\begin_inset Formula $\varepsilon_{i}=e_{i}+\omega_{i}$
 \end_inset
 
  and 
-\begin_inset Formula $\sigma_{\varepsilon}^{2}=\sigma_{\eta}^{2}+\sigma_{\omega}^{2}$
+\begin_inset Formula $\sigma_{\varepsilon}^{2}=\sigma_{e}^{2}+\sigma_{\omega}^{2}$
 \end_inset
 
 .
@@ -1331,7 +1505,11 @@ literal "false"
 
 \end_inset
 
-, we then define the bias as 
+, we then define the bias of the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure as 
 \begin_inset Formula 
 \begin{equation}
 B=R_{a}^{2}-R_{d}^{2}.\label{eq:bias}
@@ -1369,7 +1547,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-B=\frac{\sigma_{a}^{2}-\sigma_{\eta}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\eta}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\eta}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}.\label{eq:bias_res}
+B=\frac{\sigma_{a}^{2}-\sigma_{e}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{e}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{e}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}.\label{eq:bias_res}
 \end{equation}
 
 \end_inset
