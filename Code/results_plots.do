@@ -4,8 +4,10 @@
 
 * Set up
 clear all
-global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
-global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Manuscript"
+if (lower("`c(username)'")=="wb378870")        global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
+if (lower("`c(username)'")=="hendersonhl")	   global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
+global inpath  "$main/Results"
+global outpath "$main/Manuscript"
 
 *==========================================
 * Section 5: The Standard Implementation
