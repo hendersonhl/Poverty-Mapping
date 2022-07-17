@@ -102,7 +102,7 @@ Methodological advances and the availability of satellite derived data as
  in the area of poverty mapping.
  Machine learning approaches coupled with these innovative data sources
  are now often used to yield a granular picture of poverty across the globe,
- and many of these poverty maps are feeding into policy making.
+ and many of these poverty ma ps are feeding into policy making.
  
 \end_layout
 
@@ -1349,7 +1349,7 @@ where
 
  represents the error term.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Note that any regression of this form can only be estimated for the sampled
@@ -1363,6 +1363,125 @@ Note that any regression of this form can only be estimated for the sampled
 \end_inset
 
  for the above regression can be written as follows:
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Do you think we can link this to the Fay Herriot literature? In essence
+ what we want is the best estimator for a given area's poverty rate: 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+y_{i}^{a}=x'_{i}\beta+u_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+where 
+\begin_inset Formula $x'_{i}\beta$
+\end_inset
+
+ is the predicted poverty rate, 
+\begin_inset Formula $y_{i}^{p}=x'_{i}\beta$
+\end_inset
+
+, and 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ are the area effects since they represent unexplained heterogeneity between
+ areas.
+ However, we do not have the true area's poverty rate, 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+.
+ All we have are the direct estimates, which are centered around the true
+ values:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+y_{i}^{d}=y_{i}^{a}+e_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+where 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+ are the heteroskedastic errors with variances 
+\begin_inset Formula $var(e_{i}|y_{i}^{a})=\psi_{i}$
+\end_inset
+
+ and is called the sampling model.
+ Note that the sampling variances are assumed to vary across areas.
+\end_layout
+
+\begin_layout Plain Layout
+Replacing the first in the second tells us that:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+y_{i}^{d}=x'_{i}\beta+u_{i}+e_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Consequently, the model's true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+R^{2}=\frac{\sigma_{d}^{2}-\sigma_{u}^{2}-\sigma_{e}^{2}}{\sigma_{d}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+However, note that in the validations normally done the sampling error,
+ 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, is ignored.
+ Assume that for a given country we have 2 samples of different sizes, consequen
+tly the sampling error in the second sample will be larger.
+ If everything else is equal, we would be led to believe that models conducted
+ on both sets of data yield estimates of similar quality.
+ However, the performance of the first model will be in reality better since
+ it was perfomed on better quality data.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1431,7 +1550,18 @@ where
 \begin_inset Formula $e$
 \end_inset
 
- represents the error term.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+I changed it from eta because we use eta to denote the random location effect
+ in SAE
+\end_layout
+
+\end_inset
+
+represents the error term.
  The 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -1505,11 +1635,7 @@ literal "false"
 
 \end_inset
 
-, we then define the bias of the 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- measure as 
+, we then define the bias as:
 \begin_inset Formula 
 \begin{equation}
 B=R_{a}^{2}-R_{d}^{2}.\label{eq:bias}
@@ -1695,10 +1821,34 @@ noprefix "false"
 \end_inset
 
  from a strong model applied to a high bias setting.
- The presence of bias can thus reverse the rank ordering of models when
- comparisons are made across contexts.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Shouldn't this be tied to measurement error, instead of bias? That is, link
+ it to the measurement error, since the direct estimates won't be biased.
+\end_layout
+
+\end_inset
+
+ The presence of bias
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+I think it's best to frame it around sampling error
+\end_layout
+
+\end_inset
+
+ in the measures of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can thus reverse the rank ordering of models when comparisons are made
+ across contexts.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See 
@@ -2026,8 +2176,16 @@ The purpose of this section is to give readers a brief introduction to the
  Opposite to machine learning methods, under unit-level based small area
  estimation there is an assumed underlying model for welfare generation.
  The model used under the EB method of Molina and Rao (2010) and ELL is
- a nested error model originally proposed by Battesse Harter and Fuller
- (XXXX, BHF).
+ a nested error model originally proposed by Battesse, Harter and Fuller
+ (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "BHF"
+literal "false"
+
+\end_inset
+
+, BHF).
  For the estimation of poverty and welfare, the ELL and EB methods assume
  the transformed welfare 
 \begin_inset Formula $y_{ch}$
@@ -2124,8 +2282,18 @@ It is evident that the dependent variable of the model is not the poverty
  status of a given household.
  Instead, the method attempts to replicate the welfare distribution based
  on an assumed data generating process.
- From the parameters obtained from the model fit using the household survey
- data
+ The parameters obtained from the model fit using the household survey data
+ are then applied to the census data
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+here
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2290,7 +2458,7 @@ Performance of alternative methods in terms of R-squared, MSE, bias, and
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
