@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 
 # Directory
-inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
-outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
+main    = 'C:/Users/WB378870/GitHub/Poverty-Mapping/'
+inpath  = main+'Data/'
+outpath = main+'Results/'
 
 # Import true poverty indicators
 true = pd.read_csv(inpath + 'true_mun.csv', header = 0)
