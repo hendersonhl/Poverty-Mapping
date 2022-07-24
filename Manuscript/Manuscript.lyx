@@ -2283,17 +2283,50 @@ It is evident that the dependent variable of the model is not the poverty
  Instead, the method attempts to replicate the welfare distribution based
  on an assumed data generating process.
  The parameters obtained from the model fit using the household survey data
- are then applied to the census data
-\begin_inset Note Note
-status open
+ are then applied to the census data.
+ From the simulated welfare vector in the census it is possible to obtain
+ estimates of any welfare indicator, not just poverty headcount rates.
+\end_layout
+
+\begin_layout Standard
+One major aspect of concern for small area estimation are the estimates
+ of noise.
+ A statistical agency in a given country may seek to undertake a small area
+ estimation application because the quality of the estimates derived from
+ survey data may not be sufficiently precise or may not even be possible
+ since the area was not sampled.
+ Hence, a big concern surrounding small area estimation is the estimation
+ of MSEs for each area's estimate.
+ Estimates of noise are obtained via bootstrap replications where the model's
+ assumptions are exploited in order to obtain an estimated MSE.
+\begin_inset Foot
+status collapsed
 
 \begin_layout Plain Layout
-here
+For a much more detailed discussion on the estimation of noise refer to
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+ and for a discussion focused on ELL and EB estimates refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2020pull"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
 
-
+ This aspect is one of the biggest differences between poverty maps based
+ on small area estimation and those based on machine learning.
 \end_layout
 
 \begin_layout Subsection
@@ -2301,7 +2334,7 @@ Targeting efficiency of the methods
 \end_layout
 
 \begin_layout Standard
-While understanding the error of the poverty estimates is useful, the ultimate
+While understanding the noise of the poverty estimates is useful, the ultimate
  concern with poverty mapping is to understand how different methodological
  choices affect poverty alleviation.
  Similar to 
@@ -2315,7 +2348,7 @@ literal "false"
 , we propose simulating a hypothetical poverty-alleviation program that
  distributes resources to households according to a given poverty map.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See 
@@ -2348,8 +2381,8 @@ literal "false"
 
 \end_inset
 
- In addition to the map, the procedure requires true household-level incomes
- from a census-type dataset.
+ In addition to the poverty estimates, the procedure applied here requires
+ true household-level incomes from a census-type dataset.
  The procedure is as follows:
 \end_layout
 
@@ -2376,8 +2409,9 @@ Using the true household-level per capita incomes, calculate the poverty
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using the poverty map, order the geographical entities according to their
- estimated poverty headcounts, from most to least poor.
+Using the true poverty rates for each municipality we order the geographical
+ entities according to their estimated poverty headcounts, from most to
+ least poor.
  For the poorest region, augment the per capita income of all household's
  by an amount equal to the transfer (i.e., each household receives an amount
  equal to the transfer times the number of household members).
@@ -2394,39 +2428,515 @@ Using the poverty map, order the geographical entities according to their
 Using the post-transfer household incomes, calculate an updated poverty
  headcount to assess the effects of the distribution scheme on poverty alleviati
 on.
+ Note that all of this is done with the census which has an income measure.
+ This process yields the best case scenario for geographical targeting where
+ transfers are given to the poorest locations, where poverty is determined
+ by the headcount rate.
+\end_layout
+
+\begin_layout Standard
+The procedure detailed above is then repeated with the estimates obtained
+ under each method.
+ The rankings are determined by the estimates obtained under a given method,
+ but the transfer amount is then applied to the true income measure in the
+ census to calculate the impact of the targeted transfer.
+ 
+\end_layout
+
+\begin_layout Standard
+The procedure applied differs from the ideal transferring scheme detailed
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+, since under the different methods all we have estimated are poverty headcount
+ rates.
+ Moreover, the ideal transfer proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+ is not simple to illustrate to policy makers and is seldom implemented.
+ The process detailed here in reality mimics how many governments determine
+ which locations to give priority for a government cash transfer scheme.
+ For example, the XXXXXXXXXXXXXXXXXXXX.
 \end_layout
 
 \begin_layout Standard
 \begin_inset VSpace -5bp
 \end_inset
 
-The above procedure can be implemented for alternative poverty maps to examine
- the effect of methodological choices on poverty alleviation.
+
 \end_layout
 
 \begin_layout Section
 Data
 \end_layout
 
-\begin_layout Itemize
-Introduce Mexican Intra Censal Survey
+\begin_layout Standard
+The data used here was originally created for the small area validation
+ illustrated in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ and thus the section borrows heavily from there.
+ 
 \end_layout
 
-\begin_layout Itemize
-Discuss the use of the Intra Censal Survey as a psuedo census
+\begin_layout Standard
+In this section we present a design-based simulation experiment based on
+ the Mexican Intra Censal Survey of 2015 (Encuesta Intracensal).
+ The purpose of the simulation is to observe performance of the different
+ methods under more realistic scenarios.
+ The survey is carried out by the Mexican National Institute of Statistics
+ and Geography (Instituto Nacional de Estadistica y Geografia - INEGI).
+ The survey has a sample of 5.9 million households and is representative
+ at the national, state (32 states) and municipal or delegation level (2,457
+ municipalities), as well as for localities with a population of 50,000
+ or more inhabitants.
+ 
 \end_layout
 
-\begin_layout Itemize
-Discuss sampling procedure
+\begin_layout Standard
+The 2015 Intra Censal Survey questionnaire includes the following topics
+ related to the housing unit: dwelling features, size and use of the dwelling,
+ conditions for cooking, ownership and access conditions, access to water,
+ sanitation facilities and sanitation, electric power, solid waste, equipment,
+ appliances and automobile; and information and communication technologies
+ (ICT).
+ It also includes the following demographic information: total population
+ and structure, birth registration, marital status, health services, ethnicity,
+ education, economic characteristics, nonpaid work, migration, daily mobility,
+ fertility and mortality, household composition, non-labor household income,
+ food security, agricultural land use, relationship to the household head,
+ indigenous language, occupation, economic activity, and accumulated education.
+ The survey also includes indicators for states, municipalities, and counties.
+ 
 \end_layout
 
-\begin_layout Itemize
-Discuss census and remotely-sensed covariates
+\begin_layout Standard
+One of the key features of the survey is its size and the fact that it includes
+ a measure of income at the household level.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Income is defined as money received from work performed during the course
+ of the reference week by individuals of age 12 or older within the household.
 \end_layout
 
-\begin_layout Itemize
-Mention that estimates can be calculated at both the PSU and municipality
- level
+\end_inset
+
+ The inclusion of an income measure allows for a design-based validation
+ of the different methods presented above.
+ The next section describes how the survey is modified to create a census
+ data set and how samples are then drawn from the created census data with
+ the goal of obtaining small area estimates of poverty at the municipal
+ level.
+\end_layout
+
+\begin_layout Subsection
+Creating a census and survey
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Creating-a-census"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the goal of this exercise is to test how well the different methods
+ perform under a real world scenario, the Intra Censal Survey is modified
+ to mimic a Census in order to allow for a design-based simulation.
+ The first step consists of randomly removing 90 percent of households that
+ reported an income of 0.
+ This is done to ensure that some households with an income of 0 are included
+ in the population, but not as many as in the original data to make it more
+ realistic.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Welfare values of 0 and/or missing are a common feature of household surveys.
+\end_layout
+
+\end_inset
+
+ In the second step, all municipalities with less than 500 households are
+ removed, thus observations by municipality range from 501 to 23,513.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The median municipality has 1,613 households.
+\end_layout
+
+\end_inset
+
+ The final 
+\begin_inset Quotes eld
+\end_inset
+
+Census
+\begin_inset Quotes erd
+\end_inset
+
+ consists of 3.9 million households and 1,865 municipalities.
+ 
+\end_layout
+
+\begin_layout Standard
+To draw survey samples, primary sampling units (PSU) need to be created.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The Intra Censal Survey has its own PSUs, however many of these have too
+ few observations to properly work as PSUs in the created 
+\begin_inset Quotes eld
+\end_inset
+
+Census
+\begin_inset Quotes erd
+\end_inset
+
+ data.
+\end_layout
+
+\end_inset
+
+ Within each municipality, the original data's PSUs are sorted
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This assumes that the clusters' numbering is tied to how proximate each
+ cluster is to one and other.
+\end_layout
+
+\end_inset
+
+ and joined until each created PSU has close to 300 households.
+ Under the proposed approach, original PSUs are never split, just joined
+ to others.
+ Additionally, all original PSUs that were larger than 300 households are
+ designated as a created PSU.
+ The entire process yields 16,297 PSUs.
+\end_layout
+
+\begin_layout Standard
+The resulting Census data is used to draw 500 survey samples to conduct
+ a design-based simulation to establish how a method will perform over repeated
+ sampling from a finite population (
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "tzavidis2018start"
+literal "false"
+
+\end_inset
+
+).
+ The sampling approach reflects standard designs used in most face-to-face
+ household surveys conducted in the developing world, such as those conducted
+ by the Living Standards Measurement Study (LSMS) program of the World Bank
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "grosh1996manual"
+literal "false"
+
+\end_inset
+
+, with some simplification for convenience.
+ First, the 32 states that comprise Mexico are treated as the intended domains
+ of the sample.
+ The main indicator of interest for the survey is the welfare measure: household
+ per capita income.
+ The desired level of precision to be achieved in the sample is assumed
+ to be a relative standard error (
+\begin_inset Formula $RSE$
+\end_inset
+
+) of 7.5 percent for mean per capita income in each state.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The desired precision of an RSE of 7.5 percent is somewhat arbitrary but
+ corresponds to precision targets in similar surveys and yields a sample
+ of reasonable size.
+\end_layout
+
+\end_inset
+
+ A two-stage clustered design is assumed with clusters (defined above) serving
+ as primary sampling units (PSUs) selected in the first stage within each
+ domain and then a sample of 10 households within each cluster is selected
+ in the second stage.
+ With these design features established, the trimmed census data was analyzed
+ to identify the parameter estimates for per capita income (mean and standard
+ deviation) for each state and the target standard error implied by the
+ parameter estimates that corresponds to an 
+\begin_inset Formula $RSE$
+\end_inset
+
+ of 7.5 percent.
+ The minimum sample size required for state 
+\begin_inset Formula $s$
+\end_inset
+
+, given these parameters, under simple random sampling (SRS) design is then
+ obtained as: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{s}^{SRS}=\left(\frac{\sigma_{s}}{\bar{y}_{s}\times RSE^{tgt}}\right)^{2}=\left(\frac{\sigma_{s}}{\bar{y}_{s}\times0.075}\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\sigma_{s}$
+\end_inset
+
+ is the standard deviation of per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $RSE^{tgt}$
+\end_inset
+
+ is the target standard error of 7.5 percent in state 
+\begin_inset Formula $s$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{y}_{c}$
+\end_inset
+
+ is the mean per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The minimum sample size under SRS must then be adjusted to account for
+ the clustered design.
+ This design effect due to clustering is accounted for by estimating the
+ intra-cluster correlation (
+\begin_inset Formula $ICC$
+\end_inset
+
+) for per capita income within each state using the trimmed census data.
+ The 
+\begin_inset Formula $ICC$
+\end_inset
+
+ estimates can then be applied to the SRS size obtained above to arrive
+ at the minimum sample size for state 
+\begin_inset Formula $s$
+\end_inset
+
+ under the clustered design employed here, given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{s}=n_{s}^{SRS}\times DEFF_{s}=n_{s}^{SRS}\times\left(1+\left(n_{psu}-1\right)\rho_{s}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $DEFF_{s}$
+\end_inset
+
+ is the design effect in state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $n_{psu}$
+\end_inset
+
+ is the number of households selected within each cluster (10 in this case),
+ and 
+\begin_inset Formula $\rho_{s}$
+\end_inset
+
+ is the 
+\begin_inset Formula $ICC$
+\end_inset
+
+ for per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The minimum number of clusters to achieve 
+\begin_inset Formula $n_{s}$
+\end_inset
+
+ (assuming 10 households per cluster) was calculated and then the final
+ (household) sample size established by multiplying the number of clusters
+ by 10.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Full estimates and results for the sample size determination are available
+ upon request.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Taking the sample size requirements from above as fixed, the sample in each
+ simulation is selected in accordance with the two-stage design.
+ PSUs within each state, referred to here as clusters, are selected with
+ probability proportional to size (
+\begin_inset Formula $PPS$
+\end_inset
+
+) without replacement, where the measure of size is the number of households
+ within the cluster.
+ Then 10 households were selected within each cluster via simple random
+ sampling.
+ According to this design, the inclusion probability for household 
+\begin_inset Formula $h$
+\end_inset
+
+ in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ and in state 
+\begin_inset Formula $s$
+\end_inset
+
+ is approximated
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The equation used to calculate inclusion probabilities assumes sampling
+ with replacement but is used here as an approximation of inclusion probabilitie
+s under PPS selection without replacement.
+ This should provide a reasonable approximation in this case since there
+ are a relatively large number of PSUs present in the frame.
+\end_layout
+
+\end_inset
+
+ as: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{sch}=\frac{N_{sc}C_{s}}{N_{s}}\times\frac{n_{sc}}{N_{sc}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $N_{s}$
+\end_inset
+
+ is the total number of households in the census for state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $N_{sc}$
+\end_inset
+
+ is the number of households in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ from state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $C_{s}$
+\end_inset
+
+ is the number of clusters selected in state 
+\begin_inset Formula $s$
+\end_inset
+
+, and 
+\begin_inset Formula $n_{sc}$
+\end_inset
+
+ is the number of households selected in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ within state 
+\begin_inset Formula $s$
+\end_inset
+
+, which is fixed at 10.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The design weight for each household is simply the inverse of the inclusion
+ probability.
+ In a typical survey, the design weights would be further adjusted for nonrespon
+se and calibrated to known population characteristics.
+ However, since the sampling is only a simulation exercise, there is no
+ nonresponse and thus no nonresponse adjustment is required.
+ Calibration or post-stratification could be performed but was not implemented
+ to simplify the process.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The sample size across the 500 samples is roughly 23,540.
+ Under the proposed sampling scenario, not all municipalities are included,
+ and the number of municipalities included varies from sample to sample,
+ ranging between 951 to 1,020 municipalities.
+ The median municipality included in a given sample, is represented by a
+ sole PSU and thus its sample size is of 10 households.
 \end_layout
 
 \begin_layout Section
