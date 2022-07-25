@@ -11,8 +11,9 @@ set more off
 set matsize 11000
 
 * Set file paths
-global inpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
-global outpath "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
+global main "C:\Users\WB378870\GitHub\Poverty-Mapping/"
+global inpath "$main/Data"
+global outpath "$main/Results"
 
 * Define function to distribute transfers
 * Note: The arguments for the function are: the muncipality identifier, 
