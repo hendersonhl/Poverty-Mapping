@@ -2329,6 +2329,33 @@ literal "false"
  on small area estimation and those based on machine learning.
 \end_layout
 
+\begin_layout Standard
+A modification of the typial unit-level small area estimation approach presented
+ above which allowed updating poverty maps even when the census and survey
+ data are not aligned was presented by Nguyen (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+).
+ The basic idea behind the approach is that no household level covariates
+ are used.
+ This way there is no need for the covariates in the survey to match the
+ moments of those from the census.
+ Nguyen (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+) introduces
+\end_layout
+
 \begin_layout Subsection
 Targeting efficiency of the methods
 \end_layout
@@ -2466,7 +2493,60 @@ literal "false"
  is not simple to illustrate to policy makers and is seldom implemented.
  The process detailed here in reality mimics how many governments determine
  which locations to give priority for a government cash transfer scheme.
- For example, the XXXXXXXXXXXXXXXXXXXX.
+ For example, in Ghana, the Livelihood Empowerment Against Poverty Programme’s
+ (LEAP) main objective is to reduce poverty by increasing consumption and
+ promoting access to services and opportunities among the extreme poor and
+ vulnerable.
+ The program provides social cash grants to extremely poor and vulnerable
+ households.
+ The latest poverty map for Ghana, corresponding to 2012/13, is used as
+ an input to rank districts and communities before selecting communities
+ where the program will collect data to identify extreme poor households.
+\end_layout
+
+\begin_layout Standard
+In Peru, small area estimates of poverty are used to determine areas that
+ should be prioritized in the allocation of public funds.
+ The Ministry of Finance of Peru uses the estimates to determine allocations
+ to programs.
+ One such program is called “Programa de Vaso de Leche” that offers a daily
+ food ration to vulnerable populations, particularly children under 13 and
+ pregnant mothers, with the goal of reducing food insecurity.
+ Another program that makes use of small area estimates of poverty in Peru
+ is the “Canon Minero” which is a program that ensures that local and regional
+ governments receive funds obtained by the State from income taxes collected
+ from mining activities.
+ 
+\end_layout
+
+\begin_layout Standard
+During the COVID-19 crisis in Nigeria, poverty estimates at a granular geographi
+cal level were used to determine how to allocate funds from the Federal
+ Government’s COVID-19 Rapid Response Registration (RRR) Cash Transfer Project
+ to 1 million Nigerians.
+ The RRR selected the poorest wards in the country based on the poverty
+ estimates at the ward level, something that would be unlikely with the
+ National Living Standards Survey (NLSS) which is only representative at
+ the State level.
+ Additionally, many wards in the country are not even present in the NLSS,
+ consequently the need for model-based approaches toward obtaining poverty
+ estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+Poverty maps are useful beyond the allocation of funds, they are also valuable
+ in the case of an emergency.
+ On the 16th of April 2016 an earthquake which killed over 500 people and
+ left many others severely wounded hit Ecuador.
+ The government needed to determine which locations to prioritize and where
+ to allocate time and effort to ensure things get back as close as possible
+ to normal.
+ The government used the country’s latest poverty map to determine which
+ localities should be given priority for search and rescue efforts.
+ The decision was based on the observation that usually the poorest areas
+ will have the worst infrastructure and are likely the most vulnerable under
+ such a disaster.
 \end_layout
 
 \begin_layout Standard
@@ -2948,6 +3028,13 @@ name "sec:standard_implementation"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+The objective of this section is to gauge how well the machine learning
+ and small area estimation based poverty maps perform.
+ Performance here is measured by bias and MSE.
+ The design bias for each method is measured
 \end_layout
 
 \begin_layout Itemize
