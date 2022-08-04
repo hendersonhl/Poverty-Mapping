@@ -35,13 +35,19 @@ keep muni incpc hhsize
 	}
 
 	sum fgt1 [aw=hhsize]
-	global budget = `r(mean)'*$pline*`r(sum_w)'
+	local gap = r(mean)
+	global budget = `gap'*$pline*`r(sum_w)'
 	sum fgt0 [aw=hhsize]
 	global transfer_pc = $budget/r(sum) 
-
+	//global transfer_pc_gap = `gap'*$pline
 tempfile pretrans
 save `pretrans'
 
+********************************************************************************
+// Modified transfer: give priority to the 50/100 poorest municipalities
+// Give everyone in them the poverty gap
+*===============================================================================
+local ene = 250
 //Leave data at muni level	
 groupfunction [aw=hhsize], mean(fgt0 fgt1 fgt2 incpc) rawsum(hhsize) by(muni)
 rename hhsize pop
@@ -49,53 +55,16 @@ rename hhsize pop
 preserve
 	//Alrighty begin the transfer
 	gsort -fgt0
-	gen double transfer = pop*$transfer_pc
+	gen double transfer = pop*$transfer_pc if _n<=`ene'
 	gen double cummul=sum(transfer)
+	sum cummul
 	//Indicate over budget
-	gen double overbudget= cummul>$budget & cummul!=.
-	replace transfer=0 if overbudget==1
-	gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
-	//Places the transfer budget for the municipality at the margin
-	replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
-	replace transfer = transfer/pop
+	replace transfer = $transfer_pc if _n<=`ene'
 	lab var transfer "transfer per capita for the municipality"
 tempfile idealtrans
 save `idealtrans'
 restore
 
-preserve
-	//Alrighty begin the transfer
-	gsort -fgt1
-	gen double transfer = pop*$transfer_pc
-	gen double cummul=sum(transfer)
-	//Indicate over budget
-	gen double overbudget= cummul>$budget & cummul!=.
-	replace transfer=0 if overbudget==1
-	gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
-	//Places the transfer budget for the municipality at the margin
-	replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
-	replace transfer = transfer/pop
-	lab var transfer "transfer per capita for the municipality"
-tempfile idealtrans_fgt1
-save `idealtrans_fgt1'
-restore
-
-preserve
-	//Alrighty begin the transfer
-	gsort -fgt2
-	gen double transfer = pop*$transfer_pc
-	gen double cummul=sum(transfer)
-	//Indicate over budget
-	gen double overbudget= cummul>$budget & cummul!=.
-	replace transfer=0 if overbudget==1
-	gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
-	//Places the transfer budget for the municipality at the margin
-	replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
-	replace transfer = transfer/pop
-	lab var transfer "transfer per capita for the municipality"
-tempfile idealtrans_fgt2
-save `idealtrans_fgt2'
-restore
 
 *=========================================================================
 //Bring in the transfer to the Census population and get new poverty rates
@@ -108,28 +77,13 @@ use `pretrans', clear
 	egen double incpc_trans = rsum(incpc transfer)
 	drop transfer
 	
-	merge m:1 muni using `idealtrans_fgt1', keepusing(transfer)
-		drop if _m==2
-		drop _m
-		
-	egen double incpc_trans_gap = rsum(incpc transfer)
-	drop transfer
-	
-	merge m:1 muni using `idealtrans_fgt2', keepusing(transfer)
-		drop if _m==2
-		drop _m
-		
-	egen double incpc_trans_sev = rsum(incpc transfer)
-	drop transfer
-	
-	
 gen pline = $pline
 gen all=1
-sp_groupfunction [aw=hhsize], poverty(incpc_trans incpc_trans_gap incpc_trans_sev incpc) povertyline(pline) by(all)
+sp_groupfunction [aw=hhsize], poverty(incpc_trans incpc) povertyline(pline) by(all)
 
 //Best output
 list
-save "$outpath/True_result.dta", replace
+save "$outpath/True_result_`ene'.dta", replace
 
 *=========================================================================
 //prep results for traditional
@@ -166,6 +120,8 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
 	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
 	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc hyperopt_census_mun
 	
+local themodels eb uc gb_census_psu 
+	
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 
 	//include population
@@ -175,17 +131,9 @@ foreach model of local themodels{
 	forval z=1/500{
 		qui{
 		gsort -yhat_`z'
-		gen double transfer = pop*$transfer_pc
-		gen double cummul=sum(transfer)
-		//Indicate over budget
-		gen double overbudget= cummul>$budget & cummul!=.
-		replace transfer=0 if overbudget==1
-		gen double budgetleft= ($budget-cummul)*(($budget-cummul)>0)
-		//Places the transfer budget for the municipality at the margin
-		replace transfer=budgetleft[_n-1] if budgetleft==0 & budgetleft[_n-1]>0
-		replace transfer = transfer/pop
-		replace yhat_`z' = transfer
-		drop transfer cummul overbudget budgetleft
+		
+		replace yhat_`z' = $transfer_pc if _n<=`ene'
+		
 		}
 	}
 	
@@ -221,13 +169,14 @@ foreach model of local themodels{
 	gen model = "`model'"
 	gen sim = _n
 	getmata fgt0 = fgt0 fgt1 = fgt1 fgt2 = fgt2  
-
+	mata: matadrop fgt0 fgt1 fgt2
 	cap append using `all'
 	tempfile all
 	save `all'	
 }
 
 use `all', clear
+use "$outpath/Results_transfer.dta", clear
 drop  model_t dtype level
 local bart BART
 local eb CensusEB

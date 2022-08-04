@@ -65,12 +65,22 @@ gen negpoor = - poor
 tempfile thetruth
 save `thetruth'
 
+//bring in pop size
+use "$dpath/h3no19.dta" if nsim==1, clear
+	_ebin nIndi, nq(50) gen(pop_rank)
+	rename Unit muni
+tempfile thepop
+save `thepop'
+
 import delimited "$inpath/results_mse.csv", clear
 	merge 1:1 muni using `thetruth', keepusing(pov_rank)
 		drop if _m!=3
 		drop _m
+	merge 1:1 muni using `thepop', keepusing(pop_rank)
+		drop if _m!=3
+		drop _m
 
-sp_groupfunction, mean(mse_*) by(muni pov_rank) 
+sp_groupfunction, mean(mse_*) by(muni pov_rank pop_rank) 
 
 local bart BART
 local eb CensusEB
@@ -106,6 +116,9 @@ replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")
 
 replace measure = "MSE"
 
+egen min = min(value), by(muni)
+gen gap = value - min
+
 tempfile mse
 save `mse'
 
@@ -113,8 +126,12 @@ import delimited "$inpath/results_bias.csv", clear
 	merge 1:1 muni using `thetruth', keepusing(pov_rank)
 		drop if _m!=3
 		drop _m
+	merge 1:1 muni using `thepop', keepusing(pop_rank)
+		drop if _m!=3
+		drop _m
 
-sp_groupfunction, mean(bias_*) by(muni pov_rank) //higher pov rank = poorer
+
+sp_groupfunction, mean(bias_*) by(muni pov_rank pop_rank) //higher pov rank = poorer
 
 local bart BART
 local eb CensusEB
@@ -148,6 +165,8 @@ gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
 replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")
 replace measure = "Bias"
+
+
 
 append using `mse', force
 

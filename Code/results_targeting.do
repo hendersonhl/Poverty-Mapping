@@ -1,6 +1,7 @@
 *==========================================
 * Program setup
 *==========================================
+/*<This code is not used for the targeting exercise>*/
 
 * Install gtools for faster sorting
 * ssc install gtools
