@@ -1,0 +1,120 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug  9 09:06:50 2022
+
+@author: Paul Corral
+
+This file runs the same XGboost but for a poverty line that yields 40% poverty
+"""
+
+# Import libraries
+import xgboost as xgb
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import cross_val_score
+from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
+import time
+
+# Directories
+inpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
+outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
+
+# Input datasets
+svy = pd.read_csv (inpath + 'svydata_python_psu.csv', header=0)
+x = pd.read_csv (inpath + 'xmatrix_python_psu.csv', header=0)
+x = x.drop('HID_automobile', axis = 1)   # HID_automobile is missing all data
+
+# Filtering covariates
+x_census = x.loc[:, x.columns.str.startswith('HID_')]
+hid = x['HID']
+
+# Choose outcome variable 
+indicator = 'poor_40' 
+
+# Parameter space
+# Note: To expand the parameter space, add the new component here, but also
+# create an entry in the model specification in the tuning function. The 
+# parameter listing is here: xgboost.readthedocs.io/en/stable/parameter.html
+space = {'n_estimators': hp.choice("n_estimators", [5, 10, 20, 30, 40, 50, 60]), 
+        'max_depth': hp.quniform("max_depth", 2, 10, 1), 
+        'colsample_bytree': hp.quniform('colsample_bytree', 0.25, 1, 0.25), 
+        'eta': hp.quniform('eta', 0.1, 0.4, 0.1)
+        }
+
+# Hyperparameter tuning function
+# Note: This function uses the currently stored y and X.
+def tuning(space):
+    model = xgb.XGBRegressor(random_state = 123, n_jobs = 1,
+        n_estimators = int(space['n_estimators']), 
+        max_depth = int(space['max_depth']),
+        colsample_bytree = space['colsample_bytree'],
+        eta = space['eta']
+        )
+    mse = -cross_val_score(model, X, y, cv = 3, scoring="neg_mean_squared_error", 
+        n_jobs = -1).mean()
+    return {'loss': mse, 'status': STATUS_OK, 'model': model}
+
+# Function for retrieving best model
+def best(trials):
+    valid = [trial for trial in trials if STATUS_OK == trial['result']['status']]
+    losses = [float(trial['result']['loss']) for trial in valid]
+    idx = np.argmin(losses)
+    best = valid[idx]
+    return best['result']['model']
+
+# Predictions
+for i in range(1,501):
+    print("Simulation number:", i)
+    y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i
+    X = pd.merge(x, y, on='HID')       # Merge y and x for simulation i
+    y = X[indicator]                   # Set y as poverty headcount
+    X = X.loc[:, X.columns.str.startswith('HID_')]  # Set X as chosen predictors
+                           
+    # Run HYPEROPT function
+    # Note: This procedure calls the y and X currently stored
+    start = time.perf_counter()   # Start timer
+    trials = Trials()
+    params = fmin(fn = tuning, space = space, algo = tpe.suggest, 
+        max_evals = 200, trials = trials)  # Run HYPEROPT
+    print(params)   # Print the best parameters
+    model = best(trials)
+    model.fit(X, y)   # Fit the best model and get predictions
+    y_pred = model.predict(x_census)
+    end = time.perf_counter()  # Stop timer
+    print(f"Iteration completed in {end - start:0.4f} seconds")
+        
+    # Save results
+    # Note: The feature importance used here is 'gain'. By design, these
+    # will sum to one.
+    name1 = 'yhat_' + str(i)
+    name2 = 'imp_' + str(i)
+    if (i==1): 
+        prediction = pd.DataFrame({name1: y_pred})
+        importance = pd.DataFrame({'variables': x_census.columns, 
+                                   name2: model.feature_importances_})
+    else:
+        prediction = pd.concat([prediction, pd.DataFrame({name1: y_pred})], axis = 1)
+        importance = pd.concat([importance, pd.DataFrame({name2: 
+                                   model.feature_importances_})], axis = 1)
+            
+# Weighted average function for aggregating to municipality level
+def weighted(x, cols, w="hhsize"):
+    return pd.Series(np.average(x[cols], weights=x[w], axis=0), cols)
+
+# Save results at PSU level
+prediction = pd.concat([hid, prediction], axis = 1)
+prediction.to_csv(outpath + 'gb_census_psu(disaggregated)_40.csv', index = False)
+            
+# Collapse to municipality level
+hhsize = pd.read_csv(inpath + 'true_psu.csv', header=0)[['HID', 'hhsize']]
+prediction = pd.merge(prediction, hhsize, on='HID')
+prediction['HID'] = (prediction['HID']/1000).astype(int)  # Fix identifier
+prediction = prediction.rename(columns={"HID": "muni"})
+cols = list(prediction)[1:-1]
+prediction = prediction.groupby(prediction.muni).apply(weighted, cols)
+
+# Save results
+prediction.to_csv(outpath + 'gb_census_psu_40.csv')
+importance.to_csv(outpath + 'gb_importance_census_psu_40.csv', index = False)
+
+
