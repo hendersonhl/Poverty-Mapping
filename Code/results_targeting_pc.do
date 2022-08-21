@@ -164,8 +164,9 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
     bart_census_mun bart_gis_mun bart_all_mun bart_census_psu ///
 	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
 	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
-	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc hyperopt_census_mun
-	
+	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc ///
+	hyperopt_census_mun gb_census_hh
+	//gb_census_hh -> XGboost household level poverty classification
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 
 	//include population
