@@ -112,7 +112,7 @@ replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
-replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")
+replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hh")
 
 replace measure = "MSE"
 
@@ -163,7 +163,7 @@ replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
-replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")
+replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hh")
 replace measure = "Bias"
 
 
