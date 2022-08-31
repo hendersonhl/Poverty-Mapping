@@ -95,8 +95,9 @@ local census Census agg.
 local gis GIS
 local all Mixed
 
+
 local models bart eb uc rf gb lasso ols hyperopt
-local types census gis all
+local types census gis all census_wc
 
 gen model_t = ""
 foreach m of local models{
@@ -113,6 +114,10 @@ replace dtype = "Census agg." if missing(dtype)
 gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
 replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hh")
+
+replace level = "PSU & Mun" if variable=="mse_gb_psu_wc"
+
+
 
 replace measure = "MSE"
 
@@ -164,9 +169,10 @@ replace dtype = "Census agg." if missing(dtype)
 gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
 replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hh")
+
+replace level = "PSU & Mun" if variable=="mse_gb_psu_wc"
+
 replace measure = "Bias"
-
-
 
 append using `mse', force
 
