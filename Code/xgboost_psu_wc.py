@@ -9,10 +9,10 @@ import time
 # Directories
 #inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
 #outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
-#inpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
-#outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
-inpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Data/'
-outpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Results/'
+inpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
+outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
+#inpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Data/'
+#outpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Results/'
 
 # Input datasets
 svy = pd.read_csv (inpath + 'svydata_python_psu.csv', header=0)
