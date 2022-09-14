@@ -3159,6 +3159,26 @@ Performance of alternative methods in terms of R-squared, MSE, bias, and
 \end_layout
 
 \begin_layout Standard
+Fig 1: R2 across sims for select models
+\end_layout
+
+\begin_layout Standard
+Fig 2: MSE for select models
+\end_layout
+
+\begin_layout Standard
+Fig 3: Bias across municipalities for select models
+\end_layout
+
+\begin_layout Standard
+fig 4: Poverty rates across simulations for select models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3192,20 +3212,16 @@ Estimates of
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3231,20 +3247,16 @@ Mean squared error across municipalities for select models
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3270,20 +3282,16 @@ Bias across municipalities for select models
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3309,7 +3317,8 @@ Poverty rates across simulations for select models
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
@@ -3341,6 +3350,30 @@ Present variable importance results
 \end_layout
 
 \begin_layout Standard
+Fig 1: R2 across sims for select models
+\end_layout
+
+\begin_layout Standard
+Fig 2: MSE for select models
+\end_layout
+
+\begin_layout Standard
+Fig 3: Bias across municipalities for select models
+\end_layout
+
+\begin_layout Standard
+fig 4: Poverty rates across simulations for select models
+\end_layout
+
+\begin_layout Standard
+Fig 5: Variable importance
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3374,16 +3407,12 @@ Estimates of
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3414,16 +3443,12 @@ s
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3453,16 +3478,12 @@ Bias across municipalities for alternative covariate specifications
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3492,16 +3513,12 @@ Poverty rates across simulations for alternative covariate specifications
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3531,7 +3548,8 @@ Variable importance
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
@@ -3560,10 +3578,30 @@ Present performance of alternative methods in terms of R-squared, MSE, bias,
 \end_layout
 
 \begin_layout Standard
+Fig 1: R2 across sims for select models
+\end_layout
+
+\begin_layout Standard
+Fig 2: MSE for select models
+\end_layout
+
+\begin_layout Standard
+Fig 3: Bias across municipalities for select models
+\end_layout
+
+\begin_layout Standard
+fig 4: Poverty rates across simulations for select models
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3593,20 +3631,16 @@ Estimates of
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3637,15 +3671,15 @@ Mean squared error across municipalities for alternative models
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 afdasdfas
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3671,20 +3705,16 @@ Bias across municipalities for alternative models
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
@@ -3710,7 +3740,8 @@ Poverty rates across simulations for alternative models
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
 
