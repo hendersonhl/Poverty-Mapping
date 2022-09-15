@@ -23,9 +23,10 @@ outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
 svy = pd.read_csv (inpath + 'svydata_python_psu.csv', header=0)
 x = pd.read_csv (inpath + 'xmatrix_python_psu.csv', header=0)
 x = x.drop('HID_automobile', axis = 1)   # HID_automobile is missing all data
+x = x.drop('mun_automobile', axis = 1)   # mun_automobile is missing all data
 
 # Filtering covariates
-x_census = x.loc[:, x.columns.str.startswith('HID_')]
+x_census = x.loc[:, x.columns.str.startswith('HID_')|x.columns.str.startswith('mun_']
 hid = x['HID']
 
 # Choose outcome variable 
@@ -68,7 +69,7 @@ for i in range(1,501):
     y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i
     X = pd.merge(x, y, on='HID')       # Merge y and x for simulation i
     y = X[indicator]                   # Set y as poverty headcount
-    X = X.loc[:, X.columns.str.startswith('HID_')]  # Set X as chosen predictors
+    X = X.loc[:, X.columns.str.startswith('HID_')|X.columns.str.startswith('mun_')]  # Set X as chosen predictors
                            
     # Run HYPEROPT function
     # Note: This procedure calls the y and X currently stored
