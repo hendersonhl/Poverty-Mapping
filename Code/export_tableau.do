@@ -7,6 +7,8 @@ clear all
 set more off
 if (lower("`c(username)'")=="wb378870")        global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
 if (lower("`c(username)'")=="hendersonhl")	   global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
+if (lower("`c(username)'")=="paul corral")        global main "C:\Users\Paul Corral\Documents\GitHub\Poverty-Mapping\"
+
 global inpath  "$main/Results"
 global outpath "$main/Results"
 global dpath   "$main/Data"
@@ -108,7 +110,7 @@ gen dtype = ""
 foreach d of local types{
 	replace dtype = "``d''" if regexm(variable,"_`d'")
 }
-replace dtype = "Census microdata" if missing(dtype) & regexm(variable,"eb")
+replace dtype = "Census microdata" if missing(dtype) & (regexm(variable,"eb")|regexm(variable,"hh"))
 replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
@@ -163,7 +165,7 @@ gen dtype = ""
 foreach d of local types{
 	replace dtype = "``d''" if regexm(variable,"_`d'")
 }
-replace dtype = "Census microdata" if missing(dtype) & regexm(variable,"eb")
+replace dtype = "Census microdata" if missing(dtype) & (regexm(variable,"eb")|regexm(variable,"hh"))
 replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
