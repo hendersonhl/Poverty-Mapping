@@ -16,6 +16,11 @@ outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
 # Input datasets
 census = pd.read_stata(inpath + 'census_trim.dta', convert_categoricals=True) # census data at hh, psu(HID), and mun level
 #census = census.head(10000)
+inpath = 'C:/Users/wb548031/Documents/xgboost/01_data/'
+outpath = 'C:/Users/wb548031/Documents/xgboost/03_results/'
+
+# Input datasets
+census = pd.read_stata(inpath + 'census_trim.dta') # census data at hh, psu(HID), and mun level
 census = census.rename(columns={'HID_mun':'muni'})  # renaming to make more sense
 xmat = pd.read_stata(inpath + 'xmatrix_python_mun.dta') # census and GIS covariates at mun level
 xmat = xmat.rename(columns={'mimun': 'muni'})       # renaming so we can merge afterwards
