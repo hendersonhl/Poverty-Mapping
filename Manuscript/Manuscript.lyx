@@ -11,11 +11,11 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
+\font_roman "lmodern" "default"
 \font_sans "default" "default"
 \font_typewriter "default" "default"
 \font_math "auto" "auto"
-\font_default_family default
+\font_default_family rmdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
@@ -28,9 +28,18 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
-\spacing double
-\use_hyperref false
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry true
 \use_package amsmath 1
@@ -63,8 +72,8 @@
 \bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \is_math_indent 0
 \math_numbering_side default
 \quotes_style english
@@ -1388,125 +1397,6 @@ Note that any regression of this form can only be estimated for the sampled
 \end_inset
 
  for the above regression can be written as follows:
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Do you think we can link this to the Fay Herriot literature? In essence
- what we want is the best estimator for a given area's poverty rate: 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-y_{i}^{a}=x'_{i}\beta+u_{i}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $x'_{i}\beta$
-\end_inset
-
- is the predicted poverty rate, 
-\begin_inset Formula $y_{i}^{p}=x'_{i}\beta$
-\end_inset
-
-, and 
-\begin_inset Formula $u_{i}$
-\end_inset
-
- are the area effects since they represent unexplained heterogeneity between
- areas.
- However, we do not have the true area's poverty rate, 
-\begin_inset Formula $y_{i}^{a}$
-\end_inset
-
-.
- All we have are the direct estimates, which are centered around the true
- values:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-y_{i}^{d}=y_{i}^{a}+e_{i}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $e_{i}$
-\end_inset
-
- are the heteroskedastic errors with variances 
-\begin_inset Formula $var(e_{i}|y_{i}^{a})=\psi_{i}$
-\end_inset
-
- and is called the sampling model.
- Note that the sampling variances are assumed to vary across areas.
-\end_layout
-
-\begin_layout Plain Layout
-Replacing the first in the second tells us that:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-y_{i}^{d}=x'_{i}\beta+u_{i}+e_{i}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Consequently, the model's true 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- is:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-R^{2}=\frac{\sigma_{d}^{2}-\sigma_{u}^{2}-\sigma_{e}^{2}}{\sigma_{d}^{2}}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-However, note that in the validations normally done the sampling error,
- 
-\begin_inset Formula $e_{i}$
-\end_inset
-
-, is ignored.
- Assume that for a given country we have 2 samples of different sizes, consequen
-tly the sampling error in the second sample will be larger.
- If everything else is equal, we would be led to believe that models conducted
- on both sets of data yield estimates of similar quality.
- However, the performance of the first model will be in reality better since
- it was performed on better quality data.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1536,6 +1426,7 @@ where
 
  thus conveys information about how much of the variance of the direct estimate
  is explained by the model-based prediction.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1555,8 +1446,11 @@ literal "false"
 \end_inset
 
 ) themselves.
- That is, model-based predictions are more appropriately assessed using
- the 
+\end_layout
+
+\begin_layout Standard
+That is, model-based predictions are more appropriately assessed using the
+ 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -1905,7 +1799,6 @@ literal "false"
 \end_inset
 
  values.
- 
 \end_layout
 
 \end_inset
@@ -2172,7 +2065,7 @@ where the first term on the right-hand side of the above captures the variance
 
  and the second term captures the (squared) bias.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 See 
@@ -2192,7 +2085,7 @@ literal "false"
 \end_layout
 
 \begin_layout Subsection
-Small area estimation
+Unit-level small area estimation
 \end_layout
 
 \begin_layout Standard
@@ -2308,18 +2201,18 @@ It is evident that the dependent variable of the model is not the poverty
  Instead, the method attempts to replicate the welfare distribution based
  on an assumed data generating process.
  The parameters obtained from the model fit using the household survey data
- are then applied to the census data.
+ are then applied to the census data, including simulated errors.
  From the simulated welfare vector in the census it is possible to obtain
  estimates of any welfare indicator, not just poverty headcount rates.
 \end_layout
 
 \begin_layout Standard
-One major aspect of concern for small area estimation are the estimates
+One major aspect of concern for small area estimation is the estimation
  of noise.
  A statistical agency in a given country may seek to undertake a small area
  estimation application because the quality of the estimates derived from
- survey data may not be sufficiently precise or may not even be possible
- since the area was not sampled.
+ survey data may not be sufficiently precise or estimates may not even be
+ possible since the area was not sampled.
  Hence, a big concern surrounding small area estimation is the estimation
  of MSEs for each area's estimate.
  Estimates of noise are obtained via bootstrap replications where the model's
@@ -2408,7 +2301,7 @@ literal "false"
 \end_inset
 
  and shown to be flawed.
- However, since it does offer certain advantages it is included here for
+ However, since it does offer certain advantages, it is included here for
  the sake of comparison between methods which can be applied for off-census
  years.
 \end_layout
@@ -3144,6 +3037,125 @@ An additional variation to usual design based simulations is done here.
  
 \end_layout
 
+\begin_layout Standard
+As noted in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Validation-methods-for"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure often used to assess the quality of machine learning based estimates
+ is downward biased.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:R2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ obtained in all 500 sets of estimates.
+ The true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ estimates across methods are quite similar with CensusEB estimates yielding
+ the highest values.
+ Nevertheless, if we were to assess these models using the direct estimates
+ (i.e.
+ what is normally done since true estimates are not available) we would
+ come away with a different perception about the quality of these estimates.
+ The median 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ with direct estimates is lowest for XGboost estimates and highest for unit-cont
+ext models.
+ Consequently, under the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ metric often used to evaluate models we would pick the model which in reality
+ is the worst performing.
+\end_layout
+
+\begin_layout Standard
+Assessing models based on their MSE and bias is usually preferable.
+ This is because under small area estimation the model's overall performance
+ is not necessarily the best reflection of the method's prowess.
+ Since the goal is to obtain relatively accurate estimates of poverty for
+ 
+\emph on
+each
+\emph default
+ area we assess at the municipality level the bias and MSE of the different
+ methods.
+ Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mean-squared-error "
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bias-across-municipalities"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ present the MSE and bias of each method's municipality level estimates.
+ The box-plots show that under the Mexican data, the machine learning approach
+ of XGboost does a very solid job with an empirical MSE which rivals and
+ maybe supersedes the one of CensusEB estimates.
+ XGboost estimates are also far superior to those obtained under unit-context
+ models.
+ The empirical bias of CensusEB and XGboost methods is also closely aligned,
+ suggesting that under the Mexican data used either method could be chosen.
+ Also, evident is the fact that there is a downward bias in the unit-context
+ models.
+ The downward bias of the method is due to it not properly replicating the
+ welfare distribution.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A much richer discussion of the unit-context method can be found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map,corral2022guidelines"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
 \begin_layout Itemize
 Introduce objective: To understand the performance of the standard implementatio
 n (i.e., ML with remotely-sensed covariates)
@@ -3159,26 +3171,6 @@ Performance of alternative methods in terms of R-squared, MSE, bias, and
 \end_layout
 
 \begin_layout Standard
-Fig 1: R2 across sims for select models
-\end_layout
-
-\begin_layout Standard
-Fig 2: MSE for select models
-\end_layout
-
-\begin_layout Standard
-Fig 3: Bias across municipalities for select models
-\end_layout
-
-\begin_layout Standard
-fig 4: Poverty rates across simulations for select models
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3187,7 +3179,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename s5_rsquared.pdf
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig_R2_comp1.png
 	lyxscale 40
 	scale 65
 
@@ -3205,7 +3197,9 @@ Estimates of
 \end_inset
 
  across simulations for select models
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:R2"
 
 \end_inset
 
@@ -3217,7 +3211,12 @@ Estimates of
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -3226,7 +3225,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename s5_mse.pdf
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
 	lyxscale 40
 	scale 65
 
@@ -3240,7 +3239,9 @@ status collapsed
 
 \begin_layout Plain Layout
 Mean squared error across municipalities for select models
-\end_layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mean-squared-error "
 
 \end_inset
 
@@ -3252,7 +3253,12 @@ Mean squared error across municipalities for select models
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -3261,7 +3267,7 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename s5_bias.pdf
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_Bias.png
 	lyxscale 40
 	scale 65
 
@@ -3274,7 +3280,14 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bias across municipalities for select models
+Bias across municipalities for select mo
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bias-across-municipalities"
+
+\end_inset
+
+dels
 \end_layout
 
 \end_inset
@@ -3286,12 +3299,16 @@ Bias across municipalities for select models
 
 
 \end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
 
 \begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -3329,6 +3346,12 @@ Poverty rates across simulations for select models
 
 \begin_layout Section
 Alternative covariates
+\end_layout
+
+\begin_layout Standard
+The models from the previous section rely solely on census derived data.
+ Microdata in the case of CensusEB estimates, and on PSU and municipality
+ level aggregates in the case of unit-context and XGboost estimates.
 \end_layout
 
 \begin_layout Itemize

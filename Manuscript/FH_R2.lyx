@@ -1,0 +1,470 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{stata}
+\linespread{1.25}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "lmodern" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\float_placement h
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex-natbib
+\cite_engine_type authoryear
+\biblatex_bibstyle apa
+\biblatex_citestyle apa
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 2.54cm
+\topmargin 2.54cm
+\rightmargin 2.54cm
+\bottommargin 2.54cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+The coefficient of determination or 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is the most commonly used metric for validating poverty maps generated
+ using machine-learning methods.
+ The standard validation procedure can be summarized in four steps: (1)
+ using survey data calculate a poverty measure for the geographic unit of
+ interest (e.g., village or cluster) and merge the poverty measure with features
+ from some passively-collected data source (e.g., mobile phone data or satellite
+ imagery); (2) randomly split the dataset into training and testing subsamples;
+ (3) fit a machine-learning model to the training data and use the model
+ to predict poverty in the testing data; (4) calculate the out-of-sample
+ 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by regressing the observed poverty measures from the testing data on the
+ predicted poverty measures for the same geographic units.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Rather than relying on a single training-testing split of the data, many
+ studies use cross-validation and report the average 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across various training-testing splits.
+ For examples of the above procedure, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+ Note that a few studies use a similar procedure, but fit the machine-learning
+ model to household-level data and then aggregate the model's predictions
+ to the geographic unit of interest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting,hersh2021open,aiken2022machine"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ It is important to emphasize that the poverty measures used in this procedure
+ are often direct, sample-based estimates rather than the true poverty measures
+ for the regions of interest.
+ In what follows, we critically assess this validation procedure and discuss
+ some alternative validation metrics.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ denote the actual or true poverty indicator for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ geographical entity.
+ Further, let 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+ denote the direct estimate and model-based prediction of the poverty indicator,
+ respectively.
+ The standard method for assessing the predictive performance of model-based
+ poverty estimates calculates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression like the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=\alpha+\beta y_{i}^{p}+\varepsilon_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are the regression coefficients and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ represents the error term.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that any regression of this form can only be estimated for the sampled
+ regions with direct estimates.
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for the above regression can be written as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\varepsilon}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{d}^{2}$
+\end_inset
+
+ is the variance of the direct estimate and 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ thus conveys information about how much of the variance of the direct estimate
+ is explained by the model-based prediction.
+ 
+\end_layout
+
+\begin_layout Standard
+While unbiased, direct estimates can be imprecise estimates of true poverty
+ indicators 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corral2020pull"
+literal "false"
+
+\end_inset
+
+.
+ Ideally, one would assess the performance of model-based predictions on
+ the basis of the true poverty indicators (
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+) themselves.
+\end_layout
+
+\begin_layout Standard
+In similar fashion to the 
+\emph on
+linking model
+\emph default
+ used in Fay-Herrtiot models (Fay and Herriot XXXX) we assume that the true
+ indicator (
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+) is linearly related to a vector of area-level covariates (
+\begin_inset Formula $\mathbf{x}_{i}$
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{a}=\mathbf{x}_{i}^{'}\beta+u_{i}\label{eq:true_fh}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mathbf{x}_{i}^{'}\beta$
+\end_inset
+
+ is the predicted poverty rate, 
+\begin_inset Formula $y_{i}^{p}=\mathbf{x}_{i}^{'}\beta$
+\end_inset
+
+, and 
+\begin_inset Formula $u_{i}$
+\end_inset
+
+ are the area effects since they represent unexplained heterogeneity between
+ areas.
+ However, we do not have the true area's poverty rate, 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+.
+ All we have are the direct estimates, which are centered around the true
+ values:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=y_{i}^{a}+\varepsilon{}_{i}\label{eq:direct_fh}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\varepsilon_{i}$
+\end_inset
+
+ are the heteroskedastic errors with variances 
+\begin_inset Formula $var(\varepsilon_{i}|y_{i}^{a})=\psi_{i}$
+\end_inset
+
+ and is called the sampling model, for simplicity we assume that homoskedastic
+ errors and thus 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ .
+ Note that the sampling variances are assumed to vary across areas.
+\end_layout
+
+\begin_layout Standard
+Replacing equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:true_fh"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:direct_fh"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ tells us that:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y_{i}^{d}=x'_{i}\beta+u_{i}+e_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Consequently, the model's true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+R^{2}=\frac{\sigma_{d}^{2}-\sigma_{u}^{2}-\sigma_{e}^{2}}{\sigma_{d}^{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+However, note that in the validations normally done the sampling error,
+ 
+\begin_inset Formula $e_{i}$
+\end_inset
+
+, is ignored.
+ Assume that for a given country we have 2 samples of different sizes, consequen
+tly the sampling error in the second sample will be larger.
+ If everything else is equal, we would be led to believe that models conducted
+ on both sets of data yield estimates of similar quality.
+ However, the performance of the first model will be in reality better since
+ it was performed on better quality data.
+\end_layout
+
+\end_body
+\end_document
