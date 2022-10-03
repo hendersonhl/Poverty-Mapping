@@ -539,12 +539,12 @@ literal "false"
 
 \end_inset
 
- Extreme gradient boosting (EGB) is a particularly popular implementation
+ Extreme gradient boosting (XGboost) is a particularly popular implementation
  of gradient boosting that uses classification and regression trees as the
  base models or weak learners.
- The popularity of EGB is due to the fact that it is fast, scalable, and
- has been shown to outperform competing methods across a wide range of problems
- 
+ The popularity of XGboost is due to the fact that it is fast, scalable,
+ and has been shown to outperform competing methods across a wide range
+ of problems 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "chen2016xgboost"
@@ -579,12 +579,12 @@ For example, for a continuous explanatory variable, one determines whether
  Any child node that is not further split is referred to as a terminal node
  or leaf, and each leaf is associated with a parameter that provides a predictio
 n for the subsample associated with that leaf.
- For any given observation, the ensemble prediction used by EGB is the sum
- of that observation's predictions across all trees in the ensemble.
+ For any given observation, the ensemble prediction used by XGboost is the
+ sum of that observation's predictions across all trees in the ensemble.
 \end_layout
 
 \begin_layout Standard
-In what follows, we discuss the key features of the EGB algorithm, drawing
+In what follows, we discuss the key features of the XGboost algorithm, drawing
  on the presentation provided in 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -636,8 +636,8 @@ where the trees are indexed by
 \end_inset
 
 .
- To build the trees used in the model, EGB minimizes the following regularized
- objective function:
+ To build the trees used in the model, XGboost minimizes the following regulariz
+ed objective function:
 \end_layout
 
 \begin_layout Standard
@@ -671,7 +671,7 @@ where
 \end_layout
 
 \begin_layout Standard
-EGB uses the following specification of the regularization term: 
+XGboost uses the following specification of the regularization term: 
 \end_layout
 
 \begin_layout Standard
@@ -755,8 +755,8 @@ where
 \end_inset
 
  that greedily minimizes the objective function at that iteration.
- More specifically, EGB uses a second-order Taylor series expansion to approxima
-te the loss function at any given iteration:
+ More specifically, XGboost uses a second-order Taylor series expansion
+ to approximate the loss function at any given iteration:
 \end_layout
 
 \begin_layout Standard
@@ -797,7 +797,7 @@ where
 \end_layout
 
 \begin_layout Standard
-The EGB algorithm is based on a re-expression of Eq.
+The XGboost algorithm is based on a re-expression of Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
@@ -918,9 +918,9 @@ which gives us the minimal objective function for a given tree structure.
  Ideally, one would enumerate all possible tree structures and then use
  the tree associated with the smallest value of the (minimized) objective
  function, but this is often intractable.
- EGB instead implements an alternative approach that seeks to minimize the
- objective at a given iteration by greedily optimizing one level of the
- tree at a time.
+ XGboost instead implements an alternative approach that seeks to minimize
+ the objective at a given iteration by greedily optimizing one level of
+ the tree at a time.
 \end_layout
 
 \begin_layout Standard
@@ -981,7 +981,7 @@ right
 where the first two terms in parentheses capture the loss associated with
  the child nodes and the third term captures the loss associated with the
  parent node being split.
- When splitting a node in any given tree, EGB then evaluates Eq.
+ When splitting a node in any given tree, XGboost then evaluates Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
@@ -1010,7 +1010,7 @@ exact greedy algorithm.
 \begin_inset Quotes erd
 \end_inset
 
- EGB also has an approximate algorithm that can be used for large datasets.
+ XGboost also has an approximate algorithm that can be used for large datasets.
  See 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1024,11 +1024,11 @@ literal "false"
 
 \end_inset
 
- EGB then continues to split nodes in a given tree until a stopping criterion
- is met (e.g., a user-specified maximum tree depth).
- Once a given tree is built, EGB then moves to building the next tree in
- the ensemble and continues to do so until reaching the user-specified number
- of trees to build.
+ XGboost then continues to split nodes in a given tree until a stopping
+ criterion is met (e.g., a user-specified maximum tree depth).
+ Once a given tree is built, XGboost then moves to building the next tree
+ in the ensemble and continues to do so until reaching the user-specified
+ number of trees to build.
 \end_layout
 
 \begin_layout Standard
@@ -3156,20 +3156,6 @@ literal "false"
  
 \end_layout
 
-\begin_layout Itemize
-Introduce objective: To understand the performance of the standard implementatio
-n (i.e., ML with remotely-sensed covariates)
-\end_layout
-
-\begin_layout Itemize
-Discuss reference estimates (i.e., direct estimates and empirical best)
-\end_layout
-
-\begin_layout Itemize
-Performance of alternative methods in terms of R-squared, MSE, bias, and
- poverty reduction
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 wide false
@@ -3300,20 +3286,64 @@ dels
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Note Note
-status open
+\begin_layout Section
+Alternative covariates
+\end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
+The models from the previous section rely solely on census derived data.
+ Microdata in the case of CensusEB estimates, and on PSU and municipality
+ level aggregates in the case of unit-context and XGboost estimates.
+ In most of the machine learning based approaches in the literature (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "blumenstock2015predicting,chi2021micro,chi2022microestimates,lee2020high"
+literal "false"
+
+\end_inset
+
+) the authors rely solely on satellite derived covariates.
+ Here we compare how gradient boosted methods perform under different sets
+ of candidate covariates.
+\end_layout
+
+\begin_layout Standard
+Due to privacy restrictions, the Mexican Intracensal survey is only geographical
+ly linked at the municipality level.
+ This implies that models where only GIS covariates are used can only be
+ fit at the municipality level.
+ Consequently, we also fit the model using only census covariates at the
+ municipality level.
+ As can be seen in figure
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mun fits"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, there is not much loss in terms of bias or MSE when fitting at the municipalit
+y level.
+ The bias and noise is quite similar, albeit a bit worse, than the estimates
+ where the fitting is done at the PSU level and results are aggregated to
+ the municipality level.
+ Consequently, the XGboost estimates fitted at the municipality level using
+ only census covariates serves as our benchmark.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename s5_poverty.pdf
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
 	lyxscale 40
 	scale 65
 
@@ -3326,8 +3356,10 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Poverty rates across simulations for select models
-\end_layout
+Mean squared error across municipalities for select models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mun fits"
 
 \end_inset
 
@@ -3342,16 +3374,6 @@ Poverty rates across simulations for select models
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Alternative covariates
-\end_layout
-
-\begin_layout Standard
-The models from the previous section rely solely on census derived data.
- Microdata in the case of CensusEB estimates, and on PSU and municipality
- level aggregates in the case of unit-context and XGboost estimates.
 \end_layout
 
 \begin_layout Itemize
