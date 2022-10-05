@@ -3335,6 +3335,44 @@ y level.
 \end_layout
 
 \begin_layout Standard
+Figure XXXX illustrates how XGboost fitted models at the municipality level
+ (i.e.
+ LHS is municipal poverty rate) track nicely the models fit at the PSU level
+ (i.e.
+ the LHS is PSU poverty rate).
+ The bias and the MSE of the models are well aligned and little information
+ is lost by doing the fit at the municipality level.
+ This is an encouraging result since matching PSUs across census years is
+ not always possible.
+ Given that the municipality level XGboost with census aggregates is well
+ aligned to the PSU level XGboost, GIS models are fit at the municipality
+ level and are compared to the municipality level XGboost with census aggregates.
+\end_layout
+
+\begin_layout Standard
+Models where only GIS covariates are used are less than stellar and appear
+ to be quite noisy (Figure XXXX).
+ This suggests that the covariates are not providing much useful information
+ towards describing variation in poverty across municipalities.
+ Information from census aggregates such as asset ownership, education levels,
+ employment rates, and others are notably much better at explaining poverty
+ variability across space.
+\end_layout
+
+\begin_layout Standard
+Finally, we combine GIS covariates and census aggregates to evaluate how
+ do the GIS covariates compare to census aggregates in the model's importance.
+ Figure XXXX shows that the resulting estimates where candidate covariates
+ include census and GIS covariates are slightly noisier than estimates obtained
+ using only census aggregates.
+ 
+\end_layout
+
+\begin_layout Standard
+<Something about how they don't differ much by deciles....>
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
