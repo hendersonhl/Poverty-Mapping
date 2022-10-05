@@ -46,7 +46,8 @@ gen dtype = ""
 foreach d of local types{
 	replace dtype = "``d''" if regexm(variable,"_`d'_")
 }
-replace dtype = "Census microdata" if missing(dtype)
+replace dtype = "Census microdata" if missing(dtype) & regexm(variable,"eb")
+replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
 replace level = "Municipality" if regexm(variable,"mun")
@@ -54,6 +55,13 @@ replace level = "HH level" if missing(level)
 
 gen true = "True" if regexm(variable,"true")
 replace true = "Direct" if missing(true)
+
+gen var2 = subinstr(variable,"_true","",.)
+replace var2 = subinstr(var2,"_direct","",.)
+
+drop variable
+//reshape wide value, i(var2 model_t dtype level sim_sample) j(true) string
+ 
 
 export delimited using "$outpath/results_for_tableau_R2.csv", replace 
 
