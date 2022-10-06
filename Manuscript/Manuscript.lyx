@@ -3160,19 +3160,7 @@ literal "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig_R2_comp1.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3197,6 +3185,40 @@ name "fig:R2"
 
 \end_layout
 
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig_R2_comp1.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ between direct or true estimates against each of the 500 estimates obtained
+ from the 500 samples.
+ Notice how when comparing against the true poverty rates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is larger than the one compared to direct estimates.
+ Also, the method with the highest 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ when comparing against direct estimates is not the same as the one comparing
+ against the true values.
+\end_layout
+
 \end_inset
 
 
@@ -3209,22 +3231,10 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error across municipalities for select models
+Empirical mean squared error across municipalities for select models
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Mean-squared-error "
@@ -3239,6 +3249,28 @@ name "fig:Mean-squared-error "
 
 \end_layout
 
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) for each
+ municipality under each method.
+ The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+ 
+\end_layout
+
 \end_inset
 
 
@@ -3249,18 +3281,6 @@ name "fig:Mean-squared-error "
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_Bias.png
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -3279,6 +3299,40 @@ dels
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_Bias.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias for each municipality under
+ each method.
+ The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+ It also shows how methods where the dependent variable is household level
+ welfare and covariates are only area level covariates fails to properly
+ replicate the welfare distribution and thus is downward biased as noted
+ in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \end_inset
@@ -3314,34 +3368,24 @@ ly linked at the municipality level.
  fit at the municipality level.
  Consequently, we also fit the model using only census covariates at the
  municipality level.
- As can be seen in figure
+ Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Mun fits"
+reference "fig:mse_bias_mun_psu"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
-, there is not much loss in terms of bias or MSE when fitting at the municipalit
-y level.
- The bias and noise is quite similar, albeit a bit worse, than the estimates
- where the fitting is done at the PSU level and results are aggregated to
- the municipality level.
- Consequently, the XGboost estimates fitted at the municipality level using
- only census covariates serves as our benchmark.
- 
-\end_layout
-
-\begin_layout Standard
-Figure XXXX illustrates how XGboost fitted models at the municipality level
- (i.e.
+ illustrates how XGboost fitted models at the municipality level (i.e.
  LHS is municipal poverty rate) track nicely the models fit at the PSU level
  (i.e.
  the LHS is PSU poverty rate).
- The bias and the MSE of the models are well aligned and little information
- is lost by doing the fit at the municipality level.
+ The bias and noise of both models is quite similar, albeit slightly worse
+ when fit at the municipality level than the estimates where the fitting
+ is done at the PSU level and results are aggregated to the municipality
+ level.
  This is an encouraging result since matching PSUs across census years is
  not always possible.
  Given that the municipality level XGboost with census aggregates is well
@@ -3351,7 +3395,17 @@ Figure XXXX illustrates how XGboost fitted models at the municipality level
 
 \begin_layout Standard
 Models where only GIS covariates are used are less than stellar and appear
- to be quite noisy (Figure XXXX).
+ to be quite noisy (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_mun_psu_all"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
  This suggests that the covariates are not providing much useful information
  towards describing variation in poverty across municipalities.
  Information from census aggregates such as asset ownership, education levels,
@@ -3361,15 +3415,28 @@ Models where only GIS covariates are used are less than stellar and appear
 
 \begin_layout Standard
 Finally, we combine GIS covariates and census aggregates to evaluate how
- do the GIS covariates compare to census aggregates in the model's importance.
- Figure XXXX shows that the resulting estimates where candidate covariates
- include census and GIS covariates are slightly noisier than estimates obtained
- using only census aggregates.
- 
-\end_layout
+ the GIS covariates compare to census aggregates in the model's importance.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_mun_psu_all"
+plural "false"
+caps "false"
+noprefix "false"
 
-\begin_layout Standard
-<Something about how they don't differ much by deciles....>
+\end_inset
+
+ also shows that the resulting estimates where candidate covariates include
+ census and GIS covariates (labelled 
+\begin_inset Quotes eld
+\end_inset
+
+Mixed
+\begin_inset Quotes erd
+\end_inset
+
+) are slightly noisier than estimates obtained using only census aggregates.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3379,25 +3446,73 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
-	lyxscale 40
-	scale 65
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_mun_psu"
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The figure shows how, under the Mexican data, there is limited loss in
+ bias and noise when the model is fit at the municipality level instead
+ of at the PSU level and estimates aggregated to the municipality level.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error across municipalities for select models
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Mun fits"
+name "fig:mse_bias_mun_psu_all"
 
 \end_inset
 
@@ -3409,23 +3524,37 @@ name "fig:Mun fits"
 
 \end_layout
 
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun_GIS_mix.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun_GIS_mix.png
+	scale 60
+
 \end_inset
 
 
 \end_layout
 
-\begin_layout Itemize
-Introduce objective: To understand how different covariate specifications
- affect performance
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The figure shows how, under the Mexican data, there is limited loss in
+ bias and noise when the model is fit at the municipality level instead
+ of at the PSU level and estimates aggregated to the municipality level.
 \end_layout
 
-\begin_layout Itemize
-Discuss alternative covariate specification (e.g., census versus remotely-sensed
- covariates)
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Present performance comparisons
+
 \end_layout
 
 \begin_layout Itemize
@@ -3433,212 +3562,7 @@ Present variable importance results
 \end_layout
 
 \begin_layout Standard
-Fig 1: R2 across sims for select models
-\end_layout
-
-\begin_layout Standard
-Fig 2: MSE for select models
-\end_layout
-
-\begin_layout Standard
-Fig 3: Bias across municipalities for select models
-\end_layout
-
-\begin_layout Standard
-fig 4: Poverty rates across simulations for select models
-\end_layout
-
-\begin_layout Standard
 Fig 5: Variable importance
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s6_rsquared.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Estimates of 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- across simulations using alternative covariate specifications
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s6_mse.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error across municipalities for alternative covariate specification
-s
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s6_bias.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias across municipalities for alternative covariate specifications
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s5_poverty.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Poverty rates across simulations for alternative covariate specifications
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s6_importance.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Variable importance
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
