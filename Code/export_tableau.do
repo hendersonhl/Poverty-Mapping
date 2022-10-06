@@ -14,6 +14,21 @@ global outpath "$main/Results"
 global dpath   "$main/Data"
 
 
+
+*===============================================================================
+// Prep data for Tableau - Only GIS and census model, it's the only one
+// we care about
+*===============================================================================
+import delimited "$inpath/gb_importance_all_mun.csv", clear
+
+sp_groupfunction, mean(imp_*) by(variables)
+
+groupfunction, mean(value) by(variables)
+gsort -value
+
+export delimited "$outpath/results_for_tableau_importance.csv", replace
+
+
 *===============================================================================
 // Prep data for Tableau
 *===============================================================================
