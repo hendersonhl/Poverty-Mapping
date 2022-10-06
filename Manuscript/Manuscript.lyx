@@ -390,46 +390,39 @@ literal "false"
  This, in our view, is also a much more thorough validation approach than
  the one often used in the literature which often relies on aggregate measures
  such as a coefficient of determination.
- In section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Validation-methods-for"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- this is discussed and we suggest the potential flaws of relying on such
- a measure.
+ 
 \end_layout
 
 \begin_layout Standard
-The findings are surprising...
+The findings illustrate the pitfalls of validating, through an aggregate
+ measure like the coefficient of determination, model based estimates against
+ direct estimates (i.e.
+ those derived from the survey) and how doing so can lead to choosing the
+ worst performing model.
+ Additionally, we present evidence that machine learning based methods with
+ models fit at the area level perform very well and are comparable to traditiona
+l small area estimates which require census microdata.
+ We also show the importance of having covariates that adequately explain
+ poverty, and how publicly available satellite derived covariates perform
+ worse than census aggregates under the Mexican data used.
+ The findings are important since across the globe programs are targeted
+ based on results from poverty maps and choosing the right method can lead
+ to millions of dollars in savings or, perhaps more important, more people
+ being lifted out of poverty.
+ Additionally, given the scarce data landscape in many countries the findings
+ present evidence that even without a contemporaneous census and survey
+ poverty maps can still yield solid poverty reduction.
 \end_layout
 
-\begin_layout Itemize
-Motivation
-\end_layout
-
-\begin_layout Itemize
-Research question
-\end_layout
-
-\begin_layout Itemize
-Brief literature review
-\end_layout
-
-\begin_layout Itemize
-Contribution of the paper
-\end_layout
-
-\begin_layout Itemize
-Overview of results
-\end_layout
-
-\begin_layout Itemize
-Outline of the paper
+\begin_layout Standard
+The paper proceeds to present the methods and how these are often validated.
+ We then present how the targeting efficiency of methods will be evaluated.
+ Then we present the Mexican Intracensal survey and how it was converted
+ into census data and how 500 survey samples were taken from the data for
+ validations.
+ We then present performance results of the various methods.
+ The paper closes with conclusions and a discussion of the practical uses
+ of poverty maps.
 \end_layout
 
 \begin_layout Section
@@ -2300,7 +2293,7 @@ literal "false"
 
 \end_inset
 
- and shown to be flawed.
+ and shown to be flawed since it yields heavily biased estimates.
  However, since it does offer certain advantages, it is included here for
  the sake of comparison between methods which can be applied for off-census
  years.
@@ -3160,7 +3153,7 @@ literal "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
