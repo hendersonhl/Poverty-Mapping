@@ -2253,7 +2253,17 @@ literal "false"
 
 ).
  The basic idea behind the approach is that no household level covariates
- are used.
+ are used in the model presented in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  This way there is no need for the covariates in the survey to match the
  moments of those from the census.
  Nguyen (
@@ -2294,196 +2304,39 @@ literal "false"
 \end_inset
 
  and shown to be flawed since it yields heavily biased estimates.
- However, since it does offer certain advantages, it is included here for
- the sake of comparison between methods which can be applied for off-census
- years.
-\end_layout
-
-\begin_layout Subsection
-Targeting efficiency of the methods
-\end_layout
-
-\begin_layout Standard
-While understanding the noise of the poverty estimates is useful, the ultimate
- concern with poverty mapping is to understand how different methodological
- choices affect poverty alleviation.
- Similar to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
-, we propose simulating a hypothetical poverty-alleviation program that
- distributes resources to households according to a given poverty map.
+ The authors discourage the use of the method since it fails to yield unbiased
+ estimates and practitioners are unlikely to know when the method has yielded
+ estimates of good quality.
+ However, since it does offer certain advantages,
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-See 
+The advantage is that it can be used in off-census years, although 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "yeh2020using"
+key "corral2022guidelines"
 literal "false"
 
 \end_inset
 
-,
+ present evidence that Fay-Herriot area level (
 \begin_inset CommandInset citation
-LatexCommand citet
-key "chi2022microestimates"
+LatexCommand citealt
+key "fay1979estimates"
 literal "false"
 
 \end_inset
 
-, and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "aiken2022machine"
-literal "false"
-
-\end_inset
-
- for examples of other studies that have conducted targeting simulations.
- 
+) models outperform unit-context models.
+ An additional advantage is that it may be applied in areas where the sampling
+ variance is equal to 0, something not feasible with Fay-Herriot models.
 \end_layout
 
 \end_inset
 
- In addition to the poverty estimates, the procedure applied here requires
- true household-level incomes from a census-type dataset.
- The procedure is as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace -15bp
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the true household-level per capita incomes, calculate the poverty
- headcount and poverty gap for the country as a whole for some chosen poverty
- line.
- Using the poverty gap measure, determine the budget required to completely
- eradicate poverty.
- Calculate an individual-level transfer amount by dividing the total budget
- by the number of people living in poverty.
- 
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the true poverty rates for each municipality we order the geographical
- entities according to their estimated poverty headcounts, from most to
- least poor.
- For the poorest region, augment the per capita income of all household's
- by an amount equal to the transfer (i.e., each household receives an amount
- equal to the transfer times the number of household members).
- Continue this distribution procedure for the second poorest region, the
- third poorest region, and so on until there is not enough resources to
- cover all households in a given region.
- For the marginal region, distribute the remaining budget equally among
- individuals in that region.
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the post-transfer household incomes, calculate an updated poverty
- headcount to assess the effects of the distribution scheme on poverty alleviati
-on.
- Note that all of this is done with the census which has an income measure.
- This process yields the best case scenario for geographical targeting where
- transfers are given to the poorest locations, where poverty is determined
- by the headcount rate.
-\end_layout
-
-\begin_layout Standard
-The procedure detailed above is then repeated with the estimates obtained
- under each method.
- The rankings are determined by the estimates obtained under a given method,
- but the transfer amount is then applied to the true income measure in the
- census to calculate the impact of the targeted transfer.
- 
-\end_layout
-
-\begin_layout Standard
-The procedure applied differs from the ideal transferring scheme detailed
- by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
-, since under the different methods all we have estimated are poverty headcount
- rates.
- Moreover, the ideal transfer proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
- is not simple to illustrate to policy makers and is seldom implemented.
- The process detailed here in reality mimics how many governments determine
- which locations to give priority for a government cash transfer scheme.
- For example, in Ghana, the Livelihood Empowerment Against Poverty Programme’s
- (LEAP) main objective is to reduce poverty by increasing consumption and
- promoting access to services and opportunities among the extreme poor and
- vulnerable.
- The program provides social cash grants to extremely poor and vulnerable
- households.
- The latest poverty map for Ghana is used as an input to rank districts
- and communities before selecting communities where the program will collect
- data to identify extreme poor households.
- 
-\end_layout
-
-\begin_layout Standard
-Another example is that of Peru.
- In Peru, small area estimates of poverty are used to determine areas that
- should be prioritized in the allocation of public funds.
- The Ministry of Finance of Peru uses the estimates to determine allocations
- to programs.
- One such program is called “Programa de Vaso de Leche” that offers a daily
- food ration to vulnerable populations, particularly children under 13 and
- pregnant mothers, with the goal of reducing food insecurity.
- Another program that makes use of small area estimates of poverty in Peru
- is the “Canon Minero” which is a program that ensures that local and regional
- governments receive funds obtained by the State from income taxes collected
- from mining activities.
- 
-\end_layout
-
-\begin_layout Standard
-During the COVID-19 crisis in Nigeria, poverty estimates at a granular geographi
-cal level were used to determine how to allocate funds from the Federal
- Government’s COVID-19 Rapid Response Registration (RRR) Cash Transfer Project
- to 1 million Nigerians.
- The RRR selected the poorest wards in the country based on the poverty
- estimates at the ward level, something that would be unlikely with the
- National Living Standards Survey (NLSS) which is only representative at
- the State level.
- Additionally, many wards in the country are not even present in the NLSS,
- consequently the need for model-based approaches toward obtaining poverty
- estimates.
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace -5bp
-\end_inset
-
-
+ it is included here for the sake of comparison between methods which can
+ be applied for off-census years.
 \end_layout
 
 \begin_layout Section
@@ -3562,6 +3415,26 @@ Fig 5: Variable importance
 Alternative models
 \end_layout
 
+\begin_layout Standard
+There are many methods beynod gradient boosting which have become popular.
+ This section seeks to test the performance of other methods to determine
+ how these methods may perform under the Mexican data.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Heath please elaborate here
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Itemize
 Introduce objective: To understand whether using different ML models affects
  performance
@@ -3595,7 +3468,7 @@ fig 4: Poverty rates across simulations for select models
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Float figure
@@ -3745,6 +3618,237 @@ Poverty rates across simulations for alternative models
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Targeting efficiency of the methods
+\end_layout
+
+\begin_layout Standard
+While understanding the noise of the poverty estimates is useful, the ultimate
+ concern with poverty mapping is to understand how different methodological
+ choices affect poverty alleviation.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+, we propose simulating a hypothetical poverty-alleviation program that
+ distributes resources to households according to a given poverty map.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other studies that have conducted targeting simulations.
+\end_layout
+
+\end_inset
+
+ In addition to the poverty estimates, the procedure applied here requires
+ true household-level incomes from a census-type dataset.
+ The procedure is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true household-level per capita incomes, calculate the poverty
+ headcount and poverty gap for the country as a whole for some chosen poverty
+ line.
+ Using the poverty gap measure, determine the budget required to completely
+ eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget
+ by the number of people living in poverty.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true poverty rates for each municipality we order the geographical
+ entities according to their estimated poverty headcounts, from most to
+ least poor.
+ For the poorest region, augment the per capita income of all household's
+ by an amount equal to the transfer (i.e., each household receives an amount
+ equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest region, the
+ third poorest region, and so on until there is not enough resources to
+ cover all households in a given region.
+ For the marginal region, distribute the remaining budget equally among
+ individuals in that region.
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the post-transfer household incomes, calculate an updated poverty
+ headcount to assess the effects of the distribution scheme on poverty alleviati
+on.
+ Note that all of this is done with the census which has an income measure.
+ This process yields the best case scenario for geographical targeting where
+ transfers are given to the poorest locations, where poverty is determined
+ by the headcount rate.
+\end_layout
+
+\begin_layout Standard
+The procedure detailed above is then repeated with the estimates obtained
+ under each method.
+ The rankings are determined by the estimates obtained under a given method,
+ but the transfer amount is then applied to the true income measure in the
+ census to calculate the impact of the targeted transfer.
+ 
+\end_layout
+
+\begin_layout Standard
+The procedure applied differs from the ideal transferring scheme detailed
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+, since under the different methods all we have estimated are poverty headcount
+ rates.
+ Moreover, the ideal transfer proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+ is not simple to illustrate to policy makers and is seldom implemented.
+ The process detailed here in reality mimics how many governments determine
+ which locations to give priority for a government cash transfer scheme.
+ For example, in Ghana, the Livelihood Empowerment Against Poverty Programme’s
+ (LEAP) main objective is to reduce poverty by increasing consumption and
+ promoting access to services and opportunities among the extreme poor and
+ vulnerable.
+ The program provides social cash grants to extremely poor and vulnerable
+ households.
+ The latest poverty map for Ghana is used as an input to rank districts
+ and communities before selecting communities where the program will collect
+ data to identify extreme poor households.
+ 
+\end_layout
+
+\begin_layout Standard
+Another example is that of Peru.
+ In Peru, small area estimates of poverty are used to determine areas that
+ should be prioritized in the allocation of public funds.
+ The Ministry of Finance of Peru uses the estimates to determine allocations
+ to programs.
+ One such program is called “Programa de Vaso de Leche” that offers a daily
+ food ration to vulnerable populations, particularly children under 13 and
+ pregnant mothers, with the goal of reducing food insecurity.
+ Another program that makes use of small area estimates of poverty in Peru
+ is the “Canon Minero” which is a program that ensures that local and regional
+ governments receive funds obtained by the State from income taxes collected
+ from mining activities.
+ 
+\end_layout
+
+\begin_layout Standard
+During the COVID-19 crisis in Nigeria, poverty estimates at a granular geographi
+cal level were used to determine how to allocate funds from the Federal
+ Government’s COVID-19 Rapid Response Registration (RRR) Cash Transfer Project
+ to 1 million Nigerians.
+ The RRR selected the poorest wards in the country based on the poverty
+ estimates at the ward level, something that would be unlikely with the
+ National Living Standards Survey (NLSS) which is only representative at
+ the State level.
+ Additionally, many wards in the country are not even present in the NLSS,
+ consequently the need for model-based approaches toward obtaining poverty
+ estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+The poverty line using the Mexican data is drawn at the 25th percentile.
+ We take the poverty gap and determine that to be our transfer budget.
+ The poverty gap is the value of money necessary to completely erradicate
+ poverty if we know who the poor are and how poor they are, and thus serves
+ as a valid transfer budget.
+ To determine the best poverty reduction we can achieve by prioritizing
+ the poorest areas we use the true poverty ranking from the census and distribut
+e to those areas until our budget runs out.
+ By doing this the best poverty rate we can achieve is of 19.9 percent.
+ 
+\end_layout
+
+\begin_layout Standard
+For each method we rank the municipalities according to the model based
+ estimates obtained.
+ Recall that under each method we have 500 sets of estimates at the municipaliti
+y level.
+ Then the transfer is given to the households in the poorest municipalities
+ until the budget runs out.
+ As noted, the amount is added to the true welfare value of the household.
+ Consequently, across simulations and across methods, the only aspect that
+ changes is the municpal ranking obtained from the model-based estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+The results of the simulation are presented in figure XXXX.
+ Considering that under the true rankings the best poverty reduction one
+ can achieve is 19.9 percent, it is surprising that even the worst performing
+ methods achieve reductions that are less than one percentage point higher.
+ The models fit at the municpality level using GIS covariates as a whole
+ are the worst performing, but still achieve a decent poverty reduction.
+ Even OLS models achieve solid results.
+ To our surprise, despite the methods inherent bias, unit-context models
+ also perform very well under this scenario.
+ Of course, the positive results observed in this case across methods could
+ be unique to the Mexican data at hand and may not replicate fully with
+ other data but in this case results are encouraging.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -5bp
 \end_inset
 
 
@@ -3752,6 +3856,10 @@ Poverty rates across simulations for alternative models
 
 \begin_layout Section
 Conclusion
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Itemize
