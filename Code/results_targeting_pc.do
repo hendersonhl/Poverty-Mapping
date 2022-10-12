@@ -229,7 +229,7 @@ foreach model of local themodels{
 }
 
 use `all', clear
-drop  model_t dtype level
+rename model variable
 local bart BART
 local eb CensusEB
 local uc Unit-Context
@@ -255,12 +255,13 @@ gen dtype = ""
 foreach d of local types{
 	replace dtype = "``d''" if regexm(variable,"_`d'")
 }
-replace dtype = "Census microdata" if missing(dtype) & (regexm(variable,"eb")|regexm(variable,"hh"))
+replace dtype = "Census microdata" if missing(dtype) & (regexm(variable,"eb")|regexm(variable,"hhid"))
+replace dtype = "Census microdata" if regexm(variable,"hhid")
 replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
-replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|regexm(variable,"census")
-replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hh")
+replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|(regexm(variable,"census")&!regexm(variable,"hhid"))
+replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hhid")
 
 replace level = "PSU & Mun" if variable=="mse_gb_psu_wc"
 
