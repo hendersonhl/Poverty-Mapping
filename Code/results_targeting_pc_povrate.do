@@ -5,6 +5,7 @@
 * Set up
 clear all
 set more off
+set matsize 1000
 
 * Set globals
 if (lower("`c(username)'")=="wb378870")    global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
@@ -170,7 +171,7 @@ foreach model of local themodels{
 	gen model = "`model'"
 	gen sim = _n
 	getmata fgt0 = fgt0 
-	svmat `model', (trans)
+	svmat `model', names(trans)
 
 	cap append using `all'
 	tempfile all
