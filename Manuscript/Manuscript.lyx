@@ -94,6 +94,10 @@
 Poverty Mapping in the Age of Machine Learning
 \end_layout
 
+\begin_layout Author
+Paul Corral, Heath Henderson, Sandra Segovia, and Kevin McGee
+\end_layout
+
 \begin_layout Abstract
 \begin_inset Newpage pagebreak
 \end_inset
@@ -223,7 +227,7 @@ literal "false"
 
 \end_inset
 
-, this method quickly became popular across the globe and is perhaps the
+, the latter quickly became popular across the globe and is perhaps the
  most applied methodology for poverty mapping.
  The empirical best (EB) method for poverty mapping was introduced by 
 \begin_inset CommandInset citation
@@ -410,14 +414,14 @@ l small area estimates which require census microdata.
  to millions of dollars in savings or, perhaps more important, more people
  being lifted out of poverty.
  Additionally, given the scarce data landscape in many countries the findings
- present evidence that even without a contemporaneous census and survey
+ present evidence that even without a contemporaneous census and survey,
  poverty maps can still yield solid poverty reduction.
 \end_layout
 
 \begin_layout Standard
 The paper proceeds to present the methods and how these are often validated.
  We then present how the targeting efficiency of methods will be evaluated.
- Then we present the Mexican Intracensal survey and how it was converted
+ Then we present the Mexican Intra-censal survey and how it was converted
  into census data and how 500 survey samples were taken from the data for
  validations.
  We then present performance results of the various methods.
@@ -437,21 +441,7 @@ This section provides a brief overview of the methods applied.
  for machine learning based estimates is discussed.
  Unit-level methods that combine survey and census data to obtain poverty
  estimates are then discussed.
- Also, since the reason for obtaining highly disaggregated poverty estimates
- is to improve the targeting of resources, the methods are compared by their
- prowess for poverty reduction using the Mexican Intra-censal survey.
- The targeting simulation presented builds upon the simulation presented
- by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
- with one key difference: because the true poverty rates for each small
- area are known, the efficiency yielded by the use of different methods
- is compared to an optimal level of efficiency.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2359,7 +2349,7 @@ literal "false"
 
 \begin_layout Standard
 In this section we present a design-based simulation experiment based on
- the Mexican Intra Censal Survey of 2015 (Encuesta Intracensal).
+ the Mexican Intra Censal Survey of 2015 (Encuesta Intra-censal).
  The purpose of the simulation is to observe performance of the different
  methods under more realistic scenarios.
  The survey is carried out by the Mexican National Institute of Statistics
@@ -2940,70 +2930,8 @@ ext models.
 \end_layout
 
 \begin_layout Standard
-Assessing models based on their MSE and bias is usually preferable.
- This is because under small area estimation the model's overall performance
- is not necessarily the best reflection of the method's prowess.
- Since the goal is to obtain relatively accurate estimates of poverty for
- 
-\emph on
-each
-\emph default
- area we assess at the municipality level the bias and MSE of the different
- methods.
- Figures 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Mean-squared-error "
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Bias-across-municipalities"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- present the MSE and bias of each method's municipality level estimates.
- The box-plots show that under the Mexican data, the machine learning approach
- of XGboost does a very solid job with an empirical MSE which rivals and
- maybe supersedes the one of CensusEB estimates.
- XGboost estimates are also far superior to those obtained under unit-context
- models.
- The empirical bias of CensusEB and XGboost methods is also closely aligned,
- suggesting that under the Mexican data used either method could be chosen.
- Also, evident is the fact that there is a downward bias in the unit-context
- models.
- The downward bias of the method is due to it not properly replicating the
- welfare distribution.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-A much richer discussion of the unit-context method can be found in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2021map,corral2022guidelines"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
+placement tph
 wide false
 sideways false
 status collapsed
@@ -3072,6 +3000,7 @@ Note: Figure illustrates the
 
 \begin_layout Standard
 \begin_inset Float figure
+placement ph
 wide false
 sideways false
 status collapsed
@@ -3112,9 +3041,19 @@ name "fig:Mean-squared-error "
 \size footnotesize
 Note: Figure illustrates the empirical mean squared error (MSE) for each
  municipality under each method.
- The figure shows how the performance of XGboost models approximates those
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
  of unit-level CensusEB models.
- 
 \end_layout
 
 \end_inset
@@ -3124,6 +3063,7 @@ Note: Figure illustrates the empirical mean squared error (MSE) for each
 
 \begin_layout Standard
 \begin_inset Float figure
+placement ph
 wide false
 sideways false
 status collapsed
@@ -3132,14 +3072,14 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bias across municipalities for select mo
+Bias across municipalities for select models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Bias-across-municipalities"
 
 \end_inset
 
-dels
+
 \end_layout
 
 \end_inset
@@ -3164,7 +3104,18 @@ dels
 \size footnotesize
 Note: Figure illustrates the empirical bias for each municipality under
  each method.
- The figure shows how the performance of XGboost models approximates those
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
  of unit-level CensusEB models.
  It also shows how methods where the dependent variable is household level
  welfare and covariates are only area level covariates fails to properly
@@ -3178,12 +3129,200 @@ literal "false"
 \end_inset
 
 .
- 
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias and MSE across municipality quantiles for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bias_mse_tiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/ByTiles_uc_eb_gb.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias and MSE for each municipality
+ under each method.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+ It also shows how methods where the dependent variable is household level
+ welfare and covariates are only area level covariates fails to properly
+ replicate the welfare distribution and thus is downward biased and much
+ noisier for poorer areas as noted in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assessing models based on their MSE and bias is usually preferable.
+ This is because under small area estimation the model's overall performance
+ is not necessarily the best reflection of the method's prowess.
+ Since the goal is to obtain relatively accurate estimates of poverty for
+ 
+\emph on
+each
+\emph default
+ area we assess at the municipality level the bias and MSE of the different
+ methods.
+ Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mean-squared-error "
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bias-across-municipalities"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ present the MSE and bias of each method's municipality level estimates.
+ The box-plots show that under the Mexican data, the machine learning approach
+ of XGboost does a very solid job with an empirical MSE which rivals and
+ maybe supersedes the one of CensusEB estimates.
+ XGboost estimates are also far superior to those obtained under unit-context
+ models.
+ The empirical bias of CensusEB and XGboost methods is also closely aligned,
+ suggesting that under the Mexican data used either method could be chosen.
+ Also, evident is the fact that there is a downward bias in the unit-context
+ models.
+ The downward bias of the method is due to it not properly replicating the
+ welfare distribution in addition to the bias noted by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A much richer discussion of the unit-context method can be found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map,corral2022guidelines"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Looking at how models perform across municipalities according to their true
+ poverty rate it is evident that unit-context models from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lange2018small,masaki2020small,doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+ are most biased among the poorest municipalities (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bias_mse_tiles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Consequently, it is not surprising that the noise level among the poorest
+ municipalities is highest.
+ Nevertheless, the method does a much more solid job among the better-off
+ municipalities.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ present evidence under a hybrid simulation that this is in fact due to
+ different sources of bias canceling each other out.
+ In this case, the omitted variable bias type of bias noted in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ is likely canceling the bias due to the method's inability to replicate
+ the welfare distribution adequately.
+ 
 \end_layout
 
 \begin_layout Section
@@ -3208,8 +3347,255 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Due to privacy restrictions, the Mexican Intracensal survey is only geographical
-ly linked at the municipality level.
+\begin_inset Float figure
+placement tph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_mun_psu"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun.png
+	scale 57
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun.png
+	scale 57
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how, under the Mexican data, there is limited loss in bias
+ and noise when the model is fit at the municipality level instead of at
+ the PSU level and estimates aggregated to the municipality level.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_mun_psu_all"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun_GIS_mix.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun_GIS_mix.png
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how, under the Mexican data, there is limited loss in bias
+ and noise when the model is fit at the municipality level instead of at
+ the PSU level and estimates aggregated to the municipality level.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical Bias and MSE across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_tiles_gis"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/ByTiles_gb_mun_gis.png
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias and MSE for each municipality
+ under each method.
+ The figure shows how the performance of XGboost differs according to the
+ data used.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Covariate importance across 500 models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:importance"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Importance.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the covariate importance in the mixed model where
+ census aggregates and GIS covariates are combined.
+ The importance measure used here indicates the gain across splits where
+ the feature is used.
+ The values shown here are the average gain across all 500 models fit with
+ the 500 survey samples taken from the census data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due to privacy restrictions, the Mexican Intra-censal survey is only geographica
+lly linked at the municipality level.
  This implies that models where only GIS covariates are used can only be
  fit at the municipality level.
  Consequently, we also fit the model using only census covariates at the
@@ -3257,6 +3643,20 @@ noprefix "false"
  Information from census aggregates such as asset ownership, education levels,
  employment rates, and others are notably much better at explaining poverty
  variability across space.
+ The models tend to underestimate poverty at the bottom of the distribution
+ and over estimate at the top, leading to noisy estimates among rich and
+ poor municipalities alike (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_tiles_gis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -3282,133 +3682,37 @@ Mixed
 \end_inset
 
 ) are slightly noisier than estimates obtained using only census aggregates.
+ However, results across municipalities are virtually indistinguishable
+ to those where only census aggregates are used for modeling (Fig.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical MSE and Bias across municipalities under models fit at the PSU
- and municipal level
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse_bias_mun_psu"
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_tiles_gis"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun.png
-	scale 60
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun.png
-	scale 60
+).
+ This could just be an artifact of the data since the covariates used are
+ publicly available, but these cannot be expected to outperform covariates
+ that relate to characteristics of the population within the municipalities
+ (see Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:importance"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Note: Figure illustrates the empirical mean squared error (MSE) and bias
- for each municipality under models fit at different aggregation levels.
- The figure shows how, under the Mexican data, there is limited loss in
- bias and noise when the model is fit at the municipality level instead
- of at the PSU level and estimates aggregated to the municipality level.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical MSE and Bias across municipalities under models fit at the PSU
- and municipal level
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse_bias_mun_psu_all"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun_GIS_mix.png
-	scale 60
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun_GIS_mix.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size footnotesize
-Note: Figure illustrates the empirical mean squared error (MSE) and bias
- for each municipality under models fit at different aggregation levels.
- The figure shows how, under the Mexican data, there is limited loss in
- bias and noise when the model is fit at the municipality level instead
- of at the PSU level and estimates aggregated to the municipality level.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Present variable importance results
-\end_layout
-
-\begin_layout Standard
-Fig 5: Variable importance
+).
+ At best, many GIS covariates may be proxies for other information within
+ the municipality which relates to socio-economic characteristics and thus
+ will not outperform census aggregates when the latter are available.
 \end_layout
 
 \begin_layout Section
@@ -3416,10 +3720,148 @@ Alternative models
 \end_layout
 
 \begin_layout Standard
-There are many methods beynod gradient boosting which have become popular.
- This section seeks to test the performance of other methods to determine
- how these methods may perform under the Mexican data.
+There are many methods beyond gradient boosting which have become popular.
+ This section seeks to test the performance of other methods and models
+ to determine how these may perform under the Mexican data.
  
+\end_layout
+
+\begin_layout Standard
+We first include an XGboost model at the household level, where we classify
+ households as poor or not poor.
+ This approach, despite including many covariates at the PSU and municipality
+ level as candidates for modeling does a poor job as can be seen by the
+ method's high MSE compared to others.
+ This is mostly due to a high downward bias of the estimates at the household
+ level.
+ This serves as cautionary evidence toward the limitations of highly touted
+ machine learning algorithms.
+ The method in this case is attempting to predict a household's poverty
+ status based on their characteristics, the latent variable on the left
+ hand side already implies a loss of information for the model.
+ When microdata are available, XGboost does not outperform traditional models
+ when the goal is to obtain poverty rates by location.
+ 
+\end_layout
+
+\begin_layout Standard
+<TO BE COMPLETED>
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE across municipalities under models fit at HH level, PSU, and
+ municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_all"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_all_minus.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+ The figure shows how the different methods and data perform under the Mexican
+ data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical bias across municipalities under models fit at HH level, PSU,
+ and municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bias_all-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_all_minus.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+ The figure shows how the different methods and data perform under the Mexican
+ data.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3427,199 +3869,7 @@ There are many methods beynod gradient boosting which have become popular.
 status open
 
 \begin_layout Plain Layout
-Heath please elaborate here
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Introduce objective: To understand whether using different ML models affects
- performance
-\end_layout
-
-\begin_layout Itemize
-Provide a brief overview of the alternative methods (i.e., lasso, random forest,
- and BART)
-\end_layout
-
-\begin_layout Itemize
-Present performance of alternative methods in terms of R-squared, MSE, bias,
- and poverty reduction
-\end_layout
-
-\begin_layout Standard
-Fig 1: R2 across sims for select models
-\end_layout
-
-\begin_layout Standard
-Fig 2: MSE for select models
-\end_layout
-
-\begin_layout Standard
-Fig 3: Bias across municipalities for select models
-\end_layout
-
-\begin_layout Standard
-fig 4: Poverty rates across simulations for select models
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s7_rsquared.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Estimates of 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- across simulations for alternative models
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s7_mse.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error across municipalities for alternative models
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-afdasdfas
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s7_bias.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias across municipalities for alternative models
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename s7_poverty.pdf
-	lyxscale 40
-	scale 65
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Poverty rates across simulations for alternative models
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
+Heath please elaborate here on the other methods...
 \end_layout
 
 \end_inset
@@ -3635,7 +3885,12 @@ Targeting efficiency of the methods
 While understanding the noise of the poverty estimates is useful, the ultimate
  concern with poverty mapping is to understand how different methodological
  choices affect poverty alleviation.
- Similar to 
+ Often, the reason for obtaining highly disaggregated poverty estimates
+ is to improve the targeting of resources.
+ Consequently, the methods are compared by their prowess for poverty reduction
+ using the Mexican Intra-censal survey.
+ The targeting simulation presented builds upon the simulation presented
+ by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "elbers2007poverty"
@@ -3643,8 +3898,9 @@ literal "false"
 
 \end_inset
 
-, we propose simulating a hypothetical poverty-alleviation program that
- distributes resources to households according to a given poverty map.
+ with one key difference: because the true poverty rates for each small
+ area are known, the efficiency yielded by the use of different methods
+ is compared to an optimal level of efficiency.
 \begin_inset Foot
 status collapsed
 
@@ -3678,7 +3934,11 @@ literal "false"
 
 \end_inset
 
- In addition to the poverty estimates, the procedure applied here requires
+ 
+\end_layout
+
+\begin_layout Standard
+In addition to the poverty estimates, the procedure applied here requires
  true household-level incomes from a census-type dataset.
  The procedure is as follows:
 \end_layout
@@ -3807,9 +4067,75 @@ cal level were used to determine how to allocate funds from the Federal
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical bias across municipalities under models fit at HH level, PSU,
+ and municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:targeting"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Targeting.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the different methods and data perform in a targeting
+ simulation under the Mexican data.
+ The best possible poverty rate, using the true poverty ranking of municipalitie
+s, is 19.9%.
+ The original value is 25%.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The poverty line using the Mexican data is drawn at the 25th percentile.
  We take the poverty gap and determine that to be our transfer budget.
- The poverty gap is the value of money necessary to completely erradicate
+ The poverty gap is the value of money necessary to completely eradicate
  poverty if we know who the poor are and how poor they are, and thus serves
  as a valid transfer budget.
  To determine the best poverty reduction we can achieve by prioritizing
@@ -3822,22 +4148,32 @@ e to those areas until our budget runs out.
 \begin_layout Standard
 For each method we rank the municipalities according to the model based
  estimates obtained.
- Recall that under each method we have 500 sets of estimates at the municipaliti
-y level.
+ Recall that under each method we have 500 sets of estimates at the municipality
+ level.
  Then the transfer is given to the households in the poorest municipalities
  until the budget runs out.
  As noted, the amount is added to the true welfare value of the household.
  Consequently, across simulations and across methods, the only aspect that
- changes is the municpal ranking obtained from the model-based estimates.
+ changes is the municipal ranking obtained from the model-based estimates.
  
 \end_layout
 
 \begin_layout Standard
-The results of the simulation are presented in figure XXXX.
+The results of the simulation are presented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
  Considering that under the true rankings the best poverty reduction one
  can achieve is 19.9 percent, it is surprising that even the worst performing
  methods achieve reductions that are less than one percentage point higher.
- The models fit at the municpality level using GIS covariates as a whole
+ The models fit at the municipality level using GIS covariates as a whole
  are the worst performing, but still achieve a decent poverty reduction.
  Even OLS models achieve solid results.
  To our surprise, despite the methods inherent bias, unit-context models
@@ -3859,8 +4195,101 @@ Conclusion
 \end_layout
 
 \begin_layout Standard
-
+This paper sets out to validate traditional small area estimation and machine
+ learning approaches for poverty mapping.
+ Machine learning approaches have become popular across the globe for producing
+ highly disaggregated estimates of poverty which often feed into policy
+ making.
+ The methods are particularly popular in the most data deprived scenarios
+ where census data are not frequently collected, and even when collected
+ may not be contemporaneous to a household survey.
+ Hence, the methods are also a popular alternative for cases where the census
+ data is too old for use under a traditional unit-level small area estimation
+ exercise.
+ To the best of our knowledge, a rigorous validation of machine learning
+ methods like the one done here where machine learning methods are compared
+ to traditional small area estimates and to a true welfare measure has not
+ been done before.
 \end_layout
+
+\begin_layout Standard
+The paper provides a few very valuable insights.
+ First, it presents evidence on the invalidity of relying on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measures between direct and model based estimates to determine a model's
+ quality.
+ We provide evidence on how the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure, which has become commonplace in the literature, is a downward
+ biased estimate of the true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, and we present evidence on how relying on the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure to choose a model is flawed and may lead to selecting the worst
+ performing model.
+ Second, we present validations with real world data where we have a census
+ data set with the true population values we are trying to estimate.
+ We provide evidence of the prowess of machine learning methods and how
+ they may out perform traditional small area estimation approaches.
+ Third, we present a comparison on the potential benefits of publicly available
+ GIS covariates.
+ We show how GIS covariates under the data used here do not outperform census
+ aggregate data.
+ This result suggests that there may be considerable gains in linking census
+ and administrative data for poverty mapping in off census years.
+ Finally, we present evidence on how despite different performance across
+ models, all models are beneficial for targeting.
+ While some models may outperform others in the potential poverty reduction
+ when relying on estimates for targeting, even the worst performing models
+ achieve decent poverty reduction.
+ 
+\end_layout
+
+\begin_layout Standard
+The results found here should be caveated by the fact that they are dependent
+ on the Mexican Intra-censal data used.
+ Results and model performance may differ considerably in a different country
+ or using different data.
+ It is quite possible that in more agrarian societies GIS covariates perform
+ better than what is observed here, but there is no guarantee this will
+ be the case.
+ Validating the usefulness of a particular type of data is not straight
+ forward as it may not work as well everywhere, it is for this reason that
+ comparisons here are made in a more holistic manner.
+ When comparing the performance of GIS covariates and other type of data
+ one should use the same method, as is done here.
+ On the one hand, we show how using census aggregates at the municipality
+ level relying on gradient boosting comes very close to the best performing
+ estimates.
+ On the other hand, using the same method with GIS covariates we show how
+ it falls short of competing with a model where only census aggregates are
+ used.
+ 
+\end_layout
+
+\begin_layout Standard
+The paper opens considerable avenues for future research.
+ One avenue is related to methodology.
+ Specifically, how the noise of machine learning methods can be accurately
+ estimated.
+ Second, the results suggest that most method would do a solid job for spatial
+ targeting type exercises.
+ However, a key question is whether or not this will hold elsewhere and
+ under what circumstances will one method outperform others.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Itemize
 Recap motivation for the paper
@@ -3880,6 +4309,11 @@ Discuss limitations of the paper
 
 \begin_layout Itemize
 Discuss directions for future research
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
