@@ -12,7 +12,6 @@ import time
 #outpath = 'C:/Users/wb548031/Documents/xgboost/03_results/'
 inpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
 outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
-<<<<<<< Updated upstream
 
 # Input datasets
 census = pd.read_stata(inpath + 'census_trim.dta', convert_categoricals=True) # census data at hh, psu(HID), and mun level
@@ -22,12 +21,6 @@ outpath = 'C:/Users/wb548031/Documents/xgboost/03_results/'
 
 # Input datasets
 census = pd.read_stata(inpath + 'census_trim.dta') # census data at hh, psu(HID), and mun level
-=======
-
-# Input datasets
-census = pd.read_stata(inpath + 'census_trim.dta') # census data at hh, psu(HID), and mun level
-#census = census.head(10000)
->>>>>>> Stashed changes
 census = census.rename(columns={'HID_mun':'muni'})  # renaming to make more sense
 xmat = pd.read_stata(inpath + 'xmatrix_python_mun.dta') # census and GIS covariates at mun level
 xmat = xmat.rename(columns={'mimun': 'muni'})       # renaming so we can merge afterwards

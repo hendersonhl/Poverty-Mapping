@@ -260,7 +260,7 @@ replace dtype = "Census microdata" if regexm(variable,"hhid")
 replace dtype = "Census agg." if missing(dtype)
 
 gen level = "PSU" if regexm(variable,"psu")
-replace level = "Municipality" if regexm(variable,"mun")
+replace level = "Municipality" if regexm(variable,"mun")|regexm(variable,"all")|regexm(variable,"gis")|(regexm(variable,"census")&!regexm(variable,"hhid"))
 replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm(variable,"hhid")
 
 replace level = "PSU & Mun" if variable=="mse_gb_psu_wc"
