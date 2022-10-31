@@ -4,8 +4,10 @@ import numpy as np
 import statsmodels.api as sm
 
 # Directory
-inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
-outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
+#inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
+#outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
+inpath = '/Users/WB378870/GitHub/Poverty-Mapping/Data/'
+outpath = '/Users/WB378870/GitHub/Poverty-Mapping/Results/'
 
 # Import true poverty indicators and reshape
 # Note: All calculations are based on municipality-level data
