@@ -973,10 +973,10 @@ literal "false"
 
 \end_inset
 
- Extreme gradient boosting (XGboost) is a particularly popular implementation
+ Extreme gradient boosting (XGBoost) is a particularly popular implementation
  of gradient boosting that uses classification and regression trees as the
  base models or weak learners.
- The popularity of XGboost is due to the fact that it is fast, scalable,
+ The popularity of XGBoost is due to the fact that it is fast, scalable,
  and has been shown to outperform competing methods across a wide range
  of problems 
 \begin_inset CommandInset citation
@@ -1013,12 +1013,12 @@ For example, for a continuous explanatory variable, one determines whether
  Any child node that is not further split is referred to as a terminal node
  or leaf, and each leaf is associated with a parameter that provides a predictio
 n for the subsample associated with that leaf.
- For any given observation, the ensemble prediction used by XGboost is the
+ For any given observation, the ensemble prediction used by XGBoost is the
  sum of that observation's predictions across all trees in the ensemble.
 \end_layout
 
 \begin_layout Standard
-In what follows, we discuss the key features of the XGboost algorithm, drawing
+In what follows, we discuss the key features of the XGBoost algorithm, drawing
  on the presentation provided in 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1070,7 +1070,7 @@ where the trees are indexed by
 \end_inset
 
 .
- To build the trees used in the model, XGboost minimizes the following regulariz
+ To build the trees used in the model, XGBoost minimizes the following regulariz
 ed objective function:
 \end_layout
 
@@ -1105,7 +1105,7 @@ where
 \end_layout
 
 \begin_layout Standard
-XGboost uses the following specification of the regularization term: 
+XGBoost uses the following specification of the regularization term: 
 \end_layout
 
 \begin_layout Standard
@@ -1189,7 +1189,7 @@ where
 \end_inset
 
  that greedily minimizes the objective function at that iteration.
- More specifically, XGboost uses a second-order Taylor series expansion
+ More specifically, XGBoost uses a second-order Taylor series expansion
  to approximate the loss function at any given iteration:
 \end_layout
 
@@ -1231,7 +1231,7 @@ where
 \end_layout
 
 \begin_layout Standard
-The XGboost algorithm is based on a re-expression of Eq.
+The XGBoost algorithm is based on a re-expression of Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
@@ -1352,7 +1352,7 @@ which gives us the minimal objective function for a given tree structure.
  Ideally, one would enumerate all possible tree structures and then use
  the tree associated with the smallest value of the (minimized) objective
  function, but this is often intractable.
- XGboost instead implements an alternative approach that seeks to minimize
+ XGBoost instead implements an alternative approach that seeks to minimize
  the objective at a given iteration by greedily optimizing one level of
  the tree at a time.
 \end_layout
@@ -1415,7 +1415,7 @@ right
 where the first two terms in parentheses capture the loss associated with
  the child nodes and the third term captures the loss associated with the
  parent node being split.
- When splitting a node in any given tree, XGboost then evaluates Eq.
+ When splitting a node in any given tree, XGBoost then evaluates Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
@@ -1444,7 +1444,7 @@ exact greedy algorithm.
 \begin_inset Quotes erd
 \end_inset
 
- XGboost also has an approximate algorithm that can be used for large datasets.
+ XGBoost also has an approximate algorithm that can be used for large datasets.
  See 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1458,9 +1458,9 @@ literal "false"
 
 \end_inset
 
- XGboost then continues to split nodes in a given tree until a stopping
+ XGBoost then continues to split nodes in a given tree until a stopping
  criterion is met (e.g., a user-specified maximum tree depth).
- Once a given tree is built, XGboost then moves to building the next tree
+ Once a given tree is built, XGBoost then moves to building the next tree
  in the ensemble and continues to do so until reaching the user-specified
  number of trees to build.
 \end_layout
@@ -2806,7 +2806,7 @@ noprefix "false"
 \begin_inset Formula $R^{2}$
 \end_inset
 
- associated with the XGboost model when using both the direct estimates
+ associated with the XGBoost model when using both the direct estimates
  and true poverty rates as the basis for performance assessment (i.e., based
  on Eqs.
 \begin_inset Formula $\negthinspace$
@@ -3276,13 +3276,13 @@ noprefix "false"
 \end_inset
 
  thus presents our MSE results for several alternative models.
- The first three models apply XGboost at the municipality level using three
+ The first three models apply XGBoost at the municipality level using three
  alternative covariate sets: only GIS-based covariates, only census-based
  covariates, and then a model with all available covariates.
  The fouth model is estimated at the PSU level and only uses census-based
  covariates.
  The final two models are traditional small-area models that we use to benchmark
- the performance of the XGboost models.
+ the performance of the XGBoost models.
  In particular, the empirical best (EB) model is often considered the 
 \begin_inset Quotes eld
 \end_inset
@@ -3335,7 +3335,7 @@ noprefix "false"
 \end_inset
 
 ]).
- Turning to the results, the XGboost model with GIS-based covariates is
+ Turning to the results, the XGBoost model with GIS-based covariates is
  our closest approximation to the standard implementation of machine learning
  in the context of poverty mapping.
  This model is nevertheless the worst performing of all the models: the
@@ -3345,7 +3345,7 @@ noprefix "false"
  In contrast, the EB and UC models achieve median MSE levels of 0.003 and
  0.004, with corresponding root MSE values of 0.05 and 0.06, respectively.
  While the standard implementation shows relatively poor performance, the
- remaining three XGboost models that incorporate census-based covariates
+ remaining three XGBoost models that incorporate census-based covariates
  perform much better, with the PSU-level model achieving a median MSE of
  0.002 and outperforming both of the traditional approaches.
 \end_layout
@@ -3382,12 +3382,12 @@ noprefix "false"
  exception of the UC model, which exhibits a downward bias.
  The median bias of the UC model is -0.03, meaning that it underestimates
  municipality-level poverty rates by about three percentage points.
- We further find that the bias estimates for the XGboost model with GIS-based
+ We further find that the bias estimates for the XGBoost model with GIS-based
  covariates exhibits considerable variation, with minimum and maximum biases
  reaching -0.43 and 0.43, respectively.
  That is, the model with GIS-based covariates is severely biased for some
  municipalities, even though its median bias is approximately zero.
- The XGboost models incorporating census-based covariates exhibit much less
+ The XGBoost models incorporating census-based covariates exhibit much less
  variation.
 \end_layout
 
@@ -3438,12 +3438,12 @@ name "fig:importance"
 \end_layout
 
 \begin_layout Standard
-We thus see that the performance of XGboost depends heavily on the covariates
+We thus see that the performance of XGBoost depends heavily on the covariates
  used by the model, with the census-based covariates appearing to considerably
  improve the performance of the model.
  Another way to see that the census-based covariates have greater predictive
  power than the GIS-based covariates is by looking at feature importances.
- The standard measure of feature importance used by XGboost summarizes the
+ The standard measure of feature importance used by XGBoost summarizes the
  gain (i.e., reduction of the loss function) associated with any given feature.
  That is, for a given run of the model, feature importance captures the
  average gain of a given feature, where the gains are averaged across all
@@ -3469,7 +3469,7 @@ noprefix "false"
 \end_inset
 
  plots the 20 covariates with the highest feature importance after running
- XGboost with all covariates on each sample and averaging the features importanc
+ XGBoost with all covariates on each sample and averaging the features importanc
 es across the 500 samples.
  We find that all of the top 10 covariates are census-based, with only five
  GIS-based covariates entering the top 20.
@@ -3601,16 +3601,16 @@ poverty quantiles.
  That is, we order all municipalities by their true poverty rates, divide
  them into 50 quantiles, and calculate the average MSE and bias for each
  quantile.
- For the sake of simplicity, we only present results for two XGboost models
+ For the sake of simplicity, we only present results for two XGBoost models
  – namely the municipality-level models using only GIS- and census-based
  covariates – and two traditional models.
  Panel (a) presents the MSE results and panel (b) presents the bias results.
- In both plots, the XGboost model with census-based covariates performs
+ In both plots, the XGBoost model with census-based covariates performs
  quite similarly to the EB model across all quantiles.
- However, the XGboost model with the GIS-based covariates again departs
+ However, the XGBoost model with the GIS-based covariates again departs
  considerably from this benchmark, particularly at the lowest and highest
  quantiles.
- The bias results are particularly notable: the XGboost model with GIS covariate
+ The bias results are particularly notable: the XGBoost model with GIS covariate
 s systematically underestimates poverty at the lowest quantiles and overestimate
 s poverty at the highest quantiles.
  The model with GIS covariates thus understates the level of inequality
@@ -3734,7 +3734,7 @@ name "fig:ml"
 \end_layout
 
 \begin_layout Standard
-Up to this point, we have focused exclusively on the performance of XGboost,
+Up to this point, we have focused exclusively on the performance of XGBoost,
  but there are nevertheless several other machine-learning models that might
  be used for poverty mapping.
  Leading alternatives include the least absolute shrinkage and selection
@@ -3765,9 +3765,9 @@ literal "false"
 .
  While the Lasso is a simple way to conduct variable selection and regularizatio
 n in the context of linear regression, the random forest and BART models
- are quite similar to XGboost in that they all rely on flexible regression
+ are quite similar to XGBoost in that they all rely on flexible regression
  tree frameworks.
- We ask whether these alternative models can perform better than XGboost
+ We ask whether these alternative models can perform better than XGBoost
  within the confines of the standard implementation, which relies exclusively
  on GIS-based covariates.
  Panels (a) and (b) of Figure 
@@ -3783,7 +3783,7 @@ noprefix "false"
  present the MSE and bias results for all models.
  With the possible exception of the Lasso, we find that all models perform
  comparably in terms of MSE and bias, meaning that the poor performance
- of XGboost when using GIS covariates cannot be remedied by simply adopting
+ of XGBoost when using GIS covariates cannot be remedied by simply adopting
  a different machine-learning model.
 \end_layout
 
@@ -3862,9 +3862,9 @@ noprefix "false"
  on the basis of true municipality-level poverty rates is able to reduce
  the overall poverty headcount to just under 20 percent.
  While the achieved poverty rates of all models fall within the 20 percent
- range, we see once again that the XGboost model with GIS covariates is
+ range, we see once again that the XGBoost model with GIS covariates is
  the worst performing model.
- The best performing XGboost model is the implementation at the PSU level,
+ The best performing XGBoost model is the implementation at the PSU level,
  which achieves a median poverty rate across all simulations of 20.02.
  Critically, even this model falls short of the UC benchmark, which achieves
  a median poverty rate of 20.01.
