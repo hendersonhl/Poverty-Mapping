@@ -3145,14 +3145,22 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-2.pdf
-	scale 60
+	filename Figure-2a.pdf
+	scale 50
 
 \end_inset
 
@@ -3163,7 +3171,71 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Empirical MSE for select models
+MSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-2b.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias for select models
 \end_layout
 
 \end_inset
@@ -3194,7 +3266,7 @@ Given the shortcomings of the
 
 , we have argued that the MSE represents a better metric for performance
  assessment.
- Figure 
+ Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mse"
@@ -3241,7 +3313,7 @@ noprefix "false"
 
  that one advantage of the MSE is that it can be calculated for each geographica
 l entity.
- As such, each box plot in Figure 
+ As such, each box plot in panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mse"
@@ -3277,6 +3349,285 @@ noprefix "false"
  remaining three XGboost models that incorporate census-based covariates
  perform much better, with the PSU-level model achieving a median MSE of
  0.002 and outperforming both of the traditional approaches.
+\end_layout
+
+\begin_layout Standard
+The bias associated with poverty estimates is especially important due to
+ the policy relevance of understanding absolute living standards.
+ In panel (b) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, we thus present box plots for the municipality-level bias estimates associated
+ with each model (see Eq.
+ [
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mseg"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+] for the bias-variance decomposition of the MSE).
+ That is, each box plot summarizes the distribution of bias estimates across
+ all municipalities in our Mexican data.
+ The median bias for each model is approximately zero, with the possible
+ exception of the UC model, which exhibits a downward bias.
+ The median bias of the UC model is -0.03, meaning that it underestimates
+ municipality-level poverty rates by about three percentage points.
+ We further find that the bias estimates for the XGboost model with GIS-based
+ covariates exhibits considerable variation, with minimum and maximum biases
+ reaching -0.43 and 0.43, respectively.
+ That is, the model with GIS-based covariates is severely biased for some
+ municipalities, even though its median bias is approximately zero.
+ The XGboost models incorporating census-based covariates exhibit much less
+ variation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3.pdf
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Feature importance
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:importance"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We thus see that the performance of XGboost depends heavily on the covariates
+ used by the model, with the census-based covariates appearing to considerably
+ improve the performance of the model.
+ Another way to see that the census-based covariates have greater predictive
+ power than the GIS-based covariates is by looking at feature importances.
+ The standard measure of feature importance used by XGboost summarizes the
+ gain or reduction of the loss function associated with any given feature.
+ That is, for a given run of the model, feature importance captures the
+ average gain of a given feature, where the gains are averaged across all
+ trees in the model.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In addition, the average gains for a given run of the model are normalized
+ by dividing each by the sum of all average gains for that run.
+\end_layout
+
+\end_inset
+
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:importance"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ plots the 20 covariates with the highest feature importance after running
+ XGboost with all covariates on each sample and averaging the features importanc
+es across the 500 samples.
+ We find that all of the top 10 covariates are census-based, with only five
+ GIS-based covariates entering the top 20.
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:quantiles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents MSE and bias estimates for various models across different 
+\begin_inset Quotes eld
+\end_inset
+
+poverty quantiles.
+\begin_inset Quotes erd
+\end_inset
+
+ That is, we order all municipalities by their true poverty rates, divide
+ them into 50 quantiles, and calculate the average MSE and bias for each
+ quantile.
+ For the sake of simplicity, we only present results for two XGboost models
+ – namely the municipality-level models using only GIS- and census-based
+ covariates – and two traditional models.
+ Panel (a) presents the MSE results and panel (b) presents the bias results.
+ In both plots, the XGboost model with census-based covariates performs
+ quite similarly to the EB model across all quantiles.
+ However, the XGboost model with the GIS-based covariates again departs
+ considerably from this benchmark, particularly at the lowest and highest
+ quantiles.
+ The bias results are particularly notable: the XGboost model with GIS covariate
+s systematically underestimates poverty at the lowest quantiles and overestimate
+s poverty at the highest quantiles.
+ The model with GIS covariates thus understates the level of inequality
+ in poverty rates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-4a.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-4b.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias by poverty quantiles for select models
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:quantiles"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

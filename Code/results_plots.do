@@ -12,6 +12,7 @@ global outpath "$main/Manuscript"
 * Basic R-squared plot
 import delimited "$inpath/results_rsquared.csv", clear
 keep sim_sample gb_census_mun_direct gb_census_mun_true gb_census_psu_direct gb_census_psu_true 
+tabstat gb_census_mun_true-gb_census_psu_direct, stat(p50)
 rename *_true True_*
 rename *_direct Direct_*
 reshape long True Direct, i(sim_sample) j(model) string
@@ -21,7 +22,7 @@ gen order = 1 if model=="PSU"
 replace order = 2 if model=="Municipality" 
 graph box Direct True, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
     nooutside note("")
-graph export "$outpath/R-squared.pdf", as(pdf) replace
+graph export "$outpath/Figure-1a.pdf", as(pdf) replace
 
 * Model-selection experiment (true vs. direct)
 import delimited "$inpath/results_rsquared.csv", clear
@@ -42,7 +43,7 @@ gen order = 1 if model=="PSU"
 replace order = 2 if model=="Municipality" 
 graph box Unconstrained Constrained, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
     nooutside note("")
-graph export "$outpath/Constrained.pdf", as(pdf) replace
+graph export "$outpath/Figure-1b.pdf", as(pdf) replace
 	
 * Model-selection experiment (unconstrained vs. contrained)
 import delimited "$inpath/results_rsquared.csv", clear
@@ -77,6 +78,7 @@ twoway (scatter mse_psu gb_census_psu_true), xtitle("R-squared") ytitle("Emprica
 * Basic MSE plot
 import delimited "$inpath/results_mse.csv", clear
 keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc
+tabstat mse_gb_census-mse_uc, stat(p50)
 label var mse_gb_census "Gradient Boosting (Census)"
 label var mse_gb_gis "Gradient Boosting (GIS)"
 label var mse_gb_all "Gradient Boosting (All)"
@@ -87,23 +89,24 @@ graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc, ytitle(
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "$outpath/MSE.pdf", as(pdf) replace
-	
+graph export "$outpath/Figure-2a.pdf", as(pdf) replace
+
 * Basic bias plot
 import delimited "$inpath/results_bias.csv", clear
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc
+tabstat bias_gb_census-bias_uc, stat(p50 min max)
 label var bias_gb_census "Gradient Boosting (Census)"
 label var bias_gb_gis "Gradient Boosting (GIS)"
 label var bias_gb_all "Gradient Boosting (All)"
 label var bias_gb_psu "Gradient Boosting (PSU)"
 label var bias_eb "Traditional (EB)"
 label var bias_uc "Traditional (UC)"
-graph hbox bias_gb_census bias_gb_gis bias_gb_all bias_gb_psu bias_eb bias_uc, ytitle(Bias) ///
+graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "$outpath/Bias.pdf", as(pdf) replace
-	
+graph export "$outpath/Figure-2b.pdf", as(pdf) replace
+
 * Variable importance
 import delimited "$inpath/gb_importance_all_mun.csv", clear
 egen imp = rowmean(imp*)
@@ -130,9 +133,9 @@ replace variable = "Maximum urban index (GIS)" if variable == "gis_uimax"
 replace variable = "Tertiary education share (census)" if variable == "census_max_tertiary"
 replace variable = "Mean slope from digital model (GIS)" if variable == "gis_mdepmean"
 graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
-    ytitle(Variable Importance)
-graph export "$outpath/Importance.pdf", as(pdf) replace
-
+    ytitle(Feature Importance)
+graph export "$outpath/Figure-3.pdf", as(pdf) replace
+	
 * MSE by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
 keep mimun poor
@@ -152,7 +155,7 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
 	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
-graph export "$outpath/Quantiles(MSE).pdf", as(pdf) replace
+graph export "$outpath/Figure-4a.pdf", as(pdf) replace
 
 * Bias by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
@@ -173,22 +176,9 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
 	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
-graph export "$outpath/Quantiles(Bias).pdf", as(pdf) replace
+graph export "$outpath/Figure-4b.pdf", as(pdf) replace
 
-* Model comparisons w/ census covariates
-import delimited "$inpath/results_mse.csv", clear
-keep mse_gb_census mse_bart_census mse_rf_census mse_lasso_census
-label var mse_gb_census "Gradient Boosting"
-label var mse_bart_census "BART"
-label var mse_rf_census "Random Forest"
-label var mse_lasso_census "Lasso"
-graph hbox mse_gb_census mse_bart_census mse_rf_census mse_lasso_census, ///
-    ytitle(Empirical MSE) scheme(s1mono) legend(off) nooutside note("") showyvars ///
-	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
-	box(5, color(gray)) 
-graph export "$outpath/Models(Census).pdf", as(pdf) replace
-	
-* Model comparisons w/ GIS covariates
+* Model comparisons w/ GIS covariates (MSE)
 import delimited "$inpath/results_mse.csv", clear
 keep mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis
 label var mse_gb_gis "Gradient Boosting"
@@ -199,7 +189,20 @@ graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis, ///
     ytitle(Empirical MSE) scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
-graph export "$outpath/Models(GIS).pdf", as(pdf) replace
+graph export "$outpath/Figure-5a.pdf", as(pdf) replace
+
+* Model comparisons w/ GIS covariates (Bias)
+import delimited "$inpath/results_bias.csv", clear
+keep bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis
+label var bias_gb_gis "Gradient Boosting"
+label var bias_bart_gis "BART"
+label var bias_rf_gis "Random Forest"
+label var bias_lasso_gis "Lasso"
+graph hbox bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis, ///
+    ytitle(Bias) scheme(s1mono) legend(off) nooutside note("") showyvars ///
+	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
+	box(5, color(gray)) 
+graph export "$outpath/Figure-5a.pdf", as(pdf) replace
 	
 * Poverty targeting
 import delimited "$inpath/results_targeting.csv", clear
@@ -220,7 +223,7 @@ graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc, ytitle(Pover
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "$outpath/Targeting.pdf", as(pdf) replace
+graph export "$outpath/Figure-6.pdf", as(pdf) replace
 
 
 
