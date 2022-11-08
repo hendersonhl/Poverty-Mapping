@@ -21,7 +21,7 @@ gen order = 1 if model=="PSU"
 replace order = 2 if model=="Municipality" 
 graph box Direct True, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
     nooutside note("")
-graph export "/Users/hendersonhl/Desktop/Plots/R-squared.pdf", as(pdf) replace
+graph export "$outpath/R-squared.pdf", as(pdf) replace
 
 * Model-selection experiment (true vs. direct)
 import delimited "$inpath/results_rsquared.csv", clear
@@ -42,6 +42,7 @@ gen order = 1 if model=="PSU"
 replace order = 2 if model=="Municipality" 
 graph box Unconstrained Constrained, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
     nooutside note("")
+graph export "$outpath/Constrained.pdf", as(pdf) replace
 	
 * Model-selection experiment (unconstrained vs. contrained)
 import delimited "$inpath/results_rsquared.csv", clear
@@ -86,7 +87,7 @@ graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc, ytitle(
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "/Users/hendersonhl/Desktop/Plots/MSE.pdf", as(pdf) replace
+graph export "$outpath/MSE.pdf", as(pdf) replace
 	
 * Basic bias plot
 import delimited "$inpath/results_bias.csv", clear
@@ -101,7 +102,7 @@ graph hbox bias_gb_census bias_gb_gis bias_gb_all bias_gb_psu bias_eb bias_uc, y
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "/Users/hendersonhl/Desktop/Plots/Bias.pdf", as(pdf) replace
+graph export "$outpath/Bias.pdf", as(pdf) replace
 	
 * Variable importance
 import delimited "$inpath/gb_importance_all_mun.csv", clear
@@ -130,7 +131,7 @@ replace variable = "Tertiary education share (census)" if variable == "census_ma
 replace variable = "Mean slope from digital model (GIS)" if variable == "gis_mdepmean"
 graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
     ytitle(Variable Importance)
-graph export "/Users/hendersonhl/Desktop/Plots/Importance.pdf", as(pdf) replace
+graph export "$outpath/Importance.pdf", as(pdf) replace
 
 * MSE by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
@@ -151,7 +152,7 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
 	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
-graph export "/Users/hendersonhl/Desktop/Plots/Quantiles(MSE).pdf", as(pdf) replace
+graph export "$outpath/Quantiles(MSE).pdf", as(pdf) replace
 
 * Bias by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
@@ -172,7 +173,7 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
 	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
-graph export "/Users/hendersonhl/Desktop/Plots/Quantiles(Bias).pdf", as(pdf) replace
+graph export "$outpath/Quantiles(Bias).pdf", as(pdf) replace
 
 * Model comparisons w/ census covariates
 import delimited "$inpath/results_mse.csv", clear
@@ -185,7 +186,7 @@ graph hbox mse_gb_census mse_bart_census mse_rf_census mse_lasso_census, ///
     ytitle(Empirical MSE) scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
-graph export "/Users/hendersonhl/Desktop/Plots/Models(Census).pdf", as(pdf) replace
+graph export "$outpath/Models(Census).pdf", as(pdf) replace
 	
 * Model comparisons w/ GIS covariates
 import delimited "$inpath/results_mse.csv", clear
@@ -198,7 +199,7 @@ graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis, ///
     ytitle(Empirical MSE) scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
-graph export "/Users/hendersonhl/Desktop/Plots/Models(GIS).pdf", as(pdf) replace
+graph export "$outpath/Models(GIS).pdf", as(pdf) replace
 	
 * Poverty targeting
 import delimited "$inpath/results_targeting.csv", clear
@@ -219,7 +220,7 @@ graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc, ytitle(Pover
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
-graph export "/Users/hendersonhl/Desktop/Plots/Targeting.pdf", as(pdf) replace
+graph export "$outpath/Targeting.pdf", as(pdf) replace
 
 
 
