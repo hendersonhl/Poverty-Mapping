@@ -202,17 +202,22 @@ graph hbox bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis, ///
     ytitle(Bias) scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
-graph export "$outpath/Figure-5a.pdf", as(pdf) replace
+graph export "$outpath/Figure-5b.pdf", as(pdf) replace
 	
 * Poverty targeting
-import delimited "$inpath/results_targeting.csv", clear
-keep gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc
-replace gb_census_mun = gb_census_mun*100  // Put values in percentage terms
-replace gb_gis_mun = gb_gis_mun*100 
-replace gb_all_mun = gb_all_mun*100 
-replace gb_census_psu = gb_census_psu*100 
+import delimited "$inpath/results_transfer.csv", clear
+keep variable sim fgt0
+order sim variable fgt0
+reshape wide fgt0, i(sim) j(variable) string
+rename fgt0* *
+keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc
+replace gb_gis_mun = gb_gis_mun*100  // Put values in percentage terms
+replace gb_census_mun = gb_census_mun*100
+replace gb_all_mun = gb_all_mun*100
+replace gb_census_psu = gb_census_psu*100
 replace eb = eb*100
 replace uc = uc*100
+tabstat eb-uc, stat(p50)
 label var gb_census_mun "Gradient Boosting (Census)"
 label var gb_gis_mun "Gradient Boosting (GIS)"
 label var gb_all_mun "Gradient Boosting (All)"

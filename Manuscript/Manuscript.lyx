@@ -3145,7 +3145,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -3264,8 +3264,7 @@ Given the shortcomings of the
 \begin_inset Formula $R^{2}$
 \end_inset
 
-, we have argued that the MSE represents a better metric for performance
- assessment.
+, we have argued that the MSE represents a better metric for model assessment.
  Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3445,7 +3444,7 @@ We thus see that the performance of XGboost depends heavily on the covariates
  Another way to see that the census-based covariates have greater predictive
  power than the GIS-based covariates is by looking at feature importances.
  The standard measure of feature importance used by XGboost summarizes the
- gain or reduction of the loss function associated with any given feature.
+ gain (i.e., reduction of the loss function) associated with any given feature.
  That is, for a given run of the model, feature importance captures the
  average gain of a given feature, where the gains are averaged across all
  trees in the model.
@@ -3474,6 +3473,110 @@ noprefix "false"
 es across the 500 samples.
  We find that all of the top 10 covariates are census-based, with only five
  GIS-based covariates entering the top 20.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-4a.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-4b.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias by poverty quantiles for select models
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:quantiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3530,7 +3633,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-4a.pdf
+	filename Figure-5a.pdf
 	scale 50
 
 \end_inset
@@ -3571,7 +3674,7 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-4b.pdf
+	filename Figure-5b.pdf
 	scale 50
 
 \end_inset
@@ -3606,7 +3709,7 @@ Bias
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MSE and bias by poverty quantiles for select models
+MSE and bias with alternative machine-learning models
 \end_layout
 
 \end_inset
@@ -3614,7 +3717,7 @@ MSE and bias by poverty quantiles for select models
 
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:quantiles"
+name "fig:ml"
 
 \end_inset
 
@@ -3628,6 +3731,145 @@ name "fig:quantiles"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Up to this point, we have focused exclusively on the performance of XGboost,
+ but there are nevertheless several other machine-learning models that might
+ be used for poverty mapping.
+ Leading alternatives include the least absolute shrinkage and selection
+ operator (Lasso) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "tibshirani1996"
+literal "false"
+
+\end_inset
+
+, the random forest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "breiman2001"
+literal "false"
+
+\end_inset
+
+, and Bayesian additive regression trees (BART) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chipman2010bart"
+literal "false"
+
+\end_inset
+
+.
+ While the Lasso is a simple way to conduct variable selection and regularizatio
+n in the context of linear regression, the random forest and BART models
+ are quite similar to XGboost in that they all rely on flexible regression
+ tree frameworks.
+ We ask whether these alternative models can perform better than XGboost
+ within the confines of the standard implementation, which relies exclusively
+ on GIS-based covariates.
+ Panels (a) and (b) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ml"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ present the MSE and bias results for all models.
+ With the possible exception of the Lasso, we find that all models perform
+ comparably in terms of MSE and bias, meaning that the poor performance
+ of XGboost when using GIS covariates cannot be remedied by simply adopting
+ a different machine-learning model.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6.pdf
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Poverty targeting
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:targeting"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, recall from Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:validation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ that we argued that the ultimate concern with poverty mapping is to understand
+ how different methodological choices affect poverty alleviation.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ thus compares our six initial models in terms of their ability to reduce
+ poverty in the context of our targeting simulations.
+ In these simulations, a hypothetical poverty-alleviation program targeted
+ on the basis of true municipality-level poverty rates is able to reduce
+ the overall poverty headcount to just under 20 percent.
+ While the achieved poverty rates of all models fall within the 20 percent
+ range, we see once again that the XGboost model with GIS covariates is
+ the worst performing model.
+ The best performing XGboost model is the implementation at the PSU level,
+ which achieves a median poverty rate across all simulations of 20.02.
+ Critically, even this model falls short of the UC benchmark, which achieves
+ a median poverty rate of 20.01.
+ Machine learning thus fails to outperform the traditional UC model, which
+ is feasible with the same data.
 \end_layout
 
 \begin_layout Section
