@@ -872,14 +872,14 @@ name "sec:methods"
 \end_layout
 
 \begin_layout Standard
-This section provides a brief overview of the methods applied.
- The section first gives an overview of gradient boosting, since the method
- is popular for machine learning based poverty mapping.
- Then a brief discussion on previously implemented validation approaches
- for machine learning based estimates is discussed.
- Unit-level methods that combine survey and census data to obtain poverty
- estimates are then discussed.
- 
+This section describes the methods we apply to the Mexican Intercensal Survey.
+ The first subsection discusses machine learning, with a special focus on
+ gradient boosting, as it is among the most popular machine-learning methods
+ for poverty mapping.
+ The second subsection then discusses more traditional approaches to poverty
+ mapping – including the empirical best and unit-context models – which
+ we use as benchmarks in our performance assessment of the machine-learning
+ methods.
 \end_layout
 
 \begin_layout Subsection
@@ -1130,7 +1130,7 @@ literal "false"
  claim that it is simpler than the leading alternatives and easier to paralleliz
 e.
  Further note that when the hyperparameters are set to zero, the objective
- function becomes equivalent to that used in traditional gradient tree boosting.
+ function becomes equivalent to that used in traditional gradient boosting.
 \end_layout
 
 \begin_layout Standard
@@ -3710,7 +3710,7 @@ Up to this point, we have focused exclusively on the performance of XGBoost,
  but there are nevertheless several other machine-learning models that might
  be used for poverty mapping.
  Leading alternatives include the least absolute shrinkage and selection
- operator (Lasso) 
+ operator (lasso) 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "tibshirani1996"
@@ -3735,7 +3735,7 @@ literal "false"
 \end_inset
 
 .
- While the Lasso is a simple way to conduct variable selection and regularizatio
+ While the lasso is a simple way to conduct variable selection and regularizatio
 n in the context of linear regression, the random forest and BART models
  are quite similar to XGBoost in that they all rely on flexible regression
  tree frameworks.
