@@ -824,7 +824,7 @@ where
 
 .
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 The equation used to calculate inclusion probabilities assumes sampling
@@ -1397,7 +1397,7 @@ noprefix "false"
  and chooses the split associated with the maximal reduction in the objective
  function.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 This is known as the 
@@ -1462,16 +1462,6 @@ The above references several hyperparameters that must be chosen by the
 \end_inset
 
 .
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-We're using iteration and tree for t, I presume this is correct but wanted
- to be sure.
-\end_layout
-
-\end_inset
-
  Shrinkage reduces the influence of each tree so that no individual tree
  has too much influence on the ensemble prediction.
 \end_layout
@@ -1500,123 +1490,6 @@ literal "false"
  Specifically, our implementation of gradient boosting relies on the open-source
  library XGBoost, which we combine with the Hyperopt library that conducts
  Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-Notation 
-\end_layout
-
-\begin_layout Plain Layout
-a: Superscript for actual or true poverty rate
-\end_layout
-
-\begin_layout Plain Layout
-alpha: Intercept in direct estimate regression
-\end_layout
-
-\begin_layout Plain Layout
-B: Bias
-\end_layout
-
-\begin_layout Plain Layout
-beta: Coefficient in direct estimate regression
-\end_layout
-
-\begin_layout Plain Layout
-c: Notation in affine transformation
-\end_layout
-
-\begin_layout Plain Layout
-d: Superscript for direct estimate
-\end_layout
-
-\begin_layout Plain Layout
-epsilon: Error term in direct estimate regression
-\end_layout
-
-\begin_layout Plain Layout
-eta: Error term in true regression
-\end_layout
-
-\begin_layout Plain Layout
-g, G: Gradient 
-\end_layout
-
-\begin_layout Plain Layout
-gamma: Hyperparameter on the number of leaves 
-\end_layout
-
-\begin_layout Plain Layout
-h, H: Hessian 
-\end_layout
-
-\begin_layout Plain Layout
-i: Indexes observations 
-\end_layout
-
-\begin_layout Plain Layout
-j: Indexes for the leaves 
-\end_layout
-
-\begin_layout Plain Layout
-k, K: Index for the various poverty estimates for a given entity
-\end_layout
-
-\begin_layout Plain Layout
-l: Loss function 
-\end_layout
-
-\begin_layout Plain Layout
-lambda: Hyperparameters on the leaf weights 
-\end_layout
-
-\begin_layout Plain Layout
-m: Prediction values 
-\end_layout
-
-\begin_layout Plain Layout
-N: Number of observations
-\end_layout
-
-\begin_layout Plain Layout
-p: Superscript for predicted poverty rate
-\end_layout
-
-\begin_layout Plain Layout
-r: Regularization function 
-\end_layout
-
-\begin_layout Plain Layout
-R: R-squared
-\end_layout
-
-\begin_layout Plain Layout
-s: Set of observations in a given leaf 
-\end_layout
-
-\begin_layout Plain Layout
-sigma: Variance
-\end_layout
-
-\begin_layout Plain Layout
-t: Indexes trees 
-\end_layout
-
-\begin_layout Plain Layout
-x: Explanatory variables 
-\end_layout
-
-\begin_layout Plain Layout
-y: Outcome
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2268,27 +2141,7 @@ noprefix "false"
 \end_inset
 
  from a strong model applied to a high bias setting.
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Shouldn't this be tied to measurement error, instead of bias? That is, link
- it to the measurement error, since the direct estimates won't be biased.
-\end_layout
-
-\end_inset
-
- The presence of bias
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-I think it's best to frame it around sampling error
-\end_layout
-
-\end_inset
-
- in the measures of 
+ The presence of bias in the measures of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2798,7 +2651,7 @@ noprefix "false"
  rates.
  All models use only census-based covariates.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 To ensure that our results are not affected by the composition of the sample,
@@ -3912,35 +3765,6 @@ The paper opens considerable avenues for future research.
  However, a key question is whether or not this will hold elsewhere and
  under what circumstances will one method outperform others.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Itemize
-Recap motivation for the paper
-\end_layout
-
-\begin_layout Itemize
-Review key results
-\end_layout
-
-\begin_layout Itemize
-Revisit contribution of the paper
-\end_layout
-
-\begin_layout Itemize
-Discuss limitations of the paper
-\end_layout
-
-\begin_layout Itemize
-Discuss directions for future research
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
