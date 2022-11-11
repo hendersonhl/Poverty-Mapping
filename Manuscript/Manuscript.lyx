@@ -176,14 +176,14 @@ In the context of poverty, small area estimation can be split into unit-level
  From the simulated welfare vector it is possible to obtain poverty headcount
  rates and other indicators.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 For a thorough discussion on small area estimation for poverty headcount
  rates see 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "sae_guide"
+key "corral2022guidelines"
 literal "false"
 
 \end_inset
@@ -191,7 +191,7 @@ literal "false"
  and 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "mcn2021"
+key "molina2022estimation"
 literal "false"
 
 \end_inset
@@ -214,7 +214,7 @@ literal "false"
  indicators was proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "jesko1998"
+key "hentschel1998combining"
 literal "false"
 
 \end_inset
@@ -291,7 +291,7 @@ literal "false"
  models is quite limited (see 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "molina_morales2009"
+key "molina2009small"
 literal "false"
 
 \end_inset
@@ -307,7 +307,7 @@ Considerable efforts have been devoted to methods which can be applied for
  models and area-level models (
 \begin_inset CommandInset citation
 LatexCommand citealt
-key "doi:10.1080/00220388.2012.682983,lange2018small,masaki2020small"
+key "lange2018small,masaki2020small,nguyen2012method"
 literal "false"
 
 \end_inset
@@ -332,7 +332,7 @@ Poverty maps constructed from machine learning methods have gained popularity
  a welfare aggregate (
 \begin_inset CommandInset citation
 LatexCommand citealt
-key "FilmerScott"
+key "filmer2012assessing"
 literal "false"
 
 \end_inset
@@ -349,7 +349,7 @@ status collapsed
 See 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "vishwanath"
+key "blumenstock2021using"
 literal "false"
 
 \end_inset
@@ -1487,8 +1487,8 @@ literal "false"
 \end_inset
 
 .
- Specifically, our implementation of gradient boosting relies on the open-source
- library XGBoost, which we combine with the Hyperopt library that conducts
+ Specifically, our implementation of xgradient boosting relies on the open-sourc
+e library XGBoost, which we combine with the Hyperopt library that conducts
  Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
 \end_layout
 
@@ -1629,15 +1629,15 @@ literal "false"
 \begin_layout Standard
 A modification of the typical unit-level small area estimation approach
  presented above which allowed updating poverty maps even when the census
- and survey data are not aligned was presented by Nguyen (
+ and survey data are not aligned was presented by 
 \begin_inset CommandInset citation
-LatexCommand citeyear
-key "doi:10.1080/00220388.2012.682983"
+LatexCommand citealt
+key "nguyen2012method"
 literal "false"
 
 \end_inset
 
-).
+.
  The basic idea behind the approach is that no household level covariates
  are used in the model presented in Eq.
  
@@ -1653,15 +1653,15 @@ noprefix "false"
 .
  This way there is no need for the covariates in the survey to match the
  moments of those from the census.
- Nguyen (
+ 
 \begin_inset CommandInset citation
-LatexCommand citeyear
-key "doi:10.1080/00220388.2012.682983"
+LatexCommand citealt
+key "nguyen2012method"
 literal "false"
 
 \end_inset
 
-) introduces the variation of the ELL method using data from Vietnam and
+ introduces the variation of the ELL method using data from Vietnam and
  suggests that only area and cluster level covariates be used.
  A further refinement was introduced by 
 \begin_inset CommandInset citation
