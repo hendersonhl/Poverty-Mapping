@@ -36,7 +36,7 @@
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
 \pdf_breaklinks false
-\pdf_pdfborder false
+\pdf_pdfborder true
 \pdf_colorlinks false
 \pdf_backref false
 \pdf_pdfusetitle true
@@ -684,10 +684,11 @@ The desired precision of 7.5 percent is somewhat arbitrary, but corresponds
 
 \end_inset
 
- We use a two-stage clustered design wherein PSUs are selected within each
- domain and then a sample of 10 households is selected within each PSU.
- Our decision to select 10 households within each PSU is consistent with
- the design of other large-scale household surveys conducted in developing
+ We use a two-stage clustered design wherein PSUs or clusters are selected
+ within each domain and then a sample of 10 households is selected within
+ each cluster.
+ Our decision to select 10 households within each cluster is consistent
+ with the design of other large-scale household surveys conducted in developing
  countries.
  Under simple random sampling, the minimum sample size required for each
  state is as follows:
@@ -696,7 +697,7 @@ The desired precision of 7.5 percent is somewhat arbitrary, but corresponds
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-n_{s}^{SRS}=\left(\frac{\sigma_{s}}{\bar{{y}}_{s}\times\text{{RSE}}}\right)^{2}
+n_{s}=\left(\frac{\sigma_{s}}{\bar{{w}}_{s}\times\text{{RSE}}}\right)^{2}
 \end{equation}
 
 \end_inset
@@ -706,7 +707,7 @@ n_{s}^{SRS}=\left(\frac{\sigma_{s}}{\bar{{y}}_{s}\times\text{{RSE}}}\right)^{2}
 
 \begin_layout Standard
 where 
-\begin_inset Formula $\bar{{y}_{s}}$
+\begin_inset Formula $\bar{{w}_{s}}$
 \end_inset
 
  and 
@@ -733,7 +734,7 @@ The minimum sample size under simple random sampling must be adjusted to
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-n_{s}=n_{s}^{SRS}\times\Big[1+\rho_{s}\left(n_{psu}-1\right)\Big]
+n_{s}\times\Big[1+\rho_{s}\left(n_{sc}-1\right)\Big]
 \end{equation}
 
 \end_inset
@@ -743,11 +744,18 @@ n_{s}=n_{s}^{SRS}\times\Big[1+\rho_{s}\left(n_{psu}-1\right)\Big]
 
 \begin_layout Standard
 where 
-\begin_inset Formula $n_{psu}$
+\begin_inset Formula $n_{sc}$
 \end_inset
 
- denotes the number of households selected within each PSU (10 in this case)
- and 
+ denotes the number of households selected in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ within state 
+\begin_inset Formula $s$
+\end_inset
+
+ (10 in this case) and 
 \begin_inset Formula $\rho_{s}$
 \end_inset
 
@@ -756,7 +764,7 @@ where
 \end_inset
 
 .
- Given the above, we can calculate the number of PSUs needed to achieve
+ Given the above, we can calculate the number of clusters needed to achieve
  the minimum sample size for each state and then multiply this number by
  10 to find the final household sample size.
  Taking these sample size requirements as given, each of our samples is
@@ -765,23 +773,19 @@ where
 \end_layout
 
 \begin_layout Standard
-Specifically, the PSUs within each state are selected with probability proportio
-nal to size (without replacement), where the measure of size is the number
- of households within each PSU.
- The 10 households within each PSU or cluster are then selected via simple
- random sampling.
+Specifically, the clusters within each state are selected with probability
+ proportional to size (without replacement), where the measure of size is
+ the number of households within each cluster.
+ The households within each cluster are then selected via simple random
+ sampling.
  According to this design, the inclusion probability for a given household
- 
-\begin_inset Formula $h$
-\end_inset
-
  is then approximately:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-p_{sch}=\frac{N_{sc}C_{s}}{N_{s}}\times\frac{n_{sc}}{N_{sc}}
+\frac{\tilde{{n}}_{sc}N_{s}}{\tilde{{n}}_{s}}\times\frac{n_{sc}}{\tilde{{n}}_{sc}}
 \end{equation}
 
 \end_inset
@@ -791,22 +795,14 @@ p_{sch}=\frac{N_{sc}C_{s}}{N_{s}}\times\frac{n_{sc}}{N_{sc}}
 
 \begin_layout Standard
 where 
-\begin_inset Formula $N_{sc}$
+\begin_inset Formula $\tilde{{n}}_{sc}$
 \end_inset
 
- is the number of households in cluster 
+ is the total number of households in cluster 
 \begin_inset Formula $c$
 \end_inset
 
  within state 
-\begin_inset Formula $s$
-\end_inset
-
-, 
-\begin_inset Formula $C_{s}$
-\end_inset
-
- is the number of clusters selected in state 
 \begin_inset Formula $s$
 \end_inset
 
@@ -814,32 +810,28 @@ where
 \begin_inset Formula $N_{s}$
 \end_inset
 
- is the total number of households in state 
+ is the number of clusters selected in state 
 \begin_inset Formula $s$
 \end_inset
 
 , and 
-\begin_inset Formula $n_{sc}$
+\begin_inset Formula $\tilde{{n}}_{s}$
 \end_inset
 
- is the number of households selected in cluster 
-\begin_inset Formula $c$
-\end_inset
-
- within state 
+ is the total number of households in state 
 \begin_inset Formula $s$
 \end_inset
 
 .
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 The equation used to calculate inclusion probabilities assumes sampling
  with replacement, but is used here as an approximation of inclusion probabiliti
 es under proportional selection without replacement.
  This should provide a reasonable approximation in this case since there
- are a relatively large number of PSUs present in the frame.
+ are a relatively large number of clusters present in the frame.
  The design weight for each household is simply the inverse of the inclusion
  probability.
  In a typical survey, the design weights would be further adjusted for nonrespon
@@ -857,7 +849,7 @@ se and calibrated to known population characteristics.
  the number of municipalities included varies from sample to sample, ranging
  between 951 to 1,020 municipalities.
  The median municipality included in a given sample is represented by a
- single PSU and thus its sample size is 10 households.
+ single cluster and thus its sample size is 10 households.
 \end_layout
 
 \begin_layout Section
@@ -1219,7 +1211,7 @@ noprefix "false"
 
 ).
  Let 
-\begin_inset Formula $s_{j}$
+\begin_inset Formula $z_{j}$
 \end_inset
 
  denote the set of observations that belong to the 
@@ -1243,7 +1235,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in s_{j}}\left\{ g(y_{i},\hat{y}_{i}^{t-1})m_{tj}+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in z_{j}}\left\{ g(y_{i},\hat{y}_{i}^{t-1})m_{tj}+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
 \end{equation}
 
 \end_inset
@@ -1276,7 +1268,7 @@ where
 \end_inset
 
  for all observations in 
-\begin_inset Formula $s_{j}$
+\begin_inset Formula $z_{j}$
 \end_inset
 
 .
@@ -1642,7 +1634,7 @@ literal "false"
 
 \end_inset
 
-and 
+ and 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2010small"
@@ -1667,7 +1659,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-y_{ih}=x_{ih}\beta+\eta_{i}+e_{ih}\label{eq:sae}
+w_{iv}=x_{iv}\delta+\mu_{i}+\xi_{iv}\label{eq:sae}
 \end{equation}
 
 \end_inset
@@ -1677,11 +1669,11 @@ y_{ih}=x_{ih}\beta+\eta_{i}+e_{ih}\label{eq:sae}
 
 \begin_layout Standard
 where 
-\begin_inset Formula $y_{ih}$
+\begin_inset Formula $w_{iv}$
 \end_inset
 
  denotes the transformed household income per capita of household 
-\begin_inset Formula $h$
+\begin_inset Formula $v$
 \end_inset
 
  in location 
@@ -1689,19 +1681,19 @@ where
 \end_inset
 
 , 
-\begin_inset Formula $x_{ih}$
+\begin_inset Formula $x_{iv}$
 \end_inset
 
  represents a vector of household-specific characteristics, 
-\begin_inset Formula $\beta$
+\begin_inset Formula $\delta$
 \end_inset
 
  is a vector of coefficients on the household characteristics, 
-\begin_inset Formula $\eta_{i}$
+\begin_inset Formula $\mu_{i}$
 \end_inset
 
  is location-specific random effect, and 
-\begin_inset Formula $e_{ih}$
+\begin_inset Formula $\xi_{ih}$
 \end_inset
 
  is a household-level error term.
@@ -2410,17 +2402,17 @@ squared
  We can thus write
 \begin_inset Formula 
 \begin{equation}
-R_{a}^{2}(y_{i}^{a},y_{i}^{p})=R_{a}^{2}(y_{i}^{a},c_{1}+c_{2}y_{i}^{p})\label{eq:shift}
+R_{a}^{2}(y_{i}^{a},y_{i}^{p})=R_{a}^{2}(y_{i}^{a},q_{1}+q_{2}y_{i}^{p})\label{eq:shift}
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $c_{1}$
+\begin_inset Formula $q_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $c_{2}$
+\begin_inset Formula $q_{2}$
 \end_inset
 
  are some arbitrary constants.
@@ -2446,11 +2438,11 @@ where
 \end_inset
 
  up to some locational shift, implying that 
-\begin_inset Formula $y_{i}^{b}=y_{i}^{u}+c$
+\begin_inset Formula $y_{i}^{b}=y_{i}^{u}+q$
 \end_inset
 
  and 
-\begin_inset Formula $E(y_{i}^{b}-y_{i}^{a})=c$
+\begin_inset Formula $E(y_{i}^{b}-y_{i}^{a})=q$
 \end_inset
 
 .
@@ -2565,7 +2557,7 @@ noprefix "false"
 \end_inset
 
 ), we can write 
-\begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+c,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+c^{2}$
+\begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+q,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+q^{2}$
 \end_inset
 
 .
