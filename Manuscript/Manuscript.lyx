@@ -110,6 +110,418 @@ Introduction
 \end_layout
 
 \begin_layout Standard
+Poverty maps provide granular estimates of poverty at the sub-national level
+ in order to deepen the understanding of poverty in a given country, better
+ inform the targeting of resources, and support the design of interventions
+ tailored to local needs 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bedi2007poverty"
+literal "false"
+
+\end_inset
+
+.
+ As household surveys are generally unrepresentative for small geographical
+ areas, producing detailed poverty maps often requires using small area
+ estimation wherein statistical methods are used to predict poverty levels
+ on the basis of household- or area-level characteristics.
+ The procedure commonly consists of two steps: (1) using household survey
+ data, fit a statistical model of some poverty measure (e.g., consumption
+ or wealth) to select household- or area-level characteristics, and (2)
+ apply the model to census data available for all households or geographical
+ entities to estimate poverty at the sub-national level.
+ At a minimum, the procedure thus requires both household survey and census
+ data to produce a sufficiently detailed poverty map.
+\end_layout
+
+\begin_layout Standard
+The literature on small area estimation is rich and several variations on
+ this basic procedure have been proposed.
+ Unit-level models conduct estimation and prediction at the household level,
+ assuming a linear relationship between the poverty measure and household-level
+ characteristics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hentschel1998combining,elbers2003micro,molina2010small"
+literal "false"
+
+\end_inset
+
+.
+ Unit-level models are not well-suited to situations where the survey and
+ census data correspond to different years, which is often the case in developin
+g countries where censuses are conducted infrequently.
+ Area-level models represent a feasible alternative that similarly rely
+ on linear functional forms, but conduct estimation and prediction using
+ only aggregate data for the geographical entities of interest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "fay1979estimates,torabi2014small"
+literal "false"
+
+\end_inset
+
+.
+ Unit-context models represent another alternative and are characterized
+ by an estimation stage where household-level measures are modeled exclusively
+ as a function of area-level characteristics 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "nguyen2012method,lange2018small,masaki2020small"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Recent developments in poverty mapping have focused on the application of
+ machine learning to remotely-sensed data, largely in response to the issue
+ of out-of-date census information.
+ These approaches also use survey-derived measures of poverty, but are distingui
+sed by a first stage where a machine-learning model is fit to remotely-sensed
+ covariates (e.g., data derived from satellite imagery or call detail records)
+ rather than census-based covariates.
+ For example, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+ matched data from several remotely-sensed data sources to survey-based
+ measures of 
+\begin_inset Quotes eld
+\end_inset
+
+village
+\begin_inset Quotes erd
+\end_inset
+
+ wealth for 56 countries, and then fit a prediction model using gradient
+ boosting machines.
+ They then applied the model to the populated surface of all 135 low- and
+ middle-income countries to develop granular poverty maps for each country.
+ Similar approaches have been adopted for individual countries, including
+ Rwanda 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting"
+literal "false"
+
+\end_inset
+
+, Senegal 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, Bangladesh 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, and Belize 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hersh2021open"
+literal "false"
+
+\end_inset
+
+, among others.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other recent applications.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Poverty maps produced with machine-learning methods generally share a common
+ validation procedure, which can be summarized in the following steps: (1)
+ using survey data calculate a poverty measure for the geographic unit of
+ interest and merge the poverty measure with features from some remotely-sensed
+ data source; (2) randomly split the dataset into training and testing subsample
+s; (3) fit a machine-learning model to the training data and use the model
+ to predict poverty in the testing data; (4) calculate the out-of-sample
+ 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by regressing the observed poverty measures from the testing data on the
+ predicted poverty measures for the same geographic units.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Rather than relying on a single training-testing split of the data, many
+ studies use cross-validation and report the average 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across various training-testing splits.
+ For examples of the above procedure, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+ Note that a few studies use a similar procedure, but fit the machine-learning
+ model to household-level data and then aggregate the model's predictions
+ to the geographic unit of interest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting,hersh2021open,aiken2022machine"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ It is important to emphasize that the poverty measures used in this procedure
+ are often direct, sample-based estimates rather than the true poverty measures
+ for the regions of interest.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+For example, in a recent application from Togo, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ matched call detail records to survey-based measures of household consumption
+ and poverty, and then fit a prediction model using gradient boosting machines.
+ They then applied the model to every subscriber in the mobile phone network
+ to produce granular poverty estimates to inform the tageting of social
+ assistance.
+ Similar methods have been used in Rwanda 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting"
+literal "false"
+
+\end_inset
+
+, Senegal 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, Bangladesh 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, and Belize 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "hersh2021open"
+literal "false"
+
+\end_inset
+
+, among other countries.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Other notable studies include 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Outline:
+\end_layout
+
+\begin_layout Plain Layout
+- Motivation
+\end_layout
+
+\begin_layout Plain Layout
+- Applications
+\end_layout
+
+\begin_layout Plain Layout
+- Validation
+\end_layout
+
+\begin_layout Plain Layout
+- Our contribution
+\end_layout
+
+\begin_layout Plain Layout
+- Our results
+\end_layout
+
+\begin_layout Plain Layout
+- Similar studies
+\end_layout
+
+\begin_layout Plain Layout
+- Overview of the paper
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Unit-level methods tend to perform poorly when the household survey and
+ census data correspond to different years, which is often the case in developin
+g countries where censuses are conducted infrequently.
+ 
+\end_layout
+
+\begin_layout Plain Layout
 Methodological advances, the availability of satellite derived data as well
  as a litany of other sources of data have led to considerable innovations
  in the area of poverty mapping.
@@ -119,7 +531,7 @@ Methodological advances, the availability of satellite derived data as well
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Poverty maps are attractive since they are a useful way to illustrate poverty
  estimates at a granular local level.
  These estimates are then used by policy makers to determine where the limited
@@ -129,7 +541,7 @@ Poverty maps are attractive since they are a useful way to illustrate poverty
  available.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Household surveys measuring living standards provide population statistics,
  like poverty rates or mean expenditures, for a given country.
  Such household surveys may also provide estimates that are sufficiently
@@ -149,7 +561,7 @@ Household surveys measuring living standards provide population statistics,
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The drawbacks related to disaggregation and coverage are often addressed
  through small area estimation.
  Small area estimation is a branch of statistics focused on obtaining estimates
@@ -164,7 +576,7 @@ The drawbacks related to disaggregation and coverage are often addressed
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 In the context of poverty, small area estimation can be split into unit-level
  models and area-level models.
  Unit-level models for small area estimation will often yield the largest
@@ -252,7 +664,7 @@ literal "false"
 ).
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The drawback with unit-level models is that they rely on covariates that
  should have similar moments of the distribution across the data used, otherwise
  estimates will tend to be biased.
@@ -266,7 +678,7 @@ The drawback with unit-level models is that they rely on covariates that
  that may yield sufficiently precise small area estimates of poverty.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Traditionally in off-census years area-level models such as the one proposed
  by 
 \begin_inset CommandInset citation
@@ -300,7 +712,7 @@ literal "false"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Considerable efforts have been devoted to methods which can be applied for
  poverty mapping in off-census years.
  One proposed method attempts to combine the best features of unit-level
@@ -323,7 +735,7 @@ literal "false"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Poverty maps constructed from machine learning methods have gained popularity
  in academic and policy circles.
  Although these machine learning based estimates are often called poverty
@@ -362,7 +774,7 @@ literal "false"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 With this backdrop, the present research builds upon the work from 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -397,7 +809,7 @@ literal "false"
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The findings illustrate the pitfalls of validating, through an aggregate
  measure like the coefficient of determination, model based estimates against
  direct estimates (i.e.
@@ -418,7 +830,7 @@ l small area estimates which require census microdata.
  poverty maps can still yield solid poverty reduction.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The paper proceeds to present the methods and how these are often validated.
  We then present how the targeting efficiency of methods will be evaluated.
  Then we present the Mexican Intra-censal survey and how it was converted
@@ -427,6 +839,11 @@ The paper proceeds to present the methods and how these are often validated.
  We then present performance results of the various methods.
  The paper closes with conclusions and a discussion of the practical uses
  of poverty maps.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -442,10 +859,10 @@ name "sec:data"
 
 \begin_layout Standard
 Poverty maps produced with machine-learning methods generally share a common
- validation procedure, which can be summarized in the following steps::
- (1) using survey data calculate a poverty measure for the geographic unit
- of interest and merge the poverty measure with features from some passively-col
-lected data source (e.g., mobile phone data or satellite imagery); (2) randomly
+ validation procedure, which can be summarized in the following steps: (1)
+ using survey data calculate a poverty measure for the geographic unit of
+ interest and merge the poverty measure with features from some passively-collec
+ted data source (e.g., mobile phone data or satellite imagery); (2) randomly
  split the dataset into training and testing subsamples; (3) fit a machine-learn
 ing model to the training data and use the model to predict poverty in the
  testing data; (4) calculate the out-of-sample 
