@@ -165,7 +165,7 @@ literal "false"
 .
  Unit-context models represent another alternative and are characterized
  by an estimation stage wherein household-level measures are modeled exclusively
- as a function of area-level characteristics 
+ as a linear function of area-level characteristics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "nguyen2012method,lange2018small,masaki2020small"
@@ -508,7 +508,7 @@ literal "false"
 
 \end_inset
 
- validate their models relative to census data, both papers use the 
+ validate their models relative to censuses, both papers use the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
