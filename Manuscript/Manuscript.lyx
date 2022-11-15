@@ -894,9 +894,8 @@ This section describes the methods we apply to the Mexican Intercensal Survey.
  gradient boosting, as it is among the most popular machine-learning methods
  for poverty mapping.
  The second subsection then discusses more traditional approaches to poverty
- mapping – including the empirical best and unit-context models – which
- we use as benchmarks in our performance assessment of the machine-learning
- methods.
+ mapping – including the unit-level and unit-context models – which we use
+ as benchmarks in our performance assessment of the machine-learning methods.
 \end_layout
 
 \begin_layout Subsection
@@ -1512,8 +1511,8 @@ literal "false"
 \end_inset
 
 .
- Specifically, our implementation of xgradient boosting relies on the open-sourc
-e library XGBoost, which we combine with the Hyperopt library that conducts
+ Specifically, our implementation of gradient boosting relies on the open-source
+ library XGBoost, which we combine with the Hyperopt library that conducts
  Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
 \end_layout
 
@@ -1622,7 +1621,7 @@ One major aspect of concern for small area estimation is the estimation
  Estimates of noise are obtained via bootstrap replications where the model's
  assumptions are exploited in order to obtain an estimated MSE.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 For a much more detailed discussion on the estimation of noise refer to
@@ -1637,7 +1636,7 @@ literal "false"
  and for a discussion focused on ELL and EB estimates refer to 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "corral2020pull"
+key "corral2021pull"
 literal "false"
 
 \end_inset
@@ -2316,7 +2315,7 @@ where
 \end_inset
 
  are some arbitrary constants.
- The implication of the above is that it implies that the 
+ The implication of the above is that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3633,7 +3632,7 @@ noprefix "false"
 \end_inset
 
  present the MSE and bias results for all models.
- With the possible exception of the Lasso, we find that all models perform
+ With the possible exception of the lasso, we find that all models perform
  comparably in terms of MSE and bias, meaning that the poor performance
  of XGBoost when using GIS covariates cannot be remedied by simply adopting
  a different machine-learning model.
