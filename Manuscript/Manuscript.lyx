@@ -1574,7 +1574,7 @@ literal "false"
 \end_inset
 
 .
- This method assumes that (transformed) household income per capita relates
+ This method assumes that (transformed) equivalized household income relates
  linearly to a vector of covariates according the following model:
 \end_layout
 
@@ -1614,13 +1614,22 @@ where
 \begin_inset Formula $\mu_{i}$
 \end_inset
 
- is location-specific random effect, and 
-\begin_inset Formula $\xi_{ih}$
+ is location-specific random effect such that 
+\begin_inset Formula $\mu_{i}\sim N(0,\sigma_{\mu}^{2})$
 \end_inset
 
- is a household-level error term.
- The random effect and household-level error terms are assumed to independently
- and normally distributed.
+ , and 
+\begin_inset Formula $\xi_{iv}$
+\end_inset
+
+ is a household-level error term such that 
+\begin_inset Formula $\xi_{iv}\sim N(0,\sigma_{\xi}^{2})$
+\end_inset
+
+.
+ The random effect and household-level error terms are assumed to be independent
+ from each other and normally distributed.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1629,9 +1638,186 @@ It is evident that the dependent variable of the model is not the poverty
  Instead, the method attempts to replicate the welfare distribution based
  on an assumed data generating process.
  The parameters obtained from the model fit using the household survey data
- are then applied to the census data, including simulated errors.
+ are then applied to the census data, including simulated errors drawn from
+ the assumed normal distribution.
  From the simulated welfare vector in the census it is possible to obtain
  estimates of any welfare indicator, not just poverty headcount rates.
+\end_layout
+
+\begin_layout Standard
+The parameter estimates obtained when fitting model (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:sae"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) to the survey data (
+\begin_inset Formula $\hat{\delta},\hat{\sigma}_{\mu}^{2}$
+\end_inset
+
+, and 
+\begin_inset Formula $\hat{\sigma}_{\xi}^{2}$
+\end_inset
+
+) are applied to the census household level data to generate a simulated
+ value of 
+\begin_inset Formula $w_{iv}$
+\end_inset
+
+ for each household in the census.
+ The parameter estimates are fit through a suitable method such as REML
+ or Henderson's Method III (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "henderson1953estimation"
+literal "false"
+
+\end_inset
+
+).
+ The 
+\begin_inset Formula $w_{iv}$
+\end_inset
+
+ for each household is simulated 
+\begin_inset Formula $M$
+\end_inset
+
+ times using Monte Carlo simulation where each simulated welfare 
+\begin_inset Formula $m$
+\end_inset
+
+ follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{ivm}=x_{iv}\hat{\delta}+\mu_{im}^{*}+\xi_{ivm}^{*}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\mu_{im}^{*}$
+\end_inset
+
+ and 
+\begin_inset Formula $\xi_{ivm}^{*}$
+\end_inset
+
+ are drawn from their assumed distributions.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+ for a more detailed description.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The method used here, CensusEB, follows the one presented in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2019desagregacion"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+ which builds upon the Empirical Best (EB) methods from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+ also show that when the sample size is small relative to the population
+ the difference between CensusEB and EB methods is indiscernible.
+\end_layout
+
+\end_inset
+
+ The method is EB since it conditions on the survey sample and makes use
+ of the area level information such that 
+\begin_inset Formula $E[\bar{y}_{i}|\mu_{i}]=\bar{x}_{i}\delta+\mu_{i}$
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Under ELL the area level mean of the dependent variable is 
+\begin_inset Formula $E[\bar{y}_{i}]=\bar{x}_{i}\delta$
+\end_inset
+
+ since it does not condition on the survey, and since residuals are drawn
+ from their assumed distribution and these have an expected value of 0,
+ the ELL estimator collapses to the synthetic estimator: 
+\begin_inset Formula $\bar{x}_{i}\delta$
+\end_inset
+
+.
+ Nevertheless, the inclusion of area level covariates helps mitigate the
+ problem to a certain extent, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "doi:https://doi.org/10.1002/9781118814963.ch18"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
+ Thus, it makes more use of the survey data for predictions.
+ However, EB methods only ensure that the area level means of the dependent
+ variable are Empirical Best Linear Unbiased Predictors (EBLUP) but does
+ not guarantee the same for poverty which is a non-linear parameter.
 \end_layout
 
 \begin_layout Standard
@@ -1646,7 +1832,7 @@ One major aspect of concern for small area estimation is the estimation
  Estimates of noise are obtained via bootstrap replications where the model's
  assumptions are exploited in order to obtain an estimated MSE.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 For a much more detailed discussion on the estimation of noise refer to
@@ -1661,7 +1847,7 @@ literal "false"
  and for a discussion focused on ELL and EB estimates refer to 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "corral2021pull"
+key "rodas2021pull"
 literal "false"
 
 \end_inset
@@ -1673,12 +1859,15 @@ literal "false"
 
  This aspect is one of the biggest differences between poverty maps based
  on small area estimation and those based on machine learning.
+ Statistical agencies across the globe will assess an estimate's noise before
+ deciding to publish it or not, hence the importance of such estimates.
+ 
 \end_layout
 
 \begin_layout Standard
 A modification of the typical unit-level small area estimation approach
- presented above which allowed updating poverty maps even when the census
- and survey data are not aligned was presented by 
+ presented above which intended to allow updating poverty maps even when
+ the census and survey data are not aligned was presented by 
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "nguyen2012method"
@@ -1740,9 +1929,20 @@ literal "false"
 \end_inset
 
  and shown to be flawed since it yields heavily biased estimates.
- The authors discourage the use of the method since it fails to yield unbiased
- estimates and practitioners are unlikely to know when the method has yielded
- estimates of good quality.
+ One of the reasons for the heavily biased estimates is due to the method's
+ inability to explain between household variation which translates to an
+ inability to replicate the full welfare distribution.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ discourage the use of the method since it fails to yield unbiased estimates
+ and practitioners are unlikely to know when the method has yielded estimates
+ of good quality.
  However, since it does offer certain advantages,
 \begin_inset Foot
 status collapsed
@@ -1773,28 +1973,6 @@ literal "false"
 
  it is included here for the sake of comparison between methods which can
  be applied for off-census years.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-I would like to see this discussion of the traditional methods improved.
- Please see my email with the subject 
-\begin_inset Quotes eld
-\end_inset
-
-Traditional SAE Methods
-\begin_inset Quotes erd
-\end_inset
-
- (11/10/22) for some detailed comments.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
