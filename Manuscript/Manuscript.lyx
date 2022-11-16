@@ -110,17 +110,21 @@ g approaches to remotely-sensed data.
  are informative of actual model performance.
  In this paper, we examine the credibility of existing approaches to model
  validation by constructing a pseudo-census from the Mexican Intercensal
- Survey of 2015.
- Our design-based simulation experiments entail repeatedly drawing survey
- samples from the psuedo-census such that for each direct estimate we also
- observe the associated true poverty rate.
- We then fit several machine-learning models to the direct estimates and
- assess model performance on the basis of true poverty rates.
+ Survey of 2015, which we use to conduct several design-based simulation
+ experiments.
  We find that the standard validation procedure can be misleading in terms
  of model assessment, with notable implications for model selection.
  Further, our closest approximation to existing machine-learning approaches
- performs poorly when evaluated against true poverty rates and fails to
- outperform traditional poverty mapping methods in targeting simulations.
+ performs poorly when evaluated against 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ poverty rates and fails to outperform traditional poverty mapping methods
+ in targeting simulations.
 \end_layout
 
 \begin_layout Abstract
