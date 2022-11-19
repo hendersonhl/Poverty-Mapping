@@ -1,0 +1,4339 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "lmodern" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family rmdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing onehalf
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Poverty Mapping in the Age of Machine Learning
+\end_layout
+
+\begin_layout Author
+Paul Corral, Heath Henderson, Sandra Segovia, and Kevin McGee
+\end_layout
+
+\begin_layout Abstract
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+Methodological advances, the availability of satellite derived data as well
+ as a litany of other sources of data have led to considerable innovations
+ in the area of poverty mapping.
+ Machine learning approaches coupled with these innovative data sources
+ are now often used to yield a granular picture of poverty across the globe,
+ and many of these poverty maps feed into policy making.
+ 
+\end_layout
+
+\begin_layout Standard
+Poverty maps are attractive since they are a useful way to illustrate poverty
+ estimates at a granular local level.
+ These estimates are then used by policy makers to determine where the limited
+ funds at their disposal should be allocated.
+ However, estimates of poverty at the local level which are sufficiently
+ precise to minimize errors of inclusion and exclusion are not always readily
+ available.
+\end_layout
+
+\begin_layout Standard
+Household surveys measuring living standards provide population statistics,
+ like poverty rates or mean expenditures, for a given country.
+ Such household surveys may also provide estimates that are sufficiently
+ reliable for large areas in a given country.
+ However, household surveys suffer from three flaws which hamper poverty
+ monitoring and alleviation efforts at a granular level.
+ The first flaw is related to time.
+ Household surveys in many developing countries are conducted infrequently,
+ in some cases more than a decade may pass before a new survey is implemented.
+ A second drawback of household surveys for the purposes of poverty monitoring
+ at the local level is that household surveys can only be disaggregated
+ up to a certain point before the estimates lose validity (i.e.
+ become too noisy).
+ The third, and final drawback, of household surveys is that these surveys
+ may not cover all the locations of interest to policy makers who are trying
+ to determine which areas should be prioritized.
+ 
+\end_layout
+
+\begin_layout Standard
+The drawbacks related to disaggregation and coverage are often addressed
+ through small area estimation.
+ Small area estimation is a branch of statistics focused on obtaining estimates
+ of higher quality than those obtained directly from the household survey.
+ These small area estimation techniques often combine data from household
+ surveys and auxiliary information from censuses, registers, or others to
+ produce estimates for areas with small sample sizes of higher quality than
+ is possible from survey data alone.
+ Since there is no such thing as a free lunch, to achieve these gains in
+ quality it is necessary to rely on model assumptions which must be thoroughly
+ checked.
+ 
+\end_layout
+
+\begin_layout Standard
+In the context of poverty, small area estimation can be split into unit-level
+ models and area-level models.
+ Unit-level models for small area estimation will often yield the largest
+ gains in quality.
+ Under unit-level models a linear relationship is assumed between welfare
+ and a set of household and individual level characteristics.
+ The parameters obtained from such a linear relationship are used to simulate
+ welfare for every unit in the census data.
+ From the simulated welfare vector it is possible to obtain poverty headcount
+ rates and other indicators.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For a thorough discussion on small area estimation for poverty headcount
+ rates see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "sae_guide"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "mcn2021"
+literal "false"
+
+\end_inset
+
+.
+ For a thorough discussion on small area estimation see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ Perhaps the first unit-level model for small area estimation of poverty
+ indicators was proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jesko1998"
+literal "false"
+
+\end_inset
+
+ which was later refined by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2003micro"
+literal "false"
+
+\end_inset
+
+, the latter quickly became popular across the globe and is perhaps the
+ most applied methodology for poverty mapping.
+ The empirical best (EB) method for poverty mapping was introduced by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+ which relies on similar model assumptions to ELL but due to EB, which makes
+ use of the survey data available for areas present in the survey, yields
+ estimates with considerably greater precision than ELL and represents a
+ significant upgrade as noted in validations with simulated and real world
+ data (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The drawback with unit-level models is that they rely on covariates that
+ should have similar moments of the distribution across the data used, otherwise
+ estimates will tend to be biased.
+ This is most likely to occur when census data and survey data correspond
+ to different years, but it may also occur in other instances where the
+ data are misaligned.
+ This represents a limitation to the usefulness of unit-level small area
+ estimates since in most developing countries census data is collected once
+ every ten years and survey data may not be contemporaneous.
+ When unit-level models are not possible there is no fully vetted methodology
+ that may yield sufficiently precise small area estimates of poverty.
+\end_layout
+
+\begin_layout Standard
+Traditionally in off-census years area-level models such as the one proposed
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+ and sub-area-level models proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "torabi2014small"
+literal "false"
+
+\end_inset
+
+ are the go to methods.
+ Area-level models rely on aggregate data at the area level and consequently
+ do not require contemporary census data to obtain small area estimates.
+ Despite their desirable features, the gains in precision offered by these
+ models is quite limited (see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina_morales2009"
+literal "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Considerable efforts have been devoted to methods which can be applied for
+ poverty mapping in off-census years.
+ One proposed method attempts to combine the best features of unit-level
+ models and area-level models (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "nguyen2012method,lange2018small,masaki2020small"
+literal "false"
+
+\end_inset
+
+), called unit-context models.
+ Specifically, the method models household level welfare from a household
+ survey using only aggregate data.
+ Aggregate data may come from a recent or previous census, administrative
+ data, or GIS data.
+ The latter data have become a selling point of many recent poverty maps,
+ particularly poverty maps with estimates obtained from machine learning
+ methods.
+ 
+\end_layout
+
+\begin_layout Standard
+Poverty maps constructed from machine learning methods have gained popularity
+ in academic and policy circles.
+ Although these machine learning based estimates are often called poverty
+ maps, in reality these often obtain estimates of an asset index.
+ Although highly correlated to poverty, asset indexes are not the same as
+ a welfare aggregate (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "FilmerScott"
+literal "false"
+
+\end_inset
+
+).
+ Despite this, the methods have become very popular and during the COVID-19
+ pandemic were applied by governments desperately in need for any sort of
+ relevant information to assist their targeting efforts to reach those most
+ in need.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vishwanath"
+literal "false"
+
+\end_inset
+
+ for an application in Nigeria.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+With this backdrop, the present research builds upon the work from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ who validate small area estimation models using the Mexican Intra-censal
+ survey data.
+ Specifically, this paper adds to the validation exercise by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ by including machine learning based estimates of poverty.
+ The goal is to compare the quality of machine learning based estimates
+ of monetary head count poverty for small areas to traditional small area
+ based estimates of monetary head count poverty in a scenario where every
+ method is applied to the same data.
+ As far as we are aware this is the first validation of machine learning
+ based methods where the quality of the estimates are measured against other
+ estimation methods and where the true poverty rate for each small area
+ domain is known, and thus yields empirical measures of design based bias
+ and mean squared errors.
+ This, in our view, is also a much more thorough validation approach than
+ the one often used in the literature which often relies on aggregate measures
+ such as a coefficient of determination.
+ 
+\end_layout
+
+\begin_layout Standard
+The findings illustrate the pitfalls of validating, through an aggregate
+ measure like the coefficient of determination, model based estimates against
+ direct estimates (i.e.
+ those derived from the survey) and how doing so can lead to choosing the
+ worst performing model.
+ Additionally, we present evidence that machine learning based methods with
+ models fit at the area level perform very well and are comparable to traditiona
+l small area estimates which require census microdata.
+ We also show the importance of having covariates that adequately explain
+ poverty, and how publicly available satellite derived covariates perform
+ worse than census aggregates under the Mexican data used.
+ The findings are important since across the globe programs are targeted
+ based on results from poverty maps and choosing the right method can lead
+ to millions of dollars in savings or, perhaps more important, more people
+ being lifted out of poverty.
+ Additionally, given the scarce data landscape in many countries the findings
+ present evidence that even without a contemporaneous census and survey,
+ poverty maps can still yield solid poverty reduction.
+\end_layout
+
+\begin_layout Standard
+The paper proceeds to present the methods and how these are often validated.
+ We then present how the targeting efficiency of methods will be evaluated.
+ Then we present the Mexican Intra-censal survey and how it was converted
+ into census data and how 500 survey samples were taken from the data for
+ validations.
+ We then present performance results of the various methods.
+ The paper closes with conclusions and a discussion of the practical uses
+ of poverty maps.
+\end_layout
+
+\begin_layout Section
+Methods and validation approach
+\end_layout
+
+\begin_layout Standard
+This section provides a brief overview of the methods applied.
+ The section first gives an overview of gradient boosting, since the method
+ is popular for machine learning based poverty mapping.
+ Then a brief discussion on previously implemented validation approaches
+ for machine learning based estimates is discussed.
+ Unit-level methods that combine survey and census data to obtain poverty
+ estimates are then discussed.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The section highlights how small area estimation based poverty estimates
+ differ from machine learning based poverty estimates.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Machine learning
+\end_layout
+
+\begin_layout Standard
+The goal of machine learning is to develop high-performance algorithms for
+ prediction, classification, and clustering/grouping tasks 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "varian2014big,athey2018impact,athey2019machine"
+literal "false"
+
+\end_inset
+
+.
+ Such tasks can be divided into supervised and unsupervised learning problems.
+ While unsupervised learning focuses on identifying clusters of observations
+ that are similar in terms of their features, supervised learning uses a
+ set of features to predict some outcome of interest.
+ Supervised learning can be further divided into regression and classification
+ tasks, where regression is concerned with predicting continuous outcomes
+ and classification focuses on categorical outcomes.
+ While there are many machine-learning methods used for regression and classific
+ation tasks (e.g., lasso, random forests, or support vector machines), here
+ we fix ideas by focusing on a method that has been particularly popular
+ for poverty mapping: gradient boosting.
+\end_layout
+
+\begin_layout Standard
+Originally developed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "friedman2001greedy"
+literal "false"
+
+\end_inset
+
+, gradient boosting machines are a family of machine-learning techniques
+ that combine a large number of weak learners to form a stronger ensemble
+ prediction.
+ Unlike some common ensemble techniques (e.g., random forests) that simply
+ average models in the ensemble, gradient boosting adds models to the ensemble
+ sequentially by fitting new weak learners to the negative gradient of some
+ chosen loss function.
+ With the classic squared-error loss function, this amounts to sequentially
+ fitting new models to the current residuals of the ensemble.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "natekin2013gradient"
+literal "false"
+
+\end_inset
+
+ for an accessible introduction to gradient boosting.
+\end_layout
+
+\end_inset
+
+ Extreme gradient boosting (XGboost) is a particularly popular implementation
+ of gradient boosting that uses classification and regression trees as the
+ base models or weak learners.
+ The popularity of XGboost is due to the fact that it is fast, scalable,
+ and has been shown to outperform competing methods across a wide range
+ of problems 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Classification and regression trees are based on a sequential binary splitting
+ of the covariate space that serves to partition the data into subsamples
+ that are increasingly homogeneous in terms of the outcome variable.
+ A tree begins with a single root node that is split into two child nodes
+ according to some decision rule.
+ A decision rule pertains to a single explanatory variable and observations
+ are assigned to the child nodes depending on whether they meet some condition
+ associated with the explanatory variable.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For example, for a continuous explanatory variable, one determines whether
+ a given observations falls above or below some numeric cutoff.
+\end_layout
+
+\end_inset
+
+ The child nodes can be further split into new child nodes based on different
+ decision rules that involve other explanatory variables and cutoff points.
+ Any child node that is not further split is referred to as a terminal node
+ or leaf, and each leaf is associated with a parameter that provides a predictio
+n for the subsample associated with that leaf.
+ For any given observation, the ensemble prediction used by XGboost is the
+ sum of that observation's predictions across all trees in the ensemble.
+\end_layout
+
+\begin_layout Standard
+In what follows, we discuss the key features of the XGboost algorithm, drawing
+ on the presentation provided in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ denote the outcome of interest (e.g., poverty headcounts) for observation
+ or entity 
+\begin_inset Formula $i$
+\end_inset
+
+, and let 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ denote a vector of explanatory variables.
+ In line with the above, the predicted value of the outcome 
+\begin_inset Formula $\hat{y}_{i}$
+\end_inset
+
+ is given by the sum of predictions across the individual trees in the ensemble:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{y}_{i}=\sum_{t}f_{t}(x_{i})
+\end{equation}
+
+\end_inset
+
+where the trees are indexed by 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{t}(x_{i})$
+\end_inset
+
+ gives the prediction of a given tree as a function of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+.
+ To build the trees used in the model, XGboost minimizes the following regulariz
+ed objective function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}=\sum_{i}l(y_{i},\hat{y}_{i})+\sum_{t}r(f_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $l(y_{i},\hat{y}_{i})$
+\end_inset
+
+ is the loss associated with the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation and 
+\begin_inset Formula $r(f_{t})$
+\end_inset
+
+ is a regularization term that serves to mitigate overfitting.
+ In our implementation, we use the classic squared-error loss such that
+ 
+\begin_inset Formula $l(y_{i},\hat{y}_{i})=(y_{i}-\hat{y}_{i})^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+XGboost uses the following specification of the regularization term: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+r(f_{t})=\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is the total number of leaves in tree 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+ is the prediction associated with the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ leaf in a given tree, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are hyperparameters that must be chosen by the user (we discuss our selection
+ of hyperparameters below).
+ The regularization term serves to mitigate overfitting by penalizing complicate
+d trees and smoothing the predictions associated with each tree.
+ That is, the method relies on a large number of weak learners and the regulariz
+ation term helps control the complexity of the learners.
+ It is important to note that the above specification of the regularization
+ term is only one of many possible specifications, though 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+ claim that it is simpler than the leading alternatives and easier to paralleliz
+e.
+ Further note that when the hyperparameters are set to zero, the objective
+ function becomes equivalent to that used in traditional gradient tree boosting.
+\end_layout
+
+\begin_layout Standard
+To minimize the objective function, the model is trained in a sequential
+ manner, building one tree at a time.
+ The objective function at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+ can be written as follows: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}_{t}=\sum_{i}l(y_{i},\hat{y}_{i}^{t-1}+f_{t}(x_{i}))+r(f_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+f_{t}(x_{i})$
+\end_inset
+
+.
+ Each iteration then adds the tree 
+\begin_inset Formula $f_{t}(x_{i})$
+\end_inset
+
+ that greedily minimizes the objective function at that iteration.
+ More specifically, XGboost uses a second-order Taylor series expansion
+ to approximate the loss function at any given iteration:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{i}\left\{ g(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})^{2}\right\} +r(f_{t})\label{eq:approx}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $g(\cdot,\cdot)$
+\end_inset
+
+ and 
+\begin_inset Formula $h(\cdot,\cdot)$
+\end_inset
+
+ denote the first- and second-order derivatives of the loss function 
+\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\end_inset
+
+ with respect to 
+\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\end_inset
+
+.
+ That is, the point 
+\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\end_inset
+
+ is taken as the basis for the expansion.
+ The above conveniently omits the first term of the series 
+\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\end_inset
+
+ because it is a constant.
+\end_layout
+
+\begin_layout Standard
+The XGboost algorithm is based on a re-expression of Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:approx"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Let 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ denote the set of observations that belong to the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ leaf of the tree being built at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Substituting in the explicit form of the regularization term and noting
+ that all observation that belong to the same leaf receive the same prediction
+ 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+, we can write 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in s_{j}}\left\{ g(y_{i},\hat{y}_{i}^{t-1})m_{tj}+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\end{equation}
+
+\end_inset
+
+or, equivalently,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\left\{ G_{j}m_{tj}+\frac{1}{2}(H_{j}+\lambda)m_{tj}^{2}\right\} +\gamma M_{t}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{j}$
+\end_inset
+
+ represent the sums over 
+\begin_inset Formula $g(\cdot,\cdot)$
+\end_inset
+
+ and 
+\begin_inset Formula $h(\cdot,\cdot)$
+\end_inset
+
+ for all observations in 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+.
+ Note that the summation in the above is over 
+\begin_inset Formula $j$
+\end_inset
+
+, which indexes the leaves in the tree.
+\end_layout
+
+\begin_layout Standard
+For a given tree structure, we can find the optimal prediction values by
+ minimizing the objective function with respect to 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+, which yields 
+\begin_inset Formula $m_{tj}^{*}=-G_{j}/(H_{j}+\lambda)$
+\end_inset
+
+.
+ With a squared-error loss function, where 
+\begin_inset Formula $g(y_{i},\hat{y}_{i}^{t-1})=-2(y_{i}-\hat{y}_{i}^{t-1})$
+\end_inset
+
+ and 
+\begin_inset Formula $h(y_{i},\hat{y}_{i}^{t-1})=2$
+\end_inset
+
+, the optimal prediction values are effectively the (penalized) average
+ of the residuals associated with a given leaf.
+ We can then substitute the optimal prediction values into the objective
+ function to obtain the following: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\tilde{\mathcal{L}}_{t}^{*}=-\frac{1}{2}\sum_{j}\frac{G_{j}^{2}}{H_{j}+\lambda}+\gamma M_{t}
+\end{equation}
+
+\end_inset
+
+which gives us the minimal objective function for a given tree structure.
+ Ideally, one would enumerate all possible tree structures and then use
+ the tree associated with the smallest value of the (minimized) objective
+ function, but this is often intractable.
+ XGboost instead implements an alternative approach that seeks to minimize
+ the objective at a given iteration by greedily optimizing one level of
+ the tree at a time.
+\end_layout
+
+\begin_layout Standard
+To this end, consider splitting a node in a given tree into 
+\begin_inset Quotes eld
+\end_inset
+
+left
+\begin_inset Quotes erd
+\end_inset
+
+ and 
+\begin_inset Quotes eld
+\end_inset
+
+right
+\begin_inset Quotes erd
+\end_inset
+
+ child nodes based on some candidate splitting rule.
+ Let 
+\begin_inset Formula $G_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $G_{R}$
+\end_inset
+
+ represent 
+\begin_inset Formula $G_{j}$
+\end_inset
+
+ for the left and right child nodes, respectively.
+ Similarly, let 
+\begin_inset Formula $H_{L}$
+\end_inset
+
+ and 
+\begin_inset Formula $H_{R}$
+\end_inset
+
+ represent 
+\begin_inset Formula $H_{j}$
+\end_inset
+
+ for the child nodes.
+ We can then find the reduction in the objective function as follows: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\Delta\tilde{\mathcal{L}}_{t}^{*}=\frac{1}{2}\left\{ \frac{G_{L}^{2}}{H_{L}+\lambda}+\frac{G_{R}^{2}}{H_{R}+\lambda}-\frac{(G_{L}+G_{R})^{2}}{H_{L}+H_{R}+\lambda}\right\} -\gamma\label{eq:gain}
+\end{equation}
+
+\end_inset
+
+where the first two terms in parentheses capture the loss associated with
+ the child nodes and the third term captures the loss associated with the
+ parent node being split.
+ When splitting a node in any given tree, XGboost then evaluates Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:gain"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) for every possible split rule for every available explanatory variable
+ and chooses the split associated with the maximal reduction in the objective
+ function.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is known as the 
+\begin_inset Quotes eld
+\end_inset
+
+exact greedy algorithm.
+\begin_inset Quotes erd
+\end_inset
+
+ XGboost also has an approximate algorithm that can be used for large datasets.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+ for details.
+\end_layout
+
+\end_inset
+
+ XGboost then continues to split nodes in a given tree until a stopping
+ criterion is met (e.g., a user-specified maximum tree depth).
+ Once a given tree is built, XGboost then moves to building the next tree
+ in the ensemble and continues to do so until reaching the user-specified
+ number of trees to build.
+\end_layout
+
+\begin_layout Standard
+The above references several hyperparameters that must be chosen by the
+ user, including the hyperparameters in the regularization term (i.e., 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+), the maximum tree depth, and the number of trees in the ensemble.
+ There are two additional hyperparameters that can be used to further prevent
+ overfitting.
+ First, one can use column or feature subsampling where each tree in the
+ ensemble is built based on a (uniformly) random subset of all explanatory
+ variables.
+ This procedure can also speed up the algorithm because it reduces the number
+ of covariates that must be searched across when creating new splits.
+ Second, one can use shrinkage by scaling the predictions associated with
+ each tree by a factor 
+\begin_inset Formula $\eta$
+\end_inset
+
+, which is often called the learning rate.
+ The predicted value of the outcome at iteration 
+\begin_inset Formula $t$
+\end_inset
+
+ is then given by 
+\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+\eta f_{t}(x_{i})$
+\end_inset
+
+.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+We're using iteration and tree for t, I presume this is correct but wanted
+ to be sure.
+\end_layout
+
+\end_inset
+
+ Shrinkage reduces the influence of each tree so that no individual tree
+ has too much influence on the ensemble prediction.
+\end_layout
+
+\begin_layout Standard
+One possible approach to hyperparameter selection is to use a grid search
+ where the user (1) specifies the domain of the hyperparameters, (2) applies
+ the model to every combination of hyperparameters, and (3) selects the
+ hyperparameters that perform the best in terms of some metric (e.g., mean
+ squared prediction error in the validation dataset).
+ Grid search, however, is computationally inefficient because hyperparameter
+ proposals are uninformed by previous evaluations, meaning that the procedure
+ spends considerable time evaluating suboptimal hyperparameters.
+ We instead use a Bayesian hyperparameter optimization procedure, which
+ sequentially updates a probability model that relates the hyperparameter
+ space to the performance metric and then uses the model to intelligently
+ explore the hyperparameter space 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "bergstra2011algorithms"
+literal "false"
+
+\end_inset
+
+.
+ Specifically, our implementation of gradient boosting relies on the open-source
+ library XGBoost, which we combine with the Hyperopt library that conducts
+ Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
+Notation 
+\end_layout
+
+\begin_layout Plain Layout
+a: Superscript for actual or true poverty rate
+\end_layout
+
+\begin_layout Plain Layout
+alpha: Intercept in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+B: Bias
+\end_layout
+
+\begin_layout Plain Layout
+beta: Coefficient in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+c: Notation in affine transformation
+\end_layout
+
+\begin_layout Plain Layout
+d: Superscript for direct estimate
+\end_layout
+
+\begin_layout Plain Layout
+epsilon: Error term in direct estimate regression
+\end_layout
+
+\begin_layout Plain Layout
+eta: Error term in true regression
+\end_layout
+
+\begin_layout Plain Layout
+g, G: Gradient 
+\end_layout
+
+\begin_layout Plain Layout
+gamma: Hyperparameter on the number of leaves 
+\end_layout
+
+\begin_layout Plain Layout
+h, H: Hessian 
+\end_layout
+
+\begin_layout Plain Layout
+i: Indexes observations 
+\end_layout
+
+\begin_layout Plain Layout
+j: Indexes for the leaves 
+\end_layout
+
+\begin_layout Plain Layout
+k, K: Index for the various poverty estimates for a given entity
+\end_layout
+
+\begin_layout Plain Layout
+l: Loss function 
+\end_layout
+
+\begin_layout Plain Layout
+lambda: Hyperparameters on the leaf weights 
+\end_layout
+
+\begin_layout Plain Layout
+m: Prediction values 
+\end_layout
+
+\begin_layout Plain Layout
+N: Number of observations
+\end_layout
+
+\begin_layout Plain Layout
+p: Superscript for predicted poverty rate
+\end_layout
+
+\begin_layout Plain Layout
+r: Regularization function 
+\end_layout
+
+\begin_layout Plain Layout
+R: R-squared
+\end_layout
+
+\begin_layout Plain Layout
+s: Set of observations in a given leaf 
+\end_layout
+
+\begin_layout Plain Layout
+sigma: Variance
+\end_layout
+
+\begin_layout Plain Layout
+t: Indexes trees 
+\end_layout
+
+\begin_layout Plain Layout
+x: Explanatory variables 
+\end_layout
+
+\begin_layout Plain Layout
+y: Outcome
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Validation methods for machine learning based estimates
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Validation-methods-for"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The coefficient of determination or 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is the most commonly used metric for validating poverty maps generated
+ using machine-learning methods.
+ The standard validation procedure can be summarized in four steps: (1)
+ using survey data calculate a poverty measure for the geographic unit of
+ interest (e.g., village or cluster) and merge the poverty measure with features
+ from some passively-collected data source (e.g., mobile phone data or satellite
+ imagery); (2) randomly split the dataset into training and testing subsamples;
+ (3) fit a machine-learning model to the training data and use the model
+ to predict poverty in the testing data; (4) calculate the out-of-sample
+ 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by regressing the observed poverty measures from the testing data on the
+ predicted poverty measures for the same geographic units.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Rather than relying on a single training-testing split of the data, many
+ studies use cross-validation and report the average 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across various training-testing splits.
+ For examples of the above procedure, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+ Note that a few studies use a similar procedure, but fit the machine-learning
+ model to household-level data and then aggregate the model's predictions
+ to the geographic unit of interest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "blumenstock2015predicting,hersh2021open,aiken2022machine"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ It is important to emphasize that the poverty measures used in this procedure
+ are often direct, sample-based estimates rather than the true poverty measures
+ for the regions of interest.
+ In what follows, we critically assess this validation procedure and discuss
+ some alternative validation metrics.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ denote the actual or true poverty indicator for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ geographical entity.
+ Further, let 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+ denote the direct estimate and model-based prediction of the poverty indicator,
+ respectively.
+ The standard method for assessing the predictive performance of model-based
+ poverty estimates calculates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression like the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=\alpha+\beta y_{i}^{p}+\varepsilon_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+ are the regression coefficients and 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ represents the error term.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that any regression of this form can only be estimated for the sampled
+ regions with direct estimates.
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for the above regression can be written as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\varepsilon}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{d}^{2}$
+\end_inset
+
+ is the variance of the direct estimate and 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ thus conveys information about how much of the variance of the direct estimate
+ is explained by the model-based prediction.
+ 
+\end_layout
+
+\begin_layout Standard
+While unbiased, direct estimates can be imprecise estimates of true poverty
+ indicators 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corral2020pull"
+literal "false"
+
+\end_inset
+
+.
+ Ideally, one would assess the performance of model-based predictions on
+ the basis of the true poverty indicators (
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+) themselves.
+\end_layout
+
+\begin_layout Standard
+That is, model-based predictions are more appropriately assessed using the
+ 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from the following regression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{a}=\alpha+\beta y_{i}^{p}+e_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $e$
+\end_inset
+
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+I changed it from eta because we use eta to denote the random location effect
+ in SAE
+\end_layout
+
+\end_inset
+
+represents the error term.
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for this regression can written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{e}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{a}^{2}$
+\end_inset
+
+ is the variance of the true poverty indicator and 
+\begin_inset Formula $\sigma_{e}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $e$
+\end_inset
+
+.
+ We are specifically interested in characterizing the bias of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ when it is used to assess true quantity of interest, 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}+\omega_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is a mean-zero error term with variance 
+\begin_inset Formula $\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ That is, we view this as a classical measurement error problem where the
+ direct estimate of the poverty indicator is a noisy estimate of the true
+ poverty indicator.
+ Note that the preceding equation implies that 
+\begin_inset Formula $\varepsilon_{i}=e_{i}+\omega_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}=\sigma_{e}^{2}+\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+, we then define the bias as:
+\begin_inset Formula 
+\begin{equation}
+B=R_{a}^{2}-R_{d}^{2}.\label{eq:bias}
+\end{equation}
+
+\end_inset
+
+Substituting Eqs.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2direct"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2true"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) into our expression for the bias, we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+B=\frac{\sigma_{a}^{2}-\sigma_{e}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{e}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{e}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}.\label{eq:bias_res}
+\end{equation}
+
+\end_inset
+
+Finally, we can substitute Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias_res"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) into Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) and rearrange, which gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right)\label{eq:relationship}
+\end{equation}
+
+\end_inset
+
+and establishes a basic relationship between 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+ for additional mathematical details.
+ 
+\end_layout
+
+\begin_layout Standard
+In Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:relationship"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) above, we see that 
+\begin_inset Formula $R_{d}^{2}=R_{a}^{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\sigma_{\omega}^{2}=0$
+\end_inset
+
+ or, equivalently, when 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ In the presence of measurement error or when 
+\begin_inset Formula $\sigma_{\omega}^{2}>0$
+\end_inset
+
+, we then see that 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will be biased downward and the magnitude of the bias will be determined
+ by the size of 
+\begin_inset Formula $(\sigma_{d}^{2}-\sigma_{\omega}^{2})/\sigma_{d}^{2}$
+\end_inset
+
+.
+ Validation exercises based on 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will thus tend to mischaracterize the performance of model-based approaches
+ to poverty mapping, with the resulting estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ being biased downward (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:standard_implementation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ for estimates of the bias).
+ One implication of the above is that 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ is context-dependent and will generally be influenced by the design of
+ the survey data (e.g., larger sample sizes will tend to reduce measurement
+ error, all else equal).
+ In particular, a poorly performing model applied to a low bias setting
+ may yield an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ that is higher than an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ from a strong model applied to a high bias setting.
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Shouldn't this be tied to measurement error, instead of bias? That is, link
+ it to the measurement error, since the direct estimates won't be biased.
+\end_layout
+
+\end_inset
+
+ The presence of bias
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+I think it's best to frame it around sampling error
+\end_layout
+
+\end_inset
+
+ in the measures of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can thus reverse the rank ordering of models when comparisons are made
+ across contexts.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+, or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for this type of cross-context comparison of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ values.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is an additional form of bias in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that can lead to overoptimistic conclusions related to model validity.
+ To illustrate this, note that 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+ in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2true"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is mathematically equivalent to the squared (Pearson) correlation coefficient
+ between 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+.
+ A well-known property of the correlation coefficient is that it is invariant
+ to any positive affine transformation of its arguments, implying that the
+ squared correlation coefficient is invariant to any affine transformation
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "gujarati2003basic"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+More specifically, the correlation coefficient is invariant to any 
+\shape italic
+positive
+\shape default
+ affine transformation because it changes signs when one of its arguments
+ is scaled by some negative constant.
+ The 
+\shape italic
+squared
+\shape default
+ correlation coefficient is then invariant to any affine transformation.
+\end_layout
+
+\end_inset
+
+ We can thus write
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}(y_{i}^{a},y_{i}^{p})=R_{a}^{2}(y_{i}^{a},c_{1}+c_{2}y_{i}^{p})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $c_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $c_{2}$
+\end_inset
+
+ are some arbitrary constants.
+ The implication of the above is that it implies that the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is insensitive to systematic bias in the model-based poverty estimates.
+ For example, consider some unbiased poverty estimate 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+, meaning that 
+\begin_inset Formula $E(y_{i}^{u}-y_{i}^{a})=0.$
+\end_inset
+
+ Now consider another estimate 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ up to some locational shift, implying that 
+\begin_inset Formula $y_{i}^{b}=y_{i}^{u}+c$
+\end_inset
+
+ and 
+\begin_inset Formula $E(y_{i}^{b}-y_{i}^{a})=c$
+\end_inset
+
+.
+ While 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ is biased (i.e., it will systematically over- or under-estimate poverty),
+ it will achieve an 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A final issue related to 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric is that it is affected by the variance of the true
+ poverty measures.
+ To see this, consider the following re-expression of 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{a}-\alpha-\beta y_{i}^{p})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{a},\alpha+\beta y_{i}^{p})}{\text{{Var}}(y_{i}^{a})}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of geographical entities.
+ The above shows that 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be viewed as a normalized version of the mean squared error with the
+ variance of the true poverty indicator used as the normalization factor.
+ This approach to normalization produces an additional source of context-depende
+nce in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+ Specifically, consider two models that perform equally well in that they
+ achieve the same mean squared error.
+ However, assume that one model is applied to a context where the variance
+ of 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ is large and the other is applied to a low variance context.
+ The above then implies that the model applied to the high variance context
+ will achieve a higher 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, even though the performance of the two models is arguably identical.
+ 
+\end_layout
+
+\begin_layout Standard
+Rather than relying on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric, one can avoid regression-based model assessment
+ altogether by calculating the mean squared error directly:
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2},\label{eq:mse}
+\end{equation}
+
+\end_inset
+
+which avoids the normalization issue and provides a more direct understanding
+ of the expected squared error of the estimates.
+ The mean squared error in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) is also sensitive to systematic biases in the predictions.
+ Reconsidering the biased and unbiased poverty estimates described above
+ (i.e., 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+), we can write 
+\begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+c,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+c^{2}$
+\end_inset
+
+.
+ Systematic biases in the estimates will thus be penalized by the direct
+ mean squared error criterion.
+ Further, with multiple estimates for each entity, one can calculate entity-spec
+ific mean squared errors, which can be decomposed into parts associated
+ with the bias and variance of the estimates.
+ Where 
+\begin_inset Formula $y_{ik}^{p}$
+\end_inset
+
+ denotes estimate 
+\begin_inset Formula $k=1,2,\ldots,K$
+\end_inset
+
+ for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ entity, we have
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}
+\end{equation}
+
+\end_inset
+
+where the first term on the right-hand side of the above captures the variance
+ of the estimates for entity 
+\begin_inset Formula $i$
+\end_inset
+
+ and the second term captures the (squared) bias.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hastie2009elements"
+literal "false"
+
+\end_inset
+
+ for derivation and detailed discussion of the bias-variance decomposition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Unit-level small area estimation
+\end_layout
+
+\begin_layout Standard
+The purpose of this section is to give readers a brief introduction to the
+ small area estimation methods applied in the proposed validation exercises.
+ Opposite to machine learning methods, under unit-level based small area
+ estimation there is an assumed underlying model for welfare generation.
+ The model used under the EB method of Molina and Rao (2010) and ELL is
+ a nested error model originally proposed by Battesse, Harter and Fuller
+ (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "BHF"
+literal "false"
+
+\end_inset
+
+, BHF).
+ For the estimation of poverty and welfare, the ELL and EB methods assume
+ the transformed welfare 
+\begin_inset Formula $y_{ih}$
+\end_inset
+
+ for each household 
+\begin_inset Formula $h$
+\end_inset
+
+ in the population within each location 
+\begin_inset Formula $i$
+\end_inset
+
+ is linearly related to a 
+\begin_inset Formula $1\times K$
+\end_inset
+
+ vector of characteristics (or correlates) 
+\begin_inset Formula $x_{ih}$
+\end_inset
+
+ for that household, according to the nested error model: 
+\begin_inset Formula 
+\begin{equation}
+y_{ih}=x_{ih}\beta+\eta_{i}+e_{ih},\:h=1,\ldots,N_{i},\,i=1,\ldots,I.\label{eq:1-1}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here 
+\begin_inset Formula $\eta_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $e_{ih}$
+\end_inset
+
+ are respectively location and household-specific idiosyncratic errors,
+ assumed to be independent from each other, satisfying: 
+\begin_inset Formula 
+\[
+\eta_{i}\stackrel{iid}{\sim}N\left(0,\sigma_{\eta}^{2}\right),\:e_{ih}\stackrel{iid}{\sim}N\left(0,\sigma_{e}^{2}\right),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the variances 
+\begin_inset Formula $\sigma_{\eta}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{e}^{2}$
+\end_inset
+
+ are unknown.
+ Here, 
+\begin_inset Formula $I$
+\end_inset
+
+ is the number of locations in which the population is divided and 
+\begin_inset Formula $N_{i}$
+\end_inset
+
+ is the number of households in location 
+\begin_inset Formula $i$
+\end_inset
+
+, for 
+\begin_inset Formula $i=1,\ldots,I$
+\end_inset
+
+.
+ Finally, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is the 
+\begin_inset Formula $K\times1$
+\end_inset
+
+ vector of coefficients.
+\end_layout
+
+\begin_layout Standard
+It is evident that the dependent variable of the model is not the poverty
+ status of a given household.
+ Instead, the method attempts to replicate the welfare distribution based
+ on an assumed data generating process.
+ The parameters obtained from the model fit using the household survey data
+ are then applied to the census data, including simulated errors.
+ From the simulated welfare vector in the census it is possible to obtain
+ estimates of any welfare indicator, not just poverty headcount rates.
+\end_layout
+
+\begin_layout Standard
+One major aspect of concern for small area estimation is the estimation
+ of noise.
+ A statistical agency in a given country may seek to undertake a small area
+ estimation application because the quality of the estimates derived from
+ survey data may not be sufficiently precise or estimates may not even be
+ possible since the area was not sampled.
+ Hence, a big concern surrounding small area estimation is the estimation
+ of MSEs for each area's estimate.
+ Estimates of noise are obtained via bootstrap replications where the model's
+ assumptions are exploited in order to obtain an estimated MSE.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For a much more detailed discussion on the estimation of noise refer to
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+ and for a discussion focused on ELL and EB estimates refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2020pull"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ This aspect is one of the biggest differences between poverty maps based
+ on small area estimation and those based on machine learning.
+\end_layout
+
+\begin_layout Standard
+A modification of the typical unit-level small area estimation approach
+ presented above which allowed updating poverty maps even when the census
+ and survey data are not aligned was presented by Nguyen (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+).
+ The basic idea behind the approach is that no household level covariates
+ are used in the model presented in equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:1-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ This way there is no need for the covariates in the survey to match the
+ moments of those from the census.
+ Nguyen (
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+) introduces the variation of the ELL method using data from Vietnam and
+ suggests that only area and cluster level covariates be used.
+ A further refinement was introduced by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "masaki2020small"
+literal "false"
+
+\end_inset
+
+ which relied on EB estimates.
+ The method was tested and validated by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ using the same Mexican data illustrated here.
+ Moreover, the method (referred to as unit-context) is thoroughly discussed
+ and dissected in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ and shown to be flawed since it yields heavily biased estimates.
+ The authors discourage the use of the method since it fails to yield unbiased
+ estimates and practitioners are unlikely to know when the method has yielded
+ estimates of good quality.
+ However, since it does offer certain advantages,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The advantage is that it can be used in off-census years, although 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ present evidence that Fay-Herriot area level (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+) models outperform unit-context models.
+ An additional advantage is that it may be applied in areas where the sampling
+ variance is equal to 0, something not feasible with Fay-Herriot models.
+\end_layout
+
+\end_inset
+
+ it is included here for the sake of comparison between methods which can
+ be applied for off-census years.
+\end_layout
+
+\begin_layout Section
+Data
+\end_layout
+
+\begin_layout Standard
+The data used here was originally created for the small area validation
+ illustrated in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ and thus the section borrows heavily from there.
+ 
+\end_layout
+
+\begin_layout Standard
+In this section we present a design-based simulation experiment based on
+ the Mexican Intra Censal Survey of 2015 (Encuesta Intra-censal).
+ The purpose of the simulation is to observe performance of the different
+ methods under more realistic scenarios.
+ The survey is carried out by the Mexican National Institute of Statistics
+ and Geography (Instituto Nacional de Estadistica y Geografia - INEGI).
+ The survey has a sample of 5.9 million households and is representative
+ at the national, state (32 states) and municipal or delegation level (2,457
+ municipalities), as well as for localities with a population of 50,000
+ or more inhabitants.
+ 
+\end_layout
+
+\begin_layout Standard
+The 2015 Intra Censal Survey questionnaire includes the following topics
+ related to the housing unit: dwelling features, size and use of the dwelling,
+ conditions for cooking, ownership and access conditions, access to water,
+ sanitation facilities and sanitation, electric power, solid waste, equipment,
+ appliances and automobile; and information and communication technologies
+ (ICT).
+ It also includes the following demographic information: total population
+ and structure, birth registration, marital status, health services, ethnicity,
+ education, economic characteristics, nonpaid work, migration, daily mobility,
+ fertility and mortality, household composition, non-labor household income,
+ food security, agricultural land use, relationship to the household head,
+ indigenous language, occupation, economic activity, and accumulated education.
+ The survey also includes indicators for states, municipalities, and counties.
+ 
+\end_layout
+
+\begin_layout Standard
+One of the key features of the survey is its size and the fact that it includes
+ a measure of income at the household level.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Income is defined as money received from work performed during the course
+ of the reference week by individuals of age 12 or older within the household.
+\end_layout
+
+\end_inset
+
+ The inclusion of an income measure allows for a design-based validation
+ of the different methods presented above.
+ The next section describes how the survey is modified to create a census
+ data set and how samples are then drawn from the created census data with
+ the goal of obtaining small area estimates of poverty at the municipal
+ level.
+\end_layout
+
+\begin_layout Subsection
+Creating a census and survey
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Creating-a-census"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Because the goal of this exercise is to test how well the different methods
+ perform under a real world scenario, the Intra Censal Survey is modified
+ to mimic a Census in order to allow for a design-based simulation.
+ The first step consists of randomly removing 90 percent of households that
+ reported an income of 0.
+ This is done to ensure that some households with an income of 0 are included
+ in the population, but not as many as in the original data to make it more
+ realistic.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Welfare values of 0 and/or missing are a common feature of household surveys.
+\end_layout
+
+\end_inset
+
+ In the second step, all municipalities with less than 500 households are
+ removed, thus observations by municipality range from 501 to 23,513.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The median municipality has 1,613 households.
+\end_layout
+
+\end_inset
+
+ The final 
+\begin_inset Quotes eld
+\end_inset
+
+Census
+\begin_inset Quotes erd
+\end_inset
+
+ consists of 3.9 million households and 1,865 municipalities.
+ 
+\end_layout
+
+\begin_layout Standard
+To draw survey samples, primary sampling units (PSU) need to be created.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The Intra Censal Survey has its own PSUs, however many of these have too
+ few observations to properly work as PSUs in the created 
+\begin_inset Quotes eld
+\end_inset
+
+Census
+\begin_inset Quotes erd
+\end_inset
+
+ data.
+\end_layout
+
+\end_inset
+
+ Within each municipality, the original data's PSUs are sorted
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This assumes that the clusters' numbering is tied to how proximate each
+ cluster is to one and other.
+\end_layout
+
+\end_inset
+
+ and joined until each created PSU has close to 300 households.
+ Under the proposed approach, original PSUs are never split, just joined
+ to others.
+ Additionally, all original PSUs that were larger than 300 households are
+ designated as a created PSU.
+ The entire process yields 16,297 PSUs.
+\end_layout
+
+\begin_layout Standard
+The resulting Census data is used to draw 500 survey samples to conduct
+ a design-based simulation to establish how a method will perform over repeated
+ sampling from a finite population (
+\begin_inset CommandInset citation
+LatexCommand citealp
+key "tzavidis2018start"
+literal "false"
+
+\end_inset
+
+).
+ The sampling approach reflects standard designs used in most face-to-face
+ household surveys conducted in the developing world, such as those conducted
+ by the Living Standards Measurement Study (LSMS) program of the World Bank
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "grosh1996manual"
+literal "false"
+
+\end_inset
+
+, with some simplification for convenience.
+ First, the 32 states that comprise Mexico are treated as the intended domains
+ of the sample.
+ The main indicator of interest for the survey is the welfare measure: household
+ per capita income.
+ The desired level of precision to be achieved in the sample is assumed
+ to be a relative standard error (
+\begin_inset Formula $RSE$
+\end_inset
+
+) of 7.5 percent for mean per capita income in each state.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The desired precision of an RSE of 7.5 percent is somewhat arbitrary but
+ corresponds to precision targets in similar surveys and yields a sample
+ of reasonable size.
+\end_layout
+
+\end_inset
+
+ A two-stage clustered design is assumed with clusters (defined above) serving
+ as primary sampling units (PSUs) selected in the first stage within each
+ domain and then a sample of 10 households within each cluster is selected
+ in the second stage.
+ With these design features established, the trimmed census data was analyzed
+ to identify the parameter estimates for per capita income (mean and standard
+ deviation) for each state and the target standard error implied by the
+ parameter estimates that corresponds to an 
+\begin_inset Formula $RSE$
+\end_inset
+
+ of 7.5 percent.
+ The minimum sample size required for state 
+\begin_inset Formula $s$
+\end_inset
+
+, given these parameters, under simple random sampling (SRS) design is then
+ obtained as: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{s}^{SRS}=\left(\frac{\sigma_{s}}{\bar{y}_{s}\times RSE^{tgt}}\right)^{2}=\left(\frac{\sigma_{s}}{\bar{y}_{s}\times0.075}\right)^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\sigma_{s}$
+\end_inset
+
+ is the standard deviation of per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $RSE^{tgt}$
+\end_inset
+
+ is the target standard error of 7.5 percent in state 
+\begin_inset Formula $s$
+\end_inset
+
+, and 
+\begin_inset Formula $\bar{y}_{c}$
+\end_inset
+
+ is the mean per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The minimum sample size under SRS must then be adjusted to account for
+ the clustered design.
+ This design effect due to clustering is accounted for by estimating the
+ intra-cluster correlation (
+\begin_inset Formula $ICC$
+\end_inset
+
+) for per capita income within each state using the trimmed census data.
+ The 
+\begin_inset Formula $ICC$
+\end_inset
+
+ estimates can then be applied to the SRS size obtained above to arrive
+ at the minimum sample size for state 
+\begin_inset Formula $s$
+\end_inset
+
+ under the clustered design employed here, given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+n_{s}=n_{s}^{SRS}\times DEFF_{s}=n_{s}^{SRS}\times\left(1+\left(n_{psu}-1\right)\rho_{s}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $DEFF_{s}$
+\end_inset
+
+ is the design effect in state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $n_{psu}$
+\end_inset
+
+ is the number of households selected within each cluster (10 in this case),
+ and 
+\begin_inset Formula $\rho_{s}$
+\end_inset
+
+ is the 
+\begin_inset Formula $ICC$
+\end_inset
+
+ for per capita income in state 
+\begin_inset Formula $s$
+\end_inset
+
+.
+ The minimum number of clusters to achieve 
+\begin_inset Formula $n_{s}$
+\end_inset
+
+ (assuming 10 households per cluster) was calculated and then the final
+ (household) sample size established by multiplying the number of clusters
+ by 10.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Full estimates and results for the sample size determination are available
+ upon request.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Taking the sample size requirements from above as fixed, the sample in each
+ simulation is selected in accordance with the two-stage design.
+ PSUs within each state, referred to here as clusters, are selected with
+ probability proportional to size (
+\begin_inset Formula $PPS$
+\end_inset
+
+) without replacement, where the measure of size is the number of households
+ within the cluster.
+ Then 10 households were selected within each cluster via simple random
+ sampling.
+ According to this design, the inclusion probability for household 
+\begin_inset Formula $h$
+\end_inset
+
+ in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ and in state 
+\begin_inset Formula $s$
+\end_inset
+
+ is approximated
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The equation used to calculate inclusion probabilities assumes sampling
+ with replacement but is used here as an approximation of inclusion probabilitie
+s under PPS selection without replacement.
+ This should provide a reasonable approximation in this case since there
+ are a relatively large number of PSUs present in the frame.
+\end_layout
+
+\end_inset
+
+ as: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p_{sch}=\frac{N_{sc}C_{s}}{N_{s}}\times\frac{n_{sc}}{N_{sc}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $N_{s}$
+\end_inset
+
+ is the total number of households in the census for state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $N_{sc}$
+\end_inset
+
+ is the number of households in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ from state 
+\begin_inset Formula $s$
+\end_inset
+
+, 
+\begin_inset Formula $C_{s}$
+\end_inset
+
+ is the number of clusters selected in state 
+\begin_inset Formula $s$
+\end_inset
+
+, and 
+\begin_inset Formula $n_{sc}$
+\end_inset
+
+ is the number of households selected in cluster 
+\begin_inset Formula $c$
+\end_inset
+
+ within state 
+\begin_inset Formula $s$
+\end_inset
+
+, which is fixed at 10.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The design weight for each household is simply the inverse of the inclusion
+ probability.
+ In a typical survey, the design weights would be further adjusted for nonrespon
+se and calibrated to known population characteristics.
+ However, since the sampling is only a simulation exercise, there is no
+ nonresponse and thus no nonresponse adjustment is required.
+ Calibration or post-stratification could be performed but was not implemented
+ to simplify the process.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+The sample size across the 500 samples is roughly 23,540.
+ Under the proposed sampling scenario, not all municipalities are included,
+ and the number of municipalities included varies from sample to sample,
+ ranging between 951 to 1,020 municipalities.
+ The median municipality included in a given sample, is represented by a
+ sole PSU and thus its sample size is of 10 households.
+\end_layout
+
+\begin_layout Section
+The standard implementation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:standard_implementation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The objective of this section is to gauge how well the machine learning
+ and small area estimation based poverty maps perform.
+ Performance here is measured by bias and MSE.
+ Using each of the 
+\begin_inset Formula $S=500$
+\end_inset
+
+ survey samples drawn in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Creating-a-census"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ we produce headcount poverty estimates (
+\begin_inset Formula $\hat{\tau}$
+\end_inset
+
+) for each municipality using each of the methods.
+ The empirical design MSE for each municipality (
+\begin_inset Formula $i$
+\end_inset
+
+) under each method (
+\begin_inset Formula $m$
+\end_inset
+
+) is measured as: 
+\begin_inset Formula $MSE_{i}^{m}=\frac{1}{S}\sum_{s=1}^{S}\left(\hat{\tau}_{is}^{m}-\tau_{i}\right)^{2}$
+\end_inset
+
+ where 
+\begin_inset Formula $\tau_{i}$
+\end_inset
+
+ is municipality 
+\begin_inset Formula $i$
+\end_inset
+
+'s true poverty rate obtained from the census created in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Creating-a-census"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The empirical design bias is then measured as 
+\begin_inset Formula $B_{i}^{m}=\frac{1}{S}\sum_{s=1}^{S}\left(\hat{\tau}_{is}^{m}-\tau_{i}\right)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+An additional variation to usual design based simulations is done here.
+ In order to keep methods comparable, under each sample a different model
+ is selected, whereas under traditional design based simulations the model
+ is kept fixed across all samples.
+ 
+\end_layout
+
+\begin_layout Standard
+As noted in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Validation-methods-for"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure often used to assess the quality of machine learning based estimates
+ is downward biased.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:R2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ obtained in all 500 sets of estimates.
+ The true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ estimates across methods are quite similar with CensusEB estimates yielding
+ the highest values.
+ Nevertheless, if we were to assess these models using the direct estimates
+ (i.e.
+ what is normally done since true estimates are not available) we would
+ come away with a different perception about the quality of these estimates.
+ The median 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ with direct estimates is lowest for XGboost estimates and highest for unit-cont
+ext models.
+ Consequently, under the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ metric often used to evaluate models we would pick the model which in reality
+ is the worst performing.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement tph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ across simulations for select models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:R2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig_R2_comp1.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ between direct or true estimates against each of the 500 estimates obtained
+ from the 500 samples.
+ Notice how when comparing against the true poverty rates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is larger than the one compared to direct estimates.
+ Also, the method with the highest 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ when comparing against direct estimates is not the same as the one comparing
+ against the true values.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical mean squared error across municipalities for select models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Mean-squared-error "
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_MSE.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) for each
+ municipality under each method.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias across municipalities for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bias-across-municipalities"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Fig2_Bias.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias for each municipality under
+ each method.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+ It also shows how methods where the dependent variable is household level
+ welfare and covariates are only area level covariates fails to properly
+ replicate the welfare distribution and thus is downward biased as noted
+ in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias and MSE across municipality quantiles for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bias_mse_tiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/ByTiles_uc_eb_gb.png
+	lyxscale 40
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias and MSE for each municipality
+ under each method.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the performance of XGboost models approximates those
+ of unit-level CensusEB models.
+ It also shows how methods where the dependent variable is household level
+ welfare and covariates are only area level covariates fails to properly
+ replicate the welfare distribution and thus is downward biased and much
+ noisier for poorer areas as noted in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assessing models based on their MSE and bias is usually preferable.
+ This is because under small area estimation the model's overall performance
+ is not necessarily the best reflection of the method's prowess.
+ Since the goal is to obtain relatively accurate estimates of poverty for
+ 
+\emph on
+each
+\emph default
+ area we assess at the municipality level the bias and MSE of the different
+ methods.
+ Figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Mean-squared-error "
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bias-across-municipalities"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ present the MSE and bias of each method's municipality level estimates.
+ The box-plots show that under the Mexican data, the machine learning approach
+ of XGboost does a very solid job with an empirical MSE which rivals and
+ maybe supersedes the one of CensusEB estimates.
+ XGboost estimates are also far superior to those obtained under unit-context
+ models.
+ The empirical bias of CensusEB and XGboost methods is also closely aligned,
+ suggesting that under the Mexican data used either method could be chosen.
+ Also, evident is the fact that there is a downward bias in the unit-context
+ models.
+ The downward bias of the method is due to it not properly replicating the
+ welfare distribution in addition to the bias noted by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A much richer discussion of the unit-context method can be found in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map,corral2022guidelines"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Looking at how models perform across municipalities according to their true
+ poverty rate it is evident that unit-context models from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lange2018small,masaki2020small,doi:10.1080/00220388.2012.682983"
+literal "false"
+
+\end_inset
+
+ are most biased among the poorest municipalities (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Bias_mse_tiles"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Consequently, it is not surprising that the noise level among the poorest
+ municipalities is highest.
+ Nevertheless, the method does a much more solid job among the better-off
+ municipalities.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ present evidence under a hybrid simulation that this is in fact due to
+ different sources of bias canceling each other out.
+ In this case, the omitted variable bias type of bias noted in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ is likely canceling the bias due to the method's inability to replicate
+ the welfare distribution adequately.
+ 
+\end_layout
+
+\begin_layout Section
+Alternative covariates
+\end_layout
+
+\begin_layout Standard
+The models from the previous section rely solely on census derived data.
+ Microdata in the case of CensusEB estimates, and on PSU and municipality
+ level aggregates in the case of unit-context and XGboost estimates.
+ In most of the machine learning based approaches in the literature (
+\begin_inset CommandInset citation
+LatexCommand citet
+key "blumenstock2015predicting,chi2021micro,chi2022microestimates,lee2020high"
+literal "false"
+
+\end_inset
+
+) the authors rely solely on satellite derived covariates.
+ Here we compare how gradient boosted methods perform under different sets
+ of candidate covariates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement tph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_mun_psu"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun.png
+	scale 57
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun.png
+	scale 57
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how, under the Mexican data, there is limited loss in bias
+ and noise when the model is fit at the municipality level instead of at
+ the PSU level and estimates aggregated to the municipality level.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE and Bias across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_mun_psu_all"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_xgb_psu_mun_GIS_mix.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_xgb_psu_mun_GIS_mix.png
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how, under the Mexican data, there is limited loss in bias
+ and noise when the model is fit at the municipality level instead of at
+ the PSU level and estimates aggregated to the municipality level.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical Bias and MSE across municipalities under models fit at the PSU
+ and municipal level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_bias_tiles_gis"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/ByTiles_gb_mun_gis.png
+	scale 65
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical bias and MSE for each municipality
+ under each method.
+ The figure shows how the performance of XGboost differs according to the
+ data used.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Covariate importance across 500 models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:importance"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Importance.png
+	scale 75
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the covariate importance in the mixed model where
+ census aggregates and GIS covariates are combined.
+ The importance measure used here indicates the gain across splits where
+ the feature is used.
+ The values shown here are the average gain across all 500 models fit with
+ the 500 survey samples taken from the census data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Due to privacy restrictions, the Mexican Intra-censal survey is only geographica
+lly linked at the municipality level.
+ This implies that models where only GIS covariates are used can only be
+ fit at the municipality level.
+ Consequently, we also fit the model using only census covariates at the
+ municipality level.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_mun_psu"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ illustrates how XGboost fitted models at the municipality level (i.e.
+ LHS is municipal poverty rate) track nicely the models fit at the PSU level
+ (i.e.
+ the LHS is PSU poverty rate).
+ The bias and noise of both models is quite similar, albeit slightly worse
+ when fit at the municipality level than the estimates where the fitting
+ is done at the PSU level and results are aggregated to the municipality
+ level.
+ This is an encouraging result since matching PSUs across census years is
+ not always possible.
+ Given that the municipality level XGboost with census aggregates is well
+ aligned to the PSU level XGboost, GIS models are fit at the municipality
+ level and are compared to the municipality level XGboost with census aggregates.
+\end_layout
+
+\begin_layout Standard
+Models where only GIS covariates are used are less than stellar and appear
+ to be quite noisy (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_mun_psu_all"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ This suggests that the covariates are not providing much useful information
+ towards describing variation in poverty across municipalities.
+ Information from census aggregates such as asset ownership, education levels,
+ employment rates, and others are notably much better at explaining poverty
+ variability across space.
+ The models tend to underestimate poverty at the bottom of the distribution
+ and over estimate at the top, leading to noisy estimates among rich and
+ poor municipalities alike (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_tiles_gis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Finally, we combine GIS covariates and census aggregates to evaluate how
+ the GIS covariates compare to census aggregates in the model's importance.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_mun_psu_all"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ also shows that the resulting estimates where candidate covariates include
+ census and GIS covariates (labelled 
+\begin_inset Quotes eld
+\end_inset
+
+Mixed
+\begin_inset Quotes erd
+\end_inset
+
+) are slightly noisier than estimates obtained using only census aggregates.
+ However, results across municipalities are virtually indistinguishable
+ to those where only census aggregates are used for modeling (Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_bias_tiles_gis"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ This could just be an artifact of the data since the covariates used are
+ publicly available, but these cannot be expected to outperform covariates
+ that relate to characteristics of the population within the municipalities
+ (see Fig.
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:importance"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ At best, many GIS covariates may be proxies for other information within
+ the municipality which relates to socio-economic characteristics and thus
+ will not outperform census aggregates when the latter are available.
+\end_layout
+
+\begin_layout Section
+Alternative models
+\end_layout
+
+\begin_layout Standard
+There are many methods beyond gradient boosting which have become popular.
+ This section seeks to test the performance of other methods and models
+ to determine how these may perform under the Mexican data.
+ 
+\end_layout
+
+\begin_layout Standard
+We first include an XGboost model at the household level, where we classify
+ households as poor or not poor.
+ This approach, despite including many covariates at the PSU and municipality
+ level as candidates for modeling does a poor job as can be seen by the
+ method's high MSE compared to others.
+ This is mostly due to a high downward bias of the estimates at the household
+ level.
+ This serves as cautionary evidence toward the limitations of highly touted
+ machine learning algorithms.
+ The method in this case is attempting to predict a household's poverty
+ status based on their characteristics, the latent variable on the left
+ hand side already implies a loss of information for the model.
+ When microdata are available, XGboost does not outperform traditional models
+ when the goal is to obtain poverty rates by location.
+ 
+\end_layout
+
+\begin_layout Standard
+<TO BE COMPLETED>
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical MSE across municipalities under models fit at HH level, PSU, and
+ municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_all"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/mse_all_minus.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+ The figure shows how the different methods and data perform under the Mexican
+ data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical bias across municipalities under models fit at HH level, PSU,
+ and municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bias_all-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/bias_all_minus.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+ The figure shows how the different methods and data perform under the Mexican
+ data.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Heath please elaborate here on the other methods...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Targeting efficiency of the methods
+\end_layout
+
+\begin_layout Standard
+While understanding the noise of the poverty estimates is useful, the ultimate
+ concern with poverty mapping is to understand how different methodological
+ choices affect poverty alleviation.
+ Often, the reason for obtaining highly disaggregated poverty estimates
+ is to improve the targeting of resources.
+ Consequently, the methods are compared by their prowess for poverty reduction
+ using the Mexican Intra-censal survey.
+ The targeting simulation presented builds upon the simulation presented
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+ with one key difference: because the true poverty rates for each small
+ area are known, the efficiency yielded by the use of different methods
+ is compared to an optimal level of efficiency.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+, and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other studies that have conducted targeting simulations.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+In addition to the poverty estimates, the procedure applied here requires
+ true household-level incomes from a census-type dataset.
+ The procedure is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -15bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true household-level per capita incomes, calculate the poverty
+ headcount and poverty gap for the country as a whole for some chosen poverty
+ line.
+ Using the poverty gap measure, determine the budget required to completely
+ eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget
+ by the number of people living in poverty.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true poverty rates for each municipality we order the geographical
+ entities according to their estimated poverty headcounts, from most to
+ least poor.
+ For the poorest region, augment the per capita income of all household's
+ by an amount equal to the transfer (i.e., each household receives an amount
+ equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest region, the
+ third poorest region, and so on until there is not enough resources to
+ cover all households in a given region.
+ For the marginal region, distribute the remaining budget equally among
+ individuals in that region.
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the post-transfer household incomes, calculate an updated poverty
+ headcount to assess the effects of the distribution scheme on poverty alleviati
+on.
+ Note that all of this is done with the census which has an income measure.
+ This process yields the best case scenario for geographical targeting where
+ transfers are given to the poorest locations, where poverty is determined
+ by the headcount rate.
+\end_layout
+
+\begin_layout Standard
+The procedure detailed above is then repeated with the estimates obtained
+ under each method.
+ The rankings are determined by the estimates obtained under a given method,
+ but the transfer amount is then applied to the true income measure in the
+ census to calculate the impact of the targeted transfer.
+ 
+\end_layout
+
+\begin_layout Standard
+The procedure applied differs from the ideal transferring scheme detailed
+ by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+, since under the different methods all we have estimated are poverty headcount
+ rates.
+ Moreover, the ideal transfer proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+ is not simple to illustrate to policy makers and is seldom implemented.
+ The process detailed here in reality mimics how many governments determine
+ which locations to give priority for a government cash transfer scheme.
+ For example, in Ghana, the Livelihood Empowerment Against Poverty Programme’s
+ (LEAP) main objective is to reduce poverty by increasing consumption and
+ promoting access to services and opportunities among the extreme poor and
+ vulnerable.
+ The program provides social cash grants to extremely poor and vulnerable
+ households.
+ The latest poverty map for Ghana is used as an input to rank districts
+ and communities before selecting communities where the program will collect
+ data to identify extreme poor households.
+ 
+\end_layout
+
+\begin_layout Standard
+Another example is that of Peru.
+ In Peru, small area estimates of poverty are used to determine areas that
+ should be prioritized in the allocation of public funds.
+ The Ministry of Finance of Peru uses the estimates to determine allocations
+ to programs.
+ One such program is called “Programa de Vaso de Leche” that offers a daily
+ food ration to vulnerable populations, particularly children under 13 and
+ pregnant mothers, with the goal of reducing food insecurity.
+ Another program that makes use of small area estimates of poverty in Peru
+ is the “Canon Minero” which is a program that ensures that local and regional
+ governments receive funds obtained by the State from income taxes collected
+ from mining activities.
+ 
+\end_layout
+
+\begin_layout Standard
+During the COVID-19 crisis in Nigeria, poverty estimates at a granular geographi
+cal level were used to determine how to allocate funds from the Federal
+ Government’s COVID-19 Rapid Response Registration (RRR) Cash Transfer Project
+ to 1 million Nigerians.
+ The RRR selected the poorest wards in the country based on the poverty
+ estimates at the ward level, something that would be unlikely with the
+ National Living Standards Survey (NLSS) which is only representative at
+ the State level.
+ Additionally, many wards in the country are not even present in the NLSS,
+ consequently the need for model-based approaches toward obtaining poverty
+ estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement ph
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical bias across municipalities under models fit at HH level, PSU,
+ and municipality level
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:targeting"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Figures/Targeting.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+Note: Figure illustrates the empirical mean squared error (MSE) and bias
+ for each municipality under models fit at different aggregation levels.
+ The top header indicates the level at which the left hand side variable
+ is at: i) HH level, ii) PSU level, or iii) Municipality level.
+ The second header indicates the type of the righ-hand side variables: i)
+ census microdata (at the HH level), ii) GIS data at the municipality level,
+ iii) census aggregates at the PSU or municipality level, and iv) mixed
+ for models using GIS and census aggregates.
+\end_layout
+
+\begin_layout Plain Layout
+
+\size footnotesize
+The figure shows how the different methods and data perform in a targeting
+ simulation under the Mexican data.
+ The best possible poverty rate, using the true poverty ranking of municipalitie
+s, is 19.9%.
+ The original value is 25%.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The poverty line using the Mexican data is drawn at the 25th percentile.
+ We take the poverty gap and determine that to be our transfer budget.
+ The poverty gap is the value of money necessary to completely eradicate
+ poverty if we know who the poor are and how poor they are, and thus serves
+ as a valid transfer budget.
+ To determine the best poverty reduction we can achieve by prioritizing
+ the poorest areas we use the true poverty ranking from the census and distribut
+e to those areas until our budget runs out.
+ By doing this the best poverty rate we can achieve is of 19.9 percent.
+ 
+\end_layout
+
+\begin_layout Standard
+For each method we rank the municipalities according to the model based
+ estimates obtained.
+ Recall that under each method we have 500 sets of estimates at the municipality
+ level.
+ Then the transfer is given to the households in the poorest municipalities
+ until the budget runs out.
+ As noted, the amount is added to the true welfare value of the household.
+ Consequently, across simulations and across methods, the only aspect that
+ changes is the municipal ranking obtained from the model-based estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+The results of the simulation are presented in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Considering that under the true rankings the best poverty reduction one
+ can achieve is 19.9 percent, it is surprising that even the worst performing
+ methods achieve reductions that are less than one percentage point higher.
+ The models fit at the municipality level using GIS covariates as a whole
+ are the worst performing, but still achieve a decent poverty reduction.
+ Even OLS models achieve solid results.
+ To our surprise, despite the methods inherent bias, unit-context models
+ also perform very well under this scenario.
+ Of course, the positive results observed in this case across methods could
+ be unique to the Mexican data at hand and may not replicate fully with
+ other data but in this case results are encouraging.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -5bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+This paper sets out to validate traditional small area estimation and machine
+ learning approaches for poverty mapping.
+ Machine learning approaches have become popular across the globe for producing
+ highly disaggregated estimates of poverty which often feed into policy
+ making.
+ The methods are particularly popular in the most data deprived scenarios
+ where census data are not frequently collected, and even when collected
+ may not be contemporaneous to a household survey.
+ Hence, the methods are also a popular alternative for cases where the census
+ data is too old for use under a traditional unit-level small area estimation
+ exercise.
+ To the best of our knowledge, a rigorous validation of machine learning
+ methods like the one done here where machine learning methods are compared
+ to traditional small area estimates and to a true welfare measure has not
+ been done before.
+\end_layout
+
+\begin_layout Standard
+The paper provides a few very valuable insights.
+ First, it presents evidence on the invalidity of relying on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measures between direct and model based estimates to determine a model's
+ quality.
+ We provide evidence on how the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure, which has become commonplace in the literature, is a downward
+ biased estimate of the true 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+, and we present evidence on how relying on the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure to choose a model is flawed and may lead to selecting the worst
+ performing model.
+ Second, we present validations with real world data where we have a census
+ data set with the true population values we are trying to estimate.
+ We provide evidence of the prowess of machine learning methods and how
+ they may out perform traditional small area estimation approaches.
+ Third, we present a comparison on the potential benefits of publicly available
+ GIS covariates.
+ We show how GIS covariates under the data used here do not outperform census
+ aggregate data.
+ This result suggests that there may be considerable gains in linking census
+ and administrative data for poverty mapping in off census years.
+ Finally, we present evidence on how despite different performance across
+ models, all models are beneficial for targeting.
+ While some models may outperform others in the potential poverty reduction
+ when relying on estimates for targeting, even the worst performing models
+ achieve decent poverty reduction.
+ 
+\end_layout
+
+\begin_layout Standard
+The results found here should be caveated by the fact that they are dependent
+ on the Mexican Intra-censal data used.
+ Results and model performance may differ considerably in a different country
+ or using different data.
+ It is quite possible that in more agrarian societies GIS covariates perform
+ better than what is observed here, but there is no guarantee this will
+ be the case.
+ Validating the usefulness of a particular type of data is not straight
+ forward as it may not work as well everywhere, it is for this reason that
+ comparisons here are made in a more holistic manner.
+ When comparing the performance of GIS covariates and other type of data
+ one should use the same method, as is done here.
+ On the one hand, we show how using census aggregates at the municipality
+ level relying on gradient boosting comes very close to the best performing
+ estimates.
+ On the other hand, using the same method with GIS covariates we show how
+ it falls short of competing with a model where only census aggregates are
+ used.
+ 
+\end_layout
+
+\begin_layout Standard
+The paper opens considerable avenues for future research.
+ One avenue is related to methodology.
+ Specifically, how the noise of machine learning methods can be accurately
+ estimated.
+ Second, the results suggest that most method would do a solid job for spatial
+ targeting type exercises.
+ However, a key question is whether or not this will hold elsewhere and
+ under what circumstances will one method outperform others.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Itemize
+Recap motivation for the paper
+\end_layout
+
+\begin_layout Itemize
+Review key results
+\end_layout
+
+\begin_layout Itemize
+Revisit contribution of the paper
+\end_layout
+
+\begin_layout Itemize
+Discuss limitations of the paper
+\end_layout
+
+\begin_layout Itemize
+Discuss directions for future research
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "References"
+options "apalike"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

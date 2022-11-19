@@ -142,26 +142,31 @@ Introduction
 Poverty maps provide granular estimates of poverty at the sub-national level
  in order to deepen the understanding of poverty in a given country, better
  inform the targeting of resources, and support the design of interventions
- tailored to local needs 
+ tailored to local needs (
 \begin_inset CommandInset citation
-LatexCommand citep
-key "bedi2007poverty"
+LatexCommand citealt
+key "bedi2007more,elbers2007poverty"
 literal "false"
 
 \end_inset
 
-.
- As household surveys are generally unrepresentative for small geographical
- areas, producing detailed poverty maps often requires using small area
- estimation, which consists of using statistical methods to predict poverty
- levels on the basis of household- or area-level characteristics.
- The basic procedure entails two steps: (1) using household survey data,
- fit a statistical model of some poverty measure (e.g., consumption or wealth)
- to select household- or area-level characteristics, and (2) apply the model
- to census data available for all households or geographical entities to
- estimate poverty at the sub-national level.
- At a minimum, the procedure thus requires both household survey and census
- data to produce a sufficiently detailed poverty map.
+).
+ However, household surveys provide estimates that are sufficiently reliable
+ for large areas in a given country but often lack the desired precision
+ and coverage to be able to properly inform targeting interventions.
+ Thus, it is necessary to rely on small area estimation.
+\end_layout
+
+\begin_layout Standard
+Small area estimation is a branch of statistics focused on obtaining estimates
+ of higher quality than those obtained directly from the household survey.
+ These small area estimation techniques often combine data from household
+ surveys and auxiliary information from censuses, registers, or others to
+ produce estimates for areas with small sample sizes of higher quality than
+ is possible from survey data alone.
+ Since there is no such thing as a free lunch, to achieve these gains in
+ quality it is necessary to rely on model assumptions which must be thoroughly
+ checked.
 \end_layout
 
 \begin_layout Standard
@@ -192,28 +197,47 @@ literal "false"
 \end_inset
 
 .
- Unit-context models represent another alternative and are characterized
- by an estimation stage wherein household-level measures are modeled exclusively
- as a linear function of area-level characteristics 
+ Despite their desirable features, the gains in precision offered by these
+ models is quite limited (see 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
+key "molina_morales2009"
+literal "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+Considerable efforts have been devoted to methods which can be applied for
+ poverty mapping in off-census years.
+ One proposed method attempts to combine the best features of unit-level
+ models and area-level models (
+\begin_inset CommandInset citation
+LatexCommand citealt
 key "nguyen2012method,lange2018small,masaki2020small"
 literal "false"
 
 \end_inset
 
-.
+), called unit-context models.
+ Specifically, the method models household level welfare from a household
+ survey using only aggregate data.
+ Aggregate data may come from a recent or previous census, administrative
+ data, or geo-referenced data.
+ The latter data have become a selling point of many recent poverty maps,
+ particularly poverty maps with estimates obtained from machine learning
+ methods.
  
 \end_layout
 
 \begin_layout Standard
-Recent developments in poverty mapping have focused on the application of
- machine learning to remotely-sensed data, largely in response to the issue
- of out-of-date census information.
- These approaches also use survey-derived measures of poverty, but are distingui
-sed by a first stage where a machine-learning model is fit to remotely-sensed
- covariates (e.g., data derived from satellite imagery or call detail records)
- rather than census-based covariates.
+Machine learning approaches also use survey-derived measures of poverty,
+ but are distinguished by a first stage where a machine-learning model is
+ fit to remotely-sensed covariates (e.g., data derived from satellite imagery
+ or call detail records) rather than census-based covariates.
  For example, 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -415,15 +439,7 @@ literal "false"
  estimates rather than the true poverty measures for the regions of interest.
  While direct estimates are unbiased, they can be imprecise estimates of
  true poverty measures, meaning that it is unclear whether the validation
- procedure is informative of actual model performance 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "corral2021pull"
-literal "false"
-
-\end_inset
-
-.
+ procedure is informative of actual model performance.
 \end_layout
 
 \begin_layout Standard
@@ -442,13 +458,21 @@ census
  where each sample produces direct poverty estimates for the sampled geographic
  areas.
  For each direct estimate, the presence of the census means that we observe
- the true poverty measure corresponding to the direct estimate and we use
- these true poverty measures to gain insight not only into the credibility
- of model validation based on direct estimates, but also the performance
- of machine-learning methods when validated against the true poverty measures.
+ the true poverty measure corresponding to the areas and we use these true
+ poverty measures to gain insight not only into the credibility of model
+ validation based on direct estimates, but also the performance of machine-learn
+ing methods when validated against the true poverty measures.
  Given that population censuses rarely collect detailed data on income or
  expenditures, we construct our census from a large-scale household survey
- conducted in Mexico: the Mexican Intercensal Survey of 2015.
+ conducted in Mexico: the Mexican Intercensal Survey of 2015 (see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -466,9 +490,9 @@ Prior to presenting our simulation results, we discuss three ways in which
  differences in location and scale between the poverty estimates and the
  reference measures, and that it is context-dependent in the sense that
  it is influenced by the variance of the true poverty rates.
- We argue that the mean-squared error is a better measure for understanding
- the strength of the association between the poverty estimates and reference
- measures.
+ We argue that the mean-squared error obtained from design based validations
+ is a better measure for understanding the strength of the association between
+ the poverty estimates and reference measures.
  In addition, we argue that the ultimate concern is to understand how different
  methodological choices affect poverty by influencing the efficiency of
  targeting.
@@ -495,12 +519,19 @@ The results of our simulations can be summarized as follows.
 
  incorrectly identifies the appropriate level of estimation in the vast
  majority of our simulations.
+ Relying on the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance measure also incorrectly identifies which model should
+ be preferred.
  Second, when assessing model performance based on the true poverty rates
  using the mean squared error, we find that our closest approximation to
  the standard machine-learning implementation performs poorly relative to
  several benchmark models.
  We find that these performance issues are largely due to the limited predictive
- power of remotely-sensed covariates relative to census-based covariates.
+ power of remotely-sensed covariates relative to census-based covariates
+ in the data used here.
  Finally, our targeting simulations show that none of our machine-learning
  implementations outperform more traditional poverty mapping methods that
  are feasible with the same data.
@@ -517,7 +548,7 @@ literal "false"
 
 , who similarly used the Mexican Intercensal Survey to examine the performance
  of several poverty mapping methods.
- The authors nevertheless focused exclusively on traditional poverty mapping
+ The authors, nevertheless, focused exclusively on traditional poverty mapping
  approaches and did not consider the performance of machine-learning methods.
  Importantly, we are not the first paper to evaluate the performance of
  machine-learning methods relative to census data.
@@ -626,7 +657,7 @@ name "sec:data"
 The Mexican Intercensal Survey was carried out by the Mexican National Institute
  of Statistics and Geography (INEGI).
  The sample consists of 5.9 million households and is representative at the
- national, state (32 states), and municipality levels (2,457 municipalities).
+ national, state (32 states), and municipality level (2,457 municipalities).
  It is also representative for localities with populations of 50,000 or
  more inhabitants.
  The administered questionnaire gathered information on household income,
@@ -647,16 +678,35 @@ Income is defined as money received from work performed during the course
 
 \end_inset
 
- 
+ The process detailed here is copied from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Prior to sampling from the Intercensal Survey, we make three modifications
+Prior to sampling from the Intercensal Survey, three modifications are made
  to the data.
  First, as an uncharacteristically large number of households reported earning
- no income, we randomly remove 90 percent of these households.
- Second, to ensure that all municipalities are sufficiently large, we remove
- all municipalities with less than 500 households.
+ no income, 90 percent of these households with missing income are randomly
+ removed.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This is done to ensure some missing values are present in the data used
+ but not as many as in the original data to make it more realistic.
+\end_layout
+
+\end_inset
+
+ Second, to ensure that all municipalities are sufficiently large for prediction
+s, all municipalities with less than 500 households are removed.
  Finally, to ensure that all primary sampling units (PSUs) are also sufficiently
  large for sampling purposes, we combine several neighboring PSUs such that
  all include at least 300 households.
@@ -673,24 +723,6 @@ literal "false"
 
 ).
  In what follows, we describe our approach to constructing these samples.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-The first two points above require some additional justification.
- I still don't understand why households with no income are removed from
- the sample.
- It's also not clear to me why municipalities with less than 500 households
- are removed.
- 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -891,6 +923,16 @@ se and calibrated to known population characteristics.
 \end_layout
 
 \begin_layout Standard
+As part of the data made available to the public by INEGI are geo-referenced
+ covariates available at the municipality level.
+ Regretfully, the geo-referenced data cannot be obtained at the same level
+ of our makeshift PSUs since this would require geo-referenced data at the
+ original Intercensal survey PSU level.
+ Hence, geo-referenced data is only available at the municipal level.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Comment
 status collapsed
 
@@ -923,8 +965,11 @@ This section describes the methods we apply to the Mexican Intercensal Survey.
  gradient boosting, as it is among the most popular machine-learning methods
  for poverty mapping.
  The second subsection then discusses more traditional approaches to poverty
- mapping – including the unit-level and unit-context models – which we use
- as benchmarks in our performance assessment of the machine-learning methods.
+ mapping – including the unit-level models – which we use as the benchmark
+ in our performance assessment of the machine-learning methods.
+ Additionally, we consider unit-context models to assess their performance
+ against machine-learning approaches whilst using the same data.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1856,6 +1901,14 @@ literal "false"
 
 \end_inset
 
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
 .
 \end_layout
 
@@ -1864,7 +1917,7 @@ literal "false"
  This aspect is one of the biggest differences between poverty maps based
  on small area estimation and those based on machine learning.
  Statistical agencies across the globe will assess an estimate's noise before
- deciding to publish it or not, hence the importance of such estimates.
+ deciding to publish it or not, thus the importance of such estimates.
  
 \end_layout
 
@@ -1893,8 +1946,11 @@ noprefix "false"
 \end_inset
 
 .
- This way there is no need for the covariates in the survey to match the
- moments of those from the census.
+ Because there are no household level covariates used in the model there
+ is no need for the covariates in the survey to match the moments of those
+ from the census.
+ The proponents of the methodology claim that the lack of household level
+ covariates allows the application of this method in off-census years.
  
 \begin_inset CommandInset citation
 LatexCommand citealt
@@ -2718,14 +2774,18 @@ literal "false"
 
 \end_layout
 
+\begin_layout Subsection
+Targeting 
+\end_layout
+
 \begin_layout Standard
 The primary reason for obtaining granular poverty estimates is nevertheless
  to improve the targeting of resources.
  While understanding the error of the poverty estimates is useful in this
  regard, the ultimate concern is to understand how different methodological
  choices affect poverty alleviation by influencing the efficiency of targeting.
- We thus also consider how machine-learning methods perform in terms of
- reducing poverty in the context of the Mexican Intercensal Survey.
+ Consequently, we also consider how machine-learning methods perform in
+ terms of reducing poverty in the context of the Mexican Intercensal Survey.
  Similar to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2735,7 +2795,8 @@ literal "false"
 \end_inset
 
 , we propose simulating a hypothetical poverty-alleviation program that
- distributes resources to households according to a given poverty map.
+ distributes resources to households according to a given set of small area
+ estimates.
 \begin_inset Foot
 status collapsed
 
@@ -2769,8 +2830,8 @@ literal "false"
 
 \end_inset
 
- In addition to the map, the procedure requires true household-level incomes
- from a census-type dataset.
+ In addition to the estimates, the procedure requires true household-level
+ incomes from a census-type dataset.
  
 \end_layout
 
@@ -2800,13 +2861,13 @@ Using the true household-level incomes, calculate the poverty headcount
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using a given poverty map, order the geographical entitities according to
+Using a given poverty map, order the geographical entities according to
  their estimated poverty headcounts, from most to least poor.
  For the poorest region, augment the true per capita income of all households
  by an amount equal to the transfer (i.e., each household receives an amount
  equal to the transfer times the number of household members).
  Continue this distribution procedure for the second poorest region, the
- third poorest region, and so on until there is not enough resources to
+ third poorest region, and so on until there are not enough resources to
  cover all households in a given region.
  For the marginal region, distribute the remaining budget equally among
  individuals in that region.
@@ -2824,8 +2885,8 @@ on.
 \begin_inset VSpace -10bp
 \end_inset
 
-The above can be implemented for alternative poverty maps to examine the
- effect of methodological choices on poverty alleviation.
+The above can be implemented for alternative sets of estimates to examine
+ the effect of methodological choices on poverty alleviation.
  In our implementation, we set the poverty line at the 25th percentile of
  per capita income.
  
@@ -3322,7 +3383,8 @@ Given the shortcomings of the
 \begin_inset Formula $R^{2}$
 \end_inset
 
-, we have argued that the MSE represents a better metric for model assessment.
+, we have argued that the empirical MSE represents a better metric for model
+ assessment.
  Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3337,7 +3399,7 @@ noprefix "false"
  The first three models apply XGBoost at the municipality level using three
  alternative covariate sets: only GIS-based covariates, only census-based
  covariates, and then a model with all available covariates.
- The fouth model is estimated at the PSU level and only uses census-based
+ The fourth model is estimated at the PSU level and only uses census-based
  covariates.
  The final two models are traditional small-area models that we use to benchmark
  the performance of the XGBoost models.
@@ -3351,9 +3413,9 @@ gold standard
 
  of small-area estimation and corresponds to an ideal scenario where up-to-date,
  micro-level census data are available.
- The unit-context (UC) model is often considered the preferred model when
- census data are out-of-date and is thus a direct competitor to the machine-lear
-ning models, which are often motivated by a lack of up-to-date census data.
+ The unit-context (UC) has been proposed for cases when census data are
+ out-of-date and is thus a direct competitor to the machine-learning models,
+ which are often motivated by a lack of up-to-date census data.
  
 \end_layout
 
@@ -3393,9 +3455,21 @@ noprefix "false"
 \end_inset
 
 ]).
- Turning to the results, the XGBoost model with GIS-based covariates is
- our closest approximation to the standard implementation of machine learning
- in the context of poverty mapping.
+ Initially we aim to compare how the methods performs against each other
+ using the same data, thus we rely on using only census aggregates.
+ As is evident in the results from Figure XX and Figure XY the XGBoost methods
+ using census aggregate data only perform better than unit-context models
+ and approximate the performance of CensusEB estimates.
+ 
+\end_layout
+
+\begin_layout Standard
+Once established that in the context of the Mexican data used and with similar
+ data used as covariates, XGBoost can perform just as well as CensusEB methods
+ our attention is turned to performance of geo-referenced data.
+ The XGBoost model with GIS-based covariates is our closest approximation
+ to the standard implementation of machine learning in the context of poverty
+ mapping.
  This model is nevertheless the worst performing of all the models: the
  median MSE for the model with GIS-based covariates is 0.008 (with a root
  MSE of about 0.09), meaning that the median error is roughly nine percentage
@@ -3405,7 +3479,7 @@ noprefix "false"
  While the standard implementation shows relatively poor performance, the
  remaining three XGBoost models that incorporate census-based covariates
  perform much better, with the PSU-level model achieving a median MSE of
- 0.002 and outperforming both of the traditional approaches.
+ 0.002 and outperforming even CensusEB estimates.
 \end_layout
 
 \begin_layout Standard
