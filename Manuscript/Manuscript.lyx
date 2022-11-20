@@ -151,9 +151,10 @@ literal "false"
 \end_inset
 
 ).
- However, household surveys provide estimates that are sufficiently reliable
- for large areas in a given country but often lack the desired precision
- and coverage to be able to properly inform targeting interventions.
+ Household surveys provide estimates that are sufficiently reliable for
+ large areas in a given country but often lack the desired precision and
+ coverage to be able to properly inform targeting interventions at a granular
+ geographic level.
  Thus, it is necessary to rely on small area estimation.
 \end_layout
 
@@ -170,11 +171,12 @@ Small area estimation is a branch of statistics focused on obtaining estimates
 \end_layout
 
 \begin_layout Standard
-The literature on small area estimation is rich and several variations on
- this basic procedure have been proposed.
+The literature on small area estimation is rich and several variations of
+ the procedure have been proposed.
  Unit-level models conduct estimation and prediction at the household level,
- assuming a linear relationship between the poverty measure and household-level
- characteristics 
+ assuming a linear relationship between the an equivalized welfare measure
+ (e.g.
+ income per capita) and household-level characteristics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "hentschel1998combining,elbers2003micro,molina2010small"
@@ -183,12 +185,16 @@ literal "false"
 \end_inset
 
 .
+ The method relies on simulating a welfare vector for every household in
+ the census and from the simulated welfare poverty and inequality indicators
+ may be estimated.
  Unit-level models are not well-suited to situations where the survey and
  census data correspond to different years, which is often the case in developin
 g countries where censuses are conducted infrequently.
  Area-level models represent a feasible alternative that similarly rely
- on linear functional forms, but conduct estimation and prediction using
- only aggregate data for the geographical entities of interest 
+ on linear functional forms, but conduct estimation and prediction of poverty
+ or other indicators using only aggregate data for the geographical entities
+ of interest 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "fay1979estimates,torabi2014small"
@@ -197,7 +203,7 @@ literal "false"
 \end_inset
 
 .
- Despite their desirable features, the gains in precision offered by these
+ Despite their desirable features, the gains in precision offered by area-level
  models is quite limited (see 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -212,7 +218,7 @@ literal "false"
 
 \begin_layout Standard
 Considerable efforts have been devoted to methods which can be applied for
- poverty mapping in off-census years.
+ poverty mapping in off-census years beyond the traditional area-level models.
  One proposed method attempts to combine the best features of unit-level
  models and area-level models (
 \begin_inset CommandInset citation
@@ -222,14 +228,31 @@ literal "false"
 
 \end_inset
 
-), called unit-context models.
+), called unit-context models by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+.
  Specifically, the method models household level welfare from a household
  survey using only aggregate data.
  Aggregate data may come from a recent or previous census, administrative
  data, or geo-referenced data.
- The latter data have become a selling point of many recent poverty maps,
- particularly poverty maps with estimates obtained from machine learning
- methods.
+ Nevertheless, the application by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "masaki2020small"
+literal "false"
+
+\end_inset
+
+ relies solely on geo-referenced data.
+ Geo-referenced and satellite imagery derived data have become a selling
+ point of many recent poverty maps, particularly poverty maps with estimates
+ obtained from machine learning methods.
  
 \end_layout
 
@@ -496,7 +519,7 @@ Prior to presenting our simulation results, we discuss three ways in which
  In addition, we argue that the ultimate concern is to understand how different
  methodological choices affect poverty by influencing the efficiency of
  targeting.
- We therefore propose a targeting experiment through which we examine the
+ We therefore present a targeting experiment through which we examine the
  relative ability of alternative mapping methods to alleviate poverty in
  the context of the Mexican data.
 \end_layout
@@ -526,15 +549,15 @@ The results of our simulations can be summarized as follows.
  as a performance measure also incorrectly identifies which model should
  be preferred.
  Second, when assessing model performance based on the true poverty rates
- using the mean squared error, we find that our closest approximation to
- the standard machine-learning implementation performs poorly relative to
- several benchmark models.
+ using the mean squared error, we find that a machine learning method with
+ remotely-sensed data implementation performs poorly relative to several
+ benchmark models.
  We find that these performance issues are largely due to the limited predictive
  power of remotely-sensed covariates relative to census-based covariates
  in the data used here.
- Finally, our targeting simulations show that none of our machine-learning
- implementations outperform more traditional poverty mapping methods that
- are feasible with the same data.
+ Finally, our targeting simulations show that the machine-learning implementatio
+ns done here are outperformed by more traditional poverty mapping methods
+ that are feasible with the same data although they do not lag far behind.
 \end_layout
 
 \begin_layout Standard
@@ -546,12 +569,38 @@ literal "false"
 
 \end_inset
 
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
 , who similarly used the Mexican Intercensal Survey to examine the performance
  of several poverty mapping methods.
- The authors, nevertheless, focused exclusively on traditional poverty mapping
- approaches and did not consider the performance of machine-learning methods.
- Importantly, we are not the first paper to evaluate the performance of
- machine-learning methods relative to census data.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ exclussively on traditional poverty mapping approaches and did not consider
+ the performance of machine-learning methods.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ considers the performance of machine-learning approaches and finds that
+ these perform comparatively well when compared with traditional small area
+ estimation methods, Importantly, we are not the first paper to evaluate
+ the performance of machine-learning methods relative to census data.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1591,12 +1640,12 @@ literal "false"
 \end_layout
 
 \begin_layout Subsection
-Traditional methods
+Traditional small area estimation methods
 \end_layout
 
 \begin_layout Standard
-In contrast to machine-learning methods, traditional approaches to small-area
- estimation generally assume an underlying data-generating process.
+In contrast to machine-learning methods, traditional approaches to small
+ area estimation generally assume an underlying data-generating process.
  The well-known methods of 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -3258,6 +3307,27 @@ noprefix "false"
 \end_inset
 
  then selects the incorrect model for 82 of the 500 samples.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In the annex Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:R2 comp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ the comparison across all methods is displayed.
+ 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4118,7 +4188,7 @@ This paper sets out to validate traditional small area estimation and machine
 \end_layout
 
 \begin_layout Standard
-The paper provides a few very valuable insights.
+The paper provides some very valuable insights.
  First, it presents evidence on the invalidity of relying on 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -4205,6 +4275,48 @@ LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "References"
 options "apalike"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Annex
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparison of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure across methods 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:R2 comp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
