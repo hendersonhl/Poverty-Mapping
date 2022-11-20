@@ -3457,16 +3457,55 @@ noprefix "false"
 ]).
  Initially we aim to compare how the methods performs against each other
  using the same data, thus we rely on using only census aggregates.
- As is evident in the results from Figure XX and Figure XY the XGBoost methods
- using census aggregate data only perform better than unit-context models
- and approximate the performance of CensusEB estimates.
+ As is evident in the results from panel (a) and (b) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ the XGBoost methods using census aggregate data (XGboost [PSU] and XGBoost
+ [MUN]) perform better than unit-context models and approximate the performance
+ of CensusEB estimates.
+ The median MSE for the CensusEB model is 0.003 while that of XGBoost methods
+ is somewhat lower and both methods have similar interquartile ranges.
+ The results suggest that XGBoost methods can approximate CensusEB unit-level
+ methods and will outperform unit-context methods by a considerable margin,
+ which is quite encouraging for cases where estimates are needed when the
+ survey and census data are not contemporaneous.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The unit-context models include covariates at the PSU and municipality level.
+ The location effects are specified at the municipality level.
  
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-Once established that in the context of the Mexican data used and with similar
- data used as covariates, XGBoost can perform just as well as CensusEB methods
- our attention is turned to performance of geo-referenced data.
+Now that we have established that in the context of the Mexican data used
+ and with covariates derived from census data, XGBoost methods can perform
+ just as well as CensusEB methods our attention is turned to XGBoost's performan
+ce under geo-referenced data.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that the underlying model for CensusEB estimates relies on household
+ level microdata.
+ Consequently, the data requirements for CensusEB is even higher.
+\end_layout
+
+\end_inset
+
  The XGBoost model with GIS-based covariates is our closest approximation
  to the standard implementation of machine learning in the context of poverty
  mapping.
@@ -3511,9 +3550,44 @@ noprefix "false"
  That is, each box plot summarizes the distribution of bias estimates across
  all municipalities in our Mexican data.
  The median bias for each model is approximately zero, with the possible
- exception of the UC model, which exhibits a downward bias.
- The median bias of the UC model is -0.03, meaning that it underestimates
- municipality-level poverty rates by about three percentage points.
+ exception of the unit-context model, which exhibits a downward bias.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The same issue for unit-context models is highlighted by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ The median bias of the unit-context model is -0.03, meaning that it underestimat
+es the median municipality-level poverty rates by about three percentage
+ points.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+There are 1,865 municipalities in our census.
+\end_layout
+
+\end_inset
+
  We further find that the bias estimates for the XGBoost model with GIS-based
  covariates exhibits considerable variation, with minimum and maximum biases
  reaching -0.43 and 0.43, respectively.
@@ -3570,11 +3644,11 @@ name "fig:importance"
 \end_layout
 
 \begin_layout Standard
-We thus see that the performance of XGBoost depends heavily on the covariates
- used by the model, with the census-based covariates appearing to considerably
+It is evident that the performance of XGBoost depends heavily on the covariates
+ used in the model, with the census-based covariates appearing to considerably
  improve the performance of the model.
  Another way to see that the census-based covariates have greater predictive
- power than the GIS-based covariates is by looking at feature importances.
+ power than the GIS-based covariates is by looking at feature importance.
  The standard measure of feature importance used by XGBoost summarizes the
  gain (i.e., reduction of the loss function) associated with any given feature.
  That is, for a given run of the model, feature importance captures the
@@ -3601,8 +3675,8 @@ noprefix "false"
 \end_inset
 
  plots the 20 covariates with the highest feature importance after running
- XGBoost with all covariates on each sample and averaging the features importanc
-es across the 500 samples.
+ XGBoost with all covariates on each sample and averaging each covariate's
+ importance across the 500 samples.
  We find that all of the top 10 covariates are census-based, with only five
  GIS-based covariates entering the top 20.
 \end_layout
@@ -3735,18 +3809,18 @@ poverty quantiles.
  quantile.
  For the sake of simplicity, we only present results for two XGBoost models
  – namely the municipality-level models using only GIS- and census-based
- covariates – and two traditional models.
+ covariates – and the CensusEB and unit-context models.
  Panel (a) presents the MSE results and panel (b) presents the bias results.
  In both plots, the XGBoost model with census-based covariates performs
- quite similarly to the EB model across all quantiles.
+ quite similarly to the CensusEB model across all quantiles.
  However, the XGBoost model with the GIS-based covariates again departs
  considerably from this benchmark, particularly at the lowest and highest
  quantiles.
  The bias results are particularly notable: the XGBoost model with GIS covariate
 s systematically underestimates poverty at the lowest quantiles and overestimate
 s poverty at the highest quantiles.
- The model with GIS covariates thus understates the level of inequality
- in poverty rates.
+ The model with GIS covariates thus understates the spatial distribution
+ of poverty.
 \end_layout
 
 \begin_layout Standard
@@ -3998,10 +4072,20 @@ noprefix "false"
  the worst performing model.
  The best performing XGBoost model is the implementation at the PSU level,
  which achieves a median poverty rate across all simulations of 20.02.
- Critically, even this model falls short of the UC benchmark, which achieves
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Critically, even this model falls short of the UC benchmark, which achieves
  a median poverty rate of 20.01.
  Machine learning thus fails to outperform the traditional UC model, which
  is feasible with the same data.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
