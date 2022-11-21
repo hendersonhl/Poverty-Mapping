@@ -4,8 +4,9 @@
 
 * Set up
 clear all
-if (lower("`c(username)'")=="wb378870")     global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
+if (lower("`c(username)'")=="wb378870" | lower("`c(username)'")=="paul corral")     global main "C:\Users\\`c(username)'\GitHub\Poverty-Mapping\"
 if (lower("`c(username)'")=="hendersonhl")  global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
+if (lower("`c(username)'")=="lupin") global main "C:\Users\\`c(username)'\Documents\GitHub\Poverty-Mapping\"
 global inpath  "$main/Results"
 global outpath "$main/Manuscript"
 

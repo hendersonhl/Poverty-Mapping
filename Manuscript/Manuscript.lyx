@@ -1876,6 +1876,35 @@ literal "false"
 
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+ also show through simulations that when sample sizes are small CensusEB
+ estimates are approximate EB estimates.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+CensusEB estimates do not include survey observations when calculating small
+ area estimates as opposed to EB estimates.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2019desagregacion"
+literal "false"
+
+\end_inset
+
+ for more details.
+\end_layout
+
+\end_inset
+
  The method is EB since it conditions on the survey sample and makes use
  of the area level information such that 
 \begin_inset Formula $E[\bar{y}_{i}|\mu_{i}]=\bar{x}_{i}\delta+\mu_{i}$
@@ -1916,6 +1945,7 @@ literal "false"
  However, EB methods only ensure that the area level means of the dependent
  variable are Empirical Best Linear Unbiased Predictors (EBLUP) but does
  not guarantee the same for poverty which is a non-linear parameter.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2051,8 +2081,16 @@ literal "false"
 
  discourage the use of the method since it fails to yield unbiased estimates
  and practitioners are unlikely to know when the method has yielded estimates
- of good quality.
- However, since it does offer certain advantages,
+ of good quality since applying the parametric boostrap methods from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "gonzalez2008bootstrap"
+literal "false"
+
+\end_inset
+
+ to the method yields inadequate noise measures.
+ However, since the method does offer certain advantages,
 \begin_inset Foot
 status collapsed
 
@@ -4142,20 +4180,9 @@ noprefix "false"
  the worst performing model.
  The best performing XGBoost model is the implementation at the PSU level,
  which achieves a median poverty rate across all simulations of 20.02.
+ These results are just a tad higher than the CensusEB estimates (median
+ of 19.99) and those from the unit-context models (median of 20.01).
  
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Critically, even this model falls short of the UC benchmark, which achieves
- a median poverty rate of 20.01.
- Machine learning thus fails to outperform the traditional UC model, which
- is feasible with the same data.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -4182,13 +4209,13 @@ This paper sets out to validate traditional small area estimation and machine
  data is too old for use under a traditional unit-level small area estimation
  exercise.
  To the best of our knowledge, a rigorous validation of machine learning
- methods like the one done here where machine learning methods are compared
- to traditional small area estimates and to a true welfare measure has not
- been done before.
+ methods like the one done here, where machine learning methods are compared
+ to traditional small area estimates and to a true welfare measure, has
+ not been done before.
 \end_layout
 
 \begin_layout Standard
-The paper provides some very valuable insights.
+The paper provides some valuable insights.
  First, it presents evidence on the invalidity of relying on 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -4220,7 +4247,7 @@ The paper provides some very valuable insights.
  aggregate data.
  This result suggests that there may be considerable gains in linking census
  and administrative data for poverty mapping in off census years.
- Finally, we present evidence on how despite different performance across
+ Finally, we present evidence on how, despite different performance across
  models, all models are beneficial for targeting.
  While some models may outperform others in the potential poverty reduction
  when relying on estimates for targeting, even the worst performing models
@@ -4230,7 +4257,7 @@ The paper provides some very valuable insights.
 
 \begin_layout Standard
 The results found here should be caveated by the fact that they are dependent
- on the Mexican Intra-censal data used.
+ on the Mexican Intercensal data used.
  Results and model performance may differ considerably in a different country
  or using different data.
  It is quite possible that in more agrarian societies GIS covariates perform
@@ -4239,7 +4266,7 @@ The results found here should be caveated by the fact that they are dependent
  Validating the usefulness of a particular type of data is not straight
  forward as it may not work as well everywhere, it is for this reason that
  comparisons here are made in a more holistic manner.
- When comparing the performance of GIS covariates and other type of data
+ When comparing the performance of GIS covariates to other type of data
  one should use the same method, as is done here.
  On the one hand, we show how using census aggregates at the municipality
  level relying on gradient boosting comes very close to the best performing
@@ -4255,8 +4282,8 @@ The paper opens considerable avenues for future research.
  One avenue is related to methodology.
  Specifically, how the noise of machine learning methods can be accurately
  estimated.
- Second, the results suggest that most method would do a solid job for spatial
- targeting type exercises.
+ Second, the results suggest that most methods would do a solid job for
+ spatial targeting type exercises.
  However, a key question is whether or not this will hold elsewhere and
  under what circumstances will one method outperform others.
  
@@ -4283,6 +4310,27 @@ options "apalike"
 
 \begin_layout Section
 Annex
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+1) Add figures in Tableau
+\end_layout
+
+\begin_layout Plain Layout
+2) Add annex figures
+\end_layout
+
+\begin_layout Plain Layout
+3) take one last look at the data section..
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
