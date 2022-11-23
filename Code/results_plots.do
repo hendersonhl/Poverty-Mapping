@@ -10,6 +10,7 @@ if (lower("`c(username)'")=="lupin") global main "C:\Users\\`c(username)'\Docume
 global inpath  "$main/Results"
 global outpath "$main/Manuscript"
 
+
 * Basic R-squared plot
 import delimited "$inpath/results_rsquared.csv", clear
 keep sim_sample gb_census_mun_direct gb_census_mun_true gb_census_psu_direct gb_census_psu_true 
@@ -21,8 +22,11 @@ replace model = "Municipality" if model=="_gb_census_mun"
 replace model = "PSU" if model=="_gb_census_psu"
 gen order = 1 if model=="PSU" 
 replace order = 2 if model=="Municipality" 
-graph box Direct True, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
-    nooutside note("")
+
+graph box Direct True, ytitle("R-squared") over(model, sort(order)) ///
+   /* nooutside note("")*/ graphregion(color(white)) scheme(s1mono)
+	
+graph export "$outpath/Figure-1a.png", as(png) replace
 graph export "$outpath/Figure-1a.pdf", as(pdf) replace
 
 * Model-selection experiment (true vs. direct)
@@ -42,9 +46,10 @@ replace model = "Municipality" if model=="_gb_census_mun"
 replace model = "PSU" if model=="_gb_census_psu"
 gen order = 1 if model=="PSU" 
 replace order = 2 if model=="Municipality" 
-graph box Unconstrained Constrained, ytitle("R-squared") scheme(s1mono) over(model, sort(order)) ///
-    nooutside note("")
+graph box Unconstrained Constrained, ytitle("R-squared") over(model, sort(order)) ///
+    nooutside note("") graphregion(color(white)) scheme(s1mono)
 graph export "$outpath/Figure-1b.pdf", as(pdf) replace
+graph export "$outpath/Figure-1b.png", as(png) replace
 	
 * Model-selection experiment (unconstrained vs. contrained)
 import delimited "$inpath/results_rsquared.csv", clear
@@ -80,33 +85,35 @@ twoway (scatter mse_psu gb_census_psu_true), xtitle("R-squared") ytitle("Emprica
 import delimited "$inpath/results_mse.csv", clear
 keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc
 tabstat mse_gb_census-mse_uc, stat(p50)
-label var mse_gb_census "Gradient Boosting (Census)"
-label var mse_gb_gis "Gradient Boosting (GIS)"
-label var mse_gb_all "Gradient Boosting (All)"
-label var mse_gb_psu "Gradient Boosting (PSU)"
-label var mse_eb "Traditional (EB)"
-label var mse_uc "Traditional (UC)"
+label var mse_gb_census "Gradient Boosting (Census agg. mun)"
+label var mse_gb_gis    "Gradient Boosting (GIS mun)"         
+label var mse_gb_all    "Gradient Boosting (All mun)"            
+label var mse_gb_psu    "Gradient Boosting (Census agg. PSU)"
+label var mse_eb        "CensusEB"                              
+label var mse_uc        "Unit-context"                       
 graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc, ytitle(Empirical MSE) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
 graph export "$outpath/Figure-2a.pdf", as(pdf) replace
+graph export "$outpath/Figure-2a.png", as(png) replace
 
 * Basic bias plot
 import delimited "$inpath/results_bias.csv", clear
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc
 tabstat bias_gb_census-bias_uc, stat(p50 min max)
-label var bias_gb_census "Gradient Boosting (Census)"
-label var bias_gb_gis "Gradient Boosting (GIS)"
-label var bias_gb_all "Gradient Boosting (All)"
-label var bias_gb_psu "Gradient Boosting (PSU)"
-label var bias_eb "Traditional (EB)"
-label var bias_uc "Traditional (UC)"
+label var bias_gb_census "Gradient Boosting (Census agg. mun)"
+label var bias_gb_gis "Gradient Boosting (GIS mun)"
+label var bias_gb_all "Gradient Boosting (All mun)"
+label var bias_gb_psu "Gradient Boosting (Census agg. PSU)"
+label var bias_eb   "CensusEB"       
+label var bias_uc   "Unit-context" 
 graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
 graph export "$outpath/Figure-2b.pdf", as(pdf) replace
+graph export "$outpath/Figure-2b.png", as(png) replace
 
 * Variable importance
 import delimited "$inpath/gb_importance_all_mun.csv", clear
@@ -136,6 +143,7 @@ replace variable = "Mean slope from digital model (GIS)" if variable == "gis_mde
 graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
     ytitle(Feature Importance)
 graph export "$outpath/Figure-3.pdf", as(pdf) replace
+graph export "$outpath/Figure-3.png", as(png) replace
 	
 * MSE by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
@@ -152,11 +160,12 @@ collapse mse*, by(pov_rank)
 twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line mse_eb pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line mse_gb_census pov_rank, lpattern(solid) lcolor(gray)) ///
-    (line mse_uc pov_rank, lpattern(shortdash) lcolor(gray)),  ///
+    (line mse_uc pov_rank, lpattern(-.-) lcolor(gray)),  ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
-	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
+	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
+	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context"))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
+graph export "$outpath/Figure-4a.png", as(png) replace
 
 * Bias by poverty quantiles
 import delimited "$main/Data/true_mun.csv", clear
@@ -173,11 +182,12 @@ collapse bias*, by(pov_rank)
 twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_eb pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line bias_gb_census pov_rank, lpattern(solid) lcolor(gray)) ///
-    (line bias_uc pov_rank, lpattern(shortdash) lcolor(gray)),  ///
+    (line bias_uc pov_rank, lpattern(-.-) lcolor(gray)),  ///
 	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS)") label(2 "Traditional (EB)") ///
-	label(3 "Gradient Boosting (Census)") label(4 "Traditional (UC)"))
+	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
+	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context"))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
+graph export "$outpath/Figure-4b.png", as(png) replace
 
 * Model comparisons w/ GIS covariates (MSE)
 import delimited "$inpath/results_mse.csv", clear
@@ -191,6 +201,7 @@ graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis, ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
 graph export "$outpath/Figure-5a.pdf", as(pdf) replace
+graph export "$outpath/Figure-5a.png", as(png) replace
 
 * Model comparisons w/ GIS covariates (Bias)
 import delimited "$inpath/results_bias.csv", clear
@@ -204,6 +215,7 @@ graph hbox bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis, ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
 graph export "$outpath/Figure-5b.pdf", as(pdf) replace
+graph export "$outpath/Figure-5b.png", as(png) replace
 	
 * Poverty targeting
 import delimited "$inpath/results_transfer.csv", clear
@@ -219,17 +231,19 @@ replace gb_census_psu = gb_census_psu*100
 replace eb = eb*100
 replace uc = uc*100
 tabstat eb-uc, stat(p50)
-label var gb_census_mun "Gradient Boosting (Census)"
-label var gb_gis_mun "Gradient Boosting (GIS)"
-label var gb_all_mun "Gradient Boosting (All)"
-label var gb_census_psu "Gradient Boosting (PSU)"
-label var eb "Traditional (EB)"
-label var uc "Traditional (UC)"
+label var gb_census_mun "Gradient Boosting (Census agg. mun)"
+label var gb_gis_mun    "Gradient Boosting (GIS mun)"         
+label var gb_all_mun    "Gradient Boosting (All mun)"            
+label var gb_census_psu    "Gradient Boosting (Census agg. PSU)"
+label var eb        "CensusEB"                              
+label var uc        "Unit-context"   
 graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray))
 graph export "$outpath/Figure-6.pdf", as(pdf) replace
+graph export "$outpath/Figure-6.png", as(png) replace
+
 
 
 
