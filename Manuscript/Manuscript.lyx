@@ -976,24 +976,104 @@ As part of the data made available to the public by INEGI are geo-referenced
  covariates available at the municipality level.
  Regretfully, the geo-referenced data cannot be obtained at the same level
  of our makeshift PSUs since this would require geo-referenced data at the
- original Intercensal survey PSU level.
+ original Intercensal survey PSU level which is not publicly availablr.
  Hence, geo-referenced data is only available at the municipal level.
- 
+ Geographic variables were calculated by INEGI for the year 2015 (same as
+ the Intercensal survey) at the municipal level for the 2457 municipalities
+ in Mexico.
+ There are 21 indicators.
+ Each indicator has 5 different measures of dispersion: minimum, maximum,
+ mean, sum, and standard deviation (e.g., for the indicator Atmospherically
+ Resistant Vegetation Index (arvi) we have arvimin, arvimax, arvimean, arvisum,
+ and arvistddev).
+ The GIS covariates available are:
+\end_layout
+
+\begin_layout Enumerate
+Enhanced Vegetation Index
+\end_layout
+
+\begin_layout Enumerate
+Normalized Difference Vegetation Index
+\end_layout
+
+\begin_layout Enumerate
+Normalized Difference Built-up Index
+\end_layout
+
+\begin_layout Enumerate
+Built-up Index
+\end_layout
+
+\begin_layout Enumerate
+Simple Ratio
+\end_layout
+
+\begin_layout Enumerate
+Atmospherically Resistant Vegetation Index
+\end_layout
+
+\begin_layout Enumerate
+Urban Index
+\end_layout
+
+\begin_layout Enumerate
+Index of biological integrity
+\end_layout
+
+\begin_layout Enumerate
+Normalized Difference Water Index 
+\end_layout
+
+\begin_layout Enumerate
+Modified Normalized Difference Water Index
+\end_layout
+
+\begin_layout Enumerate
+New Built-up Index 
+\end_layout
+
+\begin_layout Enumerate
+Band Ratio for Built-up Area 
+\end_layout
+
+\begin_layout Enumerate
+Normalized Built-up Area Index 
+\end_layout
+
+\begin_layout Enumerate
+Built-up Area Extraction Index
+\end_layout
+
+\begin_layout Enumerate
+Normalized Difference Snow Index
+\end_layout
+
+\begin_layout Enumerate
+Visible Atmospherically Resistant Index
+\end_layout
+
+\begin_layout Enumerate
+Soil Adjusted Vegetation Index 
+\end_layout
+
+\begin_layout Enumerate
+Optimized Soil Adjusted Vegetation Index
+\end_layout
+
+\begin_layout Enumerate
+Normalized Difference Moisture Index
+\end_layout
+
+\begin_layout Enumerate
+Digital altitude model
+\end_layout
+
+\begin_layout Enumerate
+Digital slope model
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-I think we need to discuss the GIS data in the main text and here would
- be a good location for that discussion.
- Please add 2-3 paragraphs summarizing the source of the GIS data and the
- definitions for the variables that we use.
-\end_layout
-
-\end_inset
-
 
 \end_layout
 
@@ -3372,7 +3452,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
