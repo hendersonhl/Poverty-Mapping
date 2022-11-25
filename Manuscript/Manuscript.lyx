@@ -163,8 +163,8 @@ Small area estimation is a branch of statistics focused on obtaining estimates
  of higher quality than those obtained directly from the household survey.
  These small area estimation techniques often combine data from household
  surveys and auxiliary information from censuses, registers, or others to
- produce estimates for areas with small sample sizes of higher quality than
- is possible from survey data alone.
+ produce estimates of higher quality than what is possible from survey data
+ alone for areas or groups with small sample sizes.
  Since there is no such thing as a free lunch, to achieve these gains in
  quality it is necessary to rely on model assumptions which must be thoroughly
  checked.
@@ -176,33 +176,33 @@ The literature on small area estimation is rich and several variations of
  Unit-level models conduct estimation and prediction at the household level,
  assuming a linear relationship between the an equivalized welfare measure
  (e.g.
- income per capita) and household-level characteristics 
+ income per capita) and household-level characteristics (
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citealt
 key "hentschel1998combining,elbers2003micro,molina2010small"
 literal "false"
 
 \end_inset
 
-.
+).
  The method relies on simulating a welfare vector for every household in
- the census and from the simulated welfare poverty and inequality indicators
- may be estimated.
+ the census and from this simulated welfare we can obtain estimates of poverty
+ and inequality indicators.
  Unit-level models are not well-suited to situations where the survey and
  census data correspond to different years, which is often the case in developin
 g countries where censuses are conducted infrequently.
  Area-level models represent a feasible alternative that similarly rely
  on linear functional forms, but conduct estimation and prediction of poverty
  or other indicators using only aggregate data for the geographical entities
- of interest 
+ of interest (
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citealt
 key "fay1979estimates,torabi2014small"
 literal "false"
 
 \end_inset
 
-.
+).
  Despite their desirable features, the gains in precision offered by area-level
  models is quite limited (see 
 \begin_inset CommandInset citation
@@ -459,7 +459,8 @@ literal "false"
 \end_inset
 
  The poverty measures used in this procedure are most often direct, sample-based
- estimates rather than the true poverty measures for the regions of interest.
+ estimates rather than the true poverty measures for the regions of interest
+ since true poverty rates are often unavailable.
  While direct estimates are unbiased, they can be imprecise estimates of
  true poverty measures, meaning that it is unclear whether the validation
  procedure is informative of actual model performance.
@@ -599,8 +600,9 @@ literal "false"
 
  considers the performance of machine-learning approaches and finds that
  these perform comparatively well when compared with traditional small area
- estimation methods, Importantly, we are not the first paper to evaluate
- the performance of machine-learning methods relative to census data.
+ estimation methods.
+ Importantly, we are not the first paper to evaluate the performance of
+ machine-learning methods relative to census data.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -976,7 +978,7 @@ As part of the data made available to the public by INEGI are geo-referenced
  covariates available at the municipality level.
  Regretfully, the geo-referenced data cannot be obtained at the same level
  of our makeshift PSUs since this would require geo-referenced data at the
- original Intercensal survey PSU level which is not publicly availablr.
+ original Intercensal survey PSU level which is not publicly available.
  Hence, geo-referenced data is only available at the municipal level.
  Geographic variables were calculated by INEGI for the year 2015 (same as
  the Intercensal survey) at the municipal level for the 2457 municipalities
@@ -986,94 +988,24 @@ As part of the data made available to the public by INEGI are geo-referenced
  mean, sum, and standard deviation (e.g., for the indicator Atmospherically
  Resistant Vegetation Index (arvi) we have arvimin, arvimax, arvimean, arvisum,
  and arvistddev).
- The GIS covariates available are:
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The GIS covariates available are: Enhanced Vegetation Index, Normalized
+ Difference Vegetation Index, Normalized Difference Built-up Index, Built-up
+ Index, Simple Ratio, Atmospherically Resistant Vegetation Index, Urban
+ Index, Index of biological integrity, Normalized Difference Water Index,
+ Modified Normalized Difference Water Index, New Built-up Index, Band Ratio
+ for Built-up Area, Normalized Built-up Area Index, Built-up Area Extraction
+ Index, Normalized Difference Snow Index, Visible Atmospherically Resistant
+ Index, Soil Adjusted Vegetation Index, Optimized Soil Adjusted Vegetation
+ Index, Normalized Difference Moisture Index, Digital altitude model, and
+ Digital slope model.
 \end_layout
 
-\begin_layout Enumerate
-Enhanced Vegetation Index
-\end_layout
+\end_inset
 
-\begin_layout Enumerate
-Normalized Difference Vegetation Index
-\end_layout
-
-\begin_layout Enumerate
-Normalized Difference Built-up Index
-\end_layout
-
-\begin_layout Enumerate
-Built-up Index
-\end_layout
-
-\begin_layout Enumerate
-Simple Ratio
-\end_layout
-
-\begin_layout Enumerate
-Atmospherically Resistant Vegetation Index
-\end_layout
-
-\begin_layout Enumerate
-Urban Index
-\end_layout
-
-\begin_layout Enumerate
-Index of biological integrity
-\end_layout
-
-\begin_layout Enumerate
-Normalized Difference Water Index 
-\end_layout
-
-\begin_layout Enumerate
-Modified Normalized Difference Water Index
-\end_layout
-
-\begin_layout Enumerate
-New Built-up Index 
-\end_layout
-
-\begin_layout Enumerate
-Band Ratio for Built-up Area 
-\end_layout
-
-\begin_layout Enumerate
-Normalized Built-up Area Index 
-\end_layout
-
-\begin_layout Enumerate
-Built-up Area Extraction Index
-\end_layout
-
-\begin_layout Enumerate
-Normalized Difference Snow Index
-\end_layout
-
-\begin_layout Enumerate
-Visible Atmospherically Resistant Index
-\end_layout
-
-\begin_layout Enumerate
-Soil Adjusted Vegetation Index 
-\end_layout
-
-\begin_layout Enumerate
-Optimized Soil Adjusted Vegetation Index
-\end_layout
-
-\begin_layout Enumerate
-Normalized Difference Moisture Index
-\end_layout
-
-\begin_layout Enumerate
-Digital altitude model
-\end_layout
-
-\begin_layout Enumerate
-Digital slope model
-\end_layout
-
-\begin_layout Standard
 
 \end_layout
 
@@ -1720,7 +1652,255 @@ literal "false"
 \end_layout
 
 \begin_layout Subsection
-Traditional small area estimation methods
+Small area estimation methods
+\end_layout
+
+\begin_layout Standard
+This section presents small area estimation methods that are often applied
+ to poverty mapping.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For a thorough review of small area estimation methods refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+, for a review of methods in the context of poverty mapping refer to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2022estimation"
+literal "false"
+
+\end_inset
+
+ as well as reviews by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pfeffermann2013new"
+literal "false"
+
+\end_inset
+
+ on other developments in the area.
+ 
+\end_layout
+
+\end_inset
+
+ Perhaps one of the earliest small area estimation methods for poverty mapping
+ corresponds to the Fay-Herriot area level method (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+).
+ The method is an area level method, meaning that a model at the area level
+ is fit using data.
+ The only data used from the household survey for this model are the direct
+ estimates of poverty and their noise level.
+ 
+\end_layout
+
+\begin_layout Standard
+In the late 1990s 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hentschel1998combining"
+literal "false"
+
+\end_inset
+
+ published an early attempt at unit-level small area estimation for poverty
+ mapping.
+ The method presented by the authors was later improved upon by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2003micro"
+literal "false"
+
+\end_inset
+
+ in what is to this day perhaps the most applied method for poverty mapping
+ by statistical agencies across the globe.
+ In 2010 the method was further improved by the introduction of Empirical
+ Best methods by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+ and has become the standard across the globe for poverty mapping.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Area-level models
+\end_layout
+
+\begin_layout Standard
+Povert mapping with area-level methods rely on estimating the distribution
+ of the area-level poverty rate relying on a set of area-level covariates.
+ Covariates may come from census aggregates, administrative data, or georeferenc
+ed data.
+ The standard area-level method is the Fay-Herriot method (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+).
+ The method was originally applied by the authors to estimate mean per capita
+ income for small areas in the United States.
+ 
+\end_layout
+
+\begin_layout Standard
+The description here borrows heavily from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small,molina2019desagregacion,corral2022guidelines,molina2022estimation"
+literal "false"
+
+\end_inset
+
+.
+ The method is defined in two stages.
+ the fisrt stage links the true poverty values, 
+\begin_inset Formula $y$
+\end_inset
+
+, for area 
+\begin_inset Formula $i$
+\end_inset
+
+ to a linear regression model where the true value is linearly related to
+ a set of area-level covariates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}=x_{i}\beta+u_{i}\label{eq:linking}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The random errors corresponding to unexplained between area variation in
+ the model, 
+\begin_inset Formula $u_{i},$
+\end_inset
+
+ are called the random area effects.
+ These are assumed to follow a constant variance, 
+\begin_inset Formula $\sigma_{u}^{2}$
+\end_inset
+
+, and mean zero.
+ Since we lack the true values, the model cannot be fit.
+ Instead the direct estimators of poverty (i.e.
+ those calculated from the survey), 
+\begin_inset Formula $\hat{y}_{i}^{dir}$
+\end_inset
+
+ are used as the left hand side.
+ These estimates are subject to sampling error because we rely on the area
+ specific sample for their calculation.
+ In the second stage of the model we assume that the direct estimates are
+ centered around the true values:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\hat{y}_{i}^{dir}=y_{i}+e_{i}\label{eq:2nd stage}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This model is referred to as the sampling model, and is assumed to have
+ heteroscedastic error variance 
+\begin_inset Formula $\mathrm{var}(e_{i}|y_{i})=\psi_{i}$
+\end_inset
+
+.
+ These variances are assumed to be known although in reality these are estimated
+ using the survey data.
+ The best linear unbiased predictor (BLUP) is obtained by predicting 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ through the model, 
+\begin_inset Formula $\hat{y}_{i}^{dir}=x_{i}\hat{\beta}+\hat{u}_{i}$
+\end_inset
+
+.
+ The 
+\begin_inset Formula $\hat{\beta}$
+\end_inset
+
+ are the weighted least squares estimator of 
+\begin_inset Formula $\beta$
+\end_inset
+
+ under the Fay-Herriot model and, 
+\begin_inset Formula $\hat{u}_{i}=\gamma_{i}\left(\hat{y}_{i}^{dir}-x_{i}\hat{\beta}\right)$
+\end_inset
+
+ is also the BLUP of the area effect 
+\begin_inset Formula $u_{i}.$
+\end_inset
+
+ Finally, 
+\begin_inset Formula $\gamma_{i}=\sigma_{u}^{2}/\left(\sigma_{u}^{2}+\psi_{i}\right)$
+\end_inset
+
+.
+ In essence, the final estimates for areas contained in the survey are the
+ weighted average between the direct estimate 
+\begin_inset Formula $\hat{y}_{i}^{dir}$
+\end_inset
+
+ and the synthetic estimator 
+\begin_inset Formula $x_{i}\hat{\beta}$
+\end_inset
+
+, where the weights are determined by the quality of the model and the quality
+ of the direct estimator.
+ For areas not sampled, the estimator is just the synthetic estimator.
+ As 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2022estimation"
+literal "false"
+
+\end_inset
+
+ notes the model does not require normality assumptions for the estimates
+ to be BLUP, but assumptions are needed for estimation of the noise, MSE.
+\end_layout
+
+\begin_layout Subsubsection
+Unit-level and unit-context models 
 \end_layout
 
 \begin_layout Standard
@@ -2943,6 +3123,13 @@ literal "false"
 
 \begin_layout Subsection
 Targeting 
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Targeting"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3165,17 +3352,41 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ estimates at the PSU and municipality levels 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:r2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-1a.pdf
-	scale 50
+	filename Figure-1a.png
+	scale 25
 
 \end_inset
 
@@ -3209,14 +3420,14 @@ Direct versus true
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-1b.pdf
-	scale 50
+	filename Figure-1b.png
+	scale 25
 
 \end_inset
 
@@ -3241,25 +3452,22 @@ Unconstrained versus constrained
 \end_layout
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
+\size small
+Note: Figure presents the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- estimates at the PSU and municipality levels
-\end_layout
-
+ from a regression where on the right hand side we have the model based
+ estimates and on the left hand side we either have the true poverty rate
+ or the direct (i.e.
+ survey) based estimates of poverty.
+ Since we have 500 samples drawn from our census, we have 500 sets of direct
+ and model based estimates and, consequently, 500 
+\begin_inset Formula $R^{2}$
 \end_inset
 
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:r2"
-
-\end_inset
-
-
+ measures.
 \end_layout
 
 \end_inset
@@ -3425,34 +3633,34 @@ noprefix "false"
 \end_inset
 
  then selects the incorrect model for 82 of the 500 samples.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-In the annex Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:R2 comp"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- the comparison across all methods is displayed.
- 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \begin_layout Plain Layout
 \noindent
@@ -3460,14 +3668,14 @@ status open
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-2a.pdf
-	scale 50
+	filename Figure-2a.png
+	scale 25
 
 \end_inset
 
@@ -3486,10 +3694,6 @@ MSE
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
@@ -3501,14 +3705,14 @@ MSE
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-2b.pdf
-	scale 50
+	filename Figure-2b.png
+	scale 25
 
 \end_inset
 
@@ -3527,31 +3731,6 @@ Bias
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MSE and bias for select models
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse"
-
 \end_inset
 
 
@@ -3559,6 +3738,16 @@ name "fig:mse"
 
 \begin_layout Plain Layout
 
+\size small
+Note: Figures presents the MSE and bias for each applied method.
+ The MSE is calculated as the mean squared difference between the model
+ based estimate for a given municipality (obtained from each of the 500
+ samples drawn from the census) and the municipality's true poverty rate.
+ The bias is just the average difference between the model based estimate
+ for a given municipality (obtained from each of the 500 samples drawn from
+ the census) and the municipality's true poverty rate.
+ The box-plots shows the municipality level spread of the MSE and bias of
+ the method's estimates.
 \end_layout
 
 \end_inset
@@ -3584,14 +3773,17 @@ noprefix "false"
 \end_inset
 
  thus presents our MSE results for several alternative models.
- The first three models apply XGBoost at the municipality level using three
- alternative covariate sets: only GIS-based covariates, only census-based
- covariates, and then a model with all available covariates.
+ The first three models apply XGBoost fit at the municipality level using
+ three alternative covariate sets: only GIS-based covariates, only census-based
+ aggregated covariates, and then a model with all available covariates (census
+ aggregates and GIS).
  The fourth model is estimated at the PSU level and only uses census-based
- covariates.
+ aggregated covariates, but the resulting PSU level estimates are aggregated
+ to the municipal level.
  The final two models are traditional small-area models that we use to benchmark
  the performance of the XGBoost models.
- In particular, the empirical best (EB) model is often considered the 
+ In particular, the empirical best (CensusEB) model is often considered
+ the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3601,9 +3793,9 @@ gold standard
 
  of small-area estimation and corresponds to an ideal scenario where up-to-date,
  micro-level census data are available.
- The unit-context (UC) has been proposed for cases when census data are
- out-of-date and is thus a direct competitor to the machine-learning models,
- which are often motivated by a lack of up-to-date census data.
+ The unit-context has been proposed for cases when census data are out-of-date
+ and is thus a direct competitor to the machine-learning models, which are
+ often motivated by a lack of up-to-date census data.
  
 \end_layout
 
@@ -3655,8 +3847,10 @@ noprefix "false"
 
 \end_inset
 
- the XGBoost methods using census aggregate data (XGboost [PSU] and XGBoost
- [MUN]) perform better than unit-context models and approximate the performance
+ the XGBoost methods using census aggregate data (Gradient boosting [Census
+ agg.
+ PSU] and XGBoost [Census agg.
+ mun]) perform better than unit-context models and approximate the performance
  of CensusEB estimates.
  The median MSE for the CensusEB model is 0.003 while that of XGBoost methods
  is somewhat lower and both methods have similar interquartile ranges.
@@ -3701,8 +3895,9 @@ Note that the underlying model for CensusEB estimates relies on household
  median MSE for the model with GIS-based covariates is 0.008 (with a root
  MSE of about 0.09), meaning that the median error is roughly nine percentage
  points.
- In contrast, the EB and UC models achieve median MSE levels of 0.003 and
- 0.004, with corresponding root MSE values of 0.05 and 0.06, respectively.
+ In contrast, the CensusEB and unit-context models achieve median MSE levels
+ of 0.003 and 0.004, with corresponding root MSE values of 0.05 and 0.06, respective
+ly.
  While the standard implementation shows relatively poor performance, the
  remaining three XGBoost models that incorporate census-based covariates
  perform much better, with the PSU-level model achieving a median MSE of
@@ -3794,25 +3989,10 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Graphics
-	filename Figure-3.pdf
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Feature importance
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:importance"
@@ -3822,8 +4002,30 @@ name "fig:importance"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Plain Layout
 
+\size small
+Note: Figure illustrates the average feature importance across all 500 models
+ fit to the 500 samples of the census data.
+ The importance corresponds to the reduction of the loss function associated
+ to each feature.
 \end_layout
 
 \end_inset
@@ -3873,20 +4075,41 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias by poverty quantiles for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:quantiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-4a.pdf
-	scale 50
+	filename Figure-4a.png
+	scale 25
 
 \end_inset
 
@@ -3916,14 +4139,14 @@ MSE
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-4b.pdf
-	scale 50
+	filename Figure-4b.png
+	scale 25
 
 \end_inset
 
@@ -3948,24 +4171,12 @@ Bias
 \end_layout
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
-MSE and bias by poverty quantiles for select models
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:quantiles"
-
-\end_inset
-
-
+\size small
+Note: Figure illustrates the empirical bias and MSE for municipalities correspon
+ding to each quantile.
+ Municipality quantiles correspond to the ordering of municipalities by
+ their true poverty rate.
 \end_layout
 
 \end_inset
@@ -4018,17 +4229,38 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias with alternative machine-learning models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-5a.pdf
-	scale 50
+	filename Figure-5a.png
+	scale 25
 
 \end_inset
 
@@ -4062,14 +4294,14 @@ MSE
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
-	filename Figure-5b.pdf
-	scale 50
+	filename Figure-5b.png
+	scale 25
 
 \end_inset
 
@@ -4098,28 +4330,19 @@ Bias
 \end_layout
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
-MSE and bias with alternative machine-learning models
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ml"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
+\size small
+Note: Figures presents the MSE and bias for each applied method.
+ The MSE is calculated as the mean squared difference between the model
+ based estimate for a given municipality (obtained from each of the 500
+ samples drawn from the census) and the municipality's true poverty rate.
+ The bias is just the average difference between the model based estimate
+ for a given municipality (obtained from each of the 500 samples drawn from
+ the census) and the municipality's true poverty rate.
+ The box-plots shows the municipality level spread of the MSE and bias of
+ the method's estimates.
+ All methods rely on GIS covariates only and are fit at the municipality
+ level.
 \end_layout
 
 \end_inset
@@ -4188,27 +4411,10 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-6.pdf
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Poverty targeting
-\end_layout
-
-\end_inset
-
-
+Poverty targeting 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:targeting"
@@ -4218,8 +4424,42 @@ name "fig:targeting"
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6.png
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Plain Layout
 
+\size small
+Note: Figure illustrates the poverty reduction potential of relying on estimates
+ from each method to rank municipalities and prioritize the poorest municipaliti
+es in a cash transfer scheme described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ The box-plot show the spread of the 500 resulting targeting simulations
+ conducted with each methods estimates.
+ 
 \end_layout
 
 \end_inset
@@ -4320,7 +4560,8 @@ The paper provides some valuable insights.
  Second, we present validations with real world data where we have a census
  data set with the true population values we are trying to estimate.
  We provide evidence of the prowess of machine learning methods and how
- they may out perform traditional small area estimation approaches.
+ they may out perform or achieve similar bias and MSE as traditional small
+ area estimation approaches.
  Third, we present a comparison on the potential benefits of publicly available
  GIS covariates.
  We show how GIS covariates under the data used here do not outperform census
@@ -4361,7 +4602,8 @@ The results found here should be caveated by the fact that they are dependent
 The paper opens considerable avenues for future research.
  One avenue is related to methodology.
  Specifically, how the noise of machine learning methods can be accurately
- estimated.
+ estimated since the noise measures presented here rely on having the true
+ poverty rates which is not possible in the vast majority of contexts.
  Second, the results suggest that most methods would do a solid job for
  spatial targeting type exercises.
  However, a key question is whether or not this will hold elsewhere and
@@ -4382,69 +4624,6 @@ LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "References"
 options "apalike"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Annex
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-1) Add figures in Tableau
-\end_layout
-
-\begin_layout Plain Layout
-2) Add annex figures
-\end_layout
-
-\begin_layout Plain Layout
-3) take one last look at the data section..
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Comparison of 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- measure across methods 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:R2 comp"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
