@@ -37,27 +37,28 @@ mun_share_female
 *===============================================================================
 
 *===============================================================================
-forval sim=34/500{
+forval sim=1/500{
 use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
 
 merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor $thevar $thevar_hid HID)
+gen double HID_mun = int(HID/1e3)
 
 replace poor = . if _m!=3
 
 
 gen popw = Whh*hhsize
-qui:proportion poor if _m==3 [pw = popw], over(HID)
+qui:proportion poor if _m==3 [pw = popw], over(HID_mun)
 mata: fgt0     = st_matrix("e(b)")
 mata: fgt0     = fgt0[(cols(fgt0)/2+1)..cols(fgt0)]'
 mata: fgt0_var = st_matrix("e(V)")
 mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 
 	// the census. Leave data at the municipality level.
-	groupfunction, first($thevar $thevar_hid) rawsum(hhsize) max(_m) by(HID) 
-	sort HID //ordered to match proportion output
-	putmata HID if _m==3
+	groupfunction, first($thevar $thevar_hid) rawsum(hhsize) max(_m) by(HID_mun) 
+	sort HID_mun //ordered to match proportion output
+	putmata HID_mun if _m==3
 	//Pull proportion's results
-	getmata dir_fgt0 = fgt0 dir_fgt0_var = fgt0_var, id(HID)
+	getmata dir_fgt0 = fgt0 dir_fgt0_var = fgt0_var, id(HID_mun)
 	replace dir_fgt0_var = . if dir_fgt0_var==0
 	replace dir_fgt0     = . if missing(dir_fgt0_var)
 	
@@ -65,7 +66,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 // Model fit and selection
 *=============================================================================
 	
-	local hhvars $thevar $thevar_hid
+	local hhvars $thevar 
 	local hhvars1 
 	
 	//Removal of non-significant variables
@@ -135,18 +136,18 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	
 	global last `hhvars'
 	
-	gen double HID_mun = int(HID/1e3)
+	
 	//Obtain SAE-FH-estimates	
 	fhsae dir_fgt0 $last, revar(dir_fgt0_var) method(reml) fh(fh_fgt0) ///
 	fhse(fh_fgt0_se) fhcv(fh_fgt0_cv) gamma(fh_fgt0_gamma) out  ///
-	aggarea(HID_mun) censuspop(hhsize) force
+	
 
 	gen simul = `sim'
-	if (`sim'==1) save "$outpath\FH_results.dta", replace
+	if (`sim'==1) save "$outpath\FH_results_mun.dta", replace
 	else{
 		cap drop weight
-		append using "$outpath\FH_results.dta"
-		save "$outpath\FH_results.dta", replace
+		append using "$outpath\FH_results_mun.dta"
+		save "$outpath\FH_results_mun.dta", replace
 	}
 	clear mata
 
