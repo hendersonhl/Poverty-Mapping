@@ -19,10 +19,13 @@ merge 1:m area using "$outpath\FH_results.dta", keepusing(estimate)
 gen mse  = (estimate - poor)^2
 gen bias = estimate - poor
 
+
 sp_groupfunction, mean(mse bias) by(area)
 
 replace variable = "bias_fh" if variable=="bias"
 replace variable = "mse_fh" if variable=="mse"
+
+save "$outpath\fh_mse_bias.dta", replace
 
 
 tempfile uno

@@ -52,8 +52,8 @@ res_eb['muni'] = res_eb['muni'].astype(int)
 results = pd.merge(results, res_eb, on=['muni', 'sim_sample'], how = 'outer')
 
 #add in FH results
-res_fh = pd.read_stata(inpath + 'FH_results.dta')
-res_fh = res_fh[['HID_mun','estimate','simul']]
+res_fh = pd.read_stata(outpath + 'FH_results.dta')
+res_fh = res_fh[['area','estimate','simul']]
 res_fh.columns = ['muni','fh','sim_sample']
 res_fh['muni'] = res_fh['muni'].astype(int)
 results = pd.merge(results, res_fh, on = ['muni', 'sim_sample'], how = 'outer')
