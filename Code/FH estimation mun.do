@@ -141,6 +141,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	fhsae dir_fgt0 $last, revar(dir_fgt0_var) method(reml) fh(fh_fgt0) ///
 	fhse(fh_fgt0_se) fhcv(fh_fgt0_cv) gamma(fh_fgt0_gamma) out  ///
 	
+	keep fh_* HID_mun
 
 	gen simul = `sim'
 	if (`sim'==1) save "$outpath\FH_results_mun.dta", replace
