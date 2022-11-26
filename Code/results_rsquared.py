@@ -44,14 +44,22 @@ res_uc = res_uc[['Unit','avg_fgt0__6744898','nsim']]
 res_uc.columns = ['muni', 'uc', 'sim_sample']
 res_uc['muni'] = res_uc['muni'].astype(int)
 results = pd.merge(results, res_uc, on=['muni', 'sim_sample'], how = 'outer')
+
 res_eb = pd.read_stata(inpath + 'h3no19.dta')
 res_eb = res_eb[['Unit','avg_fgt0__6744898','nsim']]
 res_eb.columns = ['muni', 'eb', 'sim_sample']
 res_eb['muni'] = res_eb['muni'].astype(int)
 results = pd.merge(results, res_eb, on=['muni', 'sim_sample'], how = 'outer')
+
+#add in FH results
+res_fh = pd.read_stata(inpath + 'FH_results.dta')
+res_fh = res_fh[['HID_mun','estimate','simul']]
+res_fh.columns = ['muni','fh','sim_sample']
+res_fh['muni'] = res_fh['muni'].astype(int)
+results = pd.merge(results, res_fh, on = ['muni', 'sim_sample'], how = 'outer')
     
 # Calculate r-squared values
-model = model + ['eb', 'uc']
+model = model + ['eb', 'uc', 'fh']
 rsquared = pd.DataFrame()
 rsquared['sim_sample'] = np.arange(1,501)
 for i in model:     # Loop over all models and samples
