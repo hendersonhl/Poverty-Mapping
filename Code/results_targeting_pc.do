@@ -8,7 +8,10 @@ set more off
 
 * Set globals
 if (lower("`c(username)'")=="wb378870")    global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
-if (lower("`c(username)'")=="paul corral") global main "C:\Users\Paul Corral\Documents\GitHub\Poverty-Mapping"
+if (lower("`c(username)'")=="paul corral"){
+	global main "C:\Users\Paul Corral\Documents\GitHub\Poverty-Mapping"
+	set processors 8
+}
 if (lower("`c(username)'")=="hendersonhl") global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
 
 global inpath "$main/Data/"
@@ -136,26 +139,40 @@ save "$outpath/True_result.dta", replace
 *=========================================================================
 * Prep results from traditional estimators
 preserve
-use "$inpath/h3no19.dta", clear   // EB results
-keep Unit avg_fgt0_* nsim
-rename Unit muni
-rename avg_fgt0_* yhat
-rename nsim sim_sample
-order muni sim_sample yhat
-sort muni sim_sample
-reshape wide yhat, i(muni) j(sim_sample)
-rename yhat* yhat_*
-outsheet using "$outpath/eb.csv", comma replace
-use "$inpath/uceb19.dta", clear   // Unit-context results
-keep Unit avg_fgt0_* nsim
-rename Unit muni
-rename avg_fgt0_* yhat
-rename nsim sim_sample
-order muni sim_sample yhat
-sort muni sim_sample
-reshape wide yhat, i(muni) j(sim_sample)
-rename yhat* yhat_*
-outsheet using "$outpath/uc.csv", comma replace
+
+	use "$inpath/h3no19.dta", clear   // EB results
+	keep Unit avg_fgt0_* nsim
+	rename Unit muni
+	rename avg_fgt0_* yhat
+	rename nsim sim_sample
+	order muni sim_sample yhat
+	sort muni sim_sample
+	reshape wide yhat, i(muni) j(sim_sample)
+	rename yhat* yhat_*
+	outsheet using "$outpath/eb.csv", comma replace
+	
+	use "$inpath/uceb19.dta", clear   // Unit-context results
+	keep Unit avg_fgt0_* nsim
+	rename Unit muni
+	rename avg_fgt0_* yhat
+	rename nsim sim_sample
+	order muni sim_sample yhat
+	sort muni sim_sample
+	reshape wide yhat, i(muni) j(sim_sample)
+	rename yhat* yhat_*
+	outsheet using "$outpath/uc.csv", comma replace
+	
+	use "$outpath\FH_results.dta", clear
+	keep area estimate simul
+	rename area muni
+	rename estimate yhat
+	rename simul sim_sample
+	order muni sim_sample yhat
+	sort muni sim_sample
+	reshape wide yhat, i(muni) j(sim_sample)
+	rename yhat* yhat_*
+	outsheet using "$outpath/fh.csv", comma replace
+	
 restore
 *=========================================================================
 //Ok, now to the model based estimates...
@@ -165,7 +182,7 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
 	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
 	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
 	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc ///
-	hyperopt_census_mun gb_census_hhid_demo
+	hyperopt_census_mun gb_census_hhid_demo fh
 	//gb_census_hh -> XGboost household level poverty classification
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 
