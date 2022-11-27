@@ -95,7 +95,7 @@ Poverty Mapping in the Age of Machine Learning
 \end_layout
 
 \begin_layout Author
-Paul Corral, Heath Henderson, Sandra Segovia, and Kevin McGee
+Paul Corral, Heath Henderson, and Sandra Segovia
 \end_layout
 
 \begin_layout Abstract
@@ -3922,8 +3922,9 @@ Note that the underlying model for CensusEB estimates relies on household
  the PSU level achieve median MSE levels of 0.003, 0.004 and 0.004, with correspond
 ing root MSE values of 0.05, 0.06, and 0.06, respectively.
  The Fay-Herriot model fit at the municipal level has a median municipal
- bias that is slightly higher but still outperforms the GIS based gradient
- boosting model as well as unit-context models.
+ MSE that is slightly higher although the ranges are tighter than those
+ of unit-context models and also outperform the GIS based gradient boosting
+ model.
 \begin_inset Foot
 status collapsed
 
@@ -4011,8 +4012,8 @@ There are 1,865 municipalities in our census.
 
  The Fay-Herriot model fit at the PSU level and then aggregated to the municipal
 ity level also displays a slight upward bias, although it is less pronounced.
- The Fay-Herriot model fit at the municipality level does not display similar
- bias.
+ The Fay-Herriot model fit at the municipality level does not display a
+ similar bias.
  
 \end_layout
 
@@ -4121,7 +4122,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4553,7 +4554,8 @@ noprefix "false"
  The best performing XGBoost model is the implementation at the PSU level,
  which achieves a median poverty rate across all simulations of 20.02.
  These results are just a tad higher than the CensusEB estimates (median
- of 19.99) and those from the unit-context models (median of 20.01).
+ of 19.99) and those from the unit-context models (median of 20.01) but are
+ slightly below those of the Fay-Herriot models.
  
 \end_layout
 
