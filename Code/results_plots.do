@@ -237,7 +237,7 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
 	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.85))
+	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
 graph export "$outpath/Figure-4a.png", as(png) replace
 
@@ -285,7 +285,7 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
 	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.85))
+	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
 graph export "$outpath/Figure-4b.png", as(png) replace
 
@@ -321,9 +321,11 @@ graph export "$outpath/Figure-5b.png", as(png) replace
 import delimited "$inpath/results_transfer.csv", clear
 keep variable sim fgt0
 order sim variable fgt0
+replace fgt0 = 100*fgt0 if regexm(variable, "fh")
+
 reshape wide fgt0, i(sim) j(variable) string
 rename fgt0* *
-keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc
+keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun
 replace gb_gis_mun = gb_gis_mun*100  // Put values in percentage terms
 replace gb_census_mun = gb_census_mun*100
 replace gb_all_mun = gb_all_mun*100
@@ -336,11 +338,14 @@ label var gb_gis_mun    "Gradient Boosting (GIS mun)"
 label var gb_all_mun    "Gradient Boosting (All mun)"            
 label var gb_census_psu    "Gradient Boosting (Census agg. PSU)"
 label var eb        "CensusEB"                              
-label var uc        "Unit-context"   
-graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc, ytitle(Poverty Rate) ///
+label var uc        "Unit-context"  
+label var fh        "Fay-Herriot (Census agg. PSU)"
+label var fh_mun        "Fay-Herriot (Census agg. mun)"   
+
+graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
-	box(5, color(gray)) box(6, color(gray))
+	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
 graph export "$outpath/Figure-6.pdf", as(pdf) replace
 graph export "$outpath/Figure-6.png", as(png) replace
 
