@@ -75,6 +75,8 @@ sp_groupfunction, mean(mse bias) by(area)
 replace variable = "bias_fh" if variable=="bias"
 replace variable = "mse_fh" if variable=="mse"
 
+save "$outpath\fh_mun_mse_bias.dta", replace
+
 
 tempfile uno
 save `uno'

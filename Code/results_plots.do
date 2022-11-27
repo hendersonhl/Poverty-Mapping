@@ -6,7 +6,7 @@
 clear all
 if (lower("`c(username)'")=="wb378870" | lower("`c(username)'")=="paul corral")     global main "C:\Users\\`c(username)'\GitHub\Poverty-Mapping\"
 if (lower("`c(username)'")=="hendersonhl")  global main "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/"
-if (lower("`c(username)'")=="lupin") global main "C:\Users\\`c(username)'\Documents\GitHub\Poverty-Mapping\"
+if (lower("`c(username)'")=="lupin" | lower("`c(username)'")=="paul corral" ) global main "C:\Users\\`c(username)'\Documents\GitHub\Poverty-Mapping\"
 global inpath  "$main/Results"
 global outpath "$main/Manuscript"
 
@@ -122,7 +122,7 @@ merge 1:1 muni using `uno', keepusing(bias_fh)
 	drop if _m==2
 	drop _m
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh
-tabstat bias_gb_census-bias_uc, stat(p50 min max)
+tabstat bias_gb_census-bias_fh, stat(p50 min max N)
 label var bias_gb_census "Gradient Boosting (Census agg. mun)"
 label var bias_gb_gis "Gradient Boosting (GIS mun)"
 label var bias_gb_all "Gradient Boosting (All mun)"

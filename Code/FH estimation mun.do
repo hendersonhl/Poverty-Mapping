@@ -37,8 +37,18 @@ mun_share_female
 *===============================================================================
 
 *===============================================================================
-forval sim=1/500{
+cap use "$outpath\FH_results_mun.dta", clear
+if _rc{
+	local start = 1
+}
+else{
+	sum simul
+	local start = r(max)+1
+}
+
+forval sim= `start'/500{
 use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
+dis as error "Starting Simulation number : `sim'"
 
 merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor $thevar $thevar_hid HID)
 gen double HID_mun = int(HID/1e3)
