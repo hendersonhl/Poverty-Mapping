@@ -171,8 +171,8 @@ Small area estimation is a branch of statistics focused on obtaining estimates
 \end_layout
 
 \begin_layout Standard
-The literature on small area estimation is rich and several variations of
- the procedure have been proposed.
+The literature on small area estimation is rich and several approaches have
+ been proposed for poverty mapping.
  Unit-level models conduct estimation and prediction at the household level,
  assuming a linear relationship between the an equivalized welfare measure
  (e.g.
@@ -1748,7 +1748,9 @@ Area-level models
 \end_layout
 
 \begin_layout Standard
-Povert mapping with area-level methods rely on estimating the distribution
+Due to the low data requirements of area-level models, these are often easy
+ and simple to execute in most scenarios – even in off-census years.
+ Poverty mapping with area-level methods rely on estimating the distribution
  of the area-level poverty rate relying on a set of area-level covariates.
  Covariates may come from census aggregates, administrative data, or georeferenc
 ed data.
@@ -1897,6 +1899,13 @@ literal "false"
 
  notes the model does not require normality assumptions for the estimates
  to be BLUP, but assumptions are needed for estimation of the noise, MSE.
+ 
+\end_layout
+
+\begin_layout Standard
+Two versions of the model are applied: 1) model is fit at the municipality
+ level and 2) model is fit at the PSU level and estimates are aggregated
+ to the municipality level.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3780,8 +3789,8 @@ noprefix "false"
  The fourth model is estimated at the PSU level and only uses census-based
  aggregated covariates, but the resulting PSU level estimates are aggregated
  to the municipal level.
- The final two models are traditional small-area models that we use to benchmark
- the performance of the XGBoost models.
+ The final three models are traditional small-area models that we use to
+ benchmark the performance of the XGBoost models.
  In particular, the empirical best (CensusEB) model is often considered
  the 
 \begin_inset Quotes eld
@@ -3794,8 +3803,21 @@ gold standard
  of small-area estimation and corresponds to an ideal scenario where up-to-date,
  micro-level census data are available.
  The unit-context has been proposed for cases when census data are out-of-date
- and is thus a direct competitor to the machine-learning models, which are
- often motivated by a lack of up-to-date census data.
+ although the method has been found deficient in similar validation studies
+ (
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "corral2022guidelines,corral2021map"
+literal "false"
+
+\end_inset
+
+).
+ For off-census years the recommended small area estimation method is the
+ Fay-Herriot area-level model.
+ The unit-context and Fay-Herriot models are direct competitors to the machine-l
+earning models, which are often motivated by a lack of up-to-date census
+ data.
  
 \end_layout
 
@@ -3849,15 +3871,16 @@ noprefix "false"
 
  the XGBoost methods using census aggregate data (Gradient boosting [Census
  agg.
- PSU] and XGBoost [Census agg.
- mun]) perform better than unit-context models and approximate the performance
- of CensusEB estimates.
+ PSU] and Gradient boosting [Census agg.
+ mun]) perform better than unit-context and Fay-Herriot ([Census agg.
+ PSU] and [Census agg.
+ mun]) models and approximate the performance of CensusEB [CensusEB] estimates.
  The median MSE for the CensusEB model is 0.003 while that of XGBoost methods
- is somewhat lower and both methods have similar interquartile ranges.
+ is 0.002 and both methods have similar interquartile ranges.
  The results suggest that XGBoost methods can approximate CensusEB unit-level
- methods and will outperform unit-context methods by a considerable margin,
- which is quite encouraging for cases where estimates are needed when the
- survey and census data are not contemporaneous.
+ methods and will outperform unit-context and Fay-Herriot methods by a considera
+ble margin, which is quite encouraging for cases where estimates are needed
+ when the survey and census data are not contemporaneous.
 \begin_inset Foot
 status collapsed
 
@@ -3876,7 +3899,7 @@ The unit-context models include covariates at the PSU and municipality level.
 Now that we have established that in the context of the Mexican data used
  and with covariates derived from census data, XGBoost methods can perform
  just as well as CensusEB methods our attention is turned to XGBoost's performan
-ce under geo-referenced data.
+ce under geo-referenced data [Gradient Boosting (GIS mun)].
 \begin_inset Foot
 status collapsed
 
@@ -3893,15 +3916,29 @@ Note that the underlying model for CensusEB estimates relies on household
  mapping.
  This model is nevertheless the worst performing of all the models: the
  median MSE for the model with GIS-based covariates is 0.008 (with a root
- MSE of about 0.09), meaning that the median error is roughly nine percentage
- points.
- In contrast, the CensusEB and unit-context models achieve median MSE levels
- of 0.003 and 0.004, with corresponding root MSE values of 0.05 and 0.06, respective
-ly.
- While the standard implementation shows relatively poor performance, the
- remaining three XGBoost models that incorporate census-based covariates
- perform much better, with the PSU-level model achieving a median MSE of
- 0.002 and outperforming even CensusEB estimates.
+ MSE of about 0.09), meaning that the median municipality's error is roughly
+ nine percentage points.
+ In contrast, the CensusEB, unit-context, and Fay-Herriot models fit at
+ the PSU level achieve median MSE levels of 0.003, 0.004 and 0.004, with correspond
+ing root MSE values of 0.05, 0.06, and 0.06, respectively.
+ The Fay-Herriot model fit at the municipal level has a median municipal
+ bias that is slightly higher but still outperforms the GIS based gradient
+ boosting model as well as unit-context models.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+A notable aspect of Fay-Herriot and Gradient Boosting models is their relative
+ ease of application and the fact that these usually take considerably less
+ time in implementing as opposed to CensusEB and unit-context models.
+\end_layout
+
+\end_inset
+
+ While the implementation with geo-referenced data shows relatively poor
+ performance, the remaining three XGBoost models that incorporate census-based
+ covariates perform much better, with the PSU-level model achieving a median
+ MSE of 0.002 and outperforming even CensusEB estimates.
 \end_layout
 
 \begin_layout Standard
@@ -3932,8 +3969,9 @@ noprefix "false"
 ] for the bias-variance decomposition of the MSE).
  That is, each box plot summarizes the distribution of bias estimates across
  all municipalities in our Mexican data.
- The median bias for each model is approximately zero, with the possible
- exception of the unit-context model, which exhibits a downward bias.
+ The median bias for all models is approximately zero, except for the Fay-Herrio
+t (Census agg.
+ PSU) and the unit-context models.
 \begin_inset Foot
 status collapsed
 
@@ -3971,9 +4009,17 @@ There are 1,865 municipalities in our census.
 
 \end_inset
 
- We further find that the bias estimates for the XGBoost model with GIS-based
- covariates exhibits considerable variation, with minimum and maximum biases
- reaching -0.43 and 0.43, respectively.
+ The Fay-Herriot model fit at the PSU level and then aggregated to the municipal
+ity level also displays a slight upward bias, although it is less pronounced.
+ The Fay-Herriot model fit at the municipality level does not display similar
+ bias.
+ 
+\end_layout
+
+\begin_layout Standard
+The bias estimates for the XGBoost model with GIS-based covariates exhibits
+ considerable variation, with minimum and maximum biases reaching -0.43 and
+ 0.43, respectively.
  That is, the model with GIS-based covariates is severely biased for some
  municipalities, even though its median bias is approximately zero.
  The XGBoost models incorporating census-based covariates exhibit much less
@@ -4034,9 +4080,9 @@ Note: Figure illustrates the average feature importance across all 500 models
 \end_layout
 
 \begin_layout Standard
-It is evident that the performance of XGBoost depends heavily on the covariates
- used in the model, with the census-based covariates appearing to considerably
- improve the performance of the model.
+It is evident that the performance of XGBoost methods depend heavily on
+ the covariates used in the model, with the census-based covariates appearing
+ to considerably improve the performance of the model.
  Another way to see that the census-based covariates have greater predictive
  power than the GIS-based covariates is by looking at feature importance.
  The standard measure of feature importance used by XGBoost summarizes the
@@ -4208,7 +4254,7 @@ poverty quantiles.
  quantile.
  For the sake of simplicity, we only present results for two XGBoost models
  – namely the municipality-level models using only GIS- and census-based
- covariates – and the CensusEB and unit-context models.
+ covariates – and the CensusEB, unit-context, and Fay-Herriot models.
  Panel (a) presents the MSE results and panel (b) presents the bias results.
  In both plots, the XGBoost model with census-based covariates performs
  quite similarly to the CensusEB model across all quantiles.
@@ -4220,6 +4266,9 @@ s systematically underestimates poverty at the lowest quantiles and overestimate
 s poverty at the highest quantiles.
  The model with GIS covariates thus understates the spatial distribution
  of poverty.
+ Finally, unit-conext models also display considerable bias and noise among
+ the poorest municipalities, suggesting estimates of poverty among the poorest
+ areas are considerably unreliable.
 \end_layout
 
 \begin_layout Standard
@@ -4480,6 +4529,9 @@ noprefix "false"
 
  that we argued that the ultimate concern with poverty mapping is to understand
  how different methodological choices affect poverty alleviation.
+ Due to how the simulation is constructed, the bias and noise of the estimates
+ play a lesser role and take a back seat to accurate rankings produced by
+ methods.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4490,7 +4542,7 @@ noprefix "false"
 
 \end_inset
 
- thus compares our six initial models in terms of their ability to reduce
+ thus compares our seven initial models in terms of their ability to reduce
  poverty in the context of our targeting simulations.
  In these simulations, a hypothetical poverty-alleviation program targeted
  on the basis of true municipality-level poverty rates is able to reduce
@@ -4568,6 +4620,16 @@ The paper provides some valuable insights.
  aggregate data.
  This result suggests that there may be considerable gains in linking census
  and administrative data for poverty mapping in off census years.
+ Fourth, we expand the validations from 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ and illustrate how Fay-Herriot models are still the preferred approach
+ for off-census years among traditional small area estimation methods.
  Finally, we present evidence on how, despite different performance across
  models, all models are beneficial for targeting.
  While some models may outperform others in the potential poverty reduction
