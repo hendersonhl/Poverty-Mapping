@@ -89,24 +89,35 @@ rename area muni
 tempfile uno
 save `uno'
 
+use "$inpath\fh_mun_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun
+rename area muni
+tempfile dos
+save `dos'
+
 import delimited "$inpath/results_mse.csv", clear
 merge 1:1 muni using `uno', keepusing(mse_fh)
 	drop if _m==2
 	drop _m
+merge 1:1 muni using `dos', keepusing(mse_fh_mun)
+	drop if _m==2
+	drop _m
 	
-keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh
-tabstat mse_gb_census-mse_uc, stat(p50)
+keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh*
+tabstat mse_gb_census-mse_fh_mun, stat(p50)
 label var mse_gb_census "Gradient Boosting (Census agg. mun)"
 label var mse_gb_gis    "Gradient Boosting (GIS mun)"         
 label var mse_gb_all    "Gradient Boosting (All mun)"            
 label var mse_gb_psu    "Gradient Boosting (Census agg. PSU)"
 label var mse_eb        "CensusEB"                              
 label var mse_uc        "Unit-context"      
-label var mse_fh        "Fay-Herriot"                    
-graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh, ytitle(Empirical MSE) ///
+label var mse_fh        "Fay-Herriot (Census agg. PSU)"
+label var mse_fh_mun        "Fay-Herriot (Census agg. mun)"                    
+graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun, ytitle(Empirical MSE) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
-	box(5, color(gray)) box(6, color(gray)) box(7, color(gray))
+	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
 graph export "$outpath/Figure-2a.pdf", as(pdf) replace
 graph export "$outpath/Figure-2a.png", as(png) replace
 
@@ -117,23 +128,38 @@ rename value bias_fh
 rename area muni
 tempfile uno
 save `uno'
+
+use "$inpath\fh_mun_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun
+rename area muni
+tempfile dos
+save `dos'
+
+
 import delimited "$inpath/results_bias.csv", clear
 merge 1:1 muni using `uno', keepusing(bias_fh)
 	drop if _m==2
 	drop _m
-keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh
-tabstat bias_gb_census-bias_fh, stat(p50 min max N)
+merge 1:1 muni using `dos', keepusing(bias_fh)
+	drop if _m==2
+	drop _m	
+
+keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh*
+tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
 label var bias_gb_census "Gradient Boosting (Census agg. mun)"
 label var bias_gb_gis "Gradient Boosting (GIS mun)"
 label var bias_gb_all "Gradient Boosting (All mun)"
 label var bias_gb_psu "Gradient Boosting (Census agg. PSU)"
 label var bias_eb   "CensusEB"       
 label var bias_uc   "Unit-context"
-label var bias_fh        "Fay-Herriot"    
-graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh, ytitle(Bias) ///
+label var bias_fh        "Fay-Herriot (Census agg. PSU)"
+label var bias_fh_mun        "Fay-Herriot (Census agg. mun)"  
+  
+graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
-	box(5, color(gray)) box(6, color(gray)) box(7, color(gray))
+	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
 graph export "$outpath/Figure-2b.pdf", as(pdf) replace
 graph export "$outpath/Figure-2b.png", as(png) replace
 
@@ -175,6 +201,13 @@ rename area muni
 tempfile uno
 save `uno'
 
+use "$inpath\fh_mun_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun
+rename area muni
+tempfile dos
+save `dos'
+
 import delimited "$main/Data/true_mun.csv", clear
 keep mimun poor
 rename mimun muni
@@ -187,7 +220,10 @@ drop _merge
 merge 1:1 muni using `uno', keepusing(mse_fh)
 	drop if _m==2
 	drop _m
-
+merge 1:1 muni using `dos', keepusing(mse_fh)
+	drop if _m==2
+	drop _m
+	
 
 xtile pov_rank = poor, nq(50)
 replace pov_rank = 51 - pov_rank  // Reverse order
@@ -195,12 +231,13 @@ collapse mse*, by(pov_rank)
 twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line mse_eb pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line mse_gb_census pov_rank, lpattern(solid) lcolor(gray)) ///
-    (line mse_uc pov_rank, lpattern(-.-) lcolor(gray)) ///
-	(line mse_fh pov_rank, lpatter(_--_#) lcolor(gs7)),  ///
+    (line mse_uc pov_rank, lpattern(dash) lcolor(gray)) ///
+	(line mse_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
+	(line mse_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
 	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot"))
+	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.85))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
 graph export "$outpath/Figure-4a.png", as(png) replace
 
@@ -211,6 +248,13 @@ rename value bias_fh
 rename area muni
 tempfile uno
 save `uno'
+
+use "$inpath\fh_mun_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun
+rename area muni
+tempfile dos
+save `dos'
 
 import delimited "$main/Data/true_mun.csv", clear
 keep mimun poor
@@ -225,18 +269,23 @@ merge 1:1 muni using `uno', keepusing(bias_fh)
 	drop if _m==2
 	drop _m
 	
+merge 1:1 muni using `dos', keepusing(bias_fh)
+	drop if _m==2
+	drop _m
+	
 xtile pov_rank = poor, nq(50)
 replace pov_rank = 51 - pov_rank  // Reverse order
 collapse bias*, by(pov_rank)
 twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_eb pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line bias_gb_census pov_rank, lpattern(solid) lcolor(gray)) ///
-    (line bias_uc pov_rank, lpattern(-.-) lcolor(gray)) ///
-	(line bias_fh pov_rank, lpatter(_--_#) lcolor(gs7)),  ///
-	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
+    (line bias_uc pov_rank, lpattern(dash) lcolor(gray)) ///
+	(line bias_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
+	(line bias_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
+	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
 	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot"))
+	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.85))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
 graph export "$outpath/Figure-4b.png", as(png) replace
 
