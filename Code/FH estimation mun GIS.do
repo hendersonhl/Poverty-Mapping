@@ -6,7 +6,7 @@
 clear all
 set more off
 set matsize 8000
-//set processors 8
+set processors 8
 
 version 14
 
@@ -19,19 +19,7 @@ if (lower("`c(username)'")=="hendersonhl") global main "/Users/hendersonhl/Docum
 global inpath "$main/Data/"
 global outpath "$main/Results/"
 
-global thevar_hid HID_hhsize HID_age_hh HID_male_hh HID_piped_water ///
-HID_no_piped_water HID_no_sewage HID_sewage_pub HID_sewage_priv ///
-HID_electricity HID_telephone HID_cellphone HID_internet ///
-HID_computer HID_washmachine HID_fridge HID_television HID_share_under15 ///
-HID_share_elderly HID_share_adult HID_max_tertiary HID_max_secondary ///
-HID_share_female
-
-global thevar mun_hhsize mun_age_hh mun_male_hh mun_piped_water ///
-mun_no_piped_water mun_no_sewage mun_sewage_pub mun_sewage_priv ///
-mun_electricity mun_telephone mun_cellphone mun_internet ///
-mun_computer mun_washmachine mun_fridge mun_television mun_share_under15 ///
-mun_share_elderly mun_share_adult mun_max_tertiary mun_max_secondary ///
-mun_share_female
+global thevar gis_arvimin gis_arvimax gis_arvimean gis_arvisum gis_arvistddev gis_baeimin gis_baeimax gis_baeimean gis_baeisum gis_baeistddev gis_bimin gis_bimax gis_bimean gis_bisum gis_bistddev gis_brbamin gis_brbamax gis_brbamean gis_brbasum gis_brbastddev gis_bumin gis_bumax gis_bumean gis_busum gis_bustddev gis_evimin gis_evimax gis_evimean gis_evisum gis_evistddev gis_ibimin gis_ibimax gis_ibimean gis_ibisum gis_ibistddev gis_mndwimin gis_mndwimax gis_mndwimean gis_mndwisum gis_mndwistddev gis_nbaimin gis_nbaimax gis_nbaimean gis_nbaisum gis_nbaistddev gis_nbimin gis_nbimax gis_nbimean gis_nbisum gis_nbistddev gis_ndbimin gis_ndbimax gis_ndbimean gis_ndbisum gis_ndbistddev gis_ndvimin gis_ndvimax gis_ndvimean gis_ndvisum gis_ndvistddev gis_ndwimin gis_ndwimax gis_ndwimean gis_ndwisum gis_ndwistddev gis_srmin gis_srmax gis_srmean gis_srsum gis_srstddev gis_uimin gis_uimax gis_uimean gis_uisum gis_uistddev gis_ndsimin gis_ndsimax gis_ndsimean gis_ndsisum gis_ndsistddev gis_varimin gis_varimax gis_varimean gis_varisum gis_varistddev gis_savimin gis_savimax gis_savimean gis_savisum gis_savistddev gis_osavimin gis_osavimax gis_osavimean gis_osavisum gis_osavistddev gis_ndmimin gis_ndmimax gis_ndmimean gis_ndmisum gis_ndmistddev gis_mdeamin gis_mdeamax gis_mdeamean gis_mdeasum gis_mdeastddev gis_mdepmin gis_mdepmax gis_mdepmean gis_mdepsum gis_mdepstddev
 
 
 *===============================================================================
@@ -50,7 +38,7 @@ forval sim= `start'/500{
 use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
 dis as error "Starting Simulation number : `sim'"
 
-merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor $thevar $thevar_hid HID)
+merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor HID)
 gen double HID_mun = int(HID/1e3)
 replace poor = . if _m!=3
 
@@ -63,11 +51,13 @@ mata: fgt0_var = st_matrix("e(V)")
 mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 
 	// the census. Leave data at the municipality level.
-	groupfunction, first($thevar $thevar_hid) rawsum(hhsize) max(_m) by(HID_mun) 
+	groupfunction,  rawsum(hhsize) max(_m) by(HID_mun) 
 	cap clonevar mimun = HID_mun
 	merge 1:1 mimun using "$inpath\xmatrix_python_mun.dta", keepusing(gis_*) gen(match)
 		drop if match!=3
 		drop match mimun
+		
+
 	
 	sort HID_mun //ordered to match proportion output
 	putmata HID_mun if _m==3
@@ -79,11 +69,11 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 *=============================================================================
 // Model fit and selection
 *=============================================================================
-	unab hhvars : gis_* 
+	local hhvars $thevar
 	local hhvars1 
 	
 	//Removal of non-significant variables
-	forval z= 0.8(-0.05)0.0001{
+	forval z= 0.8(-0.05)0.01{
 		qui:fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
 		mata: bb=st_matrix("e(b)")
 		mata: se=sqrt(diagonal(st_matrix("e(V)")))
@@ -91,7 +81,8 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 		mata: st_matrix("min",min(abs(zvals)))
 		local zv = (-min[1,1])
 		if (2*normal(`zv')>=`z'){
-			foreach x of varlist `hhvars'{
+			foreach x of local hhvars{
+			dis as error "`x'"
 				local hhvars1
 				qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
 				qui: test `x' 
@@ -122,7 +113,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	local hhvars1 
 	
 	//One final removal of non-significant covariates
-	forval z= 0.8(-0.05)0.0001{
+	forval z= 0.8(-0.05)0.01{
 		qui:fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
 		mata: bb=st_matrix("e(b)")
 		mata: se=sqrt(diagonal(st_matrix("e(V)")))
@@ -130,7 +121,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 		mata: st_matrix("min",min(abs(zvals)))
 		local zv = (-min[1,1])
 		if (2*normal(`zv')>=`z'){	
-			foreach x of varlist `hhvars'{
+			foreach x of local hhvars{
 				local hhvars1
 				qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
 				qui: test `x' 
