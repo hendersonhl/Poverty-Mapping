@@ -6,7 +6,7 @@
 clear all
 set more off
 set matsize 8000
-set processors 8
+//set processors 8
 
 version 14
 
@@ -72,6 +72,18 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	local hhvars $thevar
 	local hhvars1 
 	
+	local a = 1
+	local hhvarsOO
+	foreach x of local hhvars{
+		rename `x' gis_`a'
+		lab var gis_`a' "`x'"
+		local hhvarsOO `hhvarsOO' gis_`a'
+		local a= `a'+1
+	}
+	
+	local hhvars `hhvarsOO'
+	_rmcoll `hhvars', forcedrop
+	local hhvars `r(varlist)'
 	//Removal of non-significant variables
 	forval z= 0.8(-0.05)0.01{
 		qui:fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
@@ -82,7 +94,6 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 		local zv = (-min[1,1])
 		if (2*normal(`zv')>=`z'){
 			foreach x of local hhvars{
-			dis as error "`x'"
 				local hhvars1
 				qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
 				qui: test `x' 
@@ -98,7 +109,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 			}
 		}
 	}	
-
+	set trace off
 	//Global with non-significant variables removed
 	global postsign `hhvars'
 
@@ -111,6 +122,7 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	
 	local hhvars $postvif
 	local hhvars1 
+	
 	
 	//One final removal of non-significant covariates
 	forval z= 0.8(-0.05)0.01{
