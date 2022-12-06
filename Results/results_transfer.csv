@@ -1,4 +1,504 @@
 variable,sim,fgt0,fgt1,fgt2,model_t,dtype,level
+fh_mun_gis,1,.20373264,.06351921,.0310244,Fay-Herriot,GIS,Municipality
+fh_mun_gis,2,.20393553,.062892608,.030259129,Fay-Herriot,GIS,Municipality
+fh_mun_gis,3,.20395122,.06396056,.03146996,Fay-Herriot,GIS,Municipality
+fh_mun_gis,4,.20387051,.063063838,.030490618,Fay-Herriot,GIS,Municipality
+fh_mun_gis,5,.20432153,.06336648,.030607827,Fay-Herriot,GIS,Municipality
+fh_mun_gis,6,.20382267,.06278006,.030168632,Fay-Herriot,GIS,Municipality
+fh_mun_gis,7,.20530131,.063532069,.030623388,Fay-Herriot,GIS,Municipality
+fh_mun_gis,8,.20409295,.062750287,.030064439,Fay-Herriot,GIS,Municipality
+fh_mun_gis,9,.20469381,.063473485,.030657692,Fay-Herriot,GIS,Municipality
+fh_mun_gis,10,.20389631,.063538603,.030954391,Fay-Herriot,GIS,Municipality
+fh_mun_gis,11,.2040229,.063079417,.030424777,Fay-Herriot,GIS,Municipality
+fh_mun_gis,12,.20360073,.062803365,.030212931,Fay-Herriot,GIS,Municipality
+fh_mun_gis,13,.20402817,.063161477,.030565616,Fay-Herriot,GIS,Municipality
+fh_mun_gis,14,.20388937,.062862612,.030283101,Fay-Herriot,GIS,Municipality
+fh_mun_gis,15,.20428331,.063286297,.030640654,Fay-Herriot,GIS,Municipality
+fh_mun_gis,16,.20412578,.064199075,.03160619,Fay-Herriot,GIS,Municipality
+fh_mun_gis,17,.20355532,.062977575,.030466497,Fay-Herriot,GIS,Municipality
+fh_mun_gis,18,.20417994,.063338347,.030681364,Fay-Herriot,GIS,Municipality
+fh_mun_gis,19,.20418639,.063689142,.03111187,Fay-Herriot,GIS,Municipality
+fh_mun_gis,20,.20452429,.063303292,.030546898,Fay-Herriot,GIS,Municipality
+fh_mun_gis,21,.20383979,.063286282,.030759361,Fay-Herriot,GIS,Municipality
+fh_mun_gis,22,.20392232,.063079424,.030508598,Fay-Herriot,GIS,Municipality
+fh_mun_gis,23,.20396538,.062821493,.030182984,Fay-Herriot,GIS,Municipality
+fh_mun_gis,24,.20390314,.063279301,.03068221,Fay-Herriot,GIS,Municipality
+fh_mun_gis,25,.20384668,.063021429,.030427068,Fay-Herriot,GIS,Municipality
+fh_mun_gis,26,.20402271,.063308038,.030631931,Fay-Herriot,GIS,Municipality
+fh_mun_gis,27,.20411833,.063294455,.030619651,Fay-Herriot,GIS,Municipality
+fh_mun_gis,28,.20348886,.062684886,.030157508,Fay-Herriot,GIS,Municipality
+fh_mun_gis,29,.20463741,.063576527,.030799368,Fay-Herriot,GIS,Municipality
+fh_mun_gis,30,.20458981,.064384751,.031700209,Fay-Herriot,GIS,Municipality
+fh_mun_gis,31,.204309,.063211702,.030455489,Fay-Herriot,GIS,Municipality
+fh_mun_gis,32,.20469579,.063716598,.030972341,Fay-Herriot,GIS,Municipality
+fh_mun_gis,33,.20392473,.062889554,.030309951,Fay-Herriot,GIS,Municipality
+fh_mun_gis,34,.20400633,.063793786,.031294178,Fay-Herriot,GIS,Municipality
+fh_mun_gis,35,.20403543,.063411437,.030791307,Fay-Herriot,GIS,Municipality
+fh_mun_gis,36,.20354655,.062895596,.030344848,Fay-Herriot,GIS,Municipality
+fh_mun_gis,37,.20430496,.063008815,.03028767,Fay-Herriot,GIS,Municipality
+fh_mun_gis,38,.20390035,.063154481,.030630335,Fay-Herriot,GIS,Municipality
+fh_mun_gis,39,.20395079,.063225321,.030643869,Fay-Herriot,GIS,Municipality
+fh_mun_gis,40,.20432779,.063342199,.030677382,Fay-Herriot,GIS,Municipality
+fh_mun_gis,41,.20402141,.063770354,.03129749,Fay-Herriot,GIS,Municipality
+fh_mun_gis,42,.20408532,.063062325,.030427331,Fay-Herriot,GIS,Municipality
+fh_mun_gis,43,.20404014,.063123129,.030492749,Fay-Herriot,GIS,Municipality
+fh_mun_gis,44,.20397995,.062904142,.030269472,Fay-Herriot,GIS,Municipality
+fh_mun_gis,45,.20330526,.0625953,.030157832,Fay-Herriot,GIS,Municipality
+fh_mun_gis,46,.20374648,.063388318,.030864259,Fay-Herriot,GIS,Municipality
+fh_mun_gis,47,.20423727,.063115604,.030420881,Fay-Herriot,GIS,Municipality
+fh_mun_gis,48,.20419569,.063264094,.030619672,Fay-Herriot,GIS,Municipality
+fh_mun_gis,49,.20422187,.062806569,.03015779,Fay-Herriot,GIS,Municipality
+fh_mun_gis,50,.20403586,.063298382,.030714724,Fay-Herriot,GIS,Municipality
+fh_mun_gis,51,.20446548,.064157568,.031461433,Fay-Herriot,GIS,Municipality
+fh_mun_gis,52,.20452219,.063613825,.030846048,Fay-Herriot,GIS,Municipality
+fh_mun_gis,53,.20394714,.062957712,.0303111,Fay-Herriot,GIS,Municipality
+fh_mun_gis,54,.20420234,.063079312,.030402401,Fay-Herriot,GIS,Municipality
+fh_mun_gis,55,.20433505,.063149549,.030393386,Fay-Herriot,GIS,Municipality
+fh_mun_gis,56,.20423205,.063583694,.030875463,Fay-Herriot,GIS,Municipality
+fh_mun_gis,57,.2040402,.062908389,.030310581,Fay-Herriot,GIS,Municipality
+fh_mun_gis,58,.20407538,.063571855,.030906832,Fay-Herriot,GIS,Municipality
+fh_mun_gis,59,.20365737,.062866703,.030289905,Fay-Herriot,GIS,Municipality
+fh_mun_gis,60,.2047051,.064465918,.031806339,Fay-Herriot,GIS,Municipality
+fh_mun_gis,61,.20410809,.062902309,.030213002,Fay-Herriot,GIS,Municipality
+fh_mun_gis,62,.20472378,.063533559,.03074871,Fay-Herriot,GIS,Municipality
+fh_mun_gis,63,.20395564,.063065924,.030434726,Fay-Herriot,GIS,Municipality
+fh_mun_gis,64,.2041056,.063030869,.030352157,Fay-Herriot,GIS,Municipality
+fh_mun_gis,65,.20371899,.062586665,.030055087,Fay-Herriot,GIS,Municipality
+fh_mun_gis,66,.20430775,.064005494,.031352907,Fay-Herriot,GIS,Municipality
+fh_mun_gis,67,.20445214,.064054966,.031372566,Fay-Herriot,GIS,Municipality
+fh_mun_gis,68,.20493251,.063524827,.030652434,Fay-Herriot,GIS,Municipality
+fh_mun_gis,69,.20420165,.063344039,.030682916,Fay-Herriot,GIS,Municipality
+fh_mun_gis,70,.20470238,.063443191,.030615479,Fay-Herriot,GIS,Municipality
+fh_mun_gis,71,.20431849,.063625939,.030977445,Fay-Herriot,GIS,Municipality
+fh_mun_gis,72,.20394626,.063356273,.030685868,Fay-Herriot,GIS,Municipality
+fh_mun_gis,73,.20399994,.063241988,.030658465,Fay-Herriot,GIS,Municipality
+fh_mun_gis,74,.20358428,.063600242,.031121271,Fay-Herriot,GIS,Municipality
+fh_mun_gis,75,.20415623,.063367277,.030695472,Fay-Herriot,GIS,Municipality
+fh_mun_gis,76,.20408197,.06293685,.030281309,Fay-Herriot,GIS,Municipality
+fh_mun_gis,77,.20438413,.063311078,.030548681,Fay-Herriot,GIS,Municipality
+fh_mun_gis,78,.20388596,.063557707,.030991117,Fay-Herriot,GIS,Municipality
+fh_mun_gis,79,.2039248,.063285619,.030709175,Fay-Herriot,GIS,Municipality
+fh_mun_gis,80,.20365794,.06290143,.030366192,Fay-Herriot,GIS,Municipality
+fh_mun_gis,81,.20425117,.063284121,.030645818,Fay-Herriot,GIS,Municipality
+fh_mun_gis,82,.20431712,.063815646,.031141067,Fay-Herriot,GIS,Municipality
+fh_mun_gis,83,.20409884,.063132219,.030475136,Fay-Herriot,GIS,Municipality
+fh_mun_gis,84,.2034224,.063296117,.030900622,Fay-Herriot,GIS,Municipality
+fh_mun_gis,85,.20484005,.064293921,.031443011,Fay-Herriot,GIS,Municipality
+fh_mun_gis,86,.20402662,.063189983,.030577227,Fay-Herriot,GIS,Municipality
+fh_mun_gis,87,.20476635,.063799433,.030922778,Fay-Herriot,GIS,Municipality
+fh_mun_gis,88,.20409115,.06282945,.030141864,Fay-Herriot,GIS,Municipality
+fh_mun_gis,89,.20357355,.062604539,.029989183,Fay-Herriot,GIS,Municipality
+fh_mun_gis,90,.20397729,.062935233,.030324822,Fay-Herriot,GIS,Municipality
+fh_mun_gis,91,.20370775,.063378498,.030823477,Fay-Herriot,GIS,Municipality
+fh_mun_gis,92,.20366824,.062655523,.030151865,Fay-Herriot,GIS,Municipality
+fh_mun_gis,93,.20439331,.063042775,.030377856,Fay-Herriot,GIS,Municipality
+fh_mun_gis,94,.20387076,.062645599,.030072702,Fay-Herriot,GIS,Municipality
+fh_mun_gis,95,.20433109,.063548751,.030882999,Fay-Herriot,GIS,Municipality
+fh_mun_gis,96,.20347576,.06305065,.030638253,Fay-Herriot,GIS,Municipality
+fh_mun_gis,97,.20430714,.063215427,.030467967,Fay-Herriot,GIS,Municipality
+fh_mun_gis,98,.20411442,.063283123,.030661358,Fay-Herriot,GIS,Municipality
+fh_mun_gis,99,.20474121,.063972756,.031231435,Fay-Herriot,GIS,Municipality
+fh_mun_gis,100,.20369504,.062689558,.030130802,Fay-Herriot,GIS,Municipality
+fh_mun_gis,101,.2046147,.063091107,.030325096,Fay-Herriot,GIS,Municipality
+fh_mun_gis,102,.20440455,.063333087,.030575782,Fay-Herriot,GIS,Municipality
+fh_mun_gis,103,.20457673,.063686214,.030970048,Fay-Herriot,GIS,Municipality
+fh_mun_gis,104,.20421164,.063500427,.030848823,Fay-Herriot,GIS,Municipality
+fh_mun_gis,105,.20423695,.063631698,.030941686,Fay-Herriot,GIS,Municipality
+fh_mun_gis,106,.20364174,.062738784,.030166455,Fay-Herriot,GIS,Municipality
+fh_mun_gis,107,.20469008,.063806139,.030940643,Fay-Herriot,GIS,Municipality
+fh_mun_gis,108,.20396897,.06368307,.031086072,Fay-Herriot,GIS,Municipality
+fh_mun_gis,109,.20393541,.063106246,.030476475,Fay-Herriot,GIS,Municipality
+fh_mun_gis,110,.20367463,.062821813,.030304514,Fay-Herriot,GIS,Municipality
+fh_mun_gis,111,.20382459,.062813334,.030225195,Fay-Herriot,GIS,Municipality
+fh_mun_gis,112,.2034198,.062708199,.030232001,Fay-Herriot,GIS,Municipality
+fh_mun_gis,113,.20450202,.06329716,.030518668,Fay-Herriot,GIS,Municipality
+fh_mun_gis,114,.20419532,.063664317,.030984193,Fay-Herriot,GIS,Municipality
+fh_mun_gis,115,.2039392,.063214488,.030638203,Fay-Herriot,GIS,Municipality
+fh_mun_gis,116,.20344189,.06246423,.029966073,Fay-Herriot,GIS,Municipality
+fh_mun_gis,117,.20373872,.062863238,.030257188,Fay-Herriot,GIS,Municipality
+fh_mun_gis,118,.2036894,.062278524,.029718248,Fay-Herriot,GIS,Municipality
+fh_mun_gis,119,.20445995,.063006796,.030245913,Fay-Herriot,GIS,Municipality
+fh_mun_gis,120,.20414574,.063645966,.030930575,Fay-Herriot,GIS,Municipality
+fh_mun_gis,121,.2041208,.063055977,.030384127,Fay-Herriot,GIS,Municipality
+fh_mun_gis,122,.20389676,.063713297,.031132109,Fay-Herriot,GIS,Municipality
+fh_mun_gis,123,.20421556,.063245602,.030565677,Fay-Herriot,GIS,Municipality
+fh_mun_gis,124,.20378973,.063296199,.030734301,Fay-Herriot,GIS,Municipality
+fh_mun_gis,125,.20405088,.063410118,.030792901,Fay-Herriot,GIS,Municipality
+fh_mun_gis,126,.20425986,.063669965,.031018702,Fay-Herriot,GIS,Municipality
+fh_mun_gis,127,.2042163,.063268349,.030551462,Fay-Herriot,GIS,Municipality
+fh_mun_gis,128,.20369187,.062932394,.030343713,Fay-Herriot,GIS,Municipality
+fh_mun_gis,129,.2037829,.062760904,.030139983,Fay-Herriot,GIS,Municipality
+fh_mun_gis,130,.20441143,.063585311,.030883152,Fay-Herriot,GIS,Municipality
+fh_mun_gis,131,.20384258,.06305375,.030446675,Fay-Herriot,GIS,Municipality
+fh_mun_gis,132,.20404796,.063739866,.03113281,Fay-Herriot,GIS,Municipality
+fh_mun_gis,133,.204051,.063462205,.030826043,Fay-Herriot,GIS,Municipality
+fh_mun_gis,134,.2042217,.063824266,.031210486,Fay-Herriot,GIS,Municipality
+fh_mun_gis,135,.20410182,.063262612,.030641034,Fay-Herriot,GIS,Municipality
+fh_mun_gis,136,.20432085,.063083246,.03033765,Fay-Herriot,GIS,Municipality
+fh_mun_gis,137,.20417765,.06297224,.030366881,Fay-Herriot,GIS,Municipality
+fh_mun_gis,138,.20391753,.063137531,.030528326,Fay-Herriot,GIS,Municipality
+fh_mun_gis,139,.20434536,.063284829,.030627377,Fay-Herriot,GIS,Municipality
+fh_mun_gis,140,.20481232,.063580222,.030729242,Fay-Herriot,GIS,Municipality
+fh_mun_gis,141,.20452504,.06387879,.031195216,Fay-Herriot,GIS,Municipality
+fh_mun_gis,142,.20444693,.06367141,.030983988,Fay-Herriot,GIS,Municipality
+fh_mun_gis,143,.20406497,.063822635,.031248616,Fay-Herriot,GIS,Municipality
+fh_mun_gis,144,.20362796,.063151672,.030561559,Fay-Herriot,GIS,Municipality
+fh_mun_gis,145,.20407768,.063047968,.030393908,Fay-Herriot,GIS,Municipality
+fh_mun_gis,146,.20394267,.063059501,.030523799,Fay-Herriot,GIS,Municipality
+fh_mun_gis,147,.20356871,.062741034,.030266302,Fay-Herriot,GIS,Municipality
+fh_mun_gis,148,.2048586,.064268798,.0314871,Fay-Herriot,GIS,Municipality
+fh_mun_gis,149,.20396742,.063280061,.030761248,Fay-Herriot,GIS,Municipality
+fh_mun_gis,150,.20418596,.063246541,.030567179,Fay-Herriot,GIS,Municipality
+fh_mun_gis,151,.20436154,.063429013,.030742586,Fay-Herriot,GIS,Municipality
+fh_mun_gis,152,.20451939,.063823901,.031089654,Fay-Herriot,GIS,Municipality
+fh_mun_gis,153,.20372705,.063294902,.030781632,Fay-Herriot,GIS,Municipality
+fh_mun_gis,154,.2041468,.063659661,.031037975,Fay-Herriot,GIS,Municipality
+fh_mun_gis,155,.20508055,.064072505,.031170798,Fay-Herriot,GIS,Municipality
+fh_mun_gis,156,.20454843,.063479908,.030655956,Fay-Herriot,GIS,Municipality
+fh_mun_gis,157,.20424025,.063203834,.030601032,Fay-Herriot,GIS,Municipality
+fh_mun_gis,158,.203794,.063507602,.031033041,Fay-Herriot,GIS,Municipality
+fh_mun_gis,159,.20422076,.063209184,.030499963,Fay-Herriot,GIS,Municipality
+fh_mun_gis,160,.20437029,.063801244,.031175824,Fay-Herriot,GIS,Municipality
+fh_mun_gis,161,.2036619,.063007243,.030439546,Fay-Herriot,GIS,Municipality
+fh_mun_gis,162,.20362455,.06342607,.030871522,Fay-Herriot,GIS,Municipality
+fh_mun_gis,163,.20410337,.063204229,.030580046,Fay-Herriot,GIS,Municipality
+fh_mun_gis,164,.20419408,.06329836,.030679934,Fay-Herriot,GIS,Municipality
+fh_mun_gis,165,.20396519,.063627057,.031033665,Fay-Herriot,GIS,Municipality
+fh_mun_gis,166,.20368145,.062895596,.030328279,Fay-Herriot,GIS,Municipality
+fh_mun_gis,167,.20512213,.064290389,.03139833,Fay-Herriot,GIS,Municipality
+fh_mun_gis,168,.2046448,.063585103,.030731495,Fay-Herriot,GIS,Municipality
+fh_mun_gis,169,.2037175,.062864922,.030302104,Fay-Herriot,GIS,Municipality
+fh_mun_gis,170,.20419787,.06308192,.030369379,Fay-Herriot,GIS,Municipality
+fh_mun_gis,171,.20457636,.06371668,.031004924,Fay-Herriot,GIS,Municipality
+fh_mun_gis,172,.20437874,.063692585,.030975988,Fay-Herriot,GIS,Municipality
+fh_mun_gis,173,.20399193,.063504376,.030913603,Fay-Herriot,GIS,Municipality
+fh_mun_gis,174,.20386815,.063257731,.030603398,Fay-Herriot,GIS,Municipality
+fh_mun_gis,175,.20414686,.063780911,.031210493,Fay-Herriot,GIS,Municipality
+fh_mun_gis,176,.20441981,.063686632,.031002106,Fay-Herriot,GIS,Municipality
+fh_mun_gis,177,.2035836,.062824696,.030314013,Fay-Herriot,GIS,Municipality
+fh_mun_gis,178,.20419061,.062945947,.030252105,Fay-Herriot,GIS,Municipality
+fh_mun_gis,179,.20374145,.063406482,.030837582,Fay-Herriot,GIS,Municipality
+fh_mun_gis,180,.20462109,.064087145,.031322949,Fay-Herriot,GIS,Municipality
+fh_mun_gis,181,.20436378,.063229904,.030547481,Fay-Herriot,GIS,Municipality
+fh_mun_gis,182,.20444798,.06348712,.030736916,Fay-Herriot,GIS,Municipality
+fh_mun_gis,183,.20365235,.062889449,.030348359,Fay-Herriot,GIS,Municipality
+fh_mun_gis,184,.20391543,.063356243,.030705249,Fay-Herriot,GIS,Municipality
+fh_mun_gis,185,.20412447,.063161865,.030501829,Fay-Herriot,GIS,Municipality
+fh_mun_gis,186,.20371036,.062915631,.030326277,Fay-Herriot,GIS,Municipality
+fh_mun_gis,187,.20463878,.063621588,.03079433,Fay-Herriot,GIS,Municipality
+fh_mun_gis,188,.20381467,.062799871,.030197999,Fay-Herriot,GIS,Municipality
+fh_mun_gis,189,.20389117,.062908299,.030370878,Fay-Herriot,GIS,Municipality
+fh_mun_gis,190,.20474835,.063721873,.030884238,Fay-Herriot,GIS,Municipality
+fh_mun_gis,191,.20410722,.063111067,.030432936,Fay-Herriot,GIS,Municipality
+fh_mun_gis,192,.20413037,.063496165,.03086732,Fay-Herriot,GIS,Municipality
+fh_mun_gis,193,.20450872,.063342758,.030568922,Fay-Herriot,GIS,Municipality
+fh_mun_gis,194,.20415635,.063484669,.030877737,Fay-Herriot,GIS,Municipality
+fh_mun_gis,195,.20433412,.062775187,.02999825,Fay-Herriot,GIS,Municipality
+fh_mun_gis,196,.20410076,.063654177,.0310676,Fay-Herriot,GIS,Municipality
+fh_mun_gis,197,.20422213,.063569084,.030941708,Fay-Herriot,GIS,Municipality
+fh_mun_gis,198,.20472421,.063746229,.030923715,Fay-Herriot,GIS,Municipality
+fh_mun_gis,199,.20377141,.062824242,.03016823,Fay-Herriot,GIS,Municipality
+fh_mun_gis,200,.20416827,.06318216,.030525766,Fay-Herriot,GIS,Municipality
+fh_mun_gis,201,.20413117,.062973715,.03026705,Fay-Herriot,GIS,Municipality
+fh_mun_gis,202,.20468555,.06369146,.030877372,Fay-Herriot,GIS,Municipality
+fh_mun_gis,203,.20470542,.063268155,.030399587,Fay-Herriot,GIS,Municipality
+fh_mun_gis,204,.20347893,.062980317,.030482506,Fay-Herriot,GIS,Municipality
+fh_mun_gis,205,.20398474,.063072629,.030475028,Fay-Herriot,GIS,Municipality
+fh_mun_gis,206,.2044393,.063444063,.030683575,Fay-Herriot,GIS,Municipality
+fh_mun_gis,207,.20364596,.062822454,.030250568,Fay-Herriot,GIS,Municipality
+fh_mun_gis,208,.20410709,.063223466,.030586511,Fay-Herriot,GIS,Municipality
+fh_mun_gis,209,.20470467,.063572444,.030793659,Fay-Herriot,GIS,Municipality
+fh_mun_gis,210,.20414892,.063401408,.030695805,Fay-Herriot,GIS,Municipality
+fh_mun_gis,211,.20363796,.062804364,.030249536,Fay-Herriot,GIS,Municipality
+fh_mun_gis,212,.2041638,.063725181,.031092389,Fay-Herriot,GIS,Municipality
+fh_mun_gis,213,.20372407,.062917829,.030377133,Fay-Herriot,GIS,Municipality
+fh_mun_gis,214,.20431824,.064002432,.031305786,Fay-Herriot,GIS,Municipality
+fh_mun_gis,215,.20386454,.062727138,.030180762,Fay-Herriot,GIS,Municipality
+fh_mun_gis,216,.2039392,.062807493,.030196901,Fay-Herriot,GIS,Municipality
+fh_mun_gis,217,.20419675,.063114308,.030385094,Fay-Herriot,GIS,Municipality
+fh_mun_gis,218,.2042668,.063037477,.030339247,Fay-Herriot,GIS,Municipality
+fh_mun_gis,219,.20420128,.064160265,.031561382,Fay-Herriot,GIS,Municipality
+fh_mun_gis,220,.20353092,.062830508,.030344516,Fay-Herriot,GIS,Municipality
+fh_mun_gis,221,.20502055,.063718364,.030886121,Fay-Herriot,GIS,Municipality
+fh_mun_gis,222,.20408463,.063175701,.030546093,Fay-Herriot,GIS,Municipality
+fh_mun_gis,223,.20351696,.063330211,.030839633,Fay-Herriot,GIS,Municipality
+fh_mun_gis,224,.2037183,.062778294,.030180378,Fay-Herriot,GIS,Municipality
+fh_mun_gis,225,.20416231,.063725643,.031120276,Fay-Herriot,GIS,Municipality
+fh_mun_gis,226,.20429814,.063465945,.030828193,Fay-Herriot,GIS,Municipality
+fh_mun_gis,227,.20439233,.063737415,.031033058,Fay-Herriot,GIS,Municipality
+fh_mun_gis,228,.20390259,.063464656,.030874407,Fay-Herriot,GIS,Municipality
+fh_mun_gis,229,.20393008,.063701712,.031136649,Fay-Herriot,GIS,Municipality
+fh_mun_gis,230,.2044571,.063756198,.031131046,Fay-Herriot,GIS,Municipality
+fh_mun_gis,231,.20483404,.063701861,.030902199,Fay-Herriot,GIS,Municipality
+fh_mun_gis,232,.20424317,.063012399,.030274006,Fay-Herriot,GIS,Municipality
+fh_mun_gis,233,.20387635,.063056171,.030454686,Fay-Herriot,GIS,Municipality
+fh_mun_gis,234,.20465478,.06342753,.030559549,Fay-Herriot,GIS,Municipality
+fh_mun_gis,235,.20448472,.063768618,.03105543,Fay-Herriot,GIS,Municipality
+fh_mun_gis,236,.20377837,.063380368,.03084223,Fay-Herriot,GIS,Municipality
+fh_mun_gis,237,.20409834,.063220076,.030609829,Fay-Herriot,GIS,Municipality
+fh_mun_gis,238,.20385239,.062980905,.030360017,Fay-Herriot,GIS,Municipality
+fh_mun_gis,239,.20448205,.064135313,.031478532,Fay-Herriot,GIS,Municipality
+fh_mun_gis,240,.20442098,.063297123,.030529998,Fay-Herriot,GIS,Municipality
+fh_mun_gis,241,.20457995,.063678659,.030966498,Fay-Herriot,GIS,Municipality
+fh_mun_gis,242,.2045802,.063662387,.030864524,Fay-Herriot,GIS,Municipality
+fh_mun_gis,243,.20386611,.063083731,.03045701,Fay-Herriot,GIS,Municipality
+fh_mun_gis,244,.2042902,.063640565,.03096085,Fay-Herriot,GIS,Municipality
+fh_mun_gis,245,.20442098,.063284643,.030586949,Fay-Herriot,GIS,Municipality
+fh_mun_gis,246,.20490949,.06357456,.030680574,Fay-Herriot,GIS,Municipality
+fh_mun_gis,247,.20447609,.063944302,.031336296,Fay-Herriot,GIS,Municipality
+fh_mun_gis,248,.2039807,.063001052,.030364694,Fay-Herriot,GIS,Municipality
+fh_mun_gis,249,.20406018,.063416503,.030784085,Fay-Herriot,GIS,Municipality
+fh_mun_gis,250,.20369542,.06326583,.030721217,Fay-Herriot,GIS,Municipality
+fh_mun_gis,251,.20388696,.063175552,.030585257,Fay-Herriot,GIS,Municipality
+fh_mun_gis,252,.2041326,.063181594,.030569613,Fay-Herriot,GIS,Municipality
+fh_mun_gis,253,.20370069,.063080691,.030522073,Fay-Herriot,GIS,Municipality
+fh_mun_gis,254,.20406669,.063584983,.031033218,Fay-Herriot,GIS,Municipality
+fh_mun_gis,255,.20427784,.0633955,.030715026,Fay-Herriot,GIS,Municipality
+fh_mun_gis,256,.20448136,.063740082,.031010812,Fay-Herriot,GIS,Municipality
+fh_mun_gis,257,.20364504,.063630782,.031146731,Fay-Herriot,GIS,Municipality
+fh_mun_gis,258,.20402551,.063601524,.030972298,Fay-Herriot,GIS,Municipality
+fh_mun_gis,259,.20421673,.063403122,.030741869,Fay-Herriot,GIS,Municipality
+fh_mun_gis,260,.20414574,.06307105,.030428987,Fay-Herriot,GIS,Municipality
+fh_mun_gis,261,.2039838,.063029312,.030404901,Fay-Herriot,GIS,Municipality
+fh_mun_gis,262,.20466594,.063763767,.030960422,Fay-Herriot,GIS,Municipality
+fh_mun_gis,263,.20360917,.062677793,.030133851,Fay-Herriot,GIS,Municipality
+fh_mun_gis,264,.20394012,.063303672,.030686265,Fay-Herriot,GIS,Municipality
+fh_mun_gis,265,.20480661,.063311949,.030474817,Fay-Herriot,GIS,Municipality
+fh_mun_gis,266,.20402463,.06344647,.030828474,Fay-Herriot,GIS,Municipality
+fh_mun_gis,267,.20408364,.063476816,.030902598,Fay-Herriot,GIS,Municipality
+fh_mun_gis,268,.20388882,.062865131,.030296538,Fay-Herriot,GIS,Municipality
+fh_mun_gis,269,.20429826,.063400172,.030732578,Fay-Herriot,GIS,Municipality
+fh_mun_gis,270,.20373413,.062893815,.030263098,Fay-Herriot,GIS,Municipality
+fh_mun_gis,271,.20384607,.063893497,.031329185,Fay-Herriot,GIS,Municipality
+fh_mun_gis,272,.20373642,.0628886,.030397089,Fay-Herriot,GIS,Municipality
+fh_mun_gis,273,.20396277,.063153565,.030517183,Fay-Herriot,GIS,Municipality
+fh_mun_gis,274,.20423137,.063174829,.030450677,Fay-Herriot,GIS,Municipality
+fh_mun_gis,275,.20382757,.063568756,.031036403,Fay-Herriot,GIS,Municipality
+fh_mun_gis,276,.20392573,.062879771,.030297469,Fay-Herriot,GIS,Municipality
+fh_mun_gis,277,.20401645,.062864892,.030274766,Fay-Herriot,GIS,Municipality
+fh_mun_gis,278,.20467024,.063430563,.030659195,Fay-Herriot,GIS,Municipality
+fh_mun_gis,279,.20365706,.062903062,.030378519,Fay-Herriot,GIS,Municipality
+fh_mun_gis,280,.20438451,.063501954,.030763445,Fay-Herriot,GIS,Municipality
+fh_mun_gis,281,.20357659,.062782109,.030269243,Fay-Herriot,GIS,Municipality
+fh_mun_gis,282,.20403773,.063203253,.030571125,Fay-Herriot,GIS,Municipality
+fh_mun_gis,283,.20424329,.062807448,.030130167,Fay-Herriot,GIS,Municipality
+fh_mun_gis,284,.20474103,.063262038,.030483888,Fay-Herriot,GIS,Municipality
+fh_mun_gis,285,.2042155,.063322067,.030663053,Fay-Herriot,GIS,Municipality
+fh_mun_gis,286,.20417473,.063172027,.030550115,Fay-Herriot,GIS,Municipality
+fh_mun_gis,287,.20452119,.063160524,.030433089,Fay-Herriot,GIS,Municipality
+fh_mun_gis,288,.20450351,.063728087,.03100732,Fay-Herriot,GIS,Municipality
+fh_mun_gis,289,.20355351,.06274388,.03027078,Fay-Herriot,GIS,Municipality
+fh_mun_gis,290,.20438841,.063233964,.030526375,Fay-Herriot,GIS,Municipality
+fh_mun_gis,291,.20396607,.063127063,.030569017,Fay-Herriot,GIS,Municipality
+fh_mun_gis,292,.20433728,.063576527,.030889742,Fay-Herriot,GIS,Municipality
+fh_mun_gis,293,.2048483,.063923538,.031060467,Fay-Herriot,GIS,Municipality
+fh_mun_gis,294,.20372476,.062936291,.030383797,Fay-Herriot,GIS,Municipality
+fh_mun_gis,295,.20384271,.062931448,.030332616,Fay-Herriot,GIS,Municipality
+fh_mun_gis,296,.20533848,.064046949,.031094607,Fay-Herriot,GIS,Municipality
+fh_mun_gis,297,.20418465,.062754117,.030081188,Fay-Herriot,GIS,Municipality
+fh_mun_gis,298,.20443842,.063737586,.031078378,Fay-Herriot,GIS,Municipality
+fh_mun_gis,299,.20457593,.063723668,.030927846,Fay-Herriot,GIS,Municipality
+fh_mun_gis,300,.20460303,.06347803,.030730089,Fay-Herriot,GIS,Municipality
+fh_mun_gis,301,.20392083,.062920988,.030345315,Fay-Herriot,GIS,Municipality
+fh_mun_gis,302,.2035602,.062821172,.030277215,Fay-Herriot,GIS,Municipality
+fh_mun_gis,303,.20451778,.063179784,.030382883,Fay-Herriot,GIS,Municipality
+fh_mun_gis,304,.20411919,.063138656,.030481113,Fay-Herriot,GIS,Municipality
+fh_mun_gis,305,.20373692,.062940314,.030447811,Fay-Herriot,GIS,Municipality
+fh_mun_gis,306,.20433424,.063481115,.030815853,Fay-Herriot,GIS,Municipality
+fh_mun_gis,307,.20415506,.063020878,.030353274,Fay-Herriot,GIS,Municipality
+fh_mun_gis,308,.20443557,.0639311,.031218344,Fay-Herriot,GIS,Municipality
+fh_mun_gis,309,.20442967,.063219257,.030445544,Fay-Herriot,GIS,Municipality
+fh_mun_gis,310,.20488833,.063720286,.030874865,Fay-Herriot,GIS,Municipality
+fh_mun_gis,311,.20416082,.063565671,.030916296,Fay-Herriot,GIS,Municipality
+fh_mun_gis,312,.20367531,.063131206,.030596055,Fay-Herriot,GIS,Municipality
+fh_mun_gis,313,.20387715,.063551344,.031004377,Fay-Herriot,GIS,Municipality
+fh_mun_gis,314,.20381224,.063421875,.030783599,Fay-Herriot,GIS,Municipality
+fh_mun_gis,315,.20408785,.063042149,.030450063,Fay-Herriot,GIS,Municipality
+fh_mun_gis,316,.20402098,.063493326,.030881705,Fay-Herriot,GIS,Municipality
+fh_mun_gis,317,.20412807,.063920088,.031290274,Fay-Herriot,GIS,Municipality
+fh_mun_gis,318,.20456183,.063433737,.030625248,Fay-Herriot,GIS,Municipality
+fh_mun_gis,319,.2042114,.063676588,.030970162,Fay-Herriot,GIS,Municipality
+fh_mun_gis,320,.20455767,.063808367,.031008216,Fay-Herriot,GIS,Municipality
+fh_mun_gis,321,.20379959,.062722921,.03008898,Fay-Herriot,GIS,Municipality
+fh_mun_gis,322,.20341818,.06304957,.030604728,Fay-Herriot,GIS,Municipality
+fh_mun_gis,323,.20395626,.063857995,.03128751,Fay-Herriot,GIS,Municipality
+fh_mun_gis,324,.20380288,.063031636,.030496385,Fay-Herriot,GIS,Municipality
+fh_mun_gis,325,.20438091,.063583337,.030942405,Fay-Herriot,GIS,Municipality
+fh_mun_gis,326,.20384637,.062746197,.030199716,Fay-Herriot,GIS,Municipality
+fh_mun_gis,327,.20466769,.063654356,.030894952,Fay-Herriot,GIS,Municipality
+fh_mun_gis,328,.20373543,.062680602,.03016215,Fay-Herriot,GIS,Municipality
+fh_mun_gis,329,.20419036,.063414767,.030806817,Fay-Herriot,GIS,Municipality
+fh_mun_gis,330,.20373487,.063045874,.03049331,Fay-Herriot,GIS,Municipality
+fh_mun_gis,331,.20420885,.063353971,.03073585,Fay-Herriot,GIS,Municipality
+fh_mun_gis,332,.20410356,.063004442,.030296125,Fay-Herriot,GIS,Municipality
+fh_mun_gis,333,.20428784,.063003123,.030258127,Fay-Herriot,GIS,Municipality
+fh_mun_gis,334,.20416325,.063057669,.030437684,Fay-Herriot,GIS,Municipality
+fh_mun_gis,335,.20485711,.063802287,.030887306,Fay-Herriot,GIS,Municipality
+fh_mun_gis,336,.20446938,.063429609,.030627584,Fay-Herriot,GIS,Municipality
+fh_mun_gis,337,.20400992,.062625818,.029983398,Fay-Herriot,GIS,Municipality
+fh_mun_gis,338,.20385785,.062660031,.030090973,Fay-Herriot,GIS,Municipality
+fh_mun_gis,339,.20362511,.062905401,.030367624,Fay-Herriot,GIS,Municipality
+fh_mun_gis,340,.2042225,.063248791,.03056453,Fay-Herriot,GIS,Municipality
+fh_mun_gis,341,.20411119,.063312039,.030669209,Fay-Herriot,GIS,Municipality
+fh_mun_gis,342,.20457034,.063521877,.030886285,Fay-Herriot,GIS,Municipality
+fh_mun_gis,343,.20489788,.063800432,.030922212,Fay-Herriot,GIS,Municipality
+fh_mun_gis,344,.20423019,.063495345,.030791586,Fay-Herriot,GIS,Municipality
+fh_mun_gis,345,.20322901,.06305939,.030576482,Fay-Herriot,GIS,Municipality
+fh_mun_gis,346,.20433244,.063239701,.030478923,Fay-Herriot,GIS,Municipality
+fh_mun_gis,347,.20465788,.063840672,.030993398,Fay-Herriot,GIS,Municipality
+fh_mun_gis,348,.20461905,.063454911,.030659648,Fay-Herriot,GIS,Municipality
+fh_mun_gis,349,.20458522,.063384019,.0306153,Fay-Herriot,GIS,Municipality
+fh_mun_gis,350,.20429106,.0633462,.03059206,Fay-Herriot,GIS,Municipality
+fh_mun_gis,351,.20411076,.063184619,.030563014,Fay-Herriot,GIS,Municipality
+fh_mun_gis,352,.2039042,.063506469,.030911304,Fay-Herriot,GIS,Municipality
+fh_mun_gis,353,.20410623,.063150547,.030495705,Fay-Herriot,GIS,Municipality
+fh_mun_gis,354,.20432903,.063212417,.030446075,Fay-Herriot,GIS,Municipality
+fh_mun_gis,355,.20391878,.0632414,.030685427,Fay-Herriot,GIS,Municipality
+fh_mun_gis,356,.2037265,.063167803,.03063683,Fay-Herriot,GIS,Municipality
+fh_mun_gis,357,.20451406,.063603036,.030800311,Fay-Herriot,GIS,Municipality
+fh_mun_gis,358,.20423013,.063758053,.03114227,Fay-Herriot,GIS,Municipality
+fh_mun_gis,359,.20364651,.062974013,.030511901,Fay-Herriot,GIS,Municipality
+fh_mun_gis,360,.20425986,.063255444,.030588523,Fay-Herriot,GIS,Municipality
+fh_mun_gis,361,.20414165,.063739717,.031164451,Fay-Herriot,GIS,Municipality
+fh_mun_gis,362,.20382434,.062859118,.030285427,Fay-Herriot,GIS,Municipality
+fh_mun_gis,363,.20398015,.063935637,.031380754,Fay-Herriot,GIS,Municipality
+fh_mun_gis,364,.20364584,.063552476,.031040397,Fay-Herriot,GIS,Municipality
+fh_mun_gis,365,.20412409,.06298504,.030313026,Fay-Herriot,GIS,Municipality
+fh_mun_gis,366,.20428368,.063144222,.030413564,Fay-Herriot,GIS,Municipality
+fh_mun_gis,367,.20451245,.06365785,.030908315,Fay-Herriot,GIS,Municipality
+fh_mun_gis,368,.20391233,.063344114,.030709388,Fay-Herriot,GIS,Municipality
+fh_mun_gis,369,.20416988,.063304067,.030638421,Fay-Herriot,GIS,Municipality
+fh_mun_gis,370,.20376682,.063046187,.030468743,Fay-Herriot,GIS,Municipality
+fh_mun_gis,371,.20421381,.06359759,.03090355,Fay-Herriot,GIS,Municipality
+fh_mun_gis,372,.2041823,.063658953,.030985909,Fay-Herriot,GIS,Municipality
+fh_mun_gis,373,.20418087,.063317165,.03060234,Fay-Herriot,GIS,Municipality
+fh_mun_gis,374,.20395371,.062824063,.030190079,Fay-Herriot,GIS,Municipality
+fh_mun_gis,375,.2038115,.063656434,.031074114,Fay-Herriot,GIS,Municipality
+fh_mun_gis,376,.20459466,.063563153,.030849965,Fay-Herriot,GIS,Municipality
+fh_mun_gis,377,.20475604,.06418328,.031422473,Fay-Herriot,GIS,Municipality
+fh_mun_gis,378,.20408501,.063149087,.030559165,Fay-Herriot,GIS,Municipality
+fh_mun_gis,379,.20397313,.06293793,.030336943,Fay-Herriot,GIS,Municipality
+fh_mun_gis,380,.20462649,.063347653,.030550497,Fay-Herriot,GIS,Municipality
+fh_mun_gis,381,.20393305,.063512318,.030948296,Fay-Herriot,GIS,Municipality
+fh_mun_gis,382,.20396481,.062981494,.030379442,Fay-Herriot,GIS,Municipality
+fh_mun_gis,383,.2043891,.063758679,.031172948,Fay-Herriot,GIS,Municipality
+fh_mun_gis,384,.20319954,.062489007,.030059326,Fay-Herriot,GIS,Municipality
+fh_mun_gis,385,.20433003,.063227974,.030469162,Fay-Herriot,GIS,Municipality
+fh_mun_gis,386,.20383936,.063793793,.031280026,Fay-Herriot,GIS,Municipality
+fh_mun_gis,387,.20360036,.063018799,.030544093,Fay-Herriot,GIS,Municipality
+fh_mun_gis,388,.20447503,.063427001,.030702399,Fay-Herriot,GIS,Municipality
+fh_mun_gis,389,.20418856,.063726775,.031099904,Fay-Herriot,GIS,Municipality
+fh_mun_gis,390,.20409152,.063645177,.031024011,Fay-Herriot,GIS,Municipality
+fh_mun_gis,391,.20387174,.062806927,.030172352,Fay-Herriot,GIS,Municipality
+fh_mun_gis,392,.20383973,.063364223,.03079506,Fay-Herriot,GIS,Municipality
+fh_mun_gis,393,.2045714,.063664764,.030960601,Fay-Herriot,GIS,Municipality
+fh_mun_gis,394,.20436589,.063232288,.030533658,Fay-Herriot,GIS,Municipality
+fh_mun_gis,395,.20384656,.063089997,.03055392,Fay-Herriot,GIS,Municipality
+fh_mun_gis,396,.20368487,.062718377,.030163085,Fay-Herriot,GIS,Municipality
+fh_mun_gis,397,.20415753,.063078821,.030395105,Fay-Herriot,GIS,Municipality
+fh_mun_gis,398,.20385034,.062692367,.030039959,Fay-Herriot,GIS,Municipality
+fh_mun_gis,399,.20374437,.06338422,.030890031,Fay-Herriot,GIS,Municipality
+fh_mun_gis,400,.20398368,.063113429,.030460555,Fay-Herriot,GIS,Municipality
+fh_mun_gis,401,.20441653,.06362728,.030925114,Fay-Herriot,GIS,Municipality
+fh_mun_gis,402,.20380071,.062723666,.030150075,Fay-Herriot,GIS,Municipality
+fh_mun_gis,403,.20414388,.063449077,.030869665,Fay-Herriot,GIS,Municipality
+fh_mun_gis,404,.20474152,.063674703,.03084022,Fay-Herriot,GIS,Municipality
+fh_mun_gis,405,.20426165,.063978501,.031362221,Fay-Herriot,GIS,Municipality
+fh_mun_gis,406,.20393616,.063404478,.03081686,Fay-Herriot,GIS,Municipality
+fh_mun_gis,407,.20402078,.06285163,.030186275,Fay-Herriot,GIS,Municipality
+fh_mun_gis,408,.20436347,.063525639,.030866699,Fay-Herriot,GIS,Municipality
+fh_mun_gis,409,.20361754,.062819518,.030306162,Fay-Herriot,GIS,Municipality
+fh_mun_gis,410,.20396507,.063390709,.030798247,Fay-Herriot,GIS,Municipality
+fh_mun_gis,411,.20462327,.063733302,.030971369,Fay-Herriot,GIS,Municipality
+fh_mun_gis,412,.20353812,.062630892,.030114399,Fay-Herriot,GIS,Municipality
+fh_mun_gis,413,.20487164,.063624114,.030766992,Fay-Herriot,GIS,Municipality
+fh_mun_gis,414,.20404616,.063552253,.030956253,Fay-Herriot,GIS,Municipality
+fh_mun_gis,415,.20414054,.063065484,.030365044,Fay-Herriot,GIS,Municipality
+fh_mun_gis,416,.2037852,.062849402,.030277824,Fay-Herriot,GIS,Municipality
+fh_mun_gis,417,.20385438,.06316828,.030602014,Fay-Herriot,GIS,Municipality
+fh_mun_gis,418,.20413341,.063043043,.030339716,Fay-Herriot,GIS,Municipality
+fh_mun_gis,419,.20398313,.062938057,.030300604,Fay-Herriot,GIS,Municipality
+fh_mun_gis,420,.20394254,.063326389,.030810716,Fay-Herriot,GIS,Municipality
+fh_mun_gis,421,.2045027,.063241184,.03043271,Fay-Herriot,GIS,Municipality
+fh_mun_gis,422,.20337892,.062694632,.030225173,Fay-Herriot,GIS,Municipality
+fh_mun_gis,423,.20421468,.063095376,.03042737,Fay-Herriot,GIS,Municipality
+fh_mun_gis,424,.20418732,.063105911,.030420924,Fay-Herriot,GIS,Municipality
+fh_mun_gis,425,.2046572,.063785426,.031015128,Fay-Herriot,GIS,Municipality
+fh_mun_gis,426,.2042055,.063235477,.030591568,Fay-Herriot,GIS,Municipality
+fh_mun_gis,427,.20392182,.063239522,.030600544,Fay-Herriot,GIS,Municipality
+fh_mun_gis,428,.20400199,.06313023,.030497789,Fay-Herriot,GIS,Municipality
+fh_mun_gis,429,.20439921,.063568659,.030879462,Fay-Herriot,GIS,Municipality
+fh_mun_gis,430,.20429112,.063499808,.03085684,Fay-Herriot,GIS,Municipality
+fh_mun_gis,431,.20413513,.063045494,.030431295,Fay-Herriot,GIS,Municipality
+fh_mun_gis,432,.20424707,.062911302,.030217132,Fay-Herriot,GIS,Municipality
+fh_mun_gis,433,.20387219,.063442916,.030893618,Fay-Herriot,GIS,Municipality
+fh_mun_gis,434,.20488945,.063987248,.031217003,Fay-Herriot,GIS,Municipality
+fh_mun_gis,435,.20394534,.062716708,.030107066,Fay-Herriot,GIS,Municipality
+fh_mun_gis,436,.20368108,.062920213,.030376026,Fay-Herriot,GIS,Municipality
+fh_mun_gis,437,.20428051,.063243523,.030571911,Fay-Herriot,GIS,Municipality
+fh_mun_gis,438,.20463096,.063753188,.03096379,Fay-Herriot,GIS,Municipality
+fh_mun_gis,439,.20371681,.063053928,.030555025,Fay-Herriot,GIS,Municipality
+fh_mun_gis,440,.20403902,.063050538,.030426355,Fay-Herriot,GIS,Municipality
+fh_mun_gis,441,.20335837,.062659122,.030179352,Fay-Herriot,GIS,Municipality
+fh_mun_gis,442,.20414482,.063157767,.030465096,Fay-Herriot,GIS,Municipality
+fh_mun_gis,443,.20432295,.063965008,.031274341,Fay-Herriot,GIS,Municipality
+fh_mun_gis,444,.20420985,.063759618,.031131854,Fay-Herriot,GIS,Municipality
+fh_mun_gis,445,.20376906,.063044198,.030456293,Fay-Herriot,GIS,Municipality
+fh_mun_gis,446,.20475382,.064049207,.031264268,Fay-Herriot,GIS,Municipality
+fh_mun_gis,447,.20374449,.063000403,.030429134,Fay-Herriot,GIS,Municipality
+fh_mun_gis,448,.20474878,.063665353,.030799093,Fay-Herriot,GIS,Municipality
+fh_mun_gis,449,.20420581,.063451946,.030721866,Fay-Herriot,GIS,Municipality
+fh_mun_gis,450,.20346913,.062557451,.02998082,Fay-Herriot,GIS,Municipality
+fh_mun_gis,451,.20384644,.062953644,.030356253,Fay-Herriot,GIS,Municipality
+fh_mun_gis,452,.20462723,.063482769,.030662294,Fay-Herriot,GIS,Municipality
+fh_mun_gis,453,.20417839,.062775619,.030110044,Fay-Herriot,GIS,Municipality
+fh_mun_gis,454,.20478955,.063646346,.030818492,Fay-Herriot,GIS,Municipality
+fh_mun_gis,455,.20404243,.063426748,.030854324,Fay-Herriot,GIS,Municipality
+fh_mun_gis,456,.20411715,.063157864,.030485902,Fay-Herriot,GIS,Municipality
+fh_mun_gis,457,.20423038,.063120343,.030405536,Fay-Herriot,GIS,Municipality
+fh_mun_gis,458,.20405553,.062763542,.030102586,Fay-Herriot,GIS,Municipality
+fh_mun_gis,459,.20441318,.063588277,.030809904,Fay-Herriot,GIS,Municipality
+fh_mun_gis,460,.20424478,.063077465,.030362455,Fay-Herriot,GIS,Municipality
+fh_mun_gis,461,.20387405,.062775612,.030157106,Fay-Herriot,GIS,Municipality
+fh_mun_gis,462,.20409617,.063022301,.030462489,Fay-Herriot,GIS,Municipality
+fh_mun_gis,463,.20408978,.063497111,.030920837,Fay-Herriot,GIS,Municipality
+fh_mun_gis,464,.20397052,.063803993,.031253647,Fay-Herriot,GIS,Municipality
+fh_mun_gis,465,.20407712,.063067511,.030464673,Fay-Herriot,GIS,Municipality
+fh_mun_gis,466,.20411082,.063058741,.030385954,Fay-Herriot,GIS,Municipality
+fh_mun_gis,467,.20383248,.063108906,.030538054,Fay-Herriot,GIS,Municipality
+fh_mun_gis,468,.20377117,.0631833,.030677503,Fay-Herriot,GIS,Municipality
+fh_mun_gis,469,.20407706,.063572079,.030943513,Fay-Herriot,GIS,Municipality
+fh_mun_gis,470,.20433971,.063399032,.030719522,Fay-Herriot,GIS,Municipality
+fh_mun_gis,471,.20431477,.06335827,.03060741,Fay-Herriot,GIS,Municipality
+fh_mun_gis,472,.20404616,.062933482,.030391229,Fay-Herriot,GIS,Municipality
+fh_mun_gis,473,.20387435,.063464396,.030916659,Fay-Herriot,GIS,Municipality
+fh_mun_gis,474,.20370646,.062385984,.029804701,Fay-Herriot,GIS,Municipality
+fh_mun_gis,475,.20411162,.063471623,.030837042,Fay-Herriot,GIS,Municipality
+fh_mun_gis,476,.20399417,.063846946,.031299364,Fay-Herriot,GIS,Municipality
+fh_mun_gis,477,.20465212,.063642457,.030853789,Fay-Herriot,GIS,Municipality
+fh_mun_gis,478,.20477676,.064002953,.031191254,Fay-Herriot,GIS,Municipality
+fh_mun_gis,479,.2039142,.063150294,.030566029,Fay-Herriot,GIS,Municipality
+fh_mun_gis,480,.20407371,.063119091,.030458074,Fay-Herriot,GIS,Municipality
+fh_mun_gis,481,.20399652,.063695155,.031144746,Fay-Herriot,GIS,Municipality
+fh_mun_gis,482,.20416473,.063249171,.030573694,Fay-Herriot,GIS,Municipality
+fh_mun_gis,483,.20366135,.062684514,.030129433,Fay-Herriot,GIS,Municipality
+fh_mun_gis,484,.20410915,.06355577,.030934198,Fay-Herriot,GIS,Municipality
+fh_mun_gis,485,.20441751,.063004225,.030282423,Fay-Herriot,GIS,Municipality
+fh_mun_gis,486,.20374213,.06294699,.030439096,Fay-Herriot,GIS,Municipality
+fh_mun_gis,487,.20485154,.063652314,.030777724,Fay-Herriot,GIS,Municipality
+fh_mun_gis,488,.20428796,.063201629,.030502761,Fay-Herriot,GIS,Municipality
+fh_mun_gis,489,.20385729,.063224941,.030677395,Fay-Herriot,GIS,Municipality
+fh_mun_gis,490,.2040129,.063634761,.031025501,Fay-Herriot,GIS,Municipality
+fh_mun_gis,491,.20371868,.063436911,.030818446,Fay-Herriot,GIS,Municipality
+fh_mun_gis,492,.20383999,.063435398,.030907648,Fay-Herriot,GIS,Municipality
+fh_mun_gis,493,.20410815,.063267082,.0305907,Fay-Herriot,GIS,Municipality
+fh_mun_gis,494,.20470691,.063794449,.030962681,Fay-Herriot,GIS,Municipality
+fh_mun_gis,495,.20358832,.062770218,.030234292,Fay-Herriot,GIS,Municipality
+fh_mun_gis,496,.20385562,.063345283,.030769398,Fay-Herriot,GIS,Municipality
+fh_mun_gis,497,.20466875,.063592806,.030889403,Fay-Herriot,GIS,Municipality
+fh_mun_gis,498,.20391084,.062885247,.030321425,Fay-Herriot,GIS,Municipality
+fh_mun_gis,499,.20420395,.062959895,.030274544,Fay-Herriot,GIS,Municipality
+fh_mun_gis,500,.20418069,.063193746,.030520579,Fay-Herriot,GIS,Municipality
 fh_mun,1,.20064108,.059563551,.027747115,Fay-Herriot,Census agg.,Municipality
 fh_mun,2,.20091489,.059546605,.027679496,Fay-Herriot,Census agg.,Municipality
 fh_mun,3,.20024461,.059510469,.027772948,Fay-Herriot,Census agg.,Municipality
@@ -2509,7 +3009,7 @@ gb_all_mun,7,.20030919,.059406959,.027639287,XGboost,Mixed,Municipality
 gb_all_mun,8,.20049849,.059701663,.027883172,XGboost,Mixed,Municipality
 gb_all_mun,9,.20014471,.059361629,.027612837,XGboost,Mixed,Municipality
 gb_all_mun,10,.20018058,.059309456,.027571265,XGboost,Mixed,Municipality
-gb_all_mun,11,.20019652,.059496664,.027733453,XGboost,Mixed,Municipality
+gb_all_mun,11,.20018907,.059503265,.027731763,XGboost,Mixed,Municipality
 gb_all_mun,12,.20036633,.059565127,.027761314,XGboost,Mixed,Municipality
 gb_all_mun,13,.20017375,.059340723,.027628897,XGboost,Mixed,Municipality
 gb_all_mun,14,.20032321,.05928506,.027503595,XGboost,Mixed,Municipality
@@ -2531,7 +3031,7 @@ gb_all_mun,29,.20057407,.059766717,.027905682,XGboost,Mixed,Municipality
 gb_all_mun,30,.20038551,.059408512,.027640516,XGboost,Mixed,Municipality
 gb_all_mun,31,.20046072,.059956621,.028091103,XGboost,Mixed,Municipality
 gb_all_mun,32,.20020954,.059436169,.027686354,XGboost,Mixed,Municipality
-gb_all_mun,33,.20048039,.060132042,.02830733,XGboost,Mixed,Municipality
+gb_all_mun,33,.20049769,.060119547,.028294137,XGboost,Mixed,Municipality
 gb_all_mun,34,.20039649,.059312418,.027548989,XGboost,Mixed,Municipality
 gb_all_mun,35,.20011108,.059495084,.027746549,XGboost,Mixed,Municipality
 gb_all_mun,36,.20025223,.059446383,.027726477,XGboost,Mixed,Municipality
@@ -2573,7 +3073,7 @@ gb_all_mun,71,.20029536,.059524633,.027752012,XGboost,Mixed,Municipality
 gb_all_mun,72,.20046015,.059437037,.027629184,XGboost,Mixed,Municipality
 gb_all_mun,73,.20035908,.059529386,.027703738,XGboost,Mixed,Municipality
 gb_all_mun,74,.19999114,.059258569,.027538221,XGboost,Mixed,Municipality
-gb_all_mun,75,.20051973,.059838932,.028012449,XGboost,Mixed,Municipality
+gb_all_mun,75,.20052077,.059838168,.02801377,XGboost,Mixed,Municipality
 gb_all_mun,76,.20032856,.059402276,.027635818,XGboost,Mixed,Municipality
 gb_all_mun,77,.20066652,.059491634,.0276521,XGboost,Mixed,Municipality
 gb_all_mun,78,.20021798,.059662364,.027879564,XGboost,Mixed,Municipality
@@ -2639,7 +3139,7 @@ gb_all_mun,137,.20005468,.059300795,.027591456,XGboost,Mixed,Municipality
 gb_all_mun,138,.20021811,.05931785,.027592668,XGboost,Mixed,Municipality
 gb_all_mun,139,.19990881,.059339602,.027679356,XGboost,Mixed,Municipality
 gb_all_mun,140,.20085768,.059914209,.028008463,XGboost,Mixed,Municipality
-gb_all_mun,141,.2004972,.059501842,.027670167,XGboost,Mixed,Municipality
+gb_all_mun,141,.20048882,.059492633,.027661799,XGboost,Mixed,Municipality
 gb_all_mun,142,.20032254,.059482239,.027729202,XGboost,Mixed,Municipality
 gb_all_mun,143,.20008533,.059480388,.027748963,XGboost,Mixed,Municipality
 gb_all_mun,144,.20040773,.059557959,.027768293,XGboost,Mixed,Municipality
@@ -2674,14 +3174,14 @@ gb_all_mun,172,.20032085,.059633285,.027839063,XGboost,Mixed,Municipality
 gb_all_mun,173,.20060274,.059579462,.027775902,XGboost,Mixed,Municipality
 gb_all_mun,174,.20029685,.059625372,.027830498,XGboost,Mixed,Municipality
 gb_all_mun,175,.20023282,.059348855,.027598318,XGboost,Mixed,Municipality
-gb_all_mun,176,.20009166,.059217047,.027522335,XGboost,Mixed,Municipality
+gb_all_mun,176,.2000875,.059208967,.027517017,XGboost,Mixed,Municipality
 gb_all_mun,177,.20043695,.059600394,.027803075,XGboost,Mixed,Municipality
 gb_all_mun,178,.20052338,.059434012,.027613448,XGboost,Mixed,Municipality
 gb_all_mun,179,.20035735,.059487257,.027692063,XGboost,Mixed,Municipality
 gb_all_mun,180,.20024249,.05942658,.027669821,XGboost,Mixed,Municipality
 gb_all_mun,181,.20023653,.059398029,.027631376,XGboost,Mixed,Municipality
 gb_all_mun,182,.20018852,.059441295,.027693454,XGboost,Mixed,Municipality
-gb_all_mun,183,.200371,.05937307,.02757966,XGboost,Mixed,Municipality
+gb_all_mun,183,.20035517,.059364524,.02757567,XGboost,Mixed,Municipality
 gb_all_mun,184,.20055081,.059584912,.027767591,XGboost,Mixed,Municipality
 gb_all_mun,185,.20035964,.059348643,.027603114,XGboost,Mixed,Municipality
 gb_all_mun,186,.20015836,.059231654,.027504155,XGboost,Mixed,Municipality
@@ -2690,7 +3190,7 @@ gb_all_mun,188,.20049937,.059375387,.027574355,XGboost,Mixed,Municipality
 gb_all_mun,189,.20027141,.059590306,.027826702,XGboost,Mixed,Municipality
 gb_all_mun,190,.20041567,.059366442,.027562708,XGboost,Mixed,Municipality
 gb_all_mun,191,.20036013,.059381515,.027611142,XGboost,Mixed,Municipality
-gb_all_mun,192,.2006651,.059935562,.028050298,XGboost,Mixed,Municipality
+gb_all_mun,192,.20066608,.059935618,.02805038,XGboost,Mixed,Municipality
 gb_all_mun,193,.20012951,.059491616,.027752476,XGboost,Mixed,Municipality
 gb_all_mun,194,.19986971,.059356611,.027666314,XGboost,Mixed,Municipality
 gb_all_mun,195,.20021842,.059199199,.027470622,XGboost,Mixed,Municipality
@@ -2728,11 +3228,11 @@ gb_all_mun,226,.20007217,.05943292,.027718239,XGboost,Mixed,Municipality
 gb_all_mun,227,.20038067,.059553843,.027730849,XGboost,Mixed,Municipality
 gb_all_mun,228,.20022637,.059374694,.027621228,XGboost,Mixed,Municipality
 gb_all_mun,229,.20001981,.059514355,.027810439,XGboost,Mixed,Municipality
-gb_all_mun,230,.20016357,.059444875,.027702175,XGboost,Mixed,Municipality
+gb_all_mun,230,.20016928,.059454747,.027709942,XGboost,Mixed,Municipality
 gb_all_mun,231,.20015581,.059386745,.027620595,XGboost,Mixed,Municipality
 gb_all_mun,232,.20037086,.059341263,.027587356,XGboost,Mixed,Municipality
-gb_all_mun,233,.20068111,.059470505,.027638298,XGboost,Mixed,Municipality
-gb_all_mun,234,.20024621,.059299745,.027546782,XGboost,Mixed,Municipality
+gb_all_mun,233,.20067222,.059477288,.027644403,XGboost,Mixed,Municipality
+gb_all_mun,234,.20024119,.059299763,.027546825,XGboost,Mixed,Municipality
 gb_all_mun,235,.20011002,.059444819,.027669132,XGboost,Mixed,Municipality
 gb_all_mun,236,.20021172,.059240844,.027519872,XGboost,Mixed,Municipality
 gb_all_mun,237,.20029628,.059285391,.027544336,XGboost,Mixed,Municipality
@@ -2740,7 +3240,7 @@ gb_all_mun,238,.20016338,.059371281,.027638109,XGboost,Mixed,Municipality
 gb_all_mun,239,.20020315,.059373502,.027614351,XGboost,Mixed,Municipality
 gb_all_mun,240,.20070611,.059723474,.027852476,XGboost,Mixed,Municipality
 gb_all_mun,241,.20027179,.05968063,.027898509,XGboost,Mixed,Municipality
-gb_all_mun,242,.20027749,.059424751,.027657749,XGboost,Mixed,Municipality
+gb_all_mun,242,.20027208,.059426945,.027660076,XGboost,Mixed,Municipality
 gb_all_mun,243,.20024076,.059284057,.027542798,XGboost,Mixed,Municipality
 gb_all_mun,244,.2000798,.05935692,.02760791,XGboost,Mixed,Municipality
 gb_all_mun,245,.20015532,.059240498,.027522951,XGboost,Mixed,Municipality
@@ -2761,7 +3261,7 @@ gb_all_mun,259,.20036659,.059594005,.02778252,XGboost,Mixed,Municipality
 gb_all_mun,260,.20066138,.059594974,.027734585,XGboost,Mixed,Municipality
 gb_all_mun,261,.20035753,.059328381,.027545165,XGboost,Mixed,Municipality
 gb_all_mun,262,.20014483,.059287801,.027576374,XGboost,Mixed,Municipality
-gb_all_mun,263,.20029883,.059484076,.027674509,XGboost,Mixed,Municipality
+gb_all_mun,263,.20028946,.059481181,.027673859,XGboost,Mixed,Municipality
 gb_all_mun,264,.20018689,.059361212,.027616065,XGboost,Mixed,Municipality
 gb_all_mun,265,.20032731,.059394583,.027590996,XGboost,Mixed,Municipality
 gb_all_mun,266,.20049533,.06001937,.028239846,XGboost,Mixed,Municipality
@@ -2915,7 +3415,7 @@ gb_all_mun,413,.20033513,.059438393,.027658792,XGboost,Mixed,Municipality
 gb_all_mun,414,.20035182,.059306893,.027562134,XGboost,Mixed,Municipality
 gb_all_mun,415,.20018554,.059536975,.027753057,XGboost,Mixed,Municipality
 gb_all_mun,416,.20073986,.059421606,.027573496,XGboost,Mixed,Municipality
-gb_all_mun,417,.20025812,.0596729,.027867565,XGboost,Mixed,Municipality
+gb_all_mun,417,.20022376,.059659697,.027861018,XGboost,Mixed,Municipality
 gb_all_mun,418,.20004115,.059192039,.027518727,XGboost,Mixed,Municipality
 gb_all_mun,419,.20031279,.059654951,.027821256,XGboost,Mixed,Municipality
 gb_all_mun,420,.20018671,.059487961,.027774468,XGboost,Mixed,Municipality
@@ -2951,7 +3451,7 @@ gb_all_mun,449,.20027371,.05973886,.027939972,XGboost,Mixed,Municipality
 gb_all_mun,450,.20012759,.059430324,.027667528,XGboost,Mixed,Municipality
 gb_all_mun,451,.20007882,.059259679,.027584584,XGboost,Mixed,Municipality
 gb_all_mun,452,.20050898,.059611056,.027764793,XGboost,Mixed,Municipality
-gb_all_mun,453,.20037782,.059429299,.027637776,XGboost,Mixed,Municipality
+gb_all_mun,453,.20037714,.05942709,.027636785,XGboost,Mixed,Municipality
 gb_all_mun,454,.20014793,.059417661,.027699066,XGboost,Mixed,Municipality
 gb_all_mun,455,.20010555,.059450947,.027699973,XGboost,Mixed,Municipality
 gb_all_mun,456,.20020229,.059406448,.027675241,XGboost,Mixed,Municipality
@@ -2971,7 +3471,7 @@ gb_all_mun,469,.20020533,.059304532,.027570643,XGboost,Mixed,Municipality
 gb_all_mun,470,.20017201,.059199296,.027477682,XGboost,Mixed,Municipality
 gb_all_mun,471,.2002116,.059269495,.027528513,XGboost,Mixed,Municipality
 gb_all_mun,472,.20024963,.059457432,.027687293,XGboost,Mixed,Municipality
-gb_all_mun,473,.20055626,.059765175,.02790758,XGboost,Mixed,Municipality
+gb_all_mun,473,.20067105,.05983267,.027954699,XGboost,Mixed,Municipality
 gb_all_mun,474,.2001866,.059449743,.027695404,XGboost,Mixed,Municipality
 gb_all_mun,475,.20028624,.059451688,.0276688,XGboost,Mixed,Municipality
 gb_all_mun,476,.20021147,.059602324,.027841389,XGboost,Mixed,Municipality
@@ -2999,7 +3499,7 @@ gb_all_mun,497,.20031936,.059401646,.027648866,XGboost,Mixed,Municipality
 gb_all_mun,498,.20022468,.059581812,.027805252,XGboost,Mixed,Municipality
 gb_all_mun,499,.20039675,.059513941,.027719134,XGboost,Mixed,Municipality
 gb_all_mun,500,.19997929,.059389979,.027668368,XGboost,Mixed,Municipality
-gb_gis_mun,1,.20398666,.062882513,.030248199,XGboost,GIS,Municipality
+gb_gis_mun,1,.20400682,.062881142,.030243326,XGboost,GIS,Municipality
 gb_gis_mun,2,.20291424,.061684582,.029293176,XGboost,GIS,Municipality
 gb_gis_mun,3,.20440833,.063111849,.030428544,XGboost,GIS,Municipality
 gb_gis_mun,4,.20373929,.062589206,.029991636,XGboost,GIS,Municipality
@@ -3014,7 +3514,7 @@ gb_gis_mun,12,.20398548,.062949419,.030290572,XGboost,GIS,Municipality
 gb_gis_mun,13,.20259625,.06158058,.029311551,XGboost,GIS,Municipality
 gb_gis_mun,14,.20289804,.061837822,.029422075,XGboost,GIS,Municipality
 gb_gis_mun,15,.20377328,.062662616,.03010853,XGboost,GIS,Municipality
-gb_gis_mun,16,.20339641,.062361598,.029890168,XGboost,GIS,Municipality
+gb_gis_mun,16,.20335527,.062322479,.029863136,XGboost,GIS,Municipality
 gb_gis_mun,17,.20302121,.062196843,.029758075,XGboost,GIS,Municipality
 gb_gis_mun,18,.20405398,.063219085,.030573081,XGboost,GIS,Municipality
 gb_gis_mun,19,.2032671,.062579647,.030114824,XGboost,GIS,Municipality
@@ -3022,38 +3522,38 @@ gb_gis_mun,20,.20400304,.063047335,.030419655,XGboost,GIS,Municipality
 gb_gis_mun,21,.20408903,.06280411,.030161221,XGboost,GIS,Municipality
 gb_gis_mun,22,.20312184,.062022429,.029600035,XGboost,GIS,Municipality
 gb_gis_mun,23,.20345901,.061984453,.029407728,XGboost,GIS,Municipality
-gb_gis_mun,24,.20432252,.063060381,.030344056,XGboost,GIS,Municipality
+gb_gis_mun,24,.20431247,.063050032,.030339716,XGboost,GIS,Municipality
 gb_gis_mun,25,.20342706,.06223489,.029761065,XGboost,GIS,Municipality
 gb_gis_mun,26,.2028749,.062077351,.029704604,XGboost,GIS,Municipality
-gb_gis_mun,27,.20411944,.063156068,.030537579,XGboost,GIS,Municipality
+gb_gis_mun,27,.20412894,.063194819,.030570608,XGboost,GIS,Municipality
 gb_gis_mun,28,.20325872,.062033039,.029535482,XGboost,GIS,Municipality
 gb_gis_mun,29,.20369783,.062922902,.030283831,XGboost,GIS,Municipality
 gb_gis_mun,30,.20289929,.062092014,.02970417,XGboost,GIS,Municipality
 gb_gis_mun,31,.204155,.062992468,.030276209,XGboost,GIS,Municipality
-gb_gis_mun,32,.20429863,.063027307,.030267403,XGboost,GIS,Municipality
+gb_gis_mun,32,.20433009,.062981568,.030228348,XGboost,GIS,Municipality
 gb_gis_mun,33,.2036709,.062571369,.029982923,XGboost,GIS,Municipality
 gb_gis_mun,34,.20456854,.06324666,.030530419,XGboost,GIS,Municipality
 gb_gis_mun,35,.20222484,.061700702,.029461933,XGboost,GIS,Municipality
 gb_gis_mun,36,.20384364,.062659137,.030064255,XGboost,GIS,Municipality
 gb_gis_mun,37,.2027106,.06185272,.029514467,XGboost,GIS,Municipality
-gb_gis_mun,38,.20418677,.063080579,.030373337,XGboost,GIS,Municipality
+gb_gis_mun,38,.20411597,.062994301,.030308781,XGboost,GIS,Municipality
 gb_gis_mun,39,.20374101,.062604524,.029988188,XGboost,GIS,Municipality
 gb_gis_mun,40,.20360258,.062425192,.029839829,XGboost,GIS,Municipality
-gb_gis_mun,41,.20404679,.062665753,.030021556,XGboost,GIS,Municipality
+gb_gis_mun,41,.204052,.062663592,.030019069,XGboost,GIS,Municipality
 gb_gis_mun,42,.20222217,.061624825,.029366767,XGboost,GIS,Municipality
 gb_gis_mun,43,.20285529,.061904371,.029520694,XGboost,GIS,Municipality
 gb_gis_mun,44,.20364298,.062598221,.030053077,XGboost,GIS,Municipality
 gb_gis_mun,45,.20261207,.061426751,.029128376,XGboost,GIS,Municipality
 gb_gis_mun,46,.20327914,.062337868,.029805599,XGboost,GIS,Municipality
-gb_gis_mun,47,.20458479,.063296251,.030508641,XGboost,GIS,Municipality
+gb_gis_mun,47,.20448019,.063231811,.030462367,XGboost,GIS,Municipality
 gb_gis_mun,48,.20379233,.062695585,.030113989,XGboost,GIS,Municipality
 gb_gis_mun,49,.20317242,.061825499,.029401971,XGboost,GIS,Municipality
-gb_gis_mun,50,.20385164,.062833376,.030177154,XGboost,GIS,Municipality
+gb_gis_mun,50,.20386021,.062817201,.03016223,XGboost,GIS,Municipality
 gb_gis_mun,51,.20350635,.062553823,.030014122,XGboost,GIS,Municipality
 gb_gis_mun,52,.20311105,.062040057,.029552929,XGboost,GIS,Municipality
 gb_gis_mun,53,.20363535,.062638782,.03006734,XGboost,GIS,Municipality
 gb_gis_mun,54,.20222831,.061926365,.029729033,XGboost,GIS,Municipality
-gb_gis_mun,55,.20505728,.063440904,.030458713,XGboost,GIS,Municipality
+gb_gis_mun,55,.20508589,.063410297,.030425185,XGboost,GIS,Municipality
 gb_gis_mun,56,.20384711,.063241862,.030633517,XGboost,GIS,Municipality
 gb_gis_mun,57,.20403449,.062706806,.030058745,XGboost,GIS,Municipality
 gb_gis_mun,58,.20336123,.062243547,.029738845,XGboost,GIS,Municipality
@@ -3063,28 +3563,28 @@ gb_gis_mun,61,.20349252,.062588468,.030061455,XGboost,GIS,Municipality
 gb_gis_mun,62,.20300347,.062164158,.029727442,XGboost,GIS,Municipality
 gb_gis_mun,63,.20389365,.062827505,.030162418,XGboost,GIS,Municipality
 gb_gis_mun,64,.20286044,.061757922,.029321924,XGboost,GIS,Municipality
-gb_gis_mun,65,.20381832,.062500402,.029895721,XGboost,GIS,Municipality
+gb_gis_mun,65,.20386617,.062541462,.029932026,XGboost,GIS,Municipality
 gb_gis_mun,66,.20310503,.062380504,.029950637,XGboost,GIS,Municipality
 gb_gis_mun,67,.20403481,.062686682,.030005183,XGboost,GIS,Municipality
 gb_gis_mun,68,.20370267,.063043728,.030470179,XGboost,GIS,Municipality
 gb_gis_mun,69,.20349401,.062702872,.030163195,XGboost,GIS,Municipality
 gb_gis_mun,70,.20424713,.063202634,.030446494,XGboost,GIS,Municipality
 gb_gis_mun,71,.20374939,.062476985,.029881617,XGboost,GIS,Municipality
-gb_gis_mun,72,.20460664,.063356489,.030541604,XGboost,GIS,Municipality
+gb_gis_mun,72,.2047365,.063464351,.030630022,XGboost,GIS,Municipality
 gb_gis_mun,73,.20368201,.062716082,.030141864,XGboost,GIS,Municipality
-gb_gis_mun,74,.20420972,.062937155,.030211635,XGboost,GIS,Municipality
+gb_gis_mun,74,.20408395,.062875502,.030177606,XGboost,GIS,Municipality
 gb_gis_mun,75,.20364392,.062554315,.029997751,XGboost,GIS,Municipality
 gb_gis_mun,76,.20363225,.06245042,.02988361,XGboost,GIS,Municipality
 gb_gis_mun,77,.2040621,.062464956,.029760731,XGboost,GIS,Municipality
 gb_gis_mun,78,.20322366,.062574334,.030091371,XGboost,GIS,Municipality
 gb_gis_mun,79,.2034644,.062423062,.029888915,XGboost,GIS,Municipality
 gb_gis_mun,80,.20392095,.062772527,.030153805,XGboost,GIS,Municipality
-gb_gis_mun,81,.20400794,.062926233,.03026358,XGboost,GIS,Municipality
+gb_gis_mun,81,.20407346,.062973119,.030292379,XGboost,GIS,Municipality
 gb_gis_mun,82,.20249821,.062426921,.03015022,XGboost,GIS,Municipality
 gb_gis_mun,83,.2034121,.062189281,.029672056,XGboost,GIS,Municipality
-gb_gis_mun,84,.20373289,.063087724,.030535597,XGboost,GIS,Municipality
-gb_gis_mun,85,.20454825,.063531049,.030769581,XGboost,GIS,Municipality
-gb_gis_mun,86,.20430514,.063585527,.030915417,XGboost,GIS,Municipality
+gb_gis_mun,84,.20372693,.063088208,.030536454,XGboost,GIS,Municipality
+gb_gis_mun,85,.20454781,.063530773,.030769413,XGboost,GIS,Municipality
+gb_gis_mun,86,.20430626,.063591093,.030918255,XGboost,GIS,Municipality
 gb_gis_mun,87,.20345387,.062618762,.030095026,XGboost,GIS,Municipality
 gb_gis_mun,88,.20338412,.062056534,.029582107,XGboost,GIS,Municipality
 gb_gis_mun,89,.20343618,.062368728,.029808316,XGboost,GIS,Municipality
@@ -3096,7 +3596,7 @@ gb_gis_mun,94,.20344467,.06225555,.029685179,XGboost,GIS,Municipality
 gb_gis_mun,95,.20300359,.061836377,.02941202,XGboost,GIS,Municipality
 gb_gis_mun,96,.20333293,.062109888,.02965725,XGboost,GIS,Municipality
 gb_gis_mun,97,.20373382,.062265161,.02969675,XGboost,GIS,Municipality
-gb_gis_mun,98,.20347168,.062743671,.030197615,XGboost,GIS,Municipality
+gb_gis_mun,98,.20346744,.062740482,.030196073,XGboost,GIS,Municipality
 gb_gis_mun,99,.20358931,.062328819,.029735275,XGboost,GIS,Municipality
 gb_gis_mun,100,.20341861,.06224874,.029733676,XGboost,GIS,Municipality
 gb_gis_mun,101,.20325319,.062084317,.029602135,XGboost,GIS,Municipality
@@ -3115,7 +3615,7 @@ gb_gis_mun,113,.20417522,.062824532,.030143382,XGboost,GIS,Municipality
 gb_gis_mun,114,.20430155,.062608592,.029865075,XGboost,GIS,Municipality
 gb_gis_mun,115,.20441361,.062600851,.029812466,XGboost,GIS,Municipality
 gb_gis_mun,116,.20357405,.062304959,.029742062,XGboost,GIS,Municipality
-gb_gis_mun,117,.20413043,.062854044,.030148029,XGboost,GIS,Municipality
+gb_gis_mun,117,.204137,.06285283,.030145882,XGboost,GIS,Municipality
 gb_gis_mun,118,.20392083,.062682785,.030052548,XGboost,GIS,Municipality
 gb_gis_mun,119,.20402892,.062534176,.029884564,XGboost,GIS,Municipality
 gb_gis_mun,120,.20257689,.062184975,.029856633,XGboost,GIS,Municipality
@@ -3140,13 +3640,13 @@ gb_gis_mun,138,.20318606,.062367845,.029946202,XGboost,GIS,Municipality
 gb_gis_mun,139,.20338374,.062296689,.029824877,XGboost,GIS,Municipality
 gb_gis_mun,140,.20348221,.062373593,.029824708,XGboost,GIS,Municipality
 gb_gis_mun,141,.20335019,.06225308,.029740792,XGboost,GIS,Municipality
-gb_gis_mun,142,.20376851,.062202167,.029670153,XGboost,GIS,Municipality
+gb_gis_mun,142,.203802,.062160578,.029597193,XGboost,GIS,Municipality
 gb_gis_mun,143,.20406075,.062980548,.030330068,XGboost,GIS,Municipality
 gb_gis_mun,144,.20362747,.062522151,.029963879,XGboost,GIS,Municipality
 gb_gis_mun,145,.20301773,.062264971,.029837927,XGboost,GIS,Municipality
 gb_gis_mun,146,.20384042,.062901676,.030347224,XGboost,GIS,Municipality
 gb_gis_mun,147,.20373295,.062476348,.029882012,XGboost,GIS,Municipality
-gb_gis_mun,148,.20345534,.062168337,.029621288,XGboost,GIS,Municipality
+gb_gis_mun,148,.20348439,.062180325,.029628318,XGboost,GIS,Municipality
 gb_gis_mun,149,.20311986,.062972747,.030549563,XGboost,GIS,Municipality
 gb_gis_mun,150,.20339529,.06233957,.029818268,XGboost,GIS,Municipality
 gb_gis_mun,151,.20260505,.061883096,.029579803,XGboost,GIS,Municipality
@@ -3166,7 +3666,7 @@ gb_gis_mun,164,.20398405,.062586509,.029957037,XGboost,GIS,Municipality
 gb_gis_mun,165,.20338716,.062523022,.029997738,XGboost,GIS,Municipality
 gb_gis_mun,166,.20395489,.062501132,.029870417,XGboost,GIS,Municipality
 gb_gis_mun,167,.20449954,.063183725,.030362628,XGboost,GIS,Municipality
-gb_gis_mun,168,.2042596,.062587693,.029857742,XGboost,GIS,Municipality
+gb_gis_mun,168,.20427214,.062595256,.02986466,XGboost,GIS,Municipality
 gb_gis_mun,169,.2033786,.062257133,.029771879,XGboost,GIS,Municipality
 gb_gis_mun,170,.20286033,.061953373,.029537018,XGboost,GIS,Municipality
 gb_gis_mun,171,.20365098,.062382039,.029857291,XGboost,GIS,Municipality
@@ -3182,7 +3682,7 @@ gb_gis_mun,180,.20383812,.062841728,.030270178,XGboost,GIS,Municipality
 gb_gis_mun,181,.20313706,.061953928,.02955642,XGboost,GIS,Municipality
 gb_gis_mun,182,.20373599,.062591642,.029975226,XGboost,GIS,Municipality
 gb_gis_mun,183,.20277476,.061672006,.02929276,XGboost,GIS,Municipality
-gb_gis_mun,184,.20518516,.063921057,.031017346,XGboost,GIS,Municipality
+gb_gis_mun,184,.20510785,.063904226,.031018138,XGboost,GIS,Municipality
 gb_gis_mun,185,.20440145,.063053198,.030306833,XGboost,GIS,Municipality
 gb_gis_mun,186,.20454384,.063569412,.030792207,XGboost,GIS,Municipality
 gb_gis_mun,187,.20392852,.06260068,.029955572,XGboost,GIS,Municipality
@@ -3220,19 +3720,19 @@ gb_gis_mun,218,.20319065,.062016685,.029566223,XGboost,GIS,Municipality
 gb_gis_mun,219,.20373015,.062511727,.029917629,XGboost,GIS,Municipality
 gb_gis_mun,220,.20344654,.062142737,.02963738,XGboost,GIS,Municipality
 gb_gis_mun,221,.20449111,.062676072,.029894769,XGboost,GIS,Municipality
-gb_gis_mun,222,.20323949,.062597908,.030173734,XGboost,GIS,Municipality
+gb_gis_mun,222,.20322807,.062589958,.030169643,XGboost,GIS,Municipality
 gb_gis_mun,223,.20335713,.062307019,.029787533,XGboost,GIS,Municipality
 gb_gis_mun,224,.20385456,.062419504,.029782234,XGboost,GIS,Municipality
 gb_gis_mun,225,.20395297,.062415093,.02977089,XGboost,GIS,Municipality
-gb_gis_mun,226,.2040775,.062860481,.030176494,XGboost,GIS,Municipality
+gb_gis_mun,226,.20404436,.06283582,.030167166,XGboost,GIS,Municipality
 gb_gis_mun,227,.20374678,.062929451,.030306105,XGboost,GIS,Municipality
-gb_gis_mun,228,.20394497,.062938571,.030400051,XGboost,GIS,Municipality
+gb_gis_mun,228,.20393094,.062936053,.030399241,XGboost,GIS,Municipality
 gb_gis_mun,229,.20383924,.062900752,.030319532,XGboost,GIS,Municipality
 gb_gis_mun,230,.20307885,.061858594,.02943901,XGboost,GIS,Municipality
 gb_gis_mun,231,.20354104,.062742203,.030165916,XGboost,GIS,Municipality
 gb_gis_mun,232,.20363286,.062244568,.029656116,XGboost,GIS,Municipality
 gb_gis_mun,233,.20386511,.062907077,.030275505,XGboost,GIS,Municipality
-gb_gis_mun,234,.20380852,.062472686,.029835859,XGboost,GIS,Municipality
+gb_gis_mun,234,.20377855,.06245074,.029823445,XGboost,GIS,Municipality
 gb_gis_mun,235,.20305385,.061895508,.029423274,XGboost,GIS,Municipality
 gb_gis_mun,236,.20324135,.062158979,.029703403,XGboost,GIS,Municipality
 gb_gis_mun,237,.203889,.062351853,.029740291,XGboost,GIS,Municipality
@@ -3251,25 +3751,25 @@ gb_gis_mun,249,.20346634,.062231649,.029684013,XGboost,GIS,Municipality
 gb_gis_mun,250,.20316596,.062647998,.030214654,XGboost,GIS,Municipality
 gb_gis_mun,251,.20374262,.062136885,.02951828,XGboost,GIS,Municipality
 gb_gis_mun,252,.20391431,.062702499,.030080466,XGboost,GIS,Municipality
-gb_gis_mun,253,.20364757,.062570088,.030026246,XGboost,GIS,Municipality
-gb_gis_mun,254,.20444036,.062621817,.029828679,XGboost,GIS,Municipality
+gb_gis_mun,253,.20365037,.062573791,.030032063,XGboost,GIS,Municipality
+gb_gis_mun,254,.20444606,.062630728,.029837735,XGboost,GIS,Municipality
 gb_gis_mun,255,.20312341,.062253296,.0298324,XGboost,GIS,Municipality
 gb_gis_mun,256,.20238553,.061806895,.029507594,XGboost,GIS,Municipality
 gb_gis_mun,257,.20351033,.062729456,.030213011,XGboost,GIS,Municipality
-gb_gis_mun,258,.20441957,.063156694,.030379053,XGboost,GIS,Municipality
+gb_gis_mun,258,.20441616,.063157417,.030382806,XGboost,GIS,Municipality
 gb_gis_mun,259,.20431271,.06272871,.029971972,XGboost,GIS,Municipality
 gb_gis_mun,260,.2025342,.061377645,.029073566,XGboost,GIS,Municipality
 gb_gis_mun,261,.20422833,.062883638,.03017468,XGboost,GIS,Municipality
 gb_gis_mun,262,.20314524,.062394496,.029983493,XGboost,GIS,Municipality
 gb_gis_mun,263,.20326202,.062250067,.029761681,XGboost,GIS,Municipality
-gb_gis_mun,264,.20405708,.063120432,.030412773,XGboost,GIS,Municipality
+gb_gis_mun,264,.20405912,.063117146,.030411489,XGboost,GIS,Municipality
 gb_gis_mun,265,.20315616,.062035073,.029530298,XGboost,GIS,Municipality
 gb_gis_mun,266,.20389719,.06283652,.030245341,XGboost,GIS,Municipality
 gb_gis_mun,267,.20366569,.062127054,.029549966,XGboost,GIS,Municipality
 gb_gis_mun,268,.2035795,.062293231,.029752247,XGboost,GIS,Municipality
 gb_gis_mun,269,.20277525,.062330216,.030046776,XGboost,GIS,Municipality
 gb_gis_mun,270,.20359483,.062510148,.029940369,XGboost,GIS,Municipality
-gb_gis_mun,271,.20354781,.062364601,.029808236,XGboost,GIS,Municipality
+gb_gis_mun,271,.203538,.062327113,.029771017,XGboost,GIS,Municipality
 gb_gis_mun,272,.20308921,.062312428,.029875455,XGboost,GIS,Municipality
 gb_gis_mun,273,.20296586,.061926659,.029519709,XGboost,GIS,Municipality
 gb_gis_mun,274,.20383036,.062505141,.029880913,XGboost,GIS,Municipality
@@ -3279,7 +3779,7 @@ gb_gis_mun,277,.20416108,.062836654,.030165687,XGboost,GIS,Municipality
 gb_gis_mun,278,.20326182,.061999533,.029574296,XGboost,GIS,Municipality
 gb_gis_mun,279,.20394477,.062535971,.029889949,XGboost,GIS,Municipality
 gb_gis_mun,280,.20360631,.062753245,.03019611,XGboost,GIS,Municipality
-gb_gis_mun,281,.20360421,.062649444,.030046556,XGboost,GIS,Municipality
+gb_gis_mun,281,.20360756,.062647909,.030044733,XGboost,GIS,Municipality
 gb_gis_mun,282,.20463419,.063139677,.030330487,XGboost,GIS,Municipality
 gb_gis_mun,283,.20268938,.061689675,.029343858,XGboost,GIS,Municipality
 gb_gis_mun,284,.20366414,.06215962,.029581733,XGboost,GIS,Municipality
@@ -3287,7 +3787,7 @@ gb_gis_mun,285,.2037306,.062851481,.03027905,XGboost,GIS,Municipality
 gb_gis_mun,286,.20371644,.062583007,.030043067,XGboost,GIS,Municipality
 gb_gis_mun,287,.20321473,.062036578,.029623996,XGboost,GIS,Municipality
 gb_gis_mun,288,.20371483,.062631406,.030040096,XGboost,GIS,Municipality
-gb_gis_mun,289,.20399982,.062906772,.030261455,XGboost,GIS,Municipality
+gb_gis_mun,289,.20399515,.062896997,.030254953,XGboost,GIS,Municipality
 gb_gis_mun,290,.20311292,.062240079,.029800387,XGboost,GIS,Municipality
 gb_gis_mun,291,.20266791,.061696365,.029350003,XGboost,GIS,Municipality
 gb_gis_mun,292,.20337462,.062626161,.030089363,XGboost,GIS,Municipality
@@ -3300,7 +3800,7 @@ gb_gis_mun,298,.20397407,.062542729,.029925978,XGboost,GIS,Municipality
 gb_gis_mun,299,.20290065,.062305491,.029933872,XGboost,GIS,Municipality
 gb_gis_mun,300,.20441355,.062571548,.029799601,XGboost,GIS,Municipality
 gb_gis_mun,301,.20325854,.061961569,.029538887,XGboost,GIS,Municipality
-gb_gis_mun,302,.20469263,.063047968,.030216945,XGboost,GIS,Municipality
+gb_gis_mun,302,.20471783,.063077725,.030236959,XGboost,GIS,Municipality
 gb_gis_mun,303,.20388031,.062669419,.030036675,XGboost,GIS,Municipality
 gb_gis_mun,304,.20345566,.06258145,.030064574,XGboost,GIS,Municipality
 gb_gis_mun,305,.20425527,.062624454,.029925348,XGboost,GIS,Municipality
@@ -3312,17 +3812,17 @@ gb_gis_mun,310,.20401533,.062490996,.029792579,XGboost,GIS,Municipality
 gb_gis_mun,311,.20389086,.062576883,.029975947,XGboost,GIS,Municipality
 gb_gis_mun,312,.2040621,.062958233,.030279582,XGboost,GIS,Municipality
 gb_gis_mun,313,.20405671,.063050725,.030387772,XGboost,GIS,Municipality
-gb_gis_mun,314,.20428082,.062882341,.030127818,XGboost,GIS,Municipality
+gb_gis_mun,314,.20428398,.062896162,.030137803,XGboost,GIS,Municipality
 gb_gis_mun,315,.20321219,.062154945,.029676791,XGboost,GIS,Municipality
 gb_gis_mun,316,.20292473,.062200036,.029824642,XGboost,GIS,Municipality
-gb_gis_mun,317,.20460844,.063586019,.030823734,XGboost,GIS,Municipality
+gb_gis_mun,317,.20458269,.063584082,.030824175,XGboost,GIS,Municipality
 gb_gis_mun,318,.20408203,.062866874,.030196182,XGboost,GIS,Municipality
 gb_gis_mun,319,.20308052,.062241752,.029750176,XGboost,GIS,Municipality
 gb_gis_mun,320,.20356648,.062128354,.029565206,XGboost,GIS,Municipality
 gb_gis_mun,321,.20350704,.06247985,.029912718,XGboost,GIS,Municipality
 gb_gis_mun,322,.20270805,.062095825,.029855352,XGboost,GIS,Municipality
 gb_gis_mun,323,.20385928,.062704153,.030101666,XGboost,GIS,Municipality
-gb_gis_mun,324,.20436788,.062990822,.030279607,XGboost,GIS,Municipality
+gb_gis_mun,324,.20433716,.06297902,.030272456,XGboost,GIS,Municipality
 gb_gis_mun,325,.204307,.062642582,.029967383,XGboost,GIS,Municipality
 gb_gis_mun,326,.2038442,.062479321,.029857768,XGboost,GIS,Municipality
 gb_gis_mun,327,.20365669,.062535733,.029992593,XGboost,GIS,Municipality
@@ -3349,7 +3849,7 @@ gb_gis_mun,347,.20439909,.062900588,.030124079,XGboost,GIS,Municipality
 gb_gis_mun,348,.20282024,.061907183,.029489331,XGboost,GIS,Municipality
 gb_gis_mun,349,.20383644,.062639467,.029981036,XGboost,GIS,Municipality
 gb_gis_mun,350,.20314959,.062051799,.029602244,XGboost,GIS,Municipality
-gb_gis_mun,351,.20391469,.062786788,.030134968,XGboost,GIS,Municipality
+gb_gis_mun,351,.20391612,.062803179,.030154167,XGboost,GIS,Municipality
 gb_gis_mun,352,.20449644,.063326284,.030521212,XGboost,GIS,Municipality
 gb_gis_mun,353,.20271631,.061615001,.029271705,XGboost,GIS,Municipality
 gb_gis_mun,354,.2037376,.062258728,.029616263,XGboost,GIS,Municipality
@@ -3358,7 +3858,7 @@ gb_gis_mun,356,.20324203,.062348943,.029884925,XGboost,GIS,Municipality
 gb_gis_mun,357,.20302506,.061938651,.029466471,XGboost,GIS,Municipality
 gb_gis_mun,358,.20294285,.061861094,.029488603,XGboost,GIS,Municipality
 gb_gis_mun,359,.2031651,.062110487,.02965284,XGboost,GIS,Municipality
-gb_gis_mun,360,.2049363,.063397355,.030504486,XGboost,GIS,Municipality
+gb_gis_mun,360,.20495155,.063405916,.03050876,XGboost,GIS,Municipality
 gb_gis_mun,361,.20313556,.062054429,.029610423,XGboost,GIS,Municipality
 gb_gis_mun,362,.20247656,.061774977,.029496761,XGboost,GIS,Municipality
 gb_gis_mun,363,.20274113,.062070612,.029742613,XGboost,GIS,Municipality
@@ -3366,21 +3866,21 @@ gb_gis_mun,364,.20390159,.062815845,.030204507,XGboost,GIS,Municipality
 gb_gis_mun,365,.20357244,.062393393,.029833376,XGboost,GIS,Municipality
 gb_gis_mun,366,.20281695,.061703954,.029275004,XGboost,GIS,Municipality
 gb_gis_mun,367,.20445995,.062609337,.029871365,XGboost,GIS,Municipality
-gb_gis_mun,368,.20370087,.062371764,.029851519,XGboost,GIS,Municipality
+gb_gis_mun,368,.20371936,.062378727,.029855365,XGboost,GIS,Municipality
 gb_gis_mun,369,.20284593,.061931327,.029581346,XGboost,GIS,Municipality
-gb_gis_mun,370,.20446758,.063407667,.030644886,XGboost,GIS,Municipality
+gb_gis_mun,370,.20450723,.063395567,.030625809,XGboost,GIS,Municipality
 gb_gis_mun,371,.20388633,.062859178,.030223547,XGboost,GIS,Municipality
 gb_gis_mun,372,.20278314,.06213497,.029755633,XGboost,GIS,Municipality
 gb_gis_mun,373,.20398952,.062835455,.030163011,XGboost,GIS,Municipality
 gb_gis_mun,374,.20373172,.062668577,.030098187,XGboost,GIS,Municipality
 gb_gis_mun,375,.20324209,.062386226,.029866911,XGboost,GIS,Municipality
-gb_gis_mun,376,.20425588,.062627204,.029884851,XGboost,GIS,Municipality
+gb_gis_mun,376,.20418218,.062575877,.029855017,XGboost,GIS,Municipality
 gb_gis_mun,377,.2038535,.062505789,.029944617,XGboost,GIS,Municipality
 gb_gis_mun,378,.2040832,.062761679,.030096823,XGboost,GIS,Municipality
 gb_gis_mun,379,.20328963,.062336095,.029863358,XGboost,GIS,Municipality
 gb_gis_mun,380,.20297554,.06217147,.029823173,XGboost,GIS,Municipality
 gb_gis_mun,381,.20266196,.061681148,.029382627,XGboost,GIS,Municipality
-gb_gis_mun,382,.20454869,.062875517,.030104287,XGboost,GIS,Municipality
+gb_gis_mun,382,.20454402,.0628694,.0300988,XGboost,GIS,Municipality
 gb_gis_mun,383,.2034471,.062382195,.029895999,XGboost,GIS,Municipality
 gb_gis_mun,384,.20386611,.062966682,.030376928,XGboost,GIS,Municipality
 gb_gis_mun,385,.20341657,.062207323,.029706888,XGboost,GIS,Municipality
@@ -3392,7 +3892,7 @@ gb_gis_mun,390,.20283438,.062152877,.029748602,XGboost,GIS,Municipality
 gb_gis_mun,391,.2036166,.062256359,.029650895,XGboost,GIS,Municipality
 gb_gis_mun,392,.20308685,.062216222,.02980007,XGboost,GIS,Municipality
 gb_gis_mun,393,.20251057,.061568975,.029291436,XGboost,GIS,Municipality
-gb_gis_mun,394,.20447901,.063334107,.030516243,XGboost,GIS,Municipality
+gb_gis_mun,394,.20441671,.063256383,.030460149,XGboost,GIS,Municipality
 gb_gis_mun,395,.20349835,.062605582,.030096594,XGboost,GIS,Municipality
 gb_gis_mun,396,.20309778,.06196497,.029554676,XGboost,GIS,Municipality
 gb_gis_mun,397,.2045009,.0631615,.030377364,XGboost,GIS,Municipality
@@ -3421,7 +3921,7 @@ gb_gis_mun,419,.20359048,.06219792,.029570997,XGboost,GIS,Municipality
 gb_gis_mun,420,.20287862,.06224294,.029849639,XGboost,GIS,Municipality
 gb_gis_mun,421,.20367314,.062572792,.029987544,XGboost,GIS,Municipality
 gb_gis_mun,422,.20379208,.062610783,.029985784,XGboost,GIS,Municipality
-gb_gis_mun,423,.20369832,.0623882,.029800519,XGboost,GIS,Municipality
+gb_gis_mun,423,.20369808,.062388752,.029802814,XGboost,GIS,Municipality
 gb_gis_mun,424,.20383762,.062798589,.030231217,XGboost,GIS,Municipality
 gb_gis_mun,425,.20334677,.062976629,.030426376,XGboost,GIS,Municipality
 gb_gis_mun,426,.20389321,.062517427,.029884754,XGboost,GIS,Municipality
@@ -3436,33 +3936,33 @@ gb_gis_mun,434,.20229736,.06145227,.029261155,XGboost,GIS,Municipality
 gb_gis_mun,435,.20346262,.062204879,.029644262,XGboost,GIS,Municipality
 gb_gis_mun,436,.20410052,.062650666,.029967977,XGboost,GIS,Municipality
 gb_gis_mun,437,.20309387,.061929516,.029459551,XGboost,GIS,Municipality
-gb_gis_mun,438,.20445542,.063525893,.030798974,XGboost,GIS,Municipality
+gb_gis_mun,438,.20447367,.063542105,.030809598,XGboost,GIS,Municipality
 gb_gis_mun,439,.20344207,.062642872,.030139746,XGboost,GIS,Municipality
 gb_gis_mun,440,.20237976,.061974611,.029657934,XGboost,GIS,Municipality
 gb_gis_mun,441,.20363709,.062806644,.030226957,XGboost,GIS,Municipality
 gb_gis_mun,442,.2033526,.062532037,.030022921,XGboost,GIS,Municipality
 gb_gis_mun,443,.20402972,.062898695,.030167563,XGboost,GIS,Municipality
 gb_gis_mun,444,.20400266,.062926382,.030321257,XGboost,GIS,Municipality
-gb_gis_mun,445,.20425396,.063207351,.030496938,XGboost,GIS,Municipality
+gb_gis_mun,445,.20424403,.063207626,.030498769,XGboost,GIS,Municipality
 gb_gis_mun,446,.20402811,.063206643,.030534625,XGboost,GIS,Municipality
 gb_gis_mun,447,.2035228,.062587991,.030028462,XGboost,GIS,Municipality
 gb_gis_mun,448,.2029122,.061804965,.029390592,XGboost,GIS,Municipality
 gb_gis_mun,449,.20352484,.062749483,.030193897,XGboost,GIS,Municipality
 gb_gis_mun,450,.20386437,.062652096,.030013917,XGboost,GIS,Municipality
 gb_gis_mun,451,.20443569,.062939964,.030186096,XGboost,GIS,Municipality
-gb_gis_mun,452,.20447589,.063125901,.030413561,XGboost,GIS,Municipality
+gb_gis_mun,452,.20446181,.063123837,.030413764,XGboost,GIS,Municipality
 gb_gis_mun,453,.20381795,.062437005,.029815394,XGboost,GIS,Municipality
 gb_gis_mun,454,.20292863,.061972287,.029588928,XGboost,GIS,Municipality
-gb_gis_mun,455,.20420755,.063106805,.030354187,XGboost,GIS,Municipality
+gb_gis_mun,455,.20420916,.063109823,.030355556,XGboost,GIS,Municipality
 gb_gis_mun,456,.20403996,.062759958,.030111831,XGboost,GIS,Municipality
 gb_gis_mun,457,.20325612,.062250197,.029747976,XGboost,GIS,Municipality
 gb_gis_mun,458,.20338127,.061919235,.029418798,XGboost,GIS,Municipality
 gb_gis_mun,459,.20349735,.062381044,.029877657,XGboost,GIS,Municipality
 gb_gis_mun,460,.20425849,.062850736,.030137507,XGboost,GIS,Municipality
-gb_gis_mun,461,.20358478,.062347073,.029778291,XGboost,GIS,Municipality
+gb_gis_mun,461,.20358931,.06235351,.02978348,XGboost,GIS,Municipality
 gb_gis_mun,462,.20282973,.061800502,.029449185,XGboost,GIS,Municipality
 gb_gis_mun,463,.20400974,.062630013,.029994523,XGboost,GIS,Municipality
-gb_gis_mun,464,.20504524,.063820735,.030930344,XGboost,GIS,Municipality
+gb_gis_mun,464,.20499499,.063768119,.030892758,XGboost,GIS,Municipality
 gb_gis_mun,465,.20289506,.061897755,.029502794,XGboost,GIS,Municipality
 gb_gis_mun,466,.20312756,.062145736,.029674543,XGboost,GIS,Municipality
 gb_gis_mun,467,.2031945,.062308695,.029824229,XGboost,GIS,Municipality
@@ -3487,7 +3987,7 @@ gb_gis_mun,485,.20336272,.062388238,.029887782,XGboost,GIS,Municipality
 gb_gis_mun,486,.20363547,.062183417,.029635176,XGboost,GIS,Municipality
 gb_gis_mun,487,.2028605,.062006626,.029606787,XGboost,GIS,Municipality
 gb_gis_mun,488,.20356511,.062184639,.029619368,XGboost,GIS,Municipality
-gb_gis_mun,489,.20418032,.062913589,.030221445,XGboost,GIS,Municipality
+gb_gis_mun,489,.20418075,.062910967,.030220019,XGboost,GIS,Municipality
 gb_gis_mun,490,.20313735,.062309448,.029841397,XGboost,GIS,Municipality
 gb_gis_mun,491,.20320152,.061956692,.029446706,XGboost,GIS,Municipality
 gb_gis_mun,492,.20324562,.062378392,.029901823,XGboost,GIS,Municipality
@@ -3495,7 +3995,7 @@ gb_gis_mun,493,.20242283,.061649762,.029359534,XGboost,GIS,Municipality
 gb_gis_mun,494,.2029988,.06200688,.02958147,XGboost,GIS,Municipality
 gb_gis_mun,495,.20305732,.062243883,.029769111,XGboost,GIS,Municipality
 gb_gis_mun,496,.20252818,.062105507,.029771741,XGboost,GIS,Municipality
-gb_gis_mun,497,.20441926,.063135132,.030387722,XGboost,GIS,Municipality
+gb_gis_mun,497,.20439065,.06311433,.030372841,XGboost,GIS,Municipality
 gb_gis_mun,498,.20368555,.062763706,.030211641,XGboost,GIS,Municipality
 gb_gis_mun,499,.20337097,.062194876,.029648781,XGboost,GIS,Municipality
 gb_gis_mun,500,.20342551,.062147625,.029618477,XGboost,GIS,Municipality
@@ -3516,10 +4016,10 @@ gb_census_mun,14,.20039698,.059293926,.02750669,XGboost,Census agg.,Municipality
 gb_census_mun,15,.20025533,.059287831,.027595272,XGboost,Census agg.,Municipality
 gb_census_mun,16,.20035517,.059333593,.027553821,XGboost,Census agg.,Municipality
 gb_census_mun,17,.20030287,.059541147,.027740927,XGboost,Census agg.,Municipality
-gb_census_mun,18,.20027891,.059713285,.027905975,XGboost,Census agg.,Municipality
+gb_census_mun,18,.20028269,.059719693,.02791219,XGboost,Census agg.,Municipality
 gb_census_mun,19,.20040388,.0595636,.027722454,XGboost,Census agg.,Municipality
 gb_census_mun,20,.20027687,.059448477,.02766921,XGboost,Census agg.,Municipality
-gb_census_mun,21,.20032588,.059376124,.027632715,XGboost,Census agg.,Municipality
+gb_census_mun,21,.20033327,.059387423,.02764219,XGboost,Census agg.,Municipality
 gb_census_mun,22,.20031868,.059570216,.027784258,XGboost,Census agg.,Municipality
 gb_census_mun,23,.20031868,.059621796,.027827274,XGboost,Census agg.,Municipality
 gb_census_mun,24,.2001681,.059584763,.027804993,XGboost,Census agg.,Municipality
@@ -3546,7 +4046,7 @@ gb_census_mun,44,.2003973,.059344318,.027532995,XGboost,Census agg.,Municipality
 gb_census_mun,45,.20015097,.059320364,.027571607,XGboost,Census agg.,Municipality
 gb_census_mun,46,.20013304,.059443653,.027679712,XGboost,Census agg.,Municipality
 gb_census_mun,47,.19996774,.059419923,.027704855,XGboost,Census agg.,Municipality
-gb_census_mun,48,.20087537,.05960406,.027717423,XGboost,Census agg.,Municipality
+gb_census_mun,48,.20086643,.05958892,.027707284,XGboost,Census agg.,Municipality
 gb_census_mun,49,.20018026,.059320834,.027573882,XGboost,Census agg.,Municipality
 gb_census_mun,50,.2003265,.059527997,.027759455,XGboost,Census agg.,Municipality
 gb_census_mun,51,.20060615,.059659366,.027802633,XGboost,Census agg.,Municipality
@@ -3561,11 +4061,11 @@ gb_census_mun,59,.20027824,.05957704,.02778797,XGboost,Census agg.,Municipality
 gb_census_mun,60,.20021147,.059199385,.027463531,XGboost,Census agg.,Municipality
 gb_census_mun,61,.2004815,.05964284,.027817618,XGboost,Census agg.,Municipality
 gb_census_mun,62,.20003824,.059554201,.027810402,XGboost,Census agg.,Municipality
-gb_census_mun,63,.20063445,.059731964,.027846556,XGboost,Census agg.,Municipality
+gb_census_mun,63,.20061329,.059738927,.027856931,XGboost,Census agg.,Municipality
 gb_census_mun,64,.20021439,.059577554,.027790466,XGboost,Census agg.,Municipality
 gb_census_mun,65,.20030876,.059426717,.027640224,XGboost,Census agg.,Municipality
-gb_census_mun,66,.20032111,.059486806,.027694426,XGboost,Census agg.,Municipality
-gb_census_mun,67,.20069493,.05965161,.027766969,XGboost,Census agg.,Municipality
+gb_census_mun,66,.20031001,.059451304,.027671508,XGboost,Census agg.,Municipality
+gb_census_mun,67,.20068799,.059645243,.027761545,XGboost,Census agg.,Municipality
 gb_census_mun,68,.20026284,.059279092,.027553048,XGboost,Census agg.,Municipality
 gb_census_mun,69,.20013459,.059671767,.027907619,XGboost,Census agg.,Municipality
 gb_census_mun,70,.20022064,.059208877,.027482226,XGboost,Census agg.,Municipality
@@ -3629,7 +4129,7 @@ gb_census_mun,127,.20061068,.059701324,.027848743,XGboost,Census agg.,Municipali
 gb_census_mun,128,.20038867,.05953094,.027733132,XGboost,Census agg.,Municipality
 gb_census_mun,129,.20021345,.059294023,.027541921,XGboost,Census agg.,Municipality
 gb_census_mun,130,.20043173,.059458036,.027643459,XGboost,Census agg.,Municipality
-gb_census_mun,131,.20051537,.059907485,.028018037,XGboost,Census agg.,Municipality
+gb_census_mun,131,.20053783,.059898924,.028004443,XGboost,Census agg.,Municipality
 gb_census_mun,132,.20003563,.059715483,.027989743,XGboost,Census agg.,Municipality
 gb_census_mun,133,.20011753,.059269037,.027530748,XGboost,Census agg.,Municipality
 gb_census_mun,134,.20002396,.059313964,.027599668,XGboost,Census agg.,Municipality
@@ -3692,14 +4192,14 @@ gb_census_mun,190,.20031285,.059368663,.027604213,XGboost,Census agg.,Municipali
 gb_census_mun,191,.20054528,.0596807,.027828826,XGboost,Census agg.,Municipality
 gb_census_mun,192,.20048814,.059843037,.028054776,XGboost,Census agg.,Municipality
 gb_census_mun,193,.20020613,.059579421,.02779055,XGboost,Census agg.,Municipality
-gb_census_mun,194,.20010947,.059447475,.027667385,XGboost,Census agg.,Municipality
-gb_census_mun,195,.20040922,.059436519,.027624663,XGboost,Census agg.,Municipality
+gb_census_mun,194,.2001009,.059440754,.027662655,XGboost,Census agg.,Municipality
+gb_census_mun,195,.20041952,.059459269,.027639087,XGboost,Census agg.,Municipality
 gb_census_mun,196,.20009302,.05941556,.027719719,XGboost,Census agg.,Municipality
-gb_census_mun,197,.20051698,.059612464,.02774634,XGboost,Census agg.,Municipality
+gb_census_mun,197,.20057407,.059652593,.027774362,XGboost,Census agg.,Municipality
 gb_census_mun,198,.20019305,.059312172,.027571656,XGboost,Census agg.,Municipality
 gb_census_mun,199,.20023027,.059683017,.027859356,XGboost,Census agg.,Municipality
 gb_census_mun,200,.20019931,.059521921,.027762832,XGboost,Census agg.,Municipality
-gb_census_mun,201,.20029213,.059515949,.027724294,XGboost,Census agg.,Municipality
+gb_census_mun,201,.20030864,.059515387,.027721358,XGboost,Census agg.,Municipality
 gb_census_mun,202,.20058095,.059985854,.02812334,XGboost,Census agg.,Municipality
 gb_census_mun,203,.20019478,.059405014,.02764624,XGboost,Census agg.,Municipality
 gb_census_mun,204,.200353,.059372734,.027617799,XGboost,Census agg.,Municipality
@@ -3711,7 +4211,7 @@ gb_census_mun,209,.20057605,.059287939,.027499339,XGboost,Census agg.,Municipali
 gb_census_mun,210,.20049031,.059589487,.027745688,XGboost,Census agg.,Municipality
 gb_census_mun,211,.20033972,.059797212,.027966985,XGboost,Census agg.,Municipality
 gb_census_mun,212,.20019527,.059316162,.027592471,XGboost,Census agg.,Municipality
-gb_census_mun,213,.20023884,.059511792,.027759587,XGboost,Census agg.,Municipality
+gb_census_mun,213,.20023474,.059509654,.027757384,XGboost,Census agg.,Municipality
 gb_census_mun,214,.20009619,.05946923,.027734322,XGboost,Census agg.,Municipality
 gb_census_mun,215,.20032774,.059307974,.027547032,XGboost,Census agg.,Municipality
 gb_census_mun,216,.20007019,.05948526,.027754722,XGboost,Census agg.,Municipality
@@ -3725,7 +4225,7 @@ gb_census_mun,223,.20036125,.059511095,.027702423,XGboost,Census agg.,Municipali
 gb_census_mun,224,.20029201,.059690338,.027886337,XGboost,Census agg.,Municipality
 gb_census_mun,225,.2003852,.059283774,.027522115,XGboost,Census agg.,Municipality
 gb_census_mun,226,.20013416,.059604306,.027827598,XGboost,Census agg.,Municipality
-gb_census_mun,227,.20059492,.059728097,.02784045,XGboost,Census agg.,Municipality
+gb_census_mun,227,.20058748,.059716184,.027833171,XGboost,Census agg.,Municipality
 gb_census_mun,228,.20028071,.059300456,.027544273,XGboost,Census agg.,Municipality
 gb_census_mun,229,.19996117,.059398204,.027685672,XGboost,Census agg.,Municipality
 gb_census_mun,230,.20030628,.059718788,.027908318,XGboost,Census agg.,Municipality
@@ -3753,17 +4253,17 @@ gb_census_mun,251,.20032483,.059352405,.027570633,XGboost,Census agg.,Municipali
 gb_census_mun,252,.20027742,.059573099,.027770374,XGboost,Census agg.,Municipality
 gb_census_mun,253,.20045805,.059610259,.027779248,XGboost,Census agg.,Municipality
 gb_census_mun,254,.20077218,.059673466,.02777628,XGboost,Census agg.,Municipality
-gb_census_mun,255,.20013286,.059530012,.027803913,XGboost,Census agg.,Municipality
+gb_census_mun,255,.20009004,.059486158,.027770758,XGboost,Census agg.,Municipality
 gb_census_mun,256,.19996607,.059514232,.027815757,XGboost,Census agg.,Municipality
 gb_census_mun,257,.20029169,.059415355,.027658997,XGboost,Census agg.,Municipality
 gb_census_mun,258,.20016803,.059422504,.027669314,XGboost,Census agg.,Municipality
 gb_census_mun,259,.20010711,.059313875,.027583459,XGboost,Census agg.,Municipality
 gb_census_mun,260,.20037062,.059615612,.027793411,XGboost,Census agg.,Municipality
 gb_census_mun,261,.20013484,.059190609,.027450662,XGboost,Census agg.,Municipality
-gb_census_mun,262,.20018727,.059399229,.027659127,XGboost,Census agg.,Municipality
+gb_census_mun,262,.20018566,.059399012,.027658708,XGboost,Census agg.,Municipality
 gb_census_mun,263,.20020501,.059273511,.027523102,XGboost,Census agg.,Municipality
 gb_census_mun,264,.20009115,.059334457,.027590156,XGboost,Census agg.,Municipality
-gb_census_mun,265,.20027965,.059376739,.02758869,XGboost,Census agg.,Municipality
+gb_census_mun,265,.20027234,.059385329,.027598286,XGboost,Census agg.,Municipality
 gb_census_mun,266,.20002744,.059183463,.027546888,XGboost,Census agg.,Municipality
 gb_census_mun,267,.20041722,.059530392,.027698874,XGboost,Census agg.,Municipality
 gb_census_mun,268,.20025583,.059237745,.027487528,XGboost,Census agg.,Municipality
@@ -3830,20 +4330,20 @@ gb_census_mun,328,.20023045,.059443261,.02769573,XGboost,Census agg.,Municipalit
 gb_census_mun,329,.20063202,.059502181,.027676715,XGboost,Census agg.,Municipality
 gb_census_mun,330,.20040326,.05973956,.027928187,XGboost,Census agg.,Municipality
 gb_census_mun,331,.20024157,.059305593,.027545419,XGboost,Census agg.,Municipality
-gb_census_mun,332,.20063277,.059781499,.027901698,XGboost,Census agg.,Municipality
+gb_census_mun,332,.2006463,.059785657,.027903678,XGboost,Census agg.,Municipality
 gb_census_mun,333,.20013143,.059209581,.027476456,XGboost,Census agg.,Municipality
 gb_census_mun,334,.20037261,.059675816,.027847823,XGboost,Census agg.,Municipality
 gb_census_mun,335,.20062502,.059594441,.02771499,XGboost,Census agg.,Municipality
 gb_census_mun,336,.20047703,.05929349,.02748798,XGboost,Census agg.,Municipality
 gb_census_mun,337,.20024931,.059296712,.027549891,XGboost,Census agg.,Municipality
-gb_census_mun,338,.20052245,.05959316,.027737716,XGboost,Census agg.,Municipality
+gb_census_mun,338,.20050606,.059581887,.027729014,XGboost,Census agg.,Municipality
 gb_census_mun,339,.20001155,.059602112,.027883919,XGboost,Census agg.,Municipality
 gb_census_mun,340,.20031211,.059613742,.027811548,XGboost,Census agg.,Municipality
 gb_census_mun,341,.20044848,.059402332,.027626049,XGboost,Census agg.,Municipality
 gb_census_mun,342,.20066702,.059743751,.027838636,XGboost,Census agg.,Municipality
 gb_census_mun,343,.20037906,.059327446,.027542137,XGboost,Census agg.,Municipality
 gb_census_mun,344,.19997668,.05931161,.027613888,XGboost,Census agg.,Municipality
-gb_census_mun,345,.20005617,.059654634,.027913148,XGboost,Census agg.,Municipality
+gb_census_mun,345,.20004314,.059637237,.027901102,XGboost,Census agg.,Municipality
 gb_census_mun,346,.20009494,.059392266,.027662354,XGboost,Census agg.,Municipality
 gb_census_mun,347,.19995205,.059386034,.027689932,XGboost,Census agg.,Municipality
 gb_census_mun,348,.20033252,.059489053,.027688185,XGboost,Census agg.,Municipality
@@ -3853,7 +4353,7 @@ gb_census_mun,351,.20038006,.059476793,.027671088,XGboost,Census agg.,Municipali
 gb_census_mun,352,.20031118,.059347928,.027603803,XGboost,Census agg.,Municipality
 gb_census_mun,353,.20018423,.059353661,.02762072,XGboost,Census agg.,Municipality
 gb_census_mun,354,.20037217,.059537627,.027724165,XGboost,Census agg.,Municipality
-gb_census_mun,355,.20034978,.059573751,.02778138,XGboost,Census agg.,Municipality
+gb_census_mun,355,.20032403,.059564292,.027777936,XGboost,Census agg.,Municipality
 gb_census_mun,356,.20039073,.059755333,.027945261,XGboost,Census agg.,Municipality
 gb_census_mun,357,.20034462,.059730589,.027902346,XGboost,Census agg.,Municipality
 gb_census_mun,358,.2001107,.059429102,.027689602,XGboost,Census agg.,Municipality
@@ -3873,13 +4373,13 @@ gb_census_mun,371,.20017003,.059440151,.027670177,XGboost,Census agg.,Municipali
 gb_census_mun,372,.20020576,.059794415,.027982922,XGboost,Census agg.,Municipality
 gb_census_mun,373,.20045909,.059480783,.027662948,XGboost,Census agg.,Municipality
 gb_census_mun,374,.20039091,.059391499,.027642915,XGboost,Census agg.,Municipality
-gb_census_mun,375,.20033656,.059511513,.027690565,XGboost,Census agg.,Municipality
+gb_census_mun,375,.20033798,.059512321,.027691267,XGboost,Census agg.,Municipality
 gb_census_mun,376,.20025522,.059519298,.027731063,XGboost,Census agg.,Municipality
 gb_census_mun,377,.20019093,.059352715,.027619906,XGboost,Census agg.,Municipality
 gb_census_mun,378,.20035245,.059602667,.027791459,XGboost,Census agg.,Municipality
 gb_census_mun,379,.19992071,.059454642,.027785737,XGboost,Census agg.,Municipality
 gb_census_mun,380,.20042199,.059576057,.027787473,XGboost,Census agg.,Municipality
-gb_census_mun,381,.20019987,.059474196,.027712546,XGboost,Census agg.,Municipality
+gb_census_mun,381,.20019434,.059471373,.027709961,XGboost,Census agg.,Municipality
 gb_census_mun,382,.20022009,.059399143,.027680667,XGboost,Census agg.,Municipality
 gb_census_mun,383,.20034462,.05931931,.027567351,XGboost,Census agg.,Municipality
 gb_census_mun,384,.20036007,.059683517,.027837798,XGboost,Census agg.,Municipality
@@ -3888,11 +4388,11 @@ gb_census_mun,386,.20072584,.059658203,.027784701,XGboost,Census agg.,Municipali
 gb_census_mun,387,.2002652,.059386477,.027623739,XGboost,Census agg.,Municipality
 gb_census_mun,388,.20021984,.059527371,.027773913,XGboost,Census agg.,Municipality
 gb_census_mun,389,.19998661,.05918235,.027482826,XGboost,Census agg.,Municipality
-gb_census_mun,390,.20037577,.059636198,.027790176,XGboost,Census agg.,Municipality
+gb_census_mun,390,.20038502,.059641711,.027793899,XGboost,Census agg.,Municipality
 gb_census_mun,391,.20005158,.059265163,.027543489,XGboost,Census agg.,Municipality
 gb_census_mun,392,.19994511,.05927233,.027590595,XGboost,Census agg.,Municipality
-gb_census_mun,393,.20066926,.059502918,.027663337,XGboost,Census agg.,Municipality
-gb_census_mun,394,.2002582,.05934206,.027581831,XGboost,Census agg.,Municipality
+gb_census_mun,393,.20063463,.059493288,.02766205,XGboost,Census agg.,Municipality
+gb_census_mun,394,.20025769,.059341229,.02758136,XGboost,Census agg.,Municipality
 gb_census_mun,395,.20033427,.059307434,.027527386,XGboost,Census agg.,Municipality
 gb_census_mun,396,.20024733,.059532251,.027757877,XGboost,Census agg.,Municipality
 gb_census_mun,397,.20041436,.059591427,.02777868,XGboost,Census agg.,Municipality
@@ -3969,7 +4469,7 @@ gb_census_mun,467,.20035982,.059507906,.027706776,XGboost,Census agg.,Municipali
 gb_census_mun,468,.20031527,.059328213,.027540699,XGboost,Census agg.,Municipality
 gb_census_mun,469,.20025508,.059184168,.027455283,XGboost,Census agg.,Municipality
 gb_census_mun,470,.2002814,.05946764,.027661242,XGboost,Census agg.,Municipality
-gb_census_mun,471,.1999788,.059295543,.027610997,XGboost,Census agg.,Municipality
+gb_census_mun,471,.19997419,.059306074,.027619809,XGboost,Census agg.,Municipality
 gb_census_mun,472,.20002726,.059329405,.027618526,XGboost,Census agg.,Municipality
 gb_census_mun,473,.20024262,.059736438,.02793498,XGboost,Census agg.,Municipality
 gb_census_mun,474,.20020074,.059378128,.027649408,XGboost,Census agg.,Municipality
@@ -3979,7 +4479,7 @@ gb_census_mun,477,.20020446,.059218649,.027474076,XGboost,Census agg.,Municipali
 gb_census_mun,478,.20017938,.059498761,.027728045,XGboost,Census agg.,Municipality
 gb_census_mun,479,.20016208,.059389435,.0276487,XGboost,Census agg.,Municipality
 gb_census_mun,480,.20010009,.059516177,.027805803,XGboost,Census agg.,Municipality
-gb_census_mun,481,.20030548,.059507526,.027709778,XGboost,Census agg.,Municipality
+gb_census_mun,481,.20032632,.0595171,.027717482,XGboost,Census agg.,Municipality
 gb_census_mun,482,.20013241,.059364412,.02764965,XGboost,Census agg.,Municipality
 gb_census_mun,483,.20044787,.059466384,.027630284,XGboost,Census agg.,Municipality
 gb_census_mun,484,.20035021,.059433267,.027642209,XGboost,Census agg.,Municipality
