@@ -6,9 +6,9 @@
 clear all
 set more off
 set matsize 8000
-//set processors 8
+set processors 8
 
-version 14
+
 
 
 * Set globals
@@ -120,9 +120,13 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 	mata: ds = _f_stepvif("$postsign","weight",5,"touse") 
 	global postvif `vifvar'
 	
-	local hhvars $postvif
+	local hhvars
 	local hhvars1 
 	
+	foreach x of global postvif{
+		cap confirm variable `x'
+		if (_rc==0) local hhvars `hhvars' `x'
+	}
 	
 	//One final removal of non-significant covariates
 	forval z= 0.8(-0.05)0.01{
@@ -134,18 +138,27 @@ mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 		local zv = (-min[1,1])
 		if (2*normal(`zv')>=`z'){	
 			foreach x of local hhvars{
-				local hhvars1
-				qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
-				qui: test `x' 
-				if (r(p)>`z'){
+				dis as error "`nm' 0"
+				cap confirm variable `x'
+				if (_rc==0){
+					local nm `x'
+					dis as error "`nm' 1"
 					local hhvars1
-					foreach yy of local hhvars{
-						if ("`yy'"=="`x'") dis ""
-						else local hhvars1 `hhvars1' `yy'
+					dis  as error "`nm' 2"
+					qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
+					dis  as error "`nm' 3"
+					qui: test `nm' 
+					if (r(p)>`z'){
+						dis  as error "`nm' 4"
+						local hhvars1
+						foreach yy of local hhvars{
+							if ("`yy'"=="`nm'") dis ""
+							else local hhvars1 `hhvars1' `yy'
+						}
 					}
+					else local hhvars1 `hhvars'
+					local hhvars `hhvars1'
 				}
-				else local hhvars1 `hhvars'
-				local hhvars `hhvars1'		
 			}
 		}
 	}	

@@ -96,6 +96,13 @@ rename area muni
 tempfile dos
 save `dos'
 
+use "$inpath\fh_mun_gis_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun_gis
+rename area muni
+tempfile tres
+save `tres'
+
 import delimited "$inpath/results_mse.csv", clear
 merge 1:1 muni using `uno', keepusing(mse_fh)
 	drop if _m==2
@@ -103,6 +110,10 @@ merge 1:1 muni using `uno', keepusing(mse_fh)
 merge 1:1 muni using `dos', keepusing(mse_fh_mun)
 	drop if _m==2
 	drop _m
+merge 1:1 muni using `tres', keepusing(mse_fh_mun_gis)
+	drop if _m==2
+	drop _m	
+
 	
 keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh*
 tabstat mse_gb_census-mse_fh_mun, stat(p50)
@@ -113,8 +124,9 @@ label var mse_gb_psu    "Gradient Boosting (Census agg. PSU)"
 label var mse_eb        "CensusEB"                              
 label var mse_uc        "Unit-context"      
 label var mse_fh        "Fay-Herriot (Census agg. PSU)"
-label var mse_fh_mun        "Fay-Herriot (Census agg. mun)"                    
-graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun, ytitle(Empirical MSE) ///
+label var mse_fh_mun        "Fay-Herriot (Census agg. mun)"  
+label var mse_fh_mun_gis        "Fay-Herriot (GIS mun)"                    
+graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis, ytitle(Empirical MSE) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
@@ -136,6 +148,13 @@ rename area muni
 tempfile dos
 save `dos'
 
+use "$inpath\fh_mun_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun_gis
+rename area muni
+tempfile tres
+save `tres'
+
 
 import delimited "$inpath/results_bias.csv", clear
 merge 1:1 muni using `uno', keepusing(bias_fh)
@@ -144,6 +163,9 @@ merge 1:1 muni using `uno', keepusing(bias_fh)
 merge 1:1 muni using `dos', keepusing(bias_fh)
 	drop if _m==2
 	drop _m	
+merge 1:1 muni using `tres', keepusing(bias_fh)
+	drop if _m==2
+	drop _m		
 
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh*
 tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
@@ -155,8 +177,9 @@ label var bias_eb   "CensusEB"
 label var bias_uc   "Unit-context"
 label var bias_fh        "Fay-Herriot (Census agg. PSU)"
 label var bias_fh_mun        "Fay-Herriot (Census agg. mun)"  
+label var bias_fh_mun_gis        "Fay-Herriot (GIS mun)"  
   
-graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun, ytitle(Bias) ///
+graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun bias_fh_mun_gis, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
@@ -325,7 +348,7 @@ replace fgt0 = 100*fgt0 if regexm(variable, "fh")
 
 reshape wide fgt0, i(sim) j(variable) string
 rename fgt0* *
-keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun
+keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis
 replace gb_gis_mun = gb_gis_mun*100  // Put values in percentage terms
 replace gb_census_mun = gb_census_mun*100
 replace gb_all_mun = gb_all_mun*100
@@ -341,11 +364,13 @@ label var eb        "CensusEB"
 label var uc        "Unit-context"  
 label var fh        "Fay-Herriot (Census agg. PSU)"
 label var fh_mun        "Fay-Herriot (Census agg. mun)"   
+label var fh_mun_gis        "Fay-Herriot (GIS mun)"   
 
-graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun, ytitle(Poverty Rate) ///
+graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
-	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
+	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray)) ///
+	box(9, color(gray))
 graph export "$outpath/Figure-6.pdf", as(pdf) replace
 graph export "$outpath/Figure-6.png", as(png) replace
 
