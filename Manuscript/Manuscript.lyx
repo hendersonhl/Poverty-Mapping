@@ -923,25 +923,26 @@ In addition to the Intercensal Survey, INEGI has also released geo-referenced
  same year as the Intercensal Survey) and are only available at the municipality
  level.
  The geo-referenced data includes 105 different indicators.
- Specifically, the dataset includes information from 21 different domains
- and each domain is associated with five different summary meaures.
+ Specifically, the dataset includes information from 21 different dimensions
+ and each dimension is associated with five different summary meaures.
  For example, we summarize the atmospherically resistant vegetation index
  for each municipality using the minimum, maximum, mean, sum, and standard
  deviation of the index.
- The same procedure is applied to all domains.
+ The same procedure is applied to all dimensions.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-The 21 domains are as follows: enhanced vegetation index, normalized difference
- vegetation index, normalized difference built-up index, built-up index,
- simple ratio, atmospherically resistant vegetation index, urban index,
- index of biological integrity, normalized difference water index, modified
- normalized difference water index, new built-up index, band ratio for built-up
- area, normalized built-up area index, built-up area extraction index, normalize
-d difference snow index, visible atmospherically resistant index, soil-adjusted
- vegetation index, optimized soil-adjusted vegetation index, normalized
- difference moisture index, digital altitude model, and digital slope model.
+The 21 dimensions are as follows: enhanced vegetation index, normalized
+ difference vegetation index, normalized difference built-up index, built-up
+ index, simple ratio, atmospherically resistant vegetation index, urban
+ index, index of biological integrity, normalized difference water index,
+ modified normalized difference water index, new built-up index, band ratio
+ for built-up area, normalized built-up area index, built-up area extraction
+ index, normalized difference snow index, visible atmospherically resistant
+ index, soil-adjusted vegetation index, optimized soil-adjusted vegetation
+ index, normalized difference moisture index, digital altitude model, and
+ digital slope model.
 \end_layout
 
 \end_inset
@@ -1091,11 +1092,11 @@ literal "false"
 
 .
  Let 
-\begin_inset Formula $y_{i}$
+\begin_inset Formula $y_{i}^{d}$
 \end_inset
 
- denote the outcome of interest (e.g., poverty headcounts) for observation
- or entity 
+ denote the outcome of interest (e.g., direct estimates of poverty rates)
+ for observation or entity 
 \begin_inset Formula $i$
 \end_inset
 
@@ -1105,7 +1106,7 @@ literal "false"
 
  denote a vector of explanatory variables.
  In line with the above, the predicted value of the outcome 
-\begin_inset Formula $\hat{y}_{i}$
+\begin_inset Formula $y_{i}^{p}$
 \end_inset
 
  is given by the sum of predictions across the individual trees in the ensemble:
@@ -1114,7 +1115,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\hat{y}_{i}=\sum_{t}f_{t}(x_{i})
+y_{i}^{p}=\sum_{t}f_{t}(x_{i})
 \end{equation}
 
 \end_inset
@@ -1139,13 +1140,13 @@ ed objective function:
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}=\sum_{i}l(y_{i},\hat{y}_{i})+\sum_{t}r(f_{t})
+\mathcal{L}=\sum_{i}l(y_{i}^{d},y_{i}^{p})+\sum_{t}r(f_{t})
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $l(y_{i},\hat{y}_{i})$
+\begin_inset Formula $l(y_{i}^{d},y_{i}^{p})$
 \end_inset
 
  is the loss associated with the 
@@ -1159,7 +1160,7 @@ where
  is a regularization term that serves to mitigate overfitting.
  In our implementation, we use the classic squared-error loss such that
  
-\begin_inset Formula $l(y_{i},\hat{y}_{i})=(y_{i}-\hat{y}_{i})^{2}$
+\begin_inset Formula $l(y_{i}^{d},y_{i}^{p})=(y_{i}^{d}-y_{i}^{p})^{2}$
 \end_inset
 
 .
@@ -1236,13 +1237,13 @@ To minimize the objective function, the model is trained in a sequential
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\mathcal{L}_{t}=\sum_{i}l(y_{i},\hat{y}_{i}^{t-1}+f_{t}(x_{i}))+r(f_{t})
+\mathcal{L}_{t}=\sum_{i}l(y_{i}^{d},y_{i,t-1}^{p}+f_{t}(x_{i}))+r(f_{t})
 \end{equation}
 
 \end_inset
 
 where 
-\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+f_{t}(x_{i})$
+\begin_inset Formula $y_{i,t}^{p}=y_{i,t-1}^{p}+f_{t}(x_{i})$
 \end_inset
 
 .
@@ -1258,7 +1259,7 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\tilde{\mathcal{L}}_{t}=\sum_{i}\left\{ g(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})f_{t}(x_{i})^{2}\right\} +r(f_{t})\label{eq:approx}
+\tilde{\mathcal{L}}_{t}=\sum_{i}\left\{ g(y_{i}^{d},y_{i,t-1}^{p})f_{t}(x_{i})+\frac{1}{2}h(y_{i}^{d},y_{i,t-1}^{p})f_{t}(x_{i})^{2}\right\} +r(f_{t})\label{eq:approx}
 \end{equation}
 
 \end_inset
@@ -1272,21 +1273,21 @@ where
 \end_inset
 
  denote the first- and second-order derivatives of the loss function 
-\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\begin_inset Formula $l(y_{i}^{d},y_{i,t-1}^{p})$
 \end_inset
 
  with respect to 
-\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\begin_inset Formula $y_{i,t-1}^{p}$
 \end_inset
 
 .
  That is, the point 
-\begin_inset Formula $\hat{y}_{i}^{t-1}$
+\begin_inset Formula $y_{i,t-1}^{p}$
 \end_inset
 
  is taken as the basis for the expansion.
  The above conveniently omits the first term of the series 
-\begin_inset Formula $l(y_{i},\hat{y}_{i}^{t-1})$
+\begin_inset Formula $l(y_{i}^{d},y_{i,t-1}^{p})$
 \end_inset
 
  because it is a constant.
@@ -1333,7 +1334,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in z_{j}}\left\{ g(y_{i},\hat{y}_{i}^{t-1})m_{tj}+\frac{1}{2}h(y_{i},\hat{y}_{i}^{t-1})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in z_{j}}\left\{ g(y_{i}^{d},y_{i,t-1}^{p})m_{tj}+\frac{1}{2}h(y_{i}^{d},y_{i,t-1}^{p})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
 \end{equation}
 
 \end_inset
@@ -1389,11 +1390,11 @@ For a given tree structure, we can find the optimal prediction values by
 
 .
  With a squared-error loss function, where 
-\begin_inset Formula $g(y_{i},\hat{y}_{i}^{t-1})=-2(y_{i}-\hat{y}_{i}^{t-1})$
+\begin_inset Formula $g(y_{i}^{d},y_{i,t-1}^{p})=-2(y_{i}^{d}-y_{i,t-1}^{p})$
 \end_inset
 
  and 
-\begin_inset Formula $h(y_{i},\hat{y}_{i}^{t-1})=2$
+\begin_inset Formula $h(y_{i}^{d},y_{i,t-1}^{p})=2$
 \end_inset
 
 , the optimal prediction values are effectively the (penalized) average
@@ -1556,7 +1557,7 @@ The above references several hyperparameters that must be chosen by the
 \end_inset
 
  is then given by 
-\begin_inset Formula $\hat{y}_{i}^{t}=\hat{y}_{i}^{t-1}+\eta f_{t}(x_{i})$
+\begin_inset Formula $y_{i,t}^{p}=y_{i,t-1}^{p}+\eta f_{t}(x_{i})$
 \end_inset
 
 .
@@ -1571,8 +1572,7 @@ One possible approach to hyperparameter selection is to use a grid search
  hyperparameters that perform the best in terms of some metric (e.g., mean
  squared prediction error in the validation dataset).
  Grid search, however, is computationally inefficient because hyperparameter
- proposals are uninformed by previous evaluations, meaning that the procedure
- spends considerable time evaluating suboptimal hyperparameters.
+ proposals are uninformed by previous evaluations.
  We instead use a Bayesian hyperparameter optimization procedure, which
  sequentially updates a probability model that relates the hyperparameter
  space to the performance metric and then uses the model to intelligently
@@ -1590,34 +1590,48 @@ literal "false"
  Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
 \end_layout
 
-\begin_layout Subsection
-Small area estimation methods
-\end_layout
-
 \begin_layout Standard
-This section presents small area estimation methods that are often applied
- to poverty mapping.
+Finally, regarding our application to the Mexican data, recall that mapping
+ procedures entail an estimation stage and a prediction stage.
+ For the machine-learning methods, we perform this procedure at two different
+ levels of analysis, namely the PSU and municipality levels.
+ Our focus is nevertheless on obtaining estimates of poverty rates at the
+ municipality level, meaning that when we conduct estimation and prediction
+ at the PSU level, we further aggregate the predictions to the municipality
+ level using population-weighted averaging.
+ Further, recall that we have two alternative sets of covariates available,
+ including geo-referenced and census-based variables.
+ Given that the geo-referenced data is only available at the municipality
+ level, we conduct estimation and prediction at the municipality level for
+ any implementation that uses these covariates.
+ When using census-based covariates, however, we consider implementations
+ at both the PSU and municipality levels.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For a thorough review of small area estimation methods refer to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small"
-literal "false"
+In all cases, we pass every eligible variable to the machine learning model
+ and let the algorithm conduct variable selection.
+\end_layout
 
 \end_inset
 
-, for a review of methods in the context of poverty mapping refer to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2022estimation"
-literal "false"
+ 
+\end_layout
 
-\end_inset
+\begin_layout Subsection
+Traditional methods
+\end_layout
 
- as well as reviews by 
+\begin_layout Standard
+We consider three alternative traditional methods to poverty mapping as
+ a way to benchmark the performance of the machine-learning approach.
+ Specifically, we consider area-level, unit-level, and unit-context models.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For a thorough review of small area estimation, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "pfeffermann2013new"
@@ -1625,209 +1639,17 @@ literal "false"
 
 \end_inset
 
- on other developments in the area.
- 
-\end_layout
-
-\end_inset
-
- Perhaps one of the earliest small area estimation methods for poverty mapping
- corresponds to the Fay-Herriot area level method (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "fay1979estimates"
-literal "false"
-
-\end_inset
-
-).
- The method is an area level method, meaning that a model at the area level
- is fit using data.
- The only data used from the household survey for this model are the direct
- estimates of poverty and their noise level.
- 
-\end_layout
-
-\begin_layout Standard
-In the late 1990s 
+ or 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "hentschel1998combining"
-literal "false"
-
-\end_inset
-
- published an early attempt at unit-level small area estimation for poverty
- mapping.
- The method presented by the authors was later improved upon by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2003micro"
-literal "false"
-
-\end_inset
-
- in what is to this day perhaps the most applied method for poverty mapping
- by statistical agencies across the globe.
- In 2010, the method was further improved by the introduction of Empirical
- Best methods by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2010small"
-literal "false"
-
-\end_inset
-
- and these methods have become increasingly prominent in recent years.
-\end_layout
-
-\begin_layout Subsubsection
-Area-level models
-\end_layout
-
-\begin_layout Standard
-Due to the low data requirements of area-level models, these are often easy
- and simple to execute in most scenarios – even in off-census years.
- Poverty mapping with area-level methods rely on estimating the distribution
- of the area-level poverty rate relying on a set of area-level covariates.
- Covariates may come from census aggregates, administrative data, or georeferenc
-ed data.
- The standard area-level method is the Fay-Herriot method (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "fay1979estimates"
-literal "false"
-
-\end_inset
-
-).
- The method was originally applied by the authors to estimate mean per capita
- income for small areas in the United States.
- 
-\end_layout
-
-\begin_layout Standard
-The description here borrows heavily from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small,molina2019desagregacion,corral2022guidelines,molina2022estimation"
+key "rao2015small"
 literal "false"
 
 \end_inset
 
 .
- The method is defined in two stages.
- the fisrt stage links the true poverty values, 
-\begin_inset Formula $y$
-\end_inset
-
-, for area 
-\begin_inset Formula $i$
-\end_inset
-
- to a linear regression model where the true value is linearly related to
- a set of area-level covariates.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-y_{i}=x_{i}\beta+u_{i}\label{eq:linking}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The random errors corresponding to unexplained between area variation in
- the model, 
-\begin_inset Formula $u_{i},$
-\end_inset
-
- are called the random area effects.
- These are assumed to follow a constant variance, 
-\begin_inset Formula $\sigma_{u}^{2}$
-\end_inset
-
-, and mean zero.
- Since we lack the true values, the model cannot be fit.
- Instead the direct estimators of poverty (i.e.
- those calculated from the survey), 
-\begin_inset Formula $\hat{y}_{i}^{dir}$
-\end_inset
-
- are used as the left hand side.
- These estimates are subject to sampling error because we rely on the area
- specific sample for their calculation.
- In the second stage of the model we assume that the direct estimates are
- centered around the true values:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-\hat{y}_{i}^{dir}=y_{i}+e_{i}\label{eq:2nd stage}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This model is referred to as the sampling model, and is assumed to have
- heteroscedastic error variance 
-\begin_inset Formula $\mathrm{var}(e_{i}|y_{i})=\psi_{i}$
-\end_inset
-
-.
- These variances are assumed to be known although in reality these are estimated
- using the survey data.
- The best linear unbiased predictor (BLUP) is obtained by predicting 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- through the model, 
-\begin_inset Formula $\hat{y}_{i}^{dir}=x_{i}\hat{\beta}+\hat{u}_{i}$
-\end_inset
-
-.
- The 
-\begin_inset Formula $\hat{\beta}$
-\end_inset
-
- are the weighted least squares estimator of 
-\begin_inset Formula $\beta$
-\end_inset
-
- under the Fay-Herriot model and, 
-\begin_inset Formula $\hat{u}_{i}=\gamma_{i}\left(\hat{y}_{i}^{dir}-x_{i}\hat{\beta}\right)$
-\end_inset
-
- is also the BLUP of the area effect 
-\begin_inset Formula $u_{i}.$
-\end_inset
-
- Finally, 
-\begin_inset Formula $\gamma_{i}=\sigma_{u}^{2}/\left(\sigma_{u}^{2}+\psi_{i}\right)$
-\end_inset
-
-.
- In essence, the final estimates for areas contained in the survey are the
- weighted average between the direct estimate 
-\begin_inset Formula $\hat{y}_{i}^{dir}$
-\end_inset
-
- and the synthetic estimator 
-\begin_inset Formula $x_{i}\hat{\beta}$
-\end_inset
-
-, where the weights are determined by the quality of the model and the quality
- of the direct estimator.
- For areas not sampled, the estimator is just the synthetic estimator.
- As 
+ For a review of methods specifically in the context of poverty mapping,
+ see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2022estimation"
@@ -1835,25 +1657,158 @@ literal "false"
 
 \end_inset
 
- notes the model does not require normality assumptions for the estimates
- to be BLUP, but assumptions are needed for estimation of the noise, MSE.
+.
  
 \end_layout
 
-\begin_layout Standard
-Two versions of the model are applied: 1) model is fit at the municipality
- level and 2) model is fit at the PSU level and estimates are aggregated
- to the municipality level.
+\end_inset
+
+ First proposed by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "fay1979estimates"
+literal "false"
+
+\end_inset
+
+, area-level models conduct estimation and prediction using data aggregated
+ to the geographic area of interest (e.g., the PSU or municipality level).
+ The area-level model consists of two basic parts.
+ The first part of the model links the actual or true poverty rates 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ entity to a vector of area-level covariates 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ as follows:
 \end_layout
 
-\begin_layout Subsubsection
-Unit-level and unit-context models 
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{a}=x_{i}\beta+\varepsilon_{i}\label{eq:linking}
+\end{equation}
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-In contrast to machine-learning methods, traditional approaches to small
- area estimation generally assume an underlying data-generating process.
- The well-known methods of 
+where 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is a vector of parameters to be estimated and 
+\begin_inset Formula $\varepsilon_{i}$
+\end_inset
+
+ represents random area-level effects that are assumed to be mean zero with
+ a constant variance 
+\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\end_inset
+
+.
+ Since we lack information on the true poverty rates, this model cannot
+ be immediately fit.
+\end_layout
+
+\begin_layout Standard
+Instead, direct estimates of poverty rates from survey data 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ are used as the outcome variable.
+ These estimates are nevertheless subject to sampling error because we must
+ rely on the area-specific sample for their calculation.
+ The second part of the model thus assumes that the direct estimates are
+ centered around the true poverty rates as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=y_{i}^{a}+\omega_{i}\label{eq:2nd stage}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\omega_{i}$
+\end_inset
+
+ represents the measurement error and is assumed to have heteroskedastic
+ variance 
+\begin_inset Formula $\sigma_{\omega,i}^{2}$
+\end_inset
+
+ because area sample sizes are often unequal.
+ These variances are assumed to be known, although in practice they are
+ estimated using the available data.
+ Given the two parts of the model, the survey data can then be used to obtain
+ parameter estimates using weighted least squares and the estimates can
+ be used to predict poverty rates for all areas using census data.
+\end_layout
+
+\begin_layout Standard
+Specifically, the best linear unbiased predictor (BLUP) is obtained by predictin
+g poverty rates using the model 
+\begin_inset Formula $x_{i}\hat{\beta}+\hat{\varepsilon}_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $\hat{\beta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\varepsilon_{i}}$
+\end_inset
+
+ represent the estimated coefficients and area-level effects, respectively.
+ For the sampled entities, the final estimates are effectively the weighted
+ average of the direct estimates and the 
+\begin_inset Quotes eld
+\end_inset
+
+synthetic
+\begin_inset Quotes erd
+\end_inset
+
+ estimates 
+\begin_inset Formula $x_{i}\hat{\beta}$
+\end_inset
+
+.
+ This is due to the fact that 
+\begin_inset Formula $\hat{\varepsilon}_{i}=\psi_{i}\left(y_{i}^{d}-x_{i}\hat{\beta}\right)$
+\end_inset
+
+ where 
+\begin_inset Formula $\psi_{i}=\hat{\sigma}_{\varepsilon}^{2}/\left(\hat{\sigma}_{\varepsilon}^{2}+\hat{\sigma}_{\omega,i}^{2}\right)$
+\end_inset
+
+.
+ For the non-sampled entities, the area-level model simply uses the synthetic
+ estimates to produce predictions.
+ A critical feature of the area-level model is that it is a direct competitor
+ to the machine-learning approach because both methods have the same data
+ requirements.
+ Also similar to the machine-learning approach, the area-level model can
+ be implemented at the PSU or municipality levels.
+\end_layout
+
+\begin_layout Standard
+Regarding unit-level models, the well-known methods of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "elbers2003micro"
@@ -1869,8 +1824,7 @@ literal "false"
 
 \end_inset
 
-, for example, are based on the nested error model originally proposed by
- 
+ are based on the nested error model originally proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "battese1988asa"
@@ -1879,8 +1833,8 @@ literal "false"
 \end_inset
 
 .
- This method assumes that (transformed) equivalized household income relates
- linearly to a vector of covariates according the following model:
+ This model assumes that (transformed) household income relates linearly
+ to a vector of household-level covariates according the following model:
 \end_layout
 
 \begin_layout Standard
@@ -1899,7 +1853,7 @@ where
 \begin_inset Formula $w_{iv}$
 \end_inset
 
- denotes the transformed household income per capita of household 
+ denotes the transformed income per capita of household 
 \begin_inset Formula $v$
 \end_inset
 
@@ -1932,79 +1886,27 @@ where
 \end_inset
 
 .
- The random effect and household-level error terms are assumed to be independent
- from each other and normally distributed.
  
 \end_layout
 
 \begin_layout Standard
-The dependent variable of the model is not the poverty status of a given
- household, but rather household income.
- As such, the method first estimates the parameters that characterize the
- relationship between household income and the selected sociodemographic
- characteristics.
- The parameters obtained from the model fit using the household survey data
- are then applied to the census data, including simulated errors drawn from
- the assumed normal distribution.
- From the simulated welfare vector in the census it is possible to obtain
- estimates of any welfare indicator, not just poverty headcount rates.
-\end_layout
-
-\begin_layout Standard
-The parameter estimates obtained when fitting model (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:sae"
-plural "false"
-caps "false"
-noprefix "false"
-
+The parameters of the model are typically estimated via restricted maximum
+ likelihood.
+ Once the model is estimated, the parameters are then used to repeatedly
+ generate income estimates for all households in a corresponding census
+ dataset.
+ That is, the income level of each household is predicted 
+\begin_inset Formula $K$
 \end_inset
 
-) to the survey data (
-\begin_inset Formula $\hat{\delta},\hat{\sigma}_{\mu}^{2}$
-\end_inset
-
-, and 
-\begin_inset Formula $\hat{\sigma}_{\xi}^{2}$
-\end_inset
-
-) are applied to the census household level data to generate a simulated
- value of 
-\begin_inset Formula $w_{iv}$
-\end_inset
-
- for each household in the census.
- The parameter estimates are fit through a suitable method such as REML
- or Henderson's Method III (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "henderson1953estimation"
-literal "false"
-
-\end_inset
-
-).
- The 
-\begin_inset Formula $w_{iv}$
-\end_inset
-
- for each household is simulated 
-\begin_inset Formula $M$
-\end_inset
-
- times using Monte Carlo simulation where each simulated welfare 
-\begin_inset Formula $m$
-\end_inset
-
- follows:
+ times using the model estimates as follows:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
-\[
-w_{ivm}=x_{iv}\hat{\delta}+\mu_{im}^{*}+\xi_{ivm}^{*}
-\]
+\begin{equation}
+\hat{{w}}_{ivk}=x_{iv}\hat{\delta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
+\end{equation}
 
 \end_inset
 
@@ -2013,11 +1915,15 @@ w_{ivm}=x_{iv}\hat{\delta}+\mu_{im}^{*}+\xi_{ivm}^{*}
 
 \begin_layout Standard
 where 
-\begin_inset Formula $\mu_{im}^{*}$
+\begin_inset Formula $k$
+\end_inset
+
+ indexes replications and where 
+\begin_inset Formula $\mu_{ik}^{*}$
 \end_inset
 
  and 
-\begin_inset Formula $\xi_{ivm}^{*}$
+\begin_inset Formula $\xi_{ivk}^{*}$
 \end_inset
 
  are drawn from their assumed distributions.
@@ -2038,27 +1944,39 @@ literal "false"
 
 \end_inset
 
- 
-\end_layout
+ As a final step, the replicates can be used to calculate 
+\begin_inset Formula $K$
+\end_inset
 
-\begin_layout Standard
-The method used here, CensusEB, follows the one presented in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2019desagregacion"
-literal "false"
-
+ estimates of the poverty rate for each geographic entity and these estimates
+ can then be averaged to arrive at a final prediction for each area.
+ Note that there are multiple versions of the unit-level model, distinguished
+ primarily through different treatments of 
+\begin_inset Formula $\mu_{ik}^{*}$
 \end_inset
 
  and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rodas2021pull"
-literal "false"
-
+\begin_inset Formula $\xi_{ivk}^{*}$
 \end_inset
 
- which builds upon the Empirical Best (EB) methods from 
+.
+ We use a particular version known as the 
+\begin_inset Quotes eld
+\end_inset
+
+census empirical best
+\begin_inset Quotes erd
+\end_inset
+
+ method, which is a variant of the 
+\begin_inset Quotes eld
+\end_inset
+
+empirical best
+\begin_inset Quotes erd
+\end_inset
+
+ method of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2010small"
@@ -2071,19 +1989,9 @@ literal "false"
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rodas2021pull"
-literal "false"
-
-\end_inset
-
- also show that when the sample size is small relative to the population
- the difference between CensusEB and EB methods is indiscernible.
-\end_layout
-
-\end_inset
-
+As opposed to empirical best estimates, census empirical best estimates
+ do not include survey observations when calculating area-level poverty
+ rates.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2092,15 +2000,9 @@ literal "false"
 
 \end_inset
 
- also show through simulations that when sample sizes are small CensusEB
- estimates are approximate EB estimates.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-CensusEB estimates do not include survey observations when calculating small
- area estimates as opposed to EB estimates.
- See 
+ show that when the sample size is small relative to the population the
+ difference between the two methods is negligible.
+ For additional discussion, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2019desagregacion"
@@ -2108,121 +2010,80 @@ literal "false"
 
 \end_inset
 
- for more details.
+.
 \end_layout
 
 \end_inset
 
- The method is EB since it conditions on the survey sample and makes use
- of the area level information such that 
-\begin_inset Formula $E[\bar{y}_{i}|\mu_{i}]=\bar{x}_{i}\delta+\mu_{i}$
-\end_inset
 
-.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Under ELL the area level mean of the dependent variable is 
-\begin_inset Formula $E[\bar{y}_{i}]=\bar{x}_{i}\delta$
-\end_inset
-
- since it does not condition on the survey, and since residuals are drawn
- from their assumed distribution and these have an expected value of 0,
- the ELL estimator collapses to the synthetic estimator: 
-\begin_inset Formula $\bar{x}_{i}\delta$
-\end_inset
-
-.
- Nevertheless, the inclusion of area level covariates helps mitigate the
- problem to a certain extent, see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "doi:https://doi.org/10.1002/9781118814963.ch18"
-literal "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\end_inset
-
- Thus, it makes more use of the survey data for predictions.
- However, EB methods only ensure that the area level means of the dependent
- variable are Empirical Best Linear Unbiased Predictors (EBLUP) but does
- not guarantee the same for poverty which is a non-linear parameter.
- 
 \end_layout
 
 \begin_layout Standard
-One major aspect of concern for small area estimation is the estimation
- of noise.
- A statistical agency in a given country may seek to undertake a small area
- estimation application because the quality of the estimates derived from
- survey data may not be sufficiently precise or estimates may not even be
- possible since the area was not sampled.
- Hence, a big concern surrounding small area estimation is the estimation
- of MSEs for each area's estimate.
- Estimates of noise are obtained via bootstrap replications where the model's
- assumptions are exploited in order to obtain an estimated MSE.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-For a much more detailed discussion on the estimation of noise refer to
- 
+The key assumption of the unit-level model is that the distribution of the
+ explanatory variables is similar between the survey used for estimation
+ and the census used for prediction.
+ This assumption is generally violated if the census is outdated – which
+ is often the case in developing countries – and in this event the application
+ of the unit-level model will lead to similarly outdated poverty maps 
 \begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small"
-literal "false"
-
-\end_inset
-
- and for a discussion focused on ELL and EB estimates refer to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rodas2021pull"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
+LatexCommand citep
+key "lange2018small"
 literal "false"
 
 \end_inset
 
 .
-\end_layout
-
+ Importantly, machine-learning approaches to poverty mapping are commonly
+ motivated by the fact that censuses are outdated and are thus viewed as
+ a way to produce timely poverty maps in a data-constrained environment.
+ Stated differently, given the differing data requirements between the unit-leve
+l model and the machine-learning approach, the two methods are not generally
+ considered to be direct competitors.
+ The unit-level model nevertheless serves as a useful performance benchmark,
+ as it is often viewed as the 
+\begin_inset Quotes eld
 \end_inset
 
- This aspect is one of the biggest differences between poverty maps based
- on small area estimation and those based on machine learning.
- Statistical agencies across the globe will assess an estimate's noise before
- deciding to publish it or not, thus the importance of such estimates.
- 
+gold standard
+\begin_inset Quotes erd
+\end_inset
+
+ of poverty mapping.
 \end_layout
 
 \begin_layout Standard
-A modification of the typical unit-level small area estimation approach
- presented above which intended to allow updating poverty maps even when
- the census and survey data are not aligned was presented by 
+Unlike unit-level models, unit-context models were specifically developed
+ to be used in off-census years.
+ Initially developed by 
 \begin_inset CommandInset citation
-LatexCommand citealt
+LatexCommand citet
 key "nguyen2012method"
 literal "false"
 
 \end_inset
 
-.
- The basic idea behind the approach is that no household level covariates
- are used in the model presented in Eq.
+ and further refined by 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "masaki2020small"
+literal "false"
+
+\end_inset
+
+, these models are based on a simple modification of the unit-level approach:
+ rather than modeling household-level income as a function of household-level
+ characteristics, unit-context models instead use only area-level covariates
+ from the census.
+ Specifically, the unit-context model replaces the survey-based covariates
  
+\begin_inset Formula $x_{iv}$
+\end_inset
+
+ in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "eq:sae"
@@ -2232,102 +2093,28 @@ noprefix "false"
 
 \end_inset
 
+) with census aggregates 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ and thus relaxes the assumption that the survey-based covariates match
+ the moments of those from the census.
+ Like the area-level model, the unit-context model is a direct competitor
+ to the machine-learning approach because it is feasible to implement with
+ the same data.
+ For this reason, we use the unit-context model as reference model as we
+ evaluate the performance of machine-learning methods.
+ However, it is worth noting that the unit-context model has been shown
+ to produce biased poverty estimates, largely due to its inability to explain
+ between-household variation in income 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
 .
- Because there are no household level covariates used in the model there
- is no need for the covariates in the survey to match the moments of those
- from the census.
- The proponents of the methodology claim that the lack of household level
- covariates allows the application of this method in off-census years.
- 
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "nguyen2012method"
-literal "false"
-
-\end_inset
-
- introduces the variation of the ELL method using data from Vietnam and
- suggests that only area and cluster level covariates be used.
- A further refinement was introduced by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "masaki2020small"
-literal "false"
-
-\end_inset
-
- which relied on EB estimates.
- The method was tested and validated by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2021map"
-literal "false"
-
-\end_inset
-
- using the same Mexican data illustrated here.
- Moreover, the method (referred to as unit-context) is thoroughly discussed
- and dissected in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
-literal "false"
-
-\end_inset
-
- and shown to be flawed since it yields heavily biased estimates.
- One of the reasons for the heavily biased estimates is due to the method's
- inability to explain between household variation which translates to an
- inability to replicate the full welfare distribution.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
-literal "false"
-
-\end_inset
-
- discourage the use of the method since it fails to yield unbiased estimates
- and practitioners are unlikely to know when the method has yielded estimates
- of good quality since applying the parametric boostrap methods from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "gonzalez2008bootstrap"
-literal "false"
-
-\end_inset
-
- to the method yields inadequate noise measures.
- However, since the method does offer certain advantages,
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The advantage is that it can be used in off-census years, although 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
-literal "false"
-
-\end_inset
-
- present evidence that Fay-Herriot area level (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "fay1979estimates"
-literal "false"
-
-\end_inset
-
-) models outperform unit-context models.
- An additional advantage is that it may be applied in areas where the sampling
- variance is equal to 0, something not feasible with Fay-Herriot models.
-\end_layout
-
-\end_inset
-
- it is included here for the sake of comparison between methods which can
- be applied for off-census years.
 \end_layout
 
 \begin_layout Section
@@ -2397,7 +2184,7 @@ Let
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-y_{i}^{d}=\alpha+\beta y_{i}^{p}+\varepsilon_{i}
+y_{i}^{d}=\alpha+\delta y_{i}^{p}+\zeta_{i}
 \end{equation}
 
 \end_inset
@@ -2407,11 +2194,11 @@ where
 \end_inset
 
  and 
-\begin_inset Formula $\beta$
+\begin_inset Formula $\delta$
 \end_inset
 
  are the regression coefficients and 
-\begin_inset Formula $\varepsilon$
+\begin_inset Formula $\zeta$
 \end_inset
 
  represents the error term.
@@ -2435,7 +2222,7 @@ Note that any regression of this form can only be estimated for the sampled
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\varepsilon}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
+R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\zeta}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
 \end{equation}
 
 \end_inset
@@ -2445,11 +2232,11 @@ where
 \end_inset
 
  is the variance of the direct estimate and 
-\begin_inset Formula $\sigma_{\varepsilon}^{2}$
+\begin_inset Formula $\sigma_{\zeta}^{2}$
 \end_inset
 
  is the variance of 
-\begin_inset Formula $\varepsilon$
+\begin_inset Formula $\zeta$
 \end_inset
 
 .
@@ -2486,7 +2273,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-y_{i}^{a}=\alpha+\beta y_{i}^{p}+\upsilon_{i}
+y_{i}^{a}=\alpha+\delta y_{i}^{p}+\upsilon_{i}
 \end{equation}
 
 \end_inset
@@ -2553,11 +2340,11 @@ Let
  direct estimate of the poverty indicator is a noisy estimate of the true
  poverty indicator.
  Note that the preceding equation implies that 
-\begin_inset Formula $\varepsilon_{i}=\upsilon_{i}+\omega_{i}$
+\begin_inset Formula $\zeta_{i}=\upsilon_{i}+\omega_{i}$
 \end_inset
 
  and 
-\begin_inset Formula $\sigma_{\varepsilon}^{2}=\sigma_{\upsilon}^{2}+\sigma_{\omega}^{2}$
+\begin_inset Formula $\sigma_{\zeta}^{2}=\sigma_{\upsilon}^{2}+\sigma_{\omega}^{2}$
 \end_inset
 
 .
@@ -2607,7 +2394,7 @@ noprefix "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-B=\frac{\sigma_{a}^{2}-\sigma_{e}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{e}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{e}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\,.\label{eq:bias_res}
+B=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\upsilon}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\upsilon}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\,.\label{eq:bias_res}
 \end{equation}
 
 \end_inset
@@ -2827,8 +2614,15 @@ noprefix "false"
 .
  A well-known property of the correlation coefficient is that it is invariant
  to any positive affine transformation of its arguments, implying that the
- squared correlation coefficient is invariant to any affine transformation
  
+\shape italic
+squared
+\shape default
+ correlation coefficient is invariant to 
+\shape italic
+any
+\shape default
+ affine transformation 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gujarati2003basic"
@@ -2934,7 +2728,7 @@ A final issue related to
 :
 \begin_inset Formula 
 \begin{equation}
-R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{a}-\alpha-\beta y_{i}^{p})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{a},\alpha+\beta y_{i}^{p})}{\text{{Var}}(y_{i}^{a})}\label{eq:variance}
+R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{a}-\alpha-\delta y_{i}^{p})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{a},\alpha+\delta y_{i}^{p})}{\text{{Var}}(y_{i}^{a})}\label{eq:variance}
 \end{equation}
 
 \end_inset
@@ -3069,25 +2863,14 @@ literal "false"
 
 \end_layout
 
-\begin_layout Subsection
-Targeting 
-\begin_inset CommandInset label
-LatexCommand label
-name "subsec:Targeting"
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 The primary reason for obtaining granular poverty estimates is nevertheless
  to improve the targeting of resources.
  While understanding the error of the poverty estimates is useful in this
  regard, the ultimate concern is to understand how different methodological
  choices affect poverty alleviation by influencing the efficiency of targeting.
- Consequently, we also consider how machine-learning methods perform in
- terms of reducing poverty in the context of the Mexican Intercensal Survey.
+ Consequently, we also consider how machine learning performs in terms of
+ reducing poverty in the context of the Mexican Intercensal Survey.
  Similar to 
 \begin_inset CommandInset citation
 LatexCommand citet
