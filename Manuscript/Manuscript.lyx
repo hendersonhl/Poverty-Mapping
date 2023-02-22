@@ -2989,17 +2989,7 @@ name "sec:results"
 \end_layout
 
 \begin_layout Standard
-Recall from Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- that the 
+Recall from the previous section that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3011,32 +3001,7 @@ noprefix "false"
 \end_inset
 
  associated with the XGBoost model when using both the direct estimates
- and true poverty rates as the basis for performance assessment (i.e., based
- on Eqs.
-\begin_inset Formula $\negthinspace$
-\end_inset
-
- [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:r2direct"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-] and [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:r2true"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-], respectively).
+ and true poverty rates as the basis for performance assessment.
  We conduct this comparison at two different levels of estimation, namely
  the PSU and municipality levels.
  All 
@@ -3083,30 +3048,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Formula $R^{2}$
-\end_inset
-
- estimates at the PSU and municipality levels 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:r2"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Float figure
 wide false
 sideways false
@@ -3117,7 +3058,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-1a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3133,10 +3074,6 @@ Direct versus true
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -3158,7 +3095,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-1b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3183,18 +3120,41 @@ Unconstrained versus constrained
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
 
-\size small
-Note: Figure presents the 
+\begin_layout Plain Layout
 \begin_inset Formula $R^{2}$
 \end_inset
 
- from a regression where on the right hand side we have the model based
- estimates and on the left hand side we either have the true poverty rate
- or the direct (i.e.
- survey) based estimates of poverty.
- Since we have 500 samples drawn from our census, we have 500 sets of direct
- and model based estimates and, consequently, 500 
+ estimates at the PSU and municipality levels 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:r2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+Note: This figure presents the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression where on the right-hand side we have the model-based
+ estimates and on the left-hand side we either have the true poverty rate
+ or the direct estimates of poverty.
+ Since we have 500 samples drawn from our census, we have 500 sets of model-base
+d estimates and, consequently, 500 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3296,29 +3256,7 @@ noprefix "false"
 \end_inset
 
  can be misleading for assessing model performance: it is invariant to locationa
-l shifts (see Eq.
- [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:shift"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-]) and influenced by the variance of the true poverty rates (see Eq.
- [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:variance"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-]).
+l shifts and influenced by the variance of the true poverty rates.
  Using the Mexican data, we can assess the relevance of the former issue
  by comparing the true 
 \begin_inset Formula $R^{2}$
@@ -3375,27 +3313,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MSE and bias for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Float figure
 wide false
 sideways false
@@ -3406,7 +3323,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-2a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3443,7 +3360,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-2b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3465,20 +3382,36 @@ Bias
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
 
 \size small
-Note: Figures presents the MSE and bias for each applied method.
- The MSE is calculated as the mean squared difference between the model
- based estimate for a given municipality (obtained from each of the 500
- samples drawn from the census) and the municipality's true poverty rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
+Note: This figure presents the MSE and bias for each method.
+ The MSE is calculated as the mean squared difference between the model-based
+ estimate for a given municipality (obtained from each of the 500 samples
+ drawn from the census) and the municipality's true poverty rate.
+ The bias is the average difference between the model-based estimate for
+ a given municipality (obtained from each of the 500 samples drawn from
  the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the MSE and bias of
- the method's estimates.
+ The box-plots show the municipality-level spread of the MSE and bias of
+ each method's estimates.
 \end_layout
 
 \end_inset
@@ -3491,8 +3424,7 @@ Given the shortcomings of the
 \begin_inset Formula $R^{2}$
 \end_inset
 
-, we have argued that the empirical MSE represents a better metric for model
- assessment.
+, we have argued that the MSE represents a better metric for model assessment.
  Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3504,58 +3436,66 @@ noprefix "false"
 \end_inset
 
  thus presents our MSE results for several alternative models.
- The first three models apply XGBoost fit at the municipality level using
- three alternative covariate sets: only GIS-based covariates, only census-based
- aggregated covariates, and then a model with all available covariates (census
- aggregates and GIS).
- The fourth model is estimated at the PSU level and only uses census-based
- aggregated covariates, but the resulting PSU level estimates are aggregated
- to the municipal level.
- The final three models are traditional small-area models that we use to
- benchmark the performance of the XGBoost models.
- In particular, the empirical best (CensusEB) model is often considered
- the 
+ The first three models apply gradient boosting at the municipality level
+ using three alternative covariate sets: geo-reference covariates (
 \begin_inset Quotes eld
 \end_inset
 
-gold standard
+GIS-MUN
 \begin_inset Quotes erd
 \end_inset
 
- of small-area estimation and corresponds to an ideal scenario where up-to-date,
- micro-level census data are available.
- The unit-context has been proposed for cases when census data are out-of-date
- although the method has been found deficient in similar validation studies
- (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "corral2022guidelines,corral2021map"
-literal "false"
+), census-based covariates (
+\begin_inset Quotes eld
+\end_inset
 
+CEN-MUN
+\begin_inset Quotes erd
+\end_inset
+
+), and then a model with all available covariates (
+\begin_inset Quotes eld
+\end_inset
+
+ALL-MUN
+\begin_inset Quotes erd
 \end_inset
 
 ).
- For off-census years the recommended small area estimation method is the
- Fay-Herriot area-level model.
- The unit-context and Fay-Herriot models are direct competitors to the machine-l
-earning models, which are often motivated by a lack of up-to-date census
- data.
- 
-\end_layout
+ The fourth model applies gradient boosting at the PSU level and only uses
+ census-based covariates (
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Standard
-Recall from Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
+CEN-PSU
+\begin_inset Quotes erd
+\end_inset
+
+).
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Recall the the geo-referenced covariates are only available at the municipality
+ level.
+\end_layout
 
 \end_inset
 
- that one advantage of the MSE is that it can be calculated for each geographica
-l entity.
+ The final three models are all traditional methods that we use to benchmark
+ the performance of gradient boosting.
+ In particular, we present the unit-level, unit-context, and area-level
+ models.
+ We consider three alternative implementations of the area-level model that,
+ much like for gradient boosting, vary the level of analysis and the covariates
+ used.
+ For these traditional models, all available covariates enter the models
+ linearly (i.e., we do not include interaction or quadratic terms).
+\end_layout
+
+\begin_layout Standard
+One advantage of the MSE is that it can be calculated for each geographical
+ entity.
  As such, each box plot in panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3579,89 +3519,52 @@ noprefix "false"
 \end_inset
 
 ]).
- Initially we aim to compare how the methods performs against each other
- using the same data, thus we rely on using only census aggregates.
- As is evident in the results from panel (a) and (b) of Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mse"
-plural "false"
-caps "false"
-noprefix "false"
-
+ We first consider how gradient boosting performs relative to the traditional
+ methods when using the same data and, as such, we focus only on comparing
+ methods that use census-based covariates.
+ The gradient boosting implementations at the municipality and PSU levels
+ achieve median MSE values of 0.003 and 0.002, respectively.
+ In contrast, the 
+\begin_inset Quotes eld
 \end_inset
 
- the XGBoost methods using census aggregate data (Gradient boosting [Census
- agg.
- PSU] and Gradient boosting [Census agg.
- mun]) perform better than unit-context and Fay-Herriot ([Census agg.
- PSU] and [Census agg.
- mun]) models and approximate the performance of CensusEB [CensusEB] estimates.
- The median MSE for the CensusEB model is 0.003 while that of XGBoost methods
- is 0.002 and both methods have similar interquartile ranges.
- The results suggest that XGBoost methods can approximate CensusEB unit-level
- methods and will outperform unit-context and Fay-Herriot methods by a considera
-ble margin, which is quite encouraging for cases where estimates are needed
- when the survey and census data are not contemporaneous.
-\begin_inset Foot
-status collapsed
+gold standard
+\begin_inset Quotes erd
+\end_inset
 
-\begin_layout Plain Layout
-The unit-context models include covariates at the PSU and municipality level.
- The location effects are specified at the municipality level.
+ unit-level model achieves a median MSE of 0.003.
+ The remaining traditional methods that use census-based covariates all
+ achieve a median MSE of roughly 0.004.
+ These results suggest that, when using the same data, gradient boosting
+ performs comparably (if not better) than the unit-level model and better
+ than the unit-context and area-level models.
  
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
-Now that we have established that in the context of the Mexican data used
- and with covariates derived from census data, XGBoost methods can perform
- just as well as CensusEB methods our attention is turned to XGBoost's performan
-ce under geo-referenced data [Gradient Boosting (GIS mun)].
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Note that the underlying model for CensusEB estimates relies on household
- level microdata.
- Consequently, the data requirements for CensusEB is even higher.
-\end_layout
-
+Recall, however, that the machine-learning approach to poverty mapping most
+ commonly uses remotely-sensed covariates rather than census-based covariates.
+ The gradient boosting model with geo-referenced covariates (
+\begin_inset Quotes eld
 \end_inset
 
- The XGBoost model with GIS-based covariates is our closest approximation
- to the standard implementation of machine learning in the context of poverty
- mapping.
- This model is nevertheless the worst performing of all the models: the
- median MSE for the model with GIS-based covariates is 0.008 (with a root
- MSE of about 0.09), meaning that the median municipality's error is roughly
- nine percentage points.
- In contrast, the CensusEB, unit-context, and Fay-Herriot models fit at
- the PSU level achieve median MSE levels of 0.003, 0.004 and 0.004, with correspond
-ing root MSE values of 0.05, 0.06, and 0.06, respectively.
- The Fay-Herriot model fit at the municipal level has a median municipal
- MSE that is slightly higher although the ranges are tighter than those
- of unit-context models and also outperform the GIS based gradient boosting
- model.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-A notable aspect of Fay-Herriot and Gradient Boosting models is their relative
- ease of application and the fact that these usually take considerably less
- time in implementing as opposed to CensusEB and unit-context models.
-\end_layout
-
+GIS-MUN
+\begin_inset Quotes erd
 \end_inset
 
- While the implementation with geo-referenced data shows relatively poor
- performance, the remaining three XGBoost models that incorporate census-based
- covariates perform much better, with the PSU-level model achieving a median
- MSE of 0.002 and outperforming even CensusEB estimates.
+) is our closest approximation to this standard implementation.
+ This model achieves a median MSE of 0.008 (with a root MSE of about 0.09),
+ meaning that the median municipality's error is roughly nine percentage
+ points.
+ It is useful to compare these results to those from the unit-context and
+ area-level models given that these models are direct competitors to machine
+ learning.
+ The unit-context model and the area-level models with census covariates
+ all achieve median MSE values of 0.004, whereas the area-level model using
+ geo-referenced covariates achieves a median MSE of 0.01.
+ With the exception of the area-level model based on geo-referenced covariates,
+ we thus find that the standard implementation performs considerably worse
+ than the traditional methods that are also feasible in off-census years.
 \end_layout
 
 \begin_layout Standard
