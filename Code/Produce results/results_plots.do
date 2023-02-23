@@ -82,21 +82,21 @@ twoway (scatter mse_mun gb_census_mun_true), xtitle("R-squared") ytitle("Empiric
 twoway (scatter mse_psu gb_census_psu_true), xtitle("R-squared") ytitle("Emprical MSE") scheme(s1mono)
 
 * Basic MSE plot
-use "$inpath\fh_mse_bias.dta", clear
+use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh
 rename area muni
 tempfile uno
 save `uno'
 
-use "$inpath\fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh_mun
 rename area muni
 tempfile dos
 save `dos'
 
-use "$inpath\fh_mun_gis_mse_bias.dta", clear
+use "$inpath/fh_mun_gis_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh_mun_gis
 rename area muni
@@ -113,19 +113,18 @@ merge 1:1 muni using `dos', keepusing(mse_fh_mun)
 merge 1:1 muni using `tres', keepusing(mse_fh_mun_gis)
 	drop if _m==2
 	drop _m	
-
 	
 keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh*
 tabstat mse_gb_census-mse_fh_mun, stat(p50)
-label var mse_gb_census "Gradient Boosting (Census agg. mun)"
-label var mse_gb_gis    "Gradient Boosting (GIS mun)"         
-label var mse_gb_all    "Gradient Boosting (All mun)"            
-label var mse_gb_psu    "Gradient Boosting (Census agg. PSU)"
-label var mse_eb        "CensusEB"                              
+label var mse_gb_census "Gradient Boosting (CEN-MUN)"
+label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
+label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
+label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
+label var mse_eb        "Unit-level"                              
 label var mse_uc        "Unit-context"      
-label var mse_fh        "Fay-Herriot (Census agg. PSU)"
-label var mse_fh_mun        "Fay-Herriot (Census agg. mun)"  
-label var mse_fh_mun_gis        "Fay-Herriot (GIS mun)"                    
+label var mse_fh        "Area-level (CEN-PSU)"
+label var mse_fh_mun        "Area-level (CEN-MUN)"  
+label var mse_fh_mun_gis        "Area-level (GIS-MUN)"                    
 graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis, ytitle(Empirical MSE) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
@@ -134,27 +133,26 @@ graph export "$outpath/Figure-2a.pdf", as(pdf) replace
 graph export "$outpath/Figure-2a.png", as(png) replace
 
 * Basic bias plot
-use "$inpath\fh_mse_bias.dta", clear
+use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh
 rename area muni
 tempfile uno
 save `uno'
 
-use "$inpath\fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh_mun
 rename area muni
 tempfile dos
 save `dos'
 
-use "$inpath\fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh_mun_gis
 rename area muni
 tempfile tres
 save `tres'
-
 
 import delimited "$inpath/results_bias.csv", clear
 merge 1:1 muni using `uno', keepusing(bias_fh)
@@ -169,15 +167,15 @@ merge 1:1 muni using `tres', keepusing(bias_fh)
 
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh*
 tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
-label var bias_gb_census "Gradient Boosting (Census agg. mun)"
-label var bias_gb_gis "Gradient Boosting (GIS mun)"
-label var bias_gb_all "Gradient Boosting (All mun)"
-label var bias_gb_psu "Gradient Boosting (Census agg. PSU)"
-label var bias_eb   "CensusEB"       
+label var bias_gb_census "Gradient Boosting (CEN-MUN)"
+label var bias_gb_gis "Gradient Boosting (GIS-MUN)"
+label var bias_gb_all "Gradient Boosting (ALL-MUN)"
+label var bias_gb_psu "Gradient Boosting (CEN-PSU)"
+label var bias_eb   "Unit-level"       
 label var bias_uc   "Unit-context"
-label var bias_fh        "Fay-Herriot (Census agg. PSU)"
-label var bias_fh_mun        "Fay-Herriot (Census agg. mun)"  
-label var bias_fh_mun_gis        "Fay-Herriot (GIS mun)"  
+label var bias_fh        "Area-level (CEN-PSU)"
+label var bias_fh_mun        "Area-level (CEN-MUN)"  
+label var bias_fh_mun_gis        "Area-level (GIS-MUN)"  
   
 graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun bias_fh_mun_gis, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
@@ -191,25 +189,25 @@ import delimited "$inpath/gb_importance_all_mun.csv", clear
 egen imp = rowmean(imp*)
 gsort -imp
 drop if _n >20
-replace variable = "Cellphone ownership (census)" if variable == "census_cellphone"
-replace variable = "Television ownership (census)" if variable == "census_television"
-replace variable = "Computer ownership (census)" if variable == "census_computer"
-replace variable = "Access to internet (census)" if variable == "census_internet"
-replace variable = "Washing machine ownership (census)" if variable == "census_washmachine"
-replace variable = "Adult population share (census)" if variable == "census_share_adult"
-replace variable = "Refrigerator ownership (census)" if variable == "census_fridge"
-replace variable = "Male household share (census)" if variable == "census_male_hh"
-replace variable = "Household size (census)" if variable == "census_hhsize"
-replace variable = "No sewage access (census)" if variable == "census_no_sewage"
-replace variable = "Under 15 population share (census)" if variable == "census_share_under15"
-replace variable = "Elderly population share (census)" if variable == "census_share_elderly"
-replace variable = "Normalized difference water index (GIS)" if variable == "gis_ndwimean"
-replace variable = "Age of household head (census)" if variable == "census_age_hh"
+replace variable = "Cellphone ownership (CEN)" if variable == "census_cellphone"
+replace variable = "Television ownership (CEN)" if variable == "census_television"
+replace variable = "Computer ownership (CEN)" if variable == "census_computer"
+replace variable = "Access to internet (CEN)" if variable == "census_internet"
+replace variable = "Washing machine ownership (CEN)" if variable == "census_washmachine"
+replace variable = "Adult population share (CEN)" if variable == "census_share_adult"
+replace variable = "Refrigerator ownership (CEN)" if variable == "census_fridge"
+replace variable = "Male household share (CEN)" if variable == "census_male_hh"
+replace variable = "Household size (CEN)" if variable == "census_hhsize"
+replace variable = "No sewage access (CEN)" if variable == "census_no_sewage"
+replace variable = "Under 15 population share (CEN)" if variable == "census_share_under15"
+replace variable = "Elderly population share (CEN)" if variable == "census_share_elderly"
+replace variable = "Mean normalized difference water index (GIS)" if variable == "gis_ndwimean"
+replace variable = "Age of household head (CEN)" if variable == "census_age_hh"
 replace variable = "Simple ratio standard deviation (GIS)" if variable == "gis_srstddev"
-replace variable = "Secondary education share (census)" if variable == "census_max_secondary"
+replace variable = "Secondary education share (CEN)" if variable == "census_max_secondary"
 replace variable = "Maximum built up index (GIS)" if variable == "gis_bumax"
 replace variable = "Maximum urban index (GIS)" if variable == "gis_uimax"
-replace variable = "Tertiary education share (census)" if variable == "census_max_tertiary"
+replace variable = "Tertiary education share (CEN)" if variable == "census_max_tertiary"
 replace variable = "Mean slope from digital model (GIS)" if variable == "gis_mdepmean"
 graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
     ytitle(Feature Importance)
@@ -217,14 +215,14 @@ graph export "$outpath/Figure-3.pdf", as(pdf) replace
 graph export "$outpath/Figure-3.png", as(png) replace
 	
 * MSE by poverty quantiles
-use "$inpath\fh_mse_bias.dta", clear
+use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh
 rename area muni
 tempfile uno
 save `uno'
 
-use "$inpath\fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh_mun
 rename area muni
@@ -258,21 +256,21 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	(line mse_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line mse_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
-	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.88))
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
+	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
+	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
 graph export "$outpath/Figure-4a.png", as(png) replace
 
 * Bias by poverty quantiles
-use "$inpath\fh_mse_bias.dta", clear
+use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh
 rename area muni
 tempfile uno
 save `uno'
 
-use "$inpath\fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh_mun
 rename area muni
@@ -306,9 +304,9 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 	(line bias_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line bias_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
 	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS mun)") label(2 "CensusEB") ///
-	label(3 "Gradient Boosting (Census agg. mun)") label(4 "Unit-context") ///
-	label(5 "Fay-Herriot (Census agg. PSU)") label(6 "Fay-Herriot (Census agg. mun)") symxsize(*0.7) size(*.88))
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
+	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
+	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
 graph export "$outpath/Figure-4b.png", as(png) replace
 
@@ -356,15 +354,15 @@ replace gb_census_psu = gb_census_psu*100
 replace eb = eb*100
 replace uc = uc*100
 tabstat eb-uc, stat(p50)
-label var gb_census_mun "Gradient Boosting (Census agg. mun)"
-label var gb_gis_mun    "Gradient Boosting (GIS mun)"         
-label var gb_all_mun    "Gradient Boosting (All mun)"            
-label var gb_census_psu    "Gradient Boosting (Census agg. PSU)"
-label var eb        "CensusEB"                              
+label var gb_census_mun "Gradient Boosting (CEN-MUN)"
+label var gb_gis_mun    "Gradient Boosting (GIS-MUN)"         
+label var gb_all_mun    "Gradient Boosting (ALL-MUN)"            
+label var gb_census_psu    "Gradient Boosting (CEN-PSU)"
+label var eb        "Unit-level"                              
 label var uc        "Unit-context"  
-label var fh        "Fay-Herriot (Census agg. PSU)"
-label var fh_mun        "Fay-Herriot (Census agg. mun)"   
-label var fh_mun_gis        "Fay-Herriot (GIS mun)"   
+label var fh        "Area-level (CEN-PSU)"
+label var fh_mun        "Area-level (CEN-MUN)"   
+label var fh_mun_gis        "Area-level (GIS-MUN)"   
 
 graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///

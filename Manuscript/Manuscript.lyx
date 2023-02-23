@@ -2989,7 +2989,7 @@ name "sec:results"
 \end_layout
 
 \begin_layout Standard
-Recall from the previous section that the 
+Recall that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3000,7 +3000,7 @@ Recall from the previous section that the
 \begin_inset Formula $R^{2}$
 \end_inset
 
- associated with the XGBoost model when using both the direct estimates
+ associated with gradient boosting when using both the direct estimates
  and true poverty rates as the basis for performance assessment.
  We conduct this comparison at two different levels of estimation, namely
  the PSU and municipality levels.
@@ -3238,6 +3238,12 @@ direct
 \end_inset
 
  then identifies the incorrect level of estimation for 433 of the 500 samples.
+ The reason for this is that the PSU-level direct 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ exhibits greater bias because the direct estimates in this case are generated
+ with smaller samples sizes, increasing measurement error.
 \end_layout
 
 \begin_layout Standard
@@ -3519,11 +3525,10 @@ noprefix "false"
 \end_inset
 
 ]).
- We first consider how gradient boosting performs relative to the traditional
- methods when using the same data and, as such, we focus only on comparing
- methods that use census-based covariates.
- The gradient boosting implementations at the municipality and PSU levels
- achieve median MSE values of 0.003 and 0.002, respectively.
+ It is useful to first consider how gradient boosting performs relative
+ to the traditional models when using the same census-based covariates.
+ In this case, the gradient boosting implementations at the municipality
+ and PSU levels achieve median MSE values of 0.003 and 0.002, respectively.
  In contrast, the 
 \begin_inset Quotes eld
 \end_inset
@@ -3538,7 +3543,8 @@ gold standard
  These results suggest that, when using the same data, gradient boosting
  performs comparably (if not better) than the unit-level model and better
  than the unit-context and area-level models.
- 
+ This is an expected result given that gradient boosting accommodates more
+ flexible functional forms.
 \end_layout
 
 \begin_layout Standard
@@ -3593,11 +3599,9 @@ noprefix "false"
 \end_inset
 
 ] for the bias-variance decomposition of the MSE).
- That is, each box plot summarizes the distribution of bias estimates across
- all municipalities in our Mexican data.
- The median bias for all models is approximately zero, except for the Fay-Herrio
-t (Census agg.
- PSU) and the unit-context models.
+ The median bias for all models is approximately zero, with the possible
+ exception of the unit-context model and the area-level model estimated
+ at the PSU level.
 \begin_inset Foot
 status collapsed
 
@@ -3623,33 +3627,14 @@ literal "false"
 
 \end_inset
 
- The median bias of the unit-context model is -0.03, meaning that it underestimat
-es the median municipality-level poverty rates by about three percentage
- points.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-There are 1,865 municipalities in our census.
-\end_layout
-
-\end_inset
-
- The Fay-Herriot model fit at the PSU level and then aggregated to the municipal
-ity level also displays a slight upward bias, although it is less pronounced.
- The Fay-Herriot model fit at the municipality level does not display a
- similar bias.
- 
-\end_layout
-
-\begin_layout Standard
-The bias estimates for the XGBoost model with GIS-based covariates exhibits
- considerable variation, with minimum and maximum biases reaching -0.43 and
- 0.43, respectively.
- That is, the model with GIS-based covariates is severely biased for some
- municipalities, even though its median bias is approximately zero.
- The XGBoost models incorporating census-based covariates exhibit much less
- variation.
+ Perhaps the more interesting result is that the bias estimates from the
+ gradient boosting model with geo-referenced covariates exhibits considerable
+ variation, with minimum and maximum biases reaching -0.43 and 0.43, respectively.
+ That is, the standard implementation with remotely-sensed covariates is
+ severely biased for some municipalities, even though its median bias is
+ approximately zero.
+ All other models, including the competing unit-context and area-level models,
+ exhibit much less variation.
 \end_layout
 
 \begin_layout Standard
@@ -3661,6 +3646,16 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Graphics
+	filename Figure-3.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3677,27 +3672,11 @@ name "fig:importance"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3.png
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
 \size small
-Note: Figure illustrates the average feature importance across all 500 models
- fit to the 500 samples of the census data.
+Note: This figure illustrates the average feature importance for machine-learnin
+g models fit to the 500 samples of the census data.
  The importance corresponds to the reduction of the loss function associated
- to each feature.
+ with each feature.
 \end_layout
 
 \end_inset
@@ -3706,13 +3685,13 @@ Note: Figure illustrates the average feature importance across all 500 models
 \end_layout
 
 \begin_layout Standard
-It is evident that the performance of XGBoost methods depend heavily on
- the covariates used in the model, with the census-based covariates appearing
- to considerably improve the performance of the model.
+The performance of the machine-learning method depends heavily on the covariates
+ used in the model, with the census-based covariates appearing to considerably
+ improve performance.
  Another way to see that the census-based covariates have greater predictive
- power than the GIS-based covariates is by looking at feature importance.
- The standard measure of feature importance used by XGBoost summarizes the
- gain (i.e., reduction of the loss function) associated with any given feature.
+ power than the geo-referenced covariates is by looking at feature importance.
+ One popular measure of feature importance summarizes the gain (i.e., reduction
+ of the loss function) associated with any given feature.
  That is, for a given run of the model, feature importance captures the
  average gain of a given feature, where the gains are averaged across all
  trees in the model.
@@ -3737,10 +3716,10 @@ noprefix "false"
 \end_inset
 
  plots the 20 covariates with the highest feature importance after running
- XGBoost with all covariates on each sample and averaging each covariate's
- importance across the 500 samples.
+ gradient boosting with all covariates on each sample and averaging each
+ covariate's importance across the 500 samples.
  We find that all of the top 10 covariates are census-based, with only five
- GIS-based covariates entering the top 20.
+ geo-referenced covariates entering the top 20.
 \end_layout
 
 \begin_layout Standard
@@ -3748,25 +3727,6 @@ noprefix "false"
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MSE and bias by poverty quantiles for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:quantiles"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \begin_layout Plain Layout
 \noindent
@@ -3781,7 +3741,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-4a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3818,7 +3778,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-4b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3843,10 +3803,29 @@ Bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias by poverty quantiles for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:quantiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \size small
-Note: Figure illustrates the empirical bias and MSE for municipalities correspon
-ding to each quantile.
+Note: This figure illustrates the MSE and bias for municipalities corresponding
+ to each quantile.
  Municipality quantiles correspond to the ordering of municipalities by
  their true poverty rate.
 \end_layout
@@ -3878,23 +3857,29 @@ poverty quantiles.
  That is, we order all municipalities by their true poverty rates, divide
  them into 50 quantiles, and calculate the average MSE and bias for each
  quantile.
- For the sake of simplicity, we only present results for two XGBoost models
- – namely the municipality-level models using only GIS- and census-based
- covariates – and the CensusEB, unit-context, and Fay-Herriot models.
+ For the sake of simplicity, we only present results for two machine-learning
+ models – the municipality-level models using only geo-referenced and census-bas
+ed covariates – and select traditional methods.
  Panel (a) presents the MSE results and panel (b) presents the bias results.
- In both plots, the XGBoost model with census-based covariates performs
- quite similarly to the CensusEB model across all quantiles.
- However, the XGBoost model with the GIS-based covariates again departs
+ In both plots, gradient boosting with census-based covariates performs
+ quite similarly to the 
+\begin_inset Quotes eld
+\end_inset
+
+gold standard
+\begin_inset Quotes erd
+\end_inset
+
+ unit-level model across all quantiles.
+ However, gradient boosting with geo-referenced covariates again departs
  considerably from this benchmark, particularly at the lowest and highest
  quantiles.
- The bias results are particularly notable: the XGBoost model with GIS covariate
-s systematically underestimates poverty at the lowest quantiles and overestimate
-s poverty at the highest quantiles.
- The model with GIS covariates thus understates the spatial distribution
- of poverty.
- Finally, unit-conext models also display considerable bias and noise among
- the poorest municipalities, suggesting estimates of poverty among the poorest
- areas are considerably unreliable.
+ The bias results are particularly notable: the model with geo-referenced
+ covariates systematically underestimates poverty at the lowest quantiles
+ and overestimates poverty at the highest quantiles.
+ The standard implementation thus understates the spatial distribution of
+ poverty.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -3902,25 +3887,6 @@ s poverty at the highest quantiles.
 wide false
 sideways false
 status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MSE and bias with alternative machine-learning models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ml"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
 
 \begin_layout Plain Layout
 \noindent
@@ -3935,7 +3901,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-5a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -3976,7 +3942,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-5b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4005,18 +3971,30 @@ Bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MSE and bias with alternative machine-learning models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \size small
-Note: Figures presents the MSE and bias for each applied method.
- The MSE is calculated as the mean squared difference between the model
- based estimate for a given municipality (obtained from each of the 500
- samples drawn from the census) and the municipality's true poverty rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the MSE and bias of
- the method's estimates.
- All methods rely on GIS covariates only and are fit at the municipality
+Note: This figure presents the MSE and bias results for several alternative
+ machine-learning methods.
+ All methods use only geo-referenced covariates and are fit at the municipality
  level.
 \end_layout
 
@@ -4026,9 +4004,9 @@ Note: Figures presents the MSE and bias for each applied method.
 \end_layout
 
 \begin_layout Standard
-Up to this point, we have focused exclusively on the performance of XGBoost,
- but there are nevertheless several other machine-learning models that might
- be used for poverty mapping.
+While we have focused on the performance of gradient boosting up to this
+ point, there are nevertheless several other machine-learning models that
+ can be used for poverty mapping.
  Leading alternatives include the least absolute shrinkage and selection
  operator (lasso) 
 \begin_inset CommandInset citation
@@ -4057,11 +4035,11 @@ literal "false"
 .
  While the lasso is a simple way to conduct variable selection and regularizatio
 n in the context of linear regression, the random forest and BART models
- are quite similar to XGBoost in that they all rely on flexible regression
- tree frameworks.
- We ask whether these alternative models can perform better than XGBoost
- within the confines of the standard implementation, which relies exclusively
- on GIS-based covariates.
+ are similar to gradient boosting in that they all rely on regression tree
+ frameworks.
+ We ask whether these alternative models can perform better than gradient
+ boosting within the confines of the standard implementation, which relies
+ exclusively on remotely-sensed covariates.
  Panels (a) and (b) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4074,9 +4052,53 @@ noprefix "false"
 
  present the MSE and bias results for all models.
  With the possible exception of the lasso, we find that all models perform
- comparably in terms of MSE and bias, meaning that the poor performance
- of XGBoost when using GIS covariates cannot be remedied by simply adopting
- a different machine-learning model.
+ comparably, meaning that the performance of gradient boosting when using
+ geo-referenced covariates cannot be remedied by simply adopting a different
+ machine-learning model.
+\end_layout
+
+\begin_layout Standard
+Finally, recall from Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:validation"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ that we argued that the ultimate concern with poverty mapping is to understand
+ how different methodological choices affect poverty alleviation.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ thus compares the machine-learning and traditional approaches in terms
+ of their ability to reduce poverty in the context of our targeting simulations.
+ In these simulations, a hypothetical poverty-alleviation program targeted
+ on the basis of 
+\shape italic
+true
+\shape default
+ municipality-level poverty rates is able to reduce the overall poverty
+ headcount to just under 20 percent.
+ While the achieved poverty rates of all models fall within the 20 percent
+ range, we find that gradient boosting with geo-referenced covariates is
+ one of the worst performing models.
+ With the exception of the area-level model using geo-referenced covariates,
+ the standard implementation is thus outperformed by all traditional methods,
+ including those that are direct competitors.
+ However, when incorporating census-based covariates, we find that gradient
+ boosting achieves poverty rates that are comparable to the traditional
+ methods, yet again showing that an exclusive reliance on remotely-sensed
+ data can limit the performance of the machine learning.
 \end_layout
 
 \begin_layout Standard
@@ -4084,6 +4106,18 @@ noprefix "false"
 wide false
 sideways false
 status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6.png
+	scale 20
+
+\end_inset
+
+
+\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4102,86 +4136,17 @@ name "fig:targeting"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-6.png
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
 \size small
-Note: Figure illustrates the poverty reduction potential of relying on estimates
- from each method to rank municipalities and prioritize the poorest municipaliti
-es in a cash transfer scheme described in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "subsec:Targeting"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The box-plot show the spread of the 500 resulting targeting simulations
- conducted with each methods estimates.
- 
+Note: This figure illustrates the poverty reduction potential of relying
+ on estimates from each method to rank municipalities and prioritize the
+ poorest municipalities in a simulated cash-transfer scheme.
+ The box-plots show the distribution of 500 targeting simulations conducted
+ with each method's estimates.
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Finally, recall from Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- that we argued that the ultimate concern with poverty mapping is to understand
- how different methodological choices affect poverty alleviation.
- Due to how the simulation is constructed, the bias and noise of the estimates
- play a lesser role and take a back seat to accurate rankings produced by
- methods.
- Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:targeting"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- thus compares our seven initial models in terms of their ability to reduce
- poverty in the context of our targeting simulations.
- In these simulations, a hypothetical poverty-alleviation program targeted
- on the basis of true municipality-level poverty rates is able to reduce
- the overall poverty headcount to just under 20 percent.
- While the achieved poverty rates of all models fall within the 20 percent
- range, we see once again that the XGBoost model with GIS covariates is
- the worst performing model.
- The best performing XGBoost model is the implementation at the PSU level,
- which achieves a median poverty rate across all simulations of 20.02.
- These results are just a tad higher than the CensusEB estimates (median
- of 19.99) and those from the unit-context models (median of 20.01) but are
- slightly below those of the Fay-Herriot models.
- 
 \end_layout
 
 \begin_layout Section
