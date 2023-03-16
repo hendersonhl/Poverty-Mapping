@@ -59,6 +59,7 @@ use "$inpath\my_samples_pps_psu@.dta" if sim_sample<=500, clear
 duplicates drop muni, force
 
 xtile psel_qtile = prob, nq(5)
+xtile psel_ctile = prob, nq(100)
 
 
 tempfile psel
@@ -126,6 +127,46 @@ append using `xgb'
 merge m:1 muni using `psel'
 graph hbox mse if psel_qtile==1, over(method) noout
 
+preserve
+	groupfunction, mean(mse bias) by(method psel_qtile)
+	reshape wide mse bias, i(method_des) j(psel_qtile)
+	list method mse1 mse2 mse3 mse4 mse5
+	list method bias1 bias2 bias3 bias4 bias5
+restore
+
 //graph hbox mse if psel_qtile==5, over(method) noout
+preserve
+	groupfunction, mean(mse bias) by(method psel_ctile)
+	twoway (line mse psel_ctile if regexm(method, "U-C")) (line mse psel_ctile if regexm(method, "Fay")) (line mse psel_ctile if regexm(method, "XG"))
+restore
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	
