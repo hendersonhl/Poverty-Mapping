@@ -1,4 +1,504 @@
 variable,sim,fgt0,fgt1,fgt2,model_t,dtype,level
+gb_census_hhid_demo,1,.20041709,.059167188,.02740003,XGboost,Census microdata,HH level
+gb_census_hhid_demo,2,.20009668,.058984332,.027330779,XGboost,Census microdata,HH level
+gb_census_hhid_demo,3,.20037918,.059105199,.027367381,XGboost,Census microdata,HH level
+gb_census_hhid_demo,4,.20024547,.059160877,.02744096,XGboost,Census microdata,HH level
+gb_census_hhid_demo,5,.20025875,.059255712,.027513446,XGboost,Census microdata,HH level
+gb_census_hhid_demo,6,.20032303,.059319496,.027552513,XGboost,Census microdata,HH level
+gb_census_hhid_demo,7,.20039438,.059178978,.027418995,XGboost,Census microdata,HH level
+gb_census_hhid_demo,8,.20012324,.059131164,.027426509,XGboost,Census microdata,HH level
+gb_census_hhid_demo,9,.20011976,.059280973,.027550284,XGboost,Census microdata,HH level
+gb_census_hhid_demo,10,.20026967,.059130669,.027403291,XGboost,Census microdata,HH level
+gb_census_hhid_demo,11,.20037863,.05931925,.027542032,XGboost,Census microdata,HH level
+gb_census_hhid_demo,12,.20036143,.059461284,.027664775,XGboost,Census microdata,HH level
+gb_census_hhid_demo,13,.20033184,.059169158,.027407452,XGboost,Census microdata,HH level
+gb_census_hhid_demo,14,.20025776,.059177857,.027437789,XGboost,Census microdata,HH level
+gb_census_hhid_demo,15,.20036604,.059440129,.027663123,XGboost,Census microdata,HH level
+gb_census_hhid_demo,16,.20015414,.059024692,.027339227,XGboost,Census microdata,HH level
+gb_census_hhid_demo,17,.19996662,.059009869,.027356956,XGboost,Census microdata,HH level
+gb_census_hhid_demo,18,.20030764,.059239395,.027498785,XGboost,Census microdata,HH level
+gb_census_hhid_demo,19,.20011802,.059255607,.02754152,XGboost,Census microdata,HH level
+gb_census_hhid_demo,20,.20044421,.059307922,.027536878,XGboost,Census microdata,HH level
+gb_census_hhid_demo,21,.20029597,.059123714,.027406093,XGboost,Census microdata,HH level
+gb_census_hhid_demo,22,.20037702,.059236016,.027471395,XGboost,Census microdata,HH level
+gb_census_hhid_demo,23,.20033054,.059210174,.027480757,XGboost,Census microdata,HH level
+gb_census_hhid_demo,24,.20025694,.059222616,.027494606,XGboost,Census microdata,HH level
+gb_census_hhid_demo,25,.20031267,.059155714,.027422087,XGboost,Census microdata,HH level
+gb_census_hhid_demo,26,.20028996,.059237503,.027496196,XGboost,Census microdata,HH level
+gb_census_hhid_demo,27,.1999353,.059095174,.027416887,XGboost,Census microdata,HH level
+gb_census_hhid_demo,28,.20024212,.059196796,.027459553,XGboost,Census microdata,HH level
+gb_census_hhid_demo,29,.20002694,.059193168,.027515065,XGboost,Census microdata,HH level
+gb_census_hhid_demo,30,.20040208,.059199296,.027438495,XGboost,Census microdata,HH level
+gb_census_hhid_demo,31,.20016959,.059470996,.027702618,XGboost,Census microdata,HH level
+gb_census_hhid_demo,32,.2004305,.059400477,.027602643,XGboost,Census microdata,HH level
+gb_census_hhid_demo,33,.20021872,.059312992,.027577642,XGboost,Census microdata,HH level
+gb_census_hhid_demo,34,.20029536,.059231609,.027485782,XGboost,Census microdata,HH level
+gb_census_hhid_demo,35,.20027377,.059311707,.027567668,XGboost,Census microdata,HH level
+gb_census_hhid_demo,36,.20056917,.059302818,.027511835,XGboost,Census microdata,HH level
+gb_census_hhid_demo,37,.20027693,.059288647,.027536621,XGboost,Census microdata,HH level
+gb_census_hhid_demo,38,.20036721,.059323434,.02752954,XGboost,Census microdata,HH level
+gb_census_hhid_demo,39,.20013608,.059228223,.02752563,XGboost,Census microdata,HH level
+gb_census_hhid_demo,40,.2005183,.059214439,.02743323,XGboost,Census microdata,HH level
+gb_census_hhid_demo,41,.20036641,.05928728,.027526272,XGboost,Census microdata,HH level
+gb_census_hhid_demo,42,.20024274,.059165433,.027435692,XGboost,Census microdata,HH level
+gb_census_hhid_demo,43,.20052549,.059362829,.027547285,XGboost,Census microdata,HH level
+gb_census_hhid_demo,44,.20014024,.059148457,.027418992,XGboost,Census microdata,HH level
+gb_census_hhid_demo,45,.20029821,.059425008,.027657533,XGboost,Census microdata,HH level
+gb_census_hhid_demo,46,.20029852,.059277926,.027530527,XGboost,Census microdata,HH level
+gb_census_hhid_demo,47,.20001087,.059175599,.027496776,XGboost,Census microdata,HH level
+gb_census_hhid_demo,48,.20044415,.059274562,.027507534,XGboost,Census microdata,HH level
+gb_census_hhid_demo,49,.20010333,.059130397,.027437234,XGboost,Census microdata,HH level
+gb_census_hhid_demo,50,.2001009,.059127498,.027447244,XGboost,Census microdata,HH level
+gb_census_hhid_demo,51,.20048498,.059372969,.027576694,XGboost,Census microdata,HH level
+gb_census_hhid_demo,52,.20015973,.059112206,.027421046,XGboost,Census microdata,HH level
+gb_census_hhid_demo,53,.20014508,.059205696,.027491016,XGboost,Census microdata,HH level
+gb_census_hhid_demo,54,.20020278,.059156455,.027422924,XGboost,Census microdata,HH level
+gb_census_hhid_demo,55,.20048857,.059135292,.027361548,XGboost,Census microdata,HH level
+gb_census_hhid_demo,56,.20000596,.059105374,.02744096,XGboost,Census microdata,HH level
+gb_census_hhid_demo,57,.20042124,.059212606,.027461903,XGboost,Census microdata,HH level
+gb_census_hhid_demo,58,.20048633,.059175167,.027406789,XGboost,Census microdata,HH level
+gb_census_hhid_demo,59,.20016544,.059131891,.027439147,XGboost,Census microdata,HH level
+gb_census_hhid_demo,60,.20034729,.059232492,.027479975,XGboost,Census microdata,HH level
+gb_census_hhid_demo,61,.2004869,.059340414,.027548181,XGboost,Census microdata,HH level
+gb_census_hhid_demo,62,.20034698,.059311312,.02756086,XGboost,Census microdata,HH level
+gb_census_hhid_demo,63,.20013918,.059110604,.027419804,XGboost,Census microdata,HH level
+gb_census_hhid_demo,64,.20002067,.059019528,.027335133,XGboost,Census microdata,HH level
+gb_census_hhid_demo,65,.20043428,.059226513,.027446982,XGboost,Census microdata,HH level
+gb_census_hhid_demo,66,.20041895,.059080087,.027338549,XGboost,Census microdata,HH level
+gb_census_hhid_demo,67,.20025502,.059285328,.027522581,XGboost,Census microdata,HH level
+gb_census_hhid_demo,68,.20035778,.05919816,.027435917,XGboost,Census microdata,HH level
+gb_census_hhid_demo,69,.20017287,.059147991,.027453355,XGboost,Census microdata,HH level
+gb_census_hhid_demo,70,.200386,.059181459,.027424593,XGboost,Census microdata,HH level
+gb_census_hhid_demo,71,.20038173,.059493843,.027718406,XGboost,Census microdata,HH level
+gb_census_hhid_demo,72,.20036647,.05916569,.027415944,XGboost,Census microdata,HH level
+gb_census_hhid_demo,73,.20038402,.059226468,.027455509,XGboost,Census microdata,HH level
+gb_census_hhid_demo,74,.20029163,.059279025,.02751418,XGboost,Census microdata,HH level
+gb_census_hhid_demo,75,.20023188,.059096724,.027390851,XGboost,Census microdata,HH level
+gb_census_hhid_demo,76,.20019534,.0591303,.027414417,XGboost,Census microdata,HH level
+gb_census_hhid_demo,77,.20046797,.059380118,.027588639,XGboost,Census microdata,HH level
+gb_census_hhid_demo,78,.20026228,.059245404,.027507748,XGboost,Census microdata,HH level
+gb_census_hhid_demo,79,.20034797,.059257917,.02751198,XGboost,Census microdata,HH level
+gb_census_hhid_demo,80,.20045897,.05931266,.027533771,XGboost,Census microdata,HH level
+gb_census_hhid_demo,81,.20027097,.059338208,.027592296,XGboost,Census microdata,HH level
+gb_census_hhid_demo,82,.20008384,.058994774,.027325893,XGboost,Census microdata,HH level
+gb_census_hhid_demo,83,.20055564,.059207641,.02743293,XGboost,Census microdata,HH level
+gb_census_hhid_demo,84,.20018348,.059080232,.027376374,XGboost,Census microdata,HH level
+gb_census_hhid_demo,85,.20039128,.059269689,.027514694,XGboost,Census microdata,HH level
+gb_census_hhid_demo,86,.20018348,.059299279,.027582297,XGboost,Census microdata,HH level
+gb_census_hhid_demo,87,.20003606,.059186373,.027490251,XGboost,Census microdata,HH level
+gb_census_hhid_demo,88,.20038377,.059214715,.027464841,XGboost,Census microdata,HH level
+gb_census_hhid_demo,89,.20035964,.059346646,.027557861,XGboost,Census microdata,HH level
+gb_census_hhid_demo,90,.20043813,.059142929,.027410084,XGboost,Census microdata,HH level
+gb_census_hhid_demo,91,.20032477,.0591661,.027422894,XGboost,Census microdata,HH level
+gb_census_hhid_demo,92,.20032284,.059069861,.027348347,XGboost,Census microdata,HH level
+gb_census_hhid_demo,93,.20043813,.059191968,.027435139,XGboost,Census microdata,HH level
+gb_census_hhid_demo,94,.20039675,.059252203,.027481379,XGboost,Census microdata,HH level
+gb_census_hhid_demo,95,.20039326,.059311703,.027540904,XGboost,Census microdata,HH level
+gb_census_hhid_demo,96,.200387,.059136078,.027374092,XGboost,Census microdata,HH level
+gb_census_hhid_demo,97,.20025223,.059355848,.027607093,XGboost,Census microdata,HH level
+gb_census_hhid_demo,98,.20031601,.059421159,.027643988,XGboost,Census microdata,HH level
+gb_census_hhid_demo,99,.20035219,.059098434,.027372345,XGboost,Census microdata,HH level
+gb_census_hhid_demo,100,.20017542,.059115909,.027403962,XGboost,Census microdata,HH level
+gb_census_hhid_demo,101,.20054628,.059385475,.027582312,XGboost,Census microdata,HH level
+gb_census_hhid_demo,102,.20028226,.059277564,.027540667,XGboost,Census microdata,HH level
+gb_census_hhid_demo,103,.20025471,.059208944,.027473157,XGboost,Census microdata,HH level
+gb_census_hhid_demo,104,.20056246,.059284255,.027496343,XGboost,Census microdata,HH level
+gb_census_hhid_demo,105,.20032774,.059157122,.027423857,XGboost,Census microdata,HH level
+gb_census_hhid_demo,106,.20041108,.059248891,.027492905,XGboost,Census microdata,HH level
+gb_census_hhid_demo,107,.20046841,.059406962,.027608898,XGboost,Census microdata,HH level
+gb_census_hhid_demo,108,.20028375,.059242211,.027504206,XGboost,Census microdata,HH level
+gb_census_hhid_demo,109,.20022525,.059137285,.027416542,XGboost,Census microdata,HH level
+gb_census_hhid_demo,110,.20034921,.05932701,.027559744,XGboost,Census microdata,HH level
+gb_census_hhid_demo,111,.20067956,.05935207,.02752755,XGboost,Census microdata,HH level
+gb_census_hhid_demo,112,.20022766,.059121363,.027420741,XGboost,Census microdata,HH level
+gb_census_hhid_demo,113,.20046183,.059301399,.027519302,XGboost,Census microdata,HH level
+gb_census_hhid_demo,114,.20036119,.059277229,.027501123,XGboost,Census microdata,HH level
+gb_census_hhid_demo,115,.20032074,.059314914,.027542807,XGboost,Census microdata,HH level
+gb_census_hhid_demo,116,.20030981,.059133757,.027406937,XGboost,Census microdata,HH level
+gb_census_hhid_demo,117,.19987319,.059035715,.027387943,XGboost,Census microdata,HH level
+gb_census_hhid_demo,118,.20016493,.059294645,.027563699,XGboost,Census microdata,HH level
+gb_census_hhid_demo,119,.20029753,.05914592,.027409021,XGboost,Census microdata,HH level
+gb_census_hhid_demo,120,.2002003,.05933743,.027588565,XGboost,Census microdata,HH level
+gb_census_hhid_demo,121,.20028375,.059167247,.027432716,XGboost,Census microdata,HH level
+gb_census_hhid_demo,122,.2001887,.059201293,.02748662,XGboost,Census microdata,HH level
+gb_census_hhid_demo,123,.20012274,.059340253,.027598541,XGboost,Census microdata,HH level
+gb_census_hhid_demo,124,.20011982,.059236601,.027513165,XGboost,Census microdata,HH level
+gb_census_hhid_demo,125,.20025912,.059135482,.027431075,XGboost,Census microdata,HH level
+gb_census_hhid_demo,126,.20019962,.05926875,.027528593,XGboost,Census microdata,HH level
+gb_census_hhid_demo,127,.20039675,.059443824,.027640712,XGboost,Census microdata,HH level
+gb_census_hhid_demo,128,.2000646,.059021514,.027349418,XGboost,Census microdata,HH level
+gb_census_hhid_demo,129,.20037869,.059271239,.027524114,XGboost,Census microdata,HH level
+gb_census_hhid_demo,130,.20044725,.059309062,.027504627,XGboost,Census microdata,HH level
+gb_census_hhid_demo,131,.20023455,.05926571,.027527463,XGboost,Census microdata,HH level
+gb_census_hhid_demo,132,.19996588,.059144594,.027456861,XGboost,Census microdata,HH level
+gb_census_hhid_demo,133,.20030193,.05922484,.027472077,XGboost,Census microdata,HH level
+gb_census_hhid_demo,134,.20009886,.05921245,.027527818,XGboost,Census microdata,HH level
+gb_census_hhid_demo,135,.20028965,.059136156,.027426608,XGboost,Census microdata,HH level
+gb_census_hhid_demo,136,.20050035,.059218109,.027431162,XGboost,Census microdata,HH level
+gb_census_hhid_demo,137,.20045774,.059209026,.027455697,XGboost,Census microdata,HH level
+gb_census_hhid_demo,138,.20055875,.059341107,.027535567,XGboost,Census microdata,HH level
+gb_census_hhid_demo,139,.20018069,.059236933,.027519492,XGboost,Census microdata,HH level
+gb_census_hhid_demo,140,.200413,.059404518,.02762506,XGboost,Census microdata,HH level
+gb_census_hhid_demo,141,.20056352,.059293989,.027517609,XGboost,Census microdata,HH level
+gb_census_hhid_demo,142,.20022766,.059204068,.027486192,XGboost,Census microdata,HH level
+gb_census_hhid_demo,143,.20021252,.059240993,.027502308,XGboost,Census microdata,HH level
+gb_census_hhid_demo,144,.20021737,.059262428,.027530625,XGboost,Census microdata,HH level
+gb_census_hhid_demo,145,.20010084,.05908408,.027401483,XGboost,Census microdata,HH level
+gb_census_hhid_demo,146,.20018268,.059178878,.027477045,XGboost,Census microdata,HH level
+gb_census_hhid_demo,147,.20021662,.05914367,.027423296,XGboost,Census microdata,HH level
+gb_census_hhid_demo,148,.20031142,.059437621,.027670899,XGboost,Census microdata,HH level
+gb_census_hhid_demo,149,.20018634,.059177294,.027462477,XGboost,Census microdata,HH level
+gb_census_hhid_demo,150,.20037583,.059297889,.027529603,XGboost,Census microdata,HH level
+gb_census_hhid_demo,151,.20027022,.059018821,.027317189,XGboost,Census microdata,HH level
+gb_census_hhid_demo,152,.20013361,.059144236,.027438769,XGboost,Census microdata,HH level
+gb_census_hhid_demo,153,.2002008,.059298035,.02756634,XGboost,Census microdata,HH level
+gb_census_hhid_demo,154,.20005468,.058969982,.02730586,XGboost,Census microdata,HH level
+gb_census_hhid_demo,155,.20016915,.059319776,.027579335,XGboost,Census microdata,HH level
+gb_census_hhid_demo,156,.20048702,.059328403,.027534381,XGboost,Census microdata,HH level
+gb_census_hhid_demo,157,.20042919,.059251703,.027505826,XGboost,Census microdata,HH level
+gb_census_hhid_demo,158,.20036788,.059414536,.027612388,XGboost,Census microdata,HH level
+gb_census_hhid_demo,159,.20040245,.05922756,.027464846,XGboost,Census microdata,HH level
+gb_census_hhid_demo,160,.20022909,.059181362,.027456116,XGboost,Census microdata,HH level
+gb_census_hhid_demo,161,.20033531,.059173811,.027419472,XGboost,Census microdata,HH level
+gb_census_hhid_demo,162,.20004407,.059398051,.027674399,XGboost,Census microdata,HH level
+gb_census_hhid_demo,163,.20030726,.059387352,.027599774,XGboost,Census microdata,HH level
+gb_census_hhid_demo,164,.20040971,.059186958,.027443891,XGboost,Census microdata,HH level
+gb_census_hhid_demo,165,.20030138,.059390895,.027603377,XGboost,Census microdata,HH level
+gb_census_hhid_demo,166,.20002651,.059003945,.027350971,XGboost,Census microdata,HH level
+gb_census_hhid_demo,167,.20051816,.059387017,.027578911,XGboost,Census microdata,HH level
+gb_census_hhid_demo,168,.20032644,.059270885,.027558744,XGboost,Census microdata,HH level
+gb_census_hhid_demo,169,.20020601,.059119254,.027389497,XGboost,Census microdata,HH level
+gb_census_hhid_demo,170,.20044136,.059430812,.027627366,XGboost,Census microdata,HH level
+gb_census_hhid_demo,171,.20025837,.059107702,.027377248,XGboost,Census microdata,HH level
+gb_census_hhid_demo,172,.20025496,.059310842,.027554259,XGboost,Census microdata,HH level
+gb_census_hhid_demo,173,.20061702,.059304629,.027495084,XGboost,Census microdata,HH level
+gb_census_hhid_demo,174,.20028567,.059438981,.027673712,XGboost,Census microdata,HH level
+gb_census_hhid_demo,175,.2002884,.059369337,.027597928,XGboost,Census microdata,HH level
+gb_census_hhid_demo,176,.20036633,.059249748,.027492058,XGboost,Census microdata,HH level
+gb_census_hhid_demo,177,.20059095,.059293546,.02748635,XGboost,Census microdata,HH level
+gb_census_hhid_demo,178,.2004555,.059121434,.027377356,XGboost,Census microdata,HH level
+gb_census_hhid_demo,179,.20025608,.059321124,.02757779,XGboost,Census microdata,HH level
+gb_census_hhid_demo,180,.20029932,.059242528,.027502324,XGboost,Census microdata,HH level
+gb_census_hhid_demo,181,.20019409,.05925132,.027513461,XGboost,Census microdata,HH level
+gb_census_hhid_demo,182,.20019552,.059129957,.027411161,XGboost,Census microdata,HH level
+gb_census_hhid_demo,183,.20053536,.059348784,.027534356,XGboost,Census microdata,HH level
+gb_census_hhid_demo,184,.20026812,.059155781,.027426831,XGboost,Census microdata,HH level
+gb_census_hhid_demo,185,.20021333,.059247173,.027506666,XGboost,Census microdata,HH level
+gb_census_hhid_demo,186,.20033929,.059254289,.027492205,XGboost,Census microdata,HH level
+gb_census_hhid_demo,187,.20011629,.059071153,.027384637,XGboost,Census microdata,HH level
+gb_census_hhid_demo,188,.20038465,.059233349,.027493011,XGboost,Census microdata,HH level
+gb_census_hhid_demo,189,.20019875,.059169754,.02745242,XGboost,Census microdata,HH level
+gb_census_hhid_demo,190,.20038985,.059239306,.027478985,XGboost,Census microdata,HH level
+gb_census_hhid_demo,191,.20024975,.059113327,.02739745,XGboost,Census microdata,HH level
+gb_census_hhid_demo,192,.20015675,.059207827,.027532496,XGboost,Census microdata,HH level
+gb_census_hhid_demo,193,.20044483,.059409086,.027626112,XGboost,Census microdata,HH level
+gb_census_hhid_demo,194,.20002712,.05906735,.027394149,XGboost,Census microdata,HH level
+gb_census_hhid_demo,195,.20042926,.059201054,.027436856,XGboost,Census microdata,HH level
+gb_census_hhid_demo,196,.20026359,.059118584,.027412022,XGboost,Census microdata,HH level
+gb_census_hhid_demo,197,.20040759,.059164293,.027393291,XGboost,Census microdata,HH level
+gb_census_hhid_demo,198,.20014353,.059133608,.027421422,XGboost,Census microdata,HH level
+gb_census_hhid_demo,199,.20020619,.059360616,.027601231,XGboost,Census microdata,HH level
+gb_census_hhid_demo,200,.20040753,.059220482,.027468003,XGboost,Census microdata,HH level
+gb_census_hhid_demo,201,.20026755,.059256408,.027504986,XGboost,Census microdata,HH level
+gb_census_hhid_demo,202,.20007919,.05917253,.027459875,XGboost,Census microdata,HH level
+gb_census_hhid_demo,203,.20021054,.05919344,.027451223,XGboost,Census microdata,HH level
+gb_census_hhid_demo,204,.20022064,.059206251,.027468432,XGboost,Census microdata,HH level
+gb_census_hhid_demo,205,.20011629,.059233233,.027518284,XGboost,Census microdata,HH level
+gb_census_hhid_demo,206,.2002603,.059209947,.027471881,XGboost,Census microdata,HH level
+gb_census_hhid_demo,207,.20029771,.059103515,.027373085,XGboost,Census microdata,HH level
+gb_census_hhid_demo,208,.20048907,.059358213,.027563611,XGboost,Census microdata,HH level
+gb_census_hhid_demo,209,.2002925,.059147157,.027397012,XGboost,Census microdata,HH level
+gb_census_hhid_demo,210,.20009774,.059182528,.027463092,XGboost,Census microdata,HH level
+gb_census_hhid_demo,211,.20018511,.059391104,.027630011,XGboost,Census microdata,HH level
+gb_census_hhid_demo,212,.20020272,.059122283,.027417073,XGboost,Census microdata,HH level
+gb_census_hhid_demo,213,.19997954,.059082199,.027393149,XGboost,Census microdata,HH level
+gb_census_hhid_demo,214,.20010735,.059231106,.027504696,XGboost,Census microdata,HH level
+gb_census_hhid_demo,215,.20017666,.059063692,.027366418,XGboost,Census microdata,HH level
+gb_census_hhid_demo,216,.20044321,.059272949,.027488673,XGboost,Census microdata,HH level
+gb_census_hhid_demo,217,.2004931,.059271105,.027486382,XGboost,Census microdata,HH level
+gb_census_hhid_demo,218,.2004573,.059393317,.027601564,XGboost,Census microdata,HH level
+gb_census_hhid_demo,219,.20030391,.059180729,.027448734,XGboost,Census microdata,HH level
+gb_census_hhid_demo,220,.20019621,.059044678,.027352622,XGboost,Census microdata,HH level
+gb_census_hhid_demo,221,.20071833,.059423931,.02757333,XGboost,Census microdata,HH level
+gb_census_hhid_demo,222,.20032278,.059340805,.027567754,XGboost,Census microdata,HH level
+gb_census_hhid_demo,223,.20024994,.059237216,.027494416,XGboost,Census microdata,HH level
+gb_census_hhid_demo,224,.20046686,.059346765,.027551332,XGboost,Census microdata,HH level
+gb_census_hhid_demo,225,.20029046,.05916756,.027428681,XGboost,Census microdata,HH level
+gb_census_hhid_demo,226,.19999363,.059183549,.027482795,XGboost,Census microdata,HH level
+gb_census_hhid_demo,227,.20021147,.059216194,.027480701,XGboost,Census microdata,HH level
+gb_census_hhid_demo,228,.2002902,.059233744,.02747957,XGboost,Census microdata,HH level
+gb_census_hhid_demo,229,.20002526,.059169456,.027470127,XGboost,Census microdata,HH level
+gb_census_hhid_demo,230,.20020321,.059220705,.02750212,XGboost,Census microdata,HH level
+gb_census_hhid_demo,231,.20028283,.059261993,.027516522,XGboost,Census microdata,HH level
+gb_census_hhid_demo,232,.20032389,.05926181,.027497055,XGboost,Census microdata,HH level
+gb_census_hhid_demo,233,.2003762,.059285808,.027520614,XGboost,Census microdata,HH level
+gb_census_hhid_demo,234,.20062092,.059264984,.027448669,XGboost,Census microdata,HH level
+gb_census_hhid_demo,235,.2002997,.059282057,.027526524,XGboost,Census microdata,HH level
+gb_census_hhid_demo,236,.20025118,.059318524,.027558787,XGboost,Census microdata,HH level
+gb_census_hhid_demo,237,.20027408,.059282251,.027530393,XGboost,Census microdata,HH level
+gb_census_hhid_demo,238,.20013949,.059132546,.027423039,XGboost,Census microdata,HH level
+gb_census_hhid_demo,239,.20019813,.059222374,.027505748,XGboost,Census microdata,HH level
+gb_census_hhid_demo,240,.20036498,.059189368,.027428154,XGboost,Census microdata,HH level
+gb_census_hhid_demo,241,.20036627,.059168134,.027409885,XGboost,Census microdata,HH level
+gb_census_hhid_demo,242,.20042622,.059265416,.027500793,XGboost,Census microdata,HH level
+gb_census_hhid_demo,243,.20024522,.059206422,.027480705,XGboost,Census microdata,HH level
+gb_census_hhid_demo,244,.20006789,.059127603,.027438851,XGboost,Census microdata,HH level
+gb_census_hhid_demo,245,.20036535,.059106395,.027377503,XGboost,Census microdata,HH level
+gb_census_hhid_demo,246,.20014644,.05913157,.027420778,XGboost,Census microdata,HH level
+gb_census_hhid_demo,247,.20011102,.059279058,.027549867,XGboost,Census microdata,HH level
+gb_census_hhid_demo,248,.20014179,.059066128,.027373167,XGboost,Census microdata,HH level
+gb_census_hhid_demo,249,.19997184,.058991689,.027340621,XGboost,Census microdata,HH level
+gb_census_hhid_demo,250,.19995254,.059231792,.027556499,XGboost,Census microdata,HH level
+gb_census_hhid_demo,251,.20031452,.059228893,.027474102,XGboost,Census microdata,HH level
+gb_census_hhid_demo,252,.20023715,.059225831,.027475227,XGboost,Census microdata,HH level
+gb_census_hhid_demo,253,.20039302,.059200253,.027435699,XGboost,Census microdata,HH level
+gb_census_hhid_demo,254,.20027079,.059124228,.027400186,XGboost,Census microdata,HH level
+gb_census_hhid_demo,255,.20033197,.059365422,.027596928,XGboost,Census microdata,HH level
+gb_census_hhid_demo,256,.20015079,.059222411,.027488086,XGboost,Census microdata,HH level
+gb_census_hhid_demo,257,.20033705,.059335586,.027567089,XGboost,Census microdata,HH level
+gb_census_hhid_demo,258,.20015575,.059190545,.027484905,XGboost,Census microdata,HH level
+gb_census_hhid_demo,259,.20035219,.059250828,.027483815,XGboost,Census microdata,HH level
+gb_census_hhid_demo,260,.20033774,.059139073,.027397338,XGboost,Census microdata,HH level
+gb_census_hhid_demo,261,.20015475,.059062075,.027371898,XGboost,Census microdata,HH level
+gb_census_hhid_demo,262,.20019726,.059207726,.027481133,XGboost,Census microdata,HH level
+gb_census_hhid_demo,263,.20035411,.059151541,.027413083,XGboost,Census microdata,HH level
+gb_census_hhid_demo,264,.20001137,.058917977,.027263163,XGboost,Census microdata,HH level
+gb_census_hhid_demo,265,.20059666,.059260242,.027443849,XGboost,Census microdata,HH level
+gb_census_hhid_demo,266,.20015755,.059137013,.027451273,XGboost,Census microdata,HH level
+gb_census_hhid_demo,267,.20036776,.059165906,.027391108,XGboost,Census microdata,HH level
+gb_census_hhid_demo,268,.2001117,.059128016,.027415371,XGboost,Census microdata,HH level
+gb_census_hhid_demo,269,.20030181,.059261322,.027527025,XGboost,Census microdata,HH level
+gb_census_hhid_demo,270,.19997768,.059081264,.027415402,XGboost,Census microdata,HH level
+gb_census_hhid_demo,271,.20024349,.05914123,.027431805,XGboost,Census microdata,HH level
+gb_census_hhid_demo,272,.20045178,.059134401,.027375076,XGboost,Census microdata,HH level
+gb_census_hhid_demo,273,.20015655,.059394654,.027643925,XGboost,Census microdata,HH level
+gb_census_hhid_demo,274,.20022568,.059200868,.027473444,XGboost,Census microdata,HH level
+gb_census_hhid_demo,275,.20068228,.059324406,.02750523,XGboost,Census microdata,HH level
+gb_census_hhid_demo,276,.20017473,.059136599,.027431663,XGboost,Census microdata,HH level
+gb_census_hhid_demo,277,.20024478,.059412744,.027660839,XGboost,Census microdata,HH level
+gb_census_hhid_demo,278,.20020446,.059171703,.02747969,XGboost,Census microdata,HH level
+gb_census_hhid_demo,279,.20030063,.059240289,.027491802,XGboost,Census microdata,HH level
+gb_census_hhid_demo,280,.20020054,.059206065,.027516937,XGboost,Census microdata,HH level
+gb_census_hhid_demo,281,.20037739,.059237484,.027476458,XGboost,Census microdata,HH level
+gb_census_hhid_demo,282,.20025726,.059199877,.027461406,XGboost,Census microdata,HH level
+gb_census_hhid_demo,283,.20052996,.059358001,.027529756,XGboost,Census microdata,HH level
+gb_census_hhid_demo,284,.20034648,.059078179,.027345819,XGboost,Census microdata,HH level
+gb_census_hhid_demo,285,.19988467,.059048198,.027379172,XGboost,Census microdata,HH level
+gb_census_hhid_demo,286,.20028952,.059223246,.027499096,XGboost,Census microdata,HH level
+gb_census_hhid_demo,287,.20048031,.05932641,.027537389,XGboost,Census microdata,HH level
+gb_census_hhid_demo,288,.20039022,.059197549,.027457796,XGboost,Census microdata,HH level
+gb_census_hhid_demo,289,.20014763,.059003893,.027293146,XGboost,Census microdata,HH level
+gb_census_hhid_demo,290,.20066348,.059310775,.027479723,XGboost,Census microdata,HH level
+gb_census_hhid_demo,291,.2003077,.059255306,.027513327,XGboost,Census microdata,HH level
+gb_census_hhid_demo,292,.20041685,.059389818,.027572796,XGboost,Census microdata,HH level
+gb_census_hhid_demo,293,.20035598,.059313536,.027544137,XGboost,Census microdata,HH level
+gb_census_hhid_demo,294,.20031577,.059306003,.027536493,XGboost,Census microdata,HH level
+gb_census_hhid_demo,295,.20024298,.059114341,.027381623,XGboost,Census microdata,HH level
+gb_census_hhid_demo,296,.20023535,.059248704,.027500458,XGboost,Census microdata,HH level
+gb_census_hhid_demo,297,.20048802,.059237391,.027475901,XGboost,Census microdata,HH level
+gb_census_hhid_demo,298,.20040351,.059454501,.027672699,XGboost,Census microdata,HH level
+gb_census_hhid_demo,299,.20035486,.059387736,.027621195,XGboost,Census microdata,HH level
+gb_census_hhid_demo,300,.20033717,.059269156,.027491935,XGboost,Census microdata,HH level
+gb_census_hhid_demo,301,.20032203,.059350371,.027613886,XGboost,Census microdata,HH level
+gb_census_hhid_demo,302,.20025155,.05915831,.027424375,XGboost,Census microdata,HH level
+gb_census_hhid_demo,303,.20025671,.059152868,.027424658,XGboost,Census microdata,HH level
+gb_census_hhid_demo,304,.20035876,.059348129,.027571185,XGboost,Census microdata,HH level
+gb_census_hhid_demo,305,.20017301,.059221029,.027512664,XGboost,Census microdata,HH level
+gb_census_hhid_demo,306,.20028232,.059295278,.027552079,XGboost,Census microdata,HH level
+gb_census_hhid_demo,307,.20034494,.05926146,.027497659,XGboost,Census microdata,HH level
+gb_census_hhid_demo,308,.20031124,.059248187,.027488299,XGboost,Census microdata,HH level
+gb_census_hhid_demo,309,.20051289,.059166655,.027404873,XGboost,Census microdata,HH level
+gb_census_hhid_demo,310,.20020805,.059249535,.027537558,XGboost,Census microdata,HH level
+gb_census_hhid_demo,311,.2004375,.059321493,.027530439,XGboost,Census microdata,HH level
+gb_census_hhid_demo,312,.20026979,.059148099,.027426593,XGboost,Census microdata,HH level
+gb_census_hhid_demo,313,.20025645,.059236679,.027497975,XGboost,Census microdata,HH level
+gb_census_hhid_demo,314,.20046264,.05936157,.02755693,XGboost,Census microdata,HH level
+gb_census_hhid_demo,315,.2002459,.059063174,.027353076,XGboost,Census microdata,HH level
+gb_census_hhid_demo,316,.20028444,.059294295,.027551049,XGboost,Census microdata,HH level
+gb_census_hhid_demo,317,.20025037,.059133176,.027404077,XGboost,Census microdata,HH level
+gb_census_hhid_demo,318,.20006385,.059112784,.027444864,XGboost,Census microdata,HH level
+gb_census_hhid_demo,319,.2002611,.059335675,.027583437,XGboost,Census microdata,HH level
+gb_census_hhid_demo,320,.20008446,.059178691,.027512373,XGboost,Census microdata,HH level
+gb_census_hhid_demo,321,.20023796,.059337333,.027573409,XGboost,Census microdata,HH level
+gb_census_hhid_demo,322,.20010525,.059160676,.027449792,XGboost,Census microdata,HH level
+gb_census_hhid_demo,323,.20040388,.059268013,.027493963,XGboost,Census microdata,HH level
+gb_census_hhid_demo,324,.2003136,.059259854,.027522877,XGboost,Census microdata,HH level
+gb_census_hhid_demo,325,.20029083,.059085649,.027366454,XGboost,Census microdata,HH level
+gb_census_hhid_demo,326,.20025887,.059338842,.027589189,XGboost,Census microdata,HH level
+gb_census_hhid_demo,327,.20045774,.059222568,.02745585,XGboost,Census microdata,HH level
+gb_census_hhid_demo,328,.20047311,.059248187,.027478358,XGboost,Census microdata,HH level
+gb_census_hhid_demo,329,.20047294,.059245229,.027491044,XGboost,Census microdata,HH level
+gb_census_hhid_demo,330,.20035306,.059228506,.027445395,XGboost,Census microdata,HH level
+gb_census_hhid_demo,331,.20025975,.059165191,.027444165,XGboost,Census microdata,HH level
+gb_census_hhid_demo,332,.2004398,.059257552,.027496044,XGboost,Census microdata,HH level
+gb_census_hhid_demo,333,.20036504,.059223425,.027479449,XGboost,Census microdata,HH level
+gb_census_hhid_demo,334,.20033407,.05935216,.027608668,XGboost,Census microdata,HH level
+gb_census_hhid_demo,335,.20019825,.05920697,.02747318,XGboost,Census microdata,HH level
+gb_census_hhid_demo,336,.20028314,.059090819,.027377812,XGboost,Census microdata,HH level
+gb_census_hhid_demo,337,.20030715,.059304852,.027558398,XGboost,Census microdata,HH level
+gb_census_hhid_demo,338,.20031931,.059308931,.027538061,XGboost,Census microdata,HH level
+gb_census_hhid_demo,339,.20022909,.059208952,.027463736,XGboost,Census microdata,HH level
+gb_census_hhid_demo,340,.20021103,.059160892,.027439926,XGboost,Census microdata,HH level
+gb_census_hhid_demo,341,.20063394,.059408266,.027576618,XGboost,Census microdata,HH level
+gb_census_hhid_demo,342,.20041895,.059200317,.027438967,XGboost,Census microdata,HH level
+gb_census_hhid_demo,343,.20020564,.059109066,.027407138,XGboost,Census microdata,HH level
+gb_census_hhid_demo,344,.20042317,.059227388,.0274815,XGboost,Census microdata,HH level
+gb_census_hhid_demo,345,.20023815,.059190005,.02747095,XGboost,Census microdata,HH level
+gb_census_hhid_demo,346,.20040475,.059446145,.027673075,XGboost,Census microdata,HH level
+gb_census_hhid_demo,347,.20038129,.059291448,.02752641,XGboost,Census microdata,HH level
+gb_census_hhid_demo,348,.20013416,.059132863,.027438745,XGboost,Census microdata,HH level
+gb_census_hhid_demo,349,.20021519,.059167497,.027431738,XGboost,Census microdata,HH level
+gb_census_hhid_demo,350,.20044762,.059739631,.027927881,XGboost,Census microdata,HH level
+gb_census_hhid_demo,351,.20019732,.059134956,.027432496,XGboost,Census microdata,HH level
+gb_census_hhid_demo,352,.20020799,.0591451,.027445413,XGboost,Census microdata,HH level
+gb_census_hhid_demo,353,.20066944,.059318725,.027487691,XGboost,Census microdata,HH level
+gb_census_hhid_demo,354,.20017709,.059159946,.027432404,XGboost,Census microdata,HH level
+gb_census_hhid_demo,355,.20050396,.05926656,.027481662,XGboost,Census microdata,HH level
+gb_census_hhid_demo,356,.20013298,.059166327,.027433943,XGboost,Census microdata,HH level
+gb_census_hhid_demo,357,.20028561,.059098314,.027381483,XGboost,Census microdata,HH level
+gb_census_hhid_demo,358,.20021246,.059247166,.027518822,XGboost,Census microdata,HH level
+gb_census_hhid_demo,359,.20038812,.059198957,.027442984,XGboost,Census microdata,HH level
+gb_census_hhid_demo,360,.20007831,.059213582,.027534576,XGboost,Census microdata,HH level
+gb_census_hhid_demo,361,.200139,.059085656,.027418915,XGboost,Census microdata,HH level
+gb_census_hhid_demo,362,.20019844,.059223607,.027480109,XGboost,Census microdata,HH level
+gb_census_hhid_demo,363,.20014514,.059166878,.027450446,XGboost,Census microdata,HH level
+gb_census_hhid_demo,364,.20031093,.059245791,.027500439,XGboost,Census microdata,HH level
+gb_census_hhid_demo,365,.20046425,.059341915,.027550727,XGboost,Census microdata,HH level
+gb_census_hhid_demo,366,.20022488,.059169825,.027441068,XGboost,Census microdata,HH level
+gb_census_hhid_demo,367,.20014402,.059144117,.027423816,XGboost,Census microdata,HH level
+gb_census_hhid_demo,368,.20054124,.05927233,.02746992,XGboost,Census microdata,HH level
+gb_census_hhid_demo,369,.20038123,.05934285,.027568206,XGboost,Census microdata,HH level
+gb_census_hhid_demo,370,.20033456,.059449114,.027663939,XGboost,Census microdata,HH level
+gb_census_hhid_demo,371,.20044421,.059291646,.027512891,XGboost,Census microdata,HH level
+gb_census_hhid_demo,372,.20004989,.059169695,.027475625,XGboost,Census microdata,HH level
+gb_census_hhid_demo,373,.20038086,.059164122,.027427379,XGboost,Census microdata,HH level
+gb_census_hhid_demo,374,.20043081,.059213374,.027449621,XGboost,Census microdata,HH level
+gb_census_hhid_demo,375,.2002371,.059098113,.027411651,XGboost,Census microdata,HH level
+gb_census_hhid_demo,376,.20038855,.059171606,.027437571,XGboost,Census microdata,HH level
+gb_census_hhid_demo,377,.20023994,.059191909,.02748991,XGboost,Census microdata,HH level
+gb_census_hhid_demo,378,.20011827,.05910771,.027414557,XGboost,Census microdata,HH level
+gb_census_hhid_demo,379,.200259,.059130028,.027415974,XGboost,Census microdata,HH level
+gb_census_hhid_demo,380,.20029169,.059045605,.0273335,XGboost,Census microdata,HH level
+gb_census_hhid_demo,381,.20028891,.059109781,.027395375,XGboost,Census microdata,HH level
+gb_census_hhid_demo,382,.20046028,.059188604,.027436491,XGboost,Census microdata,HH level
+gb_census_hhid_demo,383,.20035474,.059201874,.027447868,XGboost,Census microdata,HH level
+gb_census_hhid_demo,384,.20033258,.059279282,.02751888,XGboost,Census microdata,HH level
+gb_census_hhid_demo,385,.20034915,.059316166,.027561346,XGboost,Census microdata,HH level
+gb_census_hhid_demo,386,.20032997,.059143994,.027417576,XGboost,Census microdata,HH level
+gb_census_hhid_demo,387,.20058431,.059318256,.02751556,XGboost,Census microdata,HH level
+gb_census_hhid_demo,388,.20030677,.059092131,.027358791,XGboost,Census microdata,HH level
+gb_census_hhid_demo,389,.20043446,.059203062,.027435165,XGboost,Census microdata,HH level
+gb_census_hhid_demo,390,.20036137,.059388716,.027604522,XGboost,Census microdata,HH level
+gb_census_hhid_demo,391,.20021091,.059223488,.027490694,XGboost,Census microdata,HH level
+gb_census_hhid_demo,392,.20005505,.059048615,.027370885,XGboost,Census microdata,HH level
+gb_census_hhid_demo,393,.20016395,.058947839,.027272251,XGboost,Census microdata,HH level
+gb_census_hhid_demo,394,.2004424,.059445817,.027644925,XGboost,Census microdata,HH level
+gb_census_hhid_demo,395,.20041765,.059228089,.027469628,XGboost,Census microdata,HH level
+gb_census_hhid_demo,396,.20023976,.059147071,.027422555,XGboost,Census microdata,HH level
+gb_census_hhid_demo,397,.20036745,.059341468,.027557796,XGboost,Census microdata,HH level
+gb_census_hhid_demo,398,.20037702,.059289467,.027525399,XGboost,Census microdata,HH level
+gb_census_hhid_demo,399,.20014092,.059201222,.027484983,XGboost,Census microdata,HH level
+gb_census_hhid_demo,400,.20033209,.059248112,.027481241,XGboost,Census microdata,HH level
+gb_census_hhid_demo,401,.20026118,.059210591,.027476862,XGboost,Census microdata,HH level
+gb_census_hhid_demo,402,.20022282,.059272807,.02754171,XGboost,Census microdata,HH level
+gb_census_hhid_demo,403,.20029654,.059377316,.027625794,XGboost,Census microdata,HH level
+gb_census_hhid_demo,404,.20047337,.059338104,.027534874,XGboost,Census microdata,HH level
+gb_census_hhid_demo,405,.20063606,.059282258,.027473098,XGboost,Census microdata,HH level
+gb_census_hhid_demo,406,.20046692,.059261203,.027491864,XGboost,Census microdata,HH level
+gb_census_hhid_demo,407,.20027004,.059228983,.027475642,XGboost,Census microdata,HH level
+gb_census_hhid_demo,408,.20044985,.059185818,.027435755,XGboost,Census microdata,HH level
+gb_census_hhid_demo,409,.20024721,.059275851,.027526764,XGboost,Census microdata,HH level
+gb_census_hhid_demo,410,.20019074,.05911833,.027393248,XGboost,Census microdata,HH level
+gb_census_hhid_demo,411,.20003787,.059107132,.027414983,XGboost,Census microdata,HH level
+gb_census_hhid_demo,412,.20029548,.059286781,.027528213,XGboost,Census microdata,HH level
+gb_census_hhid_demo,413,.20010649,.059263662,.02754382,XGboost,Census microdata,HH level
+gb_census_hhid_demo,414,.20013335,.059035636,.027349509,XGboost,Census microdata,HH level
+gb_census_hhid_demo,415,.20014302,.059287377,.027541678,XGboost,Census microdata,HH level
+gb_census_hhid_demo,416,.20042267,.059189666,.027429439,XGboost,Census microdata,HH level
+gb_census_hhid_demo,417,.20041791,.059386801,.027589856,XGboost,Census microdata,HH level
+gb_census_hhid_demo,418,.20048647,.059201349,.027436526,XGboost,Census microdata,HH level
+gb_census_hhid_demo,419,.2002752,.059343554,.027597761,XGboost,Census microdata,HH level
+gb_census_hhid_demo,420,.20021097,.059191857,.027496295,XGboost,Census microdata,HH level
+gb_census_hhid_demo,421,.20027246,.059247475,.02749666,XGboost,Census microdata,HH level
+gb_census_hhid_demo,422,.20006721,.059059795,.027394408,XGboost,Census microdata,HH level
+gb_census_hhid_demo,423,.20034643,.059241775,.027505063,XGboost,Census microdata,HH level
+gb_census_hhid_demo,424,.20009115,.059201103,.027493948,XGboost,Census microdata,HH level
+gb_census_hhid_demo,425,.2004828,.059344981,.027553612,XGboost,Census microdata,HH level
+gb_census_hhid_demo,426,.2000476,.059140537,.027452117,XGboost,Census microdata,HH level
+gb_census_hhid_demo,427,.20025124,.059125423,.027409069,XGboost,Census microdata,HH level
+gb_census_hhid_demo,428,.2002075,.059245251,.027514985,XGboost,Census microdata,HH level
+gb_census_hhid_demo,429,.20030473,.059349652,.027579743,XGboost,Census microdata,HH level
+gb_census_hhid_demo,430,.20046784,.059304304,.027526384,XGboost,Census microdata,HH level
+gb_census_hhid_demo,431,.20016946,.059184313,.027464818,XGboost,Census microdata,HH level
+gb_census_hhid_demo,432,.20039351,.05924112,.027476717,XGboost,Census microdata,HH level
+gb_census_hhid_demo,433,.20044377,.059342485,.027563537,XGboost,Census microdata,HH level
+gb_census_hhid_demo,434,.20011008,.05914133,.027463742,XGboost,Census microdata,HH level
+gb_census_hhid_demo,435,.20043825,.059383489,.027584692,XGboost,Census microdata,HH level
+gb_census_hhid_demo,436,.20045085,.059292767,.027521973,XGboost,Census microdata,HH level
+gb_census_hhid_demo,437,.20017765,.059258711,.02752218,XGboost,Census microdata,HH level
+gb_census_hhid_demo,438,.20023827,.059099581,.027381098,XGboost,Census microdata,HH level
+gb_census_hhid_demo,439,.20025502,.059197374,.02746319,XGboost,Census microdata,HH level
+gb_census_hhid_demo,440,.20023616,.059117816,.027390383,XGboost,Census microdata,HH level
+gb_census_hhid_demo,441,.20024802,.059142474,.027410304,XGboost,Census microdata,HH level
+gb_census_hhid_demo,442,.20030566,.059175916,.027444387,XGboost,Census microdata,HH level
+gb_census_hhid_demo,443,.20036013,.059224065,.027462021,XGboost,Census microdata,HH level
+gb_census_hhid_demo,444,.20025533,.059337337,.027593425,XGboost,Census microdata,HH level
+gb_census_hhid_demo,445,.20054863,.059279114,.027464734,XGboost,Census microdata,HH level
+gb_census_hhid_demo,446,.20002104,.059318446,.027584577,XGboost,Census microdata,HH level
+gb_census_hhid_demo,447,.20019844,.059214793,.027512906,XGboost,Census microdata,HH level
+gb_census_hhid_demo,448,.20049863,.059328549,.027530273,XGboost,Census microdata,HH level
+gb_census_hhid_demo,449,.20010245,.05918365,.027497258,XGboost,Census microdata,HH level
+gb_census_hhid_demo,450,.20021433,.059366267,.027598448,XGboost,Census microdata,HH level
+gb_census_hhid_demo,451,.20023412,.059220854,.02748565,XGboost,Census microdata,HH level
+gb_census_hhid_demo,452,.2004637,.059403583,.027596161,XGboost,Census microdata,HH level
+gb_census_hhid_demo,453,.20045786,.059161905,.027406747,XGboost,Census microdata,HH level
+gb_census_hhid_demo,454,.20044607,.059179187,.027424315,XGboost,Census microdata,HH level
+gb_census_hhid_demo,455,.2001895,.059311911,.027589155,XGboost,Census microdata,HH level
+gb_census_hhid_demo,456,.20017405,.059208632,.027494574,XGboost,Census microdata,HH level
+gb_census_hhid_demo,457,.2003077,.059299141,.027542386,XGboost,Census microdata,HH level
+gb_census_hhid_demo,458,.20023566,.059241951,.027494123,XGboost,Census microdata,HH level
+gb_census_hhid_demo,459,.20039786,.059439447,.027656645,XGboost,Census microdata,HH level
+gb_census_hhid_demo,460,.20043583,.059340898,.027555883,XGboost,Census microdata,HH level
+gb_census_hhid_demo,461,.20028891,.059132893,.027395949,XGboost,Census microdata,HH level
+gb_census_hhid_demo,462,.20031664,.059077229,.027367949,XGboost,Census microdata,HH level
+gb_census_hhid_demo,463,.20021817,.059165027,.027453911,XGboost,Census microdata,HH level
+gb_census_hhid_demo,464,.20009048,.059091423,.027401714,XGboost,Census microdata,HH level
+gb_census_hhid_demo,465,.20012498,.059230868,.027521065,XGboost,Census microdata,HH level
+gb_census_hhid_demo,466,.20026855,.059162639,.027427934,XGboost,Census microdata,HH level
+gb_census_hhid_demo,467,.20040053,.059466988,.027690589,XGboost,Census microdata,HH level
+gb_census_hhid_demo,468,.20007372,.059222016,.027493972,XGboost,Census microdata,HH level
+gb_census_hhid_demo,469,.20013143,.059113611,.027401483,XGboost,Census microdata,HH level
+gb_census_hhid_demo,470,.20022339,.059235025,.027476523,XGboost,Census microdata,HH level
+gb_census_hhid_demo,471,.20029405,.059155878,.027429624,XGboost,Census microdata,HH level
+gb_census_hhid_demo,472,.20014347,.059179641,.02748259,XGboost,Census microdata,HH level
+gb_census_hhid_demo,473,.20029052,.05932153,.027576441,XGboost,Census microdata,HH level
+gb_census_hhid_demo,474,.2002966,.059221346,.027475573,XGboost,Census microdata,HH level
+gb_census_hhid_demo,475,.20020929,.059123624,.027413357,XGboost,Census microdata,HH level
+gb_census_hhid_demo,476,.2001975,.059406497,.027675204,XGboost,Census microdata,HH level
+gb_census_hhid_demo,477,.20022927,.059173923,.027462181,XGboost,Census microdata,HH level
+gb_census_hhid_demo,478,.20020117,.059143368,.027407708,XGboost,Census microdata,HH level
+gb_census_hhid_demo,479,.20011076,.059130516,.027420947,XGboost,Census microdata,HH level
+gb_census_hhid_demo,480,.20013981,.059230022,.027500238,XGboost,Census microdata,HH level
+gb_census_hhid_demo,481,.20038942,.059359927,.027580947,XGboost,Census microdata,HH level
+gb_census_hhid_demo,482,.20025149,.059195787,.027480369,XGboost,Census microdata,HH level
+gb_census_hhid_demo,483,.20049961,.059338141,.027526457,XGboost,Census microdata,HH level
+gb_census_hhid_demo,484,.20018852,.059099756,.027399128,XGboost,Census microdata,HH level
+gb_census_hhid_demo,485,.20033538,.05901061,.027296236,XGboost,Census microdata,HH level
+gb_census_hhid_demo,486,.20021078,.059247535,.027527846,XGboost,Census microdata,HH level
+gb_census_hhid_demo,487,.20037553,.059346538,.027575145,XGboost,Census microdata,HH level
+gb_census_hhid_demo,488,.20043354,.05927695,.027511097,XGboost,Census microdata,HH level
+gb_census_hhid_demo,489,.20015594,.059223913,.027495863,XGboost,Census microdata,HH level
+gb_census_hhid_demo,490,.20029852,.059269387,.027520748,XGboost,Census microdata,HH level
+gb_census_hhid_demo,491,.20014322,.059256326,.027526988,XGboost,Census microdata,HH level
+gb_census_hhid_demo,492,.20020291,.059155032,.027441084,XGboost,Census microdata,HH level
+gb_census_hhid_demo,493,.20033662,.059398297,.027638104,XGboost,Census microdata,HH level
+gb_census_hhid_demo,494,.20040002,.059197217,.027448891,XGboost,Census microdata,HH level
+gb_census_hhid_demo,495,.2001905,.059257723,.027530784,XGboost,Census microdata,HH level
+gb_census_hhid_demo,496,.20014055,.059180945,.027471198,XGboost,Census microdata,HH level
+gb_census_hhid_demo,497,.20048076,.059259083,.027472459,XGboost,Census microdata,HH level
+gb_census_hhid_demo,498,.20013124,.059221264,.027503857,XGboost,Census microdata,HH level
+gb_census_hhid_demo,499,.20008452,.059249215,.027531622,XGboost,Census microdata,HH level
+gb_census_hhid_demo,500,.20025986,.059316505,.02754405,XGboost,Census microdata,HH level
 fh_mun_gis,1,.20373264,.06351921,.0310244,Fay-Herriot,GIS,Municipality
 fh_mun_gis,2,.20393553,.062892608,.030259129,Fay-Herriot,GIS,Municipality
 fh_mun_gis,3,.20395122,.06396056,.03146996,Fay-Herriot,GIS,Municipality
@@ -3031,7 +3531,7 @@ gb_all_mun,29,.20057407,.059766717,.027905682,XGboost,Mixed,Municipality
 gb_all_mun,30,.20038551,.059408512,.027640516,XGboost,Mixed,Municipality
 gb_all_mun,31,.20046072,.059956621,.028091103,XGboost,Mixed,Municipality
 gb_all_mun,32,.20020954,.059436169,.027686354,XGboost,Mixed,Municipality
-gb_all_mun,33,.20049769,.060119547,.028294137,XGboost,Mixed,Municipality
+gb_all_mun,33,.20050861,.060129937,.028299255,XGboost,Mixed,Municipality
 gb_all_mun,34,.20039649,.059312418,.027548989,XGboost,Mixed,Municipality
 gb_all_mun,35,.20011108,.059495084,.027746549,XGboost,Mixed,Municipality
 gb_all_mun,36,.20025223,.059446383,.027726477,XGboost,Mixed,Municipality
@@ -3073,7 +3573,7 @@ gb_all_mun,71,.20029536,.059524633,.027752012,XGboost,Mixed,Municipality
 gb_all_mun,72,.20046015,.059437037,.027629184,XGboost,Mixed,Municipality
 gb_all_mun,73,.20035908,.059529386,.027703738,XGboost,Mixed,Municipality
 gb_all_mun,74,.19999114,.059258569,.027538221,XGboost,Mixed,Municipality
-gb_all_mun,75,.20052077,.059838168,.02801377,XGboost,Mixed,Municipality
+gb_all_mun,75,.20052306,.05984005,.028012499,XGboost,Mixed,Municipality
 gb_all_mun,76,.20032856,.059402276,.027635818,XGboost,Mixed,Municipality
 gb_all_mun,77,.20066652,.059491634,.0276521,XGboost,Mixed,Municipality
 gb_all_mun,78,.20021798,.059662364,.027879564,XGboost,Mixed,Municipality
@@ -3084,8 +3584,8 @@ gb_all_mun,82,.20037118,.059605524,.02785076,XGboost,Mixed,Municipality
 gb_all_mun,83,.20049261,.059456564,.027633088,XGboost,Mixed,Municipality
 gb_all_mun,84,.20024727,.059465632,.027704887,XGboost,Mixed,Municipality
 gb_all_mun,85,.20047311,.059531942,.027737889,XGboost,Mixed,Municipality
-gb_all_mun,86,.20029442,.059632823,.027813664,XGboost,Mixed,Municipality
-gb_all_mun,87,.20013267,.059601177,.027865479,XGboost,Mixed,Municipality
+gb_all_mun,86,.20028648,.059630372,.027812608,XGboost,Mixed,Municipality
+gb_all_mun,87,.20012863,.059597243,.027861642,XGboost,Mixed,Municipality
 gb_all_mun,88,.20026855,.059516966,.027720729,XGboost,Mixed,Municipality
 gb_all_mun,89,.20035107,.059688218,.027880002,XGboost,Mixed,Municipality
 gb_all_mun,90,.20018497,.05936886,.027669726,XGboost,Mixed,Municipality
@@ -3139,7 +3639,7 @@ gb_all_mun,137,.20005468,.059300795,.027591456,XGboost,Mixed,Municipality
 gb_all_mun,138,.20021811,.05931785,.027592668,XGboost,Mixed,Municipality
 gb_all_mun,139,.19990881,.059339602,.027679356,XGboost,Mixed,Municipality
 gb_all_mun,140,.20085768,.059914209,.028008463,XGboost,Mixed,Municipality
-gb_all_mun,141,.20048882,.059492633,.027661799,XGboost,Mixed,Municipality
+gb_all_mun,141,.20048484,.059503041,.027669562,XGboost,Mixed,Municipality
 gb_all_mun,142,.20032254,.059482239,.027729202,XGboost,Mixed,Municipality
 gb_all_mun,143,.20008533,.059480388,.027748963,XGboost,Mixed,Municipality
 gb_all_mun,144,.20040773,.059557959,.027768293,XGboost,Mixed,Municipality
@@ -3174,14 +3674,14 @@ gb_all_mun,172,.20032085,.059633285,.027839063,XGboost,Mixed,Municipality
 gb_all_mun,173,.20060274,.059579462,.027775902,XGboost,Mixed,Municipality
 gb_all_mun,174,.20029685,.059625372,.027830498,XGboost,Mixed,Municipality
 gb_all_mun,175,.20023282,.059348855,.027598318,XGboost,Mixed,Municipality
-gb_all_mun,176,.2000875,.059208967,.027517017,XGboost,Mixed,Municipality
+gb_all_mun,176,.20009166,.059217047,.027522335,XGboost,Mixed,Municipality
 gb_all_mun,177,.20043695,.059600394,.027803075,XGboost,Mixed,Municipality
 gb_all_mun,178,.20052338,.059434012,.027613448,XGboost,Mixed,Municipality
 gb_all_mun,179,.20035735,.059487257,.027692063,XGboost,Mixed,Municipality
 gb_all_mun,180,.20024249,.05942658,.027669821,XGboost,Mixed,Municipality
 gb_all_mun,181,.20023653,.059398029,.027631376,XGboost,Mixed,Municipality
 gb_all_mun,182,.20018852,.059441295,.027693454,XGboost,Mixed,Municipality
-gb_all_mun,183,.20035517,.059364524,.02757567,XGboost,Mixed,Municipality
+gb_all_mun,183,.20037217,.05937833,.0275848,XGboost,Mixed,Municipality
 gb_all_mun,184,.20055081,.059584912,.027767591,XGboost,Mixed,Municipality
 gb_all_mun,185,.20035964,.059348643,.027603114,XGboost,Mixed,Municipality
 gb_all_mun,186,.20015836,.059231654,.027504155,XGboost,Mixed,Municipality
@@ -3190,7 +3690,7 @@ gb_all_mun,188,.20049937,.059375387,.027574355,XGboost,Mixed,Municipality
 gb_all_mun,189,.20027141,.059590306,.027826702,XGboost,Mixed,Municipality
 gb_all_mun,190,.20041567,.059366442,.027562708,XGboost,Mixed,Municipality
 gb_all_mun,191,.20036013,.059381515,.027611142,XGboost,Mixed,Municipality
-gb_all_mun,192,.20066608,.059935618,.02805038,XGboost,Mixed,Municipality
+gb_all_mun,192,.20065622,.059907172,.028027859,XGboost,Mixed,Municipality
 gb_all_mun,193,.20012951,.059491616,.027752476,XGboost,Mixed,Municipality
 gb_all_mun,194,.19986971,.059356611,.027666314,XGboost,Mixed,Municipality
 gb_all_mun,195,.20021842,.059199199,.027470622,XGboost,Mixed,Municipality
@@ -3228,10 +3728,10 @@ gb_all_mun,226,.20007217,.05943292,.027718239,XGboost,Mixed,Municipality
 gb_all_mun,227,.20038067,.059553843,.027730849,XGboost,Mixed,Municipality
 gb_all_mun,228,.20022637,.059374694,.027621228,XGboost,Mixed,Municipality
 gb_all_mun,229,.20001981,.059514355,.027810439,XGboost,Mixed,Municipality
-gb_all_mun,230,.20016928,.059454747,.027709942,XGboost,Mixed,Municipality
+gb_all_mun,230,.20016357,.059444875,.027702175,XGboost,Mixed,Municipality
 gb_all_mun,231,.20015581,.059386745,.027620595,XGboost,Mixed,Municipality
 gb_all_mun,232,.20037086,.059341263,.027587356,XGboost,Mixed,Municipality
-gb_all_mun,233,.20067222,.059477288,.027644403,XGboost,Mixed,Municipality
+gb_all_mun,233,.20068111,.059470505,.027638298,XGboost,Mixed,Municipality
 gb_all_mun,234,.20024119,.059299763,.027546825,XGboost,Mixed,Municipality
 gb_all_mun,235,.20011002,.059444819,.027669132,XGboost,Mixed,Municipality
 gb_all_mun,236,.20021172,.059240844,.027519872,XGboost,Mixed,Municipality
@@ -3240,7 +3740,7 @@ gb_all_mun,238,.20016338,.059371281,.027638109,XGboost,Mixed,Municipality
 gb_all_mun,239,.20020315,.059373502,.027614351,XGboost,Mixed,Municipality
 gb_all_mun,240,.20070611,.059723474,.027852476,XGboost,Mixed,Municipality
 gb_all_mun,241,.20027179,.05968063,.027898509,XGboost,Mixed,Municipality
-gb_all_mun,242,.20027208,.059426945,.027660076,XGboost,Mixed,Municipality
+gb_all_mun,242,.20027749,.059424751,.027657749,XGboost,Mixed,Municipality
 gb_all_mun,243,.20024076,.059284057,.027542798,XGboost,Mixed,Municipality
 gb_all_mun,244,.2000798,.05935692,.02760791,XGboost,Mixed,Municipality
 gb_all_mun,245,.20015532,.059240498,.027522951,XGboost,Mixed,Municipality
@@ -3256,7 +3756,7 @@ gb_all_mun,254,.20057413,.059493829,.027654102,XGboost,Mixed,Municipality
 gb_all_mun,255,.20021737,.059427708,.027686834,XGboost,Mixed,Municipality
 gb_all_mun,256,.20028797,.059798039,.028010491,XGboost,Mixed,Municipality
 gb_all_mun,257,.20031403,.059361372,.027609335,XGboost,Mixed,Municipality
-gb_all_mun,258,.20052971,.059587423,.02773973,XGboost,Mixed,Municipality
+gb_all_mun,258,.20052314,.05959728,.027751369,XGboost,Mixed,Municipality
 gb_all_mun,259,.20036659,.059594005,.02778252,XGboost,Mixed,Municipality
 gb_all_mun,260,.20066138,.059594974,.027734585,XGboost,Mixed,Municipality
 gb_all_mun,261,.20035753,.059328381,.027545165,XGboost,Mixed,Municipality
@@ -3415,7 +3915,7 @@ gb_all_mun,413,.20033513,.059438393,.027658792,XGboost,Mixed,Municipality
 gb_all_mun,414,.20035182,.059306893,.027562134,XGboost,Mixed,Municipality
 gb_all_mun,415,.20018554,.059536975,.027753057,XGboost,Mixed,Municipality
 gb_all_mun,416,.20073986,.059421606,.027573496,XGboost,Mixed,Municipality
-gb_all_mun,417,.20022376,.059659697,.027861018,XGboost,Mixed,Municipality
+gb_all_mun,417,.20025875,.059674516,.027868126,XGboost,Mixed,Municipality
 gb_all_mun,418,.20004115,.059192039,.027518727,XGboost,Mixed,Municipality
 gb_all_mun,419,.20031279,.059654951,.027821256,XGboost,Mixed,Municipality
 gb_all_mun,420,.20018671,.059487961,.027774468,XGboost,Mixed,Municipality
@@ -3471,7 +3971,7 @@ gb_all_mun,469,.20020533,.059304532,.027570643,XGboost,Mixed,Municipality
 gb_all_mun,470,.20017201,.059199296,.027477682,XGboost,Mixed,Municipality
 gb_all_mun,471,.2002116,.059269495,.027528513,XGboost,Mixed,Municipality
 gb_all_mun,472,.20024963,.059457432,.027687293,XGboost,Mixed,Municipality
-gb_all_mun,473,.20067105,.05983267,.027954699,XGboost,Mixed,Municipality
+gb_all_mun,473,.20064412,.05985865,.027974229,XGboost,Mixed,Municipality
 gb_all_mun,474,.2001866,.059449743,.027695404,XGboost,Mixed,Municipality
 gb_all_mun,475,.20028624,.059451688,.0276688,XGboost,Mixed,Municipality
 gb_all_mun,476,.20021147,.059602324,.027841389,XGboost,Mixed,Municipality
@@ -3499,14 +3999,14 @@ gb_all_mun,497,.20031936,.059401646,.027648866,XGboost,Mixed,Municipality
 gb_all_mun,498,.20022468,.059581812,.027805252,XGboost,Mixed,Municipality
 gb_all_mun,499,.20039675,.059513941,.027719134,XGboost,Mixed,Municipality
 gb_all_mun,500,.19997929,.059389979,.027668368,XGboost,Mixed,Municipality
-gb_gis_mun,1,.20400682,.062881142,.030243326,XGboost,GIS,Municipality
+gb_gis_mun,1,.20401452,.062901258,.030258037,XGboost,GIS,Municipality
 gb_gis_mun,2,.20291424,.061684582,.029293176,XGboost,GIS,Municipality
 gb_gis_mun,3,.20440833,.063111849,.030428544,XGboost,GIS,Municipality
 gb_gis_mun,4,.20373929,.062589206,.029991636,XGboost,GIS,Municipality
 gb_gis_mun,5,.20366234,.062515333,.029887339,XGboost,GIS,Municipality
 gb_gis_mun,6,.20319363,.062125932,.029638885,XGboost,GIS,Municipality
 gb_gis_mun,7,.20400788,.062892884,.030266862,XGboost,GIS,Municipality
-gb_gis_mun,8,.20342669,.062262662,.029710716,XGboost,GIS,Municipality
+gb_gis_mun,8,.20343246,.062258806,.029704679,XGboost,GIS,Municipality
 gb_gis_mun,9,.20388043,.062676772,.030023998,XGboost,GIS,Municipality
 gb_gis_mun,10,.20415865,.063169181,.030521739,XGboost,GIS,Municipality
 gb_gis_mun,11,.20406485,.062640585,.02997057,XGboost,GIS,Municipality
@@ -3514,7 +4014,7 @@ gb_gis_mun,12,.20398548,.062949419,.030290572,XGboost,GIS,Municipality
 gb_gis_mun,13,.20259625,.06158058,.029311551,XGboost,GIS,Municipality
 gb_gis_mun,14,.20289804,.061837822,.029422075,XGboost,GIS,Municipality
 gb_gis_mun,15,.20377328,.062662616,.03010853,XGboost,GIS,Municipality
-gb_gis_mun,16,.20335527,.062322479,.029863136,XGboost,GIS,Municipality
+gb_gis_mun,16,.20341267,.062351149,.029876204,XGboost,GIS,Municipality
 gb_gis_mun,17,.20302121,.062196843,.029758075,XGboost,GIS,Municipality
 gb_gis_mun,18,.20405398,.063219085,.030573081,XGboost,GIS,Municipality
 gb_gis_mun,19,.2032671,.062579647,.030114824,XGboost,GIS,Municipality
@@ -3522,38 +4022,38 @@ gb_gis_mun,20,.20400304,.063047335,.030419655,XGboost,GIS,Municipality
 gb_gis_mun,21,.20408903,.06280411,.030161221,XGboost,GIS,Municipality
 gb_gis_mun,22,.20312184,.062022429,.029600035,XGboost,GIS,Municipality
 gb_gis_mun,23,.20345901,.061984453,.029407728,XGboost,GIS,Municipality
-gb_gis_mun,24,.20431247,.063050032,.030339716,XGboost,GIS,Municipality
+gb_gis_mun,24,.20432252,.063060381,.030344056,XGboost,GIS,Municipality
 gb_gis_mun,25,.20342706,.06223489,.029761065,XGboost,GIS,Municipality
 gb_gis_mun,26,.2028749,.062077351,.029704604,XGboost,GIS,Municipality
-gb_gis_mun,27,.20412894,.063194819,.030570608,XGboost,GIS,Municipality
+gb_gis_mun,27,.20423485,.06325724,.030603301,XGboost,GIS,Municipality
 gb_gis_mun,28,.20325872,.062033039,.029535482,XGboost,GIS,Municipality
 gb_gis_mun,29,.20369783,.062922902,.030283831,XGboost,GIS,Municipality
 gb_gis_mun,30,.20289929,.062092014,.02970417,XGboost,GIS,Municipality
 gb_gis_mun,31,.204155,.062992468,.030276209,XGboost,GIS,Municipality
-gb_gis_mun,32,.20433009,.062981568,.030228348,XGboost,GIS,Municipality
+gb_gis_mun,32,.20435093,.063016191,.030250128,XGboost,GIS,Municipality
 gb_gis_mun,33,.2036709,.062571369,.029982923,XGboost,GIS,Municipality
 gb_gis_mun,34,.20456854,.06324666,.030530419,XGboost,GIS,Municipality
 gb_gis_mun,35,.20222484,.061700702,.029461933,XGboost,GIS,Municipality
 gb_gis_mun,36,.20384364,.062659137,.030064255,XGboost,GIS,Municipality
 gb_gis_mun,37,.2027106,.06185272,.029514467,XGboost,GIS,Municipality
-gb_gis_mun,38,.20411597,.062994301,.030308781,XGboost,GIS,Municipality
+gb_gis_mun,38,.20415325,.063036971,.030334922,XGboost,GIS,Municipality
 gb_gis_mun,39,.20374101,.062604524,.029988188,XGboost,GIS,Municipality
 gb_gis_mun,40,.20360258,.062425192,.029839829,XGboost,GIS,Municipality
-gb_gis_mun,41,.204052,.062663592,.030019069,XGboost,GIS,Municipality
+gb_gis_mun,41,.20405473,.062666662,.030020472,XGboost,GIS,Municipality
 gb_gis_mun,42,.20222217,.061624825,.029366767,XGboost,GIS,Municipality
 gb_gis_mun,43,.20285529,.061904371,.029520694,XGboost,GIS,Municipality
 gb_gis_mun,44,.20364298,.062598221,.030053077,XGboost,GIS,Municipality
 gb_gis_mun,45,.20261207,.061426751,.029128376,XGboost,GIS,Municipality
 gb_gis_mun,46,.20327914,.062337868,.029805599,XGboost,GIS,Municipality
-gb_gis_mun,47,.20448019,.063231811,.030462367,XGboost,GIS,Municipality
+gb_gis_mun,47,.20450743,.063250661,.030473843,XGboost,GIS,Municipality
 gb_gis_mun,48,.20379233,.062695585,.030113989,XGboost,GIS,Municipality
 gb_gis_mun,49,.20317242,.061825499,.029401971,XGboost,GIS,Municipality
-gb_gis_mun,50,.20386021,.062817201,.03016223,XGboost,GIS,Municipality
+gb_gis_mun,50,.203872,.062848635,.030185238,XGboost,GIS,Municipality
 gb_gis_mun,51,.20350635,.062553823,.030014122,XGboost,GIS,Municipality
 gb_gis_mun,52,.20311105,.062040057,.029552929,XGboost,GIS,Municipality
 gb_gis_mun,53,.20363535,.062638782,.03006734,XGboost,GIS,Municipality
 gb_gis_mun,54,.20222831,.061926365,.029729033,XGboost,GIS,Municipality
-gb_gis_mun,55,.20508589,.063410297,.030425185,XGboost,GIS,Municipality
+gb_gis_mun,55,.20505659,.063436143,.030454054,XGboost,GIS,Municipality
 gb_gis_mun,56,.20384711,.063241862,.030633517,XGboost,GIS,Municipality
 gb_gis_mun,57,.20403449,.062706806,.030058745,XGboost,GIS,Municipality
 gb_gis_mun,58,.20336123,.062243547,.029738845,XGboost,GIS,Municipality
@@ -3563,28 +4063,28 @@ gb_gis_mun,61,.20349252,.062588468,.030061455,XGboost,GIS,Municipality
 gb_gis_mun,62,.20300347,.062164158,.029727442,XGboost,GIS,Municipality
 gb_gis_mun,63,.20389365,.062827505,.030162418,XGboost,GIS,Municipality
 gb_gis_mun,64,.20286044,.061757922,.029321924,XGboost,GIS,Municipality
-gb_gis_mun,65,.20386617,.062541462,.029932026,XGboost,GIS,Municipality
+gb_gis_mun,65,.20381832,.062500402,.029895721,XGboost,GIS,Municipality
 gb_gis_mun,66,.20310503,.062380504,.029950637,XGboost,GIS,Municipality
 gb_gis_mun,67,.20403481,.062686682,.030005183,XGboost,GIS,Municipality
-gb_gis_mun,68,.20370267,.063043728,.030470179,XGboost,GIS,Municipality
+gb_gis_mun,68,.20371036,.063044466,.030469026,XGboost,GIS,Municipality
 gb_gis_mun,69,.20349401,.062702872,.030163195,XGboost,GIS,Municipality
 gb_gis_mun,70,.20424713,.063202634,.030446494,XGboost,GIS,Municipality
 gb_gis_mun,71,.20374939,.062476985,.029881617,XGboost,GIS,Municipality
-gb_gis_mun,72,.2047365,.063464351,.030630022,XGboost,GIS,Municipality
+gb_gis_mun,72,.20460583,.06332121,.030516298,XGboost,GIS,Municipality
 gb_gis_mun,73,.20368201,.062716082,.030141864,XGboost,GIS,Municipality
-gb_gis_mun,74,.20408395,.062875502,.030177606,XGboost,GIS,Municipality
+gb_gis_mun,74,.20408183,.062865846,.030177463,XGboost,GIS,Municipality
 gb_gis_mun,75,.20364392,.062554315,.029997751,XGboost,GIS,Municipality
 gb_gis_mun,76,.20363225,.06245042,.02988361,XGboost,GIS,Municipality
 gb_gis_mun,77,.2040621,.062464956,.029760731,XGboost,GIS,Municipality
 gb_gis_mun,78,.20322366,.062574334,.030091371,XGboost,GIS,Municipality
 gb_gis_mun,79,.2034644,.062423062,.029888915,XGboost,GIS,Municipality
 gb_gis_mun,80,.20392095,.062772527,.030153805,XGboost,GIS,Municipality
-gb_gis_mun,81,.20407346,.062973119,.030292379,XGboost,GIS,Municipality
+gb_gis_mun,81,.20399323,.062928453,.030266028,XGboost,GIS,Municipality
 gb_gis_mun,82,.20249821,.062426921,.03015022,XGboost,GIS,Municipality
 gb_gis_mun,83,.2034121,.062189281,.029672056,XGboost,GIS,Municipality
 gb_gis_mun,84,.20372693,.063088208,.030536454,XGboost,GIS,Municipality
-gb_gis_mun,85,.20454781,.063530773,.030769413,XGboost,GIS,Municipality
-gb_gis_mun,86,.20430626,.063591093,.030918255,XGboost,GIS,Municipality
+gb_gis_mun,85,.20454825,.063531049,.030769581,XGboost,GIS,Municipality
+gb_gis_mun,86,.20431855,.063592739,.030920153,XGboost,GIS,Municipality
 gb_gis_mun,87,.20345387,.062618762,.030095026,XGboost,GIS,Municipality
 gb_gis_mun,88,.20338412,.062056534,.029582107,XGboost,GIS,Municipality
 gb_gis_mun,89,.20343618,.062368728,.029808316,XGboost,GIS,Municipality
@@ -3596,7 +4096,7 @@ gb_gis_mun,94,.20344467,.06225555,.029685179,XGboost,GIS,Municipality
 gb_gis_mun,95,.20300359,.061836377,.02941202,XGboost,GIS,Municipality
 gb_gis_mun,96,.20333293,.062109888,.02965725,XGboost,GIS,Municipality
 gb_gis_mun,97,.20373382,.062265161,.02969675,XGboost,GIS,Municipality
-gb_gis_mun,98,.20346744,.062740482,.030196073,XGboost,GIS,Municipality
+gb_gis_mun,98,.20347168,.062743671,.030197615,XGboost,GIS,Municipality
 gb_gis_mun,99,.20358931,.062328819,.029735275,XGboost,GIS,Municipality
 gb_gis_mun,100,.20341861,.06224874,.029733676,XGboost,GIS,Municipality
 gb_gis_mun,101,.20325319,.062084317,.029602135,XGboost,GIS,Municipality
@@ -3628,7 +4128,7 @@ gb_gis_mun,126,.20372228,.062588535,.030010501,XGboost,GIS,Municipality
 gb_gis_mun,127,.20423274,.06313172,.03044774,XGboost,GIS,Municipality
 gb_gis_mun,128,.20417267,.063028499,.030341191,XGboost,GIS,Municipality
 gb_gis_mun,129,.20276973,.061956901,.029598663,XGboost,GIS,Municipality
-gb_gis_mun,130,.20483789,.063555107,.030674817,XGboost,GIS,Municipality
+gb_gis_mun,130,.20484371,.063563637,.030680582,XGboost,GIS,Municipality
 gb_gis_mun,131,.20272364,.062070768,.029677473,XGboost,GIS,Municipality
 gb_gis_mun,132,.20394316,.062319588,.029698282,XGboost,GIS,Municipality
 gb_gis_mun,133,.20282277,.061645176,.029274736,XGboost,GIS,Municipality
@@ -3640,17 +4140,17 @@ gb_gis_mun,138,.20318606,.062367845,.029946202,XGboost,GIS,Municipality
 gb_gis_mun,139,.20338374,.062296689,.029824877,XGboost,GIS,Municipality
 gb_gis_mun,140,.20348221,.062373593,.029824708,XGboost,GIS,Municipality
 gb_gis_mun,141,.20335019,.06225308,.029740792,XGboost,GIS,Municipality
-gb_gis_mun,142,.203802,.062160578,.029597193,XGboost,GIS,Municipality
+gb_gis_mun,142,.20378904,.062165562,.029600812,XGboost,GIS,Municipality
 gb_gis_mun,143,.20406075,.062980548,.030330068,XGboost,GIS,Municipality
 gb_gis_mun,144,.20362747,.062522151,.029963879,XGboost,GIS,Municipality
 gb_gis_mun,145,.20301773,.062264971,.029837927,XGboost,GIS,Municipality
 gb_gis_mun,146,.20384042,.062901676,.030347224,XGboost,GIS,Municipality
 gb_gis_mun,147,.20373295,.062476348,.029882012,XGboost,GIS,Municipality
-gb_gis_mun,148,.20348439,.062180325,.029628318,XGboost,GIS,Municipality
+gb_gis_mun,148,.20348415,.062171135,.029619515,XGboost,GIS,Municipality
 gb_gis_mun,149,.20311986,.062972747,.030549563,XGboost,GIS,Municipality
 gb_gis_mun,150,.20339529,.06233957,.029818268,XGboost,GIS,Municipality
 gb_gis_mun,151,.20260505,.061883096,.029579803,XGboost,GIS,Municipality
-gb_gis_mun,152,.20379375,.063094616,.030523017,XGboost,GIS,Municipality
+gb_gis_mun,152,.20378898,.063097492,.030531656,XGboost,GIS,Municipality
 gb_gis_mun,153,.20351678,.062650256,.030121911,XGboost,GIS,Municipality
 gb_gis_mun,154,.2024737,.061446816,.029119793,XGboost,GIS,Municipality
 gb_gis_mun,155,.20356809,.063175753,.030559601,XGboost,GIS,Municipality
@@ -3666,7 +4166,7 @@ gb_gis_mun,164,.20398405,.062586509,.029957037,XGboost,GIS,Municipality
 gb_gis_mun,165,.20338716,.062523022,.029997738,XGboost,GIS,Municipality
 gb_gis_mun,166,.20395489,.062501132,.029870417,XGboost,GIS,Municipality
 gb_gis_mun,167,.20449954,.063183725,.030362628,XGboost,GIS,Municipality
-gb_gis_mun,168,.20427214,.062595256,.02986466,XGboost,GIS,Municipality
+gb_gis_mun,168,.20427331,.062595442,.029863304,XGboost,GIS,Municipality
 gb_gis_mun,169,.2033786,.062257133,.029771879,XGboost,GIS,Municipality
 gb_gis_mun,170,.20286033,.061953373,.029537018,XGboost,GIS,Municipality
 gb_gis_mun,171,.20365098,.062382039,.029857291,XGboost,GIS,Municipality
@@ -3682,11 +4182,11 @@ gb_gis_mun,180,.20383812,.062841728,.030270178,XGboost,GIS,Municipality
 gb_gis_mun,181,.20313706,.061953928,.02955642,XGboost,GIS,Municipality
 gb_gis_mun,182,.20373599,.062591642,.029975226,XGboost,GIS,Municipality
 gb_gis_mun,183,.20277476,.061672006,.02929276,XGboost,GIS,Municipality
-gb_gis_mun,184,.20510785,.063904226,.031018138,XGboost,GIS,Municipality
+gb_gis_mun,184,.20535158,.064127341,.031201262,XGboost,GIS,Municipality
 gb_gis_mun,185,.20440145,.063053198,.030306833,XGboost,GIS,Municipality
 gb_gis_mun,186,.20454384,.063569412,.030792207,XGboost,GIS,Municipality
 gb_gis_mun,187,.20392852,.06260068,.029955572,XGboost,GIS,Municipality
-gb_gis_mun,188,.20464951,.062918477,.030083925,XGboost,GIS,Municipality
+gb_gis_mun,188,.20465045,.062913254,.030080002,XGboost,GIS,Municipality
 gb_gis_mun,189,.20350921,.062887609,.030388519,XGboost,GIS,Municipality
 gb_gis_mun,190,.20340627,.061944939,.029429439,XGboost,GIS,Municipality
 gb_gis_mun,191,.20347701,.062288541,.029802924,XGboost,GIS,Municipality
@@ -3713,7 +4213,7 @@ gb_gis_mun,211,.20339535,.062247947,.029784037,XGboost,GIS,Municipality
 gb_gis_mun,212,.20363733,.06225526,.029733058,XGboost,GIS,Municipality
 gb_gis_mun,213,.20392424,.062839165,.030181361,XGboost,GIS,Municipality
 gb_gis_mun,214,.20388453,.062522769,.029900696,XGboost,GIS,Municipality
-gb_gis_mun,215,.20414506,.06259755,.029906202,XGboost,GIS,Municipality
+gb_gis_mun,215,.20420432,.062629715,.02992101,XGboost,GIS,Municipality
 gb_gis_mun,216,.20383868,.062739678,.030099103,XGboost,GIS,Municipality
 gb_gis_mun,217,.20345597,.062157713,.029606987,XGboost,GIS,Municipality
 gb_gis_mun,218,.20319065,.062016685,.029566223,XGboost,GIS,Municipality
@@ -3732,11 +4232,11 @@ gb_gis_mun,230,.20307885,.061858594,.02943901,XGboost,GIS,Municipality
 gb_gis_mun,231,.20354104,.062742203,.030165916,XGboost,GIS,Municipality
 gb_gis_mun,232,.20363286,.062244568,.029656116,XGboost,GIS,Municipality
 gb_gis_mun,233,.20386511,.062907077,.030275505,XGboost,GIS,Municipality
-gb_gis_mun,234,.20377855,.06245074,.029823445,XGboost,GIS,Municipality
+gb_gis_mun,234,.20380852,.062472686,.029835859,XGboost,GIS,Municipality
 gb_gis_mun,235,.20305385,.061895508,.029423274,XGboost,GIS,Municipality
 gb_gis_mun,236,.20324135,.062158979,.029703403,XGboost,GIS,Municipality
 gb_gis_mun,237,.203889,.062351853,.029740291,XGboost,GIS,Municipality
-gb_gis_mun,238,.20366018,.062807083,.030215131,XGboost,GIS,Municipality
+gb_gis_mun,238,.20367885,.062816426,.030219378,XGboost,GIS,Municipality
 gb_gis_mun,239,.20382695,.062791713,.030181253,XGboost,GIS,Municipality
 gb_gis_mun,240,.20423603,.063195735,.030478194,XGboost,GIS,Municipality
 gb_gis_mun,241,.20297803,.061838493,.029418075,XGboost,GIS,Municipality
@@ -3752,11 +4252,11 @@ gb_gis_mun,250,.20316596,.062647998,.030214654,XGboost,GIS,Municipality
 gb_gis_mun,251,.20374262,.062136885,.02951828,XGboost,GIS,Municipality
 gb_gis_mun,252,.20391431,.062702499,.030080466,XGboost,GIS,Municipality
 gb_gis_mun,253,.20365037,.062573791,.030032063,XGboost,GIS,Municipality
-gb_gis_mun,254,.20444606,.062630728,.029837735,XGboost,GIS,Municipality
+gb_gis_mun,254,.20444004,.062629066,.029837176,XGboost,GIS,Municipality
 gb_gis_mun,255,.20312341,.062253296,.0298324,XGboost,GIS,Municipality
 gb_gis_mun,256,.20238553,.061806895,.029507594,XGboost,GIS,Municipality
-gb_gis_mun,257,.20351033,.062729456,.030213011,XGboost,GIS,Municipality
-gb_gis_mun,258,.20441616,.063157417,.030382806,XGboost,GIS,Municipality
+gb_gis_mun,257,.20352355,.062769555,.030245064,XGboost,GIS,Municipality
+gb_gis_mun,258,.20441957,.063156694,.030379053,XGboost,GIS,Municipality
 gb_gis_mun,259,.20431271,.06272871,.029971972,XGboost,GIS,Municipality
 gb_gis_mun,260,.2025342,.061377645,.029073566,XGboost,GIS,Municipality
 gb_gis_mun,261,.20422833,.062883638,.03017468,XGboost,GIS,Municipality
@@ -3769,17 +4269,17 @@ gb_gis_mun,267,.20366569,.062127054,.029549966,XGboost,GIS,Municipality
 gb_gis_mun,268,.2035795,.062293231,.029752247,XGboost,GIS,Municipality
 gb_gis_mun,269,.20277525,.062330216,.030046776,XGboost,GIS,Municipality
 gb_gis_mun,270,.20359483,.062510148,.029940369,XGboost,GIS,Municipality
-gb_gis_mun,271,.203538,.062327113,.029771017,XGboost,GIS,Municipality
+gb_gis_mun,271,.20354557,.062339276,.029781919,XGboost,GIS,Municipality
 gb_gis_mun,272,.20308921,.062312428,.029875455,XGboost,GIS,Municipality
 gb_gis_mun,273,.20296586,.061926659,.029519709,XGboost,GIS,Municipality
 gb_gis_mun,274,.20383036,.062505141,.029880913,XGboost,GIS,Municipality
 gb_gis_mun,275,.20327871,.062149473,.029669391,XGboost,GIS,Municipality
-gb_gis_mun,276,.20360215,.062962405,.030358143,XGboost,GIS,Municipality
+gb_gis_mun,276,.2036588,.063021116,.030396903,XGboost,GIS,Municipality
 gb_gis_mun,277,.20416108,.062836654,.030165687,XGboost,GIS,Municipality
 gb_gis_mun,278,.20326182,.061999533,.029574296,XGboost,GIS,Municipality
 gb_gis_mun,279,.20394477,.062535971,.029889949,XGboost,GIS,Municipality
 gb_gis_mun,280,.20360631,.062753245,.03019611,XGboost,GIS,Municipality
-gb_gis_mun,281,.20360756,.062647909,.030044733,XGboost,GIS,Municipality
+gb_gis_mun,281,.20360421,.062649444,.030046556,XGboost,GIS,Municipality
 gb_gis_mun,282,.20463419,.063139677,.030330487,XGboost,GIS,Municipality
 gb_gis_mun,283,.20268938,.061689675,.029343858,XGboost,GIS,Municipality
 gb_gis_mun,284,.20366414,.06215962,.029581733,XGboost,GIS,Municipality
@@ -3787,7 +4287,7 @@ gb_gis_mun,285,.2037306,.062851481,.03027905,XGboost,GIS,Municipality
 gb_gis_mun,286,.20371644,.062583007,.030043067,XGboost,GIS,Municipality
 gb_gis_mun,287,.20321473,.062036578,.029623996,XGboost,GIS,Municipality
 gb_gis_mun,288,.20371483,.062631406,.030040096,XGboost,GIS,Municipality
-gb_gis_mun,289,.20399515,.062896997,.030254953,XGboost,GIS,Municipality
+gb_gis_mun,289,.20399982,.062906772,.030261455,XGboost,GIS,Municipality
 gb_gis_mun,290,.20311292,.062240079,.029800387,XGboost,GIS,Municipality
 gb_gis_mun,291,.20266791,.061696365,.029350003,XGboost,GIS,Municipality
 gb_gis_mun,292,.20337462,.062626161,.030089363,XGboost,GIS,Municipality
@@ -3800,7 +4300,7 @@ gb_gis_mun,298,.20397407,.062542729,.029925978,XGboost,GIS,Municipality
 gb_gis_mun,299,.20290065,.062305491,.029933872,XGboost,GIS,Municipality
 gb_gis_mun,300,.20441355,.062571548,.029799601,XGboost,GIS,Municipality
 gb_gis_mun,301,.20325854,.061961569,.029538887,XGboost,GIS,Municipality
-gb_gis_mun,302,.20471783,.063077725,.030236959,XGboost,GIS,Municipality
+gb_gis_mun,302,.20469014,.063044451,.030213919,XGboost,GIS,Municipality
 gb_gis_mun,303,.20388031,.062669419,.030036675,XGboost,GIS,Municipality
 gb_gis_mun,304,.20345566,.06258145,.030064574,XGboost,GIS,Municipality
 gb_gis_mun,305,.20425527,.062624454,.029925348,XGboost,GIS,Municipality
@@ -3812,22 +4312,22 @@ gb_gis_mun,310,.20401533,.062490996,.029792579,XGboost,GIS,Municipality
 gb_gis_mun,311,.20389086,.062576883,.029975947,XGboost,GIS,Municipality
 gb_gis_mun,312,.2040621,.062958233,.030279582,XGboost,GIS,Municipality
 gb_gis_mun,313,.20405671,.063050725,.030387772,XGboost,GIS,Municipality
-gb_gis_mun,314,.20428398,.062896162,.030137803,XGboost,GIS,Municipality
+gb_gis_mun,314,.20428082,.062882341,.030127818,XGboost,GIS,Municipality
 gb_gis_mun,315,.20321219,.062154945,.029676791,XGboost,GIS,Municipality
 gb_gis_mun,316,.20292473,.062200036,.029824642,XGboost,GIS,Municipality
-gb_gis_mun,317,.20458269,.063584082,.030824175,XGboost,GIS,Municipality
+gb_gis_mun,317,.20458244,.06357912,.030820085,XGboost,GIS,Municipality
 gb_gis_mun,318,.20408203,.062866874,.030196182,XGboost,GIS,Municipality
 gb_gis_mun,319,.20308052,.062241752,.029750176,XGboost,GIS,Municipality
 gb_gis_mun,320,.20356648,.062128354,.029565206,XGboost,GIS,Municipality
 gb_gis_mun,321,.20350704,.06247985,.029912718,XGboost,GIS,Municipality
 gb_gis_mun,322,.20270805,.062095825,.029855352,XGboost,GIS,Municipality
 gb_gis_mun,323,.20385928,.062704153,.030101666,XGboost,GIS,Municipality
-gb_gis_mun,324,.20433716,.06297902,.030272456,XGboost,GIS,Municipality
+gb_gis_mun,324,.2043193,.062971361,.030268116,XGboost,GIS,Municipality
 gb_gis_mun,325,.204307,.062642582,.029967383,XGboost,GIS,Municipality
 gb_gis_mun,326,.2038442,.062479321,.029857768,XGboost,GIS,Municipality
 gb_gis_mun,327,.20365669,.062535733,.029992593,XGboost,GIS,Municipality
 gb_gis_mun,328,.20355159,.062233128,.029726621,XGboost,GIS,Municipality
-gb_gis_mun,329,.20361711,.062623449,.030064547,XGboost,GIS,Municipality
+gb_gis_mun,329,.20358348,.062598735,.030044092,XGboost,GIS,Municipality
 gb_gis_mun,330,.20308903,.062342133,.029958079,XGboost,GIS,Municipality
 gb_gis_mun,331,.20308015,.06237762,.029909683,XGboost,GIS,Municipality
 gb_gis_mun,332,.2031543,.061983902,.029499717,XGboost,GIS,Municipality
@@ -3839,7 +4339,7 @@ gb_gis_mun,337,.20411795,.062608361,.029885124,XGboost,GIS,Municipality
 gb_gis_mun,338,.20354997,.062239371,.029703271,XGboost,GIS,Municipality
 gb_gis_mun,339,.20389415,.063077696,.030447302,XGboost,GIS,Municipality
 gb_gis_mun,340,.20349915,.062382746,.02983023,XGboost,GIS,Municipality
-gb_gis_mun,341,.20399684,.062995166,.030372456,XGboost,GIS,Municipality
+gb_gis_mun,341,.20400825,.062997527,.030374201,XGboost,GIS,Municipality
 gb_gis_mun,342,.20489447,.063188113,.030283269,XGboost,GIS,Municipality
 gb_gis_mun,343,.20327771,.062321063,.029842224,XGboost,GIS,Municipality
 gb_gis_mun,344,.2035017,.06260588,.030077029,XGboost,GIS,Municipality
@@ -3858,7 +4358,7 @@ gb_gis_mun,356,.20324203,.062348943,.029884925,XGboost,GIS,Municipality
 gb_gis_mun,357,.20302506,.061938651,.029466471,XGboost,GIS,Municipality
 gb_gis_mun,358,.20294285,.061861094,.029488603,XGboost,GIS,Municipality
 gb_gis_mun,359,.2031651,.062110487,.02965284,XGboost,GIS,Municipality
-gb_gis_mun,360,.20495155,.063405916,.03050876,XGboost,GIS,Municipality
+gb_gis_mun,360,.2049443,.06340576,.030508675,XGboost,GIS,Municipality
 gb_gis_mun,361,.20313556,.062054429,.029610423,XGboost,GIS,Municipality
 gb_gis_mun,362,.20247656,.061774977,.029496761,XGboost,GIS,Municipality
 gb_gis_mun,363,.20274113,.062070612,.029742613,XGboost,GIS,Municipality
@@ -3866,15 +4366,15 @@ gb_gis_mun,364,.20390159,.062815845,.030204507,XGboost,GIS,Municipality
 gb_gis_mun,365,.20357244,.062393393,.029833376,XGboost,GIS,Municipality
 gb_gis_mun,366,.20281695,.061703954,.029275004,XGboost,GIS,Municipality
 gb_gis_mun,367,.20445995,.062609337,.029871365,XGboost,GIS,Municipality
-gb_gis_mun,368,.20371936,.062378727,.029855365,XGboost,GIS,Municipality
+gb_gis_mun,368,.20370826,.062367801,.029847369,XGboost,GIS,Municipality
 gb_gis_mun,369,.20284593,.061931327,.029581346,XGboost,GIS,Municipality
-gb_gis_mun,370,.20450723,.063395567,.030625809,XGboost,GIS,Municipality
+gb_gis_mun,370,.20449898,.063427784,.030654902,XGboost,GIS,Municipality
 gb_gis_mun,371,.20388633,.062859178,.030223547,XGboost,GIS,Municipality
 gb_gis_mun,372,.20278314,.06213497,.029755633,XGboost,GIS,Municipality
 gb_gis_mun,373,.20398952,.062835455,.030163011,XGboost,GIS,Municipality
 gb_gis_mun,374,.20373172,.062668577,.030098187,XGboost,GIS,Municipality
 gb_gis_mun,375,.20324209,.062386226,.029866911,XGboost,GIS,Municipality
-gb_gis_mun,376,.20418218,.062575877,.029855017,XGboost,GIS,Municipality
+gb_gis_mun,376,.20420289,.062597178,.029868631,XGboost,GIS,Municipality
 gb_gis_mun,377,.2038535,.062505789,.029944617,XGboost,GIS,Municipality
 gb_gis_mun,378,.2040832,.062761679,.030096823,XGboost,GIS,Municipality
 gb_gis_mun,379,.20328963,.062336095,.029863358,XGboost,GIS,Municipality
@@ -3892,7 +4392,7 @@ gb_gis_mun,390,.20283438,.062152877,.029748602,XGboost,GIS,Municipality
 gb_gis_mun,391,.2036166,.062256359,.029650895,XGboost,GIS,Municipality
 gb_gis_mun,392,.20308685,.062216222,.02980007,XGboost,GIS,Municipality
 gb_gis_mun,393,.20251057,.061568975,.029291436,XGboost,GIS,Municipality
-gb_gis_mun,394,.20441671,.063256383,.030460149,XGboost,GIS,Municipality
+gb_gis_mun,394,.20437321,.063275822,.030481761,XGboost,GIS,Municipality
 gb_gis_mun,395,.20349835,.062605582,.030096594,XGboost,GIS,Municipality
 gb_gis_mun,396,.20309778,.06196497,.029554676,XGboost,GIS,Municipality
 gb_gis_mun,397,.2045009,.0631615,.030377364,XGboost,GIS,Municipality
@@ -3920,7 +4420,7 @@ gb_gis_mun,418,.20344505,.062503345,.029993579,XGboost,GIS,Municipality
 gb_gis_mun,419,.20359048,.06219792,.029570997,XGboost,GIS,Municipality
 gb_gis_mun,420,.20287862,.06224294,.029849639,XGboost,GIS,Municipality
 gb_gis_mun,421,.20367314,.062572792,.029987544,XGboost,GIS,Municipality
-gb_gis_mun,422,.20379208,.062610783,.029985784,XGboost,GIS,Municipality
+gb_gis_mun,422,.20379004,.062606864,.029982286,XGboost,GIS,Municipality
 gb_gis_mun,423,.20369808,.062388752,.029802814,XGboost,GIS,Municipality
 gb_gis_mun,424,.20383762,.062798589,.030231217,XGboost,GIS,Municipality
 gb_gis_mun,425,.20334677,.062976629,.030426376,XGboost,GIS,Municipality
@@ -3934,35 +4434,35 @@ gb_gis_mun,432,.20343091,.062469326,.030020433,XGboost,GIS,Municipality
 gb_gis_mun,433,.20379412,.062682383,.030103341,XGboost,GIS,Municipality
 gb_gis_mun,434,.20229736,.06145227,.029261155,XGboost,GIS,Municipality
 gb_gis_mun,435,.20346262,.062204879,.029644262,XGboost,GIS,Municipality
-gb_gis_mun,436,.20410052,.062650666,.029967977,XGboost,GIS,Municipality
+gb_gis_mun,436,.20408934,.062644579,.029963745,XGboost,GIS,Municipality
 gb_gis_mun,437,.20309387,.061929516,.029459551,XGboost,GIS,Municipality
-gb_gis_mun,438,.20447367,.063542105,.030809598,XGboost,GIS,Municipality
+gb_gis_mun,438,.20451213,.063571043,.03082661,XGboost,GIS,Municipality
 gb_gis_mun,439,.20344207,.062642872,.030139746,XGboost,GIS,Municipality
 gb_gis_mun,440,.20237976,.061974611,.029657934,XGboost,GIS,Municipality
 gb_gis_mun,441,.20363709,.062806644,.030226957,XGboost,GIS,Municipality
 gb_gis_mun,442,.2033526,.062532037,.030022921,XGboost,GIS,Municipality
 gb_gis_mun,443,.20402972,.062898695,.030167563,XGboost,GIS,Municipality
 gb_gis_mun,444,.20400266,.062926382,.030321257,XGboost,GIS,Municipality
-gb_gis_mun,445,.20424403,.063207626,.030498769,XGboost,GIS,Municipality
+gb_gis_mun,445,.20425868,.063215271,.030504894,XGboost,GIS,Municipality
 gb_gis_mun,446,.20402811,.063206643,.030534625,XGboost,GIS,Municipality
 gb_gis_mun,447,.2035228,.062587991,.030028462,XGboost,GIS,Municipality
 gb_gis_mun,448,.2029122,.061804965,.029390592,XGboost,GIS,Municipality
 gb_gis_mun,449,.20352484,.062749483,.030193897,XGboost,GIS,Municipality
 gb_gis_mun,450,.20386437,.062652096,.030013917,XGboost,GIS,Municipality
 gb_gis_mun,451,.20443569,.062939964,.030186096,XGboost,GIS,Municipality
-gb_gis_mun,452,.20446181,.063123837,.030413764,XGboost,GIS,Municipality
+gb_gis_mun,452,.20447454,.063141719,.030429272,XGboost,GIS,Municipality
 gb_gis_mun,453,.20381795,.062437005,.029815394,XGboost,GIS,Municipality
 gb_gis_mun,454,.20292863,.061972287,.029588928,XGboost,GIS,Municipality
-gb_gis_mun,455,.20420916,.063109823,.030355556,XGboost,GIS,Municipality
+gb_gis_mun,455,.20421146,.063111126,.030356193,XGboost,GIS,Municipality
 gb_gis_mun,456,.20403996,.062759958,.030111831,XGboost,GIS,Municipality
 gb_gis_mun,457,.20325612,.062250197,.029747976,XGboost,GIS,Municipality
 gb_gis_mun,458,.20338127,.061919235,.029418798,XGboost,GIS,Municipality
 gb_gis_mun,459,.20349735,.062381044,.029877657,XGboost,GIS,Municipality
 gb_gis_mun,460,.20425849,.062850736,.030137507,XGboost,GIS,Municipality
-gb_gis_mun,461,.20358931,.06235351,.02978348,XGboost,GIS,Municipality
+gb_gis_mun,461,.203554,.062329751,.029769892,XGboost,GIS,Municipality
 gb_gis_mun,462,.20282973,.061800502,.029449185,XGboost,GIS,Municipality
-gb_gis_mun,463,.20400974,.062630013,.029994523,XGboost,GIS,Municipality
-gb_gis_mun,464,.20499499,.063768119,.030892758,XGboost,GIS,Municipality
+gb_gis_mun,463,.20400856,.06263037,.029994784,XGboost,GIS,Municipality
+gb_gis_mun,464,.20506038,.063840121,.030941254,XGboost,GIS,Municipality
 gb_gis_mun,465,.20289506,.061897755,.029502794,XGboost,GIS,Municipality
 gb_gis_mun,466,.20312756,.062145736,.029674543,XGboost,GIS,Municipality
 gb_gis_mun,467,.2031945,.062308695,.029824229,XGboost,GIS,Municipality
@@ -3983,19 +4483,19 @@ gb_gis_mun,481,.20359142,.062429313,.029870983,XGboost,GIS,Municipality
 gb_gis_mun,482,.20386729,.062784359,.030163476,XGboost,GIS,Municipality
 gb_gis_mun,483,.20379561,.062581897,.02999153,XGboost,GIS,Municipality
 gb_gis_mun,484,.20355041,.062470205,.029892262,XGboost,GIS,Municipality
-gb_gis_mun,485,.20336272,.062388238,.029887782,XGboost,GIS,Municipality
+gb_gis_mun,485,.20335837,.062387243,.029885842,XGboost,GIS,Municipality
 gb_gis_mun,486,.20363547,.062183417,.029635176,XGboost,GIS,Municipality
 gb_gis_mun,487,.2028605,.062006626,.029606787,XGboost,GIS,Municipality
 gb_gis_mun,488,.20356511,.062184639,.029619368,XGboost,GIS,Municipality
-gb_gis_mun,489,.20418075,.062910967,.030220019,XGboost,GIS,Municipality
+gb_gis_mun,489,.20418032,.062913589,.030221445,XGboost,GIS,Municipality
 gb_gis_mun,490,.20313735,.062309448,.029841397,XGboost,GIS,Municipality
 gb_gis_mun,491,.20320152,.061956692,.029446706,XGboost,GIS,Municipality
 gb_gis_mun,492,.20324562,.062378392,.029901823,XGboost,GIS,Municipality
 gb_gis_mun,493,.20242283,.061649762,.029359534,XGboost,GIS,Municipality
-gb_gis_mun,494,.2029988,.06200688,.02958147,XGboost,GIS,Municipality
+gb_gis_mun,494,.20300327,.061988745,.029566897,XGboost,GIS,Municipality
 gb_gis_mun,495,.20305732,.062243883,.029769111,XGboost,GIS,Municipality
 gb_gis_mun,496,.20252818,.062105507,.029771741,XGboost,GIS,Municipality
-gb_gis_mun,497,.20439065,.06311433,.030372841,XGboost,GIS,Municipality
+gb_gis_mun,497,.20440151,.063139848,.030389559,XGboost,GIS,Municipality
 gb_gis_mun,498,.20368555,.062763706,.030211641,XGboost,GIS,Municipality
 gb_gis_mun,499,.20337097,.062194876,.029648781,XGboost,GIS,Municipality
 gb_gis_mun,500,.20342551,.062147625,.029618477,XGboost,GIS,Municipality
@@ -4019,7 +4519,7 @@ gb_census_mun,17,.20030287,.059541147,.027740927,XGboost,Census agg.,Municipalit
 gb_census_mun,18,.20028269,.059719693,.02791219,XGboost,Census agg.,Municipality
 gb_census_mun,19,.20040388,.0595636,.027722454,XGboost,Census agg.,Municipality
 gb_census_mun,20,.20027687,.059448477,.02766921,XGboost,Census agg.,Municipality
-gb_census_mun,21,.20033327,.059387423,.02764219,XGboost,Census agg.,Municipality
+gb_census_mun,21,.20032588,.059376124,.027632715,XGboost,Census agg.,Municipality
 gb_census_mun,22,.20031868,.059570216,.027784258,XGboost,Census agg.,Municipality
 gb_census_mun,23,.20031868,.059621796,.027827274,XGboost,Census agg.,Municipality
 gb_census_mun,24,.2001681,.059584763,.027804993,XGboost,Census agg.,Municipality
@@ -4061,10 +4561,10 @@ gb_census_mun,59,.20027824,.05957704,.02778797,XGboost,Census agg.,Municipality
 gb_census_mun,60,.20021147,.059199385,.027463531,XGboost,Census agg.,Municipality
 gb_census_mun,61,.2004815,.05964284,.027817618,XGboost,Census agg.,Municipality
 gb_census_mun,62,.20003824,.059554201,.027810402,XGboost,Census agg.,Municipality
-gb_census_mun,63,.20061329,.059738927,.027856931,XGboost,Census agg.,Municipality
+gb_census_mun,63,.20061353,.059750348,.027865944,XGboost,Census agg.,Municipality
 gb_census_mun,64,.20021439,.059577554,.027790466,XGboost,Census agg.,Municipality
 gb_census_mun,65,.20030876,.059426717,.027640224,XGboost,Census agg.,Municipality
-gb_census_mun,66,.20031001,.059451304,.027671508,XGboost,Census agg.,Municipality
+gb_census_mun,66,.20041361,.059575319,.027751567,XGboost,Census agg.,Municipality
 gb_census_mun,67,.20068799,.059645243,.027761545,XGboost,Census agg.,Municipality
 gb_census_mun,68,.20026284,.059279092,.027553048,XGboost,Census agg.,Municipality
 gb_census_mun,69,.20013459,.059671767,.027907619,XGboost,Census agg.,Municipality
@@ -4075,7 +4575,7 @@ gb_census_mun,73,.20024045,.059367951,.027575908,XGboost,Census agg.,Municipalit
 gb_census_mun,74,.2002469,.059304807,.027543923,XGboost,Census agg.,Municipality
 gb_census_mun,75,.20050073,.059485793,.027671175,XGboost,Census agg.,Municipality
 gb_census_mun,76,.20034015,.059359867,.027591759,XGboost,Census agg.,Municipality
-gb_census_mun,77,.20051792,.059508577,.027691554,XGboost,Census agg.,Municipality
+gb_census_mun,77,.20052363,.05950179,.027681081,XGboost,Census agg.,Municipality
 gb_census_mun,78,.20025367,.059634726,.027821383,XGboost,Census agg.,Municipality
 gb_census_mun,79,.20026433,.059593037,.027839057,XGboost,Census agg.,Municipality
 gb_census_mun,80,.20069166,.059613086,.027787538,XGboost,Census agg.,Municipality
@@ -4099,7 +4599,7 @@ gb_census_mun,97,.20023039,.059483763,.027708588,XGboost,Census agg.,Municipalit
 gb_census_mun,98,.20012516,.059640408,.027905924,XGboost,Census agg.,Municipality
 gb_census_mun,99,.20031174,.059535034,.027732749,XGboost,Census agg.,Municipality
 gb_census_mun,100,.20049751,.059450507,.027622454,XGboost,Census agg.,Municipality
-gb_census_mun,101,.20052828,.059631974,.027801111,XGboost,Census agg.,Municipality
+gb_census_mun,101,.20053175,.059634201,.02780216,XGboost,Census agg.,Municipality
 gb_census_mun,102,.20044328,.059449304,.027615456,XGboost,Census agg.,Municipality
 gb_census_mun,103,.20043483,.059401415,.02762207,XGboost,Census agg.,Municipality
 gb_census_mun,104,.20049918,.059435051,.027651915,XGboost,Census agg.,Municipality
@@ -4129,7 +4629,7 @@ gb_census_mun,127,.20061068,.059701324,.027848743,XGboost,Census agg.,Municipali
 gb_census_mun,128,.20038867,.05953094,.027733132,XGboost,Census agg.,Municipality
 gb_census_mun,129,.20021345,.059294023,.027541921,XGboost,Census agg.,Municipality
 gb_census_mun,130,.20043173,.059458036,.027643459,XGboost,Census agg.,Municipality
-gb_census_mun,131,.20053783,.059898924,.028004443,XGboost,Census agg.,Municipality
+gb_census_mun,131,.20052971,.05992417,.028027995,XGboost,Census agg.,Municipality
 gb_census_mun,132,.20003563,.059715483,.027989743,XGboost,Census agg.,Municipality
 gb_census_mun,133,.20011753,.059269037,.027530748,XGboost,Census agg.,Municipality
 gb_census_mun,134,.20002396,.059313964,.027599668,XGboost,Census agg.,Municipality
@@ -4187,23 +4687,23 @@ gb_census_mun,185,.20041679,.059437588,.027636494,XGboost,Census agg.,Municipali
 gb_census_mun,186,.20054658,.059987612,.028163858,XGboost,Census agg.,Municipality
 gb_census_mun,187,.20044973,.059641372,.027795304,XGboost,Census agg.,Municipality
 gb_census_mun,188,.20056699,.059380978,.027565841,XGboost,Census agg.,Municipality
-gb_census_mun,189,.20008235,.059308179,.027593629,XGboost,Census agg.,Municipality
+gb_census_mun,189,.20007274,.05928674,.027577987,XGboost,Census agg.,Municipality
 gb_census_mun,190,.20031285,.059368663,.027604213,XGboost,Census agg.,Municipality
 gb_census_mun,191,.20054528,.0596807,.027828826,XGboost,Census agg.,Municipality
 gb_census_mun,192,.20048814,.059843037,.028054776,XGboost,Census agg.,Municipality
 gb_census_mun,193,.20020613,.059579421,.02779055,XGboost,Census agg.,Municipality
-gb_census_mun,194,.2001009,.059440754,.027662655,XGboost,Census agg.,Municipality
-gb_census_mun,195,.20041952,.059459269,.027639087,XGboost,Census agg.,Municipality
+gb_census_mun,194,.20010947,.059447475,.027667385,XGboost,Census agg.,Municipality
+gb_census_mun,195,.20040108,.059426125,.027614692,XGboost,Census agg.,Municipality
 gb_census_mun,196,.20009302,.05941556,.027719719,XGboost,Census agg.,Municipality
-gb_census_mun,197,.20057407,.059652593,.027774362,XGboost,Census agg.,Municipality
+gb_census_mun,197,.20059095,.059663121,.027781527,XGboost,Census agg.,Municipality
 gb_census_mun,198,.20019305,.059312172,.027571656,XGboost,Census agg.,Municipality
 gb_census_mun,199,.20023027,.059683017,.027859356,XGboost,Census agg.,Municipality
 gb_census_mun,200,.20019931,.059521921,.027762832,XGboost,Census agg.,Municipality
-gb_census_mun,201,.20030864,.059515387,.027721358,XGboost,Census agg.,Municipality
+gb_census_mun,201,.20029213,.059515949,.027724294,XGboost,Census agg.,Municipality
 gb_census_mun,202,.20058095,.059985854,.02812334,XGboost,Census agg.,Municipality
 gb_census_mun,203,.20019478,.059405014,.02764624,XGboost,Census agg.,Municipality
 gb_census_mun,204,.200353,.059372734,.027617799,XGboost,Census agg.,Municipality
-gb_census_mun,205,.20024814,.059739426,.027903818,XGboost,Census agg.,Municipality
+gb_census_mun,205,.20025255,.059741341,.027904522,XGboost,Census agg.,Municipality
 gb_census_mun,206,.20028146,.059488017,.027706895,XGboost,Census agg.,Municipality
 gb_census_mun,207,.20052604,.059513588,.027703479,XGboost,Census agg.,Municipality
 gb_census_mun,208,.20029034,.059287872,.027545506,XGboost,Census agg.,Municipality
@@ -4213,7 +4713,7 @@ gb_census_mun,211,.20033972,.059797212,.027966985,XGboost,Census agg.,Municipali
 gb_census_mun,212,.20019527,.059316162,.027592471,XGboost,Census agg.,Municipality
 gb_census_mun,213,.20023474,.059509654,.027757384,XGboost,Census agg.,Municipality
 gb_census_mun,214,.20009619,.05946923,.027734322,XGboost,Census agg.,Municipality
-gb_census_mun,215,.20032774,.059307974,.027547032,XGboost,Census agg.,Municipality
+gb_census_mun,215,.20033494,.059308831,.027547544,XGboost,Census agg.,Municipality
 gb_census_mun,216,.20007019,.05948526,.027754722,XGboost,Census agg.,Municipality
 gb_census_mun,217,.20007627,.05922994,.027524536,XGboost,Census agg.,Municipality
 gb_census_mun,218,.20047653,.059746463,.027885308,XGboost,Census agg.,Municipality
@@ -4225,7 +4725,7 @@ gb_census_mun,223,.20036125,.059511095,.027702423,XGboost,Census agg.,Municipali
 gb_census_mun,224,.20029201,.059690338,.027886337,XGboost,Census agg.,Municipality
 gb_census_mun,225,.2003852,.059283774,.027522115,XGboost,Census agg.,Municipality
 gb_census_mun,226,.20013416,.059604306,.027827598,XGboost,Census agg.,Municipality
-gb_census_mun,227,.20058748,.059716184,.027833171,XGboost,Census agg.,Municipality
+gb_census_mun,227,.2006067,.059729062,.027841507,XGboost,Census agg.,Municipality
 gb_census_mun,228,.20028071,.059300456,.027544273,XGboost,Census agg.,Municipality
 gb_census_mun,229,.19996117,.059398204,.027685672,XGboost,Census agg.,Municipality
 gb_census_mun,230,.20030628,.059718788,.027908318,XGboost,Census agg.,Municipality
@@ -4240,7 +4740,7 @@ gb_census_mun,238,.20011964,.059398159,.027658727,XGboost,Census agg.,Municipali
 gb_census_mun,239,.20025986,.059528548,.027730491,XGboost,Census agg.,Municipality
 gb_census_mun,240,.20057897,.059610162,.027772743,XGboost,Census agg.,Municipality
 gb_census_mun,241,.20026781,.059589382,.027813837,XGboost,Census agg.,Municipality
-gb_census_mun,242,.20021135,.059414875,.027671617,XGboost,Census agg.,Municipality
+gb_census_mun,242,.20021798,.059406113,.027663212,XGboost,Census agg.,Municipality
 gb_census_mun,243,.20033923,.059325416,.027546411,XGboost,Census agg.,Municipality
 gb_census_mun,244,.20017461,.059560359,.027757408,XGboost,Census agg.,Municipality
 gb_census_mun,245,.20018032,.059204571,.027483385,XGboost,Census agg.,Municipality
@@ -4253,17 +4753,17 @@ gb_census_mun,251,.20032483,.059352405,.027570633,XGboost,Census agg.,Municipali
 gb_census_mun,252,.20027742,.059573099,.027770374,XGboost,Census agg.,Municipality
 gb_census_mun,253,.20045805,.059610259,.027779248,XGboost,Census agg.,Municipality
 gb_census_mun,254,.20077218,.059673466,.02777628,XGboost,Census agg.,Municipality
-gb_census_mun,255,.20009004,.059486158,.027770758,XGboost,Census agg.,Municipality
+gb_census_mun,255,.2001228,.059495691,.027778143,XGboost,Census agg.,Municipality
 gb_census_mun,256,.19996607,.059514232,.027815757,XGboost,Census agg.,Municipality
 gb_census_mun,257,.20029169,.059415355,.027658997,XGboost,Census agg.,Municipality
 gb_census_mun,258,.20016803,.059422504,.027669314,XGboost,Census agg.,Municipality
 gb_census_mun,259,.20010711,.059313875,.027583459,XGboost,Census agg.,Municipality
 gb_census_mun,260,.20037062,.059615612,.027793411,XGboost,Census agg.,Municipality
 gb_census_mun,261,.20013484,.059190609,.027450662,XGboost,Census agg.,Municipality
-gb_census_mun,262,.20018566,.059399012,.027658708,XGboost,Census agg.,Municipality
+gb_census_mun,262,.20018727,.059399229,.027659127,XGboost,Census agg.,Municipality
 gb_census_mun,263,.20020501,.059273511,.027523102,XGboost,Census agg.,Municipality
 gb_census_mun,264,.20009115,.059334457,.027590156,XGboost,Census agg.,Municipality
-gb_census_mun,265,.20027234,.059385329,.027598286,XGboost,Census agg.,Municipality
+gb_census_mun,265,.20026769,.059349772,.02756637,XGboost,Census agg.,Municipality
 gb_census_mun,266,.20002744,.059183463,.027546888,XGboost,Census agg.,Municipality
 gb_census_mun,267,.20041722,.059530392,.027698874,XGboost,Census agg.,Municipality
 gb_census_mun,268,.20025583,.059237745,.027487528,XGboost,Census agg.,Municipality
@@ -4283,7 +4783,7 @@ gb_census_mun,281,.20036945,.059321865,.02752853,XGboost,Census agg.,Municipalit
 gb_census_mun,282,.20022047,.05931763,.027596317,XGboost,Census agg.,Municipality
 gb_census_mun,283,.20044217,.059373807,.027587572,XGboost,Census agg.,Municipality
 gb_census_mun,284,.20023802,.059350949,.027580334,XGboost,Census agg.,Municipality
-gb_census_mun,285,.20018373,.059473589,.027693937,XGboost,Census agg.,Municipality
+gb_census_mun,285,.20016618,.059470732,.027692119,XGboost,Census agg.,Municipality
 gb_census_mun,286,.20043527,.05931972,.027562043,XGboost,Census agg.,Municipality
 gb_census_mun,287,.2003831,.059315756,.027533349,XGboost,Census agg.,Municipality
 gb_census_mun,288,.20055905,.059647221,.02780503,XGboost,Census agg.,Municipality
@@ -4336,7 +4836,7 @@ gb_census_mun,334,.20037261,.059675816,.027847823,XGboost,Census agg.,Municipali
 gb_census_mun,335,.20062502,.059594441,.02771499,XGboost,Census agg.,Municipality
 gb_census_mun,336,.20047703,.05929349,.02748798,XGboost,Census agg.,Municipality
 gb_census_mun,337,.20024931,.059296712,.027549891,XGboost,Census agg.,Municipality
-gb_census_mun,338,.20050606,.059581887,.027729014,XGboost,Census agg.,Municipality
+gb_census_mun,338,.20051016,.059590176,.027736055,XGboost,Census agg.,Municipality
 gb_census_mun,339,.20001155,.059602112,.027883919,XGboost,Census agg.,Municipality
 gb_census_mun,340,.20031211,.059613742,.027811548,XGboost,Census agg.,Municipality
 gb_census_mun,341,.20044848,.059402332,.027626049,XGboost,Census agg.,Municipality
@@ -4353,7 +4853,7 @@ gb_census_mun,351,.20038006,.059476793,.027671088,XGboost,Census agg.,Municipali
 gb_census_mun,352,.20031118,.059347928,.027603803,XGboost,Census agg.,Municipality
 gb_census_mun,353,.20018423,.059353661,.02762072,XGboost,Census agg.,Municipality
 gb_census_mun,354,.20037217,.059537627,.027724165,XGboost,Census agg.,Municipality
-gb_census_mun,355,.20032403,.059564292,.027777936,XGboost,Census agg.,Municipality
+gb_census_mun,355,.20033903,.05958036,.02778809,XGboost,Census agg.,Municipality
 gb_census_mun,356,.20039073,.059755333,.027945261,XGboost,Census agg.,Municipality
 gb_census_mun,357,.20034462,.059730589,.027902346,XGboost,Census agg.,Municipality
 gb_census_mun,358,.2001107,.059429102,.027689602,XGboost,Census agg.,Municipality
@@ -4373,7 +4873,7 @@ gb_census_mun,371,.20017003,.059440151,.027670177,XGboost,Census agg.,Municipali
 gb_census_mun,372,.20020576,.059794415,.027982922,XGboost,Census agg.,Municipality
 gb_census_mun,373,.20045909,.059480783,.027662948,XGboost,Census agg.,Municipality
 gb_census_mun,374,.20039091,.059391499,.027642915,XGboost,Census agg.,Municipality
-gb_census_mun,375,.20033798,.059512321,.027691267,XGboost,Census agg.,Municipality
+gb_census_mun,375,.20033798,.059515227,.027693521,XGboost,Census agg.,Municipality
 gb_census_mun,376,.20025522,.059519298,.027731063,XGboost,Census agg.,Municipality
 gb_census_mun,377,.20019093,.059352715,.027619906,XGboost,Census agg.,Municipality
 gb_census_mun,378,.20035245,.059602667,.027791459,XGboost,Census agg.,Municipality
@@ -4381,18 +4881,18 @@ gb_census_mun,379,.19992071,.059454642,.027785737,XGboost,Census agg.,Municipali
 gb_census_mun,380,.20042199,.059576057,.027787473,XGboost,Census agg.,Municipality
 gb_census_mun,381,.20019434,.059471373,.027709961,XGboost,Census agg.,Municipality
 gb_census_mun,382,.20022009,.059399143,.027680667,XGboost,Census agg.,Municipality
-gb_census_mun,383,.20034462,.05931931,.027567351,XGboost,Census agg.,Municipality
+gb_census_mun,383,.20034462,.059319064,.027567191,XGboost,Census agg.,Municipality
 gb_census_mun,384,.20036007,.059683517,.027837798,XGboost,Census agg.,Municipality
 gb_census_mun,385,.2005263,.059418362,.027612306,XGboost,Census agg.,Municipality
 gb_census_mun,386,.20072584,.059658203,.027784701,XGboost,Census agg.,Municipality
 gb_census_mun,387,.2002652,.059386477,.027623739,XGboost,Census agg.,Municipality
 gb_census_mun,388,.20021984,.059527371,.027773913,XGboost,Census agg.,Municipality
 gb_census_mun,389,.19998661,.05918235,.027482826,XGboost,Census agg.,Municipality
-gb_census_mun,390,.20038502,.059641711,.027793899,XGboost,Census agg.,Municipality
+gb_census_mun,390,.20037788,.059638645,.027791984,XGboost,Census agg.,Municipality
 gb_census_mun,391,.20005158,.059265163,.027543489,XGboost,Census agg.,Municipality
 gb_census_mun,392,.19994511,.05927233,.027590595,XGboost,Census agg.,Municipality
-gb_census_mun,393,.20063463,.059493288,.02766205,XGboost,Census agg.,Municipality
-gb_census_mun,394,.20025769,.059341229,.02758136,XGboost,Census agg.,Municipality
+gb_census_mun,393,.20062321,.059507605,.027672336,XGboost,Census agg.,Municipality
+gb_census_mun,394,.2002582,.05934206,.027581831,XGboost,Census agg.,Municipality
 gb_census_mun,395,.20033427,.059307434,.027527386,XGboost,Census agg.,Municipality
 gb_census_mun,396,.20024733,.059532251,.027757877,XGboost,Census agg.,Municipality
 gb_census_mun,397,.20041436,.059591427,.02777868,XGboost,Census agg.,Municipality
@@ -4422,7 +4922,7 @@ gb_census_mun,420,.20032713,.059639219,.027835997,XGboost,Census agg.,Municipali
 gb_census_mun,421,.20029697,.059418682,.027636282,XGboost,Census agg.,Municipality
 gb_census_mun,422,.20027289,.059313025,.027590007,XGboost,Census agg.,Municipality
 gb_census_mun,423,.20053387,.059393179,.027597843,XGboost,Census agg.,Municipality
-gb_census_mun,424,.20040555,.05951523,.027715445,XGboost,Census agg.,Municipality
+gb_census_mun,424,.20040524,.059514709,.02771634,XGboost,Census agg.,Municipality
 gb_census_mun,425,.20029797,.05945345,.027671544,XGboost,Census agg.,Municipality
 gb_census_mun,426,.20012125,.05940444,.027674176,XGboost,Census agg.,Municipality
 gb_census_mun,427,.2004071,.059605233,.027782016,XGboost,Census agg.,Municipality
@@ -4469,7 +4969,7 @@ gb_census_mun,467,.20035982,.059507906,.027706776,XGboost,Census agg.,Municipali
 gb_census_mun,468,.20031527,.059328213,.027540699,XGboost,Census agg.,Municipality
 gb_census_mun,469,.20025508,.059184168,.027455283,XGboost,Census agg.,Municipality
 gb_census_mun,470,.2002814,.05946764,.027661242,XGboost,Census agg.,Municipality
-gb_census_mun,471,.19997419,.059306074,.027619809,XGboost,Census agg.,Municipality
+gb_census_mun,471,.20001112,.059324782,.027632639,XGboost,Census agg.,Municipality
 gb_census_mun,472,.20002726,.059329405,.027618526,XGboost,Census agg.,Municipality
 gb_census_mun,473,.20024262,.059736438,.02793498,XGboost,Census agg.,Municipality
 gb_census_mun,474,.20020074,.059378128,.027649408,XGboost,Census agg.,Municipality
@@ -4479,7 +4979,7 @@ gb_census_mun,477,.20020446,.059218649,.027474076,XGboost,Census agg.,Municipali
 gb_census_mun,478,.20017938,.059498761,.027728045,XGboost,Census agg.,Municipality
 gb_census_mun,479,.20016208,.059389435,.0276487,XGboost,Census agg.,Municipality
 gb_census_mun,480,.20010009,.059516177,.027805803,XGboost,Census agg.,Municipality
-gb_census_mun,481,.20032632,.0595171,.027717482,XGboost,Census agg.,Municipality
+gb_census_mun,481,.20030548,.059507526,.027709778,XGboost,Census agg.,Municipality
 gb_census_mun,482,.20013241,.059364412,.02764965,XGboost,Census agg.,Municipality
 gb_census_mun,483,.20044787,.059466384,.027630284,XGboost,Census agg.,Municipality
 gb_census_mun,484,.20035021,.059433267,.027642209,XGboost,Census agg.,Municipality

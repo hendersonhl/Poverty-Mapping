@@ -28,7 +28,7 @@ rename (fgt0_mse fgt0_bias_reg) (mse bias)
 drop if regexm(lower(method),"cbeb")
 
 replace method_des = "Unit-context" if regexm(lower(method),"u-c")
-replace method_des = "CensusEB" if regexm(lower(method),"censuseb")
+replace method_des = "Unit-level (CensusEB)" if regexm(lower(method),"censuseb")
 
 tempfile main
 save `main'
@@ -79,9 +79,9 @@ tempfile FHgis
 save `FHgis'
 
 local fhs FHgis FHpsu FH
-local FHgis1 "Fay-Herriot (GIS mun)"     
-local FHpsu1  "Fay-Herriot (Census agg. PSU)"
-local FH1 "Fay-Herriot (Census agg. mun)" 
+local FHgis1 "Area-level (GIS-MUN)"    
+local FHpsu1  "Area-level (CEN-PSU)"
+local FH1 "Area-level (CEN-MUN)"   
 
 
 *=========================================================================
@@ -118,10 +118,10 @@ save `thetruth'
 
 
 local modelos gb_census_mun gb_gis_mun gb_all_mun gb_census_psu
-local gb_census_mun "Gradient Boosting (Census agg. mun)"
-local gb_gis_mun "Gradient Boosting (GIS mun)"  
-local gb_all_mun "Gradient Boosting (All mun)"
-local gb_census_psu "Gradient Boosting (Census agg. PSU)"
+local gb_census_mun "Gradient Boosting (CEN-MUN)"
+local gb_gis_mun "Gradient Boosting (GIS-MUN)"  
+local gb_all_mun "Gradient Boosting (ALL-MUN)"
+local gb_census_psu "Gradient Boosting (CEN-PSU)"
 
 foreach modelo of local modelos{
 	import delimited using "$outpath\\`modelo'", clear
@@ -177,17 +177,18 @@ append using `xgb'
 
 merge m:1 muni using `psel'
 
-drop if method=="Fay-Herriot (GIS mun)"
+  
 drop if method=="Direct"
 
-gen order = 5 if method=="CensusEB"
-replace order= 1 if method=="Gradient Boosting (GIS mun)"
-replace order= 2 if method=="Gradient Boosting (Census agg. mun)"
-replace order= 4 if method=="Gradient Boosting (Census agg. PSU)"
-replace order= 3 if method=="Gradient Boosting (All mun)"
-replace order= 7 if method=="Fay-Herriot (Census agg. PSU)"
-replace order= 8 if method=="Fay-Herriot (Census agg. mun)"
+gen order = 5    if method=="Unit-level (CensusEB)"
+replace order= 1 if method=="Gradient Boosting (GIS-MUN)" 
+replace order= 2 if method=="Gradient Boosting (CEN-MUN)"
+replace order= 4 if method=="Gradient Boosting (CEN-PSU)"
+replace order= 3 if method=="Gradient Boosting (ALL-MUN)" 
+replace order= 7 if method=="Area-level (CEN-PSU)"
+replace order= 8 if method=="Area-level (CEN-MUN)"
 replace order= 6 if method=="Unit-context"
+replace order= 9 if method=="Area-level (GIS-MUN)"  
 
 graph hbox mse if psel_qtile==1, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_1a.png", as(png) replace

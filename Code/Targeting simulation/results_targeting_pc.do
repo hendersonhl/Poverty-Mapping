@@ -213,7 +213,7 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
 	hyperopt_census_mun gb_census_hhid_demo fh fh_mun fh_mun_gis
 	//gb_census_hh -> XGboost household level poverty classification
 	
-local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis
+local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis gb_census_hhid_demo
 
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 
