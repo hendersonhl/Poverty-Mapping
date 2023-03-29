@@ -1651,8 +1651,8 @@ Traditional small-area methods
 
 \begin_layout Standard
 We consider three alternative traditional methods for obtaining small area
- estimates of poverty as a way to benchmark the performance of the machine-learn
-ing approach.
+ estimates of poverty as a way to benchmark the performance of the non-parametri
+c machine-learning approach.
 \begin_inset Foot
 status collapsed
 
@@ -1986,7 +1986,7 @@ census empirical best
 \begin_inset Quotes erd
 \end_inset
 
- method, which is a variant of the 
+ method (CensusEB), which is a variant of the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2195,7 +2195,7 @@ One major aspect of concern for small area estimation is the estimation
  Hence, a big concern surrounding small area estimation is the estimation
  of MSEs for each area's estimate.
  Estimates of noise are obtained via bootstrap replications where the model's
- assumptions are exploited in order to obtain an estimated MSE (
+ assumptions are exploited in order to obtain an estimated MSE 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "gonzalez2008bootstrap"
@@ -2203,7 +2203,7 @@ literal "false"
 
 \end_inset
 
-).
+.
 \begin_inset Foot
 status collapsed
 
@@ -2320,11 +2320,15 @@ noprefix "false"
 
 \end_inset
 
-) with census aggregates 
+) with census aggregates at the municipality and the PSU level, 
 \begin_inset Formula $x_{i}$
 \end_inset
 
- and thus relaxes the assumption that the survey-based covariates match
+ and 
+\begin_inset Formula $x_{ic}$
+\end_inset
+
+, and thus relaxes the assumption that the survey-based covariates match
  the moments of those from the census.
  Like the area-level model, the unit-context model is a direct competitor
  to the machine-learning approach because it is feasible to implement with
@@ -3166,6 +3170,17 @@ Using the true household-level incomes, calculate the poverty headcount
  and poverty gap for the country as a whole for some chosen poverty line.
  Using the poverty gap measure, determine the budget required to completely
  eradicate poverty.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This requires knowing who is poor and how poor are they.
+ The transfer is enough to bring every poor individual up to the poverty
+ threshold.
+\end_layout
+
+\end_inset
+
  Calculate an individual-level transfer amount by dividing the total budget
  by the number of people living in poverty.
  
@@ -3207,8 +3222,10 @@ Repeat steps 2 and 3 for each estimation method for all 500 sets of small
 The benchmark poverty alleviation from this scheme corresponds to the results
  of applying the above to the true municipal poverty rankings.
  The results for each method are compared to that result.
- In our implementation, we set the poverty line at the 25th percentile of
- per capita income and the benchmark poverty rate is 19.9 percent.
+ In our implementation, we fix the poverty line at the 25th percentile of
+ per capita income prior to transfers.
+ The benchmark poverty rate, after delivering transfers to people in municipalit
+ies ranked by their true poverty rate, is 19.9 percent.
 \end_layout
 
 \begin_layout Section
@@ -3627,7 +3644,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Empirical MSE and bias for select models 
+Empirical design MSE and bias for select models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:mse"
@@ -4116,7 +4133,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MSE and bias by poverty quantiles for select models 
+Empirical average MSE and bias by poverty quantiles for select models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:quantiles"
@@ -4208,8 +4225,8 @@ Bias
 \begin_layout Plain Layout
 
 \size small
-Note: Figure illustrates the empirical bias and MSE for municipalities correspon
-ding to each quantile.
+Note: Figure illustrates the average empirical bias and MSE for municipalities
+ corresponding to each quantile.
  Municipality quantiles correspond to the ordering of municipalities by
  their true poverty rate.
 \end_layout
@@ -4276,8 +4293,8 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MSE and bias with alternative machine-learning models among 20 percent least
- likely to be sampled municipalities 
+Empirical design MSE and bias with alternative machine-learning models among
+ 20 percent least likely to be sampled municipalities 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ll_sample_q1"
@@ -4369,15 +4386,17 @@ Design bias
 \begin_layout Plain Layout
 
 \size small
-Note: Figures presents the MSE and bias for each applied method.
- The MSE is calculated as the mean squared difference between the model
- based estimate for a given municipality (obtained from each of the 500
- samples drawn from the census) and the municipality's true poverty rate.
+Note: Figures presents the design MSE and bias for each applied method.
+ The design MSE is calculated as the mean squared difference between the
+ model based estimate for a given municipality (obtained from each of the
+ 500 samples drawn from the census) and the municipality's true poverty
+ rate.
  The bias is just the average difference between the model based estimate
  for a given municipality (obtained from each of the 500 samples drawn from
  the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the MSE and bias of
- the method's estimates for the least likely to be sampled municipalities.
+ The box-plots shows the municipality level spread of the design MSE and
+ bias of the method's estimates for the least likely to be sampled municipalitie
+s.
 \end_layout
 
 \end_inset
@@ -4395,8 +4414,8 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Empirical MSE and bias with alternative machine-learning models among 20
- percent most likely to be sampled municipalities 
+Empirical design MSE and bias with alternative machine-learning models among
+ 20 percent most likely to be sampled municipalities 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ll_sample_q5"
@@ -4488,15 +4507,16 @@ Design bias
 \begin_layout Plain Layout
 
 \size small
-Note: Figures presents the MSE and bias for each applied method.
- The MSE is calculated as the mean squared difference between the model
- based estimate for a given municipality (obtained from each of the 500
- samples drawn from the census) and the municipality's true poverty rate.
+Note: Figures presents the design MSE and bias for each applied method.
+ The design MSE is calculated as the mean squared difference between the
+ model based estimate for a given municipality (obtained from each of the
+ 500 samples drawn from the census) and the municipality's true poverty
+ rate.
  The bias is just the average difference between the model based estimate
  for a given municipality (obtained from each of the 500 samples drawn from
  the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the MSE and bias of
- the method's estimates for the most likely to be sampled municipalities.
+ The box-plots shows the municipality level spread of the design MSE and
+ bias of the method's estimates for the most likely to be sampled municipalities.
 \end_layout
 
 \end_inset
@@ -4563,7 +4583,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Empirical MSE and bias with alternative machine-learning models 
+Empirical design MSE and bias with alternative machine-learning models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:ml"
@@ -4963,10 +4983,9 @@ literal "false"
  for off-census years among traditional small area estimation methods.
  Finally, we present evidence on how, despite different performance across
  models, all models are beneficial for targeting.
- While some models may outperform others in the potential poverty reduction
+ While some models may outperform others in their potential poverty reduction
  when relying on estimates for targeting, even the worst performing models
- achieve decent poverty reduction.
- 
+ achieve decent poverty reduction, but may come at a considerable cost.
 \end_layout
 
 \begin_layout Standard
