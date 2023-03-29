@@ -1840,7 +1840,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-w_{iv}=x_{iv}\delta+\mu_{i}+\xi_{iv}\label{eq:sae}
+w_{iv}=x_{iv}\theta+\mu_{i}+\xi_{iv}\label{eq:sae}
 \end{equation}
 
 \end_inset
@@ -1866,7 +1866,7 @@ where
 \end_inset
 
  represents a vector of household-specific characteristics, 
-\begin_inset Formula $\delta$
+\begin_inset Formula $\theta$
 \end_inset
 
  is a vector of coefficients on the household characteristics, 
@@ -1905,7 +1905,7 @@ The parameters of the model are typically estimated via restricted maximum
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\hat{{w}}_{ivk}=x_{iv}\hat{\delta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
+\hat{{w}}_{ivk}=x_{iv}\hat{\theta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
 \end{equation}
 
 \end_inset
