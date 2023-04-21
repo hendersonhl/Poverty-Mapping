@@ -303,7 +303,7 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_uc pov_rank, lpattern(dash) lcolor(gray)) ///
 	(line bias_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line bias_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
-	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
+	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
 	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
 	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
