@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\date{}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -95,46 +98,78 @@ Poverty Mapping in the Age of Machine Learning
 \end_layout
 
 \begin_layout Author
-Paul Corral, Heath Henderson, and Sandra Segovia
+Paul Corral,
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The World Bank Group - Poverty and Equity Global Practice (pcorralrodas@worldban
+k.org)
 \end_layout
 
-\begin_layout Abstract
-Recent years have witnessed considerable methodological advances in poverty
- mapping, much of which has focused on the application of modern machine-learnin
-g approaches to remotely-sensed data.
- Poverty maps produced with these methods generally share a common validation
- procedure, which assesses model performance by comparing sub-national machine-l
-earning based poverty estimates with survey-based, direct estimates.
- While unbiased, survey-based estimates at a granular level can be imprecise
- measures of true poverty rates, meaning that it is unclear whether the
- validation procedures used in machine-learning approaches are informative
- of actual model performance.
- In this paper, we examine the credibility of existing approaches to model
- validation by constructing a pseudo-census from the Mexican Intercensal
- Survey of 2015, which we use to conduct several design-based simulation
- experiments.
- We find that the standard validation procedure used for machine-learning
- approaches can be misleading in terms of model assessment since it yields
- incorrect information for choosing what may be the best set of estimates
- across different methods and scenarios.
- Using alternative validation methods we show that machine-learning based
- estimates can rival traditional, more data intensive, poverty mapping approache
-s.
- Further, our closest approximation to existing machine-learning approaches,
- using publicly available geo-referenced data, performs poorly when evaluated
- against 
-\begin_inset Quotes eld
 \end_inset
 
-true
-\begin_inset Quotes erd
-\end_inset
+ Heath Henderson,
+\begin_inset Foot
+status collapsed
 
- poverty rates and fails to outperform traditional poverty mapping methods
- in targeting simulations.
+\begin_layout Plain Layout
+Department of Economics and Finance, Drake University, United States of
+ America
 \end_layout
 
-\begin_layout Abstract
+\end_inset
+
+ and Sandra Segovia
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The World Bank Group
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The authors acknowledge financial support from the World Bank.
+ We thank Roy van der Weide and Isabel Molina for comments.
+ Additionally, we thank Benu Bidani, Carlos Rodriguez-Castelan, and Johan
+ Mistiaen for providing support and space to pursue this work.
+ Finally, we thank the Global Solutions Group on Data for Policy.
+ Any error or omission is the authors’ responsibility alone.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Key words:
+\series default
+ Small area estimation, Poverty mapping, Machine learning, Satellite imagery
+ 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+JEL classification: 
+\series default
+C13, C55, C87, C15
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -194,7 +229,7 @@ literal "false"
  Unit-level models are not well-suited to situations where the survey and
  census data correspond to different years, which is often the case in developin
 g countries where censuses are conducted infrequently.
- Area-level models represent a feasible alternative that similarly rely
+ Area-level models represent a feasible alternative that similarly relies
  on linear functional forms, but conduct estimation and prediction using
  only aggregate data for the geographical entities of interest 
 \begin_inset CommandInset citation
@@ -242,8 +277,8 @@ literal "false"
 Recent developments in poverty mapping have focused on the application of
  machine learning to remotely-sensed data, largely in response to the issue
  of out-of-date census information.
- These approaches also use survey-derived welfare measures, but are distinguishe
-d by a first stage where a machine-learning model is fit to remotely-sensed
+ These approaches also use survey-derived welfare measures but are distinguished
+ by a first stage where a machine-learning model is fit to remotely-sensed
  covariates (e.g., data derived from satellite imagery or call detail records)
  rather than census-based covariates.
  For example, 
@@ -380,7 +415,7 @@ machine learning,
  from a regression of the observed poverty measures on the estimated poverty
  measures for the same geographical units.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 For examples of the above procedure, see 
@@ -484,6 +519,7 @@ census
 \end_inset
 
 ) that we use to conduct design-based simulation experiments.
+ The census provides the true values we wish to estimate.
  Our experiments entail repeatedly drawing survey samples from the census
  where each sample produces direct poverty estimates for the sampled geographic
  areas.
@@ -967,7 +1003,7 @@ In addition to the Intercensal Survey, INEGI has also released geo-referenced
  level.
  The geo-referenced data includes 105 different indicators.
  Specifically, the dataset includes information from 21 different dimensions
- and each dimension is associated with five different summary meaures.
+ and each dimension is associated with five different summary measures.
  For example, we summarize the atmospherically resistant vegetation index
  for each municipality using the minimum, maximum, mean, sum, and standard
  deviation of the index.
@@ -1105,11 +1141,11 @@ Classification and regression trees are based on a sequential binary splitting
  are assigned to the child nodes depending on whether they meet some condition
  associated with the explanatory variable.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 For example, for a continuous explanatory variable, one determines whether
- a given observations falls above or below some numeric cutoff.
+ a given observation falls above or below some numeric cutoff.
 \end_layout
 
 \end_inset
@@ -3236,10 +3272,10 @@ Using the true household-level incomes, calculate the poverty headcount
  Using the poverty gap measure, determine the budget required to completely
  eradicate poverty.
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
-This requires knowing who is poor and how poor are they.
+This requires knowing who is poor and how poor they are.
  The transfer is enough to bring every poor individual up to the poverty
  threshold.
 \end_layout
@@ -3601,7 +3637,7 @@ direct
 \end_inset
 
  tends to be higher for the PSU-level model than the municipality-level
- model, but the the opposite is the case for the direct 
+ model, but the opposite is the case for the direct 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3690,7 +3726,7 @@ noprefix "false"
  identifies the PSU level as the appropriate level of estimation for 355
  of the 500 samples whereas the unconstrained version, as mentioned, selects
  the PSU level for 437 out of the 500 samples.
- The commonly-used unconstrained 
+ The commonly used unconstrained 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -3874,10 +3910,10 @@ CEN-PSU
 
 ).
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
-Recall the the geo-referenced covariates are only available at the municipality
+Recall that the geo-referenced covariates are only available at the municipality
  level.
 \end_layout
 
@@ -4000,12 +4036,12 @@ Now that we have established that in the context of the Mexican data used
  gradient boosting's performance under geo-referenced data – Gradient Boosting
  (GIS-MUN).
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Note that the underlying model for CensusEB estimates relies on household
  level microdata.
- Consequently, the data requirements for CensusEB is even higher.
+ Consequently, the data requirements for CensusEB are even higher.
 \end_layout
 
 \end_inset
@@ -4590,7 +4626,7 @@ Note: Figures presents the design MSE and bias for each applied method.
 \end_layout
 
 \begin_layout Standard
-An additional consideration is how do methods perform for predictions which
+An additional consideration is how the methods perform for predictions which
  are out of sample.
  Because the experiment consists of 500 samples taken from the census data,
  a given municipality may be present in one of the samples and may be absent
@@ -4934,8 +4970,8 @@ The results of the targeting simulation are relevant to cases where targeting
  do a solid job.
  Nevertheless, there are many instances where the targeting mechanism may
  rely on the method's poverty estimates.
- For example, Seneagal's Unique National Registry (RNU - in French) of vulnerabl
-e households relies on actual estimates from poverty maps to determine the
+ For example, Senegal's Unique National Registry (RNU - in French) of vulnerable
+ households relies on actual estimates from poverty maps to determine the
  quotas for sampling by municipality (Ferre 
 \begin_inset CommandInset citation
 LatexCommand citeyear
