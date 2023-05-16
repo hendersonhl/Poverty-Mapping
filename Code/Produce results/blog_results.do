@@ -119,17 +119,17 @@ gr combine bias.gph mse.gph , graphregion(color(white))  imargin(0 0 0 0)  graph
 import delimited "$inpath/results_transfer.csv", clear
 keep variable sim fgt0
 order sim variable fgt0
-replace fgt0 = 100*fgt0 if regexm(variable, "fh") | regexm(variable,"gb_census_hhid_demo")
+replace fgt0 = 100*(0.25-fgt0) if regexm(variable, "fh") | regexm(variable,"gb_census_hhid_demo")
 
 reshape wide fgt0, i(sim) j(variable) string
 rename fgt0* *
 keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis gb_census_hhid_demo
-replace gb_gis_mun = gb_gis_mun*100  // Put values in percentage terms
-replace gb_census_mun = gb_census_mun*100
-replace gb_all_mun = gb_all_mun*100
-replace gb_census_psu = gb_census_psu*100
-replace eb = eb*100
-replace uc = uc*100
+replace gb_gis_mun = (0.25-gb_gis_mun)*100  // Put values in percentage terms
+replace gb_census_mun = (0.25-gb_census_mun)*100
+replace gb_all_mun = (0.25-gb_all_mun)*100
+replace gb_census_psu = (0.25-gb_census_psu)*100
+replace eb = (0.25-eb)*100
+replace uc = (0.25-uc)*100
 tabstat eb-uc, stat(p50)
 label var gb_census_mun "Gradient Boosting (CEN-MUN)"
 label var gb_gis_mun    "Gradient Boosting (GIS-MUN)"         
@@ -142,7 +142,7 @@ label var fh_mun        "Area-level (CEN-MUN)"
 label var fh_mun_gis        "Area-level (GIS-MUN)"  
 label var gb_census_hhid_demo "Gradient Boosting (CEN-HH)"
 
-graph hbox gb_census_mun gb_gis_mun  gb_all_mun eb fh_mun fh_mun_gis /*gb_census_hhid_demo*/, ytitle(Poverty Rate) ///
+graph hbox gb_census_mun gb_gis_mun  gb_all_mun eb fh_mun fh_mun_gis /*gb_census_hhid_demo*/, ytitle(Poverty reduction (% points)) ///
     legend(off) nooutside note("") graphregion(color(white)) showyvars ///
   box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
   box(5, color(gray)) box(6, color(gray))
