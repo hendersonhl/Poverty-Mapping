@@ -120,7 +120,7 @@ label var mse_gb_census "Gradient Boosting (CEN-MUN)"
 label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
 label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
 label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
-label var mse_eb        "Unit-level"                              
+label var mse_eb        "Unit-level (CensusEB)"                           
 label var mse_uc        "Unit-context"      
 label var mse_fh        "Area-level (CEN-PSU)"
 label var mse_fh_mun        "Area-level (CEN-MUN)"  
@@ -171,7 +171,7 @@ label var bias_gb_census "Gradient Boosting (CEN-MUN)"
 label var bias_gb_gis "Gradient Boosting (GIS-MUN)"
 label var bias_gb_all "Gradient Boosting (ALL-MUN)"
 label var bias_gb_psu "Gradient Boosting (CEN-PSU)"
-label var bias_eb   "Unit-level"       
+label var bias_eb   "Unit-level (CensusEB)"      
 label var bias_uc   "Unit-context"
 label var bias_fh        "Area-level (CEN-PSU)"
 label var bias_fh_mun        "Area-level (CEN-MUN)"  
@@ -255,8 +255,8 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line mse_uc pov_rank, lpattern(dash) lcolor(gray)) ///
 	(line mse_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line mse_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
-	ytitle(Average MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
+	ytitle(Average empirical MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level (CensusEB)") ///
 	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
 	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
@@ -303,8 +303,8 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_uc pov_rank, lpattern(dash) lcolor(gray)) ///
 	(line bias_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line bias_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
-	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
+	ytitle(Average empirical bias) xtitle(Poverty Quantile) scheme(s1mono) ///
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level (CensusEB)") ///
 	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
 	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
@@ -342,11 +342,11 @@ graph export "$outpath/Figure-5b.png", as(png) replace
 import delimited "$inpath/results_transfer.csv", clear
 keep variable sim fgt0
 order sim variable fgt0
-replace fgt0 = 100*fgt0 if regexm(variable, "fh")
+replace fgt0 = 100*fgt0 if regexm(variable, "fh") | regexm(variable,"gb_census_hhid_demo")
 
 reshape wide fgt0, i(sim) j(variable) string
 rename fgt0* *
-keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis
+keep gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis gb_census_hhid_demo
 replace gb_gis_mun = gb_gis_mun*100  // Put values in percentage terms
 replace gb_census_mun = gb_census_mun*100
 replace gb_all_mun = gb_all_mun*100
@@ -358,20 +358,20 @@ label var gb_census_mun "Gradient Boosting (CEN-MUN)"
 label var gb_gis_mun    "Gradient Boosting (GIS-MUN)"         
 label var gb_all_mun    "Gradient Boosting (ALL-MUN)"            
 label var gb_census_psu    "Gradient Boosting (CEN-PSU)"
-label var eb        "Unit-level"                              
+label var eb        "Unit-level (CensusEB)"                              
 label var uc        "Unit-context"  
 label var fh        "Area-level (CEN-PSU)"
 label var fh_mun        "Area-level (CEN-MUN)"   
-label var fh_mun_gis        "Area-level (GIS-MUN)"   
+label var fh_mun_gis        "Area-level (GIS-MUN)"  
+label var gb_census_hhid_demo "Gradient Boosting (CEN-HH)"
 
-graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis, ytitle(Poverty Rate) ///
+graph hbox gb_gis_mun gb_census_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis /*gb_census_hhid_demo*/, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray)) ///
 	box(9, color(gray))
 graph export "$outpath/Figure-6.pdf", as(pdf) replace
 graph export "$outpath/Figure-6.png", as(png) replace
-
 
 
 
