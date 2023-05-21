@@ -3165,84 +3165,12 @@ name "sec:results"
 \end_layout
 
 \begin_layout Standard
-Recall from Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- that the 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- measure often used to assess the Recall that the 
+Recall that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  measure often used to assess the performance of machine-learning models
  is biased downward.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-For examples, see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "jean2016combining"
-literal "false"
-
-\end_inset
-
-, 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "pokhriyal2017combining"
-literal "false"
-
-\end_inset
-
-, 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "steele2017mapping"
-literal "false"
-
-\end_inset
-
-, 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "lee2020high"
-literal "false"
-
-\end_inset
-
-, 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "yeh2020using"
-literal "false"
-
-\end_inset
-
-, or 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "chi2022microestimates"
-literal "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\end_inset
-
  To understand the extent of this bias in practice, we have calculated the
  
 \begin_inset Formula $R^{2}$
@@ -3296,30 +3224,6 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Formula $R^{2}$
-\end_inset
-
- estimates at the PSU and municipality levels 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:r2"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Float figure
 wide false
 sideways false
@@ -3330,7 +3234,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-1a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3346,10 +3250,6 @@ Direct versus true
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -3371,7 +3271,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-1b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -3396,21 +3296,27 @@ Unconstrained versus constrained
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
 
-\size footnotesize
-Note: This figure presents the 
+\begin_layout Plain Layout
 \begin_inset Formula $R^{2}$
 \end_inset
 
- from a regression where on the right-hand side we have the model-based
- estimates and on the left-hand side we either have the true poverty rate
- or the direct estimates of poverty.
- Since we have 500 samples drawn from our census, we have 500 sets of model-base
-d estimates and, consequently, 500 
-\begin_inset Formula $R^{2}$
+ estimates at the PSU and municipality levels 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:r2"
+
 \end_inset
 
- measures.
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3566,31 +3472,10 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -3627,7 +3512,7 @@ Design MSE
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -3659,18 +3544,24 @@ Design bias
 \end_layout
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
 
-\size small
-Note: Figures presents the design MSE and bias for each applied method.
- The design MSE is approximated as the mean squared difference between the
- model based estimate for a given municipality (obtained from each of the
- 500 samples drawn from the census) and the municipality's true poverty
- rate.
- The bias is the average difference between the model based estimate for
- a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the design MSE and
- bias of the method's estimates.
+\begin_layout Plain Layout
+Empirical design MSE and bias for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3683,9 +3574,7 @@ Given the shortcomings of the
 \begin_inset Formula $R^{2}$
 \end_inset
 
-, we have argued that the empirical MSE of the poverty estimate at the area
- level represents a better metric for validating the performance of a particular
- set of estimates.
+, we have argued that the MSE represents a better metric for model assessment.
  Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3698,7 +3587,7 @@ noprefix "false"
 
  thus presents our empirical MSE results for several alternative models.
  The first three models apply gradient boosting at the municipality level
- using three alternative covariate sets: geo-reference covariates (
+ using three alternative covariate sets: geo-referenced covariates (
 \begin_inset Quotes eld
 \end_inset
 
@@ -3734,7 +3623,7 @@ CEN-PSU
 
 ).
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Recall that the geo-referenced covariates are only available at the municipality
@@ -3745,21 +3634,11 @@ Recall that the geo-referenced covariates are only available at the municipality
 
  The final three models are all traditional methods that we use to benchmark
  the performance of gradient boosting.
- We present unit-level (CensusEB), unit-context, and area level models.
+ In particular, we present the unit-level, unit-context, and area-level
+ models.
  We consider three alternative implementations of the area-level model that,
  much like for gradient boosting, vary the level of analysis and the covariates
  used.
- In particular, the empirical best (CensusEB) model is often considered
- the 
-\begin_inset Quotes eld
-\end_inset
-
-gold standard
-\begin_inset Quotes erd
-\end_inset
-
- of small area estimation and corresponds to an ideal scenario where up-to-date,
- micro-level census data are available.
  For these traditional models, all available covariates enter the models
  linearly (i.e., we do not include interaction or quadratic terms).
 \end_layout
@@ -3860,7 +3739,7 @@ Now that we have established that in the context of the Mexican data used
  gradient boosting's performance under geo-referenced data – Gradient Boosting
  (GIS-MUN).
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 Note that the underlying model for CensusEB estimates relies on household
