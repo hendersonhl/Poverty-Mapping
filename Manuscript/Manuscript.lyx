@@ -3222,19 +3222,15 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Graphics
 	filename Figure-1a.png
-	scale 18
+	scale 17
 
 \end_inset
 
@@ -3253,25 +3249,26 @@ Direct versus true
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
-\begin_inset space \hspace{}
-\length 0cm
+\begin_inset space \hfill{}
 \end_inset
 
 
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Graphics
 	filename Figure-1b.png
-	scale 18
+	scale 17
 
 \end_inset
 
@@ -3290,14 +3287,16 @@ Unconstrained versus constrained
 
 \end_layout
 
+\begin_layout Plain Layout
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3316,6 +3315,10 @@ name "fig:r2"
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3482,7 +3485,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Figure-2a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -3493,7 +3496,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design MSE
+Mean squared error
 \end_layout
 
 \end_inset
@@ -3519,7 +3522,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Figure-2b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -3530,7 +3533,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design bias
+Bias
 \end_layout
 
 \end_inset
@@ -3549,7 +3552,7 @@ Design bias
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Empirical design MSE and bias for select models 
+Mean squared error and bias for select models 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:mse"
@@ -3845,6 +3848,18 @@ status collapsed
 \begin_layout Plain Layout
 \noindent
 \align center
+\begin_inset Graphics
+	filename Figure-3.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3861,27 +3876,6 @@ name "fig:importance"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3.png
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size small
-Note: Figure illustrates the average feature importance across all 500 models
- fit to the 500 samples of the census data.
- The importance corresponds to the reduction of the loss function associated
- to each feature.
 \end_layout
 
 \end_inset
@@ -3934,38 +3928,19 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical average MSE and bias by poverty quantiles for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:quantiles"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
 	filename Figure-4a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -3976,7 +3951,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MSE
+Mean squared error
 \end_layout
 
 \end_inset
@@ -4002,7 +3977,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-4b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4027,12 +4002,22 @@ Bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\size small
-Note: Figure illustrates the average empirical bias and MSE for municipalities
- corresponding to each quantile.
- Municipality quantiles correspond to the ordering of municipalities by
- their true poverty rate.
+\begin_layout Plain Layout
+Mean squared error and bias by poverty quantiles for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:quantiles"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4094,26 +4079,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models among
- 20 percent least likely to be sampled municipalities 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Float figure
@@ -4126,7 +4091,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_1a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4137,7 +4102,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design MSE 
+Mean squareed error 
 \end_layout
 
 \end_inset
@@ -4163,7 +4128,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_2a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4174,7 +4139,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design bias 
+Bias 
 \end_layout
 
 \end_inset
@@ -4188,19 +4153,23 @@ Design bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\size small
-Note: Figures presents the design MSE and bias for each applied method.
- The design MSE is calculated as the mean squared difference between the
- model based estimate for a given municipality (obtained from each of the
- 500 samples drawn from the census) and the municipality's true poverty
- rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the design MSE and
- bias of the method's estimates for the least likely to be sampled municipalitie
-s.
+\begin_layout Plain Layout
+Mean squared error and bias for the 20 percent of municipalities least likely
+ to be sampled 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ll_sample_q1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4215,39 +4184,19 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models among
- 20 percent most likely to be sampled municipalities 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q5"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
 	filename Figure-3_1b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4258,7 +4207,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design MSE 
+Mean squared error 
 \end_layout
 
 \end_inset
@@ -4284,7 +4233,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_2b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4295,7 +4244,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design bias 
+Bias 
 \end_layout
 
 \end_inset
@@ -4309,18 +4258,23 @@ Design bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\size small
-Note: Figures presents the design MSE and bias for each applied method.
- The design MSE is calculated as the mean squared difference between the
- model based estimate for a given municipality (obtained from each of the
- 500 samples drawn from the census) and the municipality's true poverty
- rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the design MSE and
- bias of the method's estimates for the most likely to be sampled municipalities.
+\begin_layout Plain Layout
+Mean squared error and bias for the 20 percent of municipalities most likely
+ to be sampled 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ll_sample_q5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4384,38 +4338,19 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ml"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
 	filename Figure-5a.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4426,7 +4361,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design MSE
+Mean squared error
 \end_layout
 
 \end_inset
@@ -4449,14 +4384,14 @@ Design MSE
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Graphics
 	filename Figure-5b.png
-	scale 25
+	scale 17
 
 \end_inset
 
@@ -4467,7 +4402,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Design bias
+Bias
 \end_layout
 
 \end_inset
@@ -4485,19 +4420,22 @@ Design bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\size small
-Note: Figures presents the MSE and bias for each applied method.
- The MSE is calculated as the mean squared difference between the model
- based estimate for a given municipality (obtained from each of the 500
- samples drawn from the census) and the municipality's true poverty rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the MSE and bias of
- the method's estimates.
- All methods rely on GIS covariates only and are fit at the municipality
- level.
+\begin_layout Plain Layout
+Mean squared error and bias for alternative machine learning models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4566,6 +4504,18 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4582,39 +4532,6 @@ name "fig:targeting"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-6.png
-	scale 30
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\size small
-Note: Figure illustrates the poverty reduction potential of relying on estimates
- from each method to rank municipalities and prioritize the poorest municipaliti
-es in a cash transfer scheme described in section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-.
- The box-plot show the spread of the 500 resulting targeting simulations
- conducted with each methods estimates.
- 
 \end_layout
 
 \end_inset
