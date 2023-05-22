@@ -4543,21 +4543,25 @@ name "sec:conclusion"
 \end_layout
 
 \begin_layout Standard
-This paper sets out to validate traditional small area estimation and machine
- learning approaches for poverty mapping.
- Machine learning approaches have become popular across the globe for producing
- highly disaggregated estimates of poverty which often feed into policy
- making.
- The methods are particularly popular in the most data deprived scenarios
- where census data are not frequently collected, and even when collected
- may not be contemporaneous to a household survey.
- Hence, the methods are also a popular alternative for cases where the census
- data is too old for use under a traditional unit-level small area estimation
- exercise.
- To the best of our knowledge, a rigorous validation of machine learning
- methods like the one done here, where machine learning methods are compared
- to traditional small area estimates and to a true welfare measure, has
- not been done before.
+Machine-learning approaches to poverty mapping have gained considerable
+ popularity in recent years.
+ In contrast to traditional poverty mapping procedures, modern machine-learning
+ methods rely on non-parametric statistical techniques applied to remotely-sense
+d data, such as satellite imagery or call detail records.
+ In addition, machine-learning approaches generally conduct model assessment
+ using the coefficient of determination (
+\begin_inset Formula $R^{2}$
+\end_inset
+
+), which is calculated by regressing direct, survey-based poverty estimates
+ on model predictions.
+ While direct estimates are unbiased, they can be imprecise measures of
+ true poverty rates and, as a result, it is unclear whether this form of
+ assessment is informative of model performance.
+ In this paper, we thus conducted a more rigorous assessment of the machine-lear
+ning approach to poverty mapping by using the Mexican Intercensal Survey
+ for several design-based simulation experiments.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4630,66 +4634,57 @@ Our simulations built on these analytical results.
 \end_inset
 
  commonly identified the incorrect level of estimation in our data.
- Second, we assessed the performance of machine learning methods and found
- that they may outperform or achieve similar bias and MSE as the best performing
- traditional small area estimation approaches, particularly in out-of-sample
- predictions.
- Third, we present a comparison on the potential benefits of publicly available
- GIS covariates.
- We show how GIS covariates under the data used here do not outperform census
- aggregate data.
- This result suggests that there may be considerable gains in linking census
- and administrative data for poverty mapping in off census years.
- Fourth, we expand the validations from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
-literal "false"
+ Second, we assessed the performance of machine learning against true poverty
+ rates and found that the standard implementation using remotely-sensed
+ covariates performs relatively poorly in terms of mean squared error and
+ bias.
+ When using census-based covariates, however, we found that machine learning
+ performs comparably to several traditional poverty mapping methods.
+ Finally, in the context of targeting simulations, we similarly found that
+ the standard implementation exhibits relatively poor performance.
+ This performance deficit was once again remedied with the use of census-based
+ covariates.
+\end_layout
 
+\begin_layout Standard
+Our results have several implications for the practice of poverty mapping.
+ For one, our results suggest caution when using 
+\begin_inset Formula $R^{2}$
 \end_inset
 
- and illustrate how Fay-Herriot models are still the preferred approach
- for off-census years among traditional small area estimation methods.
- Finally, we present evidence on how, despite different performance across
- models, all models are beneficial for targeting.
- While some models may outperform others in their potential poverty reduction
- when relying on estimates for targeting, even the worst performing models
- achieve decent poverty reduction, but may come at a considerable cost.
+ as a model assessment tool, especially when it is calculated using direct
+ poverty estimates as the reference measure.
+ We recommend evaluating the performance of poverty maps using mean squared
+ error, bias, and targeting simulations, ideally with true poverty rates
+ as the reference measure.
+ Perhaps the most interesting implication of our results, however, is that
+ the use of non-parametric statistical methods does not appear to improve
+ the accuracy of poverty maps relative to traditional parametric methods.
+ When using the same data, all methods perform similarly across all metrics.
+ As a result, we recommend that machine-learning implementations make better
+ use of census-based covariates rather than relying exclusively on remotely-sens
+ed data.
+ The machine-learning algorithm can determine whether the census data is
+ truly outdated and uninformative.
 \end_layout
 
 \begin_layout Standard
-The results found here should be caveated by the fact that they are dependent
- on the Mexican Intercensal data used.
- Results and model performance may differ considerably in a different country
- or using different data.
- It is quite possible that in less-developed economies the geo-referenced
- covariates perform better than what is observed here, but there is no guarantee
- this will be the case.
- Validating the usefulness of a particular type of data is not straight
- forward as it may not work as well everywhere, it is for this reason that
- comparisons here are made in a more holistic manner.
- When comparing the performance of geo-referenced covariates to other type
- of data one should use the same method, as is done here.
- On the one hand, we show how using census aggregates at the municipality
- level relying on gradient boosting comes very close to the best performing
- method's estimates.
- On the other hand, using the same method with GIS covariates we show how
- it falls short of competing with a model where only census aggregates are
- used.
- 
-\end_layout
-
-\begin_layout Standard
-The paper opens considerable avenues for future research.
- One avenue is related to methodology.
- Specifically, how the noise of machine learning methods can be accurately
- estimated since the noise measures presented here rely on having the true
- poverty rates which is not possible in the vast majority of contexts.
- Second, the results suggest that most methods would do a solid job for
- spatial targeting type exercises.
- However, a key question is whether or not this will hold elsewhere and
- under what circumstances will one method outperform others.
- 
+Finally, it is worth emphasizing the limitations of our analysis.
+ One issue is that we have only examined the performance of machine learning
+ in the context of the Mexican Intercensal Survey.
+ Similar simulations using data from other countries may find different
+ results.
+ For example, it is possible that the same remotely-sensed covariates have
+ greater predictive power in countries that are lesser-developed and more
+ reliant on the primary sector.
+ It is also possible that the remotely-sensed covariates we use in our implement
+ations have less predictive power than the remotely-sensed data used in
+ other applications.
+ For example, many applications have used call detail records to produce
+ poverty maps, but we did not have access to similar data from Mexico.
+ A natural avenue for future research is then to conduct similar simulations
+ using data from other countries, possibly with richer forms of remotely-sensed
+ data.
 \end_layout
 
 \begin_layout Standard
