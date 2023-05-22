@@ -120,12 +120,12 @@ label var mse_gb_census "Gradient Boosting (CEN-MUN)"
 label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
 label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
 label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
-label var mse_eb        "Unit-level (CensusEB)"                           
+label var mse_eb        "Unit-level"                           
 label var mse_uc        "Unit-context"      
 label var mse_fh        "Area-level (CEN-PSU)"
 label var mse_fh_mun        "Area-level (CEN-MUN)"  
 label var mse_fh_mun_gis        "Area-level (GIS-MUN)"                    
-graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis, ytitle(Empirical MSE) ///
+graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
@@ -171,7 +171,7 @@ label var bias_gb_census "Gradient Boosting (CEN-MUN)"
 label var bias_gb_gis "Gradient Boosting (GIS-MUN)"
 label var bias_gb_all "Gradient Boosting (ALL-MUN)"
 label var bias_gb_psu "Gradient Boosting (CEN-PSU)"
-label var bias_eb   "Unit-level (CensusEB)"      
+label var bias_eb   "Unit-level"      
 label var bias_uc   "Unit-context"
 label var bias_fh        "Area-level (CEN-PSU)"
 label var bias_fh_mun        "Area-level (CEN-MUN)"  
@@ -255,8 +255,8 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line mse_uc pov_rank, lpattern(dash) lcolor(gray)) ///
 	(line mse_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line mse_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
-	ytitle(Average empirical MSE) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level (CensusEB)") ///
+	ytitle(Average Mean Squared Error) xtitle(Poverty Quantile) scheme(s1mono) ///
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
 	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
 	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
@@ -303,8 +303,8 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_uc pov_rank, lpattern(dash) lcolor(gray)) ///
 	(line bias_fh pov_rank, lpatter(shortdash_dot) lcolor(gs7)) ///
 	(line bias_fh_mun pov_rank, lpatter(dot) lcolor(black)),  ///
-	ytitle(Average empirical bias) xtitle(Poverty Quantile) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level (CensusEB)") ///
+	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
+	legend(label(1 "Gradient Boosting (GIS-MUN)") label(2 "Unit-level") ///
 	label(3 "Gradient Boosting (CEN-MUN)") label(4 "Unit-context") ///
 	label(5 "Area-level (CEN-PSU)") label(6 "Area-level (CEN-MUN)") symxsize(*0.7) size(*.88))
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
@@ -318,7 +318,7 @@ label var mse_bart_gis "BART"
 label var mse_rf_gis "Random Forest"
 label var mse_lasso_gis "Lasso"
 graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis, ///
-    ytitle(Empirical MSE) scheme(s1mono) legend(off) nooutside note("") showyvars ///
+    ytitle(Mean Squared Error) scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) 
 graph export "$outpath/Figure-5a.pdf", as(pdf) replace
@@ -358,7 +358,7 @@ label var gb_census_mun "Gradient Boosting (CEN-MUN)"
 label var gb_gis_mun    "Gradient Boosting (GIS-MUN)"         
 label var gb_all_mun    "Gradient Boosting (ALL-MUN)"            
 label var gb_census_psu    "Gradient Boosting (CEN-PSU)"
-label var eb        "Unit-level (CensusEB)"                              
+label var eb        "Unit-level"                              
 label var uc        "Unit-context"  
 label var fh        "Area-level (CEN-PSU)"
 label var fh_mun        "Area-level (CEN-MUN)"   
