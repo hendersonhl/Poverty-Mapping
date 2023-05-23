@@ -244,26 +244,6 @@ literal "false"
 \end_inset
 
 .
- 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Despite their desirable features, the gains in precision offered by area-level
- models is often quite limited (see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina_morales2009"
-literal "false"
-
-\end_inset
-
-).
-\end_layout
-
-\end_inset
-
- 
 \end_layout
 
 \begin_layout Standard
@@ -471,16 +451,7 @@ literal "false"
 \end_inset
 
 .
- Others rely on reporting correlation coefficients between survey based
- estimates and model predictions, which is similar (see 
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "smythe2022geographic"
-literal "false"
-
-\end_inset
-
-).
+ 
 \end_layout
 
 \end_inset
@@ -769,14 +740,14 @@ Prior to sampling from the Intercensal Survey, we make three modifications
 status collapsed
 
 \begin_layout Plain Layout
-This is done to ensure some missing values are present in the data used
+This is done to ensure some missing values are present in the data used,
  but not as many as in the original data.
 \end_layout
 
 \end_inset
 
- Second, to ensure that all municipalities are sufficiently large, all municipal
-ities with less than 500 households are removed.
+ Second, to ensure that all municipalities are sufficiently large, municipalitie
+s with less than 500 households are removed.
  Finally, to ensure that all primary sampling units (PSUs) are also sufficiently
  large for sampling purposes, we combine several neighboring PSUs such that
  all include at least 300 households.
@@ -1691,18 +1662,17 @@ In all cases, we pass every eligible variable to the machine-learning model
 \end_layout
 
 \begin_layout Subsection
-Traditional small area methods
+Traditional methods
 \end_layout
 
 \begin_layout Standard
-We consider three alternative traditional methods for obtaining small area
- estimates of poverty as a way to benchmark the performance of the non-parametri
-c machine-learning approach.
+We consider three traditional poverty-mapping methods as a way to benchmark
+ the performance of the machine-learning approach.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For a thorough review of small area estimation methods refer to 
+For a review of small area estimation methods, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "rao2015small"
@@ -1710,7 +1680,8 @@ literal "false"
 
 \end_inset
 
-, for a review of methods in the context of poverty mapping refer to 
+.
+ For a review of methods in the context of poverty mapping, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2022estimation"
@@ -1718,7 +1689,7 @@ literal "false"
 
 \end_inset
 
- as well as reviews by 
+ or 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "pfeffermann2013new"
@@ -1726,7 +1697,7 @@ literal "false"
 
 \end_inset
 
- on other developments in the area.
+.
  
 \end_layout
 
@@ -2112,7 +2083,7 @@ literal "false"
 
 \end_inset
 
- show that when the sample size is small relative to the population the
+ show that when the sample size is small relative to the population, the
  difference between the two methods is negligible.
  For additional discussion, see 
 \begin_inset CommandInset citation
@@ -3062,7 +3033,7 @@ literal "false"
 
 \end_inset
 
-,
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
