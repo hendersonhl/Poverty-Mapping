@@ -95,6 +95,21 @@
 
 \begin_layout Title
 Poverty Mapping in the Age of Machine Learning
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The authors acknowledge financial support from the World Bank.
+ We thank Roy van der Weide and Isabel Molina for comments.
+ Additionally, we thank Benu Bidani, Carlos Rodriguez-Castelan, and Johan
+ Mistiaen for providing support and space to pursue this work.
+ Finally, we thank the Global Solutions Group on Data for Policy.
+ Any error or omission is the authors’ responsibility alone.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Author
@@ -131,28 +146,34 @@ The World Bank Group
 \end_inset
 
  
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The authors acknowledge financial support from the World Bank.
- We thank Roy van der Weide and Isabel Molina for comments.
- Additionally, we thank Benu Bidani, Carlos Rodriguez-Castelan, and Johan
- Mistiaen for providing support and space to pursue this work.
- Finally, we thank the Global Solutions Group on Data for Policy.
- Any error or omission is the authors’ responsibility alone.
 \end_layout
 
+\begin_layout Abstract
+Recent years have witnessed considerable methodological advances in poverty
+ mapping, much of which has focused on the application of modern machine-learnin
+g approaches to remotely-sensed data.
+ Poverty maps produced with these methods generally share a common validation
+ procedure, which assesses model performance by comparing sub-national poverty
+ estimates with survey-based, direct estimates.
+ While unbiased, direct estimates can be imprecise measures of true poverty
+ rates, meaning that it is unclear whether the standard validation procedures
+ are informative of actual model performance.
+ In this paper, we examine the credibility of existing approaches to model
+ validation by constructing a pseudo-census from the Mexican Intercensal
+ Survey of 2015, which we use to conduct several simulation experiments.
+ We find that the standard validation procedure can be misleading in terms
+ of model assessment, with notable implications for model selection.
+ Further, we find that our closest approximation to existing machine-learning
+ approaches performs poorly when evaluated against 
+\begin_inset Quotes eld
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace vfill
+true
+\begin_inset Quotes erd
 \end_inset
 
-
+ poverty rates and fails to outperform traditional poverty mapping methods
+ in targeting simulations.
 \end_layout
 
 \begin_layout Standard
@@ -160,7 +181,7 @@ The authors acknowledge financial support from the World Bank.
 \series bold
 Key words:
 \series default
- Small area estimation, Poverty mapping, Machine learning, Satellite imagery
+ Small area estimation; poverty mapping; machine learning; satellite imagery
  
 \end_layout
 
@@ -169,7 +190,7 @@ Key words:
 \series bold
 JEL classification: 
 \series default
-C13, C55, C87, C15
+C13; C55; C87; C15
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -3979,274 +4000,6 @@ gold standard
  The standard implementation thus understates the spatial distribution of
  poverty.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_1a.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squareed error
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_2a.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error and bias for the 20 percent of municipalities least likely
- to be sampled 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_1b.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_2b.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error and bias for the 20 percent of municipalities most likely
- to be sampled 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q5"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-An additional consideration is how the methods perform for predictions which
- are out of sample.
- Because the experiment consists of 500 samples taken from the census data,
- a given municipality may be present in one of the samples and may be absent
- in others.
- Consequently, to evaluate out of sample properties we rank municipalities
- by their likelihood of selection across the 500 samples.
- The likelihood of being present ranges from 0.09 to 1, with a median of
- 0.48 and a mean of 0.53.
- Among the 20 percent least likely to be sampled municipalities, the gradient
- boosting model with GIS-based covariates is the worst performing in terms
- of MSE followed closely by unit-context models (Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ll_sample_q1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- In terms of bias among the 20 percent of municipalities that are least
- likely to be sampled, the gradient boosting model with the geo-referenced
- covariates shows very wide variability, while unit context models show
- downward bias.
- The other gradient boosting models perform similarly to CensusEB models
- in terms of bias and MSE.
- The performance, in terms of MSE, of the different methods seems to improve
- with the likelihood of being selected.
- Among municipalities most likely to be selected, the gradient boosting
- model with the geo-referenced covariates is still the worst performing
- (Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ll_sample_q5"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- However, in terms of bias, among the most likely to be selected municipalities,
- the bias of Fay-Herriot methods at the municipality level is the best performin
-g illustrating the importance of the methods EBLUP.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
