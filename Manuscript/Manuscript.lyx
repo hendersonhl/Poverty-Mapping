@@ -217,13 +217,23 @@ literal "false"
  areas, producing detailed poverty maps often requires using small area
  estimation, which consists of using statistical methods to predict poverty
  levels on the basis of household- or area-level characteristics.
- The basic procedure entails two steps: (1) using household survey data,
- fit a statistical model of some welfare measure (e.g., poverty, income, or
- wealth) to select household- or area-level characteristics, and (2) apply
- the model to census data available for all households or geographical entities
- to estimate poverty at the sub-national level.
- At a minimum, the procedure thus requires both household survey and census
- data to produce a sufficiently detailed poverty map.
+ 
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+It doesn't require census data.
+\end_layout
+
+\end_inset
+
+The basic procedure entails two steps: (1) using household survey data,
+ fit a statistical model at the household or area level of some welfare
+ measure (e.g., poverty, income, or wealth) to household- or area-level characteri
+stics, and (2) apply the model to census data available for all households
+ or geographical entities to estimate poverty at the sub-national level.
+ At a minimum, the procedure thus requires a household survey and data at
+ the area level to produce a sufficiently detailed poverty map.
 \end_layout
 
 \begin_layout Standard
@@ -243,9 +253,10 @@ literal "false"
  Unit-level models are not well-suited to situations where the survey and
  census data correspond to different years, which is often the case in developin
 g countries where censuses are conducted infrequently.
- Area-level models represent a feasible alternative that similarly relies
- on linear functional forms, but conduct estimation and prediction using
- only aggregate data for the geographical entities of interest 
+ Area-level models represent a feasible alternative for periods where a
+ recent census is not available that similarly relies on linear functional
+ forms, but conduct estimation and prediction using only aggregate data
+ for the geographical entities of interest 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "fay1979estimates,torabi2014small"
@@ -254,7 +265,7 @@ literal "false"
 \end_inset
 
 .
- Unit-context models represent another alternative and are characterized
+ Unit-context models have been suggested alternative and are characterized
  by an estimation stage wherein household-level measures are modeled exclusively
  as a linear function of area-level characteristics 
 \begin_inset CommandInset citation
@@ -399,6 +410,25 @@ machine learning,
  methods for the parametric approaches traditionally used for poverty mapping.
  In addition, the modern approach relies heavily on remotely-sensed covariates
  rather than covariates derived from census data.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Nevertheless, traditional area-level metods have made considerable use of
+ remotely sensed covariates and often rely on using data available at the
+ area-level, including administrative data (see 
+\begin_inset CommandInset citation
+LatexCommand citealt
+key "seitz2019they"
+literal "false"
+
+\end_inset
+
+ for an application using publicly available geospatial data).
+\end_layout
+
+\end_inset
+
  Finally, poverty maps produced with machine-learning methods generally
  share a common validation procedure.
  The key feature of this procedure is that model performance is assessed
@@ -507,8 +537,10 @@ census
  Our experiments entail repeatedly drawing survey samples from the census
  where each sample produces direct poverty estimates for the sampled geographic
  areas.
- For each direct estimate, the presence of the census means that we observe
- the ``true'' poverty measure corresponding to the direct estimate.
+ With each sample we obtain small area estimates using traditional and machine
+ learning based methods.
+ The presence of the census means that we observe the ``true'' poverty measure
+ corresponding to the direct estimate.
  We use these true poverty measures to gain insight not only into the credibilit
 y of model validation based on direct estimates, but also the performance
  of machine-learning methods when validated against the true poverty measures.
@@ -567,9 +599,9 @@ The results of our simulations can be summarized as follows.
  several benchmark models.
  We find that these performance issues are largely due to the limited predictive
  power of remotely-sensed covariates relative to census-based covariates.
- Finally, our targeting simulations show that none of our machine-learning
- implementations outperform more traditional poverty mapping methods that
- are feasible with the same data.
+ Finally, our targeting simulations which rely on accurate rankings of locations
+ show that none of our machine-learning implementations outperform more
+ traditional poverty mapping methods that are feasible with the same data.
 \end_layout
 
 \begin_layout Standard
@@ -1819,8 +1851,7 @@ where
  These variances are assumed to be known, although in practice they are
  estimated using the survey data.
  Given the two parts of the model, the survey data can then be used to obtain
- parameter estimates using weighted least squares and the estimates can
- be used to predict poverty rates for all areas using census data.
+ parameter estimates.
 \end_layout
 
 \begin_layout Standard
@@ -1890,7 +1921,7 @@ literal "false"
 
 \end_inset
 
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1919,8 +1950,9 @@ literal "false"
 \end_inset
 
 .
- This model assumes that (transformed) household income relates linearly
- to a vector of household-level covariates according the following model:
+ This model assumes that (transformed) equivalized household level income
+ or consumption relates linearly to a vector of household-level covariates
+ according to the following model:
 \end_layout
 
 \begin_layout Standard
@@ -2128,15 +2160,9 @@ The key assumption of the unit-level model is that the distribution of the
  and the census used for prediction.
  This assumption is generally violated if the census is outdated – which
  is often the case in developing countries – and in this event the application
- of the unit-level model will lead to similarly outdated poverty maps 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "lange2018small"
-literal "false"
-
-\end_inset
-
-.
+ of the unit-level model will lead to estimates which may be biased since
+ the survey parameters are applied to a different population from which
+ the survey was drawn from.
  Importantly, machine-learning approaches to poverty mapping are commonly
  motivated by the fact that censuses are outdated and are thus viewed as
  a way to produce timely poverty maps in a data-constrained environment.
@@ -3129,7 +3155,7 @@ on.
 
 \begin_layout Enumerate
 Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated
- by each method.
+ by each method under each survey sample.
 \end_layout
 
 \begin_layout Standard
@@ -3217,7 +3243,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3255,7 +3281,7 @@ Direct versus true
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -3629,8 +3655,8 @@ Recall that the geo-referenced covariates are only available at the municipality
 
  The final three models are all traditional methods that we use to benchmark
  the performance of gradient boosting.
- In particular, we present the unit-level, unit-context, and area-level
- models.
+ In particular, we present the unit-level (obtained with CensusEB methods),
+ unit-context (obtained with CensusEB methods), and area-level models.
  We consider three alternative implementations of the area-level model that,
  much like for gradient boosting, vary the level of analysis and the covariates
  used.
@@ -3675,8 +3701,10 @@ noprefix "false"
  These results suggest that, when using the same data, gradient boosting
  performs comparably (if not better) than the unit-level model and better
  than the unit-context and area-level models.
- This is an expected result given that gradient boosting accommodates more
- flexible functional forms.
+ Given that traditional small area methods tend to make more use of the
+ data at hand, the performance of gradient boosting is somewhat surprising.
+ It may be due to the fact that gradient boosting accommodates more flexible
+ functional forms or it may be something specific to the data at hand.
 \end_layout
 
 \begin_layout Standard
@@ -4235,24 +4263,46 @@ noprefix "false"
 
  thus compares the machine-learning and traditional approaches in terms
  of their ability to reduce poverty in the context of our targeting simulations.
- In these simulations, a hypothetical poverty-alleviation program targeted
- on the basis of 
+ In these simulations, which is dependent just on the povertyu ranking,
+ a hypothetical poverty-alleviation program targeted on the basis of 
 \shape italic
 true
 \shape default
  municipality-level poverty rates is able to reduce the overall poverty
- headcount to just under 20 percent.
+ headcount to just under 20 percent, a 5 percentage point improvement.
  While the achieved poverty rates of all models fall within the 20 percent
  range, we find that gradient boosting with geo-referenced covariates is
  one of the worst performing models.
  With the exception of the area-level model using geo-referenced covariates,
- the standard implementation is thus outperformed by all traditional methods,
- including those that are direct competitors.
+ the standard gradient boosting implementation relying on geospatial covariates
+ is thus outperformed by all traditional methods, including those that are
+ direct competitors.
  However, when incorporating census-based covariates, we find that gradient
  boosting achieves poverty rates that are comparable to the traditional
  methods, yet again showing that an exclusive reliance on remotely-sensed
  data can limit the performance of the machine learning.
  
+\end_layout
+
+\begin_layout Standard
+The results of the targeting simulation are relevant to cases where targeting
+ is based solely on the ranking of municipalities – all methods appear to
+ do a solid job.
+ Nevertheless, there are many instances where the targeting mechanism may
+ rely on the method's poverty estimates.
+ For example, Senegal's Unique National Registry (RNU - in French) of vulnerable
+ households relies on actual estimates from poverty maps to determine the
+ quotas for sampling by municipality (Ferre 
+\begin_inset CommandInset citation
+LatexCommand citeyear
+key "ferresenegal"
+literal "false"
+
+\end_inset
+
+).
+ It is in those cases where a method that yields unbiased and precise estimates
+ should be employed.
 \end_layout
 
 \begin_layout Section
