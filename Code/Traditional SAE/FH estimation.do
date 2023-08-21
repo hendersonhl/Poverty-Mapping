@@ -37,7 +37,7 @@ mun_share_female
 *===============================================================================
 
 *===============================================================================
-forval sim=34/500{
+forval sim=1/500{
 use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
 
 merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor $thevar $thevar_hid HID)
