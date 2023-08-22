@@ -140,7 +140,7 @@ Department of Economics and Finance, Drake University, United States of
 status collapsed
 
 \begin_layout Plain Layout
-The World Bank Group
+The World Bank Group - Poverty and Equity Global Practice
 \end_layout
 
 \end_inset
@@ -217,23 +217,13 @@ literal "false"
  areas, producing detailed poverty maps often requires using small area
  estimation, which consists of using statistical methods to predict poverty
  levels on the basis of household- or area-level characteristics.
- 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-It doesn't require census data.
-\end_layout
-
-\end_inset
-
-The basic procedure entails two steps: (1) using household survey data,
+ The basic procedure entails two steps: (1) using household survey data,
  fit a statistical model at the household or area level of some welfare
  measure (e.g., poverty, income, or wealth) to household- or area-level characteri
 stics, and (2) apply the model to census data available for all households
  or geographical entities to estimate poverty at the sub-national level.
  At a minimum, the procedure thus requires a household survey and data at
- the area level to produce a sufficiently detailed poverty map.
+ the area level or a census to produce a sufficiently detailed poverty map.
 \end_layout
 
 \begin_layout Standard
@@ -4028,6 +4018,296 @@ gold standard
  The standard implementation thus understates the spatial distribution of
  poverty.
  
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical design MSE and bias with alternative machine-learning models among
+ 20 percent least likely to be sampled municipalities 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ll_sample_q1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3_1a.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Design MSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3_2a.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Design bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+Note: Figures presents the design MSE and bias for each applied method.
+ The design MSE is calculated as the mean squared difference between the
+ model based estimate for a given municipality (obtained from each of the
+ 500 samples drawn from the census) and the municipality's true poverty
+ rate.
+ The bias is just the average difference between the model based estimate
+ for a given municipality (obtained from each of the 500 samples drawn from
+ the census) and the municipality's true poverty rate.
+ The box-plots shows the municipality level spread of the design MSE and
+ bias of the method's estimates for the least likely to be sampled municipalitie
+s.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Empirical design MSE and bias with alternative machine-learning models among
+ 20 percent most likely to be sampled municipalities 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ll_sample_q5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3_1b.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Design MSE
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3_2b.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Design bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size small
+Note: Figures presents the design MSE and bias for each applied method.
+ The design MSE is calculated as the mean squared difference between the
+ model based estimate for a given municipality (obtained from each of the
+ 500 samples drawn from the census) and the municipality's true poverty
+ rate.
+ The bias is just the average difference between the model based estimate
+ for a given municipality (obtained from each of the 500 samples drawn from
+ the census) and the municipality's true poverty rate.
+ The box-plots shows the municipality level spread of the design MSE and
+ bias of the method's estimates for the most likely to be sampled municipalities.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An additional consideration is how the methods perform for predictions which
+ are out of sample.
+ Because the experiment consists of 500 samples taken from the census data,
+ a given municipality may be present in one of the samples and may be absent
+ in others.
+ Consequently, to evaluate out of sample properties we rank municipalities
+ by their likelihood of selection across the 500 samples.
+ The likelihood of being present ranges from 0.09 to 1, with a median of
+ 0.48 and a mean of 0.53.
+ Among the 20 percent least likely to be sampled municipalities, the gradient
+ boosting model with GIS-based covariates is the worst performing in terms
+ of MSE followed closely by unit-context models (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ll_sample_q1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ In terms of bias among the 20 percent of municipalities that are least
+ likely to be sampled, the gradient boosting model with the geo-referenced
+ covariates shows very wide variability, while unit context models show
+ downward bias.
+ The other gradient boosting models perform similarly to CensusEB models
+ in terms of bias and MSE.
+ The performance, in terms of MSE, of the different methods seems to improve
+ with the likelihood of being selected.
+ Among municipalities most likely to be selected, the gradient boosting
+ model with the geo-referenced covariates is still the worst performing
+ (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:ll_sample_q5"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ However, in terms of bias, among the most likely to be selected municipalities,
+ the bias of Fay-Herriot methods at the municipality level is the best performin
+g illustrating the importance of the methods EBLUP.
 \end_layout
 
 \begin_layout Standard
