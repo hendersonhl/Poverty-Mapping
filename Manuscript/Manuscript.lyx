@@ -176,6 +176,13 @@ true
  in targeting simulations.
 \end_layout
 
+\begin_layout Abstract
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 
 \series bold
@@ -3873,7 +3880,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -3881,7 +3888,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -4027,26 +4034,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models among
- 20 percent least likely to be sampled municipalities 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \noindent
 \align center
 \begin_inset Float figure
@@ -4059,7 +4046,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_1a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -4096,7 +4083,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_2a.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -4121,19 +4108,23 @@ Design bias
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset Caption Standard
 
-\size small
-Note: Figures presents the design MSE and bias for each applied method.
- The design MSE is calculated as the mean squared difference between the
- model based estimate for a given municipality (obtained from each of the
- 500 samples drawn from the census) and the municipality's true poverty
- rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the design MSE and
- bias of the method's estimates for the least likely to be sampled municipalitie
-s.
+\begin_layout Plain Layout
+Empirical design MSE and bias with alternative machine-learning models among
+ 20 percent least likely to be sampled municipalities 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ll_sample_q1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4180,7 +4171,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_1b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -4217,7 +4208,7 @@ status collapsed
 \align center
 \begin_inset Graphics
 	filename Figure-3_2b.png
-	scale 25
+	scale 18
 
 \end_inset
 
@@ -4239,21 +4230,6 @@ Design bias
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-
-\size small
-Note: Figures presents the design MSE and bias for each applied method.
- The design MSE is calculated as the mean squared difference between the
- model based estimate for a given municipality (obtained from each of the
- 500 samples drawn from the census) and the municipality's true poverty
- rate.
- The bias is just the average difference between the model based estimate
- for a given municipality (obtained from each of the 500 samples drawn from
- the census) and the municipality's true poverty rate.
- The box-plots shows the municipality level spread of the design MSE and
- bias of the method's estimates for the most likely to be sampled municipalities.
 \end_layout
 
 \end_inset
@@ -4288,7 +4264,7 @@ noprefix "false"
  likely to be sampled, the gradient boosting model with the geo-referenced
  covariates shows very wide variability, while unit context models show
  downward bias.
- The other gradient boosting models perform similarly to CensusEB models
+ The other gradient boosting models perform similarly to unit-level models
  in terms of bias and MSE.
  The performance, in terms of MSE, of the different methods seems to improve
  with the likelihood of being selected.
@@ -4307,7 +4283,7 @@ noprefix "false"
 ).
  However, in terms of bias, among the most likely to be selected municipalities,
  the bias of Fay-Herriot methods at the municipality level is the best performin
-g illustrating the importance of the methods EBLUP.
+g illustrating the importance of the method's EBLUP.
 \end_layout
 
 \begin_layout Standard
