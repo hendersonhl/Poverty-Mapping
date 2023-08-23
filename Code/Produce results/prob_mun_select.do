@@ -28,7 +28,7 @@ rename (fgt0_mse fgt0_bias_reg) (mse bias)
 drop if regexm(lower(method),"cbeb")
 
 replace method_des = "Unit-context" if regexm(lower(method),"u-c")
-replace method_des = "Unit-level (CensusEB)" if regexm(lower(method),"censuseb")
+replace method_des = "Unit-level" if regexm(lower(method),"censuseb")
 
 tempfile main
 save `main'
@@ -146,8 +146,7 @@ foreach modelo of local modelos{
 	tempfile xgb
 	save `xgb'
 }
-set trace on
-set traced 1
+
 foreach fh of local fhs{
 	use ``fh'', clear
 	
@@ -171,7 +170,7 @@ foreach fh of local fhs{
 	tempfile losfh
 	save `losfh'
 }
-set trace off
+
 append using `main'
 append using `xgb'
 
@@ -180,7 +179,7 @@ merge m:1 muni using `psel'
   
 drop if method=="Direct"
 
-gen order = 5    if method=="Unit-level (CensusEB)"
+gen order = 5    if method=="Unit-level"
 replace order= 1 if method=="Gradient Boosting (GIS-MUN)" 
 replace order= 2 if method=="Gradient Boosting (CEN-MUN)"
 replace order= 4 if method=="Gradient Boosting (CEN-PSU)"
@@ -204,7 +203,7 @@ preserve
 	groupfunction, mean(mse bias) by(method psel_qtile)
 	reshape wide mse bias, i(method_des) j(psel_qtile)
 	
-gen order = 5 if method=="CensusEB"
+gen order = 5 if method=="Unit-level"
 replace order= 1 if method=="Gradient Boosting (GIS mun)"
 replace order= 2 if method=="Gradient Boosting (Census agg. mun)"
 replace order= 4 if method=="Gradient Boosting (Census agg. PSU)"
