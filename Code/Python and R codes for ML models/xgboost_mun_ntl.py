@@ -9,10 +9,10 @@ import time
 # Directories
 #inpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data/'
 #outpath = '/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results/'
-#inpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
-#outpath = '/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
-inpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Data/'
-outpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Results/'
+inpath = r'/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Data/'
+outpath = r'/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
+#inpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Data/'
+#outpath = 'C:/Users/WB378870/GitHub/Poverty-Mapping/Results/'
 
 # Input datasets
 svy = pd.read_csv(inpath + 'svydata_mun.csv', header = 0)
@@ -22,7 +22,7 @@ x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all d
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = 'gis'
+covars = ''
 x_census = x.drop(columns = ['MiMun'])  # If covars = '' need to drop 'MiMun'
 x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
 hid = x['MiMun']

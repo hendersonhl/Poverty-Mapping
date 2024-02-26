@@ -70,4 +70,7 @@ import delimited using "$inpath\xmatrix_mun.csv", clear
 		drop if _m==2
 		drop _m
 		
+	rename mimun MiMun
+		
 export delimited using "$inpath\xmatrix_mun_ntl.csv", replace
+save "$inpath\xmatrix_mun_ntl.dta", replace
