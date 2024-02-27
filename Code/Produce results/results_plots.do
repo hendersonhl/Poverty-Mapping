@@ -114,7 +114,7 @@ merge 1:1 muni using `tres', keepusing(mse_fh_mun_gis)
 	drop if _m==2
 	drop _m	
 	
-keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh*
+keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh* mse_gb_gis_ntl mse_gb_all_ntl
 tabstat mse_gb_census-mse_fh_mun, stat(p50)
 label var mse_gb_census "Gradient Boosting (CEN-MUN)"
 label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
@@ -124,8 +124,11 @@ label var mse_eb        "Unit-level"
 label var mse_uc        "Unit-context"      
 label var mse_fh        "Area-level (CEN-PSU)"
 label var mse_fh_mun        "Area-level (CEN-MUN)"  
-label var mse_fh_mun_gis        "Area-level (GIS-MUN)"                    
-graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis, ytitle(Mean Squared Error) ///
+label var mse_fh_mun_gis        "Area-level (GIS-MUN)"  
+label var mse_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
+label var mse_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
+                  
+graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis mse_gb_gis_ntl mse_gb_all_ntl, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
@@ -165,7 +168,7 @@ merge 1:1 muni using `tres', keepusing(bias_fh)
 	drop if _m==2
 	drop _m		
 
-keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh*
+keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh* bias_gb_gis_ntl bias_gb_all_ntl
 tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
 label var bias_gb_census "Gradient Boosting (CEN-MUN)"
 label var bias_gb_gis "Gradient Boosting (GIS-MUN)"
@@ -176,8 +179,10 @@ label var bias_uc   "Unit-context"
 label var bias_fh        "Area-level (CEN-PSU)"
 label var bias_fh_mun        "Area-level (CEN-MUN)"  
 label var bias_fh_mun_gis        "Area-level (GIS-MUN)"  
+label var bias_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
+label var bias_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
   
-graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun bias_fh_mun_gis, ytitle(Bias) ///
+graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun bias_fh_mun_gis bias_gb_gis_ntl bias_gb_all_ntl, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))

@@ -2,7 +2,7 @@ The scripts in this folder process the outputs from the "Traditional SAE" and th
 "Python and R codes for ML models" folders and produces the figures and other outputs 
 presented in the main paper.
 
-	- results_mse.py: calculates MSE of the estimates from the different models fit.
+	- results_mse.py: calculates MSE and Bias of the estimates from the different models fit.
 	- results_rsquared.py: calculate the R2 between model based estimates and survey
 	  and true estimates.
 	- export_tableu.do: Old script used to produce outputs for tableau. Not used for

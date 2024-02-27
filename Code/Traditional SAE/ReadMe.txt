@@ -8,6 +8,8 @@ The ado files for the codes used are available online, specifically:
 For unit-level models:
 1) The results for unit level area models are obtained from:
 	- Simulation19.do runs "qnorm_model_select_comp_xgboost" and "random_sim_xgboost"
+		- File names means they're comparably run to xgboost in the sense that
+		  under each sample a new model is selected.
 	- the simulation takes quite a bit of time to complete (about a week or so)
 	- I recommend you first run the selection in its entirety (500 sims), and then
 	  run the models - qnorm_model_select_comp_xgboost.do
