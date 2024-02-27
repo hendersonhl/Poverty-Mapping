@@ -22,7 +22,8 @@ x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all d
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = ''
+covars = '6+3
+'
 x_census = x.drop(columns = ['MiMun'])  # If covars = '' need to drop 'MiMun'
 x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
 hid = x['MiMun']
