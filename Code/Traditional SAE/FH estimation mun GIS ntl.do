@@ -6,7 +6,7 @@
 clear all
 set more off
 set matsize 8000
-set processors 8
+cap set processors 8
 
 
 
@@ -70,20 +70,20 @@ else{
 }
 
 forval sim= `start'/500{
-use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
-dis as error "Starting Simulation number : `sim'"
-
-merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor HID)
-gen double HID_mun = int(HID/1e3)
-replace poor = . if _m!=3
-
-
-gen popw = Whh*hhsize
-qui:proportion poor if _m==3 [pw = popw], over(HID_mun)
-mata: fgt0     = st_matrix("e(b)")
-mata: fgt0     = fgt0[(cols(fgt0)/2+1)..cols(fgt0)]'
-mata: fgt0_var = st_matrix("e(V)")
-mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
+	use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
+	dis as error "Starting Simulation number : `sim'"
+	
+	merge 1:1 hhid using "$inpath\census_trim", keepusing(hhsize poor HID)
+	gen double HID_mun = int(HID/1e3)
+	replace poor = . if _m!=3
+	
+	
+	gen popw = Whh*hhsize
+	qui:proportion poor if _m==3 [pw = popw], over(HID_mun)
+	mata: fgt0     = st_matrix("e(b)")
+	mata: fgt0     = fgt0[(cols(fgt0)/2+1)..cols(fgt0)]'
+	mata: fgt0_var = st_matrix("e(V)")
+	mata: fgt0_var = diagonal(fgt0_var)[(cols(fgt0_var)/2+1)..cols(fgt0_var)]
 
 	// the census. Leave data at the municipality level.
 	groupfunction,  rawsum(hhsize) max(_m) by(HID_mun) 
