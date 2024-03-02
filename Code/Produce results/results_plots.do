@@ -13,15 +13,15 @@ global outpath "$main/Manuscript"
 
 * Basic R-squared plot
 import delimited "$inpath/results_rsquared.csv", clear
-keep sim_sample gb_census_mun_direct gb_census_mun_true gb_census_psu_direct gb_census_psu_true 
-tabstat gb_census_mun_true-gb_census_psu_direct, stat(p50)
-rename *_true True_*
-rename *_direct Direct_*
-reshape long True Direct, i(sim_sample) j(model) string
-replace model = "Municipality" if model=="_gb_census_mun"
-replace model = "PSU" if model=="_gb_census_psu"
-gen order = 1 if model=="PSU" 
-replace order = 2 if model=="Municipality" 
+	keep sim_sample gb_census_mun_direct gb_census_mun_true gb_census_psu_direct gb_census_psu_true 
+	tabstat gb_census_mun_true-gb_census_psu_direct, stat(p50)
+	rename *_true True_*
+	rename *_direct Direct_*
+	reshape long True Direct, i(sim_sample) j(model) string
+	replace model = "Municipality" if model=="_gb_census_mun"
+	replace model = "PSU" if model=="_gb_census_psu"
+	gen order = 1 if model=="PSU" 
+	replace order = 2 if model=="Municipality" 
 
 graph box Direct True, ytitle("R-squared") over(model, sort(order)) ///
    /* nooutside note("")*/ graphregion(color(white)) scheme(s1mono)
@@ -31,21 +31,21 @@ graph export "$outpath/Figure-1a.pdf", as(pdf) replace
 
 * Model-selection experiment (true vs. direct)
 import delimited "$inpath/results_rsquared.csv", clear
-keep sim_sample gb_census_mun_true gb_census_mun_direct gb_census_psu_true gb_census_psu_direct
-gen select_muni_true = (gb_census_mun_true > gb_census_psu_true)
-gen select_muni_direct = (gb_census_mun_direct > gb_census_psu_direct)
-tab select_muni_direct select_muni_true
+	keep sim_sample gb_census_mun_true gb_census_mun_direct gb_census_psu_true gb_census_psu_direct
+	gen select_muni_true = (gb_census_mun_true > gb_census_psu_true)
+	gen select_muni_direct = (gb_census_mun_direct > gb_census_psu_direct)
+	tab select_muni_direct select_muni_true
 
 * Constrained versus unconstrained R-squared plot
 import delimited "$inpath/results_rsquared.csv", clear
-keep sim_sample gb_census_mun_true gb_census_mun_constrain gb_census_psu_true gb_census_psu_constrain
-rename *_true Unconstrained_*
-rename *_constrain Constrained_*
-reshape long Unconstrained Constrained, i(sim_sample) j(model) string
-replace model = "Municipality" if model=="_gb_census_mun"
-replace model = "PSU" if model=="_gb_census_psu"
-gen order = 1 if model=="PSU" 
-replace order = 2 if model=="Municipality" 
+	keep sim_sample gb_census_mun_true gb_census_mun_constrain gb_census_psu_true gb_census_psu_constrain
+	rename *_true Unconstrained_*
+	rename *_constrain Constrained_*
+	reshape long Unconstrained Constrained, i(sim_sample) j(model) string
+	replace model = "Municipality" if model=="_gb_census_mun"
+	replace model = "PSU" if model=="_gb_census_psu"
+	gen order = 1 if model=="PSU" 
+	replace order = 2 if model=="Municipality" 
 graph box Unconstrained Constrained, ytitle("R-squared") over(model, sort(order)) ///
     nooutside note("") graphregion(color(white)) scheme(s1mono)
 graph export "$outpath/Figure-1b.pdf", as(pdf) replace
@@ -53,89 +53,105 @@ graph export "$outpath/Figure-1b.png", as(png) replace
 	
 * Model-selection experiment (unconstrained vs. contrained)
 import delimited "$inpath/results_rsquared.csv", clear
-keep sim_sample gb_census_mun_true gb_census_mun_constrain gb_census_psu_true gb_census_psu_constrain
-gen select_muni_true = (gb_census_mun_true > gb_census_psu_true)
-gen select_muni_constrain = (gb_census_mun_constrain > gb_census_psu_constrain)
-tab select_muni_true select_muni_constrain
+	keep sim_sample gb_census_mun_true gb_census_mun_constrain gb_census_psu_true gb_census_psu_constrain
+	gen select_muni_true = (gb_census_mun_true > gb_census_psu_true)
+	gen select_muni_constrain = (gb_census_mun_constrain > gb_census_psu_constrain)
+	tab select_muni_true select_muni_constrain
 	
 * MSE vs. R-squared scatterplot
 import delimited "$main/Data/true_mun.csv", clear   // Import true poverty rates
-keep mimun poor
-rename poor true
-tempfile true
-save `true'
-import delimited "$main/Data/svydata_mun.csv", clear  // Import sampling information
-keep sim_sample mimun poor
-merge m:1 mimun using `true'
-drop _merge
-by sim_sample, sort: egen variance = sd(true)  // Get variance of true rates by sample
-replace variance = variance^2
+	keep mimun poor
+	rename poor true
+	tempfile true
+	save `true'
+	import delimited "$main/Data/svydata_mun.csv", clear  // Import sampling information
+	keep sim_sample mimun poor
+	merge m:1 mimun using `true'
+	drop _merge
+	by sim_sample, sort: egen variance = sd(true)  // Get variance of true rates by sample
+	replace variance = variance^2
 collapse variance, by(sim_sample)
 tempfile variance
 save `variance'
 import delimited "$inpath/results_rsquared.csv", clear
-merge 1:1 sim_sample using `variance'    // Merge variances with R-squared values
-keep sim_sample gb_census_mun_true gb_census_psu_true variance
-gen mse_mun = (1 - gb_census_mun_true)*variance
-gen mse_psu = (1 - gb_census_psu_true)*variance
+	merge 1:1 sim_sample using `variance'    // Merge variances with R-squared values
+	keep sim_sample gb_census_mun_true gb_census_psu_true variance
+	gen mse_mun = (1 - gb_census_mun_true)*variance
+	gen mse_psu = (1 - gb_census_psu_true)*variance
 twoway (scatter mse_mun gb_census_mun_true), xtitle("R-squared") ytitle("Empirical MSE") scheme(s1mono)
 twoway (scatter mse_psu gb_census_psu_true), xtitle("R-squared") ytitle("Emprical MSE") scheme(s1mono)
 
+*=========================================================================
 * Basic MSE plot
+*=========================================================================
 use "$inpath/fh_mse_bias.dta", clear
-keep if variable == "mse_fh"
-rename value mse_fh
-rename area muni
+	keep if variable == "mse_fh"
+	rename value mse_fh
+	rename area muni
 tempfile uno
 save `uno'
 
 use "$inpath/fh_mun_mse_bias.dta", clear
-keep if variable == "mse_fh"
-rename value mse_fh_mun
-rename area muni
+	keep if variable == "mse_fh"
+	rename value mse_fh_mun
+	rename area muni
 tempfile dos
 save `dos'
 
 use "$inpath/fh_mun_gis_mse_bias.dta", clear
-keep if variable == "mse_fh"
-rename value mse_fh_mun_gis
-rename area muni
+	keep if variable == "mse_fh"
+	rename value mse_fh_mun_gis
+	rename area muni
 tempfile tres
 save `tres'
 
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+	keep if variable == "mse_fh"
+	rename value mse_fh_mun_gis_ntl
+	rename area muni
+tempfile cuatro
+save `cuatro'
+
 import delimited "$inpath/results_mse.csv", clear
-merge 1:1 muni using `uno', keepusing(mse_fh)
-	drop if _m==2
-	drop _m
-merge 1:1 muni using `dos', keepusing(mse_fh_mun)
-	drop if _m==2
-	drop _m
-merge 1:1 muni using `tres', keepusing(mse_fh_mun_gis)
-	drop if _m==2
-	drop _m	
-	
-keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh* mse_gb_gis_ntl mse_gb_all_ntl
-tabstat mse_gb_census-mse_fh_mun, stat(p50)
-label var mse_gb_census "Gradient Boosting (CEN-MUN)"
-label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
-label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
-label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
-label var mse_eb        "Unit-level"                           
-label var mse_uc        "Unit-context"      
-label var mse_fh        "Area-level (CEN-PSU)"
-label var mse_fh_mun        "Area-level (CEN-MUN)"  
-label var mse_fh_mun_gis        "Area-level (GIS-MUN)"  
-label var mse_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
-label var mse_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
+	merge 1:1 muni using `uno', keepusing(mse_fh)
+		drop if _m==2
+		drop _m
+	merge 1:1 muni using `dos', keepusing(mse_fh_mun)
+		drop if _m==2
+		drop _m
+	merge 1:1 muni using `tres', keepusing(mse_fh_mun_gis)
+		drop if _m==2
+		drop _m	
+	merge 1:1 muni using `cuatro', keepusing(mse_fh_mun_gis)
+		drop if _m==2
+		drop _m	
+		
+	keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh* mse_gb_gis_ntl mse_gb_all_ntl
+	tabstat mse_gb_census-mse_fh_mun, stat(p50)
+	label var mse_gb_census "Gradient Boosting (CEN-MUN)"
+	label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
+	label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
+	label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
+	label var mse_eb        "Unit-level"                           
+	label var mse_uc        "Unit-context"      
+	label var mse_fh        "Area-level (CEN-PSU)"
+	label var mse_fh_mun        "Area-level (CEN-MUN)"  
+	label var mse_fh_mun_gis        "Area-level (GIS-MUN)"  
+	label var mse_fh_mun_gis_ntl       "Area-level (GIS-NTL-MUN)" 
+	label var mse_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
+	label var mse_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
                   
-graph hbox mse_gb_gis mse_gb_census mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh mse_fh_mun mse_fh_mun_gis mse_gb_gis_ntl mse_gb_all_ntl, ytitle(Mean Squared Error) ///
+graph hbox mse_gb_gis mse_gb_gis_ntl mse_fh_mun_gis mse_fh_mun_gis_ntl mse_uc mse_fh mse_fh_mun mse_gb_all_ntl mse_gb_all mse_gb_census mse_gb_psu    mse_eb, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
 graph export "$outpath/Figure-2a.pdf", as(pdf) replace
 graph export "$outpath/Figure-2a.png", as(png) replace
 
+*=========================================================================
 * Basic bias plot
+*=========================================================================
+
 use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh
@@ -150,12 +166,19 @@ rename area muni
 tempfile dos
 save `dos'
 
-use "$inpath/fh_mun_mse_bias.dta", clear
+use "$inpath/fh_mun_gis_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh_mun_gis
 rename area muni
 tempfile tres
 save `tres'
+
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun_gis_ntl
+rename area muni
+tempfile cuatro
+save `cuatro'
 
 import delimited "$inpath/results_bias.csv", clear
 merge 1:1 muni using `uno', keepusing(bias_fh)
@@ -166,7 +189,11 @@ merge 1:1 muni using `dos', keepusing(bias_fh)
 	drop _m	
 merge 1:1 muni using `tres', keepusing(bias_fh)
 	drop if _m==2
+	drop _m	
+merge 1:1 muni using `cuatro', keepusing(bias_fh)
+	drop if _m==2
 	drop _m		
+
 
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh* bias_gb_gis_ntl bias_gb_all_ntl
 tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
@@ -181,8 +208,10 @@ label var bias_fh_mun        "Area-level (CEN-MUN)"
 label var bias_fh_mun_gis        "Area-level (GIS-MUN)"  
 label var bias_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
 label var bias_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
+label var bias_fh_mun_gis_ntl       "Area-level (GIS-NTL-MUN)" 
+	
   
-graph hbox bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh bias_fh_mun bias_fh_mun_gis bias_gb_gis_ntl bias_gb_all_ntl, ytitle(Bias) ///
+graph hbox bias_gb_gis bias_gb_gis_ntl bias_fh_mun_gis bias_fh_mun_gis_ntl bias_uc bias_fh bias_fh_mun bias_gb_all_ntl bias_gb_all bias_gb_census bias_gb_psu    bias_eb, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))

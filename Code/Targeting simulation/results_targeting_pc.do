@@ -200,6 +200,19 @@ preserve
 	rename yhat* yhat_*
 	outsheet using "$outpath/fh_mun_gis.csv", comma replace
 	
+	use "$outpath\FH_results_mun_gis_ntl.dta", clear
+	rename HID_mun area 
+	rename fh_fgt0 estimate
+	keep area estimate simul
+	rename area muni
+	rename estimate yhat
+	rename simul sim_sample
+	order muni sim_sample yhat
+	sort muni sim_sample
+	reshape wide yhat, i(muni) j(sim_sample)
+	rename yhat* yhat_*
+	outsheet using "$outpath/fh_mun_gis_ntl.csv", comma replace
+	
 restore
 
 *=========================================================================
@@ -210,10 +223,12 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
 	rf_census_mun rf_gis_mun rf_all_mun rf_census_psu ///
 	lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu ///
 	ols_census_mun ols_gis_mun ols_all_mun ols_census_psu eb uc ///
-	hyperopt_census_mun gb_census_hhid_demo fh fh_mun fh_mun_gis
+	hyperopt_census_mun gb_census_hhid_demo fh fh_mun fh_mun_gis ///
+	fh_mun_gis_ntl gb_all_mun_ntl gb_gis_mun_ntl
 	//gb_census_hh -> XGboost household level poverty classification
-	
-local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis gb_census_hhid_demo
+
+//For a subset
+local themodels gb_census_mun gb_gis_mun gb_gis_mun_ntl gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis fh_mun_gis_ntl gb_census_hhid_demo
 
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 
@@ -292,9 +307,10 @@ local fh_mun Fay-Herriot
 local census Census agg.
 local gis GIS
 local all Mixed
+local ntl GIS-NTL
 
 local models bart eb uc rf gb lasso ols hyperopt fh
-local types census gis all
+local types census gis all ntl
 
 gen model_t = ""
 foreach m of local models{
