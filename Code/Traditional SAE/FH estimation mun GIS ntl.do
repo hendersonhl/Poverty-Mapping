@@ -8,8 +8,23 @@ set more off
 set matsize 8000
 cap set processors 8
 
+mata
+	//Mata function for selection
+	function mysel2(_bb, _se, _pval){
+		thevars = tokens(st_local("_myhhvars"))
+		zvals   = (_bb':/_se)[1..(rows(_se)-1)]
+		zvals   = 2:*normal(-abs(zvals))
+		if (colmax(zvals)>_pval){
+			keepvar = thevars[selectindex(colmax(zvals):>zvals)]
+			return(keepvar)	
+		}	
+		else{
+			keepvar = "it's done"
+			return(keepvar)
+		}
+	}
 
-
+end
 
 * Set globals
 if (lower("`c(username)'")=="wb378870")    global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
@@ -70,6 +85,7 @@ else{
 }
 
 forval sim= `start'/500{
+	
 	use "$inpath\my_samples_pps_psu@.dta" if sim_sample==`sim', clear
 	dis as error "Starting Simulation number : `sim'"
 	
@@ -95,7 +111,7 @@ forval sim= `start'/500{
 
 	
 	sort HID_mun //ordered to match proportion output
-	putmata HID_mun if _m==3
+	putmata HID_mun if _m==3, replace
 	//Pull proportion's results
 	getmata dir_fgt0 = fgt0 dir_fgt0_var = fgt0_var, id(HID_mun)
 	replace dir_fgt0_var = . if dir_fgt0_var==0
@@ -126,33 +142,20 @@ forval sim= `start'/500{
 	
 
 	local hhvars : list clean hhvars
+	dis as error "Sim : `sim' first removal"
 	//Removal of non-significant variables
 	forval z= 0.8(-0.05)0.01{
-		qui:fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
-		mata: bb=st_matrix("e(b)")
-		mata: se=sqrt(diagonal(st_matrix("e(V)")))
-		mata: zvals = bb':/se
-		mata: st_matrix("min",min(abs(zvals)))
-		local zv = (-min[1,1])
-		if (2*normal(`zv')>=`z'){
-			foreach x of local hhvars{
-				local hhvars1
-				qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
-				dis as error "`x'"
-				qui: test `x' 
-				if (r(p)>`z'){
-					local hhvars1
-					foreach yy of local hhvars{
-						if ("`yy'"=="`x'") dis ""
-						else local hhvars1 `hhvars1' `yy'
-					}
-				}
-				else local hhvars1 `hhvars'
-				local hhvars `hhvars1'		
-			}
-		}
-	}	
-	cap set trace off
+		local regreso 
+		while ("`regreso'"!="it's done"){
+			fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
+			mata: bb=st_matrix("e(b)")
+			mata: se=sqrt(diagonal(st_matrix("e(V)")))
+			local _myhhvars : colnames(e(b))
+			mata: st_local("regreso", invtokens(mysel2(bb, se, `z')))	
+			if ("`regreso'"!="it's done") local hhvars `regreso'
+		}		
+	}
+
 	//Global with non-significant variables removed
 	global postsign `hhvars'
 
@@ -171,39 +174,18 @@ forval sim= `start'/500{
 		if (_rc==0) local hhvars `hhvars' `x'
 	}
 	
+	dis as error "Sim : `sim' final removal"
 	//One final removal of non-significant covariates
 	forval z= 0.8(-0.05)0.01{
-		qui:fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
-		mata: bb=st_matrix("e(b)")
-		mata: se=sqrt(diagonal(st_matrix("e(V)")))
-		mata: zvals = bb':/se
-		mata: st_matrix("min",min(abs(zvals)))
-		local zv = (-min[1,1])
-		if (2*normal(`zv')>=`z'){	
-			foreach x of local hhvars{
-				dis as error "`nm' 0"
-				cap confirm variable `x'
-				if (_rc==0){
-					local nm `x'
-					dis as error "`nm' 1"
-					local hhvars1
-					dis  as error "`nm' 2"
-					qui: fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
-					dis  as error "`nm' 3"
-					qui: test `nm' 
-					if (r(p)>`z'){
-						dis  as error "`nm' 4"
-						local hhvars1
-						foreach yy of local hhvars{
-							if ("`yy'"=="`nm'") dis ""
-							else local hhvars1 `hhvars1' `yy'
-						}
-					}
-					else local hhvars1 `hhvars'
-					local hhvars `hhvars1'
-				}
-			}
-		}
+		local regreso 
+		while ("`regreso'"!="it's done"){
+			fhsae dir_fgt0 `hhvars', revar(dir_fgt0_var) method(fh) 
+			mata: bb=st_matrix("e(b)")
+			mata: se=sqrt(diagonal(st_matrix("e(V)")))
+			local _myhhvars : colnames(e(b))
+			mata: st_local("regreso", invtokens(mysel2(bb, se, `z')))	
+			if ("`regreso'"!="it's done") local hhvars `regreso'
+		}	
 	}	
 	
 	global last `hhvars'
@@ -222,7 +204,7 @@ forval sim= `start'/500{
 		append using "$outpath\FH_results_mun_gis_ntl.dta"
 		save "$outpath\FH_results_mun_gis_ntl.dta", replace
 	}
-	clear mata
+	//clear mata
 
 dis as error "`sim'"
 }
