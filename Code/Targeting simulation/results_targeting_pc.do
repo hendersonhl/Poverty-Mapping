@@ -228,7 +228,7 @@ local themodels gb_census_mun gb_gis_mun gb_all_mun gb_census_psu ///
 	//gb_census_hh -> XGboost household level poverty classification
 
 //For a subset
-local themodels gb_census_mun gb_gis_mun gb_gis_mun_ntl gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis fh_mun_gis_ntl gb_census_hhid_demo
+local themodels gb_census_mun gb_gis_mun gb_gis_mun_ntl gb_all_mun_ntl gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis fh_mun_gis_ntl gb_census_hhid_demo
 
 foreach model of local themodels{
 	import delimited "$outpath/`model'.csv", clear 

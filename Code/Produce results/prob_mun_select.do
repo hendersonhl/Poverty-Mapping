@@ -6,7 +6,8 @@ local modelos gb_census_mun gb_gis_mun gb_all_mun gb_census_psu
          bart_census_mun bart_gis_mun bart_all_mun bart_census_psu 
          rf_census_mun rf_gis_mun rf_all_mun rf_census_psu 
          lasso_census_mun lasso_gis_mun lasso_all_mun lasso_census_psu 
-         ols_census_mun ols_gis_mun ols_all_mun ols_census_psu gb_census_hhid_demo gb_census_psu_wc;
+         ols_census_mun ols_gis_mun ols_all_mun ols_census_psu gb_census_hhid_demo 
+		 gb_census_psu_wc ;
 #delimit cr
 
 if (lower("`c(username)'")=="wb378870")    global main "C:\Users\WB378870\GitHub\Poverty-Mapping\"
@@ -78,10 +79,27 @@ rename HID_mun muni
 tempfile FHgis
 save `FHgis'
 
-local fhs FHgis FHpsu FH
+use "$outpath\FH_results_mun_gis_ntl.dta", clear
+
+rename fh_fgt0 yhat_
+
+drop fh_fgt0_se fh_fgt0_cv fh_fgt0_gamma
+
+reshape wide yhat_, i(HID_mun) j(simul)
+
+rename HID_mun muni
+
+tempfile FHgis_ntl
+save `FHgis_ntl'
+
+
+
+
+local fhs FHgis FHpsu FH FHgis_ntl
 local FHgis1 "Area-level (GIS-MUN)"    
 local FHpsu1  "Area-level (CEN-PSU)"
 local FH1 "Area-level (CEN-MUN)"   
+local FHgis_ntl1 "Area-level (GIS-NTL-MUN)"
 
 
 *=========================================================================
@@ -117,11 +135,13 @@ save `thetruth'
 *=========================================================================
 
 
-local modelos gb_census_mun gb_gis_mun gb_all_mun gb_census_psu
+local modelos gb_census_mun gb_gis_mun gb_all_mun gb_census_psu gb_gis_mun_ntl gb_all_mun_ntl
 local gb_census_mun "Gradient Boosting (CEN-MUN)"
 local gb_gis_mun "Gradient Boosting (GIS-MUN)"  
 local gb_all_mun "Gradient Boosting (ALL-MUN)"
+local gb_all_mun_ntl  "Gradient Boosting (ALL-NTL-MUN)"
 local gb_census_psu "Gradient Boosting (CEN-PSU)"
+local gb_gis_mun_ntl "Gradient Boosting (GIS-NTL-MUN)"
 
 foreach modelo of local modelos{
 	import delimited using "$outpath\\`modelo'", clear
@@ -179,15 +199,21 @@ merge m:1 muni using `psel'
   
 drop if method=="Direct"
 
-gen order = 5    if method=="Unit-level"
-replace order= 1 if method=="Gradient Boosting (GIS-MUN)" 
-replace order= 2 if method=="Gradient Boosting (CEN-MUN)"
-replace order= 4 if method=="Gradient Boosting (CEN-PSU)"
-replace order= 3 if method=="Gradient Boosting (ALL-MUN)" 
-replace order= 7 if method=="Area-level (CEN-PSU)"
-replace order= 8 if method=="Area-level (CEN-MUN)"
-replace order= 6 if method=="Unit-context"
-replace order= 9 if method=="Area-level (GIS-MUN)"  
+
+	gen     order = 1  if method=="Gradient Boosting (CEN-MUN)"
+	replace order = 2  if method=="Gradient Boosting (GIS-MUN)"         
+	replace order = 3  if method=="Gradient Boosting (ALL-MUN)"            
+	replace order = 4  if method=="Gradient Boosting (CEN-PSU)"
+	replace order = 5  if method=="Unit-level"                           
+	replace order = 6  if method=="Unit-context"      
+	replace order = 7  if method=="Area-level (CEN-PSU)"
+	replace order = 8  if method=="Area-level (CEN-MUN)"  
+	replace order = 9  if method=="Area-level (GIS-MUN)"  
+	replace order = 10 if method=="Area-level (GIS-NTL-MUN)" 
+	replace order = 11 if method=="Gradient Boosting (GIS-NTL-MUN)"
+	replace order = 12 if method=="Gradient Boosting (ALL-NTL-MUN)"
+
+
 
 graph hbox mse if psel_qtile==1, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_1a.png", as(png) replace
