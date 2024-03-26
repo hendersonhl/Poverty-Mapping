@@ -84,11 +84,12 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
-\tracking_changes false
+\tracking_changes true
 \output_changes false
 \html_math_output 0
 \html_css_as_file 0
 \html_be_strict false
+\author 428888767 "WB378870"
 \end_header
 
 \begin_body
@@ -209,6 +210,35 @@ Introduction
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted 428888767 1711444644
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+
+\change_inserted 428888767 1711444651
+The paper does 2 things:
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted 428888767 1711444697
+1) Compare GIS models to non-GIS models - we show GIS is not ideal
+\end_layout
+
+\begin_layout Plain Layout
+
+\change_inserted 428888767 1711444723
+2) Compare ML to SAE - We show that ML works just as well but has drawbacks.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+
+\change_unchanged
 Poverty maps provide granular estimates of poverty at the sub-national level
  in order to better inform the targeting of resources and support the design
  of interventions tailored to local needs (
@@ -517,6 +547,18 @@ literal "false"
 \end_inset
 
 .
+
+\change_inserted 428888767 1711444841
+ In addition, we are often interested in how well the predictions perform
+ in all areas, not on aggregate.
+ Consequently, the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ measure hides the heterogeneity across areas.
+ 
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
@@ -544,15 +586,32 @@ y of model validation based on direct estimates, but also the performance
  Given that population censuses rarely collect detailed data on income or
  expenditures, we construct our census from a large-scale household survey
  conducted in Mexico: the Mexican Intercensal Survey of 2015.
+
+\change_inserted 428888767 1711443878
+ The Mexican Intracensal Survey represents our population and it contains
+ an income measure that yields the true poverty values that we wish to estimate.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted 428888767 1711443922
+In contrast to other papers which focus on the 
+\change_deleted 428888767 1711443948
 Prior to presenting our simulation results, we discuss three ways in which
- the 
+ the
+\change_unchanged
+ 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- can be misleading in terms of model assessment.
+ 
+\change_inserted 428888767 1711444037
+measure, which omits much of the within area accuracy of our estimates,
+ we focus on the mean squared error.
+\change_deleted 428888767 1711444045
+can be misleading in terms of model assessment.
  Specifically, we show analytically that the 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -561,20 +620,27 @@ Prior to presenting our simulation results, we discuss three ways in which
  differences in location and scale between the poverty estimates and the
  reference measures, and that it is context-dependent in the sense that
  it is influenced by the variance of the true poverty rates.
+
+\change_unchanged
  We argue that the mean squared error is a better measure for understanding
  the strength of the association between the poverty estimates and reference
  measures.
  In addition, we argue that the ultimate concern is to understand how different
  methodological choices affect poverty by influencing the efficiency of
  targeting.
- We therefore propose a targeting experiment through which we examine the
- relative ability of alternative mapping methods to alleviate poverty in
- the context of the Mexican data.
+ We therefore propose a 
+\change_inserted 428888767 1711444064
+simple 
+\change_unchanged
+targeting experiment through which we examine the relative ability of alternativ
+e mapping methods to alleviate poverty in the context of the Mexican data.
 \end_layout
 
 \begin_layout Standard
 The results of our simulations can be summarized as follows.
- First, we find that the magnitude of the downward bias of the 
+ First, 
+\change_deleted 428888767 1711444093
+we find that the magnitude of the downward bias of the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -590,15 +656,52 @@ The results of our simulations can be summarized as follows.
 
  incorrectly identifies the appropriate level of estimation in the vast
  majority of our simulations.
- Second, when assessing model performance based on the true poverty rates
- using the mean squared error, we find that our closest approximation to
- the standard machine-learning implementation performs poorly relative to
- several benchmark models.
+ Second,
+\change_unchanged
+ when assessing model performance based on the true poverty rates using
+ the mean squared error, we find that 
+\change_inserted 428888767 1711444252
+the quality of the data used for modeling is crucial.
+ Hence, models that rely on publicly available remotely-sensed covariates
+ are unlikely to yield estimates that are of similar quality to models that
+ include census-based covariates.
+\change_deleted 428888767 1711444275
+our closest approximation to the standard machine-learning implementation
+ performs poorly relative to several benchmark models.
+
+\change_unchanged
  We find that these performance issues are largely due to the limited predictive
  power of remotely-sensed covariates relative to census-based covariates.
+
+\change_inserted 428888767 1711444350
+ When comparing machine learning based methedos to traditional small area
+ methods using similar data, then machine learning methods perform just
+ as well or better to traditional methods.
+
+\change_unchanged
  Finally, our targeting simulations which rely on accurate rankings of locations
- show that none of our machine-learning implementations outperform more
- traditional poverty mapping methods that are feasible with the same data.
+ show that 
+\change_deleted 428888767 1711444534
+none of
+\change_unchanged
+ our machine-learning implementations 
+\change_inserted 428888767 1711444551
+perform as well as
+\change_deleted 428888767 1711444554
+outperform
+\change_unchanged
+ more traditional poverty mapping methods 
+\change_inserted 428888767 1711444568
+only when 
+\change_deleted 428888767 1711444587
+that are feasible with
+\change_inserted 428888767 1711444601
+relying on similar data.
+
+\change_deleted 428888767 1711444596
+ the same data.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
