@@ -869,8 +869,31 @@ The Mexican Intercensal Survey was carried out by the Mexican National Institute
  The size of the dataset is especially important, as it allows us to draw
  repeated samples that are sufficiently large and diverse.
  In addition, the fact that the survey gathered detailed income information
- on all households allows us to reliably calculate the required poverty
- measures that serve as the basis for our simulation experiments.
+ on all households allows us to 
+\change_deleted 428888767 1712734079
+reliably 
+\change_unchanged
+calculate the required poverty measures that serve as the basis for our
+ simulation experiments.
+\change_inserted 428888767 1712734341
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\change_inserted 428888767 1712734341
+Income is defined as money received from work performed during the course
+ of the reference period by individuals aged 12 or older.
+\end_layout
+
+\end_inset
+
+ The intercensus is used as the reference population and the poverty rates
+ from the intercensus are used as the true poverty rates that are to be
+ estimated.
+\change_deleted 428888767 1712734321
+
 \begin_inset Foot
 status collapsed
 
@@ -881,6 +904,8 @@ Income is defined as money received from work performed during the course
 
 \end_inset
 
+
+\change_unchanged
  
 \end_layout
 
@@ -907,7 +932,11 @@ s with less than 500 households are removed.
  Our final census dataset consists of 3.9 million households in 1,865 municipalit
 ies and 16,297 PSUs.
  The resulting census is used to draw 500 survey samples that serve as the
- basis for our simulation experiments (
+ basis for our 
+\change_inserted 428888767 1712734458
+design-based 
+\change_unchanged
+simulation experiments (
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "tzavidis2018start"
@@ -1257,7 +1286,7 @@ Classification and regression trees are based on a sequential binary splitting
  are assigned to the child nodes depending on whether they meet some condition
  associated with the explanatory variable.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 For example, for a continuous explanatory variable, one determines whether
@@ -1273,9 +1302,25 @@ For example, for a continuous explanatory variable, one determines whether
 n for the subsample associated with that leaf.
  For any given observation, the ensemble prediction used by XGBoost is the
  sum of that observation's predictions across all trees in the ensemble.
+
+\change_inserted 428888767 1712734936
+ For an in-depth discussion and description of the XGBoost algorithm refer
+ to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 In what follows, we discuss the key features of the XGBoost algorithm, drawing
  on the presentation provided in 
 \begin_inset CommandInset citation
@@ -1308,6 +1353,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 y_{i}^{p}=\sum_{t}f_{t}(x_{i})
@@ -1333,6 +1380,8 @@ ed objective function:
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \mathcal{L}=\sum_{i}l(y_{i}^{d},y_{i}^{p})+\sum_{t}r(f_{t})
@@ -1363,10 +1412,14 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 XGBoost uses the following specification of the regularization term: 
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 r(f_{t})=\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
@@ -1420,6 +1473,8 @@ e.
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 To minimize the objective function, the model is trained in a sequential
  manner, building one tree at a time.
  The objective function at iteration 
@@ -1430,6 +1485,8 @@ To minimize the objective function, the model is trained in a sequential
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \mathcal{L}_{t}=\sum_{i}l(y_{i}^{d},y_{i,t-1}^{p}+f_{t}(x_{i}))+r(f_{t})
@@ -1452,6 +1509,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \tilde{\mathcal{L}}_{t}=\sum_{i}\left\{ g(y_{i}^{d},y_{i,t-1}^{p})f_{t}(x_{i})+\frac{1}{2}h(y_{i}^{d},y_{i,t-1}^{p})f_{t}(x_{i})^{2}\right\} +r(f_{t})\label{eq:approx}
@@ -1489,6 +1548,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 The XGBoost algorithm is based on a re-expression of Eq.
 \begin_inset space \thinspace{}
 \end_inset
@@ -1527,6 +1588,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \tilde{\mathcal{L}}_{t}=\sum_{j}\sum_{i\in z_{j}}\left\{ g(y_{i}^{d},y_{i,t-1}^{p})m_{tj}+\frac{1}{2}h(y_{i}^{d},y_{i,t-1}^{p})m_{tj}^{2}\right\} +\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
@@ -1538,6 +1601,8 @@ or, equivalently,
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \tilde{\mathcal{L}}_{t}=\sum_{j}\left\{ G_{j}m_{tj}+\frac{1}{2}(H_{j}+\lambda)m_{tj}^{2}\right\} +\gamma M_{t}
@@ -1574,6 +1639,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 For a given tree structure, we can find the optimal prediction values by
  minimizing the objective function with respect to 
 \begin_inset Formula $m_{tj}$
@@ -1599,6 +1666,8 @@ For a given tree structure, we can find the optimal prediction values by
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \tilde{\mathcal{L}}_{t}^{*}=-\frac{1}{2}\sum_{j}\frac{G_{j}^{2}}{H_{j}+\lambda}+\gamma M_{t}\,,
@@ -1616,6 +1685,8 @@ which gives us the minimal objective function for a given tree structure.
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 To this end, consider splitting a node in a given tree into 
 \begin_inset Quotes eld
 \end_inset
@@ -1663,6 +1734,8 @@ right
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712734966
 \begin_inset Formula 
 \begin{equation}
 \Delta\tilde{\mathcal{L}}_{t}^{*}=\frac{1}{2}\left\{ \frac{G_{L}^{2}}{H_{L}+\lambda}+\frac{G_{R}^{2}}{H_{R}+\lambda}-\frac{(G_{L}+G_{R})^{2}}{H_{L}+H_{R}+\lambda}\right\} -\gamma\label{eq:gain}
@@ -1721,11 +1794,21 @@ literal "false"
  Once a given tree is built, XGBoost then moves to building the next tree
  in the ensemble and continues to do so until reaching the user-specified
  number of trees to build.
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
-The above references several hyperparameters that must be chosen by the
- user, including the hyperparameters in the regularization term (i.e., 
+
+\change_deleted 428888767 1712735273
+The above references
+\change_inserted 428888767 1712735283
+XGBoost requires the specification of
+\change_unchanged
+ several hyperparameters that must be chosen by the user, including the
+ hyperparameters in the regularization term
+\change_deleted 428888767 1712735419
+ (i.e., 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -1733,7 +1816,9 @@ The above references several hyperparameters that must be chosen by the
 \begin_inset Formula $\lambda$
 \end_inset
 
-), the maximum tree depth, and the number of trees in the ensemble.
+)
+\change_unchanged
+, the maximum tree depth, and the number of trees in the ensemble.
  There are two additional hyperparameters that can be used to further prevent
  overfitting.
  First, one can use column or feature subsampling where each tree in the
@@ -1752,9 +1837,16 @@ The above references several hyperparameters that must be chosen by the
 \end_inset
 
  is then given by 
+\change_inserted 428888767 1712735585
+the sum of the previous prediction and the current prediction scaled by
+ the learning rate
+\change_deleted 428888767 1712735590
+
 \begin_inset Formula $y_{i,t}^{p}=y_{i,t-1}^{p}+\eta f_{t}(x_{i})$
 \end_inset
 
+
+\change_unchanged
 .
  Shrinkage reduces the influence of each tree so that no individual tree
  has too much influence on the ensemble prediction.
@@ -2357,6 +2449,8 @@ name "sec:validation"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 The coefficient of determination or 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -2439,6 +2533,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 Let 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
@@ -2467,6 +2563,8 @@ Let
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 y_{i}^{d}=\alpha+\delta y_{i}^{p}+\zeta_{i}
@@ -2505,6 +2603,8 @@ Note that any regression of this form can only be estimated for the sampled
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\zeta}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
@@ -2535,6 +2635,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 While unbiased, direct estimates can be imprecise estimates of true poverty
  indicators 
 \begin_inset CommandInset citation
@@ -2556,6 +2658,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 y_{i}^{a}=\alpha+\delta y_{i}^{p}+\upsilon_{i}
@@ -2576,6 +2680,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
@@ -2608,6 +2714,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 Let 
 \begin_inset Formula $y_{i}^{d}=y_{i}^{a}+\omega_{i}$
 \end_inset
@@ -2677,6 +2785,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 B=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\upsilon}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\upsilon}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\,.\label{eq:bias_res}
@@ -2716,6 +2826,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 \begin_inset Formula 
 \begin{equation}
 R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right)\label{eq:relationship}
@@ -2745,6 +2857,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 In Eq.
 \begin_inset space \thinspace{}
 \end_inset
@@ -2864,6 +2978,8 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 There is an additional form of bias in 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -3000,6 +3116,8 @@ where
 \end_layout
 
 \begin_layout Standard
+
+\change_deleted 428888767 1712735950
 A final issue related to 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -3050,6 +3168,8 @@ nce in
 
 , even though the performance of the two models is arguably identical.
  
+\change_unchanged
+
 \end_layout
 
 \begin_layout Standard
