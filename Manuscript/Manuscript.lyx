@@ -3117,7 +3117,7 @@ where
 
 \begin_layout Standard
 
-\change_deleted 428888767 1712735950
+\change_deleted 428888767 1713115820
 A final issue related to 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -3168,11 +3168,108 @@ nce in
 
 , even though the performance of the two models is arguably identical.
  
-\change_unchanged
+\change_inserted 428888767 1713115822
 
 \end_layout
 
 \begin_layout Standard
+
+\change_inserted 428888767 1713117966
+The different methods for poverty mapping are assessed on how well they
+ predict the true poverty rates acorss all municipalities.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+
+\change_inserted 428888767 1713116289
+The pseudo census created represents our population and their reported incomes
+ allow for the calculation of the true poverty rates within each municipality.
+\change_unchanged
+
+\end_layout
+
+\end_inset
+
+ Estimates are evaluated on how biased these are and the over all Mean Squared
+ Error (MSE).
+ Note that because the goal is to obtain poverty estimates for each municipality
+ these measures are calculated for every area.
+ Model bias and MSE are approximated empirically as in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+.
+ The bias and MSE for each area 
+\begin_inset Formula $i$
+\end_inset
+
+ are calculated across 
+\begin_inset Formula $N=500$
+\end_inset
+
+ sets of estimates obtained across each of the 500 samples taken from the
+ population using each of the proposed methods, 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Specifically, the bias of mehtod 
+\begin_inset Formula $j$
+\end_inset
+
+ in area 
+\begin_inset Formula $i$
+\end_inset
+
+ is calculated as follows:
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 428888767 1713119572
+\begin_inset Formula 
+\[
+Bias\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 428888767 1713119602
+The MSE is calculated as:
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 428888767 1713119686
+\begin_inset Formula 
+\begin{equation}
+MSE\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)^{2}\label{eq:mse}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\change_inserted 428888767 1713119629
+
+\end_layout
+
+\begin_layout Standard
+
+\change_deleted 428888767 1713119718
 Rather than relying on 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -3188,7 +3285,9 @@ Rather than relying on
 
 which avoids the normalization issue and provides a more direct understanding
  of the expected squared error of the estimates.
- The mean squared error in Eq.
+ 
+\change_unchanged
+The mean squared error in Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
