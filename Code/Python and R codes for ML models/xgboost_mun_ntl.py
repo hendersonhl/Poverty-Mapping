@@ -23,7 +23,7 @@ x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all d
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
 covars = ''
-columns_to_drop = ['MiMun', 'hhid', 'estado','municipio']
+columns_to_drop = ['MiMun']
 
 # Filter out columns that exist in x
 columns_to_drop_existing = [col for col in columns_to_drop if col in x.columns]
@@ -34,8 +34,12 @@ if columns_to_drop_existing:
 else:
     print("No columns to drop exist in the DataFrame x")
     x_census = x.copy()  # Create a copy of x if no columns to drop
-
+  
+    
+variables_to_filter = ['estado','municipio', 'hhid']
+x_census = x_census.loc[:, ~x_census.columns.str.startswith(tuple(variables_to_filter))]
 x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
+
 hid = x['MiMun']
 
 # Choose outcome variable 
@@ -78,7 +82,8 @@ for i in range(1,501):
     y = svy.loc[svy['sim_sample']==i]  # Get all outcomes for simulation i
     X = pd.merge(x, y, on='MiMun')     # Merge y and x for simulation i
     y = X[indicator]                   # Set y as poverty headcount
-    X = X.drop(columns = ['MiMun', 'sim_sample', 'e_y', 'poor', 'gap', 'gap2'])  
+    X = X.drop(columns = ['MiMun', 'sim_sample', 'e_y', 'poor', 'gap', 'gap2']) 
+    X = X.loc[:, ~X.columns.str.startswith(tuple(variables_to_filter))]
     X = X.loc[:, X.columns.str.startswith(covars)]  # Set X as chosen predictors
                            
     # Run HYPEROPT function
