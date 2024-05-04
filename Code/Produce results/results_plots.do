@@ -128,20 +128,20 @@ import delimited "$inpath/results_mse.csv", clear
 		
 	keep mse_gb_census mse_gb_gis mse_gb_all mse_gb_psu mse_eb mse_uc mse_fh* mse_gb_gis_ntl mse_gb_all_ntl
 	tabstat mse_gb_census-mse_fh_mun, stat(p50)
-	label var mse_gb_census "Gradient Boosting (CEN-MUN)"
-	label var mse_gb_gis    "Gradient Boosting (GIS-MUN)"         
-	label var mse_gb_all    "Gradient Boosting (ALL-MUN)"            
+	label var mse_gb_census "Gradient Boosting (CEN)"
+	label var mse_gb_gis    "Gradient Boosting (GIS)"         
+	label var mse_gb_all    "Gradient Boosting (ALL)"            
 	label var mse_gb_psu    "Gradient Boosting (CEN-PSU)"
 	label var mse_eb        "Unit-level"                           
-	label var mse_uc        "Unit-context"      
+	label var mse_uc        "Unit-context (CEN)"      
 	label var mse_fh        "Area-level (CEN-PSU)"
-	label var mse_fh_mun        "Area-level (CEN-MUN)"  
-	label var mse_fh_mun_gis        "Area-level (GIS-MUN)"  
-	label var mse_fh_mun_gis_ntl       "Area-level (GIS-NTL-MUN)" 
-	label var mse_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
-	label var mse_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
+	label var mse_fh_mun        "Area-level (CEN)"  
+	label var mse_fh_mun_gis        "Area-level (GIS)"  
+	label var mse_fh_mun_gis_ntl       "Area-level (GIS-NTL)" 
+	label var mse_gb_gis_ntl "Gradient Boosting (GIS-NTL)"
+	label var mse_gb_all_ntl "Gradient Boosting (ALL-NTL)"
                   
-graph hbox mse_gb_gis mse_gb_gis_ntl mse_fh_mun_gis mse_fh_mun_gis_ntl mse_uc mse_fh mse_fh_mun mse_gb_all_ntl mse_gb_all mse_gb_census mse_gb_psu    mse_eb, ytitle(Mean Squared Error) ///
+graph hbox mse_gb_gis mse_gb_gis_ntl mse_fh_mun_gis mse_fh_mun_gis_ntl mse_uc mse_fh_mun mse_gb_all_ntl mse_gb_all mse_gb_census mse_eb, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
@@ -197,28 +197,30 @@ merge 1:1 muni using `cuatro', keepusing(bias_fh)
 
 keep bias_gb_gis bias_gb_census bias_gb_all bias_gb_psu bias_eb bias_uc bias_fh* bias_gb_gis_ntl bias_gb_all_ntl
 tabstat bias_gb_census-bias_fh_mun, stat(p50 min max N)
-label var bias_gb_census "Gradient Boosting (CEN-MUN)"
-label var bias_gb_gis "Gradient Boosting (GIS-MUN)"
-label var bias_gb_all "Gradient Boosting (ALL-MUN)"
-label var bias_gb_psu "Gradient Boosting (CEN-PSU)"
+label var bias_gb_census "Gradient Boosting (CEN)"
+label var bias_gb_gis    "Gradient Boosting (GIS)"
+label var bias_gb_all    "Gradient Boosting (ALL)"
+label var bias_gb_psu    "Gradient Boosting (CEN-PSU)"
 label var bias_eb   "Unit-level"      
-label var bias_uc   "Unit-context"
-label var bias_fh        "Area-level (CEN-PSU)"
-label var bias_fh_mun        "Area-level (CEN-MUN)"  
-label var bias_fh_mun_gis        "Area-level (GIS-MUN)"  
-label var bias_gb_gis_ntl "Gradient Boosting (GIS-NTL-MUN)"
-label var bias_gb_all_ntl "Gradient Boosting (ALL-NTL-MUN)"
+label var bias_uc   "Unit-context (CEN)"
+label var bias_fh                "Area-level (CEN-PSU)"
+label var bias_fh_mun            "Area-level (CEN)"  
+label var bias_fh_mun_gis        "Area-level (GIS)"  
+label var bias_gb_gis_ntl "Gradient Boosting (GIS-NTL)"
+label var bias_gb_all_ntl "Gradient Boosting (ALL-NTL)"
 label var bias_fh_mun_gis_ntl       "Area-level (GIS-NTL-MUN)" 
 	
   
-graph hbox bias_gb_gis bias_gb_gis_ntl bias_fh_mun_gis bias_fh_mun_gis_ntl bias_uc bias_fh bias_fh_mun bias_gb_all_ntl bias_gb_all bias_gb_census bias_gb_psu    bias_eb, ytitle(Bias) ///
+graph hbox bias_gb_gis bias_gb_gis_ntl bias_fh_mun_gis bias_fh_mun_gis_ntl bias_uc bias_fh_mun bias_gb_all_ntl bias_gb_all bias_gb_census bias_eb, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray))
 graph export "$outpath/Figure-2b.pdf", as(pdf) replace
 graph export "$outpath/Figure-2b.png", as(png) replace
 
+*===============================================================================
 * Variable importance
+*===============================================================================
 import delimited "$inpath/gb_importance_all_mun.csv", clear
 egen imp = rowmean(imp*)
 gsort -imp
@@ -247,8 +249,10 @@ graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
     ytitle(Feature Importance)
 graph export "$outpath/Figure-3.pdf", as(pdf) replace
 graph export "$outpath/Figure-3.png", as(png) replace
-	
+
+*===============================================================================
 * MSE by poverty quantiles
+*===============================================================================
 use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "mse_fh"
 rename value mse_fh
@@ -296,7 +300,9 @@ twoway (line mse_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 graph export "$outpath/Figure-4a.pdf", as(pdf) replace
 graph export "$outpath/Figure-4a.png", as(png) replace
 
+*===============================================================================
 * Bias by poverty quantiles
+*===============================================================================
 use "$inpath/fh_mse_bias.dta", clear
 keep if variable == "bias_fh"
 rename value bias_fh
@@ -344,7 +350,9 @@ twoway (line bias_gb_gis pov_rank, lpattern(solid) lcolor(black)) ///
 graph export "$outpath/Figure-4b.pdf", as(pdf) replace
 graph export "$outpath/Figure-4b.png", as(png) replace
 
+*===============================================================================
 * Model comparisons w/ GIS covariates (MSE)
+*===============================================================================
 import delimited "$inpath/results_mse.csv", clear
 keep mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis
 label var mse_gb_gis "Gradient Boosting"
@@ -358,7 +366,9 @@ graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_lasso_gis, ///
 graph export "$outpath/Figure-5a.pdf", as(pdf) replace
 graph export "$outpath/Figure-5a.png", as(png) replace
 
+*===============================================================================
 * Model comparisons w/ GIS covariates (Bias)
+*===============================================================================
 import delimited "$inpath/results_bias.csv", clear
 keep bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis
 label var bias_gb_gis "Gradient Boosting"
@@ -371,8 +381,10 @@ graph hbox bias_gb_gis bias_bart_gis bias_rf_gis bias_lasso_gis, ///
 	box(5, color(gray)) 
 graph export "$outpath/Figure-5b.pdf", as(pdf) replace
 graph export "$outpath/Figure-5b.png", as(png) replace
-	
+
+*===============================================================================	
 * Poverty targeting
+*===============================================================================
 import delimited "$inpath/results_transfer.csv", clear
 keep variable sim fgt0
 order sim variable fgt0

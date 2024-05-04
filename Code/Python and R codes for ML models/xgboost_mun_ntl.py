@@ -22,9 +22,19 @@ x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all d
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = '6+3
-'
-x_census = x.drop(columns = ['MiMun'])  # If covars = '' need to drop 'MiMun'
+covars = ''
+columns_to_drop = ['MiMun', 'hhid', 'estado','municipio']
+
+# Filter out columns that exist in x
+columns_to_drop_existing = [col for col in columns_to_drop if col in x.columns]
+
+if columns_to_drop_existing:
+    x_census = x.drop(columns=columns_to_drop_existing)
+    print(f"Dropped columns: {columns_to_drop_existing}")
+else:
+    print("No columns to drop exist in the DataFrame x")
+    x_census = x.copy()  # Create a copy of x if no columns to drop
+
 x_census = x_census.loc[:, x_census.columns.str.startswith(covars)]
 hid = x['MiMun']
 
