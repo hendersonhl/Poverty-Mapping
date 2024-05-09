@@ -56,20 +56,7 @@ gis_ntl_count_2014 gis_ntl_area_2014 gis_ntl_min_2014 gis_ntl_max_2014 ///
 gis_ntl_range_2014 gis_ntl_mean_2014 gis_ntl_std_2014 gis_ntl_sum_2014 ///
 gis_ntl_median_2014 gis_ntl_pct90_2014 gis_ntl_count_2015 gis_ntl_area_2015 ///
 gis_ntl_min_2015 gis_ntl_max_2015 gis_ntl_range_2015 gis_ntl_mean_2015 gis_ntl_std_2015 ///
-gis_ntl_sum_2015 gis_ntl_median_2015 gis_ntl_pct90_2015 gis_ntl_count_2016 gis_ntl_area_2016 ///
-gis_ntl_min_2016 gis_ntl_max_2016 gis_ntl_range_2016 gis_ntl_mean_2016 gis_ntl_std_2016 ///
-gis_ntl_sum_2016 gis_ntl_median_2016 gis_ntl_pct90_2016 gis_ntl_count_2017 ///
-gis_ntl_area_2017 gis_ntl_min_2017 gis_ntl_max_2017 gis_ntl_range_2017 gis_ntl_mean_2017 ///
-gis_ntl_std_2017 gis_ntl_sum_2017 gis_ntl_median_2017 gis_ntl_pct90_2017 ///
-gis_ntl_count_2018 gis_ntl_area_2018 gis_ntl_min_2018 gis_ntl_max_2018 ///
-gis_ntl_range_2018 gis_ntl_mean_2018 gis_ntl_std_2018 gis_ntl_sum_2018 /// 
-gis_ntl_median_2018 gis_ntl_pct90_2018 gis_ntl_count_2019 gis_ntl_area_2019 ///
-gis_ntl_min_2019 gis_ntl_max_2019 gis_ntl_range_2019 gis_ntl_mean_2019 ///
-gis_ntl_std_2019 gis_ntl_sum_2019 gis_ntl_median_2019 gis_ntl_pct90_2019 ///
-gis_ntl_count_2020 gis_ntl_area_2020 gis_ntl_min_2020 gis_ntl_max_2020 ///
-gis_ntl_range_2020 gis_ntl_mean_2020 gis_ntl_std_2020 gis_ntl_sum_2020 ///
-gis_ntl_median_2020 gis_ntl_pct90_2020 gis_ntl_count_2021 gis_ntl_area_2021 ///
-gis_ntl_min_2021 gis_ntl_max_2021 gis_ntl_range_2021 gis_ntl_mean_2021 gis_ntl_std_2021 gis_ntl_sum_2021 gis_ntl_median_2021 gis_ntl_pct90_2021
+gis_ntl_sum_2015 gis_ntl_median_2015 gis_ntl_pct90_2015 
 
 
 *===============================================================================
