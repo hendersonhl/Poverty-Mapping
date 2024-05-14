@@ -2165,7 +2165,7 @@ noprefix "false"
 
 \begin_layout Standard
 The results presented consider 4 different methods: 1) gradient boosting,
- 2) area-level, 3) unit-level, and 4) unit context.
+ 2) area-level (Fay Herriot), 3) unit-level, and 4) unit context.
  Models 2-4 are all more traditional methods that we use to benchmark the
  performance of gradient boosting.
  In particular, we present the unit-level (obtained with CensusEB methods),
@@ -2180,7 +2180,7 @@ ity level, and no household level covariates.
 
 \end_inset
 
- and area-level models.
+ and area-level models (obtained with Fay Herriot).
  We consider different alternative implementations of the area-level model
  that, much like for gradient boosting, vary the covariates used.
  For these traditional models, all available covariates enter the models
@@ -2247,8 +2247,8 @@ GIS-NTL
 \end_inset
 
  models.
- Different methods can also lead to better predictions as can be seen by
- comparing area-level models and gradient boosting models.
+ Choosing the right method can also lead to better predictions as can be
+ seen by comparing area-level models and gradient boosting models.
  The median municipality has an MSE of 0.008 under gradient boosting (
 \begin_inset Quotes eld
 \end_inset
@@ -2260,9 +2260,9 @@ GIS
 ), while the addition of NTL to the gradient boosting model lowers the median
  MSE to 0.007.
  For area level models there is hardly a difference in the median MSE and
- the mean is actually higher for the area-level model that includes NTL
- due to an outlier, the median for both is roughly 0.01.
- In practice, those outliers would usually not be reported.
+ the mean is slightly higher for the area-level model that does not include
+ night time lights (0.21 to 0.18), the median for both is roughly 0.01.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2299,7 +2299,7 @@ noprefix "false"
 \end_inset
 
 ).
- The remaining traditional methods (area-level and unit-context)
+ The remaining traditional methods, area-level (CEN) and unit-context (CEN),
 \begin_inset Foot
 status collapsed
 
@@ -2312,6 +2312,8 @@ Unit-context models are fit using PSU and municipality level covariates.
 \end_inset
 
  that use census-based covariates all achieve a median MSE of roughly 0.004.
+ The mean of the area-level (CEN) model is 0.007 while that of the unit-context
+ (CEN) is close to 0.009.
  These results suggest that, when using the same data, gradient boosting
  performs nearly as well as the unit-level model and better than the unit-contex
 t and area-level models.
@@ -2344,7 +2346,7 @@ literal "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -2476,7 +2478,7 @@ noprefix "false"
 ] for the bias-variance decomposition of the MSE).
  The median municipality's bias for all models is approximately zero, with
  the exception of the unit-context model where the median municipality has
- a bias of -0.05.
+ a bias of -0.03.
 \begin_inset Foot
 status collapsed
 
@@ -2506,12 +2508,12 @@ literal "false"
  Perhaps the more interesting result is that the bias estimates from the
  gradient boosting model with geo-referenced covariates exhibits considerable
  variation, with minimum and maximum biases reaching -0.43 and 0.43, respectively.
- Adding NTL to the set of covariates lowers this rang by a small amount.
+ Adding NTL to the set of covariates lowers this range by a small amount.
  This suggests the standard implementation with remotely-sensed covariates
  is quite biased for some municipalities, even though the bias for the median
  municipality is approximately zero.
- All other models, including the competing unit-context and area-level models,
- exhibit much less variation.
+ All other models, including the competing unit-context and area-level models
+ which use census aggregate data, exhibit much less variation.
 \end_layout
 
 \begin_layout Standard

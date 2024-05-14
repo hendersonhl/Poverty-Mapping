@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 
 # Directory
-main    = 'C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/'
-#main    = 'C:/Users/WB378870/GitHub/Poverty-Mapping/'
+#main    = 'C:/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/'
+main    = 'C:/Users/WB378870/GitHub/Poverty-Mapping/'
 inpath  = main+'Data/'
 outpath = main+'Results/'
 

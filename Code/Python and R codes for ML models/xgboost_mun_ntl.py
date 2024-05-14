@@ -18,7 +18,7 @@ outpath = r'/Users/Paul Corral/Documents/GitHub/Poverty-Mapping/Results/'
 svy = pd.read_csv(inpath + 'svydata_mun.csv', header = 0)
 x = pd.read_csv(inpath + 'xmatrix_mun_ntl.csv', header = 0)
 x = x.drop('census_automobile', axis = 1)   # census_automobile is missing all data
-columns_to_drop_existing = [col for col in x.columns if col.startswith('gis_ntl_count_') and int(col[-4:]) > 2015]
+columns_to_drop_existing = [col for col in x.columns if col.startswith('gis_ntl_') and int(col[-4:]) > 2015]
 
 # Drop columns
 x = x.drop(columns=columns_to_drop_existing)

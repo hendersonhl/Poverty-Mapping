@@ -221,7 +221,7 @@ graph export "$outpath/Figure-2b.png", as(png) replace
 *===============================================================================
 * Variable importance
 *===============================================================================
-import delimited "$inpath/gb_importance_all_mun.csv", clear
+import delimited "$inpath/gb_importance_all_mun_ntl.csv", clear
 egen imp = rowmean(imp*)
 gsort -imp
 drop if _n >20
@@ -398,21 +398,20 @@ foreach x of varlist gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc fh 
 }
 
 
-label var gb_census_mun "Gradient Boosting (CEN-MUN)"
-label var gb_gis_mun "Gradient Boosting (GIS-MUN)"
-label var gb_all_mun "Gradient Boosting (ALL-MUN)"
-label var gb_census_psu "Gradient Boosting (CEN-PSU)"
+label var gb_census_mun "Gradient Boosting (CEN)"
+label var gb_gis_mun "Gradient Boosting (GIS)"
+label var gb_all_mun "Gradient Boosting (ALL)"
 label var eb   "Unit-level"      
-label var uc   "Unit-context"
-label var fh        "Area-level (CEN-PSU)"
-label var fh_mun        "Area-level (CEN-MUN)"  
-label var fh_mun_gis        "Area-level (GIS-MUN)"  
-label var gb_gis_mun_ntl "Gradient Boosting (GIS-NTL-MUN)"
-label var gb_all_mun_ntl "Gradient Boosting (ALL-NTL-MUN)"
-label var fh_mun_gis_ntl       "Area-level (GIS-NTL-MUN)" 
+label var uc   "Unit-context (CEN)"
+label var fh_mun        "Area-level (CEN)"  
+label var fh_mun_gis        "Area-level (GIS)"  
+label var gb_gis_mun_ntl "Gradient Boosting (GIS-NTL)"
+label var gb_all_mun_ntl "Gradient Boosting (ALL)"
+label var fh_mun_gis_ntl       "Area-level (GIS-NTL)" 
 
 
-graph hbox gb_census_mun gb_gis_mun gb_all_mun gb_census_psu eb uc fh fh_mun fh_mun_gis gb_gis_mun_ntl gb_all_mun_ntl fh_mun_gis_ntl, ytitle(Poverty Rate) ///
+graph hbox gb_gis_mun gb_gis_mun_ntl fh_mun_gis fh_mun_gis_ntl ///
+uc fh_mun gb_all_mun_ntl gb_all_mun gb_census_mun eb, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray)) ///

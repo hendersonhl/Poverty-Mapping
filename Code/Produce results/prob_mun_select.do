@@ -96,10 +96,10 @@ save `FHgis_ntl'
 
 
 local fhs FHgis FHpsu FH FHgis_ntl
-local FHgis1 "Area-level (GIS-MUN)"    
+local FHgis1 "Area-level (GIS)"    
 local FHpsu1  "Area-level (CEN-PSU)"
-local FH1 "Area-level (CEN-MUN)"   
-local FHgis_ntl1 "Area-level (GIS-NTL-MUN)"
+local FH1 "Area-level (CEN)"   
+local FHgis_ntl1 "Area-level (GIS-NTL)"
 
 
 *=========================================================================
@@ -136,12 +136,11 @@ save `thetruth'
 
 
 local modelos gb_census_mun gb_gis_mun gb_all_mun gb_census_psu gb_gis_mun_ntl gb_all_mun_ntl
-local gb_census_mun "Gradient Boosting (CEN-MUN)"
-local gb_gis_mun "Gradient Boosting (GIS-MUN)"  
-local gb_all_mun "Gradient Boosting (ALL-MUN)"
-local gb_all_mun_ntl  "Gradient Boosting (ALL-NTL-MUN)"
-local gb_census_psu "Gradient Boosting (CEN-PSU)"
-local gb_gis_mun_ntl "Gradient Boosting (GIS-NTL-MUN)"
+local gb_census_mun "Gradient Boosting (CEN)"
+local gb_gis_mun "Gradient Boosting (GIS)"  
+local gb_all_mun "Gradient Boosting (ALL)"
+local gb_all_mun_ntl  "Gradient Boosting (ALL-NTL)"
+local gb_gis_mun_ntl "Gradient Boosting (GIS-NTL)"
 
 foreach modelo of local modelos{
 	import delimited using "$outpath\\`modelo'", clear
@@ -199,30 +198,28 @@ merge m:1 muni using `psel'
   
 drop if method=="Direct"
 
-
-	gen     order = 1  if method=="Gradient Boosting (CEN-MUN)"
-	replace order = 2  if method=="Gradient Boosting (GIS-MUN)"         
-	replace order = 3  if method=="Gradient Boosting (ALL-MUN)"            
-	replace order = 4  if method=="Gradient Boosting (CEN-PSU)"
-	replace order = 5  if method=="Unit-level"                           
-	replace order = 6  if method=="Unit-context"      
-	replace order = 7  if method=="Area-level (CEN-PSU)"
-	replace order = 8  if method=="Area-level (CEN-MUN)"  
-	replace order = 9  if method=="Area-level (GIS-MUN)"  
-	replace order = 10 if method=="Area-level (GIS-NTL-MUN)" 
-	replace order = 11 if method=="Gradient Boosting (GIS-NTL-MUN)"
-	replace order = 12 if method=="Gradient Boosting (ALL-NTL-MUN)"
+replace method = "Unit-context (CEN)" if method=="Unit-context"
 
 
+	gen     order = 1  if method=="Gradient Boosting (GIS)"
+	replace order = 2  if method=="Gradient Boosting (GIS-NTL)"         
+	replace order = 3  if method=="Area-level (GIS)"
+	replace order = 4  if method=="Area-level (GIS-NTL)"
+	replace order = 5  if method=="Unit-context (CEN)"                    
+	replace order = 6  if method=="Area-level (CEN)"       
+	replace order = 7  if method=="Gradient Boosting (ALL-NTL)"
+	replace order = 8  if method=="Gradient Boosting (ALL)"
+	replace order = 9  if method=="Gradient Boosting (CEN)"
+	replace order = 10 if method=="Unit-level"
 
-graph hbox mse if psel_qtile==1, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
+graph hbox mse if psel_qtile==1 & !missing(order), over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_1a.png", as(png) replace
-graph hbox mse if psel_qtile==5, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
+graph hbox mse if psel_qtile==5 & !missing(order), over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_1b.png", as(png) replace
 
-graph hbox bias if psel_qtile==1, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
+graph hbox bias if psel_qtile==1 & !missing(order), over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_2a.png", as(png) replace
-graph hbox bias if psel_qtile==5, over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
+graph hbox bias if psel_qtile==5 & !missing(order), over(method, sort(order)) scheme(s1mono) legend(off) nooutside note("")
 graph export "$outpath1/Figure-3_2b.png", as(png) replace
 
 preserve
