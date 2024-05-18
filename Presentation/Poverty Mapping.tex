@@ -34,14 +34,17 @@
 \begin{frame}{Introduction}
 \begin{itemize}
 \item Poverty maps provide granular estimates of poverty at the sub-national level.
+\par\pause\noindent
 \item Poverty mapping typically requires small area estimation, which consists of 
 two basic steps:
 \begin{enumerate}
 \item Fit a statistical model using household survey data
 \item Apply the model to census data to predict poverty rates
 \end{enumerate}
+\par\pause\noindent
 \item Traditional approaches rely on parametric statistical models applied 
 to population census data.
+\par\pause\noindent
 \item There are a wide variety of traditional approaches, including unit-level,
 unit-context, and area-level models.
 \end{itemize}
@@ -57,10 +60,13 @@ traditional approach:
 \item Remotely-sensed data
 \item Validation procedure based on $R^2$
 \end{enumerate}
+\par\pause\noindent
 \item $R^2$ is calculated by regressing direct, survey-based poverty estimates 
 on the model-based predictions.
+\par\pause\noindent
 \item While direct estimates are unbiased, they can be imprecise estimates of 
 true poverty measures.
+\par\pause\noindent
 \item In this paper, we provide a more rigorous assessment of the modern 
 approach to poverty mapping.
 \end{itemize}
@@ -89,10 +95,13 @@ outcomes, standard of living, and housing quality in Africa'' (Yeh et al.\ 2020)
 \begin{itemize}
 \item We use the 2015 Mexican Intercensal Survey to construct a ``census'' that 
 we use to conduct simulation experiments.
+\par\pause\noindent
 \item The census consists of 3.9 million households across 1,865 municipalities and
 16,297 PSUs.
+\par\pause\noindent
 \item For each household, we observe income, geographic location, demographics,
 and dwelling characteristics, among other information.
+\par\pause\noindent
 \item We supplement the census data with remotely-sensed data available at the
 municipality level:
 \begin{itemize}
@@ -112,8 +121,10 @@ census using a two-stage design:
 \item We select PSUs with probability proportional to size
 \item We select 10 households within each cluster
 \end{enumerate}
+\par\pause\noindent
 \item For each sample, we then have direct poverty estimates and 
 true poverty measures for each subnational entity.
+\par\pause\noindent
 \item We implement several different approaches to poverty mapping using the 
 survey datasets:
 \begin{itemize}
@@ -129,13 +140,16 @@ survey datasets:
 \begin{itemize}
 \item We focus on one particularly popular machine-learning method: gradient 
 boosting.
+\par\pause\noindent
 \item Originally developed by Friedman (2001), gradient boosting combines a 
 large number of weak learners to form a stronger ensemble prediction.
+\par\pause\noindent
 \item Rather than averaging models, gradient boosting sequentially adds models 
 (trees) to the ensemble by fitting new models to negative gradient of the loss function:
 \begin{equation*}
 y_i^p = \sum_t f_t(x_i)
 \end{equation*}
+\par\pause\noindent
 \item We specifically use extreme gradient boosting (XGBoost) where each tree
 is built by minimizing the following regularized objective function: 
 \begin{equation*}
@@ -164,16 +178,19 @@ is built by minimizing the following regularized objective function:
 \begin{itemize}
 \item We consider three alternative traditional methods: 
 unit-level, unit-context, and area-level models.
+\par\pause\noindent
 \item The unit-level model is typically considered the ``gold standard'' of
 traditional poverty mapping:
 \begin{equation*}
 w_{iv} = x_{iv} \theta + \mu_i + \xi_{iv}
 \end{equation*}
+\par\pause\noindent
 \item The parameters of the model are used to generate $K$ income
 estimates for each household in the census:
 \begin{equation*}
 \hat{w}_{ivk} = x_{iv} \hat{\theta} + \mu^*_i + \xi^*_{iv}
 \end{equation*}
+\par\pause\noindent
 \item The unit-level model is a useful benchmark, but is not a direct competitor
 to modern approaches.
 \end{itemize}
@@ -184,10 +201,13 @@ to modern approaches.
 \begin{itemize}
 \item The unit-context model is an alternative traditional method that was 
 designed to be used with out-of-date census data.
+\par\pause\noindent
 \item Rather than using household-level covariates $x_{iv}$, the unit-context
 model simply substitutes census aggregates $x_i$.
+\par\pause\noindent
 \item The area-level model is yet another alternative that models area-level 
 poverty rates directly as a function of area aggregates.
+\par\pause\noindent
 \item Both the unit-context and area-level models can be viewed as direct 
 competitors to the modern approach to poverty mapping.
 \end{itemize}
@@ -201,11 +221,13 @@ competitors to the modern approach to poverty mapping.
 y_i^d = \alpha + \delta y_i^p + \zeta_i \hspace{10pt} \Rightarrow
 \hspace{10pt} R_d^2 = \frac{\sigma_d^2 - \sigma_\zeta^2}{\sigma_d^2}
 \end{equation*}
+\par\pause\noindent
 \item Model-based predictions are more appropriately assessed as follows:
 \begin{equation*}
 y_i^a = \alpha + \delta y_i^p + \upsilon_i \hspace{10pt} \Rightarrow
 \hspace{10pt} R_a^2 = \frac{\sigma_a^2 - \sigma_\upsilon^2}{\sigma_a^2}
 \end{equation*}
+\par\pause\noindent
 \item Let $y_i^d = y_i^a + \omega_i$ and let $B = R_a^2 -  R_d^2$. We can then write
 \begin{equation*}
 R_d^2 = R_a^2 \left(\frac{\sigma_d^2 - \sigma_\omega^2}{\sigma_d^2} \right)
@@ -220,11 +242,13 @@ R_d^2 = R_a^2 \left(\frac{\sigma_d^2 - \sigma_\omega^2}{\sigma_d^2} \right)
 \begin{equation*}
 \text{MSE}(y_i^a, y_i^p) = \frac{1}{N} \sum_i (y_i^a - y_i^p)^2
 \end{equation*}
+\par\pause\noindent
 \item With multiple estimates for each entity, we can write the following:
 \begin{equation*}
 \text{MSE}_i = \frac{1}{K} \sum_k (y_i^a - y_{ik}^p)^2 
 =  \frac{1}{K}\sum_k (y_{ik}^p - \bar{y}_i^p)^2 + (\bar{y}_i^p - y_i^a)^2
 \end{equation*}
+\par\pause\noindent
 \item With the above, we can assess the MSE for different entities and examine
 both the variance and bias associated with the predictions.
 \end{itemize}
@@ -239,6 +263,7 @@ poverty gap for the country as a whole for some chosen poverty line.
 Using the poverty gap measure, determine the budget required to completely 
 eradicate poverty. Calculate an individual-level transfer amount by dividing the 
 total budget by the number of people living in poverty. 
+\par\pause\noindent
 \item Using a given poverty map, order the geographical entities according to their 
 estimated poverty headcounts, from most to least poor. 
 For the poorest region, augment the true per capita income of all households by 
@@ -248,6 +273,7 @@ region, and so on until there are not enough resources to cover all households i
 given region. 
 For the marginal region, distribute the remaining budget equally among individuals in 
 that region.
+\par\pause\noindent
 \item Using the post-transfer household incomes, calculate an updated poverty 
 headcount to assess the effects of the distribution scheme on poverty alleviation.
 \end{enumerate}
@@ -313,8 +339,10 @@ of mean squared error and bias.
 \item We also found that the modern approach exhibits relatively poor performance
 in our targeting simulations.
 \end{enumerate}
+\par\pause\noindent
 \item Main takeaway: The type of covariate information used for poverty mapping 
 appears to be more critical than the statistical method.
+\par\pause\noindent
 \item Limitation: It is possible that the remotely-sensed data we use has less 
 predictive power than the data used in other applications.
 \end{itemize}
