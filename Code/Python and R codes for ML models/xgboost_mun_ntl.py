@@ -26,7 +26,7 @@ x = x.drop(columns=columns_to_drop_existing)
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = 'gis'
+covars = ''
 columns_to_drop = ['MiMun']
 
 # Filter out columns that exist in x
@@ -62,7 +62,7 @@ space = {'n_estimators': hp.choice("n_estimators", [5, 10, 20, 30, 40, 50, 60]),
 # Hyperparameter tuning function
 # Note: This function uses the currently stored y and X.
 def tuning(space):
-    model = xgb.XGBRegressor(random_state = 123, n_jobs = 1,
+    model = xgb.XGBRegressor(random_state = 123, n_jobs = 4,
         n_estimators = int(space['n_estimators']), 
         max_depth = int(space['max_depth']),
         colsample_bytree = space['colsample_bytree'],
