@@ -52,11 +52,8 @@ gis_osavimin gis_osavimax gis_osavimean gis_osavisum gis_osavistddev gis_ndmimin
 gis_ndmimax gis_ndmimean gis_ndmisum gis_ndmistddev gis_mdeamin gis_mdeamax ///
 gis_mdeamean gis_mdeasum gis_mdeastddev gis_mdepmin gis_mdepmax gis_mdepmean ///
 gis_mdepsum gis_mdepstddev ///
-gis_ntl_count_2014 gis_ntl_area_2014 gis_ntl_min_2014 gis_ntl_max_2014 ///
-gis_ntl_range_2014 gis_ntl_mean_2014 gis_ntl_std_2014 gis_ntl_sum_2014 ///
-gis_ntl_median_2014 gis_ntl_pct90_2014 gis_ntl_count_2015 gis_ntl_area_2015 ///
-gis_ntl_min_2015 gis_ntl_max_2015 gis_ntl_range_2015 gis_ntl_mean_2015 gis_ntl_std_2015 ///
-gis_ntl_sum_2015 gis_ntl_median_2015 gis_ntl_pct90_2015 
+gis_ntl_range_2014 gis_ntl_mean_2014 gis_ntl_std_2014 gis_ntl_median_2014 gis_ntl_pct90_2014 ///
+ gis_ntl_range_2015 gis_ntl_mean_2015 gis_ntl_std_2015 gis_ntl_median_2015 gis_ntl_pct90_2015 
 
 
 *===============================================================================

@@ -30,7 +30,7 @@ forval z=2014/2022{
 		gen estado = real(substr(adm2_pcode,3,2))
 		gen municipio = real(substr(adm2_pcode,5,3))
 		local keepers
-		foreach x in count area min max range mean std sum  median pct90{
+		foreach x in range mean std median pct90{
 			rename `x' gis_ntl_`x'_`z'
 			local keepers `keepers' gis_ntl_`x'_`z'
 		}
