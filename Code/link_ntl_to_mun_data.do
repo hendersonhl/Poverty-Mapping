@@ -24,13 +24,13 @@ global outpath "$main/Results/"
 // Bring in the NTL data
 *===============================================================================
 
-forval z=2014/2022{
+forval z=2015/2015{
 	cap	import delimited using "$inpath\MX_VNL_v21_npp_`z'_AVG.csv", clear
 	if (_rc==0){
 		gen estado = real(substr(adm2_pcode,3,2))
 		gen municipio = real(substr(adm2_pcode,5,3))
 		local keepers
-		foreach x in range mean std median pct90{
+		foreach x in mean std min max sum {
 			rename `x' gis_ntl_`x'_`z'
 			local keepers `keepers' gis_ntl_`x'_`z'
 		}
@@ -47,7 +47,7 @@ forval z=2014/2022{
 
 use "$inpath\for_ntl_link.dta", clear
 
-forval z = 2014/2022{
+forval z = 2015/2015{
 	cap merge 1:1 estado municipio using `_`z''
 	if (_rc==0){
 		drop if _m==2
@@ -71,6 +71,11 @@ import delimited using "$inpath\xmatrix_mun.csv", clear
 		drop _m
 		
 	rename mimun MiMun
+	
+	foreach var of varlist gis_*{
+		sum `var'
+		replace `var' = (`var'-r(mean))/r(sd)
+	}
 		
 export delimited using "$inpath\xmatrix_mun_ntl.csv", replace
 save "$inpath\xmatrix_mun_ntl.dta", replace
