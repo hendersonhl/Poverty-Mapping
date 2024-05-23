@@ -66,6 +66,7 @@ else{
 	sum simul
 	local start = r(max)+1
 }
+local start=1
 
 forval sim= `start'/500{
 	

@@ -26,7 +26,7 @@ x = x.drop(columns=columns_to_drop_existing)
 # Filtering covariates
 # Note: Use 'census' for census variables, 'gis' for GIS variables, and '' 
 # for all variables
-covars = ''
+covars = 'gis'
 columns_to_drop = ['MiMun']
 
 # Filter out columns that exist in x
