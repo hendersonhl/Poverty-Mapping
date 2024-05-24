@@ -7,20 +7,22 @@ library(matrixStats)
 set.seed(123)
 
 # Directories
-inpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
-outpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
+#inpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Data"
+#outpath = "/Users/hendersonhl/Documents/Articles/Poverty-Mapping/Results"
+inpath = '/Users/lupin/GitHub/Poverty-Mapping/Data/'
+outpath ='/Users/lupin/GitHub/Poverty-Mapping/Results/'
 
 # Input datasets
 svy = file.path(inpath, "svydata_mun.csv", fsep = "/")
 svy = read.csv(svy)
-x = file.path(inpath, "xmatrix_mun.csv", fsep = "/")
+x = file.path(inpath, "xmatrix_mun_ntl.csv", fsep = "/")
 x = read.csv(x)
 x <- subset(x, select = -c(census_automobile))  # census_automobile is missing all data
 
 # Filtering covariates
 # Note: Use "census" for census variables, "gis" for GIS variables, and "" 
 # for all variables
-covars = ""
+covars = "gis"
 x_census = x[-c(1)]   # If covars = "" must drop "MiMun"
 x_census = x_census[, grepl(covars, names(x_census))]
 hid = x["MiMun"]
