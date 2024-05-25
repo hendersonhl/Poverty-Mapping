@@ -1062,7 +1062,7 @@ name "sec:methods"
 \end_layout
 
 \begin_layout Standard
-This section describes the methods we apply to the Mexican Intercensal Survey.
+This section describes the methods we use in our poverty-mapping simulations.
  The first subsection discusses machine learning, with a special focus on
  gradient boosting, as it is among the most popular machine-learning methods
  for poverty mapping.
@@ -1094,9 +1094,9 @@ literal "false"
  tasks, where regression is concerned with predicting continuous outcomes
  and classification focuses on categorical outcomes.
  While there are many machine-learning methods used for regression and classific
-ation tasks (e.g., lasso, random forests, or support vector machines), here
- we fix ideas by focusing on a method that has been particularly popular
- for poverty mapping: gradient boosting.
+ation tasks (e.g., lasso, random forests, or support vector machines), the
+ following outlines some key ideas by focusing on one of the leading methods:
+ gradient boosting.
 \end_layout
 
 \begin_layout Standard
@@ -1176,7 +1176,82 @@ For example, for a continuous explanatory variable, one determines whether
 n for the subsample associated with that leaf.
  For any given observation, the ensemble prediction used by XGBoost is the
  sum of that observation's predictions across all trees in the ensemble.
- For an in-depth discussion and description of the XGBoost algorithm refer
+ 
+\end_layout
+
+\begin_layout Standard
+To fix ideas, let 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ denote the outcome of interest (e.g., direct estimates of poverty rates)
+ for observation or entity 
+\begin_inset Formula $i$
+\end_inset
+
+, and let 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ denote a vector of explanatory variables.
+ In line with the above, the predicted value of the outcome 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+ is given by the sum of predictions across the individual trees in the ensemble:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{p}=\sum_{t}f_{t}(x_{i})
+\end{equation}
+
+\end_inset
+
+where the trees are indexed by 
+\begin_inset Formula $t$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{t}(x_{i})$
+\end_inset
+
+ gives the prediction of a given tree as a function of 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+.
+ To build the trees used in the model, XGBoost minimizes the following regulariz
+ed objective function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\mathcal{L}=\sum_{i}l(y_{i}^{d},y_{i}^{p})+\sum_{t}r(f_{t})
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $l(y_{i}^{d},y_{i}^{p})$
+\end_inset
+
+ is the loss associated with the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ observation and 
+\begin_inset Formula $r(f_{t})$
+\end_inset
+
+ is a regularization term that serves to mitigate overfitting.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For an in-depth discussion and description of the XGBoost algorithm refer
  to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1186,6 +1261,73 @@ literal "false"
 \end_inset
 
 .
+\end_layout
+
+\end_inset
+
+ In our implementation, we use the classic squared-error loss such that
+ 
+\begin_inset Formula $l(y_{i}^{d},y_{i}^{p})=(y_{i}^{d}-y_{i}^{p})^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+XGBoost uses the following specification of the regularization term: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+r(f_{t})=\gamma M_{t}+\frac{1}{2}\lambda\sum_{j}m_{tj}^{2}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $M_{t}$
+\end_inset
+
+ is the total number of leaves in tree 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $m_{tj}$
+\end_inset
+
+ is the prediction associated with the 
+\begin_inset Formula $j^{th}$
+\end_inset
+
+ leaf in a given tree, and 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ and 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ are hyperparameters that must be chosen by the user.
+ The regularization term serves to mitigate overfitting by penalizing complicate
+d trees and smoothing the predictions associated with each tree.
+ That is, the method relies on a large number of weak learners and the regulariz
+ation term helps control the complexity of the learners.
+ It is important to note that the above specification of the regularization
+ term is only one of many possible specifications, though 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chen2016xgboost"
+literal "false"
+
+\end_inset
+
+ claim that it is simpler than the leading alternatives and easier to paralleliz
+e.
+ Further note that when the hyperparameters are set to zero, the objective
+ function becomes equivalent to that used in traditional gradient boosting.
 \end_layout
 
 \begin_layout Standard
@@ -1240,35 +1382,6 @@ literal "false"
  Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
 \end_layout
 
-\begin_layout Standard
-Finally, regarding our application to the Mexican data, recall that mapping
- procedures entail an estimation stage and a prediction stage.
- For the machine-learning methods, we perform this procedure at two different
- levels of analysis, namely the PSU and municipality levels.
- Our focus is nevertheless on obtaining estimates of poverty rates at the
- municipality level, meaning that when we conduct estimation and prediction
- at the PSU level, we further aggregate the predictions to the municipality
- level using population-weighted averaging.
- Further, recall that we have two alternative sets of covariates available,
- including geo-referenced and census-based variables.
- Given that the geo-referenced data is only available at the municipality
- level, we conduct estimation and prediction at the municipality level for
- any implementation that uses these covariates.
- When using census-based covariates, however, we consider implementations
- at both the PSU and municipality levels.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-In all cases, we pass every eligible variable to the machine-learning model
- and let the algorithm conduct variable selection.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Subsection
 Traditional methods
 \end_layout
@@ -1321,7 +1434,7 @@ literal "false"
 \end_inset
 
 , area-level models conduct estimation and prediction using data aggregated
- to the geographic area of interest (e.g., the PSU or municipality level).
+ to the geographic area of interest.
  The area-level model consists of two basic parts.
  The first part of the model links the actual or true poverty rates 
 \begin_inset Formula $y_{i}^{a}$
@@ -1455,27 +1568,7 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty
  A critical feature of the area-level model is that it is a direct competitor
  to the machine-learning approach because both methods have the same data
  requirements.
- Also similar to the machine-learning approach, the area-level model can
- be implemented at the PSU or municipality levels.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Estimates at the PSU level may be aggregated to a higher level.
- See 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small"
-literal "false"
-
-\end_inset
-
- for more details.
-\end_layout
-
-\end_inset
-
-
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1504,9 +1597,9 @@ literal "false"
 \end_inset
 
 .
- This model assumes that (transformed) equivalized household level income
- or consumption relates linearly to a vector of household-level covariates
- according to the following model:
+ This model assumes that (transformed) equivalized household income or consumpti
+on relates linearly to a vector of household-level covariates according
+ to the following model:
 \end_layout
 
 \begin_layout Standard
@@ -1713,14 +1806,18 @@ The key assumption of the unit-level model is that the distribution of the
  and the census used for prediction.
  This assumption is generally violated if the census is outdated – which
  is often the case in developing countries – and in this event the application
- of the unit-level model will lead to estimates which may be biased since
- the survey parameters are applied to a different population from which
- the survey was drawn from.
+ of the unit-level model will lead to similarly outdated poverty maps 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "lange2018small"
+literal "false"
+
+\end_inset
+
+.
  Importantly, machine-learning approaches to poverty mapping are commonly
  motivated by the fact that censuses are outdated and are thus viewed as
  a way to produce timely poverty maps in a data-constrained environment.
- This is often cahieved by relying on georeferenced data, although the covariate
-s still need to be sufficiently correlated with poverty.
  Stated differently, given the differing data requirements between the unit-leve
 l model and the machine-learning approach, the two methods are not generally
  considered to be direct competitors.
@@ -2615,7 +2712,7 @@ noprefix "false"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -2762,6 +2859,10 @@ gold standard
 \end_layout
 
 \begin_layout Standard
+\begin_inset Note Comment
+status collapsed
+
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -2773,7 +2874,7 @@ status collapsed
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -2810,7 +2911,7 @@ Design MSE
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -2866,7 +2967,7 @@ name "fig:ll_sample_q1"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -2898,7 +2999,7 @@ name "fig:ll_sample_q5"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -2935,7 +3036,7 @@ Design MSE
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -2954,6 +3055,11 @@ status collapsed
 
 \begin_layout Plain Layout
 Design bias
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
