@@ -30,11 +30,11 @@ drop _m
 
 * Label and plot
 keep mse_gb_gis_ntl mse_uc mse_fh_mun mse_eb	
-label var mse_gb_gis_ntl "Gradient Boosting"
-label var mse_eb "Unit-level"  
-label var mse_uc "Unit-context" 
-label var mse_fh_mun "Area-level"    	
-graph hbox mse_gb_gis_ntl mse_uc mse_fh_mun mse_eb, ytitle(Mean Squared Error) ///
+label var mse_gb_gis_ntl "Gradient Boosting (GIS)"
+label var mse_eb "Unit-level (CEN)"  
+label var mse_uc "Unit-context (CEN)" 
+label var mse_fh_mun "Area-level (CEN)"    	
+graph hbox mse_gb_gis_ntl mse_eb  mse_fh_mun mse_uc, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1a.png", as(png) replace
@@ -57,11 +57,11 @@ foreach x of varlist gb_gis_mun_ntl eb uc fh_mun {
 }
 
 * Label and plot
-label var gb_gis_mun_ntl "Gradient Boosting"
-label var eb "Unit-level"      
-label var uc "Unit-context"
-label var fh_mun "Area-level"  
-graph hbox gb_gis_mun_ntl uc fh_mun eb, ytitle(Poverty Rate) ///
+label var gb_gis_mun_ntl "Gradient Boosting (GIS)"
+label var eb "Unit-level (CEN)"      
+label var uc "Unit-context (CEN)"
+label var fh_mun "Area-level (CEN)"  
+graph hbox gb_gis_mun_ntl eb fh_mun uc, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1b.png", as(png) replace

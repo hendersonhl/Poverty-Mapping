@@ -2220,6 +2220,187 @@ name "sec:results"
 \end_layout
 
 \begin_layout Standard
+Recall that our primary objective is to assess the performance of the modern
+ approach to poverty mapping by using the Mexican Intercensal Survey as
+ a ground truth.
+ To this end, panel (a) in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents the MSE for our closest approximation to the standard implementation
+ of the modern approach: gradient boosting with remotely-sensed covariates.
+ We benchmark the performance of this implementation against three traditional
+ mapping methods, namely the unit-level, area-level, and unit-context models.
+ To approximate how these traditional methods are commonly used, each model
+ is implemented with census-based covariates, albeit at different levels
+ of analysis.
+ Importantly, as our initial implementations are intended to reflect current
+ practice, the modern and traditional approaches differ both in terms of
+ their statistical method and the data used.
+ The remainder of this section examines how these differences contribute
+ to performance disparities between the two approaches.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-1a.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-1b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Targeting performance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error and targeting performance for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:mse_targeting"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Panel (a) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows that gradient boosting with remotely-sensed covariates tends to have
+ the highest MSE among the models considered.
+ The associated boxplot summarizes the distribution of MSE values across
+ all municipalities (i.e., the results are based on Eq.
+ XX) and indicates that the gradient boosting model achieves a median MSE
+ of 0.007.
+ The corresponding root MSE is approximately 0.08, meaning that the median
+ municipality's error is roughly eight percentage points.
+ By contrast, the 
+\begin_inset Quotes eld
+\end_inset
+
+gold standard
+\begin_inset Quotes erd
+\end_inset
+
+ unit-level achieves a median MSE of 0.003, which is roughly 40 percent that
+ of the gradient boosting model.
+ The area-level and unit-context models similarly outperform the gradient
+ boosting model, as both achieve a median MSE of 0.004.
+ The fact that the area-level and unit-context models outperform the gradient
+ boosting model is particularly notable, as all of these models were developed
+ for use in off-census years and are thus direct competitors.
+\end_layout
+
+\begin_layout Standard
+- Covariate labels
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
 Recall that the Intracensal survey is treated as the true population, whose
  poverty rates we are trying to estimate.
  Panel (a) of Figure 
@@ -2260,7 +2441,7 @@ noprefix "false"
 ]).
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The results presented consider 4 different methods: 1) gradient boosting,
  2) area-level (Fay Herriot), 3) unit-level, and 4) unit context.
  Models 2-4 are all more traditional methods that we use to benchmark the
@@ -2284,7 +2465,7 @@ ity level, and no household level covariates.
  linearly (i.e., we do not include interaction or quadratic terms).
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The first two models in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2362,7 +2543,7 @@ GIS
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Despite the improvement achieved by adding NTL data to the eligible set
  of covariates, it is still not sufficient to compete with models that use
  census aggregates as covariates.
@@ -2374,7 +2555,7 @@ Despite the improvement achieved by adding NTL data to the eligible set
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Gradient boosting models that rely on census aggregates as covariates are
  able to perform nearly as well as unit-level models (obtained with CensusEB
  methods).
@@ -2439,7 +2620,7 @@ literal "false"
  functional forms or it may be something specific to the Mexican data.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -2547,7 +2728,7 @@ name "fig:mse"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The bias associated with poverty estimates is especially important due to
  the policy relevance of understanding absolute living standards.
  In panel (b) of Figure 
@@ -2613,7 +2794,7 @@ literal "false"
  which use census aggregate data, exhibit much less variation.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -2657,7 +2838,7 @@ name "fig:importance"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Note Note
 status open
 
@@ -2670,7 +2851,7 @@ HERE - need to run the importance figures with NTL.
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The performance of machine learning appears to depend heavily on the covariates
  used in the model, with NTL and census-based covariates considerably improving
  model performance.
@@ -2708,7 +2889,7 @@ noprefix "false"
  geo-referenced covariates entering the top 20.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -2812,7 +2993,7 @@ name "fig:quantiles"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2858,7 +3039,7 @@ gold standard
  poverty.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Note Comment
 status collapsed
 
@@ -3077,7 +3258,7 @@ Design bias
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 An additional consideration is how the methods perform for predictions which
  are out of sample.
  Because the experiment consists of 500 samples taken from the census data,
@@ -3126,7 +3307,7 @@ noprefix "false"
 g illustrating the importance of the method's EBLUP.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3230,7 +3411,7 @@ name "fig:ml"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 While we have focused on the performance of gradient boosting up to this
  point, there are nevertheless several other machine-learning models that
  can be used for poverty mapping.
@@ -3284,7 +3465,7 @@ noprefix "false"
  machine-learning model.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -3326,7 +3507,7 @@ name "fig:targeting"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Finally, recall from Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3371,7 +3552,7 @@ true
  data can limit the performance of the machine learning.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 The results of the targeting simulation are relevant to cases where targeting
  is based solely on the ranking of municipalities – all methods appear to
  do a solid job.
@@ -3390,6 +3571,11 @@ literal "false"
 ).
  It is in those cases where a method that yields unbiased and precise estimates
  should be employed.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
