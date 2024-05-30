@@ -326,10 +326,10 @@ twoway (line bias_gb_gis_ntl pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_gb_census pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line bias_fh_mun_gis_ntl pov_rank, lpattern(solid) lcolor(gray)) ///
     (line bias_fh_mun pov_rank, lpattern(dash) lcolor(gray)), ///
-	ytitle(Average Bias) xtitle(Poverty Quantile) scheme(s1mono) ///
+	ytitle(Average Bias) xtitle(Poverty Quantile - Poorest to Richest) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
 	label(3 "Area-level (GIS)") label(4 "Area-level (CEN)") ///
-    symxsize(*0.7) size(*.88))
+    symxsize(*0.7) size(*.88)) 
 graph export "$outpath/Figure-6.png", as(png) replace
 
 
