@@ -10,6 +10,7 @@ if (lower("`c(username)'")=="lupin" | lower("`c(username)'")=="paul corral" ) gl
 global inpath  "$main/Results"
 global outpath "$main/Manuscript"
 
+
 *=========================================================================
 * Figure 1a
 *=========================================================================
@@ -38,6 +39,10 @@ graph hbox mse_gb_gis_ntl mse_eb  mse_fh_mun mse_uc, ytitle(Mean Squared Error) 
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1a.png", as(png) replace
+
+* Select descriptive statistics
+sum, detail
+
 
 *=========================================================================
 * Figure 1b
