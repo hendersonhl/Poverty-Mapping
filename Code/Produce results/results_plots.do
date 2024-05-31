@@ -71,24 +71,70 @@ graph hbox gb_gis_mun_ntl eb fh_mun uc, ytitle(Poverty Rate) ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1b.png", as(png) replace
 
+* Select descriptive statistics
+sum, detail
+
 
 *=========================================================================
-* Figure 2
+* Figure 2a
 *=========================================================================
+
+* Bring in area-level results w/ GIS covariates
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun_gis_ntl
+rename area muni
+tempfile FH_GIS
+save `FH_GIS'
 
 * Import and label
 import delimited "$inpath/results_mse.csv", clear
-keep mse_gb_gis mse_bart_gis mse_rf_gis mse_eb
-label var mse_gb_gis "Gradient Boosting"
-label var mse_bart_gis "BART"
-label var mse_rf_gis "Random Forest"
-label var mse_eb "Unit-level"  
+merge 1:1 muni using `FH_GIS', keepusing(mse_fh_mun_gis)
+keep mse_gb_gis_ntl mse_bart_gis mse_rf_gis mse_fh_mun_gis_ntl
+label var mse_gb_gis "Gradient Boosting (GIS)"
+label var mse_bart_gis "BART (GIS)"
+label var mse_rf_gis "Random Forest (GIS)"
+label var mse_fh_mun_gis_ntl "Area-level (GIS)"  
 
 * Plot   	
-graph hbox mse_gb_gis mse_bart_gis mse_rf_gis mse_eb, ytitle(Mean Squared Error) ///
-    scheme(s1mono) legend(off) nooutside note("") showyvars ///
+graph hbox mse_gb_gis_ntl mse_rf_gis mse_bart_gis mse_fh_mun_gis_ntl, ///
+    ytitle(Mean Squared Error) scheme(s1mono) legend(off) nooutside note("") ///
+	showyvars box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) ///
+	box(4, color(gray))
+graph export "$outpath/Figure-2a.png", as(png) replace
+
+* Select descriptive statistics
+sum, detail
+
+*=========================================================================
+* Figure 2b
+*=========================================================================
+
+* Import and reshape
+import delimited "$inpath/results_transfer.csv", clear
+keep variable sim fgt0
+order sim variable fgt0
+reshape wide fgt0, i(sim) j(variable) string
+rename fgt0* *
+keep gb_gis_mun_ntl rf_gis_mun bart_gis_mun fh_mun_gis_ntl
+
+* Poverty rates in percentage terms
+foreach x of varlist gb_gis_mun_ntl rf_gis_mun bart_gis_mun fh_mun_gis_ntl {
+	replace `x' = `x'*100
+}
+
+* Label and plot
+label var gb_gis_mun_ntl "Gradient Boosting (GIS)"
+label var bart_gis_mun "BART (GIS)"
+label var rf_gis_mun "Random Forest (GIS)"
+label var fh_mun_gis_ntl "Area-level (GIS)"   
+graph hbox gb_gis_mun_ntl rf_gis_mun bart_gis_mun fh_mun_gis_ntl, ytitle(Poverty Rate) ///
+    scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
-graph export "$outpath/Figure-2.png", as(png) replace
+graph export "$outpath/Figure-2b.png", as(png) replace
+
+* Select descriptive statistics
+sum, detail
 
 *=========================================================================
 * Figure 3a
