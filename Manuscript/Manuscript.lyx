@@ -2234,16 +2234,33 @@ noprefix "false"
 \end_inset
 
  presents the MSE for our closest approximation to the standard implementation
- of the modern approach: gradient boosting with remotely-sensed covariates.
+ of the modern approach: gradient boosting with remotely-sensed covariates
+ (covariates labeled 
+\begin_inset Quotes eld
+\end_inset
+
+GIS
+\begin_inset Quotes erd
+\end_inset
+
+).
  We benchmark the performance of this implementation against three traditional
  mapping methods, namely the unit-level, area-level, and unit-context models.
  To approximate how these traditional methods are commonly used, each model
  is implemented with census-based covariates, albeit at different levels
- of analysis.
+ of analysis (covariates labeled 
+\begin_inset Quotes eld
+\end_inset
+
+CEN
+\begin_inset Quotes erd
+\end_inset
+
+).
  Importantly, as our initial implementations are intended to reflect current
  practice, the modern and traditional approaches differ both in terms of
  their statistical method and the data used.
- The remainder of this section examines how these differences contribute
+ The remainder of this section will examine how these differences contribute
  to performance disparities between the two approaches.
  
 \end_layout
@@ -2336,7 +2353,8 @@ Targeting performance
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error and targeting performance for select models 
+Mean squared error and targeting performance for select implementations
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:mse_targeting"
@@ -2393,7 +2411,224 @@ gold standard
 \end_layout
 
 \begin_layout Standard
-- Covariate labels
+Panel (b) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:mse_targeting"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ considers the targeting performance of the alternative models and shows
+ a similar result.
+ For these simulations, we have set the poverty line at the 25th percentile
+ of the (pre-transfer) per capita income distribution, which means that
+ the baseline poverty rate is 25 percent.
+ The poverty rate falls to 19.9 percent when transfers are delivered to municipal
+ities according to their true poverty rate.
+ Across 500 simulations, we find that gradient boosting with remotely-sensed
+ covariates achieves a median poverty rate of 20.29, which is close to the
+ benchmark rate of 19.9 percent.
+ The three traditional methods nevertheless outperform the gradient boosting
+ model.
+ The unit-level model achieves a median poverty rate of 20 percent whereas
+ the area-level and unit-context models achieve median rates of 20.04 and
+ 20.01, respectively.
+ In short, our implementation of the modern approach underperforms both
+ in terms of MSE and poverty reduction.
+\end_layout
+
+\begin_layout Standard
+As mentioned, there are two primary differences between the traditional
+ and modern approaches that could explain performance disparities: the statistic
+al method and the data used.
+ We first examine whether using an alternative statistical method could
+ improve upon the performance of our initial implementation of the modern
+ approach.
+ Accordingly, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:alt_methods"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents MSE and targeting results for four alternative statistical methods
+ where each uses the same, remotely-sensed covariates in order to isolate
+ the influence of the method.
+ In addition to gradient boosting, we consider two non-parametric alternatives
+ (i.e., random forest and Bayesian additive regression trees) and one parametric
+ alternative (i.e., the area-level model).
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The alternative models we have chosen are arguably the leading competitors
+ to gradient boosting.
+ In terms of non-parametric models, both random forests and Bayesian additive
+ regression trees are quite popular and have been shown to perform comparably
+ to, and sometimes better than, gradient boosting.
+ For example, see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chipman2010bart"
+literal "false"
+
+\end_inset
+
+.
+ Regarding parametric models, the area-level and unit-context models are
+ the closest competitors, but to minimize the number of comparisons we have
+ chosen to focus on the area-level model, largely because it is both more
+ popular and better-performing.
+ For example, 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ found that the unit-context model exhibits considerable bias and thus caution
+ against using it.
+ 
+\end_layout
+
+\end_inset
+
+ We find that the alternative methods do not produce any substantive performance
+ gains.
+ In particular, the two alternative non-parametric methods perform similarly
+ to gradient boosting whereas the parametric, area-level model tends to
+ perform slightly worse when using the same covariates.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Bayesian additive regression trees perform slightly better than gradient
+ boosting, but the performance gains are not large.
+ For example, in terms of targeting performance, gradient boosting achieves
+ a median poverty rate of 20.29 whereas the Bayesian method achieves a median
+ rate of 20.26.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-2a.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-2b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Targeting performance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error and targeting performance for alternative statistical
+ methods 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:alt_methods"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
