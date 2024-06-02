@@ -40,7 +40,8 @@ keep muni incpc hhsize
 	}
 
 	sum fgt1 [aw=hhsize]
-	global budget = `r(mean)'*$pline*`r(sum_w)'
+	//20% of the budget to be devoted to the poorest 200 municipalities!
+	global budget = `r(mean)'*$pline*`r(sum_w)'*.20
 	sum fgt0 [aw=hhsize]
 	global transfer_pc = $budget/r(sum) 
 
@@ -49,24 +50,24 @@ save `pretrans'
 
 //Leave data at muni level	
 groupfunction [aw=hhsize], mean(fgt0 fgt1 fgt2 incpc) rawsum(hhsize) by(muni)
+gsort -fgt0
 
 //Determine proportion of poor
-sum fgt0 [aw=hhsize]
+sum fgt0 if _n<=200 [aw=hhsize]
 local num_poor = r(sum)
 
-gen double prop_poor = fgt0*hhsize/`num_poor'
+gen double prop_poor = fgt0*hhsize/`num_poor' if _n<=200
 sum prop_poor
-di r(sum)
+assert r(sum)==1
 
 renam hhsize pop
 /*
 The targtetting exercise will be as follows:
-- We give priority to poorest communities...then we devote funds by the prop of poor
+- We give priority to 200 poorest communities...then we devote funds by the prop of poor
 */
 
 
-gsort -fgt0
-gen double transfer = ${budget}*prop_poor/pop
+gen double transfer = ${budget}*prop_poor/pop 
 
 tempfile latran
 save `latran'
@@ -101,7 +102,6 @@ preserve
 	order muni sim_sample yhat
 	sort muni sim_sample
 	qwreshape yhat, uniq(muni) col(sim_sample) prefix(yhat)
-
 	outsheet using "$outpath/eb.csv", comma replace
 	
 	use "$inpath/uceb19.dta", clear   // Unit-context results
@@ -185,10 +185,12 @@ foreach model of local themodels{
 		drop if _m==2
 		drop _m
 	forval z = 1/500{
-		sum yhat_`z' [aw=pop]
-		gen double prop = yhat_`z'*pop/r(sum)
+		gsort -yhat_`z'
+		sum yhat_`z' if _n<=200 [aw=pop]
+		gen double prop = yhat_`z'*pop/r(sum) if _n<=200
 		drop yhat_`z'
 		gen double yhat_`z' = prop*${budget}/pop
+		replace yhat_`z' = 0 if missing(yhat_`z')
 		drop prop
 	}
 	tempfile `model'
@@ -270,9 +272,10 @@ replace level = "HH level" if regexm(variable,"eb")|regexm(variable,"uc")|regexm
 
 replace level = "PSU & Mun" if variable=="mse_gb_psu_wc"
 
-save "$outpath/Results_transfer_share.dta", replace
+save "$outpath/Results_transfer_200.dta", replace
 
-export delimited using "$outpath/results_transfer_share.csv", replace 
+export delimited using "$outpath/results_transfer_200.csv", replace 
+
 
 *==========================================
 * Figures for Manuscript
@@ -286,11 +289,10 @@ if (lower("`c(username)'")=="lupin" | lower("`c(username)'")=="paul corral" ) gl
 global inpath  "$main/Results"
 global outpath "$main/Manuscript"
 
-
 *===============================================================================	
 * Poverty targeting
 *===============================================================================
-import delimited "$inpath/results_transfer_share.csv", clear
+import delimited "$inpath/results_transfer_200.csv", clear
 keep variable sim fgt0
 order sim variable fgt0
 
@@ -321,3 +323,5 @@ uc fh_mun gb_all_mun_ntl gb_all_mun gb_census_mun eb, ytitle(Poverty Rate) ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) ///
 	box(5, color(gray)) box(6, color(gray)) box(7, color(gray)) box(8, color(gray)) ///
 	box(9, color(gray))
+
+
