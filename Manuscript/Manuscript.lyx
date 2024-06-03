@@ -2259,7 +2259,7 @@ CEN
 ).
  Importantly, as our initial implementations are intended to reflect current
  practice, the modern and traditional approaches differ both in terms of
- their statistical method and the data used.
+ their statistical method and the covariates used.
  The remainder of this section will examine how these differences contribute
  to performance disparities between the two approaches.
  
@@ -2386,7 +2386,7 @@ noprefix "false"
 \end_inset
 
  shows that gradient boosting with remotely-sensed covariates tends to have
- the highest MSE among the models considered.
+ the highest MSE of the models considered.
  The associated boxplot summarizes the distribution of MSE values across
  all municipalities (i.e., the results are based on Eq.
  XX) and indicates that the gradient boosting model achieves a median MSE
@@ -2442,8 +2442,8 @@ ities according to their true poverty rate.
 
 \begin_layout Standard
 As mentioned, there are two primary differences between the traditional
- and modern approaches that could explain performance disparities: the statistic
-al method and the data used.
+ and modern approaches that could explain these performance disparities:
+ the statistical method and the covariates used.
  We first examine whether using an alternative statistical method could
  improve upon the performance of our initial implementation of the modern
  approach.
@@ -2460,16 +2460,14 @@ noprefix "false"
  presents MSE and targeting results for four alternative statistical methods
  where each uses the same, remotely-sensed covariates in order to isolate
  the influence of the method.
- In addition to gradient boosting, we consider two non-parametric alternatives
- (i.e., random forest and Bayesian additive regression trees) and one parametric
- alternative (i.e., the area-level model).
+ In addition to gradient boosting, we consider two leading non-parametric
+ competitors (i.e., random forest and Bayesian additive regression trees)
+ and the leading parametric alternative (i.e., the area-level model).
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-The alternative models we have chosen are arguably the leading competitors
- to gradient boosting.
- In terms of non-parametric models, both random forests and Bayesian additive
+In terms of non-parametric models, both random forests and Bayesian additive
  regression trees are quite popular and have been shown to perform comparably
  to, and sometimes better than, gradient boosting.
  For example, see 
@@ -2615,6 +2613,356 @@ Mean squared error and targeting performance for alternative statistical
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:alt_methods"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By contrast, Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:alt_covariates"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ shows that implementing gradient boosting with census-based covariates
+ leads to notable performance gains.
+ The first two boxplots in panels (a) and (b) present the results for gradient
+ boosting with remotely-sensed and census-based covariates, respectively.
+ As a benchmark, we plot similar results for the area-level model, which
+ we view as the closest traditional competitor.
+ Recall that when using remotely-sensed covariates, gradient boosting achieves
+ a median MSE of 0.007 and a median poverty rate of 20.29.
+ With census-based covariates, the median MSE falls to 0.003 and the median
+ poverty rate falls to 20.02.
+ Importantly, gradient boosting with census-based covariates slightly outperform
+s the area-level model, which achieves a median MSE of 0.004 and a median
+ poverty rate of 20.04 when using the same covariates.
+ The performance differences between the modern and traditional approaches
+ are thus largely driven by covariate quality.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3a.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-3b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Targeting performance
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mean squared error and targeting performance for alternative covariates
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:alt_covariates"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Another way to see that our census-based covariates have greater predictive
+ capacity than the remotely-sensed covariates is by looking at feature importanc
+e.
+ One popular measure of feature importance summarizes the gain (i.e., reduction
+ of the loss function) associated with any given feature.
+ That is, for a given run of the model, feature importance captures the
+ average gain of a given feature, where the gains are averaged across all
+ trees in the model.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In addition, the average gains for a given run of the model are normalized
+ by dividing each by the sum of all average gains for that run.
+\end_layout
+
+\end_inset
+
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:feature"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ plots the 20 covariates with the highest feature importance after running
+ gradient boosting with both census-based (
+\begin_inset Quotes eld
+\end_inset
+
+CEN
+\begin_inset Quotes erd
+\end_inset
+
+) and remotely-sensed (
+\begin_inset Quotes eld
+\end_inset
+
+GIS
+\begin_inset Quotes erd
+\end_inset
+
+) covariates on each sample and averaging each covariate’s importance across
+ the 500 samples.
+ We find that all of the top 10 covariates are census-based, with only six
+ remotely-sensed covariates entering the top 20.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-4.png
+	scale 35
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Feature importance
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:feature"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The immediate implication of these results is that mapping exercises should
+ incorporate census-based covariates when possible.
+ For those situations where census data is unavailable, it is important
+ to consider whether poverty maps produced with remotely-sensed covariates
+ will be distorted in any predictable way.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-5a.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-5b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias by poverty quantile
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias for select models with alternative covariates 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:bias"
 
 \end_inset
 

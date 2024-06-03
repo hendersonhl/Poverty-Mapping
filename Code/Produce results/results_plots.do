@@ -176,6 +176,9 @@ graph hbox mse_gb_gis_ntl mse_gb_census mse_fh_mun_gis_ntl mse_fh_mun, ytitle(Me
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-3a.png", as(png) replace
 
+* Select descriptive statistics
+sum, detail
+
 
 *=========================================================================
 * Figure 3b
@@ -204,6 +207,9 @@ graph hbox gb_gis_mun_ntl gb_census_mun fh_mun_gis_ntl fh_mun, ytitle(Poverty Ra
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-3b.png", as(png) replace
 
+* Select descriptive statistics
+sum, detail
+
 
 *===============================================================================
 * Figure 4
@@ -219,45 +225,31 @@ drop if _n >20
 replace variable = "Cellphone ownership (CEN)" if variable == "census_cellphone"
 replace variable = "Television ownership (CEN)" if variable == "census_television"
 replace variable = "Computer ownership (CEN)" if variable == "census_computer"
-replace variable = "Access to internet (CEN)" if variable == "census_internet"
 replace variable = "Washing machine ownership (CEN)" if variable == "census_washmachine"
+replace variable = "Access to internet (CEN)" if variable == "census_internet"
 replace variable = "Adult population share (CEN)" if variable == "census_share_adult"
 replace variable = "Refrigerator ownership (CEN)" if variable == "census_fridge"
-replace variable = "Household size (CEN)" if variable == "census_hhsize"
-replace variable = "Night-time lights (GIS)" if variable == "gis_ntl_range_2014"
-replace variable = "Mean normalized difference water index (GIS)" if variable == "gis_ndwimean"
-replace variable = "Male household share (CEN)" if variable == "census_male_hh"
-replace variable = "Min. built-up area extraction index (GIS)" if variable == "gis_baeimin" 
 replace variable = "No sewage access (CEN)" if variable == "census_no_sewage"
-replace variable = "Mean normalized difference vegetation index (GIS)" if variable == "gis_ndvimean"
+replace variable = "Male household share (CEN)" if variable == "census_male_hh"
+replace variable = "Household size (CEN)" if variable == "census_hhsize"
+replace variable = "Night-time lights std. dev. (GIS)" if variable == "gis_ntl_std_2015"
 replace variable = "Mean slope from digital model (GIS)" if variable == "gis_mdepmean"
-replace variable = "Age of household head (CEN)" if variable == "census_age_hh"
-replace variable = "Simple ratio standard deviation (GIS)" if variable == "gis_srstddev"
 replace variable = "Secondary education share (CEN)" if variable == "census_max_secondary"
-replace variable = "Mean built-up index (GIS)" if variable == "gis_bumean"
 replace variable = "Elderly population share (CEN)" if variable == "census_share_elderly"
+replace variable = "Age of household head (CEN)" if variable == "census_age_hh"
+replace variable = "Simple ratio std. dev. (GIS)" if variable == "gis_srstddev"
+replace variable = "Max. night-time lights (GIS)" if variable == "gis_ntl_max_2015"
+replace variable = "Max. built-up index (GIS)" if variable == "gis_bumax"
+replace variable = "Mean night-time lights (GIS)" if variable == "gis_ntl_mean_2015"
+replace variable = "Under 15 population share (CEN)" if variable == "census_share_under15"
 graph hbar (asis) imp, over(variables, sort(1) descending) scheme(s1mono) ///
     ytitle(Feature Importance) xsize(8)
 graph export "$outpath/Figure-4.png", as(png) replace
 
 
 *===============================================================================
-* Figure 5a and 5b
+* Figure 5a
 *===============================================================================
-
-* Bring in bias results
-import delimited "$inpath/results_bias.csv", clear
-keep muni bias_gb_gis_ntl bias_gb_census bias_eb bias_uc
-tempfile bias
-save `bias'
-
-* Bring in area-level MSE results w/ census covariates
-use "$inpath/fh_mun_mse_bias.dta", clear
-keep if variable == "mse_fh"
-rename value mse_fh_mun
-rename area muni
-tempfile FH_CEN_mse
-save `FH_CEN_mse'
 
 * Bring in area-level bias results w/ census covariates
 use "$inpath/fh_mun_mse_bias.dta", clear
@@ -267,14 +259,6 @@ rename area muni
 tempfile FH_CEN_bias
 save `FH_CEN_bias'
 
-* Bring in area-level MSE results w/ GIS covariates
-use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
-keep if variable == "mse_fh"
-rename value mse_fh_mun_gis_ntl
-rename area muni
-tempfile FH_GIS_mse
-save `FH_GIS_mse'
-
 * Bring in area-level bias results w/ GIS covariates
 use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
 keep if variable == "bias_fh"
@@ -283,42 +267,15 @@ rename area muni
 tempfile FH_GIS_bias
 save `FH_GIS_bias'
 
-* Merge 
-import delimited "$inpath/results_mse.csv", clear
-keep muni mse_gb_gis_ntl mse_gb_census mse_eb mse_uc
-merge 1:1 muni using `FH_CEN_mse', keepusing(mse_fh_mun)
-drop if _m==2
-drop _m
-merge 1:1 muni using `FH_GIS_mse', keepusing(mse_fh_mun_gis_ntl)
-drop if _m==2
-drop _m	
-merge 1:1 muni using `bias'
-drop if _m==2
-drop _m
+* Bring in bias results
+import delimited "$inpath/results_bias.csv", clear
+keep muni bias_gb_gis_ntl bias_gb_census bias_eb bias_uc
 merge 1:1 muni using `FH_CEN_bias', keepusing(bias_fh_mun)
 drop if _m==2
 drop _m
 merge 1:1 muni using `FH_GIS_bias', keepusing(bias_fh_mun_gis_ntl)
 drop if _m==2
-drop _m	
-
-* Calculate variance for each model
-gen var_gb_census = mse_gb_census - bias_gb_census^2
-gen var_gb_gis_ntl = mse_gb_gis_ntl - bias_gb_gis_ntl^2
-gen var_eb = mse_eb - bias_eb^2
-gen var_uc = mse_uc - bias_uc^2
-gen var_fh_mun = mse_fh_mun - bias_fh_mun^2
-gen var_fh_mun_gis_ntl = mse_fh_mun_gis_ntl - bias_fh_mun_gis_ntl^2
-
-* Variance plot
-label var var_gb_gis_ntl "Gradient Boosting (GIS)"
-label var var_gb_census "Gradient Boosting (CEN)"
-label var var_fh_mun_gis_ntl "Area-level (GIS)"   	
-label var var_fh_mun "Area-level (CEN)"   
-graph hbox var_gb_gis_ntl var_gb_census var_fh_mun_gis_ntl var_fh_mun, ytitle(Variance) ///
-    scheme(s1mono) legend(off) nooutside note("") showyvars ///
-	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
-graph export "$outpath/Figure-5a.png", as(png) replace
+drop _m
 
 * Bias plot 
 label var bias_gb_gis_ntl "Gradient Boosting (GIS)"
@@ -328,11 +285,11 @@ label var bias_fh_mun "Area-level (CEN)"
 graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
-graph export "$outpath/Figure-5b.png", as(png) replace
+graph export "$outpath/Figure-5a.png", as(png) replace
 
 
 *===============================================================================
-* Figure 6
+* Figure 5b
 *===============================================================================
 
 * Bring in area-level bias results w/ GIS covariates
@@ -377,11 +334,11 @@ twoway (line bias_gb_gis_ntl pov_rank, lpattern(solid) lcolor(black)) ///
     (line bias_gb_census pov_rank, lpattern(shortdash) lcolor(black)) ///
     (line bias_fh_mun_gis_ntl pov_rank, lpattern(solid) lcolor(gray)) ///
     (line bias_fh_mun pov_rank, lpattern(dash) lcolor(gray)), ///
-	ytitle(Average Bias) xtitle(Poverty Quantile - Poorest to Richest) scheme(s1mono) ///
+	ytitle(Average Bias) xtitle(Poverty Quantile (Poorest to Richest)) scheme(s1mono) ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
 	label(3 "Area-level (GIS)") label(4 "Area-level (CEN)") ///
     symxsize(*0.7) size(*.88)) 
-graph export "$outpath/Figure-6.png", as(png) replace
+graph export "$outpath/Figure-5b.png", as(png) replace
 
 
 
