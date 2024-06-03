@@ -292,7 +292,7 @@ global outpath "$main/Manuscript"
 *===============================================================================	
 * Poverty targeting
 *===============================================================================
-import delimited "$inpath/results_transfer_200.csv", clear
+import delimited "$outpath/results_transfer_200.csv", clear
 keep variable sim fgt0
 order sim variable fgt0
 
