@@ -2389,8 +2389,8 @@ noprefix "false"
  the highest MSE of the models considered.
  The associated boxplot summarizes the distribution of MSE values across
  all municipalities (i.e., the results are based on Eq.
- XX) and indicates that the gradient boosting model achieves a median MSE
- of 0.007.
+ [XX]) and indicates that the gradient boosting model achieves a median
+ MSE of 0.007.
  The corresponding root MSE is approximately 0.08, meaning that the median
  municipality's error is roughly eight percentage points.
  By contrast, the 
@@ -2816,6 +2816,9 @@ GIS
  the 500 samples.
  We find that all of the top 10 covariates are census-based, with only six
  remotely-sensed covariates entering the top 20.
+ The immediate implication of these results is that mapping exercises should
+ incorporate census-based covariates when possible.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2863,12 +2866,91 @@ name "fig:feature"
 \end_layout
 
 \begin_layout Standard
-The immediate implication of these results is that mapping exercises should
- incorporate census-based covariates when possible.
- For those situations where census data is unavailable, it is important
- to consider whether poverty maps produced with remotely-sensed covariates
+For those situations where census data is unavailable, it is important to
+ consider whether poverty maps produced with remotely-sensed covariates
  will be distorted in any predictable way.
+ Accordingly, we use Eq.
+ [XX] to calculate municipality-level bias estimates for the gradient boosting
+ model with remotely-sensed covariates.
+ We benchmark these estimates against gradient boosting with census-based
+ covariates and two implementations of the area-level model (i.e., one for
+ each covariate type).
+ Panel (a) in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ presents boxplots associated with each of these four models and shows that
+ all models are unbiased at the median.
+ The models using remotely-sensed covariates nevertheless exhibit wide variation
+ in the bias estimates, implying that the estimated poverty rates for some
+ municipalities are severely biased.
+ For example, the minimum and maximum bias estimates for gradient boosting
+ with remotely-sensed covariates are -45 and 40 percentage points, respectively.
+\end_layout
+
+\begin_layout Standard
+To depict the source of this bias, panel (b) in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:bias"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ plots the average bias for each 
+\begin_inset Quotes eld
+\end_inset
+
+poverty quantile.
+\begin_inset Quotes erd
+\end_inset
+
+ That is, we order all municipalities by their true poverty rates, divide
+ them into 50 quantiles, and calculate the average bias for each quantile
+ for several alternative models.
+ We see that the models with remotely-sensed covariates severely under-estimate
+ poverty for the municipalities with the highest true poverty rates and
+ over-estimate poverty for the municipalities with the lowest true poverty
+ rates.
+ The models with remotely-sensed covariates thus understate the spatial
+ distribution of poverty.
  
+\end_layout
+
+\begin_layout Standard
+Intuitively, models using a squared-error loss function revert to predicting
+ the mean in the absence of informative covariates, 
+\end_layout
+
+\begin_layout Standard
+which produces biased predictions in the tails 
+\end_layout
+
+\begin_layout Standard
+the models revert toward predicting the mean 
+\end_layout
+
+\begin_layout Standard
+models with weak covariates revert toward predicting the mean and therefore
+ 
+\end_layout
+
+\begin_layout Standard
+Intuitively, models with weaker covariates tend to revert to predicting
+ the mean
+\end_layout
+
+\begin_layout Standard
+The intuition behind this result is straightforward: models without informative
+ covariates 
 \end_layout
 
 \begin_layout Standard
