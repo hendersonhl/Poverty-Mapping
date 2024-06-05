@@ -2920,37 +2920,14 @@ poverty quantile.
  poverty for the municipalities with the highest true poverty rates and
  over-estimate poverty for the municipalities with the lowest true poverty
  rates.
- The models with remotely-sensed covariates thus understate the spatial
- distribution of poverty.
- 
-\end_layout
-
-\begin_layout Standard
-Intuitively, models using a squared-error loss function revert to predicting
- the mean in the absence of informative covariates, 
-\end_layout
-
-\begin_layout Standard
-which produces biased predictions in the tails 
-\end_layout
-
-\begin_layout Standard
-the models revert toward predicting the mean 
-\end_layout
-
-\begin_layout Standard
-models with weak covariates revert toward predicting the mean and therefore
- 
-\end_layout
-
-\begin_layout Standard
-Intuitively, models with weaker covariates tend to revert to predicting
- the mean
-\end_layout
-
-\begin_layout Standard
-The intuition behind this result is straightforward: models without informative
- covariates 
+ Stated differently, the models with remotely-sensed covariates understate
+ the spatial distribution of poverty.
+ This result occurs because the predictions collapse toward the mean in
+ the absence of informative covariates, which produces predictable biases
+ in the tails of the distribution.
+ Both models using remotely-sensed covariates understate the spatial distributio
+n of poverty to a similar extent, and the issue diminishes considerably
+ when using census-based covariates.
 \end_layout
 
 \begin_layout Standard
