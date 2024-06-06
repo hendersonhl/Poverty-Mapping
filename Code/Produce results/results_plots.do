@@ -287,6 +287,9 @@ graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitl
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-5a.png", as(png) replace
 
+* Select descriptive statistics
+sum
+
 
 *===============================================================================
 * Figure 5b
