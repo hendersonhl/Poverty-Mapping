@@ -329,19 +329,72 @@ merge 1:1 muni using `FH_CEN', keepusing(bias_fh_mun)
 drop if _m==2
 drop _m
 
-* Collapse and plot	
+* Create plot
+twoway (lowess bias_gb_gis_ntl poor, lpattern(solid) lcolor(black)) ///
+    (lowess bias_gb_census poor, lpattern(shortdash) lcolor(black)) ///
+    (lowess bias_fh_mun_gis_ntl poor, lpattern(solid) lcolor(gray)) ///
+    (lowess bias_fh_mun poor, lpattern(dash) lcolor(gray)), ///
+	scheme(s1mono) xtitle("Poverty Rate") ytitle("Bias") ///
+	legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
+	label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
+graph export "$outpath/Figure-5b.png", as(png) replace
+
+	*ring(0) ///
+	*position(8) size(0.1in))
+
+
+*===============================================================================
+* Figure 6
+*===============================================================================
+
+* Import survey information
+import delimited "$main/Data/svydata_mun.csv", clear
+collapse (count) sim_sample, by(mimun)
+rename sim_sample coverage 
+replace coverage = coverage/500
+rename mimun muni
+tempfile coverage
+save `coverage'
+
+* Import true poverty rates and calculate ranks
+import delimited "$main/Data/true_mun.csv", clear
 xtile pov_rank = poor, nq(50)
 replace pov_rank = 51 - pov_rank  // Reverse order
-collapse bias*, by(pov_rank)
-twoway (line bias_gb_gis_ntl pov_rank, lpattern(solid) lcolor(black)) ///
-    (line bias_gb_census pov_rank, lpattern(shortdash) lcolor(black)) ///
-    (line bias_fh_mun_gis_ntl pov_rank, lpattern(solid) lcolor(gray)) ///
-    (line bias_fh_mun pov_rank, lpattern(dash) lcolor(gray)), ///
-	ytitle(Average Bias) xtitle(Poverty Quantile (Poorest to Richest)) scheme(s1mono) ///
-	legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
-	label(3 "Area-level (GIS)") label(4 "Area-level (CEN)") ///
-    symxsize(*0.7) size(*.88)) 
-graph export "$outpath/Figure-5b.png", as(png) replace
+keep mimun pov_rank
+rename mimun muni
+tempfile ranks
+save `ranks'
+
+* Bring in area-level bias results w/ GIS covariates
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun_gis_ntl
+rename area muni
+tempfile FH_GIS
+save `FH_GIS'
+
+* Merge 
+import delimited "$inpath/results_bias.csv", clear
+merge 1:1 muni using `FH_GIS', keepusing(bias_fh_mun_gis_ntl)
+drop _m
+merge 1:1 muni using `ranks'
+drop _merge
+merge 1:1 muni using `coverage'
+drop _merge
+
+* Create plot
+twoway (scatter bias_gb_gis_ntl coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
+(lowess bias_gb_gis_ntl coverage,  lcolor(gs12) lwidth(medthick)) ///
+(scatter bias_fh_mun_gis_ntl coverage, mcolor(black) msymbol(circle) msize(small)) ///
+(lowess bias_fh_mun_gis_ntl coverage,  lcolor(black) lwidth(medthick)) ///
+if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+legend(order(1 "Gradient Boosting (GIS)" 3 "Area-level (GIS)"))
+
+
+
+	
+
+
 
 
 
