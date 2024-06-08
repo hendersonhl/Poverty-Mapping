@@ -248,8 +248,96 @@ graph export "$outpath/Figure-4.png", as(png) replace
 
 
 *===============================================================================
-* Figure 5a
+* Figure 5a and 5b
 *===============================================================================
+
+* Bring in bias results
+import delimited "$inpath/results_bias.csv", clear
+keep muni bias_gb_gis_ntl bias_gb_census
+tempfile bias
+save `bias'
+
+* Bring in area-level MSE results w/ census covariates
+use "$inpath/fh_mun_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun
+rename area muni
+tempfile FH_CEN_mse
+save `FH_CEN_mse'
+
+* Bring in area-level bias results w/ census covariates
+use "$inpath/fh_mun_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun
+rename area muni
+tempfile FH_CEN_bias
+save `FH_CEN_bias'
+
+* Bring in area-level MSE results w/ GIS covariates
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+keep if variable == "mse_fh"
+rename value mse_fh_mun_gis_ntl
+rename area muni
+tempfile FH_GIS_mse
+save `FH_GIS_mse'
+
+* Bring in area-level bias results w/ GIS covariates
+use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun_gis_ntl_ntl
+rename area muni
+tempfile FH_GIS_bias
+save `FH_GIS_bias'
+
+* Merge 
+import delimited "$inpath/results_mse.csv", clear
+keep muni mse_gb_gis_ntl mse_gb_census
+merge 1:1 muni using `FH_CEN_mse', keepusing(mse_fh_mun)
+drop if _m==2
+drop _m
+merge 1:1 muni using `FH_GIS_mse', keepusing(mse_fh_mun_gis_ntl)
+drop if _m==2
+drop _m	
+merge 1:1 muni using `bias'
+drop if _m==2
+drop _m
+merge 1:1 muni using `FH_CEN_bias', keepusing(bias_fh_mun)
+drop if _m==2
+drop _m
+merge 1:1 muni using `FH_GIS_bias', keepusing(bias_fh_mun_gis_ntl)
+drop if _m==2
+drop _m	
+
+* Calculate variance for each model
+gen var_gb_census = mse_gb_census - bias_gb_census^2
+gen var_gb_gis_ntl = mse_gb_gis_ntl - bias_gb_gis_ntl^2
+gen var_fh_mun = mse_fh_mun - bias_fh_mun^2
+gen var_fh_mun_gis_ntl = mse_fh_mun_gis_ntl - bias_fh_mun_gis_ntl^2
+
+* Variance plot
+label var var_gb_gis_ntl "Gradient Boosting (GIS)"
+label var var_gb_census "Gradient Boosting (CEN)"
+label var var_fh_mun_gis_ntl "Area-level (GIS)"   	
+label var var_fh_mun "Area-level (CEN)"   
+graph hbox var_gb_gis_ntl var_gb_census var_fh_mun_gis_ntl var_fh_mun, ytitle(Variance) ///
+    scheme(s1mono) legend(off) nooutside note("") showyvars ///
+	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+
+* Bias plot
+label var bias_gb_gis_ntl "Gradient Boosting (GIS)"
+label var bias_gb_census "Gradient Boosting (CEN)"
+label var bias_fh_mun_gis_ntl "Area-level (GIS)"   	
+label var bias_fh_mun "Area-level (CEN)" 
+graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitle(Bias) ///
+    scheme(s1mono) legend(off) nooutside note("") showyvars ///
+	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+	
+* Select descriptive statistics
+sum
+	
+	
+
+
 
 * Bring in area-level bias results w/ census covariates
 use "$inpath/fh_mun_mse_bias.dta", clear
@@ -292,7 +380,7 @@ sum
 
 
 *===============================================================================
-* Figure 5b
+* Figure 6a
 *===============================================================================
 
 * Bring in area-level bias results w/ GIS covariates
@@ -337,14 +425,11 @@ twoway (lowess bias_gb_gis_ntl poor, lpattern(solid) lcolor(black)) ///
 	scheme(s1mono) xtitle("Poverty Rate") ytitle("Bias") ///
 	legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
 	label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
-graph export "$outpath/Figure-5b.png", as(png) replace
-
-	*ring(0) ///
-	*position(8) size(0.1in))
+graph export "$outpath/Figure-6a.png", as(png) replace
 
 
 *===============================================================================
-* Figure 6
+* Figure 6b
 *===============================================================================
 
 * Import survey information
@@ -373,9 +458,19 @@ rename area muni
 tempfile FH_GIS
 save `FH_GIS'
 
+* Bring in area-level bias results w/ census covariates
+use "$inpath/fh_mun_mse_bias.dta", clear
+keep if variable == "bias_fh"
+rename value bias_fh_mun
+rename area muni
+tempfile FH_CEN
+save `FH_CEN'
+
 * Merge 
 import delimited "$inpath/results_bias.csv", clear
 merge 1:1 muni using `FH_GIS', keepusing(bias_fh_mun_gis_ntl)
+drop _m
+merge 1:1 muni using `FH_CEN', keepusing(bias_fh_mun)
 drop _m
 merge 1:1 muni using `ranks'
 drop _merge
@@ -391,8 +486,22 @@ if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
 legend(order(1 "Gradient Boosting (GIS)" 3 "Area-level (GIS)"))
 
 
+twoway (scatter bias_gb_census coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
+(lowess bias_gb_census coverage,  lcolor(gs12) lwidth(medthick)) ///
+(scatter bias_fh_mun coverage, mcolor(black) msymbol(circle) msize(small)) ///
+(lowess bias_fh_mun coverage,  lcolor(black) lwidth(medthick)) ///
+if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+legend(order(1 "Gradient Boosting (CEN)" 3 "Area-level (CEN)"))
 
-	
+
+twoway (lowess bias_gb_gis_ntl coverage, lpattern(solid) lcolor(black)) ///
+(lowess bias_gb_census coverage, lpattern(shortdash) lcolor(black)) ///
+(lowess bias_fh_mun_gis_ntl coverage, lpattern(solid) lcolor(gray)) ///
+(lowess bias_fh_mun coverage, lpattern(dash) lcolor(gray)) ///
+if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
+label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
+graph export "$outpath/Figure-6b.png", as(png) replace
 
 
 
