@@ -447,29 +447,6 @@ twoway (lowess bias_gb_gis_ntl coverage, lpattern(solid) lcolor(black)) ///
     graph export "$outpath/Figure-6b.png", as(png) replace
 
 
-twoway (scatter bias_gb_gis_ntl coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
-    (lowess bias_gb_gis_ntl coverage,  lcolor(gs12) lwidth(medthick)) ///
-    (scatter bias_fh_mun_gis_ntl coverage, mcolor(black) msymbol(circle) msize(small)) ///
-    (lowess bias_fh_mun_gis_ntl coverage,  lcolor(black) lwidth(medthick)) ///
-    if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
-    legend(order(1 "Gradient Boosting (GIS)" 3 "Area-level (GIS)"))
-
-
-twoway (scatter bias_gb_census coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
-(lowess bias_gb_census coverage,  lcolor(gs12) lwidth(medthick)) ///
-(scatter bias_fh_mun coverage, mcolor(black) msymbol(circle) msize(small)) ///
-(lowess bias_fh_mun coverage,  lcolor(black) lwidth(medthick)) ///
-if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
-legend(order(1 "Gradient Boosting (CEN)" 3 "Area-level (CEN)"))
-
-
-
-
-
-
-
-
-
 *===============================================================================
 * Old stuff below
 *===============================================================================
