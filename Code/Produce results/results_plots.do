@@ -322,6 +322,7 @@ label var var_fh_mun "Area-level (CEN)"
 graph hbox var_gb_gis_ntl var_gb_census var_fh_mun_gis_ntl var_fh_mun, ytitle(Variance) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+graph export "$outpath/Figure-5a.png", as(png) replace
 
 * Bias plot
 label var bias_gb_gis_ntl "Gradient Boosting (GIS)"
@@ -331,54 +332,12 @@ label var bias_fh_mun "Area-level (CEN)"
 graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+graph export "$outpath/Figure-5b.png", as(png) replace
 	
 * Select descriptive statistics
 sum
 	
 	
-
-
-
-* Bring in area-level bias results w/ census covariates
-use "$inpath/fh_mun_mse_bias.dta", clear
-keep if variable == "bias_fh"
-rename value bias_fh_mun
-rename area muni
-tempfile FH_CEN_bias
-save `FH_CEN_bias'
-
-* Bring in area-level bias results w/ GIS covariates
-use "$inpath/fh_mun_gis_ntl_mse_bias.dta", clear
-keep if variable == "bias_fh"
-rename value bias_fh_mun_gis_ntl
-rename area muni
-tempfile FH_GIS_bias
-save `FH_GIS_bias'
-
-* Bring in bias results
-import delimited "$inpath/results_bias.csv", clear
-keep muni bias_gb_gis_ntl bias_gb_census bias_eb bias_uc
-merge 1:1 muni using `FH_CEN_bias', keepusing(bias_fh_mun)
-drop if _m==2
-drop _m
-merge 1:1 muni using `FH_GIS_bias', keepusing(bias_fh_mun_gis_ntl)
-drop if _m==2
-drop _m
-
-* Bias plot 
-label var bias_gb_gis_ntl "Gradient Boosting (GIS)"
-label var bias_gb_census "Gradient Boosting (CEN)"
-label var bias_fh_mun_gis_ntl "Area-level (GIS)"   	
-label var bias_fh_mun "Area-level (CEN)"   
-graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitle(Bias) ///
-    scheme(s1mono) legend(off) nooutside note("") showyvars ///
-	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
-graph export "$outpath/Figure-5a.png", as(png) replace
-
-* Select descriptive statistics
-sum
-
-
 *===============================================================================
 * Figure 6a
 *===============================================================================
@@ -478,12 +437,22 @@ merge 1:1 muni using `coverage'
 drop _merge
 
 * Create plot
+twoway (lowess bias_gb_gis_ntl coverage, lpattern(solid) lcolor(black)) ///
+    (lowess bias_gb_census coverage, lpattern(shortdash) lcolor(black)) ///
+    (lowess bias_fh_mun_gis_ntl coverage, lpattern(solid) lcolor(gray)) ///
+    (lowess bias_fh_mun coverage, lpattern(dash) lcolor(gray)) ///
+    if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+    legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
+    label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
+    graph export "$outpath/Figure-6b.png", as(png) replace
+
+
 twoway (scatter bias_gb_gis_ntl coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
-(lowess bias_gb_gis_ntl coverage,  lcolor(gs12) lwidth(medthick)) ///
-(scatter bias_fh_mun_gis_ntl coverage, mcolor(black) msymbol(circle) msize(small)) ///
-(lowess bias_fh_mun_gis_ntl coverage,  lcolor(black) lwidth(medthick)) ///
-if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
-legend(order(1 "Gradient Boosting (GIS)" 3 "Area-level (GIS)"))
+    (lowess bias_gb_gis_ntl coverage,  lcolor(gs12) lwidth(medthick)) ///
+    (scatter bias_fh_mun_gis_ntl coverage, mcolor(black) msymbol(circle) msize(small)) ///
+    (lowess bias_fh_mun_gis_ntl coverage,  lcolor(black) lwidth(medthick)) ///
+    if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+    legend(order(1 "Gradient Boosting (GIS)" 3 "Area-level (GIS)"))
 
 
 twoway (scatter bias_gb_census coverage, mcolor(gs12) msymbol(circle) msize(small)) ///
@@ -494,14 +463,7 @@ if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
 legend(order(1 "Gradient Boosting (CEN)" 3 "Area-level (CEN)"))
 
 
-twoway (lowess bias_gb_gis_ntl coverage, lpattern(solid) lcolor(black)) ///
-(lowess bias_gb_census coverage, lpattern(shortdash) lcolor(black)) ///
-(lowess bias_fh_mun_gis_ntl coverage, lpattern(solid) lcolor(gray)) ///
-(lowess bias_fh_mun coverage, lpattern(dash) lcolor(gray)) ///
-if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
-legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
-label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
-graph export "$outpath/Figure-6b.png", as(png) replace
+
 
 
 
