@@ -427,9 +427,9 @@ machine learning,
 status collapsed
 
 \begin_layout Plain Layout
-Nevertheless, traditional area-level metods have made considerable use of
- remotely sensed covariates and often rely on using data available at the
- area-level, including administrative data (see 
+Nevertheless, traditional area-level methods have made considerable use
+ of remotely sensed covariates and often rely on using data available at
+ the area-level, including administrative data (see 
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "seitz2019they"
@@ -598,7 +598,7 @@ The results of our simulations can be summarized as follows.
  include census-based covariates.
  We find that these performance issues are largely due to the limited predictive
  power of remotely-sensed covariates relative to census-based covariates.
- When comparing machine learning based methedos to traditional small area
+ When comparing machine learning based methods to traditional small area
  methods using similar data, then machine learning methods perform just
  as well or better to traditional methods.
  Finally, our targeting simulations which rely on accurate rankings of locations
@@ -1910,7 +1910,7 @@ name "sec:validation"
 
 \begin_layout Standard
 The different methods for poverty mapping are assessed on how well they
- predict the true poverty rates acorss all municipalities.
+ predict the true poverty rates across all municipalities.
 \begin_inset Foot
 status collapsed
 
@@ -1948,7 +1948,7 @@ literal "false"
 \end_inset
 
 .
- Specifically, the bias of mehtod 
+ Specifically, the bias of method 
 \begin_inset Formula $j$
 \end_inset
 
@@ -2006,7 +2006,7 @@ where
 \begin_inset Formula $y_{i}$
 \end_inset
 
- is the true poverty rate taken from pur population.
+ is the true poverty rate taken from our population.
  The mean squared error in Eq.
 \begin_inset space \thinspace{}
 \end_inset
@@ -2436,7 +2436,7 @@ ities according to their true poverty rate.
  The unit-level model achieves a median poverty rate of 20 percent whereas
  the area-level and unit-context models achieve median rates of 20.04 and
  20.01, respectively.
- In short, our implementation of the modern approach underperforms both
+ In short, our implementation of the modern approach under-performs both
  in terms of MSE and poverty reduction.
 \end_layout
 
@@ -2653,8 +2653,8 @@ noprefix "false"
  Importantly, gradient boosting with census-based covariates slightly outperform
 s the area-level model, which achieves a median MSE of 0.004 and a median
  poverty rate of 20.04 when using the same covariates.
- The performance differences between the modern and traditional approaches
- are thus largely driven by covariate quality.
+ The under-performance of the modern approach is thus largely driven by
+ covariate quality.
 \end_layout
 
 \begin_layout Standard
@@ -2816,9 +2816,8 @@ GIS
  the 500 samples.
  We find that all of the top 10 covariates are census-based, with only six
  remotely-sensed covariates entering the top 20.
- The immediate implication of these results is that mapping exercises should
- incorporate census-based covariates when possible.
- 
+ Further, the feature importances outside the top 10 are relatively small
+ in magnitude.
 \end_layout
 
 \begin_layout Standard
@@ -2866,68 +2865,33 @@ name "fig:feature"
 \end_layout
 
 \begin_layout Standard
-For those situations where census data is unavailable, it is important to
- consider whether poverty maps produced with remotely-sensed covariates
- will be distorted in any predictable way.
- Accordingly, we use Eq.
- [XX] to calculate municipality-level bias estimates for the gradient boosting
- model with remotely-sensed covariates.
- We benchmark these estimates against gradient boosting with census-based
- covariates and two implementations of the area-level model (i.e., one for
- each covariate type).
- Panel (a) in Figure 
+The above results suggest that gradient boosting can approximate the performance
+ of the unit-level model and outperform the area-level model when using
+ the same covariates.
+ The aggregated nature of our performance comparisons thus far, however,
+ mask some important differences between the methods.
+ To illustrate these differences, we first use the variance-bias decomposition
+ presented in Eq.
+ [XX] and plot the two components independently.
+ Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:bias"
+reference "fig:decomposition"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- presents boxplots associated with each of these four models and shows that
- all models are unbiased at the median.
- The models using remotely-sensed covariates nevertheless exhibit wide variation
- in the bias estimates, implying that the estimated poverty rates for some
- municipalities are severely biased.
- For example, the minimum and maximum bias estimates for gradient boosting
- with remotely-sensed covariates are -45 and 40 percentage points, respectively.
-\end_layout
-
-\begin_layout Standard
-To depict the source of this bias, panel (b) in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:bias"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- plots the average bias for each 
-\begin_inset Quotes eld
-\end_inset
-
-poverty quantile.
-\begin_inset Quotes erd
-\end_inset
-
- That is, we order all municipalities by their true poverty rates, divide
- them into 50 quantiles, and calculate the average bias for each quantile
- for several alternative models.
- We see that the models with remotely-sensed covariates severely under-estimate
- poverty for the municipalities with the highest true poverty rates and
- over-estimate poverty for the municipalities with the lowest true poverty
- rates.
- Stated differently, the models with remotely-sensed covariates understate
- the spatial distribution of poverty.
- This result occurs because the predictions collapse toward the mean in
- the absence of informative covariates, which produces predictable biases
- in the tails of the distribution.
- Both models using remotely-sensed covariates understate the spatial distributio
-n of poverty to a similar extent, and the issue diminishes considerably
- when using census-based covariates.
+ presents boxplots summarizing the distribution of the variance component
+ across municipalities for select models.
+ We see that gradient boosting is associated with lower variance estimates
+ than the area-level model for any given set of covariates.
+ For example, the median variance for gradient boosting with remotely-sensed
+ covariates is 0.002 whereas the median variance for the area-level model
+ with the same covariates is 0.005.
+ This result is due to gradient boosting's use of regularization, which
+ reduces the variance of the poverty estimates.
 \end_layout
 
 \begin_layout Standard
@@ -2961,7 +2925,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bias
+Variance
 \end_layout
 
 \end_inset
@@ -2987,6 +2951,133 @@ status open
 \align center
 \begin_inset Graphics
 	filename Figure-5b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variance-bias decomposition for select models 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:decomposition"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Panel (b) presents the bias component of the decomposition for the same
+ set of models and shows that all the models depicted are approximately
+ unbiased at the median.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The variance-bias decomposition shows that the MSE is the sum of the variance
+ and the squared bias of the estimates.
+ To illustrate both underestimates and overestimates, we do not square the
+ bias estimates.
+\end_layout
+
+\end_inset
+
+ The models using remotely-sensed covariates nevertheless exhibit wide variation
+ in the bias estimates, implying that the estimated poverty rates for some
+ municipalities are severely biased.
+ For example, the minimum and maximum bias estimates for gradient boosting
+ with remotely-sensed covariates are -45 and 40 percentage points, respectively.
+ The area-level model exhibits similar variation in the bias estimates when
+ using remotely-sensed covariates, indicating that weak predictors can produce
+ considerable biases for both methods, at least for some municipalities.
+ While gradient boosting and the area-level model appear to be similarly
+ biased for any given covariate set, a closer look at the source of these
+ biases reveals an important shortcoming of gradient boosting.
+\end_layout
+
+\begin_layout Standard
+To this end, panel (a) of Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:poverty_sampling"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ plots the municipality-level bias estimates from select models on the true
+ municipality poverty rates.
+ For each model, we fit a lowess curve to the data to show the (weighted)
+ average of the bias estimates at different true poverty rates.
+ The figure shows the source of the aforementioned bias variability: both
+ models with remotely-sensed covariates severely overestimate poverty in
+ the least poor municipalities and underestimate poverty in the most poor
+ municipalities.
+ Stated differently, the models with remotely-sensed covariates understate
+ the spatial distribution of poverty.
+ This result occurs because the predictions collapse toward the mean in
+ the absence of informative covariates, which produces predictable biases
+ in the tails of the distribution.
+ Interestingly, for both covariate types, the area-level model is less biased
+ for the poorest municipalities.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6a.png
 	lyxscale 20
 	scale 30
 
@@ -3010,6 +3101,44 @@ Bias by poverty rate
 \end_inset
 
 
+\begin_inset space \hspace{}
+\length 0cm
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename Figure-6b.png
+	lyxscale 20
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bias by sampling frequency
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -3018,10 +3147,10 @@ Bias by poverty rate
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bias for select models with alternative covariates 
+Bias by poverty rate and sampling frequency
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:bias"
+name "fig:poverty_sampling"
 
 \end_inset
 
@@ -3039,1185 +3168,60 @@ name "fig:bias"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-Recall that the Intracensal survey is treated as the true population, whose
- poverty rates we are trying to estimate.
- Panel (a) of Figure 
+Panel (b) in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:mse"
+reference "fig:poverty_sampling"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- presents our MSE results for several alternative models.
- One advantage of the MSE is that it can be calculated for each geographical
- entity.
- As such, each box plot in panel (a) of Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mse"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- summarizes the distribution of municipality-level MSE estimates rather
- than the aggregate MSE for each sample (i.e., the results are based on Eq.
- [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mseg"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-]).
-\end_layout
-
-\begin_layout Plain Layout
-The results presented consider 4 different methods: 1) gradient boosting,
- 2) area-level (Fay Herriot), 3) unit-level, and 4) unit context.
- Models 2-4 are all more traditional methods that we use to benchmark the
- performance of gradient boosting.
- In particular, we present the unit-level (obtained with CensusEB methods),
- unit-context (obtained with CensusEB methods),
+ shows that the area-level model is less biased for the poorest municipalities
+ in part because its in-sample predictions are a weighted average of the
+ model-based estimates and the (unbiased) direct estimates.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Unit-context methods are fit with contextual covariates at the PSU and municipal
-ity level, and no household level covariates.
-\end_layout
-
-\end_inset
-
- and area-level models (obtained with Fay Herriot).
- We consider different alternative implementations of the area-level model
- that, much like for gradient boosting, vary the covariates used.
- For these traditional models, all available covariates enter the models
- linearly (i.e., we do not include interaction or quadratic terms).
-\end_layout
-
-\begin_layout Plain Layout
-The first two models in Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mse"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- apply gradient boosting and models 3 and 4 are Fay-Herriot area-level models.
- All four rely on geo-referenced covariates (
-\begin_inset Quotes eld
-\end_inset
-
-GIS
-\begin_inset Quotes erd
-\end_inset
-
-) but those indicated by 
-\begin_inset Quotes eld
-\end_inset
-
-GIS-NTL
-\begin_inset Quotes erd
-\end_inset
-
- add night time lights (NTL) to the set of eligible covariates.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Recall that the geo-referenced covariates are only available at the municipality
- level.
-\end_layout
-
-\end_inset
-
- The addition of NTL showcases the importance of having covariates that
- are sufficiently correlated to the dependent variable, regardless of the
- method used.
- In this instance, better data leads to less noisy predictions as can be
- seen by comparing the MSE of 
-\begin_inset Quotes eld
-\end_inset
-
-GIS
-\begin_inset Quotes erd
-\end_inset
-
- and 
-\begin_inset Quotes eld
-\end_inset
-
-GIS-NTL
-\begin_inset Quotes erd
-\end_inset
-
- models.
- Choosing the right method can also lead to better predictions as can be
- seen by comparing area-level models and gradient boosting models.
- The median municipality has an MSE of 0.008 under gradient boosting (
-\begin_inset Quotes eld
-\end_inset
-
-GIS
-\begin_inset Quotes erd
-\end_inset
-
-), while the addition of NTL to the gradient boosting model lowers the median
- MSE to 0.007.
- For area level models there is hardly a difference in the median MSE and
- the mean is slightly higher for the area-level model that does not include
- night time lights (0.21 to 0.18), the median for both is roughly 0.01.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Despite the improvement achieved by adding NTL data to the eligible set
- of covariates, it is still not sufficient to compete with models that use
- census aggregates as covariates.
- Area-level models with census aggregates used as covariates outperform
- gradient boosting estimates obtained with geo-referenced data.
- In this case, models relying solely on GIS data need data that is much
- better correlated to poverty in order to compete with models that use census
- aggregate data.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Gradient boosting models that rely on census aggregates as covariates are
- able to perform nearly as well as unit-level models (obtained with CensusEB
- methods).
- Unit-level models are much more data demanding and rely on household and
- area level covariates – including covariates at the PSU and municipality
- level.
- In this case, the gradient boosting implementations at the municipality
- level achieves a median MSE value of around 0.003, similar to the “gold
- standard” unit-level model.
- The spread of the MSE for gradient boosting models is a bit wider as can
- be seen in the box-plot (
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mse"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- The remaining traditional methods, area-level (CEN) and unit-context (CEN),
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Unit-context models are fit using PSU and municipality level covariates.
- Recall that the dependent variable in unit-context models is household
- level income.
-\end_layout
-
-\end_inset
-
- that use census-based covariates all achieve a median MSE of roughly 0.004.
- The mean of the area-level (CEN) model is 0.007 while that of the unit-context
- (CEN) is close to 0.009.
- These results suggest that, when using the same data, gradient boosting
- performs nearly as well as the unit-level model and better than the unit-contex
-t and area-level models.
- Given that traditional small area methods tend to make more use of the
- data at hand
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The traditional small area estimates rely on empirical best methods.
- For more details on how these improve predictions see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- the performance of gradient boosting is somewhat surprising.
- It may be due to the fact that gradient boosting accommodates more flexible
- functional forms or it may be something specific to the Mexican data.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-2a.png
-	lyxscale 20
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-2b.png
-	lyxscale 20
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error and bias for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:mse"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The bias associated with poverty estimates is especially important due to
- the policy relevance of understanding absolute living standards.
- In panel (b) of Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:mse"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-, we thus present box plots for the municipality-level bias estimates associated
- with each model (see Eq.
- [
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mseg"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-] for the bias-variance decomposition of the MSE).
- The median municipality's bias for all models is approximately zero, with
- the exception of the unit-context model where the median municipality has
- a bias of -0.03.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The same issue for unit-context models is noted and discussed more in depth
- by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2021map"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2022guidelines"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- Perhaps the more interesting result is that the bias estimates from the
- gradient boosting model with geo-referenced covariates exhibits considerable
- variation, with minimum and maximum biases reaching -0.43 and 0.43, respectively.
- Adding NTL to the set of covariates lowers this range by a small amount.
- This suggests the standard implementation with remotely-sensed covariates
- is quite biased for some municipalities, even though the bias for the median
- municipality is approximately zero.
- All other models, including the competing unit-context and area-level models
- which use census aggregate data, exhibit much less variation.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3.png
-	scale 25
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Feature importance
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:importance"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-HERE - need to run the importance figures with NTL.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The performance of machine learning appears to depend heavily on the covariates
- used in the model, with NTL and census-based covariates considerably improving
- model performance.
- Another way to see that the census-based covariates have greater predictive
- power than the remotely-sensed covariates is by looking at feature importance.
- One popular measure of feature importance summarizes the gain (i.e., reduction
- of the loss function) associated with any given feature.
- That is, for a given run of the model, feature importance captures the
- average gain of a given feature, where the gains are averaged across all
- trees in the model.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-In addition, the average gains for a given run of the model are normalized
- by dividing each by the sum of all average gains for that run.
-\end_layout
-
-\end_inset
-
- Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:importance"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- plots the 20 covariates with the highest feature importance after running
- gradient boosting with all covariates on each sample and averaging each
- covariate's importance across the 500 samples.
- We find that all of the top 10 covariates are census-based, with only five
- geo-referenced covariates entering the top 20.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-4a.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-4b.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error and bias by poverty quantiles for select models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:quantiles"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:quantiles"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- presents MSE and bias estimates for various models across different 
-\begin_inset Quotes eld
-\end_inset
-
-poverty quantiles.
-\begin_inset Quotes erd
-\end_inset
-
- That is, we order all municipalities by their true poverty rates, divide
- them into 50 quantiles, and calculate the average MSE and bias for each
- quantile.
- For the sake of simplicity, we only present results for two machine-learning
- models – the municipality-level models using only geo-referenced and census-bas
-ed covariates – and select traditional methods.
- Panel (a) presents the MSE results and panel (b) presents the bias results.
- In both plots, gradient boosting with census-based covariates performs
- quite similarly to the 
-\begin_inset Quotes eld
-\end_inset
-
-gold standard
-\begin_inset Quotes erd
-\end_inset
-
- unit-level model across all quantiles.
- However, gradient boosting with geo-referenced covariates again departs
- considerably from this benchmark, particularly at the lowest and highest
- quantiles.
- The bias results are particularly notable: the model with geo-referenced
- covariates systematically underestimates poverty at the lowest quantiles
- and overestimates poverty at the highest quantiles.
- The standard implementation thus understates the spatial distribution of
- poverty.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Comment
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_1a.png
-	scale 18
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Design MSE
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_2a.png
-	scale 18
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Design bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models among
- 20 percent least likely to be sampled municipalities 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q1"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Empirical design MSE and bias with alternative machine-learning models among
- 20 percent most likely to be sampled municipalities 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ll_sample_q5"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_1b.png
-	scale 18
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Design MSE
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-3_2b.png
-	scale 18
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Design bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-An additional consideration is how the methods perform for predictions which
- are out of sample.
- Because the experiment consists of 500 samples taken from the census data,
- a given municipality may be present in one of the samples and may be absent
- in others.
- Consequently, to evaluate out of sample properties we rank municipalities
- by their likelihood of selection across the 500 samples.
- The likelihood of being present ranges from 0.09 to 1, with a median of
- 0.48 and a mean of 0.53.
- Among the 20 percent least likely to be sampled municipalities, the gradient
- boosting model with GIS-based covariates is the worst performing in terms
- of MSE followed closely by unit-context models (Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ll_sample_q1"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- In terms of bias among the 20 percent of municipalities that are least
- likely to be sampled, the gradient boosting model with the geo-referenced
- covariates shows very wide variability, while unit context models show
- downward bias.
- The other gradient boosting models perform similarly to unit-level models
- in terms of bias and MSE.
- The performance, in terms of MSE, of the different methods seems to improve
- with the likelihood of being selected.
- Among municipalities most likely to be selected, the gradient boosting
- model with the geo-referenced covariates is still the worst performing
- (Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ll_sample_q5"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-).
- However, in terms of bias, among the most likely to be selected municipalities,
- the bias of Fay-Herriot methods at the municipality level is the best performin
-g illustrating the importance of the method's EBLUP.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-5a.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hspace{}
-\length 0cm
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-5b.png
-	scale 17
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Bias
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Mean squared error and bias for alternative machine learning models 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:ml"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-While we have focused on the performance of gradient boosting up to this
- point, there are nevertheless several other machine-learning models that
- can be used for poverty mapping.
- Leading alternatives include the least absolute shrinkage and selection
- operator (lasso) 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "tibshirani1996"
-literal "false"
-
-\end_inset
-
-, the random forest 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "breiman2001"
-literal "false"
-
-\end_inset
-
-, and Bayesian additive regression trees (BART) 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "chipman2010bart"
-literal "false"
-
-\end_inset
-
-.
- While the lasso is a simple way to conduct variable selection and regularizatio
-n in the context of linear regression, the random forest and BART models
- are similar to gradient boosting in that they all rely on regression tree
- frameworks.
- We ask whether these alternative models can perform better than gradient
- boosting within the confines of the standard implementation, which relies
- exclusively on remotely-sensed covariates.
- Panels (a) and (b) of Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:ml"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- present the MSE and bias results for all models.
- With the possible exception of the lasso, we find that all models perform
- comparably, meaning that the performance of gradient boosting when using
- geo-referenced covariates cannot be remedied by simply adopting a different
- machine-learning model.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename Figure-6.png
-	scale 25
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Poverty targeting 
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:targeting"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Finally, recall from Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:validation"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- that we argued that the ultimate concern with poverty mapping is to understand
- how different methodological choices affect poverty alleviation.
- Figure 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:targeting"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- thus compares the machine-learning and traditional approaches in terms
- of their ability to reduce poverty in the context of our targeting simulations.
- In these simulations, which is dependent just on the poverty ranking, a
- hypothetical poverty-alleviation program targeted on the basis of 
-\shape italic
-true
-\shape default
- municipality-level poverty rates is able to reduce the overall poverty
- headcount to just under 20 percent, a 5 percentage point improvement.
- While the achieved poverty rates of all models fall within the 20 percent
- range, we find that gradient boosting with geo-referenced covariates is
- one of the worst performing models.
- With the exception of the area-level model using geo-referenced covariates,
- the standard gradient boosting implementation relying on geospatial covariates
- is thus outperformed by all traditional methods, including those that are
- direct competitors.
- However, when incorporating census-based covariates, we find that gradient
- boosting achieves poverty rates that are comparable to the traditional
- methods, yet again showing that an exclusive reliance on remotely-sensed
- data can limit the performance of the machine learning.
-\end_layout
-
-\begin_layout Plain Layout
-The results of the targeting simulation are relevant to cases where targeting
- is based solely on the ranking of municipalities – all methods appear to
- do a solid job.
- Nevertheless, there are many instances where the targeting mechanism may
- rely on the method's poverty estimates.
- For example, Senegal's Unique National Registry (RNU - in French) of vulnerable
- households relies on actual estimates from poverty maps to determine the
- quotas for sampling by municipality (Ferre 
-\begin_inset CommandInset citation
-LatexCommand citeyear
-key "ferresenegal"
-literal "false"
-
-\end_inset
-
-).
- It is in those cases where a method that yields unbiased and precise estimates
- should be employed.
-\end_layout
-
-\end_inset
-
-
+By contrast, gradient boosting relies exclusively on the model-based estimates
+ and only incorporates the direct estimates when fitting the model.
+\end_layout
+
+\end_inset
+
+ For each model depicted, we focus on the 20 percent of municipalities with
+ the lowest true poverty rate, plot the municipality-level bias estimates
+ on the frequency with which a municipality was sampled, and then fit a
+ lowess curve to the data.
+ The sampling frequencies capture the proportion of samples for which a
+ municipality received an in-sample prediction, thus benefitting from the
+ area-level model's averaging procedure.
+ As expected, we see that the area-level model is relatively less biased
+ for municipalities with higher sampling frequencies.
+ The performance disparity is particularly pronounced among the models with
+ remotely-sensed covariates, as the area-level model is roughly 10 percentage
+ points less biased at the highest sampling frequencies.
+\end_layout
+
+\begin_layout Standard
+To summarize, our implementation of the modern approach to poverty mapping
+ under-performs relative to the traditional approach both in terms of MSE
+ and poverty reduction.
+ We have shown that this under-performance is driven by the modern approach's
+ reliance on remotely-sensed covariates.
+ When using the same covariates, we found that gradient boosting performs
+ comparably to the unit-level model and slightly outperforms the area-level
+ model.
+ Focusing on the MSE, we showed that the performance advantage of gradient
+ boosting relative to the area-level model is largely due to its variance-reduct
+ion properties.
+ The cost of such variance reduction, however, is that gradient boosting
+ exhibits relatively more bias in the tails of the poverty distribution
+ than the area-level model.
+ In the following section, we discuss the practical implications of these
+ findings.
 \end_layout
 
 \begin_layout Section

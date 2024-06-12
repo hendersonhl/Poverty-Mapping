@@ -335,7 +335,7 @@ graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitl
 graph export "$outpath/Figure-5b.png", as(png) replace
 	
 * Select descriptive statistics
-sum
+sum var*, detail
 	
 	
 *===============================================================================
@@ -441,7 +441,7 @@ twoway (lowess bias_gb_gis_ntl coverage, lpattern(solid) lcolor(black)) ///
     (lowess bias_gb_census coverage, lpattern(shortdash) lcolor(black)) ///
     (lowess bias_fh_mun_gis_ntl coverage, lpattern(solid) lcolor(gray)) ///
     (lowess bias_fh_mun coverage, lpattern(dash) lcolor(gray)) ///
-    if pov_rank<=10, scheme(s1mono) xtitle(Coverage Frequency) ytitle(Bias) ///
+    if pov_rank<=10, scheme(s1mono) xtitle(Sampling Frequency) ytitle(Bias) ///
     legend(label(1 "Gradient Boosting (GIS)") label(2 "Gradient Boosting (CEN)") ///
     label(3 "Area-level (GIS)") label(4 "Area-level (CEN)"))
     graph export "$outpath/Figure-6b.png", as(png) replace
