@@ -1586,335 +1586,23 @@ gold standard
  our experiments are thus favorable to the modern approach because gradient boosting benefits from automated model selection.
 \end_layout
 
+\begin_layout Section
+Model Validation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:validation"
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-We consider three traditional poverty-mapping methods as a way to benchmark the performance of the machine-learning approach.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-For a review of small area estimation methods,
- see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rao2015small"
-literal "false"
-
+The coefficient of determination or 
+\begin_inset Formula $R^{2}$
 \end_inset
 
-.
- For a review of methods in the context of poverty mapping,
- see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2022estimation"
-literal "false"
-
-\end_inset
-
- or 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "pfeffermann2013new"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
- Specifically,
- we consider area-level models,
- unit-level models,
- and unit-context models.
- First proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "fay1979estimates"
-literal "false"
-
-\end_inset
-
-,
- area-level models conduct estimation and prediction using data aggregated to the geographic area of interest.
- The area-level model consists of two basic parts.
- The first part of the model links the actual or true poverty rates 
-\begin_inset Formula $y_{i}^{a}$
-\end_inset
-
- for the 
-\begin_inset Formula $i^{th}$
-\end_inset
-
- entity to a vector of area-level covariates 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- as follows:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{equation}
-y_{i}^{a}=x_{i}\beta+\varepsilon_{i}\label{eq:linking-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $\beta$
-\end_inset
-
- is a vector of parameters to be estimated and 
-\begin_inset Formula $\varepsilon_{i}$
-\end_inset
-
- represents random area-level effects that are assumed to be mean zero with a constant variance 
-\begin_inset Formula $\sigma_{\varepsilon}^{2}$
-\end_inset
-
-.
- Since we lack information on the true poverty rates,
- this model cannot be immediately fit.
-\end_layout
-
-\begin_layout Plain Layout
-Instead,
- direct estimates of poverty rates from survey data 
-\begin_inset Formula $y_{i}^{d}$
-\end_inset
-
- are used as the outcome variable.
- These estimates are nevertheless subject to sampling error because they are based on the area-specific sample data.
- The second part of the model thus assumes that the direct estimates are centered around the true poverty rates as follows:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{equation}
-y_{i}^{d}=y_{i}^{a}+\omega_{i}\label{eq:2nd stage-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $\omega_{i}$
-\end_inset
-
- represents the measurement error and is assumed to have heteroskedastic variance 
-\begin_inset Formula $\sigma_{\omega,i}^{2}$
-\end_inset
-
- because area sample sizes are often unequal.
- These variances are assumed to be known,
- although in practice they are estimated using the survey data.
- Given the two parts of the model,
- the survey data can then be used to obtain parameter estimates.
-\end_layout
-
-\begin_layout Plain Layout
-The best linear unbiased predictor (BLUP) is obtained by predicting poverty rates through the model 
-\begin_inset Formula $x_{i}\hat{\beta}+\hat{\varepsilon}_{i}$
-\end_inset
-
- where 
-\begin_inset Formula $\hat{\beta}$
-\end_inset
-
- and 
-\begin_inset Formula $\hat{\varepsilon}_{i}$
-\end_inset
-
- represent the estimated coefficients and area-level effects,
- respectively.
- More specifically,
- the estimated area effect is 
-\begin_inset Formula $\hat{\varepsilon}_{i}=\psi_{i}\left(y_{i}^{d}-x_{i}\hat{\beta}\right)$
-\end_inset
-
- where 
-\begin_inset Formula $\psi_{i}=\hat{\sigma}_{\varepsilon}^{2}/\left(\hat{\sigma}_{\varepsilon}^{2}+\hat{\sigma}_{\omega,i}^{2}\right)$
-\end_inset
-
-.
- In essence,
- the final estimates for areas contained in the survey are the weighted average between the direct estimate 
-\begin_inset Formula $y_{i}^{d}$
-\end_inset
-
- and the synthetic estimator 
-\begin_inset Formula $x_{i}\hat{\beta}$
-\end_inset
-
- where the weights,
- 
-\begin_inset Formula $\psi_{i}$
-\end_inset
-
- and 
-\begin_inset Formula $(1-\psi_{i})$
-\end_inset
-
-,
- are determined by the quality of the model.
- For the non-sampled entities,
- the area-level model simply uses the synthetic estimator to produce predictions.
- A critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods have the same data requirements.
- 
-\end_layout
-
-\begin_layout Plain Layout
-Regarding unit-level models,
- the well-known methods of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2003micro"
-literal "false"
-
-\end_inset
-
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2010small"
-literal "false"
-
-\end_inset
-
- are based on the nested error model originally proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "battese1988asa"
-literal "false"
-
-\end_inset
-
-.
- This model assumes that (transformed) equivalized household income or consumption relates linearly to a vector of household-level covariates according to the following model:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{equation}
-w_{iv}=x_{iv}\theta+\mu_{i}+\xi_{iv}\label{eq:sae-1}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $w_{iv}$
-\end_inset
-
- denotes the transformed equivalized income of household 
-\begin_inset Formula $v$
-\end_inset
-
- in location 
-\begin_inset Formula $i$
-\end_inset
-
-,
- 
-\begin_inset Formula $x_{iv}$
-\end_inset
-
- represents a vector of household-specific characteristics,
- 
-\begin_inset Formula $\theta$
-\end_inset
-
- is a vector of coefficients on the household characteristics,
- 
-\begin_inset Formula $\mu_{i}$
-\end_inset
-
- is location-specific random effect such that 
-\begin_inset Formula $\mu_{i}\sim N(0,\sigma_{\mu}^{2})$
-\end_inset
-
-,
- and 
-\begin_inset Formula $\xi_{iv}$
-\end_inset
-
- is a household-level error term such that 
-\begin_inset Formula $\xi_{iv}\sim N(0,\sigma_{\xi}^{2})$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Plain Layout
-The parameters of the model are typically estimated via restricted maximum likelihood or Henderson's Method III (
-\begin_inset CommandInset citation
-LatexCommand citealt
-key "henderson1953estimation"
-literal "false"
-
-\end_inset
-
-).
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-Henderson's Method III is coupled with generalized least squares to obtain the regression coefficients.
-\end_layout
-
-\end_inset
-
- Once the model is estimated,
- the parameters are then used to repeatedly generate income estimates for all households in a corresponding census dataset.
- That is,
- the income level of each household is predicted 
-\begin_inset Formula $K$
-\end_inset
-
- times using the model estimates as follows:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{equation}
-\hat{{w}}_{ivk}=x_{iv}\hat{\theta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $k$
-\end_inset
-
- indexes replications and where 
-\begin_inset Formula $\mu_{ik}^{*}$
-\end_inset
-
- and 
-\begin_inset Formula $\xi_{ivk}^{*}$
-\end_inset
-
- are drawn from their assumed distributions.
+ is the most commonly used metric for validating poverty maps generated using machine-learning methods.
 \begin_inset Foot
 status collapsed
 
@@ -1922,145 +1610,539 @@ status collapsed
 See 
 \begin_inset CommandInset citation
 LatexCommand citet
-key "rodas2021pull"
-literal "false"
-
-\end_inset
-
- for a more detailed description.
-\end_layout
-
-\end_inset
-
- As a final step,
- the replicates can be used to calculate 
-\begin_inset Formula $K$
-\end_inset
-
- estimates of the poverty rate for each geographic entity and these estimates can then be averaged to arrive at a final prediction for each area.
- Note that there are multiple versions of the unit-level model,
- distinguished primarily through different treatments of 
-\begin_inset Formula $\mu_{ik}^{*}$
-\end_inset
-
- and 
-\begin_inset Formula $\xi_{ivk}^{*}$
-\end_inset
-
-.
- We use a particular version known as the 
-\begin_inset Quotes eld
-\end_inset
-
-census empirical best
-\begin_inset Quotes erd
-\end_inset
-
- method,
- which is a variant of the 
-\begin_inset Quotes eld
-\end_inset
-
-empirical best
-\begin_inset Quotes erd
-\end_inset
-
- method of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2010small"
-literal "false"
-
-\end_inset
-
-.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-As opposed to empirical best estimates,
- census empirical best estimates do not include survey observations when calculating area-level poverty rates.
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "rodas2021pull"
-literal "false"
-
-\end_inset
-
- show that when the sample size is small relative to the population,
- the difference between the two methods is negligible.
- For additional discussion,
- see 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2019desagregacion"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The key assumption of the unit-level model is that the distribution of the explanatory variables is similar between the survey used for estimation and the census used for prediction.
- This assumption is generally violated if the census is outdated – which is often the case in developing countries – and in this event the application of the unit-level model will lead to similarly outdated poverty maps 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "lange2018small"
-literal "false"
-
-\end_inset
-
-.
- Importantly,
- machine-learning approaches to poverty mapping are commonly motivated by the fact that censuses are outdated and are thus viewed as a way to produce timely poverty maps in a data-constrained environment.
- Stated differently,
- given the differing data requirements between the unit-level model and the machine-learning approach,
- the two methods are not generally considered to be direct competitors.
- The unit-level model nevertheless serves as a useful performance benchmark,
- as it is often viewed as the 
-\begin_inset Quotes eld
-\end_inset
-
-gold standard
-\begin_inset Quotes erd
-\end_inset
-
- of poverty mapping.
-\end_layout
-
-\begin_layout Plain Layout
-Unlike unit-level models,
- unit-context models were specifically developed to be used in off-census years.
- Initially developed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "nguyen2012method"
-literal "false"
-
-\end_inset
-
- and further refined by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "masaki2020small"
+key "jean2016combining"
 literal "false"
 
 \end_inset
 
 ,
- these models are based on a simple modification of the unit-level approach:
- rather than modeling household-level income as a function of household-level characteristics,
- unit-context models instead use only area-level covariates from the census.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "steele2017mapping"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ In this section,
+ we first critically assess this validation approach by discussing three ways in which the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be misleading in terms of model assessment.
+ We then motivate our simulation experiments by proposing an alternative approach that remedies many of the limitations of the conventional procedure.
  Specifically,
- the unit-context model replaces the survey-based covariates 
-\begin_inset Formula $x_{iv}$
+ we propose (1) assessing model performance relative to 
+\begin_inset Quotes eld
+\end_inset
+
+true
+\begin_inset Quotes erd
+\end_inset
+
+ poverty measures rather than direct estimates,
+ and (2) using mean squared error and targeting performance as the principal validation metrics.
+ Note that our objective is to propose a validation procedure that is approximately ideal for our purposes and we recognize that it may not be feasible with all poverty-mapping exercises.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For example,
+ our validation procedure requires a dataset that is sufficiently large for repeated sampling and such data is unlikely to be available in many contexts.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ denote the actual or true poverty indicator for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ geographical entity.
+ Further,
+ let 
+\begin_inset Formula $y_{i}^{d}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+ denote the direct estimate and model-based prediction of the poverty indicator,
+ respectively.
+ The standard method for assessing the predictive performance of model-based poverty estimates calculates the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from a regression like the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{d}=\alpha+\delta y_{i}^{p}+\zeta_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\delta$
+\end_inset
+
+ are the regression coefficients and 
+\begin_inset Formula $\zeta$
+\end_inset
+
+ represents the error term.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Note that any regression of this form can only be estimated for the sampled regions with direct estimates.
+\end_layout
+
+\end_inset
+
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for the above regression can be written as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=\frac{\sigma_{d}^{2}-\sigma_{\zeta}^{2}}{\sigma_{d}^{2}}\label{eq:r2direct}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{d}^{2}$
+\end_inset
+
+ is the variance of the direct estimate and 
+\begin_inset Formula $\sigma_{\zeta}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\zeta$
+\end_inset
+
+.
+ 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ thus conveys information about how much of the variance of the direct estimate is explained by the model-based prediction.
+ 
+\end_layout
+
+\begin_layout Standard
+While unbiased,
+ direct estimates can be imprecise estimates of true poverty indicators 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+.
+ Ideally,
+ one would assess the performance of model-based predictions on the basis of the true poverty indicators themselves.
+ That is,
+ model-based predictions are more appropriately assessed using the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ from the following regression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+y_{i}^{a}=\alpha+\delta y_{i}^{p}+\upsilon_{i}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\upsilon$
+\end_inset
+
+ represents the error term.
+ The 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for this regression can written as
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}\label{eq:r2true}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $\sigma_{a}^{2}$
+\end_inset
+
+ is the variance of the true poverty indicator and 
+\begin_inset Formula $\sigma_{\upsilon}^{2}$
+\end_inset
+
+ is the variance of 
+\begin_inset Formula $\upsilon$
+\end_inset
+
+.
+ We are specifically interested in characterizing the bias of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ when it is used to assess true quantity of interest,
+ 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}+\omega_{i}$
+\end_inset
+
+ where 
+\begin_inset Formula $\omega$
+\end_inset
+
+ is a mean-zero error term with variance 
+\begin_inset Formula $\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ That is,
+ we view this as a classical measurement error problem where the direct estimate of the poverty indicator is a noisy estimate of the true poverty indicator.
+ Note that the preceding equation implies that 
+\begin_inset Formula $\zeta_{i}=\upsilon_{i}+\omega_{i}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sigma_{\zeta}^{2}=\sigma_{\upsilon}^{2}+\sigma_{\omega}^{2}$
+\end_inset
+
+.
+ Following 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+,
+ we then define the bias as:
+\begin_inset Formula 
+\begin{equation}
+B=R_{a}^{2}-R_{d}^{2}\,.\label{eq:bias}
+\end{equation}
+
+\end_inset
+
+Substituting Eqs.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2direct"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) and (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:r2true"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) into our expression for the bias,
+ we have:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+B=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{2}-\sigma_{\upsilon}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}=\frac{\sigma_{\omega}^{2}(\sigma_{a}^{2}-\sigma_{\upsilon}^{2})}{\sigma_{d}^{2}\sigma_{a}^{2}}=\frac{\sigma_{\omega}^{2}}{\sigma_{d}^{2}}R_{a}^{2}\,.\label{eq:bias_res}
+\end{equation}
+
+\end_inset
+
+Finally,
+ we can substitute Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias_res"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) into Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:bias"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) and rearrange,
+ which gives
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+R_{d}^{2}=R_{a}^{2}\left(\frac{\sigma_{d}^{2}-\sigma_{\omega}^{2}}{\sigma_{d}^{2}}\right)\label{eq:relationship}
+\end{equation}
+
+\end_inset
+
+and establishes a basic relationship between 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ and 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "majeske2010quantifying"
+literal "false"
+
+\end_inset
+
+ for additional mathematical details.
+ 
+\end_layout
+
+\begin_layout Standard
+In Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:relationship"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) above,
+ we see that 
+\begin_inset Formula $R_{d}^{2}=R_{a}^{2}$
+\end_inset
+
+ when 
+\begin_inset Formula $\sigma_{\omega}^{2}=0$
+\end_inset
+
+ or,
+ equivalently,
+ when 
+\begin_inset Formula $y_{i}^{d}=y_{i}^{a}$
+\end_inset
+
+ for all 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ In the presence of measurement error or when 
+\begin_inset Formula $\sigma_{\omega}^{2}>0$
+\end_inset
+
+,
+ we then see that 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will be biased downward and the magnitude of the bias will be determined by the size of 
+\begin_inset Formula $(\sigma_{d}^{2}-\sigma_{\omega}^{2})/\sigma_{d}^{2}$
+\end_inset
+
+.
+ Validation exercises based on 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ will thus tend to mischaracterize the performance of model-based approaches to poverty mapping,
+ with the resulting estimates of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ being biased downward.
+ One implication of the above is that 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ is context-dependent and will generally be influenced by the design of the survey data (e.g.,
+ larger sample sizes will tend to reduce measurement error,
+ all else equal).
+ In particular,
+ a poorly performing model applied to a low bias setting may yield an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ that is higher than an estimate of 
+\begin_inset Formula $R_{d}^{2}$
+\end_inset
+
+ from a strong model applied to a high bias setting.
+ The presence of bias in the measures of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can thus reverse the rank ordering of models when comparisons are made across contexts.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+,
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for this type of cross-context comparison of 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ values.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is an additional form of bias in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that can lead to overoptimistic conclusions related to model validity.
+ To illustrate this,
+ note that 
+\begin_inset Formula $R_{a}^{2}$
 \end_inset
 
  in Eq.
@@ -2070,7 +2152,7 @@ literal "false"
 (
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "eq:sae-1"
+reference "eq:r2true"
 plural "false"
 caps "false"
 noprefix "false"
@@ -2078,24 +2160,684 @@ nolink "false"
 
 \end_inset
 
-) with census aggregates 
-\begin_inset Formula $x_{i}$
+) is mathematically equivalent to the squared (Pearson) correlation coefficient between 
+\begin_inset Formula $y_{i}^{a}$
 \end_inset
 
- and thus relaxes the assumption that the survey-based covariates match the moments of those from the census.
- Like the area-level model,
- the unit-context model is a direct competitor to the machine-learning approach because it is feasible to implement with the same data.
- However,
- it is worth noting that the unit-context model has been shown to produce biased and noisy poverty estimates,
- largely due to its inability to explain between-household variation in income 
+ and 
+\begin_inset Formula $y_{i}^{p}$
+\end_inset
+
+.
+ A well-known property of the correlation coefficient is that it is invariant to any positive affine transformation of its arguments,
+ implying that the 
+\shape italic
+squared
+\shape default
+ correlation coefficient is invariant to 
+\shape italic
+any
+\shape default
+ affine transformation 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "corral2022guidelines"
+key "gujarati2003basic"
 literal "false"
 
 \end_inset
 
 .
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+More specifically,
+ the correlation coefficient is invariant to any 
+\shape italic
+positive
+\shape default
+ affine transformation because it changes signs when one of its arguments is scaled by some negative constant.
+ The 
+\shape italic
+squared
+\shape default
+ correlation coefficient is then invariant to any affine transformation.
+\end_layout
+
+\end_inset
+
+ We can thus write
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}(y_{i}^{a},y_{i}^{p})=R_{a}^{2}(y_{i}^{a},q_{1}+q_{2}y_{i}^{p})\label{eq:shift}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $q_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $q_{2}$
+\end_inset
+
+ are some arbitrary constants.
+ The implication of the above is that the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ is insensitive to systematic bias in the model-based poverty estimates.
+ For example,
+ consider some unbiased poverty estimate 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+,
+ meaning that 
+\begin_inset Formula $E(y_{i}^{u}-y_{i}^{a})=0.$
+\end_inset
+
+ Now consider another estimate 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ up to some locational shift,
+ implying that 
+\begin_inset Formula $y_{i}^{b}=y_{i}^{u}+q$
+\end_inset
+
+ and 
+\begin_inset Formula $E(y_{i}^{b}-y_{i}^{a})=q$
+\end_inset
+
+.
+ While 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+ is biased (i.e.,
+ it will systematically over- or under-estimate poverty),
+ it will achieve an 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ that is identical to 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+A final issue related to 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric is that it is affected by the variance of the true poverty measures.
+ To see this,
+ consider the following re-expression of 
+\begin_inset Formula $R_{a}^{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{equation}
+R_{a}^{2}=1-\frac{\frac{1}{N}\sum_{i}(y_{i}^{a}-\alpha-\delta y_{i}^{p})^{2}}{\frac{1}{N}\sum_{i}(y_{i}^{a}-\bar{{y}}^{a})^{2}}=1-\frac{\text{{MSE}}(y_{i}^{a},\alpha+\delta y_{i}^{p})}{\text{{Var}}(y_{i}^{a})}\label{eq:variance}
+\end{equation}
+
+\end_inset
+
+where 
+\begin_inset Formula $N$
+\end_inset
+
+ is the number of geographical entities.
+ The above shows that 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ can be viewed as a normalized version of the mean squared error with the variance of the true poverty indicator used as the normalization factor.
+ This approach to normalization produces an additional source of context-dependence in 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+.
+ Specifically,
+ consider two models that perform equally well in that they achieve the same mean squared error.
+ However,
+ assume that one model is applied to a context where the variance of 
+\begin_inset Formula $y_{i}^{a}$
+\end_inset
+
+ is large and the other is applied to a low variance context.
+ The above then implies that the model applied to the high variance context will achieve a higher 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+,
+ even though the performance of the two models is arguably identical.
+ 
+\end_layout
+
+\begin_layout Standard
+Rather than relying on 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ as a performance metric,
+ one can avoid regression-based model assessment altogether by calculating the mean squared error directly:
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2}\,,\label{eq:mse}
+\end{equation}
+
+\end_inset
+
+which avoids the normalization issue and provides a more direct understanding of the expected squared error of the estimates.
+ The mean squared error in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mse"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) is sensitive to systematic biases in the predictions.
+ Reconsidering the biased and unbiased poverty estimates described above (i.e.,
+ 
+\begin_inset Formula $y_{i}^{u}$
+\end_inset
+
+ and 
+\begin_inset Formula $y_{i}^{b}$
+\end_inset
+
+),
+ we can write 
+\begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+q,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+q^{2}$
+\end_inset
+
+.
+ Systematic biases in the estimates will thus be penalized by the mean squared error.
+ Further,
+ with multiple estimates for each entity,
+ one can calculate entity-specific mean squared errors,
+ which can be decomposed into parts associated with the bias and variance of the estimates.
+ Where 
+\begin_inset Formula $y_{ik}^{p}$
+\end_inset
+
+ denotes estimate 
+\begin_inset Formula $k=1,2,\ldots,K$
+\end_inset
+
+ for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ entity,
+ we have
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
+\end{equation}
+
+\end_inset
+
+where the first term on the right-hand side of the above captures the variance of the estimates for entity 
+\begin_inset Formula $i$
+\end_inset
+
+ and the second term captures the (squared) bias.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hastie2009elements"
+literal "false"
+
+\end_inset
+
+ for derivation and detailed discussion of the bias-variance decomposition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
+ While understanding the error of the poverty estimates is useful in this regard,
+ the ultimate concern is to understand how different methodological choices affect poverty alleviation by influencing the efficiency of targeting.
+ Consequently,
+ we also consider how machine-learning methods perform in terms of reducing poverty in the context of the census created from the Mexican Intercensal Survey.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+,
+ we propose simulating a hypothetical poverty-alleviation program that distributes resources to households according to a given set of small area estimates.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+,
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other studies that have conducted targeting simulations.
+\end_layout
+
+\end_inset
+
+ In addition to the estimates,
+ the procedure requires true household-level incomes from a census-type dataset.
+ 
+\end_layout
+
+\begin_layout Standard
+The procedure we use in our simulations is as follows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -25bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true household-level incomes,
+ calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
+ Using the poverty gap measure,
+ determine the budget required to completely eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget by the number of people living in poverty.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using a given set of small area estimates,
+ order the municipalities according to their estimated poverty headcounts,
+ from most to least poor.
+ For the poorest municipality,
+ augment the true per capita income of all households by an amount equal to the transfer (i.e.,
+ each household receives an amount equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest municipality,
+ the third poorest municipality,
+ and so on until there are not enough resources to cover all households in a given municipality.
+ For the marginal municipality,
+ distribute the remaining budget equally among individuals in that municipality.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the post-transfer household incomes,
+ calculate an updated poverty headcount to assess the effects of the distribution scheme on poverty alleviation.
+\end_layout
+
+\begin_layout Enumerate
+Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated by each method under each survey sample.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace -10bp
+\end_inset
+
+The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true municipal poverty rankings.
+ The results for each method are compared to that result.
+ In our implementation,
+ we fix the poverty line at the 25th percentile of per capita income prior to transfers.
+ The benchmark poverty rate,
+ after delivering transfers to people in municipalities ranked by their true poverty rate,
+ is 19.9 percent.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+The different methods for poverty mapping are assessed on how well they predict the true poverty rates across all municipalities.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The pseudo census created represents our population and their reported incomes allow for the calculation of the true poverty rates within each municipality.
+\end_layout
+
+\end_inset
+
+ Estimates are evaluated on how biased these are and the over all Mean Squared Error (MSE).
+ Note that because the goal is to obtain poverty estimates for each municipality these measures are calculated for every area.
+ Model bias and MSE are approximated empirically as in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+.
+ The bias and MSE for each area 
+\begin_inset Formula $i$
+\end_inset
+
+ are calculated across 
+\begin_inset Formula $N=500$
+\end_inset
+
+ sets of estimates obtained across each of the 500 samples taken from the population using each of the proposed methods,
+ 
+\begin_inset Formula $j$
+\end_inset
+
+.
+ Specifically,
+ the bias of method 
+\begin_inset Formula $j$
+\end_inset
+
+ in area 
+\begin_inset Formula $i$
+\end_inset
+
+ is calculated as follows:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+Bias\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The MSE is calculated as:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{equation}
+MSE\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)^{2}\label{eq:mse}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+where 
+\begin_inset Formula $\hat{y}_{i,n}^{j}$
+\end_inset
+
+ indicates the poverty prediction under sample 
+\begin_inset Formula $n$
+\end_inset
+
+ of method 
+\begin_inset Formula $j$
+\end_inset
+
+ for area 
+\begin_inset Formula $i$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ is the true poverty rate taken from our population.
+ The mean squared error in Eq.
+\begin_inset space \thinspace{}
+\end_inset
+
+(
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mse"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) is sensitive to systematic biases in the predictions.
+ Under the MSE measure systematic biases in the estimates are penalized.
+ Further,
+ with multiple estimates for each entity,
+ one can calculate entity-specific mean squared errors,
+ which can be decomposed into parts associated with the bias and variance of the estimates.
+ Where 
+\begin_inset Formula $y_{ik}^{p}$
+\end_inset
+
+ denotes estimate 
+\begin_inset Formula $k=1,2,\ldots,K$
+\end_inset
+
+ for the 
+\begin_inset Formula $i^{th}$
+\end_inset
+
+ entity,
+ we have
+\begin_inset Formula 
+\begin{equation}
+\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
+\end{equation}
+
+\end_inset
+
+where the first term on the right-hand side of the above captures the variance of the estimates for entity 
+\begin_inset Formula $i$
+\end_inset
+
+ and the second term captures the (squared) bias.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hastie2009elements"
+literal "false"
+
+\end_inset
+
+ for derivation and detailed discussion of the bias-variance decomposition.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Heath,
+ I'm not really sure what you're getting at here.
+ Can't we describe the bias variance trade-off for each entity using the predicted poverty rate under method j and the real poverty rate for the location (y_i)?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+The primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
+ While understanding the error of the poverty estimates is useful in this regard,
+ the ultimate concern is to understand how different methodological choices affect poverty alleviation by influencing the efficiency of targeting.
+ Consequently,
+ we also consider how machine-learning methods perform in terms of reducing poverty in the context of the census created from the Mexican Intercensal Survey.
+ Similar to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "elbers2007poverty"
+literal "false"
+
+\end_inset
+
+,
+ we propose simulating a hypothetical poverty-alleviation program that distributes resources to households according to a given set of small area estimates.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "yeh2020using"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+,
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ for examples of other studies that have conducted targeting simulations.
+\end_layout
+
+\end_inset
+
+ In addition to the estimates,
+ the procedure requires true household-level incomes from a census-type dataset.
+\end_layout
+
+\begin_layout Plain Layout
+The procedure we use in our simulations is as follows:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace -25bp
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the true household-level incomes,
+ calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
+ Using the poverty gap measure,
+ determine the budget required to completely eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget by the number of people living in poverty.
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using a given set of small area estimates,
+ order the municipalities according to their estimated poverty headcounts,
+ from most to least poor.
+ For the poorest municipality,
+ augment the true per capita income of all households by an amount equal to the transfer (i.e.,
+ each household receives an amount equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest municipality,
+ the third poorest municipality,
+ and so on until there are not enough resources to cover all households in a given municipality.
+ For the marginal municipality,
+ distribute the remaining budget equally among individuals in that municipality.
+\end_layout
+
+\begin_layout Enumerate
+\paragraph_spacing single
+\noindent
+Using the post-transfer household incomes,
+ calculate an updated poverty headcount to assess the effects of the distribution scheme on poverty alleviation.
+\end_layout
+
+\begin_layout Enumerate
+Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated by each method under each survey sample.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace -10bp
+\end_inset
+
+The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true municipal poverty rankings.
+ The results for each method are compared to that result.
+ In our implementation,
+ we fix the poverty line at the 25th percentile of per capita income prior to transfers.
+ The benchmark poverty rate,
+ after delivering transfers to people in municipalities ranked by their true poverty rate,
+ is 19.9 percent.
 \end_layout
 
 \end_inset
@@ -2401,312 +3143,6 @@ The 21 dimensions are as follows:
 
  We then have two alternative sets of covariates that we use in our simulations:
  the geo-referenced data and the standard set of sociodemographic characteristics from the census.
-\end_layout
-
-\begin_layout Section
-Model Validation
-\begin_inset CommandInset label
-LatexCommand label
-name "sec:validation"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The different methods for poverty mapping are assessed on how well they predict the true poverty rates across all municipalities.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The pseudo census created represents our population and their reported incomes allow for the calculation of the true poverty rates within each municipality.
-\end_layout
-
-\end_inset
-
- Estimates are evaluated on how biased these are and the over all Mean Squared Error (MSE).
- Note that because the goal is to obtain poverty estimates for each municipality these measures are calculated for every area.
- Model bias and MSE are approximated empirically as in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2010small"
-literal "false"
-
-\end_inset
-
-.
- The bias and MSE for each area 
-\begin_inset Formula $i$
-\end_inset
-
- are calculated across 
-\begin_inset Formula $N=500$
-\end_inset
-
- sets of estimates obtained across each of the 500 samples taken from the population using each of the proposed methods,
- 
-\begin_inset Formula $j$
-\end_inset
-
-.
- Specifically,
- the bias of method 
-\begin_inset Formula $j$
-\end_inset
-
- in area 
-\begin_inset Formula $i$
-\end_inset
-
- is calculated as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-Bias\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The MSE is calculated as:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\begin{equation}
-MSE\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)^{2}\label{eq:mse}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-where 
-\begin_inset Formula $\hat{y}_{i,n}^{j}$
-\end_inset
-
- indicates the poverty prediction under sample 
-\begin_inset Formula $n$
-\end_inset
-
- of method 
-\begin_inset Formula $j$
-\end_inset
-
- for area 
-\begin_inset Formula $i$
-\end_inset
-
-,
- and 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- is the true poverty rate taken from our population.
- The mean squared error in Eq.
-\begin_inset space \thinspace{}
-\end_inset
-
-(
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mse"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-) is sensitive to systematic biases in the predictions.
- Under the MSE measure systematic biases in the estimates are penalized.
- Further,
- with multiple estimates for each entity,
- one can calculate entity-specific mean squared errors,
- which can be decomposed into parts associated with the bias and variance of the estimates.
- Where 
-\begin_inset Formula $y_{ik}^{p}$
-\end_inset
-
- denotes estimate 
-\begin_inset Formula $k=1,2,\ldots,K$
-\end_inset
-
- for the 
-\begin_inset Formula $i^{th}$
-\end_inset
-
- entity,
- we have
-\begin_inset Formula 
-\begin{equation}
-\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
-\end{equation}
-
-\end_inset
-
-where the first term on the right-hand side of the above captures the variance of the estimates for entity 
-\begin_inset Formula $i$
-\end_inset
-
- and the second term captures the (squared) bias.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-See 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "hastie2009elements"
-literal "false"
-
-\end_inset
-
- for derivation and detailed discussion of the bias-variance decomposition.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Heath,
- I'm not really sure what you're getting at here.
- Can't we describe the bias variance trade-off for each entity using the predicted poverty rate under method j and the real poverty rate for the location (y_i)?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
- While understanding the error of the poverty estimates is useful in this regard,
- the ultimate concern is to understand how different methodological choices affect poverty alleviation by influencing the efficiency of targeting.
- Consequently,
- we also consider how machine-learning methods perform in terms of reducing poverty in the context of the census created from the Mexican Intercensal Survey.
- Similar to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
-,
- we propose simulating a hypothetical poverty-alleviation program that distributes resources to households according to a given set of small area estimates.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-See 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "yeh2020using"
-literal "false"
-
-\end_inset
-
-,
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "chi2022microestimates"
-literal "false"
-
-\end_inset
-
-,
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "aiken2022machine"
-literal "false"
-
-\end_inset
-
- for examples of other studies that have conducted targeting simulations.
-\end_layout
-
-\end_inset
-
- In addition to the estimates,
- the procedure requires true household-level incomes from a census-type dataset.
-\end_layout
-
-\begin_layout Standard
-The procedure we use in our simulations is as follows:
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace -25bp
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the true household-level incomes,
- calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
- Using the poverty gap measure,
- determine the budget required to completely eradicate poverty.
- Calculate an individual-level transfer amount by dividing the total budget by the number of people living in poverty.
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using a given set of small area estimates,
- order the municipalities according to their estimated poverty headcounts,
- from most to least poor.
- For the poorest municipality,
- augment the true per capita income of all households by an amount equal to the transfer (i.e.,
- each household receives an amount equal to the transfer times the number of household members).
- Continue this distribution procedure for the second poorest municipality,
- the third poorest municipality,
- and so on until there are not enough resources to cover all households in a given municipality.
- For the marginal municipality,
- distribute the remaining budget equally among individuals in that municipality.
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the post-transfer household incomes,
- calculate an updated poverty headcount to assess the effects of the distribution scheme on poverty alleviation.
-\end_layout
-
-\begin_layout Enumerate
-Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated by each method under each survey sample.
-\end_layout
-
-\begin_layout Standard
-\begin_inset VSpace -10bp
-\end_inset
-
-The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true municipal poverty rankings.
- The results for each method are compared to that result.
- In our implementation,
- we fix the poverty line at the 25th percentile of per capita income prior to transfers.
- The benchmark poverty rate,
- after delivering transfers to people in municipalities ranked by their true poverty rate,
- is 19.9 percent.
 \end_layout
 
 \begin_layout Section
