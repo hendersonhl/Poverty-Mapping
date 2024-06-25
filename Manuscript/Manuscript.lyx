@@ -1683,7 +1683,7 @@ true
 
  poverty measures rather than direct estimates,
  and (2) using mean squared error and targeting performance as the principal validation metrics.
- Note that our objective is to propose a validation procedure that is approximately ideal for our purposes and we recognize that it may not be feasible with all poverty-mapping exercises.
+ Note that our objective is to propose a validation procedure that is approximately ideal for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
 \begin_inset Foot
 status collapsed
 
@@ -2064,13 +2064,13 @@ nolink "false"
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- will thus tend to mischaracterize the performance of model-based approaches to poverty mapping,
+ will thus tend to mischaracterize the performance of poverty maps,
  with the resulting estimates of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  being biased downward.
- One implication of the above is that 
+ One implication of this bias is that 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
@@ -2139,7 +2139,7 @@ There is an additional form of bias in
 \begin_inset Formula $R^{2}$
 \end_inset
 
- that can lead to overoptimistic conclusions related to model validity.
+ that can conversely lead to overoptimistic conclusions regarding model validity.
  To illustrate this,
  note that 
 \begin_inset Formula $R_{a}^{2}$
