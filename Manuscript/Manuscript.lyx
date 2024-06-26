@@ -1781,7 +1781,7 @@ where
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- thus conveys information about how much of the variance of the direct estimate is explained by the model-based prediction.
+ conveys information about how much of the variance of the direct estimate is explained by the model-based prediction.
  
 \end_layout
 
@@ -2127,7 +2127,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-There is an second form of bias in 
+There is a second form of bias in 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2220,8 +2220,7 @@ where
 \end_inset
 
  is insensitive to systematic bias in the model-based poverty estimates.
- For example,
- consider some unbiased poverty estimate 
+ Consider some unbiased poverty estimate 
 \begin_inset Formula $y_{i}^{u}$
 \end_inset
 
@@ -2317,7 +2316,7 @@ where
 \end_layout
 
 \begin_layout Standard
-It is important to note that these issues with the standard procedure stem both from the 
+The limitations of the standard procedure stem both from the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2326,33 +2325,46 @@ It is important to note that these issues with the standard procedure stem both 
 \end_inset
 
  to direct poverty estimates rather than true poverty indicators.
- One strategy for addressing these problems is to continue using direct poverty estimates as the reference measure,
- but with major changes to the validation metric.
- In particular,
- one could attempt to correct the 
+ Accordingly,
+ we address these limitations by making two modifications to the usual procedure.
+ To address the issue related to error in the reference measure,
+ we assess our poverty-mapping methods with data that allows us to use true poverty indicators as the reference measure (see the next section for discussion).
+ We then address the remaining limitations by emphasizing validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
+ To be clear,
+ one could alternatively attempt to correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- for its biases or adopt a very different performance metric that is less affected by the above issues.
- We pursue an alternative strategy that instead uses true poverty indicators as the reference measures and only requires us to make minor changes to the validation procedure.
- For example,
- with information on true poverty measures,
- we can sidestep the most critical issues with the 
-\begin_inset Formula $R^{2}$
+ for its biases,
+ but any adjustments would require approximations that could undermine our validation exercises.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For example,
+ correcting the bias associated with the measurement error issue would require estimating the variance of the measurement error.
+\end_layout
+
 \end_inset
 
- by using the mean squared,
- which we have already seen is a closely-related metric.
+
 \end_layout
 
 \begin_layout Standard
-The mean squared error is defined as follows:
+Regarding our validation metrics,
+ the mean squared error is closely related to the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+,
+ but sidesteps its most critical limitations.
+ The mean squared error is defined as follows:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2}\,.\label{eq:mse}
+\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2}\label{eq:mse}
 \end{equation}
 
 \end_inset
@@ -2361,7 +2373,7 @@ The mean squared error is defined as follows:
 \end_layout
 
 \begin_layout Standard
-We immediately see that the mean squared error provides a direct understanding of the expected squared error of the estimates and consequently avoids the normalization issue.
+and we immediately see that it provides a direct understanding of the expected squared error of the estimates and thus avoids the normalization issue.
  It is also sensitive to systematic biases in the predictions.
  Reconsidering the biased and unbiased poverty estimates described above (i.e.,
  
@@ -2442,7 +2454,7 @@ literal "false"
 \end_inset
 
 ,
- we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with the map.
+ we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with that map.
 \begin_inset Foot
 status collapsed
 
