@@ -1673,17 +1673,9 @@ literal "false"
  can be misleading in terms of model assessment.
  We then motivate our simulation experiments by proposing an alternative approach that remedies many of the limitations of the conventional procedure.
  Specifically,
- we propose (1) assessing model performance relative to 
-\begin_inset Quotes eld
-\end_inset
-
-true
-\begin_inset Quotes erd
-\end_inset
-
- poverty measures rather than direct estimates,
+ we propose (1) assessing model performance relative to true poverty measures rather than direct estimates,
  and (2) using mean squared error and targeting performance as the principal validation metrics.
- Note that our objective is to propose a validation procedure that is approximately ideal for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
+ Our objective is to propose a validation procedure that is appropriate for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
 \begin_inset Foot
 status collapsed
 
@@ -2326,36 +2318,54 @@ where
 \end_layout
 
 \begin_layout Standard
-Rather than relying on 
+The issues with the usual validation procedure stem not only from the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a performance metric,
- one can avoid regression-based model assessment altogether by calculating the mean squared error directly:
+ metric itself,
+ but also from applying the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ to direct poverty estimates rather than true poverty indicators.
+ One strategy for addressing these problems is to continue using direct poverty estimates as the reference measure,
+ but with substantial changes to the validation metric.
+ In particular,
+ one could attempt to correct a metric like the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ or adopt a very different performance metric that is unaffected by the above issues.
+ We pursue an alternative strategy by using data that allows us to assess poverty maps relative to true poverty indicators,
+ thus permitting us to use more conventional validation metrics.
+ For example,
+ with information on true poverty measures,
+ we can sidestep the most critical issues with the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by using a closely-related metric,
+ namely the mean squared error.
+\end_layout
+
+\begin_layout Standard
+The mean squared error is defined as follows:
+\end_layout
+
+\begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2}\,,\label{eq:mse}
+\text{{MSE}}(y_{i}^{a},y_{i}^{p})=\frac{{1}}{N}\sum_{i}(y_{i}^{a}-y_{i}^{p})^{2}\,.\label{eq:mse}
 \end{equation}
 
 \end_inset
 
-which avoids the normalization issue and provides a more direct understanding of the expected squared error of the estimates.
- The mean squared error in Eq.
-\begin_inset space \thinspace{}
-\end_inset
 
-(
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mse"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
+\end_layout
 
-\end_inset
-
-) is sensitive to systematic biases in the predictions.
+\begin_layout Standard
+We immediately see that the mean squared error provides a direct understanding of the expected squared error of the estimates and consequently avoids the normalization issue.
+ It is also sensitive to systematic biases in the predictions.
  Reconsidering the biased and unbiased poverty estimates described above (i.e.,
  
 \begin_inset Formula $y_{i}^{u}$
@@ -2371,9 +2381,8 @@ nolink "false"
 \end_inset
 
 .
- Systematic biases in the estimates will thus be penalized by the mean squared error.
- Further,
- with multiple estimates for each entity,
+ Systematic biases in the estimates will then be appropriately penalized by the mean squared error.
+ Another advantage is that with multiple estimates for each entity,
  one can calculate entity-specific mean squared errors,
  which can be decomposed into parts associated with the bias and variance of the estimates.
  Where 
@@ -2423,11 +2432,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
- While understanding the error of the poverty estimates is useful in this regard,
- the ultimate concern is to understand how different methodological choices affect poverty alleviation by influencing the efficiency of targeting.
- Consequently,
- we also consider how machine-learning methods perform in terms of reducing poverty in the context of the census created from the Mexican Intercensal Survey.
+While calculating the error of the poverty estimates is useful for understanding the accuracy of poverty maps,
+ the primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
+ As such,
+ we complement the mean squared error with an alternative performance metric that focuses on how different methodological choices affect poverty alleviation through influencing the efficiency of targeting.
  Similar to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2437,7 +2445,7 @@ literal "false"
 \end_inset
 
 ,
- we propose simulating a hypothetical poverty-alleviation program that distributes resources to households according to a given set of small area estimates.
+ we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with the map.
 \begin_inset Foot
 status collapsed
 
@@ -2473,8 +2481,8 @@ literal "false"
 
 \end_inset
 
- In addition to the estimates,
- the procedure requires true household-level incomes from a census-type dataset.
+ In addition to the poverty maps,
+ note that the procedure requires true household-level incomes from a census-type dataset.
  
 \end_layout
 
@@ -2492,7 +2500,7 @@ The procedure we use in our simulations is as follows:
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using the true household-level incomes,
+Using true household-level incomes,
  calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
  Using the poverty gap measure,
  determine the budget required to completely eradicate poverty.
@@ -2503,17 +2511,17 @@ Using the true household-level incomes,
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using a given set of small area estimates,
- order the municipalities according to their estimated poverty headcounts,
+Using a given poverty map,
+ order geographic areas according to their estimated poverty headcounts,
  from most to least poor.
- For the poorest municipality,
+ For the poorest area,
  augment the true per capita income of all households by an amount equal to the transfer (i.e.,
  each household receives an amount equal to the transfer times the number of household members).
- Continue this distribution procedure for the second poorest municipality,
- the third poorest municipality,
- and so on until there are not enough resources to cover all households in a given municipality.
- For the marginal municipality,
- distribute the remaining budget equally among individuals in that municipality.
+ Continue this distribution procedure for the second poorest area,
+ the third poorest area,
+ and so on until there are not enough resources to cover all households in a given area.
+ For the marginal area,
+ distribute the remaining budget equally among individuals in that area.
  
 \end_layout
 
@@ -2525,324 +2533,14 @@ Using the post-transfer household incomes,
 \end_layout
 
 \begin_layout Enumerate
-Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated by each method under each survey sample.
+Repeat steps 2 and 3 for each of the poverty maps generated by the alternative methods.
 \end_layout
 
 \begin_layout Standard
-\begin_inset VSpace -10bp
+\begin_inset VSpace -5bp
 \end_inset
 
-The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true municipal poverty rankings.
- The results for each method are compared to that result.
- In our implementation,
- we fix the poverty line at the 25th percentile of per capita income prior to transfers.
- The benchmark poverty rate,
- after delivering transfers to people in municipalities ranked by their true poverty rate,
- is 19.9 percent.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-The different methods for poverty mapping are assessed on how well they predict the true poverty rates across all municipalities.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The pseudo census created represents our population and their reported incomes allow for the calculation of the true poverty rates within each municipality.
-\end_layout
-
-\end_inset
-
- Estimates are evaluated on how biased these are and the over all Mean Squared Error (MSE).
- Note that because the goal is to obtain poverty estimates for each municipality these measures are calculated for every area.
- Model bias and MSE are approximated empirically as in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "molina2010small"
-literal "false"
-
-\end_inset
-
-.
- The bias and MSE for each area 
-\begin_inset Formula $i$
-\end_inset
-
- are calculated across 
-\begin_inset Formula $N=500$
-\end_inset
-
- sets of estimates obtained across each of the 500 samples taken from the population using each of the proposed methods,
- 
-\begin_inset Formula $j$
-\end_inset
-
-.
- Specifically,
- the bias of method 
-\begin_inset Formula $j$
-\end_inset
-
- in area 
-\begin_inset Formula $i$
-\end_inset
-
- is calculated as follows:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\[
-Bias\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The MSE is calculated as:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Formula 
-\begin{equation}
-MSE\left(\hat{y}_{i}^{j}\right)=\frac{1}{N}\sum_{n=1}^{N}\left(\hat{y}_{i,n}^{j}-y_{i}\right)^{2}\label{eq:mse}
-\end{equation}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-where 
-\begin_inset Formula $\hat{y}_{i,n}^{j}$
-\end_inset
-
- indicates the poverty prediction under sample 
-\begin_inset Formula $n$
-\end_inset
-
- of method 
-\begin_inset Formula $j$
-\end_inset
-
- for area 
-\begin_inset Formula $i$
-\end_inset
-
-,
- and 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- is the true poverty rate taken from our population.
- The mean squared error in Eq.
-\begin_inset space \thinspace{}
-\end_inset
-
-(
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:mse"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-) is sensitive to systematic biases in the predictions.
- Under the MSE measure systematic biases in the estimates are penalized.
- Further,
- with multiple estimates for each entity,
- one can calculate entity-specific mean squared errors,
- which can be decomposed into parts associated with the bias and variance of the estimates.
- Where 
-\begin_inset Formula $y_{ik}^{p}$
-\end_inset
-
- denotes estimate 
-\begin_inset Formula $k=1,2,\ldots,K$
-\end_inset
-
- for the 
-\begin_inset Formula $i^{th}$
-\end_inset
-
- entity,
- we have
-\begin_inset Formula 
-\begin{equation}
-\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
-\end{equation}
-
-\end_inset
-
-where the first term on the right-hand side of the above captures the variance of the estimates for entity 
-\begin_inset Formula $i$
-\end_inset
-
- and the second term captures the (squared) bias.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-See 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "hastie2009elements"
-literal "false"
-
-\end_inset
-
- for derivation and detailed discussion of the bias-variance decomposition.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Heath,
- I'm not really sure what you're getting at here.
- Can't we describe the bias variance trade-off for each entity using the predicted poverty rate under method j and the real poverty rate for the location (y_i)?
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-The primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
- While understanding the error of the poverty estimates is useful in this regard,
- the ultimate concern is to understand how different methodological choices affect poverty alleviation by influencing the efficiency of targeting.
- Consequently,
- we also consider how machine-learning methods perform in terms of reducing poverty in the context of the census created from the Mexican Intercensal Survey.
- Similar to 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "elbers2007poverty"
-literal "false"
-
-\end_inset
-
-,
- we propose simulating a hypothetical poverty-alleviation program that distributes resources to households according to a given set of small area estimates.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-See 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "yeh2020using"
-literal "false"
-
-\end_inset
-
-,
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "chi2022microestimates"
-literal "false"
-
-\end_inset
-
-,
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "aiken2022machine"
-literal "false"
-
-\end_inset
-
- for examples of other studies that have conducted targeting simulations.
-\end_layout
-
-\end_inset
-
- In addition to the estimates,
- the procedure requires true household-level incomes from a census-type dataset.
-\end_layout
-
-\begin_layout Plain Layout
-The procedure we use in our simulations is as follows:
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset VSpace -25bp
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the true household-level incomes,
- calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
- Using the poverty gap measure,
- determine the budget required to completely eradicate poverty.
- Calculate an individual-level transfer amount by dividing the total budget by the number of people living in poverty.
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using a given set of small area estimates,
- order the municipalities according to their estimated poverty headcounts,
- from most to least poor.
- For the poorest municipality,
- augment the true per capita income of all households by an amount equal to the transfer (i.e.,
- each household receives an amount equal to the transfer times the number of household members).
- Continue this distribution procedure for the second poorest municipality,
- the third poorest municipality,
- and so on until there are not enough resources to cover all households in a given municipality.
- For the marginal municipality,
- distribute the remaining budget equally among individuals in that municipality.
-\end_layout
-
-\begin_layout Enumerate
-\paragraph_spacing single
-\noindent
-Using the post-transfer household incomes,
- calculate an updated poverty headcount to assess the effects of the distribution scheme on poverty alleviation.
-\end_layout
-
-\begin_layout Enumerate
-Repeat steps 2 and 3 for each of the 500 sets of small area estimates generated by each method under each survey sample.
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset VSpace -10bp
-\end_inset
-
-The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true municipal poverty rankings.
- The results for each method are compared to that result.
- In our implementation,
- we fix the poverty line at the 25th percentile of per capita income prior to transfers.
- The benchmark poverty rate,
- after delivering transfers to people in municipalities ranked by their true poverty rate,
- is 19.9 percent.
-\end_layout
-
-\end_inset
-
-
+The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true poverty rankings.
 \end_layout
 
 \begin_layout Section
