@@ -1578,12 +1578,12 @@ gold standard
 \end_inset
 
  unit-level model provides an absolute performance benchmark by approximating the upper performance bound,
- the area-level model provides a relative performance benchmark since it is the leading traditional competitor to the modern approach.
- In our implementations of these models,
+ the area-level model provides a relative performance benchmark as the leading competitor to the modern approach.
+ In our implementations of the traditional models,
  we rely exclusively on linear specifications because identifying covariate transformations (e.g.,
  quadratic or cubic terms) for each replication would substantially complicate our sampling experiments.
  To the extent that adding covariate transformations could improve the performance of the traditional methods,
- our experiments are thus favorable to the modern approach because gradient boosting benefits from automated model selection.
+ our experiments are thus favorable to the modern approach since gradient boosting benefits from automated model selection.
 \end_layout
 
 \begin_layout Section
@@ -1671,11 +1671,11 @@ literal "false"
 \end_inset
 
  can be misleading in terms of model assessment.
- We then motivate our simulation experiments by proposing an alternative approach that remedies many of the limitations of the conventional procedure.
+ We then motivate our simulation experiments by proposing an alternative approach that remedies many of the limitations of the standard procedure.
  Specifically,
  we propose (1) assessing model performance relative to true poverty measures rather than direct estimates,
  and (2) using mean squared error and targeting performance as the principal validation metrics.
- Our objective is to propose a validation procedure that is appropriate for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
+ Our objective is to present a validation procedure that is appropriate for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
 \begin_inset Foot
 status collapsed
 
@@ -1691,7 +1691,8 @@ For example,
 \end_layout
 
 \begin_layout Standard
-Let 
+Regarding our assessment of the standard procedure,
+ let 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
@@ -1846,12 +1847,11 @@ where
 \end_inset
 
 .
- We are specifically interested in characterizing the bias of 
+ We are first interested in characterizing the bias of 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- when it is used to assess true quantity of interest,
- 
+ when it is used to approximate 
 \begin_inset Formula $R_{a}^{2}$
 \end_inset
 
@@ -2127,7 +2127,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-There is an additional form of bias in 
+There is an second form of bias in 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2254,7 +2254,7 @@ where
 
  is biased (i.e.,
  it will systematically over- or under-estimate poverty),
- it will achieve an 
+ it will misleadingly achieve an 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2267,7 +2267,7 @@ where
 \end_layout
 
 \begin_layout Standard
-A final issue related to 
+A third issue related to 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2300,15 +2300,14 @@ where
 \end_inset
 
 .
- Specifically,
- consider two models that perform equally well in that they achieve the same mean squared error.
+ Consider two models that perform equally well in that they achieve the same mean squared error.
  However,
  assume that one model is applied to a context where the variance of 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
  is large and the other is applied to a low variance context.
- The above then implies that the model applied to the high variance context will achieve a higher 
+ The above implies that the model applied to the high variance context will achieve a higher 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2318,34 +2317,32 @@ where
 \end_layout
 
 \begin_layout Standard
-The issues with the usual validation procedure stem not only from the 
+It is important to note that these issues with the standard procedure stem both from the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- metric itself,
- but also from applying the 
+ metric itself and from applying the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  to direct poverty estimates rather than true poverty indicators.
  One strategy for addressing these problems is to continue using direct poverty estimates as the reference measure,
- but with substantial changes to the validation metric.
+ but with major changes to the validation metric.
  In particular,
- one could attempt to correct a metric like the 
+ one could attempt to correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- or adopt a very different performance metric that is unaffected by the above issues.
- We pursue an alternative strategy by using data that allows us to assess poverty maps relative to true poverty indicators,
- thus permitting us to use more conventional validation metrics.
+ for its biases or adopt a very different performance metric that is less affected by the above issues.
+ We pursue an alternative strategy that instead uses true poverty indicators as the reference measures and only requires us to make minor changes to the validation procedure.
  For example,
  with information on true poverty measures,
  we can sidestep the most critical issues with the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- by using a closely-related metric,
- namely the mean squared error.
+ by using the mean squared,
+ which we have already seen is a closely-related metric.
 \end_layout
 
 \begin_layout Standard
