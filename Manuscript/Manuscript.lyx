@@ -229,23 +229,6 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-The paper does 2 things:
-\end_layout
-
-\begin_layout Plain Layout
-1) Compare GIS models to non-GIS models - we show GIS is not ideal
-\end_layout
-
-\begin_layout Plain Layout
-2) Compare ML to SAE - We show that ML works just as well but has drawbacks.
-\end_layout
-
-\end_inset
-
 Poverty maps provide granular estimates of poverty at the sub-national level in order to better inform the targeting of resources and support the design of interventions tailored to local needs (
 \begin_inset CommandInset citation
 LatexCommand citealt
@@ -599,6 +582,25 @@ In contrast to other papers which focus on the
  In addition,
  we argue that the ultimate concern is to understand how different methodological choices affect poverty by influencing the efficiency of targeting.
  We therefore propose a simple targeting experiment through which we examine the relative ability of alternative mapping methods to alleviate poverty in the context of the Mexican data.
+\end_layout
+
+\begin_layout Standard
+The results of our simulations can be summarized as follows.
+ First,
+ we find that poverty maps produced using machine learning and remotely-sensed covariates tend to perform poorly relative to traditional methods,
+ both in terms of the mean squared error of the estimates and simulated targeting performance.
+ Second,
+ we find that this under-performance is due to the limited predictive capacity of the remotely-sensed covariates.
+ Machine learning performs comparably to,
+ and sometimes better than,
+ the traditional methods when both methods use the same covariates.
+ Third,
+ we show that the performance advantage of machine learning results from the relatively low variance of its poverty estimates,
+ which follows from its use of regularization.
+ Finally,
+ we show that this variance reduction comes at a cost,
+ as it increases the bias of the estimates in the tails of the poverty distribution.
+ 
 \end_layout
 
 \begin_layout Standard
