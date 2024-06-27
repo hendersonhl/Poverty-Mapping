@@ -2733,9 +2733,7 @@ where
 
 \begin_layout Standard
 Specifically,
- the clusters within each state are selected with probability proportional to size (without replacement),
- where the measure of size is the number of households within each cluster.
- The households within each cluster are then selected via simple random sampling.
+ the clusters within each state are selected with probability proportional to size (without replacement) and the households within each cluster are selected via simple random sampling.
  According to this design,
  the inclusion probability for a given household is then approximately:
 \end_layout
@@ -2802,12 +2800,22 @@ The equation used to calculate inclusion probabilities assumes sampling with rep
 
 \end_inset
 
- The sample size across the 500 samples is roughly 23,500 households.
- Under this sampling scenario,
- not all municipalities are included,
- and the number of municipalities included varies from sample to sample,
- ranging between 951 to 1,020 municipalities.
- The median municipality included in a given sample is represented by a single cluster and thus its sample size is 10 households.
+ Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:desc_stats"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ presents select descriptive statistics related to the full intercensus and the 500 samples.
+ We set the poverty line at the 25th percentile of the true income distribution and the first two rows summarize the associated poverty rates at the municipality and PSU levels for the full dataset.
+ The remaining rows summarize our samples and show that we draw 23,540 households per sample (2,354 PSUs),
+ with an average number of municipalities per sample of roughly 992.
+ The samples thus have an average of 2.37 PSUs per municipality.
 \end_layout
 
 \begin_layout Standard
@@ -2816,7 +2824,7 @@ placement document
 alignment document
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \paragraph_spacing onehalf
@@ -3235,6 +3243,13 @@ PSU-to-municipality ratio per sample
 
 \begin_layout Plain Layout
 Select descriptive statistics for the Mexican Intercensal Survey
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:desc_stats"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -3258,13 +3273,6 @@ In addition to the intercensus,
  The geo-referenced data includes 105 indicators.
  Specifically,
  the dataset includes information from 21 different dimensions and each dimension is associated with five summary measures.
- For example,
- we summarize the atmospherically resistant vegetation index for each municipality using the minimum,
- maximum,
- mean,
- sum,
- and standard deviation of the index.
- The same procedure is applied to all dimensions.
 \begin_inset Foot
 status collapsed
 
@@ -3295,6 +3303,13 @@ The 21 dimensions are as follows:
 
 \end_inset
 
+ For example,
+ we summarize the atmospherically resistant vegetation index for each municipality using the minimum,
+ maximum,
+ mean,
+ sum,
+ and standard deviation of the index.
+ The same procedure is applied to all dimensions.
  The geo-referenced data has one major limitation,
  which is that it does not include information on night-time lights,
  which is a commonly-used covariate in machine-learning applications.
@@ -3397,10 +3412,8 @@ GIS
 \end_inset
 
 ).
- We benchmark the performance of this implementation against three traditional mapping methods,
- namely the unit-level,
- area-level,
- and unit-context models.
+ We benchmark the performance of this implementation against two traditional mapping methods,
+ namely the unit-level and area-level models.
  To approximate how these traditional methods are commonly used,
  each model is implemented with census-based covariates,
  albeit at different levels of analysis (covariates labeled 
@@ -3548,7 +3561,18 @@ nolink "false"
  shows that gradient boosting with remotely-sensed covariates tends to have the highest MSE of the models considered.
  The associated boxplot summarizes the distribution of MSE values across all municipalities (i.e.,
  the results are based on Eq.
- [XX]) and indicates that the gradient boosting model achieves a median MSE of 0.007.
+ [
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mseg"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+]) and indicates that the gradient boosting model achieves a median MSE of 0.007.
  The corresponding root MSE is approximately 0.08,
  meaning that the median municipality's error is roughly eight percentage points.
  By contrast,
@@ -3562,10 +3586,10 @@ gold standard
 
  unit-level achieves a median MSE of 0.003,
  which is roughly 40 percent that of the gradient boosting model.
- The area-level and unit-context models similarly outperform the gradient boosting model,
- as both achieve a median MSE of 0.004.
- The fact that the area-level and unit-context models outperform the gradient boosting model is particularly notable,
- as all of these models were developed for use in off-census years and are thus direct competitors.
+ The area-level model performs similarly to the unit-level model,
+ with a median MSE of 0.004.
+ The fact that the area-level model outperforms the gradient boosting model is particularly notable,
+ as both of these models were developed for use in off-census years and are thus direct competitors.
 \end_layout
 
 \begin_layout Standard
@@ -3588,9 +3612,8 @@ nolink "false"
  Across 500 simulations,
  we find that gradient boosting with remotely-sensed covariates achieves a median poverty rate of 20.29,
  which is close to the benchmark rate of 19.9 percent.
- The three traditional methods nevertheless outperform the gradient boosting model.
- The unit-level model achieves a median poverty rate of 20 percent whereas the area-level and unit-context models achieve median rates of 20.04 and 20.01,
- respectively.
+ The two traditional methods nevertheless outperform the gradient boosting model.
+ The unit-level model achieves a median poverty rate of 20 percent whereas the area-level model achieves a median rate of 20.04.
  In short,
  our implementation of the modern approach under-performs both in terms of MSE and poverty reduction.
 \end_layout
@@ -3600,7 +3623,6 @@ As mentioned,
  there are two primary differences between the traditional and modern approaches that could explain these performance disparities:
  the statistical method and the covariates used.
  We first examine whether using an alternative statistical method could improve upon the performance of our initial implementation of the modern approach.
- Accordingly,
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3616,7 +3638,7 @@ nolink "false"
  remotely-sensed covariates in order to isolate the influence of the method.
  In addition to gradient boosting,
  we consider two leading non-parametric competitors (i.e.,
- random forest and Bayesian additive regression trees) and the leading parametric alternative (i.e.,
+ random forest and Bayesian additive regression trees) and the leading parametric competitor (i.e.,
  the area-level model).
 \begin_inset Foot
 status collapsed
@@ -3636,20 +3658,6 @@ literal "false"
 \end_inset
 
 .
- Regarding parametric models,
- the area-level and unit-context models are the closest competitors,
- but to minimize the number of comparisons we have chosen to focus on the area-level model,
- largely because it is both more popular and better-performing.
- For example,
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "corral2021map"
-literal "false"
-
-\end_inset
-
- found that the unit-context model exhibits considerable bias and thus caution against using it.
  
 \end_layout
 
@@ -3807,8 +3815,7 @@ nolink "false"
  The first two boxplots in panels (a) and (b) present the results for gradient boosting with remotely-sensed and census-based covariates,
  respectively.
  As a benchmark,
- we plot similar results for the area-level model,
- which we view as the closest traditional competitor.
+ we plot similar results for the area-level model.
  Recall that when using remotely-sensed covariates,
  gradient boosting achieves a median MSE of 0.007 and a median poverty rate of 20.29.
  With census-based covariates,
@@ -3816,7 +3823,7 @@ nolink "false"
  Importantly,
  gradient boosting with census-based covariates slightly outperforms the area-level model,
  which achieves a median MSE of 0.004 and a median poverty rate of 20.04 when using the same covariates.
- The under-performance of the modern approach is thus largely driven by covariate quality.
+ The under-performance of the modern approach is thus largely driven by the remotely-sensed covariates.
 \end_layout
 
 \begin_layout Standard
@@ -3934,7 +3941,7 @@ name "fig:alt_covariates"
 \end_layout
 
 \begin_layout Standard
-Another way to see that our census-based covariates have greater predictive capacity than the remotely-sensed covariates is by looking at feature importance.
+Another way to see that the census-based covariates have greater predictive capacity than the remotely-sensed covariates is by looking at feature importance.
  One popular measure of feature importance summarizes the gain (i.e.,
  reduction of the loss function) associated with any given feature.
  That is,
@@ -3981,8 +3988,7 @@ GIS
 ) covariates on each sample and averaging each covariate’s importance across the 500 samples.
  We find that all of the top 10 covariates are census-based,
  with only six remotely-sensed covariates entering the top 20.
- Further,
- the feature importances outside the top 10 are relatively small in magnitude.
+ Note also that the feature importances outside the top 10 are relatively small in magnitude.
 \end_layout
 
 \begin_layout Standard
@@ -4038,7 +4044,18 @@ The above results suggest that gradient boosting can approximate the performance
  mask some important differences between the methods.
  To illustrate these differences,
  we first use the variance-bias decomposition presented in Eq.
- [XX] and plot the two components independently.
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mseg"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+) and plot the two components independently.
  Panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4054,8 +4071,8 @@ nolink "false"
  We see that gradient boosting is associated with lower variance estimates than the area-level model for any given set of covariates.
  For example,
  the median variance for gradient boosting with remotely-sensed covariates is 0.002 whereas the median variance for the area-level model with the same covariates is 0.005.
- This result is due to gradient boosting's use of regularization,
- which reduces the variance of the poverty estimates.
+ This variance reduction is an important advantage of gradient boosting and is due to the method's use of regularization.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -4350,7 +4367,7 @@ nolink "false"
 
 \end_inset
 
- shows that the area-level model is less biased for the poorest municipalities in part because its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
+ shows that the area-level model is less biased for the poorest municipalities because its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
 \begin_inset Foot
 status collapsed
 
@@ -4363,13 +4380,13 @@ By contrast,
 
  For each model depicted,
  we focus on the 20 percent of municipalities with the lowest true poverty rate,
- plot the municipality-level bias estimates on the frequency with which a municipality was sampled,
+ plot the municipality-level bias estimates on the frequency in which a municipality was sampled,
  and then fit a lowess curve to the data.
  The sampling frequencies capture the proportion of samples for which a municipality received an in-sample prediction,
  thus benefitting from the area-level model's averaging procedure.
  As expected,
  we see that the area-level model is relatively less biased for municipalities with higher sampling frequencies.
- The performance disparity is particularly pronounced among the models with remotely-sensed covariates,
+ The performance disparity is especially pronounced among the models with remotely-sensed covariates,
  as the area-level model is roughly 10 percentage points less biased at the highest sampling frequencies.
 \end_layout
 
@@ -4379,11 +4396,10 @@ To summarize,
  We have shown that this under-performance is driven by the modern approach's reliance on remotely-sensed covariates.
  When using the same covariates,
  we found that gradient boosting performs comparably to the unit-level model and slightly outperforms the area-level model.
- Focusing on the MSE,
- we showed that the performance advantage of gradient boosting relative to the area-level model is largely due to its variance-reduction properties.
+ We then showed that the performance advantage of gradient boosting relative to the area-level model is due to its variance-reduction properties.
  The cost of such variance reduction,
  however,
- is that gradient boosting exhibits relatively more bias in the tails of the poverty distribution than the area-level model.
+ is that gradient boosting exhibits more bias in the tails of the poverty distribution than the area-level model.
  In the following section,
  we discuss the practical implications of these findings.
 \end_layout

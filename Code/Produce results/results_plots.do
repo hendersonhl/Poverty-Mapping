@@ -62,12 +62,11 @@ drop if _m==2
 drop _m
 
 * Label and plot
-keep mse_gb_gis_ntl mse_uc mse_fh_mun mse_eb	
+keep mse_gb_gis_ntl mse_fh_mun mse_eb	
 label var mse_gb_gis_ntl "Gradient Boosting (GIS)"
 label var mse_eb "Unit-level (CEN)"  
-label var mse_uc "Unit-context (CEN)" 
 label var mse_fh_mun "Area-level (CEN)"    	
-graph hbox mse_gb_gis_ntl mse_eb  mse_fh_mun mse_uc, ytitle(Mean Squared Error) ///
+graph hbox mse_gb_gis_ntl mse_fh_mun mse_eb, ytitle(Mean Squared Error) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1a.png", as(png) replace
@@ -96,9 +95,8 @@ foreach x of varlist gb_gis_mun_ntl eb uc fh_mun {
 * Label and plot
 label var gb_gis_mun_ntl "Gradient Boosting (GIS)"
 label var eb "Unit-level (CEN)"      
-label var uc "Unit-context (CEN)"
 label var fh_mun "Area-level (CEN)"  
-graph hbox gb_gis_mun_ntl eb fh_mun uc, ytitle(Poverty Rate) ///
+graph hbox gb_gis_mun_ntl fh_mun eb, ytitle(Poverty Rate) ///
     scheme(s1mono) legend(off) showyvars nooutside note("") ///
 	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
 graph export "$outpath/Figure-1b.png", as(png) replace
@@ -285,7 +283,7 @@ graph export "$outpath/Figure-4.png", as(png) replace
 
 * Bring in bias results
 import delimited "$inpath/results_bias.csv", clear
-keep muni bias_gb_gis_ntl bias_gb_census
+keep muni bias_gb_gis_ntl bias_gb_census bias_eb
 tempfile bias
 save `bias'
 
@@ -323,7 +321,7 @@ save `FH_GIS_bias'
 
 * Merge 
 import delimited "$inpath/results_mse.csv", clear
-keep muni mse_gb_gis_ntl mse_gb_census
+keep muni mse_gb_gis_ntl mse_gb_census mse_eb
 merge 1:1 muni using `FH_CEN_mse', keepusing(mse_fh_mun)
 drop if _m==2
 drop _m
@@ -343,6 +341,7 @@ drop _m
 * Calculate variance for each model
 gen var_gb_census = mse_gb_census - bias_gb_census^2
 gen var_gb_gis_ntl = mse_gb_gis_ntl - bias_gb_gis_ntl^2
+gen var_eb = mse_eb - bias_eb^2
 gen var_fh_mun = mse_fh_mun - bias_fh_mun^2
 gen var_fh_mun_gis_ntl = mse_fh_mun_gis_ntl - bias_fh_mun_gis_ntl^2
 
@@ -351,9 +350,10 @@ label var var_gb_gis_ntl "Gradient Boosting (GIS)"
 label var var_gb_census "Gradient Boosting (CEN)"
 label var var_fh_mun_gis_ntl "Area-level (GIS)"   	
 label var var_fh_mun "Area-level (CEN)"   
-graph hbox var_gb_gis_ntl var_gb_census var_fh_mun_gis_ntl var_fh_mun, ytitle(Variance) ///
+label var var_eb "Unit-level (CEN)"
+graph hbox var_gb_gis_ntl var_gb_census var_fh_mun_gis_ntl var_fh_mun var_eb, ytitle(Variance) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
-	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) box(5, color(gray))
 graph export "$outpath/Figure-5a.png", as(png) replace
 
 * Bias plot
@@ -361,9 +361,10 @@ label var bias_gb_gis_ntl "Gradient Boosting (GIS)"
 label var bias_gb_census "Gradient Boosting (CEN)"
 label var bias_fh_mun_gis_ntl "Area-level (GIS)"   	
 label var bias_fh_mun "Area-level (CEN)" 
-graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun, ytitle(Bias) ///
+label var bias_eb "Unit-level (CEN)" 
+graph hbox bias_gb_gis_ntl bias_gb_census bias_fh_mun_gis_ntl bias_fh_mun bias_eb, ytitle(Bias) ///
     scheme(s1mono) legend(off) nooutside note("") showyvars ///
-	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray))
+	box(1, color(gray)) box(2, color(gray)) box(3, color(gray)) box(4, color(gray)) box(5, color(gray))
 graph export "$outpath/Figure-5b.png", as(png) replace
 	
 * Select descriptive statistics
