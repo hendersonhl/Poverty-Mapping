@@ -2585,8 +2585,8 @@ Income is defined as money received from work performed during the course of the
 \end_inset
 
  The size of the dataset is especially important,
- as it allows us conduct simulation experiments with repeated samples from the intercensus that are sufficiently large and diverse.
- We use these samples to estimate municipality-level poverty maps with alternative methods and then assess the maps using the full intercensus as the ground truth.
+ as it allows us conduct simulation experiments with repeated samples that are sufficiently large and diverse.
+ We use these samples to estimate municipality-level poverty maps with alternative methods and then assess the maps using the full dataset as the ground truth.
 \end_layout
 
 \begin_layout Standard
@@ -2819,12 +2819,13 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\paragraph_spacing double
+\paragraph_spacing onehalf
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="5">
+<lyxtabular version="3" rows="7" columns="6">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
@@ -2876,6 +2877,15 @@ Max.
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Obs.
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
@@ -2891,7 +2901,7 @@ Municipality poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.30
 \end_layout
 
 \end_inset
@@ -2900,7 +2910,7 @@ Municipality poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.19
 \end_layout
 
 \end_inset
@@ -2909,7 +2919,7 @@ Municipality poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.02
 \end_layout
 
 \end_inset
@@ -2918,7 +2928,16 @@ Municipality poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
+0.96
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,865
 \end_layout
 
 \end_inset
@@ -2938,7 +2957,7 @@ PSU poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.23
 \end_layout
 
 \end_inset
@@ -2947,7 +2966,7 @@ PSU poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.20
 \end_layout
 
 \end_inset
@@ -2956,7 +2975,7 @@ PSU poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.00
 \end_layout
 
 \end_inset
@@ -2965,7 +2984,16 @@ PSU poverty rate (full intercensus)
 \begin_inset Text
 
 \begin_layout Plain Layout
+1.00
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16,297
 \end_layout
 
 \end_inset
@@ -2985,7 +3013,7 @@ Observations per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+23,540
 \end_layout
 
 \end_inset
@@ -2994,7 +3022,7 @@ Observations per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.00
 \end_layout
 
 \end_inset
@@ -3003,7 +3031,7 @@ Observations per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+23,540
 \end_layout
 
 \end_inset
@@ -3012,18 +3040,7 @@ Observations per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Municipalities per sample
+23,540
 \end_layout
 
 \end_inset
@@ -3032,34 +3049,7 @@ Municipalities per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+500
 \end_layout
 
 \end_inset
@@ -3079,7 +3069,7 @@ PSU per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2,354
 \end_layout
 
 \end_inset
@@ -3088,7 +3078,7 @@ PSU per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.00
 \end_layout
 
 \end_inset
@@ -3097,7 +3087,7 @@ PSU per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2,354
 \end_layout
 
 \end_inset
@@ -3106,7 +3096,72 @@ PSU per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
+2,354
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Municipalities per sample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+992.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.95
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+951
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1,020
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
 \end_layout
 
 \end_inset
@@ -3126,7 +3181,7 @@ PSU-to-municipality ratio per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2.37
 \end_layout
 
 \end_inset
@@ -3135,7 +3190,7 @@ PSU-to-municipality ratio per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+0.03
 \end_layout
 
 \end_inset
@@ -3144,7 +3199,7 @@ PSU-to-municipality ratio per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+2.31
 \end_layout
 
 \end_inset
@@ -3153,7 +3208,16 @@ PSU-to-municipality ratio per sample
 \begin_inset Text
 
 \begin_layout Plain Layout
+2.48
+\end_layout
 
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
 \end_layout
 
 \end_inset
