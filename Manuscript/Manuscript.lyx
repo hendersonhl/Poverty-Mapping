@@ -2454,7 +2454,7 @@ literal "false"
 \end_inset
 
 ,
- we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with that map.
+ we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with the map.
 \begin_inset Foot
 status collapsed
 
@@ -2490,9 +2490,9 @@ literal "false"
 
 \end_inset
 
- In addition to the poverty maps,
- note that the procedure requires true household-level incomes from a census-type dataset.
- 
+ Though using targeting performance as a validation metric has direct policy relevance,
+ note that it can be insensitive to systematic biases in the poverty estimates (e.g.,
+ rank-based targeting schemes do not depend on the absolute level of poverty).
 \end_layout
 
 \begin_layout Standard
@@ -2564,21 +2564,17 @@ name "sec:data"
 \end_layout
 
 \begin_layout Standard
-The Mexican Intercensal Survey was carried out by the Mexican National Institute of Statistics and Geography (INEGI).
+Carried out by the Mexican National Institute of Statistics and Geography (INEGI) in 2015,
+ the Mexican Intercensal Survey is a unique dataset that allows us to construct a ground truth for our validation exercises.
  The sample consists of 5.9 million households and is representative at the national,
  state (32 states),
  and municipality level (2,457 municipalities).
  It is also representative for localities with populations of 50,000 or more inhabitants.
- The administered questionnaire gathered information on household income,
+ The survey questionnaire gathered information on household income,
  geographic location,
  household demographics,
- dwelling characteristics,
- and economic activities,
- among others.
- The size of the dataset is especially important,
- as it allows us to draw repeated samples that are sufficiently large and diverse.
- In addition,
- the fact that the survey gathered detailed income information on all households allows us to calculate the required poverty measures that serve as the basis for our simulation experiments.
+ and dwelling characteristics,
+ among other things.
 \begin_inset Foot
 status collapsed
 
@@ -2588,11 +2584,13 @@ Income is defined as money received from work performed during the course of the
 
 \end_inset
 
- The intercensus is used as the reference population and the poverty rates from the intercensus are used as the true poverty rates that are to be estimated.
+ The size of the dataset is especially important,
+ as it allows us conduct simulation experiments with repeated samples from the intercensus that are sufficiently large and diverse.
+ We use these samples to estimate municipality-level poverty maps with alternative methods and then assess the maps using the full intercensus as the ground truth.
 \end_layout
 
 \begin_layout Standard
-Prior to sampling from the Intercensal Survey,
+Prior to sampling from the intercensus,
  we make three modifications to the data.
  First,
  as a large number of households reported earning no income,
@@ -2614,7 +2612,7 @@ This is done to ensure some missing values are present in the data used,
  to ensure that all primary sampling units (PSUs) are also sufficiently large for sampling purposes,
  we combine several neighboring PSUs such that all include at least 300 households.
  Our final census dataset consists of 3.9 million households in 1,865 municipalities and 16,297 PSUs.
- The resulting census is used to draw 500 survey samples that serve as the basis for our design-based simulation experiments (
+ The resulting census is used to draw 500 survey samples that serve as the basis for our simulation experiments (
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "tzavidis2018start"
@@ -2651,7 +2649,15 @@ The desired precision of 7.5 percent is somewhat arbitrary,
 \end_inset
 
  We use a two-stage clustered design wherein PSUs or clusters are selected within each domain and then a sample of 10 households is selected within each cluster.
- Our decision to select 10 households within each cluster is consistent with the design of other large-scale household surveys conducted in developing countries.
+ Our decision to select 10 households within each cluster is consistent with the design of other large-scale household surveys conducted in developing countries 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "grosh1996manual"
+literal "false"
+
+\end_inset
+
+.
  Under simple random sampling,
  the minimum sample size required for each state is as follows:
 \end_layout
@@ -2805,12 +2811,389 @@ The equation used to calculate inclusion probabilities assumes sampling with rep
 \end_layout
 
 \begin_layout Standard
-In addition to the Intercensal Survey,
+\begin_inset Float table
+placement document
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\paragraph_spacing double
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="5">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mean
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Std.
+ Dev.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Min.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Max.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Municipality poverty rate (full intercensus)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PSU poverty rate (full intercensus)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Observations per sample 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Municipalities per sample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PSU per sample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PSU-to-municipality ratio per sample
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Select descriptive statistics for the Mexican Intercensal Survey
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In addition to the intercensus,
  INEGI has also released geo-referenced data that is similar to the remotely-sensed data often used in machine-learning applications.
- These geographic variables were calculated by INEGI for the year 2015 (the same year as the Intercensal Survey) and are only available at the municipality level.
- The geo-referenced data includes 105 different indicators.
+ These geographic variables were calculated by INEGI for the year 2015 (the same year as the intercensus) and are available at the municipality level.
+ The geo-referenced data includes 105 indicators.
  Specifically,
- the dataset includes information from 21 different dimensions and each dimension is associated with five different summary measures.
+ the dataset includes information from 21 different dimensions and each dimension is associated with five summary measures.
  For example,
  we summarize the atmospherically resistant vegetation index for each municipality using the minimum,
  maximum,
@@ -2848,8 +3231,71 @@ The 21 dimensions are as follows:
 
 \end_inset
 
- We then have two alternative sets of covariates that we use in our simulations:
- the geo-referenced data and the standard set of sociodemographic characteristics from the census.
+ The geo-referenced data has one major limitation,
+ which is that it does not include information on night-time lights,
+ which is a commonly-used covariate in machine-learning applications.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+For examples,
+ see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "lee2020high"
+literal "false"
+
+\end_inset
+
+,
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+We thus augment the INEGI geo-referenced data with night-time lights data produced by the Earth Observation Group (EOG).
+ EOG uses the nightly day/night band (DNB) low light imaging data gathered by the NASA/NOAA Visible Infrared Imaging Radiometer Suite (VIIRS) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "elvidge2021annual"
+literal "false"
+
+\end_inset
+
+.
+ To match the other geo-referenced covariates,
+ we use the night-time lights data from 2015,
+ which is available at 15 arc second resolution (roughly 500 meters at the equator) and then aggregated to the municipality level.
+ Also like the other geo-referenced data,
+ we summarize night-time lights within each municipality using the minimum,
+ maximum,
+ mean,
+ sum,
+ and standard deviation.
+ With these additions,
+ we then have two alternative sets of covariates that we use in our simulations:
+ the geo-referenced data (including night-time lights) and the standard set of sociodemographic covariates from the intercensus.
 \end_layout
 
 \begin_layout Section
