@@ -590,17 +590,15 @@ The results of our simulations can be summarized as follows.
  we find that poverty maps produced using machine learning and remotely-sensed covariates tend to perform poorly relative to traditional methods,
  both in terms of the mean squared error of the estimates and simulated targeting performance.
  Second,
- we find that this under-performance is due to the limited predictive capacity of the remotely-sensed covariates.
+ we find that this under-performance is due to the low predictive capacity of the remotely-sensed covariates.
  Machine learning performs comparably to,
  and sometimes better than,
  the traditional methods when both methods use the same covariates.
  Third,
- we show that the performance advantage of machine learning results from the relatively low variance of its poverty estimates,
- which follows from its use of regularization.
- Finally,
- we show that this variance reduction comes at a cost,
- as it increases the bias of the estimates in the tails of the poverty distribution.
- 
+ we show that the performance advantage of machine learning for a given covariate set results from the relatively low variance of its estimates,
+ but this variance reduction comes at the cost of increasing the bias of the estimates,
+ particularly for the poorest municipalities.
+ This bias-variance trade-off is especially stark when using remotely-sensed covariates and ultimately raises some challenging questions about the practice of poverty mapping.
 \end_layout
 
 \begin_layout Standard
@@ -4073,8 +4071,7 @@ nolink "false"
  We see that gradient boosting is associated with lower variance estimates than the area-level model for any given set of covariates.
  For example,
  the median variance for gradient boosting with remotely-sensed covariates is 0.002 whereas the median variance for the area-level model with the same covariates is 0.005.
- This variance reduction is an important advantage of gradient boosting and is due to the method's use of regularization.
- 
+ This variance reduction is an important advantage of gradient boosting and the reason for its use of regularization.
 \end_layout
 
 \begin_layout Standard
@@ -4369,7 +4366,7 @@ nolink "false"
 
 \end_inset
 
- shows that the area-level model is less biased for the poorest municipalities because its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
+ shows that an important reason for the area-level model's reduced bias is that its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
 \begin_inset Foot
 status collapsed
 
@@ -4398,7 +4395,8 @@ To summarize,
  We have shown that this under-performance is driven by the modern approach's reliance on remotely-sensed covariates.
  When using the same covariates,
  we found that gradient boosting performs comparably to the unit-level model and slightly outperforms the area-level model.
- We then showed that the performance advantage of gradient boosting relative to the area-level model is due to its variance-reduction properties.
+ We then showed that the performance advantage of gradient boosting relative to the area-level model is due to its variance-reduction properties,
+ namely the use of regularization.
  The cost of such variance reduction,
  however,
  is that gradient boosting exhibits more bias in the tails of the poverty distribution than the area-level model.
