@@ -239,23 +239,23 @@ literal "false"
 
 ).
  As household surveys are generally unrepresentative for small geographical areas,
- producing detailed poverty maps often requires using small area estimation,
+ producing detailed poverty maps typically requires using small area estimation,
  which consists of using statistical methods to predict poverty levels on the basis of household- or area-level characteristics.
  The basic procedure entails two steps:
  (1) using household survey data,
- fit a statistical model at the household or area level of some welfare measure (e.g.,
+ fit a statistical model of some welfare measure (e.g.,
  poverty,
  income,
  or wealth) to household- or area-level characteristics,
- and (2) apply the model to census data available for all households or geographical entities to estimate poverty at the sub-national level.
+ and (2) apply the model to data available for all households or geographical units to estimate poverty at the sub-national level.
  At a minimum,
- the procedure thus requires a household survey and data at the area level or a census to produce a sufficiently detailed poverty map.
+ the procedure then requires a household survey and data on the entire population to produce a sufficiently detailed map.
 \end_layout
 
 \begin_layout Standard
 The literature on small area estimation is rich and several variations on this basic procedure have been proposed.
- Unit-level models conduct estimation and prediction at the household level,
- assuming a linear relationship between the welfare measure and covariates 
+ Unit-level models generally use survey and census data to conduct estimation and prediction at the household level,
+ assuming a parametric relationship between the welfare measure and covariates 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "hentschel1998combining,elbers2003micro,molina2010small"
@@ -264,10 +264,9 @@ literal "false"
 \end_inset
 
 .
- Unit-level models are not well-suited to situations where the survey and census data correspond to different years,
+ Unit-level models are not well-suited to situations where the survey and census correspond to different years,
  which is often the case in developing countries where censuses are conducted infrequently.
- Area-level models represent a feasible alternative for periods where a recent census is not available that similarly relies on linear functional forms,
- but conduct estimation and prediction using only aggregate data for the geographical entities of interest 
+ Area-level models are the leading parametric alternative for off-census years and only require aggregate data on the geographical units of interest for estimation and prediction 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "fay1979estimates,torabi2014small"
@@ -276,7 +275,7 @@ literal "false"
 \end_inset
 
 .
- Unit-context models have been suggested alternative and are characterized by an estimation stage wherein household-level measures are modeled exclusively as a linear function of area-level characteristics 
+ Unit-context models have also been suggested for off-census years and are characterized by an estimation stage wherein household-level measures are modeled as a parametric function of area-level characteristics 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "nguyen2012method,lange2018small,masaki2020small"
@@ -324,7 +323,7 @@ Their remotely-sensed data includes high-resolution satellite imagery,
 
 \end_inset
 
- They then applied the model to the populated surface of all 135 low- and middle-income countries to develop granular poverty maps for each country.
+ They then applied the model to the populated surface of 135 low- and middle-income countries to develop granular poverty maps for each country.
  Similar approaches have been used for individual countries,
  including Rwanda 
 \begin_inset CommandInset citation
@@ -411,15 +410,15 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-While often subsumed under the term 
+This alternative method – which we refer to as the 
 \begin_inset Quotes eld
 \end_inset
 
-machine learning,
+modern
 \begin_inset Quotes erd
 \end_inset
 
- this modern approach to poverty mapping actually consists of several practices that differ from more traditional approaches.
+ approach to poverty mapping – consists of several practices that differ from more traditional approaches.
  Most obviously,
  the modern approach substitutes non-parametric statistical methods for the parametric approaches traditionally used for poverty mapping.
  In addition,
@@ -428,28 +427,27 @@ machine learning,
 status collapsed
 
 \begin_layout Plain Layout
-Nevertheless,
- traditional area-level methods have made considerable use of remotely sensed covariates and often rely on using data available at the area-level,
- including administrative data (see 
+Traditional area-level models occasionally use remotely-sensed data.
+ See 
 \begin_inset CommandInset citation
-LatexCommand citealt
+LatexCommand citet
 key "seitz2019they"
 literal "false"
 
 \end_inset
 
- for an application using publicly available geospatial data).
+ for an application using publicly-available geospatial data.
 \end_layout
 
 \end_inset
 
- Finally,
- poverty maps produced with machine-learning methods generally share a common validation procedure.
+ Further,
+ maps produced with machine-learning methods generally share a common validation procedure.
  The key feature of this procedure is that model performance is assessed by calculating the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- from a regression of the observed poverty measures on the estimated poverty measures for the same geographical units.
+ from a regression of the observed poverty measures on the estimates for the same geographical units.
 \begin_inset Foot
 status collapsed
 
@@ -523,10 +521,11 @@ literal "false"
 
 \end_inset
 
- The poverty measures used in this procedure are most often direct,
- sample-based estimates rather than the true poverty measures for the regions of interest.
+ There are several limitations to this procedure,
+ but the most critical is that it typically uses direct,
+ sample-based estimates rather than the true measures for the regions of interest.
  While direct estimates are unbiased,
- they can be imprecise estimates of true poverty measures,
+ they can be imprecise estimates of the true measures,
  meaning that it is unclear whether the validation procedure is informative of actual model performance 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -536,15 +535,6 @@ literal "false"
 \end_inset
 
 .
- In addition,
- we are often interested in how well the predictions perform in all areas,
- not on aggregate.
- Consequently,
- the 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- measure hides the heterogeneity across areas.
 \end_layout
 
 \begin_layout Standard
@@ -560,34 +550,19 @@ census
 
 ) that we use to conduct several simulation experiments.
  Our experiments entail repeatedly drawing survey samples from the census where each sample produces direct poverty estimates for the sampled geographic areas.
- With each sample we obtain small area estimates using traditional and machine learning based methods.
+ With each sample we obtain small area estimates using traditional and modern mapping methods.
  The presence of the census means that we observe the ``true'' poverty measure corresponding to the direct estimate.
- We use these true poverty measures to gain insight not only into the credibility of model validation based on direct estimates,
- but also the performance of machine-learning methods when validated against the true poverty measures.
- Given that population censuses rarely collect detailed data on income or expenditures,
- we construct our census from a large-scale household survey conducted in Mexico:
+ We use these true poverty measures to gain insight into the performance of machine-learning methods when validated against a credible ground truth.
+ As population censuses rarely collect detailed data on income or expenditures,
+ we construct our census from a large-scale survey conducted in Mexico:
  the Mexican Intercensal Survey of 2015.
- The Mexican Intracensal Survey represents our population and it contains an income measure that yields the true poverty values that we wish to estimate.
-\end_layout
-
-\begin_layout Standard
-In contrast to other papers which focus on the 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- measure,
- which omits much of the within area accuracy of our estimates,
- we focus on the mean squared error.
- We argue that the mean squared error is a better measure for understanding the strength of the association between the poverty estimates and reference measures.
- In addition,
- we argue that the ultimate concern is to understand how different methodological choices affect poverty by influencing the efficiency of targeting.
- We therefore propose a simple targeting experiment through which we examine the relative ability of alternative mapping methods to alleviate poverty in the context of the Mexican data.
+ 
 \end_layout
 
 \begin_layout Standard
 The results of our simulations can be summarized as follows.
  First,
- we find that poverty maps produced using machine learning and remotely-sensed covariates tend to perform poorly relative to traditional methods,
+ we find that poverty maps produced using machine learning and remotely-sensed covariates tend to perform poorly relative to the traditional approach,
  both in terms of the mean squared error of the estimates and simulated targeting performance.
  Second,
  we find that this under-performance is due to the low predictive capacity of the remotely-sensed covariates.
@@ -598,21 +573,7 @@ The results of our simulations can be summarized as follows.
  we show that the performance advantage of machine learning for a given covariate set results from the relatively low variance of its estimates,
  but this variance reduction comes at the cost of increasing the bias of the estimates,
  particularly for the poorest municipalities.
- This bias-variance trade-off is especially stark when using remotely-sensed covariates and ultimately raises some challenging questions about the practice of poverty mapping.
-\end_layout
-
-\begin_layout Standard
-The results of our simulations can be summarized as follows.
- First,
- when assessing model performance based on the true poverty rates using the mean squared error,
- we find that the quality of the data used for modeling is crucial.
- Hence,
- models that rely on publicly available remotely-sensed covariates are unlikely to yield estimates that are of similar quality to models that include census-based covariates.
- We find that these performance issues are largely due to the limited predictive power of remotely-sensed covariates relative to census-based covariates.
- When comparing machine learning based methods to traditional small area methods using similar data,
- then machine learning methods perform just as well or better to traditional methods.
- Finally,
- our targeting simulations which rely on accurate rankings of locations show that our machine-learning implementations perform as well as more traditional poverty mapping methods only when relying on similar data.
+ This bias-variance tradeoff is especially stark when using remotely-sensed covariates and ultimately raises practical questions about the use and production of modern poverty maps.
 \end_layout
 
 \begin_layout Standard
@@ -633,7 +594,7 @@ literal "false"
 \end_inset
 
 ,
- who similarly used the Mexican Intercensal Survey to examine the performance of several poverty mapping methods.
+ who similarly used the Mexican Intercensal Survey to examine the performance of several mapping methods.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -642,7 +603,7 @@ literal "false"
 
 \end_inset
 
- focused exclusively on traditional poverty mapping approaches and did not consider the performance of machine-learning methods.
+ focused exclusively on traditional mapping approaches and did not consider the performance of machine-learning methods.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -651,10 +612,10 @@ literal "false"
 
 \end_inset
 
- consider the performance of machine-learning approaches,
+ consider the performance of machine learning,
  their implementation only uses census-based covariates and thus does not examine the performance of the standard implementation that relies on remotely-sensed covariates.
  Importantly,
- we are not the first paper to evaluate the performance of machine-learning methods relative to census data.
+ we are not the first paper to evaluate machine-learning methods relative to independent census data.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -671,12 +632,23 @@ literal "false"
 
 \end_inset
 
- validate their models relative to censuses,
- both papers use the 
+ validate their models relative to a census,
+ they focus on wealth rather than poverty and do not address all the limitations of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a performance metric and focus on wealth estimates rather than poverty.
+ as a performance metric (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:validation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+).
  Finally,
  
 \begin_inset CommandInset citation
@@ -686,27 +658,14 @@ literal "false"
 
 \end_inset
 
- examine how well machine-learning methods using remotely-sensed data can reproduce poverty maps estimated using census data.
- They do not,
- however,
- compare their estimates to a ground truth.
+ examine the performance of machine-learning methods combined with remotely-sensed data,
+ but not relative to a ground truth.
 \end_layout
 
 \begin_layout Standard
-This paper then represents the first attempt to rigorously assess the performance of modern poverty mapping methods relative to true poverty rates.
+This paper then represents the first attempt to rigorously assess the performance of modern poverty-mapping methods relative to true poverty measures.
  In what follows,
  Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:data"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- discusses the data we use for our experiments and Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:methods"
@@ -718,7 +677,7 @@ nolink "false"
 \end_inset
 
  discusses the various methods we examine,
- including both machine-learning methods and some traditional poverty mapping methods that we use as performance benchmarks.
+ including both machine-learning methods and the traditional approaches we use as performance benchmarks.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -730,13 +689,23 @@ nolink "false"
 
 \end_inset
 
- then considers the issue of model validation where we critically assess the 
+ considers the issue of model validation by presenting a critical evaluation of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a validation metric and then propose some alternative metrics.
- Finally,
+ as a validation metric and proposing some alternative measures.
  Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:data"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ then discusses the data we use for our simulation experiments and Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:results"
@@ -747,7 +716,9 @@ nolink "false"
 
 \end_inset
 
- presents the results of our experiments and Section 
+ presents the results.
+ Finally,
+ Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:conclusion"
@@ -758,7 +729,8 @@ nolink "false"
 
 \end_inset
 
- provides some concluding remarks.
+ provides concluding remarks,
+ including practical recommendations for the production and use of poverty maps.
 \end_layout
 
 \begin_layout Section
