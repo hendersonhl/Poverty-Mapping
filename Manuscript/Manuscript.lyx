@@ -3240,8 +3240,8 @@ name "tab:desc_stats"
 
 \begin_layout Standard
 In addition to the intercensus,
- INEGI has also released geo-referenced data that is similar to the remotely-sensed data often used in machine-learning applications.
- These geographic variables were calculated by INEGI for the year 2015 (the same year as the intercensus) and are available at the municipality level.
+ INEGI has also released geo-referenced data that is similar to the remotely-sensed covariates often used in machine-learning applications.
+ These geographic variables were calculated by INEGI for the year 2015 (the same year as the intercensus) and the municipality is the lowest administrative level for which the covariates are available.
  The geo-referenced data includes 105 indicators.
  Specifically,
  the dataset includes information from 21 different dimensions and each dimension is associated with five summary measures.
