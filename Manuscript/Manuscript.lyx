@@ -266,7 +266,7 @@ literal "false"
 .
  Unit-level models are not well-suited to situations where the survey and census correspond to different years,
  which is often the case in developing countries where censuses are conducted infrequently.
- Area-level models are the leading parametric alternative for off-census years and only require aggregate data on the geographical units of interest for estimation and prediction 
+ Area-level models are the leading parametric alternative for off-census years and only use aggregate data on the geographical units of interest for estimation and prediction 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "fay1979estimates,torabi2014small"
@@ -526,15 +526,18 @@ literal "false"
  sample-based estimates rather than the true measures for the regions of interest.
  While direct estimates are unbiased,
  they can be imprecise estimates of the true measures,
- meaning that it is unclear whether the validation procedure is informative of actual model performance 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "rodas2021pull"
-literal "false"
+ meaning that it is unclear whether the validation procedure is informative of actual model performance (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:validation"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Standard
@@ -572,7 +575,7 @@ The results of our simulations can be summarized as follows.
  Third,
  we show that the performance advantage of machine learning for a given covariate set results from the relatively low variance of its estimates,
  but this variance reduction comes at the cost of increasing the bias of the estimates,
- particularly for the poorest municipalities.
+ particularly for the poorest areas.
  This bias-variance tradeoff is especially stark when using remotely-sensed covariates and ultimately raises practical questions about the use and production of modern poverty maps.
 \end_layout
 
@@ -659,12 +662,68 @@ literal "false"
 \end_inset
 
  examine the performance of machine-learning methods combined with remotely-sensed data,
- but not relative to a ground truth.
+ but not relative to true poverty measures.
 \end_layout
 
 \begin_layout Standard
-This paper then represents the first attempt to rigorously assess the performance of modern poverty-mapping methods relative to true poverty measures.
- In what follows,
+This paper then represents the first attempt to rigorously assess the performance of modern poverty-mapping methods relative to a ground truth.
+ The scope of our analysis is nevertheless limited in some important ways.
+ For one,
+ we confine our attention to the performance of machine learning for predicting consumption poverty and do not consider other welfare measures,
+ such as wealth or multi-dimensional poverty.
+ We also focus exclusively on the case of Mexico because of the unique data requirements of our experiments and therefore do not assess the external validity of our findings.
+ A final limitation of our analysis is that we do not consider all possible uses of machine learning for poverty mapping.
+ For example,
+ we do not consider the issue of 
+\begin_inset Quotes eld
+\end_inset
+
+feature extraction,
+\begin_inset Quotes erd
+\end_inset
+
+ which is a data-processing technique that builds the covariates for mapping exercises by applying machine learning to unstructured input data (e.g.,
+ satellite imagery).
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citet
+key "smythe2022geographic"
+literal "false"
+
+\end_inset
+
+,
+ for example,
+ used a convolutional neural network to extract features from high-resolution satellite imagery in Nigeria and then used those features to create a poverty map using gradient boosting.
+ See 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "jean2016combining"
+literal "false"
+
+\end_inset
+
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "chi2022microestimates"
+literal "false"
+
+\end_inset
+
+ for other applications of a similar procedure.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In what follows,
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
