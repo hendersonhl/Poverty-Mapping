@@ -4529,8 +4529,14 @@ Our analysis has several practical implications for poverty mapping.
 status collapsed
 
 \begin_layout Plain Layout
-See https://en.www.inegi.org.mx.
- The processed data for our simulation experiments are also available upon request.
+See https://en.www.inegi.org.mx/programas/intercensal/2015.
+ For the remotely-sensed data in the same year,
+ see https://www.inegi.org.mx/investigacion/geomediana.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+The processed data for our simulation experiments are also available upon request.
  
 \end_layout
 
