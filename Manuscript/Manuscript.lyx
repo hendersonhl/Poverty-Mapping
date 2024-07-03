@@ -194,7 +194,7 @@ Recent years have witnessed considerable methodological advances in poverty mapp
 Key words:
 
 \series default
- Small area estimation;
+ Small-area estimation;
  poverty mapping;
  machine learning;
  satellite imagery
@@ -231,7 +231,7 @@ literal "false"
 
 ).
  As household surveys are generally unrepresentative for small geographical areas,
- producing detailed poverty maps typically requires using small area estimation,
+ producing detailed poverty maps typically requires using small-area estimation,
  which consists of using statistical methods to predict poverty levels on the basis of household- or area-level characteristics.
  The basic procedure entails two steps:
  (1) using household survey data,
@@ -245,7 +245,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The literature on small area estimation is rich and several variations on this basic procedure have been proposed.
+The literature on small-area estimation is rich and several variations on this basic procedure have been proposed.
  Unit-level models generally use survey and census data to conduct estimation and prediction at the household level,
  assuming a parametric relationship between the welfare measure and covariates 
 \begin_inset CommandInset citation
@@ -545,7 +545,7 @@ census
 
 ) that we use to conduct several simulation experiments.
  Our experiments entail repeatedly drawing survey samples from the census where each sample produces direct poverty estimates for the sampled geographic areas.
- With each sample we obtain small area estimates using traditional and modern mapping methods.
+ With each sample we obtain small-area estimates using traditional and modern mapping methods.
  The presence of the census means that we observe the ``true'' poverty measure corresponding to the direct estimate.
  We use these true poverty measures to gain insight into the performance of machine-learning methods when validated against a credible ground truth.
  As population censuses rarely collect detailed data on income or expenditures,
@@ -3425,7 +3425,7 @@ nolink "false"
 
 \end_inset
 
- presents the MSE for our closest approximation to the standard implementation of the modern approach:
+ presents the mean squared error (MSE) for our closest approximation to the standard implementation of the modern approach:
  gradient boosting with remotely-sensed covariates (covariates labeled 
 \begin_inset Quotes eld
 \end_inset
