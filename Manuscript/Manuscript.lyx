@@ -669,7 +669,7 @@ literal "false"
 This paper then represents the first attempt to rigorously assess the performance of modern poverty-mapping methods relative to a ground truth.
  The scope of our analysis is nevertheless limited in some important ways.
  For one,
- we confine our attention to the performance of machine learning for predicting consumption poverty and do not consider other welfare measures,
+ we confine our attention to the performance of machine learning for predicting income poverty and do not consider other welfare measures,
  such as wealth or multi-dimensional poverty.
  We also focus exclusively on the case of Mexico because of the unique data requirements of our experiments and therefore do not assess the external validity of our findings.
  A final limitation of our analysis is that we do not consider all possible uses of machine learning for poverty mapping.
@@ -4447,146 +4447,126 @@ name "sec:conclusion"
 \end_layout
 
 \begin_layout Standard
-Machine-learning approaches to poverty mapping have gained considerable popularity in recent years.
+Machine-learning approaches to poverty mapping have become increasingly popular in recent years.
  In contrast to traditional poverty mapping procedures,
  modern machine-learning methods rely on non-parametric statistical techniques applied to remotely-sensed data,
  such as satellite imagery or call detail records.
  In addition,
- machine-learning approaches generally conduct model assessment using the coefficient of determination (
+ machine-learning approaches routinely conduct model assessment using the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-),
- which is calculated by regressing direct,
+,
+ which is often calculated by regressing direct,
  survey-based poverty estimates on model predictions.
  While direct estimates are unbiased,
  they can be imprecise measures of true poverty rates and,
  as a result,
- it is unclear whether this form of assessment is informative of model performance.
+ it is unclear whether this approach to assessment is informative of model performance.
  In this paper,
  we thus conducted a more rigorous assessment of the machine-learning approach to poverty mapping by using the Mexican Intercensal Survey for several design-based simulation experiments.
 \end_layout
 
 \begin_layout Standard
-We first showed analytically that that the 
+To motivate our experiments,
+ we outlined several ways that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  can be a misleading measure of model performance:
  it is biased downward when direct estimates are used as the reference measure of model performance,
  it is insensitive to differences in location and scale between the reference measure and the model predictions,
- and it is influenced by the variance of the reference measure.
- One practical issue this raises is that it can be misleading to compare the performance of poverty mapping methods across different datasets,
- as is done in 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "yeh2020using"
-literal "false"
-
-\end_inset
-
-,
- 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "chi2022microestimates"
-literal "false"
-
-\end_inset
-
-,
- and 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "aiken2022machine"
-literal "false"
-
-\end_inset
-
-,
- among others.
- Most notably,
- survey design elements can affect measurement error in the direct estimates (e.g.,
- through different sample sizes),
- which in turn influences the magnitude of bias in the 
+ and it is normalized by the variance of the reference measure.
+ The limitations of the standard validation procedure are due both to the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-.
- All else equal,
- models applied to low-bias settings will appear to perform better than those applied to high-bias settings.
+ metric itself and from applying the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ to direct poverty estimates rather than true poverty measures.
+ Our experiments thus address these limitations in two ways:
+ (1) we assess model performance using data that allows us to use true poverty indicators as the reference measures,
+ and (2) we emphasize validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
 \end_layout
 
 \begin_layout Standard
-Our simulations built on these analytical results.
- First,
- we showed empirically that the direct 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- exhibits considerable downward bias,
- with the true 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- being roughly 35 to 50 percent higher than the direct 
-\begin_inset Formula $R^{2}$
-\end_inset
-
-.
- We also showed that this bias has implications for model selection,
- as the direct 
-\begin_inset Formula $R^{2}$
-\end_inset
-
- commonly identified the incorrect level of estimation in our data.
- Second,
- we assessed the performance of machine learning against true poverty rates and found that the standard implementation using remotely-sensed covariates performs relatively poorly in terms of mean squared error and bias.
- When using census-based covariates,
+Our results showed that the modern approach to poverty mapping under-performs relative to the traditional approach both in terms of mean squared error and poverty reduction.
+ We found that this under-performance is driven by the modern approach's reliance on remotely-sensed covariates.
+ When using the same covariates,
+ we found that machine learning performs comparably to the unit-level model and slightly outperforms the area-level model.
+ We then showed that the performance advantage of machine learning relative to the area-level model is due to its variance-reduction properties,
+ namely its use of regularization.
+ The cost of such variance reduction,
  however,
- we found that machine learning performs comparably to several traditional poverty mapping methods.
- Finally,
- in the context of targeting simulations,
- we similarly found that the standard implementation exhibits relatively poor performance.
- This performance deficit was once again remedied with the use of census-based covariates.
+ is that machine learning exhibits more bias in the tails of the poverty distribution than the area-level model.
+ This bias-variance tradeoff is especially stark in the context of remotely-sensed covariates,
+ which suggests that the quality of the available data is an important consideration when choosing between parametric and non-parametric mapping methods.
 \end_layout
 
 \begin_layout Standard
-Our results have several implications for the practice of poverty mapping.
+Our analysis has several practical implications for poverty mapping.
  For one,
- our results suggest caution when using 
+ producers and users of poverty maps should exercise caution when using 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  as a model assessment tool,
  especially when it is calculated using direct poverty estimates as the reference measure.
- We recommend evaluating the performance of poverty maps using mean squared error,
- bias,
- and targeting simulations,
- ideally with true poverty rates as the reference measure.
- Perhaps the most interesting implication of our results,
- however,
- is that the use of non-parametric statistical methods does not appear to improve the accuracy of poverty maps relative to traditional parametric methods.
- When using the same data,
- all methods perform similarly across all metrics.
- As a result,
- we recommend that machine-learning implementations make better use of census-based covariates rather than relying exclusively on remotely-sensed data.
- The machine-learning algorithm can determine whether the census data is truly outdated and uninformative.
+ Poverty maps should ideally be validated using a ground truth and alternative validation metrics,
+ such as the mean squared error and targeting performance.
+ The data requirements for constructing a credible ground truth are nevertheless demanding and unlikely to be met in many country contexts.
+ One possible strategy for researchers in these cases is to use richer data from other countries to assess certain methodological decisions,
+ particularly those decisions that have not been previously validated.
+ The Mexican Intercensal Survey,
+ for example,
+ is publicly available on the INEGI website.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See https://en.www.inegi.org.mx.
+ The processed data for our simulation experiments are also available upon request.
+ 
+\end_layout
+
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Standard
-Finally,
- it is worth emphasizing the limitations of our analysis.
- One issue is that we have only examined the performance of machine learning in the context of the Mexican Intercensal Survey.
- Similar simulations using data from other countries may find different results.
- For example,
- it is possible that the same remotely-sensed covariates have greater predictive power in countries that are lesser-developed and more reliant on the primary sector.
- It is also possible that the remotely-sensed covariates we use in our implementations have less predictive power than the remotely-sensed data used in other applications.
- For example,
- many applications have used call detail records to produce poverty maps,
- but we did not have access to similar data from Mexico.
- A natural avenue for future research is then to conduct similar simulations using data from other countries,
- possibly with richer forms of remotely-sensed data.
+Our results also highlight that covariate quality has important implications for the practice of poverty mapping.
+ Most obviously,
+ the limited predictive capacity of remotely-sensed covariates suggests that researchers should incorporate census-based covariates whenever possible.
+ Perhaps more interestingly,
+ our results suggest that the quality of the available covariates has implications for the choice of statistical model,
+ particularly in off-census years.
+ With high-quality covariates,
+ there are only minor performance differences between the non-parametric and parametric approaches to estimating poverty maps.
+ Machine learning is a reasonable choice in this case,
+ as it performs slightly better overall with only minimal increases in bias.
+ With lower-quality covariates,
+ however,
+ the modest overall advantage of machine learning is coupled with substantial increases in bias for some areas.
+ Machine learning should be used with caution in this case,
+ particularly when poverty maps are needed to understand absolute poverty levels.
+\end_layout
+
+\begin_layout Standard
+We have identified several limitations of the modern approach to poverty mapping,
+ but our analysis has its own drawbacks.
+ We have focused on measuring income poverty and have not considered the performance of the modern approach when used in the context of other welfare measures (e.g.,
+ wealth).
+ We have also only examined the modern approach using the Mexican Intercensal Survey and remotely-sensed data available at the same time.
+ Other types of passively-collected data (e.g.,
+ call detail records) or experiments using data from other countries could produce different results.
+ Finally,
+ there are other possible applications of machine learning to poverty mapping that we have not considered,
+ such as extracting numerical covariates from high-dimensional data sources.
+ These limitations suggest several potential areas for future research.
+ 
 \end_layout
 
 \begin_layout Standard
