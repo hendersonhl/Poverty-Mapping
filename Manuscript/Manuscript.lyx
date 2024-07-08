@@ -347,15 +347,6 @@ literal "false"
 \end_inset
 
 ,
- Senegal 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "pokhriyal2017combining"
-literal "false"
-
-\end_inset
-
-,
  Bangladesh 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -365,10 +356,19 @@ literal "false"
 \end_inset
 
 ,
- and Belize 
+ Belize 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "hersh2021open"
+literal "false"
+
+\end_inset
+
+,
+ and Sri Lanka 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "engstrom2022poverty"
 literal "false"
 
 \end_inset
@@ -383,6 +383,15 @@ See
 \begin_inset CommandInset citation
 LatexCommand citet
 key "jean2016combining"
+literal "false"
+
+\end_inset
+
+,
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "pokhriyal2017combining"
 literal "false"
 
 \end_inset
@@ -406,10 +415,18 @@ literal "false"
 \end_inset
 
 ,
- and 
+ 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "aiken2022machine"
+literal "false"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "newhouse2022small"
 literal "false"
 
 \end_inset
@@ -991,7 +1008,7 @@ where the trees are indexed by
 
 .
  To build the trees used in the model,
- XGBoost minimizes the following regularized objective function:
+ XGBoost greedily minimizes the following regularized objective function:
 \end_layout
 
 \begin_layout Standard
@@ -1028,6 +1045,7 @@ literal "false"
 \end_inset
 
 .
+ Note that the fact that XGBoost is a greedy algorithm means that a global minimum is not guaranteed.
 \end_layout
 
 \end_inset
@@ -1559,6 +1577,27 @@ where
 \end_inset
 
 .
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+While we focus on the original formulation of the model,
+ note that several extensions have been proposed,
+ particularly to accommodate more complicated error structures (e.g.,
+ spatial correlation).
+ See Chapter 3 of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ for discussion.
+\end_layout
+
+\end_inset
+
  Since we lack information on the true poverty rates,
  this model cannot be immediately fit.
 \end_layout
@@ -3412,6 +3451,17 @@ name "tab:desc_stats"
 In addition to the intercensus,
  INEGI has also released geo-referenced data that is similar to the remotely-sensed covariates often used in machine-learning applications.
  These geographic variables were calculated by INEGI for the year 2015 (the same year as the intercensus) and the municipality is the lowest administrative level for which the covariates are available.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Technically speaking,
+ the intercensus does not include identifiers that provide information on geographic location below the municipality level.
+ We are thus only able to merge the intercensus and geo-referenced data at the municipality level.
+\end_layout
+
+\end_inset
+
  The geo-referenced data includes 105 indicators.
  Specifically,
  the dataset includes information from 21 different dimensions and each dimension is associated with five summary measures.
