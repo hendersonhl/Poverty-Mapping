@@ -2576,11 +2576,11 @@ and we immediately see that it provides a direct understanding of the expected s
  one can calculate entity-specific mean squared errors,
  which can be decomposed into parts associated with the bias and variance of the estimates.
  Where 
-\begin_inset Formula $y_{ik}^{p}$
+\begin_inset Formula $y_{ih}^{p}$
 \end_inset
 
  denotes estimate 
-\begin_inset Formula $k=1,2,\ldots,K$
+\begin_inset Formula $h=1,2,\ldots,H$
 \end_inset
 
  for the 
@@ -2591,7 +2591,7 @@ and we immediately see that it provides a direct understanding of the expected s
  we have
 \begin_inset Formula 
 \begin{equation}
-\text{{MSE}}_{i}=\frac{{1}}{K}\sum_{k}(y_{i}^{a}-y_{ik}^{p})^{2}=\frac{{1}}{K}\sum_{k}(y_{ik}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
+\text{{MSE}}_{i}=\frac{{1}}{H}\sum_{h}(y_{i}^{a}-y_{ih}^{p})^{2}=\frac{{1}}{H}\sum_{h}(y_{ih}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
 \end{equation}
 
 \end_inset
@@ -4794,6 +4794,24 @@ We have identified several limitations of the modern approach to poverty mapping
  but our analysis has its own drawbacks.
  We have focused on measuring income poverty and have not considered the performance of the modern approach when used in the context of other welfare measures (e.g.,
  wealth).
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+In particular,
+ see 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "hall2023review"
+literal "false"
+
+\end_inset
+
+ for detailed discussion on the capacity of remotely-sensed data to predict alternative welfare measures.
+\end_layout
+
+\end_inset
+
  We have also only examined the modern approach using the Mexican Intercensal Survey and remotely-sensed data available at the same time.
  Other types of passively-collected data (e.g.,
  call detail records) or experiments using data from other countries could produce different results.
