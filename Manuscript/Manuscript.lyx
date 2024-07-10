@@ -2055,6 +2055,19 @@ Let
 .
  That is,
  we view this as a classical measurement error problem where the direct estimate of the poverty indicator is a noisy estimate of the true poverty indicator.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The assumption of classical measurement error may be violated in practice.
+ For example,
+ if poorer households are less likely to be sampled,
+ the measurement error will not be independent of the true poverty rates.
+ 
+\end_layout
+
+\end_inset
+
  Note that the preceding equation implies that 
 \begin_inset Formula $\zeta_{i}=\upsilon_{i}+\omega_{i}$
 \end_inset
@@ -3827,8 +3840,19 @@ nolink "false"
  which is close to the benchmark rate of 19.9 percent.
  The two traditional methods nevertheless outperform the gradient boosting model.
  The unit-level model achieves a median poverty rate of 20 percent whereas the area-level model achieves a median rate of 20.04.
- In short,
- our implementation of the modern approach under-performs both in terms of MSE and poverty reduction.
+ The traditional approach thus outperforms the modern approach by about 0.3 percentage points,
+ which in a country the size of Mexico corresponds to about 360,000 additional people escaping poverty.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Mexico's population was about 120 million in 2015,
+ which is the year that the Mexican Intercensal Survey was conducted.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4819,6 +4843,33 @@ literal "false"
  there are other possible applications of machine learning to poverty mapping that we have not considered,
  such as extracting numerical covariates from high-dimensional data sources.
  Each of these limitations suggests a potential area for future research.
+ 
+\end_layout
+
+\begin_layout Standard
+An additional area for future reseach would be to develop strategies to correct the 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ for its various limitations.
+ For example,
+ one might correct for measurement error in the direct estimates by multiplying the estimated 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+ by the reciprocal of the bias term.
+ This strategy would require estimating the variance of the measurement error associated with the direct estimates.
+ Note also that our derivation of this bias relies on the assumption of classical measurement error,
+ which may be violated in practice (e.g.,
+ if poorer or richer households are less likely to be sampled).
+ A related topic for future research would then be to derive the bias under less stringent assumptions.
+ Further,
+ as measurement error in the direct estimates is not the only concern with 
+\begin_inset Formula $R^{2}$
+\end_inset
+
+,
+ future research could consider applying multiple adjustments simultaneously.
  
 \end_layout
 
