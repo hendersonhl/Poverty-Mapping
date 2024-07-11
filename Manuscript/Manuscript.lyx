@@ -242,17 +242,6 @@ literal "false"
  and (2) apply the model to data available for all households or geographical units to estimate poverty at the sub-national level.
  At a minimum,
  the procedure then requires a household survey and data on the entire population to produce a sufficiently detailed map.
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-can we rephrase this?
- we can use aggregate data as well as we do throughout the paper.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -287,16 +276,6 @@ literal "false"
 \end_inset
 
 .
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-I think we can now delete the bit on unit context models.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -452,17 +431,7 @@ modern
  Most obviously,
  the modern approach substitutes non-parametric statistical methods for the parametric approaches traditionally used for poverty mapping.
  In addition,
- the modern approach relies heavily on remotely-sensed covariates rather than covariates derived from census data
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-or administrative data
-\end_layout
-
-\end_inset
-
-.
+ the modern approach relies heavily on remotely-sensed covariates rather than covariates derived from census or administrative data.
 \begin_inset Foot
 status collapsed
 
@@ -776,17 +745,7 @@ nolink "false"
 \end_inset
 
  discusses the various methods we examine,
- including both
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-xgboost and BART?
-\end_layout
-
-\end_inset
-
- machine-learning methods and the traditional approaches we use as performance benchmarks.
+ including machine-learning methods and the traditional approaches we use as performance benchmarks.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1292,16 +1251,6 @@ Henderson's Method III is coupled with generalized least squares to obtain the r
 \end_inset
 
 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-should w hat be replaced by w star??
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1436,19 +1385,6 @@ gold standard
 \end_inset
 
  of poverty mapping.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-I suggest we now remove any conversation of unit context models throughout the document.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1629,31 +1565,11 @@ where
 \begin_inset Formula $\omega_{i}$
 \end_inset
 
- represents the measurement 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-or sampling 
-\end_layout
-
-\end_inset
-
-error and is assumed to have heteroskedastic variance 
+ represents measurement or sampling error and is assumed to have heteroskedastic variance 
 \begin_inset Formula $\sigma_{\omega,i}^{2}$
 \end_inset
 
- because area sample sizes
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-across areas
-\end_layout
-
-\end_inset
-
- are often unequal.
+ because sample sizes across areas are often unequal.
  These variances are assumed to be known,
  although in practice they are estimated using the survey data.
  Given the two parts of the model,
@@ -1704,32 +1620,11 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
 \end_inset
 
 ,
- are determined by the quality of the model 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-and the sample size for the area
-\end_layout
-
-\end_inset
-
-.
+ are determined by the quality of the model and the sample sizes for each area.
  For the non-sampled entities,
  the area-level model simply uses the synthetic estimator to produce predictions.
  As mentioned,
- a critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods are intended for use in off-census years
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-and do not necessarily rely on household level data
-\end_layout
-
-\end_inset
-
-.
- 
+ a critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods are intended for use in off-census years and do not rely on household-level data.
 \end_layout
 
 \begin_layout Standard
@@ -1977,21 +1872,6 @@ literal "false"
 \begin{equation}
 y_{i}^{a}=\alpha+\delta y_{i}^{p}+\upsilon_{i}
 \end{equation}
-
-\end_inset
-
-
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-should we point out that this is very similar to the fay herriot model?
- the other interesting tid bit here is that a fay herriot model which adds 0 information,
- i.e.
- and r2 of 0,
- and will lead to us just using the direct estimates,
- will yield an R2 of 1 under the typical validation.
-\end_layout
 
 \end_inset
 
@@ -3629,32 +3509,11 @@ CEN
 \begin_inset Quotes erd
 \end_inset
 
-) 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-we should be more explicit about the level for each model
-\end_layout
-
-\end_inset
-
-.
+).
  Importantly,
  as our initial implementations are intended to reflect current practice,
  the modern and traditional approaches differ both in terms of their statistical method and the covariates used.
- The remainder of this section will examine how these differences contribute to performance disparities between the two approaches
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-to put things in perspective we could add the MSE of direct estimates,
- to show it does yield some improvement.
-\end_layout
-
-\end_inset
-
-.
+ The remainder of this section will examine how these differences contribute to performance disparities between the two approaches.
  
 \end_layout
 
@@ -4603,22 +4462,24 @@ nolink "false"
 
 \end_inset
 
- shows that an important reason for the area-level model's reduced bias is that its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-should we add the figure to show the direct estimates' unbiasedness and noisiness?
-\end_layout
-
-\end_inset
-
-.
+ shows that an important reason for the area-level model's reduced bias is that its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-By contrast,
+See Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:methods"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for details.
+ By contrast,
  gradient boosting relies exclusively on the model-based estimates and only incorporates the direct estimates when fitting the model.
 \end_layout
 
@@ -4639,37 +4500,15 @@ By contrast,
 \begin_layout Standard
 These latter results highlight an important methodological difference between modern and traditional approaches.
  In particular,
- the machine-learning methods used for poverty mapping were developed for out-of-sample prediction and thus ignore the direct estimates after fitting the model.
+ the machine-learning methods used for poverty mapping were developed for out-of-sample prediction and ignore the direct estimates after fitting the model.
  The traditional methods,
  by contrast,
- were developed specifically for poverty mapping and recognize that mapping is partly an in-sample prediction problem 
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-these methods sacrifice a little bit of bias with the aim of reducing the noise,
- as measured by the MSE
-\end_layout
-
-\end_inset
-
-.
- The traditional methods therefore use the direct estimates after fitting the model by averaging the direct and model-based estimates for in-sample predictions (see Section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sec:methods"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-).
- Further,
- the traditional approach weights the direct estimates more heavily in this procedure when the covariates are less informative.
- In line with our results,
- we would then expect the traditional approach to exhibit less in-sample bias,
+ were developed specifically for poverty mapping and recognize that mapping is partly an in-sample prediction problem.
+ The traditional methods thus use the direct estimates after fitting the model and weight them more heavily when the covariates are less informative.
+ Interestingly,
+ this highlights another concern with using direct estimates to assess model performance:
+ traditional methods are designed to be less predictive of direct estimates when the model is more informative.
+ The main point here is nevertheless that our results are in line with the expectation that traditional methods should exhibit less in-sample bias,
  particularly in the presence of weak covariates.
 \end_layout
 
@@ -4753,13 +4592,12 @@ Our analysis has several practical implications for poverty mapping.
  as a model assessment tool,
  especially when it is calculated using direct poverty estimates as the reference measure.
  Poverty maps should ideally be validated using a ground truth and alternative validation metrics,
- such as the mean squared error and targeting performance
-\begin_inset Note Note
+ such as the mean squared error and targeting performance.
+\begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-design based validation is a frequently suggested approach,
- we can cite Tzavidis
+See 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "tzavidis2018start"
@@ -4767,12 +4605,11 @@ literal "false"
 
 \end_inset
 
- who recommends this for every poverty mapping effort.
+ for additional discussion.
 \end_layout
 
 \end_inset
 
-.
  The data requirements for constructing a credible ground truth are nevertheless demanding and unlikely to be met in many country contexts.
  One possible strategy for researchers in these cases is to use richer data from other countries to assess their methodological decisions,
  particularly decisions that have not been previously validated.
@@ -4847,7 +4684,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-An additional area for future reseach would be to develop strategies to correct the 
+An additional area for future research would be to develop strategies to correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
