@@ -171,13 +171,13 @@ Recent years have witnessed considerable methodological advances in poverty mapp
  direct estimates.
  While unbiased,
  direct estimates can be imprecise measures of true poverty rates,
- meaning that it is unclear whether the standard validation procedures are informative of actual model performance.
+ meaning that it is unclear whether these validation procedures are informative of actual model performance.
  In this paper,
  we use a rich dataset from Mexico to provide a more rigorous assessment of the modern approach to poverty mapping by evaluating its performance against a credible ground truth.
  We find that the modern method under-performs relative to benchmark traditional methods,
  largely because of the limited predictive capacity of remotely-sensed covariates.
  For a given covariate set,
- we also show that machine learning produces more biased poverty estimates than traditional procedures,
+ we also find that machine learning produces more biased poverty estimates than traditional procedures,
  particularly for the poorest geographic areas.
 \end_layout
 
@@ -532,7 +532,7 @@ literal "false"
 
  There are several limitations to this procedure,
  but the most critical is that it typically uses direct,
- sample-based estimates rather than the true measures for the regions of interest.
+ sample-based estimates rather than true poverty measures as a performance benchmark.
  While direct estimates are unbiased,
  they can be imprecise estimates of the true measures,
  meaning that it is unclear whether the validation procedure is informative of actual model performance (see Section 
@@ -846,7 +846,7 @@ literal "false"
  lasso,
  random forests,
  or support vector machines),
- the following outlines some key ideas by focusing on one of the leading methods:
+ the following presents some key ideas by focusing on one of the leading methods:
  gradient boosting.
 \end_layout
 
@@ -863,7 +863,7 @@ literal "false"
  gradient boosting machines are a family of machine-learning techniques that combine a large number of weak learners to form a stronger ensemble prediction.
  Unlike some common ensemble techniques (e.g.,
  random forests) that simply average models in the ensemble,
- gradient boosting adds models to the ensemble sequentially by fitting new weak learners to the negative gradient of some chosen loss function.
+ gradient boosting adds models to the ensemble sequentially by fitting new weak learners to the negative gradient of the chosen loss function.
  With the classic squared-error loss function,
  this amounts to sequentially fitting new models to the current residuals of the ensemble.
 \begin_inset Foot
@@ -1623,8 +1623,7 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
  are determined by the quality of the model and the sample sizes for each area.
  For the non-sampled entities,
  the area-level model simply uses the synthetic estimator to produce predictions.
- As mentioned,
- a critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods are intended for use in off-census years and do not rely on household-level data.
+ A critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods are intended for use in off-census years and do not rely on household-level data.
 \end_layout
 
 \begin_layout Standard
@@ -1736,7 +1735,7 @@ literal "false"
  Specifically,
  we propose (1) assessing model performance relative to true poverty measures rather than direct estimates,
  and (2) using mean squared error and targeting performance as the principal validation metrics.
- Our objective is to present a validation procedure that is appropriate for our purposes and we recognize that it may not be feasible for all poverty-mapping exercises.
+ Our objective is to present a validation procedure that is appropriate for our purposes rather than a general strategy that is feasible for all poverty-mapping exercises.
 \begin_inset Foot
 status collapsed
 
@@ -2379,8 +2378,8 @@ where
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
- is large and the other is applied to a low variance context.
- The above implies that the model applied to the high variance context will achieve a higher 
+ is large and the other is applied to a low-variance context.
+ The above implies that the model applied to the high-variance context will achieve a higher 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2403,14 +2402,14 @@ The limitations of the standard procedure stem both from the
  we address these limitations by making two modifications to the usual procedure.
  To address the issue related to error in the reference measure,
  we assess our poverty-mapping methods with data that allows us to use true poverty indicators as the reference measure (see the next section for discussion).
- We then address the remaining limitations by emphasizing validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
+ We then address the remaining limitations by focusing on validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
  To be clear,
  one could alternatively attempt to correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  for its biases,
- but any adjustments would require approximations that could undermine our validation exercises.
+ but any adjustments would require approximations that could lessen the credibility of our validation exercises.
 \begin_inset Foot
 status collapsed
 
@@ -2566,7 +2565,7 @@ literal "false"
 
  Though using targeting performance as a validation metric has direct policy relevance,
  note that it can be insensitive to systematic biases in the poverty estimates (e.g.,
- rank-based targeting schemes do not depend on the absolute level of poverty).
+ rank-based targeting schemes do not depend on the absolute level of the poverty estimates).
 \end_layout
 
 \begin_layout Standard
@@ -2800,7 +2799,7 @@ where
 
  is the intra-cluster correlation of per capita income.
  Given the above,
- we can calculate the number of clusters needed to achieve the minimum sample size for each state and then multiply this number by 10 to find the final household sample size.
+ we can calculate the number of clusters needed to achieve the minimum sample size for each state and then multiply this number by 10 to find the final sample size.
  Taking these sample size requirements as given,
  each of our samples is then drawn in accordance with the two-stage design.
 \end_layout
@@ -3450,7 +3449,7 @@ literal "false"
 .
  To match the other geo-referenced covariates,
  we use the night-time lights data from 2015,
- which is available at 15 arc second resolution (roughly 500 meters at the equator) and then aggregated to the municipality level.
+ which is available at 15 arc-second resolution (roughly 500 meters at the equator) and then aggregated to the municipality level.
  Also like the other geo-referenced data,
  we summarize night-time lights within each municipality using the minimum,
  maximum,
@@ -3657,7 +3656,7 @@ nolink "false"
 
 \end_inset
 
-]) and indicates that the gradient boosting model achieves a median MSE of 0.007.
+]) and indicates that the gradient-boosting model achieves a median MSE of 0.007.
  The corresponding root MSE is approximately 0.08,
  meaning that the median municipality's error is roughly eight percentage points.
  By contrast,
@@ -3670,10 +3669,10 @@ gold standard
 \end_inset
 
  unit-level achieves a median MSE of 0.003,
- which is roughly 40 percent that of the gradient boosting model.
+ which is roughly 40 percent that of the gradient-boosting model.
  The area-level model performs similarly to the unit-level model,
  with a median MSE of 0.004.
- The fact that the area-level model outperforms the gradient boosting model is particularly notable,
+ The fact that the area-level model outperforms the gradient-boosting model is particularly notable,
  as both of these models were developed for use in off-census years and are thus direct competitors.
 \end_layout
 
@@ -3697,7 +3696,7 @@ nolink "false"
  Across 500 simulations,
  we find that gradient boosting with remotely-sensed covariates achieves a median poverty rate of 20.29,
  which is close to the benchmark rate of 19.9 percent.
- The two traditional methods nevertheless outperform the gradient boosting model.
+ The two traditional methods nevertheless outperform the gradient-boosting model.
  The unit-level model achieves a median poverty rate of 20 percent whereas the area-level model achieves a median rate of 20.04.
  The traditional approach thus outperforms the modern approach by about 0.3 percentage points,
  which in a country the size of Mexico corresponds to about 360,000 additional people escaping poverty.
@@ -4487,7 +4486,7 @@ nolink "false"
 
  For each model depicted,
  we focus on the 20 percent of municipalities with the lowest true poverty rate,
- plot the municipality-level bias estimates on the frequency in which a municipality was sampled,
+ plot the municipality-level bias estimates on the frequency with which a municipality was sampled,
  and then fit a lowess curve to the data.
  The sampling frequencies capture the proportion of samples for which a municipality received an in-sample prediction,
  thus benefitting from the area-level model's averaging procedure.
@@ -4498,7 +4497,7 @@ nolink "false"
 \end_layout
 
 \begin_layout Standard
-These latter results highlight an important methodological difference between modern and traditional approaches.
+These latter results highlight an important methodological difference between the modern and traditional approaches.
  In particular,
  the machine-learning methods used for poverty mapping were developed for out-of-sample prediction and ignore the direct estimates after fitting the model.
  The traditional methods,
@@ -4508,7 +4507,7 @@ These latter results highlight an important methodological difference between mo
  Interestingly,
  this highlights another concern with using direct estimates to assess model performance:
  traditional methods are designed to be less predictive of direct estimates when the model is more informative.
- The main point here is nevertheless that our results are in line with the expectation that traditional methods should exhibit less in-sample bias,
+ The main point here is nevertheless that our results are in line with the expectation that traditional methods will exhibit less in-sample bias,
  particularly in the presence of weak covariates.
 \end_layout
 
@@ -4696,11 +4695,12 @@ An additional area for future research would be to develop strategies to correct
 
  by the reciprocal of the bias term.
  This strategy would require estimating the variance of the measurement error associated with the direct estimates.
- Note also that our derivation of this bias relies on the assumption of classical measurement error,
+ Relatedly,
+ note that our derivation of this bias relies on the assumption of classical measurement error,
  which may be violated in practice (e.g.,
  if poorer or richer households are less likely to be sampled).
- A related topic for future research would then be to derive the bias under less stringent assumptions.
- Further,
+ Another topic for future research would then be to derive the bias under less stringent assumptions.
+ Finally,
  as measurement error in the direct estimates is not the only concern with 
 \begin_inset Formula $R^{2}$
 \end_inset
