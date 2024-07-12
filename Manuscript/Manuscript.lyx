@@ -177,7 +177,7 @@ Recent years have witnessed considerable methodological advances in poverty mapp
  We find that the modern method under-performs relative to benchmark traditional methods,
  largely because of the limited predictive capacity of remotely-sensed covariates.
  For a given covariate set,
- we also find that machine learning produces more biased poverty estimates than traditional procedures,
+ we also find that machine learning produces more biased poverty estimates than the traditional procedures,
  particularly for the poorest geographic areas.
 \end_layout
 
@@ -241,7 +241,7 @@ literal "false"
  or wealth) to household- or area-level characteristics,
  and (2) apply the model to data available for all households or geographical units to estimate poverty at the sub-national level.
  At a minimum,
- the procedure then requires a household survey and data on the entire population to produce a sufficiently detailed map.
+ the procedure then requires a household survey and data that covers all geographic areas to produce a sufficiently detailed map.
 \end_layout
 
 \begin_layout Standard
@@ -1245,7 +1245,7 @@ Henderson's Method III is coupled with generalized least squares to obtain the r
 \begin_layout Standard
 \begin_inset Formula 
 \begin{equation}
-\hat{{w}}_{ivk}=x_{iv}\hat{\theta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
+w_{ivk}^{*}=x_{iv}\hat{\theta}+\mu_{ik}^{*}+\xi_{ivk}^{*}
 \end{equation}
 
 \end_inset
@@ -1639,11 +1639,51 @@ gold standard
 
  unit-level model provides an absolute performance benchmark by approximating the upper performance bound,
  the area-level model provides a relative performance benchmark as the leading competitor to the modern approach.
- In our implementations of the traditional models,
- we rely exclusively on linear specifications because identifying covariate transformations (e.g.,
- quadratic or cubic terms) for each replication would substantially complicate our sampling experiments.
- To the extent that adding covariate transformations could improve the performance of the traditional methods,
- our experiments are thus favorable to the modern approach since gradient boosting benefits from automated model selection.
+ In our implementations of these models,
+ we follow World Bank guidelines and remove any eligible covariate that is weak or extraneous 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+.
+ For example,
+ when fitting the area-level model on a given sample,
+ we sequentially remove insignificant covariates from the set of eligible variables,
+ beginning with the one with the highest p-value.
+ We then then address collinearity by removing any variable with a variance inflation factor above five.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+See Section 3.2 in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ for additional discussion.
+ Variable selection for the unit-level model is slightly more complicated,
+ as the above procedure is preceded by a lasso regression.
+ See Section 6.2 in 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ for details.
+\end_layout
+
+\end_inset
+
+ All covariates enter into this procedure linearly because identifying transformations (e.g.,
+ quadratic or cubic terms) would substantially complicate our sampling experiments.
 \end_layout
 
 \begin_layout Section
