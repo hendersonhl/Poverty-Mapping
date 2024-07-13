@@ -585,7 +585,7 @@ The results of our simulations can be summarized as follows.
  we show that the performance advantage of machine learning for a given covariate set results from the relatively low variance of its estimates,
  but this variance reduction comes at the cost of increasing the bias of the estimates,
  particularly for the poorest areas.
- This bias-variance tradeoff is especially stark when using remotely-sensed covariates and ultimately raises practical questions about the use and production of modern poverty maps.
+ This bias-variance trade-off is especially stark when using remotely-sensed covariates and ultimately raises practical questions about the use and production of modern poverty maps.
 \end_layout
 
 \begin_layout Standard
@@ -1399,7 +1399,7 @@ literal "false"
 
 \end_inset
 
- and further refined by 
+ and later implemented by 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "masaki2020small"
@@ -1411,6 +1411,49 @@ literal "false"
  these models are based on a simple modification of the unit-level approach:
  rather than modeling household-level income as a function of household-level characteristics,
  unit-context models instead use only area-level covariates from the census.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The key difference between the application from 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "nguyen2012method"
+literal "false"
+
+\end_inset
+
+ and that of 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "masaki2020small"
+literal "false"
+
+\end_inset
+
+,
+ is that the former relied on the approach presented by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "elbers2003micro"
+literal "false"
+
+\end_inset
+
+ and the latter relied on the approach introduced by 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "molina2010small"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
  Specifically,
  the unit-context model replaces the survey-based covariates 
 \begin_inset Formula $x_{iv}$
@@ -1443,17 +1486,34 @@ nolink "false"
  largely due to its inability to explain between-household variation in income 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "corral2022guidelines"
+key "corral2022guidelines,corral2021map,10.1111/rssa.12913"
 literal "false"
 
 \end_inset
 
 .
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand citet
+key "10.1111/rssa.12913,corral2022guidelines"
+literal "false"
+
+\end_inset
+
+ both elaborate on how the method also yields biased estimates of area-level means due to the method's inherent bias.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Due to these performance issues,
- the World Bank instead recommends using the area-level model in off-census years 
+ the World Bank guidelines instead recommend using the area-level models in off-census years 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "corral2022guidelines"
@@ -1462,6 +1522,26 @@ literal "false"
 \end_inset
 
 .
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+An earlier version of this paper also presented results on how area-level models outperform,
+ in terms of bias and noise,
+ unit-context models 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2023poverty"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\end_inset
+
  First proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
