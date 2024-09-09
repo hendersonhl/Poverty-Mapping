@@ -1360,7 +1360,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The key assumption of the unit-level model is that the distribution of the explanatory variables is similar between the survey used for estimation and the census used for prediction.
+The key assumption of the unit-level model is that the explanatory variables in the survey and census share the same definitions and have similar distributions across the two data sources.
  This assumption is generally violated if the census is outdated – which is often the case in developing countries – and in this event the application of the unit-level model will lead to similarly outdated poverty maps 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1513,24 +1513,22 @@ literal "false"
 
 \begin_layout Standard
 Due to these performance issues,
- the World Bank guidelines instead recommend using the area-level models in off-census years 
+ 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "corral2022guidelines"
 literal "false"
 
 \end_inset
 
-.
+ instead recommend using the area-level model in off-census years.
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
-An earlier version of this paper also presented results on how area-level models outperform,
- in terms of bias and noise,
- unit-context models 
+An earlier version of this paper presented results on how area-level models outperform unit-context models in terms of bias and noise 
 \begin_inset CommandInset citation
-LatexCommand citet
+LatexCommand citep
 key "corral2023poverty"
 literal "false"
 
@@ -1720,15 +1718,15 @@ gold standard
  unit-level model provides an absolute performance benchmark by approximating the upper performance bound,
  the area-level model provides a relative performance benchmark as the leading competitor to the modern approach.
  In our implementations of these models,
- we follow World Bank guidelines and remove any eligible covariate that is weak or extraneous 
+ we follow 
 \begin_inset CommandInset citation
-LatexCommand citep
+LatexCommand citet
 key "corral2022guidelines"
 literal "false"
 
 \end_inset
 
-.
+ and remove any eligible covariate that is weak or extraneous.
  For example,
  when fitting the area-level model on a given sample,
  we sequentially remove insignificant covariates from the set of eligible variables,
@@ -4039,6 +4037,24 @@ nolink "false"
  gradient boosting with census-based covariates slightly outperforms the area-level model,
  which achieves a median MSE of 0.004 and a median poverty rate of 20.04 when using the same covariates.
  The under-performance of the modern approach is thus largely driven by the remotely-sensed covariates.
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+This result is similar to 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "vanderweide2022how"
+literal "false"
+
+\end_inset
+
+ who find that remotely-sensed covariates lose significance once census-based covariates are added to their model.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4623,7 +4639,18 @@ These latter results highlight an important methodological difference between th
  The traditional methods,
  by contrast,
  were developed specifically for poverty mapping and recognize that mapping is partly an in-sample prediction problem.
- The traditional methods thus use the direct estimates after fitting the model and weight them more heavily when the covariates are less informative.
+ The traditional methods thus use the direct estimates after fitting the model and weight them more heavily when the covariates are less informative (see Section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:methods"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ for discussion of the BLUP method).
  Interestingly,
  this highlights another concern with using direct estimates to assess model performance:
  traditional methods are designed to be less predictive of direct estimates when the model is more informative.
