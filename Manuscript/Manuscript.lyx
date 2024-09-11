@@ -1388,158 +1388,16 @@ gold standard
 \end_layout
 
 \begin_layout Standard
-One closely related alternative,
- known as the unit-context model,
- was specifically developed for use in off-census years.
- Initially proposed by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "nguyen2012method"
-literal "false"
-
-\end_inset
-
- and later implemented by 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "masaki2020small"
-literal "false"
-
-\end_inset
-
-,
- these models are based on a simple modification of the unit-level approach:
- rather than modeling household-level income as a function of household-level characteristics,
- unit-context models instead use only area-level covariates from the census.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-The key difference between the application from 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "nguyen2012method"
-literal "false"
-
-\end_inset
-
- and that of 
-\begin_inset CommandInset citation
-LatexCommand citet
-key "masaki2020small"
-literal "false"
-
-\end_inset
-
-,
- is that the former relied on the approach presented by 
+In off-census years,
+ the area-level model is generally considered the leading traditional method 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "elbers2003micro"
-literal "false"
-
-\end_inset
-
- and the latter relied on the approach introduced by 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "molina2010small"
-literal "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\end_inset
-
- Specifically,
- the unit-context model replaces the survey-based covariates 
-\begin_inset Formula $x_{iv}$
-\end_inset
-
- in Eq.
-\begin_inset space \thinspace{}
-\end_inset
-
-(
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:sae-1"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-) with census aggregates 
-\begin_inset Formula $x_{i}$
-\end_inset
-
- and thus relaxes the assumption that the survey-based covariates match the moments of those from the census.
- The unit-context model is then a direct competitor to the machine-learning approach because both apply to off-census years.
- Recent research,
- however,
- has shown that the unit-context model often produces biased and noisy poverty estimates,
- largely due to its inability to explain between-household variation in income 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "corral2022guidelines,corral2021map,10.1111/rssa.12913"
-literal "false"
-
-\end_inset
-
-.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset CommandInset citation
-LatexCommand citet
-key "10.1111/rssa.12913,corral2022guidelines"
-literal "false"
-
-\end_inset
-
- both elaborate on how the method also yields biased estimates of area-level means due to the method's inherent bias.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Due to these performance issues,
- 
-\begin_inset CommandInset citation
-LatexCommand citet
 key "corral2022guidelines"
 literal "false"
 
 \end_inset
 
- instead recommend using the area-level model in off-census years.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-An earlier version of this paper presented results on how area-level models outperform unit-context models in terms of bias and noise 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "corral2023poverty"
-literal "false"
-
-\end_inset
-
 .
- 
-\end_layout
-
-\end_inset
-
  First proposed by 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1731,7 +1589,7 @@ literal "false"
  when fitting the area-level model on a given sample,
  we sequentially remove insignificant covariates from the set of eligible variables,
  beginning with the one with the highest p-value.
- We then then address collinearity by removing any variable with a variance inflation factor above five.
+ We then address collinearity by removing any variable with a variance inflation factor above five.
 \begin_inset Foot
 status collapsed
 
@@ -3015,13 +2873,13 @@ placement document
 alignment document
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \paragraph_spacing onehalf
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="7" columns="6">
+<lyxtabular version="3" rows="6" columns="6">
 <features tabularvalignment="middle">
 <column alignment="left" valignment="top">
 <column alignment="center" valignment="top">
@@ -3240,62 +3098,6 @@ Observations per sample
 
 \begin_layout Plain Layout
 23,540
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-500
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-PSU per sample
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2,354
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.00
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2,354
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2,354
 \end_layout
 
 \end_inset
@@ -4621,7 +4423,7 @@ nolink "false"
 \end_inset
 
  For each model depicted,
- we focus on the 20 percent of municipalities with the lowest true poverty rate,
+ we focus on the 20 percent of municipalities with the highest true poverty rate,
  plot the municipality-level bias estimates on the frequency with which a municipality was sampled,
  and then fit a lowess curve to the data.
  The sampling frequencies capture the proportion of samples for which a municipality received an in-sample prediction,
@@ -4737,8 +4539,36 @@ Our analysis has several practical implications for poverty mapping.
 
  as a model assessment tool,
  especially when it is calculated using direct poverty estimates as the reference measure.
- Poverty maps should ideally be validated using a ground truth and alternative validation metrics,
+ Poverty maps should ideally be validated using a credible ground truth and alternative validation metrics,
  such as the mean squared error and targeting performance.
+ As the survey data used in our experiments is uniquely large,
+ researchers may need to consider alternative design-based validation exercises.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "tzavidis2018start"
+literal "false"
+
+\end_inset
+
+ recommend using available census data to conduct sampling experiments based on a variable that is correlated with the variable of interest.
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "corral2021map"
+literal "false"
+
+\end_inset
+
+ alternatively recommend using census data to conduct 
+\begin_inset Quotes eld
+\end_inset
+
+hybrid
+\begin_inset Quotes erd
+\end_inset
+
+ sampling experiments using a synthetic dependent variable.
 \begin_inset Foot
 status collapsed
 
@@ -4751,31 +4581,13 @@ literal "false"
 
 \end_inset
 
- for additional discussion.
-\end_layout
-
-\end_inset
-
- The data requirements for constructing a credible ground truth are nevertheless demanding and unlikely to be met in many country contexts.
- One possible strategy for researchers in these cases is to use richer data from other countries to assess their methodological decisions,
- particularly decisions that have not been previously validated.
- The Mexican Intercensal Survey,
- for example,
- is publicly available on the INEGI website.
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-See https://en.www.inegi.org.mx/programas/intercensal/2015.
- For the remotely-sensed data in the same year,
- see https://www.inegi.org.mx/investigacion/geomediana.
- The processed data for our simulation experiments are also available upon request.
+ for a rich discussion of alternative validation procedures.
  
 \end_layout
 
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
