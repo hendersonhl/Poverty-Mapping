@@ -4581,8 +4581,15 @@ literal "false"
 
 \end_inset
 
- for a rich discussion of alternative validation procedures.
- 
+ or 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rao2015small"
+literal "false"
+
+\end_inset
+
+ for further discussion of alternative validation procedures.
 \end_layout
 
 \end_inset
@@ -4606,6 +4613,22 @@ Our results also highlight that covariate quality has important implications for
  the modest overall advantage of machine learning is coupled with substantial increases in bias for some areas.
  Machine learning should be used with caution in this case,
  especially when poverty maps are needed to understand absolute poverty levels.
+\end_layout
+
+\begin_layout Standard
+Stated differently,
+ there are important tradeoffs to consider when choosing between modern and traditional poverty-mapping methods,
+ particularly in off-census years.
+ While both approaches require survey-based welfare measures,
+ producers of poverty maps must weigh the costs of gathering different types of covariate data against their relative performance benefits.
+ For example,
+ we found that the traditional approach only slightly outperforms the modern approach in terms of targeting performance.
+ The modern approach could potentially be a reasonable choice if there are substantial costs associated with accessing census data.
+ Our targeting results nevertheless only depend on each method's rank-ordering of areas and do not consider the levels of poverty estimated by each method.
+ In cases where poverty levels are relevant (e.g.,
+ determining program quotas),
+ producers of poverty maps must additionally navigate the bias-variance tradeoff.
+ 
 \end_layout
 
 \begin_layout Standard
