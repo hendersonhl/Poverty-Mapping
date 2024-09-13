@@ -1342,8 +1342,20 @@ literal "false"
 
  show that when the sample size is small relative to the population,
  the difference between the two methods is negligible.
- For additional discussion,
- see 
+ 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "rodas2021pull"
+literal "false"
+
+\end_inset
+
+ also show that the census empirical best method performs quite well in simulations,
+ particularly in terms of adequately tracking the variance of the true poverty rates.
+ This contrasts with ELL-type methods,
+ which have a tendency to underestimate the variance.
+ For further discussion of the census empirical best method,
+ also see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2019desagregacion"
