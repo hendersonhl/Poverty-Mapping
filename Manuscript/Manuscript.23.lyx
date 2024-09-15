@@ -1,4 +1,4 @@
-#LyX 2.4 created this file. For more info see https://www.lyx.org/
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
 \lyxformat 544
 \begin_document
 \begin_header
@@ -6,10 +6,10 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\date{}
-% Added by lyx2lyx
-\setlength{\parskip}{\medskipamount}
-\setlength{\parindent}{0pt}
+\date{}
+% Added by lyx2lyx
+\setlength{\parskip}{\medskipamount}
+\setlength{\parindent}{0pt}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -104,12 +104,9 @@ status collapsed
 \begin_layout Plain Layout
 The authors acknowledge financial support from the World Bank.
  We thank Roy van der Weide and Isabel Molina for comments.
- Additionally,
- we thank Benu Bidani,
- Carlos Rodriguez-Castelan,
- and Johan Mistiaen for providing support and space to pursue this work.
- Finally,
- we thank the Global Solutions Group on Data for Policy.
+ Additionally, we thank Benu Bidani, Carlos Rodriguez-Castelan, and Johan
+ Mistiaen for providing support and space to pursue this work.
+ Finally, we thank the Global Solutions Group on Data for Policy.
  Any error or omission is the authors’ responsibility alone.
 \end_layout
 
@@ -124,7 +121,8 @@ Paul Corral,
 status collapsed
 
 \begin_layout Plain Layout
-The World Bank Group - Poverty and Equity Global Practice (pcorralrodas@worldbank.org)
+The World Bank Group - Poverty and Equity Global Practice (pcorralrodas@worldban
+k.org)
 \end_layout
 
 \end_inset
@@ -134,9 +132,7 @@ The World Bank Group - Poverty and Equity Global Practice (pcorralrodas@worldban
 status collapsed
 
 \begin_layout Plain Layout
-Zimpleman College of Business,
- Drake University,
- United States of America
+Zimpleman College of Business, Drake University, United States of America
 \end_layout
 
 \end_inset
@@ -155,21 +151,24 @@ The World Bank Group - Poverty and Equity Global Practice
 \end_layout
 
 \begin_layout Abstract
-Recent years have witnessed considerable methodological advances in poverty mapping,
- much of which has focused on the application of modern machine-learning approaches to remotely-sensed data.
- Poverty maps produced with these methods generally share a common validation procedure,
- which assesses model performance by comparing sub-national poverty estimates with survey-based,
- direct estimates.
- While unbiased,
- direct estimates can be imprecise measures of true poverty rates,
- meaning that it is unclear whether these validation procedures are informative of actual model performance.
- In this paper,
- we use a rich dataset from Mexico to provide a more rigorous assessment of the modern approach to poverty mapping by evaluating its performance against a credible ground truth.
- We find that the modern method under-performs relative to benchmark traditional methods,
- largely because of the limited predictive capacity of remotely-sensed covariates.
- For a given covariate set,
- we also find that machine learning produces more biased poverty estimates than the traditional procedures,
- particularly for the poorest geographic areas.
+Recent years have witnessed considerable methodological advances in poverty
+ mapping, much of which has focused on the application of modern machine-learnin
+g approaches to remotely-sensed data.
+ Poverty maps produced with these methods generally share a common validation
+ procedure, which assesses model performance by comparing sub-national poverty
+ estimates with survey-based, direct estimates.
+ While unbiased, direct estimates can be imprecise measures of true poverty
+ rates, meaning that it is unclear whether these validation procedures are
+ informative of actual model performance.
+ In this paper, we use a rich dataset from Mexico to provide a more rigorous
+ assessment of the modern approach to poverty mapping by evaluating its
+ performance against a credible ground truth.
+ We find that the modern method under-performs relative to benchmark traditional
+ methods, largely because of the limited predictive capacity of remotely-sensed
+ covariates.
+ For a given covariate set, we also find that machine learning produces
+ more biased poverty estimates than the traditional procedures, particularly
+ for the poorest geographic areas.
 \end_layout
 
 \begin_layout Abstract
@@ -183,24 +182,16 @@ Recent years have witnessed considerable methodological advances in poverty mapp
 
 \series bold
 Key words:
-
 \series default
- Small-area estimation;
- poverty mapping;
- machine learning;
- satellite imagery
+ Small-area estimation; poverty mapping; machine learning; satellite imagery
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-JEL classification:
- 
+JEL classification: 
 \series default
-C13;
- C55;
- C87;
- C15
+C13; C55; C87; C15
 \begin_inset Newpage pagebreak
 \end_inset
 
@@ -212,7 +203,9 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-Poverty maps provide granular estimates of poverty at the sub-national level in order to better inform the targeting of resources and support the design of interventions tailored to local needs (
+Poverty maps provide granular estimates of poverty at the sub-national level
+ in order to better inform the targeting of resources and support the design
+ of interventions tailored to local needs (
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "bedi2007more,elbers2007poverty"
@@ -221,24 +214,25 @@ literal "false"
 \end_inset
 
 ).
- As household surveys are generally unrepresentative for small geographic areas,
- producing detailed poverty maps typically requires using small-area estimation,
- which consists of using statistical methods to predict poverty levels on the basis of household- or area-level characteristics.
- The basic procedure entails two steps:
- (1) using household survey data,
- fit a statistical model of some welfare measure (e.g.,
- poverty,
- income,
- or wealth) to household- or area-level characteristics,
- and (2) apply the model to data available for all households or geographic units to estimate poverty at the sub-national level.
- At a minimum,
- the procedure then requires a household survey and data that covers all geographic areas to produce a sufficiently detailed map.
+ As household surveys are generally unrepresentative for small geographic
+ areas, producing detailed poverty maps typically requires using small-area
+ estimation, which consists of using statistical methods to predict poverty
+ levels on the basis of household- or area-level characteristics.
+ The basic procedure entails two steps: (1) using household survey data,
+ fit a statistical model of some welfare measure (e.g., poverty, income, or
+ wealth) to household- or area-level characteristics, and (2) apply the
+ model to data available for all households or geographic units to estimate
+ poverty at the sub-national level.
+ At a minimum, the procedure then requires a household survey and data that
+ covers all geographic areas to produce a sufficiently detailed map.
 \end_layout
 
 \begin_layout Standard
-The literature on small-area estimation is rich and several variations on this basic procedure have been proposed.
- Unit-level models generally use survey and census data to conduct estimation and prediction at the household level,
- assuming a parametric relationship between the welfare measure and covariates 
+The literature on small-area estimation is rich and several variations on
+ this basic procedure have been proposed.
+ Unit-level models generally use survey and census data to conduct estimation
+ and prediction at the household level, assuming a parametric relationship
+ between the welfare measure and covariates 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "hentschel1998combining,elbers2003micro,molina2010small"
@@ -247,9 +241,12 @@ literal "false"
 \end_inset
 
 .
- Unit-level models are not well-suited to situations where the survey and census correspond to different years,
- which is often the case in developing countries where censuses are conducted infrequently.
- Area-level models are the leading parametric alternative for off-census years and only use aggregate data on the geographic units of interest for estimation and prediction 
+ Unit-level models are not well-suited to situations where the survey and
+ census correspond to different years, which is often the case in developing
+ countries where censuses are conducted infrequently.
+ Area-level models are the leading parametric alternative for off-census
+ years and only use aggregate data on the geographic units of interest for
+ estimation and prediction 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "fay1979estimates,torabi2014small"
@@ -258,25 +255,18 @@ literal "false"
 \end_inset
 
 .
- Unit-context models have also been suggested for off-census years and are characterized by an estimation stage wherein household-level measures are modeled as a parametric function of area-level characteristics 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "nguyen2012method,lange2018small,masaki2020small"
-literal "false"
-
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Standard
-Recent developments in poverty mapping have focused on the application of machine learning to remotely-sensed data,
- largely in response to the issue of out-of-date census information.
- These approaches also use survey-derived welfare measures,
- but are distinguished by a first stage where a machine-learning model is fit to remotely-sensed covariates (e.g.,
- data derived from satellite imagery or call detail records) rather than census-based covariates.
- For example,
- 
+Recent developments in poverty mapping have focused on the application of
+ machine learning to remotely-sensed data, largely in response to the issue
+ of out-of-date census information.
+ These approaches also use survey-derived welfare measures, but are distinguishe
+d by a first stage where a machine-learning model is fit to remotely-sensed
+ covariates (e.g., data derived from satellite imagery or call detail records)
+ rather than census-based covariates.
+ For example, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -284,7 +274,8 @@ literal "false"
 
 \end_inset
 
- matched data from several remotely-sensed data sources to survey-based measures of 
+ matched data from several remotely-sensed data sources to survey-based
+ measures of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -292,23 +283,22 @@ village
 \begin_inset Quotes erd
 \end_inset
 
- wealth for 56 countries,
- and then fit a prediction model using gradient boosting machines.
+ wealth for 56 countries, and then fit a prediction model using gradient
+ boosting machines.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Their remotely-sensed data includes high-resolution satellite imagery,
- mobile phone data,
- topographic maps,
- and connectivity data from Facebook.
+Their remotely-sensed data includes high-resolution satellite imagery, mobile
+ phone data, topographic maps, and connectivity data from Facebook.
 \end_layout
 
 \end_inset
 
- They then applied the model to the populated surface of 135 low- and middle-income countries to develop granular poverty maps for each country.
- Similar approaches have been used for individual countries,
- including Rwanda 
+ They then applied the model to the populated surface of 135 low- and middle-inc
+ome countries to develop granular poverty maps for each country.
+ Similar approaches have been used for individual countries, including Rwanda
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "blumenstock2015predicting"
@@ -316,8 +306,7 @@ literal "false"
 
 \end_inset
 
-,
- Bangladesh 
+, Bangladesh 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "steele2017mapping"
@@ -325,8 +314,7 @@ literal "false"
 
 \end_inset
 
-,
- Belize 
+, Belize 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "hersh2021open"
@@ -334,8 +322,7 @@ literal "false"
 
 \end_inset
 
-,
- and Sri Lanka 
+, and Sri Lanka 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "engstrom2022poverty"
@@ -343,8 +330,7 @@ literal "false"
 
 \end_inset
 
-,
- among others.
+, among others.
 \begin_inset Foot
 status collapsed
 
@@ -357,8 +343,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "pokhriyal2017combining"
@@ -366,8 +351,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "yeh2020using"
@@ -375,8 +359,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "lee2020high"
@@ -384,8 +367,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "aiken2022machine"
@@ -418,11 +400,12 @@ modern
 \begin_inset Quotes erd
 \end_inset
 
- approach to poverty mapping – consists of several practices that differ from more traditional approaches.
- Most obviously,
- the modern approach substitutes non-parametric statistical methods for the parametric approaches traditionally used for poverty mapping.
- In addition,
- the modern approach relies heavily on remotely-sensed covariates rather than covariates derived from census or administrative data.
+ approach to poverty mapping – consists of several practices that differ
+ from more traditional approaches.
+ Most obviously, the modern approach substitutes non-parametric statistical
+ methods for the parametric approaches traditionally used for poverty mapping.
+ In addition, the modern approach relies heavily on remotely-sensed covariates
+ rather than covariates derived from census or administrative data.
 \begin_inset Foot
 status collapsed
 
@@ -441,19 +424,20 @@ literal "false"
 
 \end_inset
 
- Further,
- maps produced with machine-learning methods generally share a common validation procedure.
- The key feature of this procedure is that model performance is assessed by calculating the 
+ Further, maps produced with machine-learning methods generally share a
+ common validation procedure.
+ The key feature of this procedure is that model performance is assessed
+ by calculating the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- from a regression of the observed poverty measures on the estimates for the same geographic units.
+ from a regression of the observed poverty measures on the estimates for
+ the same geographic units.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For examples of the above procedure,
- see 
+For examples of the above procedure, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "jean2016combining"
@@ -461,8 +445,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "pokhriyal2017combining"
@@ -470,8 +453,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "steele2017mapping"
@@ -479,8 +461,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "lee2020high"
@@ -488,8 +469,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "yeh2020using"
@@ -497,8 +477,7 @@ literal "false"
 
 \end_inset
 
-,
- or 
+, or 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -507,8 +486,9 @@ literal "false"
 \end_inset
 
 .
- Note that a few studies use a similar procedure,
- but fit the machine-learning model to household-level data and then aggregate the model's predictions to the geographic unit of interest 
+ Note that a few studies use a similar procedure, but fit the machine-learning
+ model to household-level data and then aggregate the model's predictions
+ to the geographic unit of interest 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "blumenstock2015predicting,hersh2021open,aiken2022machine"
@@ -521,12 +501,12 @@ literal "false"
 
 \end_inset
 
- There are several limitations to this procedure,
- but the most critical is that it typically uses direct,
- sample-based estimates rather than true poverty measures as a performance benchmark.
- While direct estimates are unbiased,
- they can be imprecise estimates of the true measures,
- meaning that it is unclear whether the validation procedure is informative of actual model performance (see Section 
+ There are several limitations to this procedure, but the most critical
+ is that it typically uses direct, sample-based estimates rather than true
+ poverty measures as a performance benchmark.
+ While direct estimates are unbiased, they can be imprecise estimates of
+ the true measures, meaning that it is unclear whether the validation procedure
+ is informative of actual model performance (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:validation"
@@ -540,8 +520,8 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-In this paper,
- we provide a more rigorous assessment of the performance of the modern approach to poverty mapping.
+In this paper, we provide a more rigorous assessment of the performance
+ of the modern approach to poverty mapping.
  Our approach consists of constructing a pseudo-census (hereafter 
 \begin_inset Quotes eld
 \end_inset
@@ -551,10 +531,15 @@ census
 \end_inset
 
 ) that we use to conduct several simulation experiments.
- Our experiments entail repeatedly drawing survey samples from the census where each sample produces direct poverty estimates for the sampled geographic areas.
- With each sample we obtain small-area estimates using traditional and modern mapping methods.
- The presence of the census means that we observe the ``true'' poverty measure corresponding to the direct estimate.
- We use these true poverty measures to gain insight into the performance of machine-learning methods when validated against a credible ground truth.
+ Our experiments entail repeatedly drawing survey samples from the census
+ where each sample produces direct poverty estimates for the sampled geographic
+ areas.
+ With each sample we obtain small-area estimates using traditional and modern
+ mapping methods.
+ The presence of the census means that we observe the ``true'' poverty measure
+ corresponding to the direct estimate.
+ We use these true poverty measures to gain insight into the performance
+ of machine-learning methods when validated against a credible ground truth.
  As population censuses rarely collect detailed data on income or expenditures,
  we construct our census from a large-scale survey conducted in Mexico:
  the Mexican Intercensal Survey of 2015.
@@ -563,19 +548,21 @@ census
 
 \begin_layout Standard
 The results of our simulations can be summarized as follows.
- First,
- we find that poverty maps produced using machine learning and remotely-sensed covariates tend to perform poorly relative to the traditional approach,
- both in terms of the mean squared error of the estimates and simulated targeting performance.
- Second,
- we find that this under-performance is due to the low predictive capacity of the remotely-sensed covariates.
- Machine learning performs comparably to,
- and sometimes better than,
- the traditional methods when both methods use the same covariates.
- Third,
- we show that the performance advantage of machine learning for a given covariate set results from the relatively low variance of its estimates,
- but this variance reduction comes at the cost of increasing the bias of the estimates,
- particularly for the poorest areas.
- This bias-variance trade-off is especially stark when using remotely-sensed covariates and ultimately raises practical questions about the use and production of modern poverty maps.
+ First, we find that poverty maps produced using machine learning and remotely-s
+ensed covariates tend to perform poorly relative to the traditional approach,
+ both in terms of the mean squared error of the estimates and simulated
+ targeting performance.
+ Second, we find that this under-performance is due to the low predictive
+ capacity of the remotely-sensed covariates.
+ Machine learning performs comparably to, and sometimes better than, the
+ traditional methods when both methods use the same covariates.
+ Third, we show that the performance advantage of machine learning for a
+ given covariate set results from the relatively low variance of its estimates,
+ but this variance reduction comes at the cost of increasing the bias of
+ the estimates, particularly for the poorest areas.
+ This bias-variance trade-off is especially stark when using remotely-sensed
+ covariates and ultimately raises practical questions about the use and
+ production of modern poverty maps.
 \end_layout
 
 \begin_layout Standard
@@ -595,8 +582,8 @@ literal "false"
 
 \end_inset
 
-,
- who similarly used the Mexican Intercensal Survey to examine the performance of several mapping methods.
+, who similarly used the Mexican Intercensal Survey to examine the performance
+ of several mapping methods.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -605,7 +592,8 @@ literal "false"
 
 \end_inset
 
- focused exclusively on traditional mapping approaches and did not consider the performance of machine-learning methods.
+ focused exclusively on traditional mapping approaches and did not consider
+ the performance of machine-learning methods.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -614,10 +602,11 @@ literal "false"
 
 \end_inset
 
- consider the performance of machine learning,
- their implementation only uses census-based covariates and thus does not examine the performance of the standard implementation that relies on remotely-sensed covariates.
- Importantly,
- we are not the first paper to evaluate machine-learning methods relative to independent census data.
+ consider the performance of machine learning, their implementation only
+ uses census-based covariates and thus does not examine the performance
+ of the standard implementation that relies on remotely-sensed covariates.
+ Importantly, we are not the first paper to evaluate machine-learning methods
+ relative to independent census data.
  While 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -634,8 +623,8 @@ literal "false"
 
 \end_inset
 
- validate their models relative to a census,
- they focus on wealth rather than poverty and do not address all the limitations of 
+ validate their models relative to a census, they focus on wealth rather
+ than poverty and do not address all the limitations of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -650,8 +639,7 @@ noprefix "false"
 \end_inset
 
 ).
- Finally,
- 
+ Finally, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "vanderweide2022how"
@@ -659,20 +647,23 @@ literal "false"
 
 \end_inset
 
- examine the performance of machine-learning methods combined with remotely-sensed data,
- but not relative to true poverty measures.
+ examine the performance of machine-learning methods combined with remotely-sens
+ed data, but not relative to true poverty measures.
 \end_layout
 
 \begin_layout Standard
-This paper then represents the first attempt to rigorously assess the performance of modern poverty-mapping methods relative to a ground truth.
+This paper then represents the first attempt to rigorously assess the performanc
+e of modern poverty-mapping methods relative to a ground truth.
  The scope of our analysis is nevertheless limited in some important ways.
- For one,
- we confine our attention to the performance of machine learning for predicting income poverty and do not consider other welfare measures,
+ For one, we confine our attention to the performance of machine learning
+ for predicting income poverty and do not consider other welfare measures,
  such as wealth or multi-dimensional poverty.
- We also focus exclusively on the case of Mexico because of the unique data requirements of our experiments and therefore do not assess the external validity of our findings.
- A final limitation of our analysis is that we do not consider all possible uses of machine learning for poverty mapping.
- For example,
- we do not consider the issue of 
+ We also focus exclusively on the case of Mexico because of the unique data
+ requirements of our experiments and therefore do not assess the external
+ validity of our findings.
+ A final limitation of our analysis is that we do not consider all possible
+ uses of machine learning for poverty mapping.
+ For example, we do not consider the issue of 
 \begin_inset Quotes eld
 \end_inset
 
@@ -680,7 +671,8 @@ feature extraction,
 \begin_inset Quotes erd
 \end_inset
 
- which is a data-processing technique that builds the covariates for mapping exercises by applying machine learning to unstructured input data (e.g.,
+ which is a data-processing technique that builds the covariates for mapping
+ exercises by applying machine learning to unstructured input data (e.g.,
  satellite imagery).
 \begin_inset Foot
 status collapsed
@@ -693,9 +685,9 @@ literal "false"
 
 \end_inset
 
-,
- for example,
- used a convolutional neural network to extract features from high-resolution satellite imagery in Nigeria and then used those features to create a poverty map using gradient boosting.
+, for example, used a convolutional neural network to extract features from
+ high-resolution satellite imagery in Nigeria and then used those features
+ to create a poverty map using gradient boosting.
  See 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -721,8 +713,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-In what follows,
- Section 
+In what follows, Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:methods"
@@ -732,8 +723,8 @@ noprefix "false"
 
 \end_inset
 
- discusses the various methods we examine,
- including machine-learning methods and the traditional approaches we use as performance benchmarks.
+ discusses the various methods we examine, including machine-learning methods
+ and the traditional approaches we use as performance benchmarks.
  Section 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -744,7 +735,8 @@ noprefix "false"
 
 \end_inset
 
- considers the issue of model validation by presenting a critical evaluation of 
+ considers the issue of model validation by presenting a critical evaluation
+ of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -759,7 +751,8 @@ noprefix "false"
 
 \end_inset
 
- then discusses the data we use for our simulation experiments and Section 
+ then discusses the data we use for our simulation experiments and Section
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:results"
@@ -770,8 +763,7 @@ noprefix "false"
 \end_inset
 
  presents the results.
- Finally,
- Section 
+ Finally, Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:conclusion"
@@ -781,8 +773,8 @@ noprefix "false"
 
 \end_inset
 
- provides concluding remarks,
- including practical recommendations for the production and use of poverty maps.
+ provides concluding remarks, including practical recommendations for the
+ production and use of poverty maps.
 \end_layout
 
 \begin_layout Section
@@ -798,11 +790,12 @@ name "sec:methods"
 
 \begin_layout Standard
 This section describes the methods we use in our poverty-mapping simulations.
- The first subsection discusses machine learning,
- with a special focus on gradient boosting,
- as it is among the most popular machine-learning methods for poverty mapping.
- The second subsection then discusses more traditional approaches to poverty mapping,
- which we use as the benchmark in our performance assessment of the machine-learning methods.
+ The first subsection discusses machine learning, with a special focus on
+ gradient boosting, as it is among the most popular machine-learning methods
+ for poverty mapping.
+ The second subsection then discusses more traditional approaches to poverty
+ mapping, which we use as the benchmark in our performance assessment of
+ the machine-learning methods.
 \end_layout
 
 \begin_layout Subsection
@@ -810,9 +803,8 @@ Machine learning
 \end_layout
 
 \begin_layout Standard
-The goal of machine learning is to develop high-performance algorithms for prediction,
- classification,
- and clustering/grouping tasks 
+The goal of machine learning is to develop high-performance algorithms for
+ prediction, classification, and clustering/grouping tasks 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "varian2014big,athey2018impact,athey2019machine"
@@ -822,15 +814,15 @@ literal "false"
 
 .
  Such tasks can be divided into supervised and unsupervised learning problems.
- While unsupervised learning focuses on identifying clusters of observations that are similar in terms of their features,
- supervised learning uses a set of features to predict some outcome of interest.
- Supervised learning can be further divided into regression and classification tasks,
- where regression is concerned with predicting continuous outcomes and classification focuses on categorical outcomes.
- While there are many machine-learning methods used for regression and classification tasks (e.g.,
- lasso,
- random forests,
- or support vector machines),
- the following presents some key ideas by focusing on one of the leading methods:
+ While unsupervised learning focuses on identifying clusters of observations
+ that are similar in terms of their features, supervised learning uses a
+ set of features to predict some outcome of interest.
+ Supervised learning can be further divided into regression and classification
+ tasks, where regression is concerned with predicting continuous outcomes
+ and classification focuses on categorical outcomes.
+ While there are many machine-learning methods used for regression and classific
+ation tasks (e.g., lasso, random forests, or support vector machines), the
+ following presents some key ideas by focusing on one of the leading methods:
  gradient boosting.
 \end_layout
 
@@ -843,13 +835,15 @@ literal "false"
 
 \end_inset
 
-,
- gradient boosting machines are a family of machine-learning techniques that combine a large number of weak learners to form a stronger ensemble prediction.
- Unlike some common ensemble techniques (e.g.,
- random forests) that simply average models in the ensemble,
- gradient boosting adds models to the ensemble sequentially by fitting new weak learners to the negative gradient of the chosen loss function.
- With the classic squared-error loss function,
- this amounts to sequentially fitting new models to the current residuals of the ensemble.
+, gradient boosting machines are a family of machine-learning techniques
+ that combine a large number of weak learners to form a stronger ensemble
+ prediction.
+ Unlike some common ensemble techniques (e.g., random forests) that simply
+ average models in the ensemble, gradient boosting adds models to the ensemble
+ sequentially by fitting new weak learners to the negative gradient of the
+ chosen loss function.
+ With the classic squared-error loss function, this amounts to sequentially
+ fitting new models to the current residuals of the ensemble.
 \begin_inset Foot
 status collapsed
 
@@ -867,10 +861,12 @@ literal "false"
 
 \end_inset
 
- Extreme gradient boosting (XGBoost) is a particularly popular implementation of gradient boosting that uses classification and regression trees as the base models or weak learners.
- The popularity of XGBoost is due to the fact that it is fast,
- scalable,
- and has been shown to outperform competing methods across a wide range of problems 
+ Extreme gradient boosting (XGBoost) is a particularly popular implementation
+ of gradient boosting that uses classification and regression trees as the
+ base models or weak learners.
+ The popularity of XGBoost is due to the fact that it is fast, scalable,
+ and has been shown to outperform competing methods across a wide range
+ of problems 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "chen2016xgboost"
@@ -882,47 +878,50 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Classification and regression trees are based on a sequential binary splitting of the covariate space that serves to partition the data into subsamples that are increasingly homogeneous in terms of the outcome variable.
- A tree begins with a single root node that is split into two child nodes according to some decision rule.
- A decision rule pertains to a single explanatory variable and observations are assigned to the child nodes depending on whether they meet some condition associated with the explanatory variable.
+Classification and regression trees are based on a sequential binary splitting
+ of the covariate space that serves to partition the data into subsamples
+ that are increasingly homogeneous in terms of the outcome variable.
+ A tree begins with a single root node that is split into two child nodes
+ according to some decision rule.
+ A decision rule pertains to a single explanatory variable and observations
+ are assigned to the child nodes depending on whether they meet some condition
+ associated with the explanatory variable.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For example,
- for a continuous explanatory variable,
- one determines whether a given observation falls above or below some numeric cutoff.
+For example, for a continuous explanatory variable, one determines whether
+ a given observation falls above or below some numeric cutoff.
 \end_layout
 
 \end_inset
 
- The child nodes can be further split into new child nodes based on different decision rules that involve other explanatory variables and cutoff points.
- Any child node that is not further split is referred to as a terminal node or leaf,
- and each leaf is associated with a parameter that provides a prediction for the subsample associated with that leaf.
- For any given observation,
- the ensemble prediction used by XGBoost is the sum of that observation's predictions across all trees in the ensemble.
+ The child nodes can be further split into new child nodes based on different
+ decision rules that involve other explanatory variables and cutoff points.
+ Any child node that is not further split is referred to as a terminal node
+ or leaf, and each leaf is associated with a parameter that provides a predictio
+n for the subsample associated with that leaf.
+ For any given observation, the ensemble prediction used by XGBoost is the
+ sum of that observation's predictions across all trees in the ensemble.
  
 \end_layout
 
 \begin_layout Standard
-To fix ideas,
- let 
+To fix ideas, let 
 \begin_inset Formula $y_{i}^{d}$
 \end_inset
 
- denote the outcome of interest (e.g.,
- direct estimates of poverty rates) for observation or entity 
+ denote the outcome of interest (e.g., direct estimates of poverty rates)
+ for observation or entity 
 \begin_inset Formula $i$
 \end_inset
 
-,
- and let 
+, and let 
 \begin_inset Formula $x_{i}$
 \end_inset
 
  denote a vector of explanatory variables.
- In line with the above,
- the predicted value of the outcome 
+ In line with the above, the predicted value of the outcome 
 \begin_inset Formula $y_{i}^{p}$
 \end_inset
 
@@ -950,8 +949,8 @@ where the trees are indexed by
 \end_inset
 
 .
- To build the trees used in the model,
- XGBoost greedily minimizes the following regularized objective function:
+ To build the trees used in the model, XGBoost greedily minimizes the following
+ regularized objective function:
 \end_layout
 
 \begin_layout Standard
@@ -979,7 +978,8 @@ where
 status collapsed
 
 \begin_layout Plain Layout
-For an in-depth discussion and description of the XGBoost algorithm refer to 
+For an in-depth discussion and description of the XGBoost algorithm refer
+ to 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chen2016xgboost"
@@ -988,13 +988,14 @@ literal "false"
 \end_inset
 
 .
- Note that the fact that XGBoost is a greedy algorithm means that a global minimum is not guaranteed.
+ Note that the fact that XGBoost is a greedy algorithm means that a global
+ minimum is not guaranteed.
 \end_layout
 
 \end_inset
 
- In our implementation,
- we use the classic squared-error loss such that 
+ In our implementation, we use the classic squared-error loss such that
+ 
 \begin_inset Formula $l(y_{i}^{d},y_{i}^{p})=(y_{i}^{d}-y_{i}^{p})^{2}$
 \end_inset
 
@@ -1003,8 +1004,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-XGBoost uses the following specification of the regularization term:
- 
+XGBoost uses the following specification of the regularization term: 
 \end_layout
 
 \begin_layout Standard
@@ -1023,8 +1023,7 @@ where
 \begin_inset Formula $t$
 \end_inset
 
-,
- 
+, 
 \begin_inset Formula $m_{tj}$
 \end_inset
 
@@ -1032,8 +1031,7 @@ where
 \begin_inset Formula $j^{th}$
 \end_inset
 
- leaf in a given tree,
- and 
+ leaf in a given tree, and 
 \begin_inset Formula $\gamma$
 \end_inset
 
@@ -1042,11 +1040,12 @@ where
 \end_inset
 
  are hyperparameters that must be chosen by the user.
- The regularization term serves to mitigate overfitting by penalizing complicated trees and smoothing the predictions associated with each tree.
- That is,
- the method relies on a large number of weak learners and the regularization term helps control the complexity of the learners.
- It is important to note that the above specification of the regularization term is only one of many possible specifications,
- though 
+ The regularization term serves to mitigate overfitting by penalizing complicate
+d trees and smoothing the predictions associated with each tree.
+ That is, the method relies on a large number of weak learners and the regulariz
+ation term helps control the complexity of the learners.
+ It is important to note that the above specification of the regularization
+ term is only one of many possible specifications, though 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chen2016xgboost"
@@ -1054,45 +1053,51 @@ literal "false"
 
 \end_inset
 
- claim that it is simpler than the leading alternatives and easier to parallelize.
- Further note that when the hyperparameters are set to zero,
- the objective function becomes equivalent to that used in traditional gradient boosting.
+ claim that it is simpler than the leading alternatives and easier to paralleliz
+e.
+ Further note that when the hyperparameters are set to zero, the objective
+ function becomes equivalent to that used in traditional gradient boosting.
 \end_layout
 
 \begin_layout Standard
-XGBoost requires the specification of several hyperparameters that must be chosen by the user,
- including the hyperparameters in the regularization term,
- the maximum tree depth,
- and the number of trees in the ensemble.
- There are two additional hyperparameters that can be used to further prevent overfitting.
- First,
- one can use column or feature subsampling where each tree in the ensemble is built based on a (uniformly) random subset of all explanatory variables.
- This procedure can also speed up the algorithm because it reduces the number of covariates that must be searched across when creating new splits.
- Second,
- one can use shrinkage by scaling the predictions associated with each tree by a factor 
+XGBoost requires the specification of several hyperparameters that must
+ be chosen by the user, including the hyperparameters in the regularization
+ term, the maximum tree depth, and the number of trees in the ensemble.
+ There are two additional hyperparameters that can be used to further prevent
+ overfitting.
+ First, one can use column or feature subsampling where each tree in the
+ ensemble is built based on a (uniformly) random subset of all explanatory
+ variables.
+ This procedure can also speed up the algorithm because it reduces the number
+ of covariates that must be searched across when creating new splits.
+ Second, one can use shrinkage by scaling the predictions associated with
+ each tree by a factor 
 \begin_inset Formula $\eta$
 \end_inset
 
-,
- which is often called the learning rate.
+, which is often called the learning rate.
  The predicted value of the outcome at iteration 
 \begin_inset Formula $t$
 \end_inset
 
- is then given by the sum of the previous prediction and the current prediction scaled by the learning rate.
- Shrinkage reduces the influence of each tree so that no individual tree has too much influence on the ensemble prediction.
+ is then given by the sum of the previous prediction and the current prediction
+ scaled by the learning rate.
+ Shrinkage reduces the influence of each tree so that no individual tree
+ has too much influence on the ensemble prediction.
 \end_layout
 
 \begin_layout Standard
-One possible approach to hyperparameter selection is to use a grid search where the user (1) specifies the domain of the hyperparameters,
- (2) applies the model to every combination of hyperparameters,
- and (3) selects the hyperparameters that perform the best in terms of some metric (e.g.,
- mean squared prediction error in the validation dataset).
- Grid search,
- however,
- is computationally inefficient because hyperparameter proposals are uninformed by previous evaluations.
- We instead use a Bayesian hyperparameter optimization procedure,
- which sequentially updates a probability model that relates the hyperparameter space to the performance metric and then uses the model to intelligently explore the hyperparameter space 
+One possible approach to hyperparameter selection is to use a grid search
+ where the user (1) specifies the domain of the hyperparameters, (2) applies
+ the model to every combination of hyperparameters, and (3) selects the
+ hyperparameters that perform the best in terms of some metric (e.g., mean
+ squared prediction error in the validation dataset).
+ Grid search, however, is computationally inefficient because hyperparameter
+ proposals are uninformed by previous evaluations.
+ We instead use a Bayesian hyperparameter optimization procedure, which
+ sequentially updates a probability model that relates the hyperparameter
+ space to the performance metric and then uses the model to intelligently
+ explore the hyperparameter space 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "bergstra2011algorithms"
@@ -1101,9 +1106,9 @@ literal "false"
 \end_inset
 
 .
- Specifically,
- our implementation of gradient boosting relies on the open-source library XGBoost,
- which we combine with the Hyperopt library that conducts Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
+ Specifically, our implementation of gradient boosting relies on the open-source
+ library XGBoost, which we combine with the Hyperopt library that conducts
+ Bayesian hyperparameter optimization using the tree-structured Parzen estimator.
 \end_layout
 
 \begin_layout Subsection
@@ -1111,10 +1116,9 @@ Traditional methods
 \end_layout
 
 \begin_layout Standard
-We benchmark the performance of the machine-learning approach against two traditional poverty-mapping methods:
- the unit-level and area-level models.
- Regarding unit-level models,
- the well-known methods of 
+We benchmark the performance of the machine-learning approach against two
+ traditional poverty-mapping methods: the unit-level and area-level models.
+ Regarding unit-level models, the well-known methods of 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "elbers2003micro"
@@ -1139,7 +1143,9 @@ literal "false"
 \end_inset
 
 .
- This model assumes that (transformed) equivalized household income or consumption relates to a vector of household-level covariates according to the following model:
+ This model assumes that (transformed) equivalized household income or consumpti
+on relates to a vector of household-level covariates according to the following
+ model:
 \end_layout
 
 \begin_layout Standard
@@ -1166,18 +1172,15 @@ where
 \begin_inset Formula $i$
 \end_inset
 
-,
- 
+, 
 \begin_inset Formula $x_{iv}$
 \end_inset
 
- represents a vector of household-specific characteristics,
- 
+ represents a vector of household-specific characteristics, 
 \begin_inset Formula $\theta$
 \end_inset
 
- is a vector of coefficients on the household characteristics,
- 
+ is a vector of coefficients on the household characteristics, 
 \begin_inset Formula $\mu_{i}$
 \end_inset
 
@@ -1185,8 +1188,7 @@ where
 \begin_inset Formula $\mu_{i}\sim N(0,\sigma_{\mu}^{2})$
 \end_inset
 
-,
- and 
+, and 
 \begin_inset Formula $\xi_{iv}$
 \end_inset
 
@@ -1198,7 +1200,8 @@ where
 \end_layout
 
 \begin_layout Standard
-The parameters of the model are typically estimated via restricted maximum likelihood or Henderson's Method III (
+The parameters of the model are typically estimated via restricted maximum
+ likelihood or Henderson's Method III (
 \begin_inset CommandInset citation
 LatexCommand citealt
 key "henderson1953estimation"
@@ -1211,15 +1214,16 @@ literal "false"
 status collapsed
 
 \begin_layout Plain Layout
-Henderson's Method III is coupled with generalized least squares to obtain the regression coefficients.
+Henderson's Method III is coupled with generalized least squares to obtain
+ the regression coefficients.
 \end_layout
 
 \end_inset
 
- Once the model is estimated,
- the parameters are then used to repeatedly generate income estimates for all households in a corresponding census dataset.
- That is,
- the income level of each household is predicted 
+ Once the model is estimated, the parameters are then used to repeatedly
+ generate income estimates for all households in a corresponding census
+ dataset.
+ That is, the income level of each household is predicted 
 \begin_inset Formula $K$
 \end_inset
 
@@ -1268,14 +1272,14 @@ literal "false"
 
 \end_inset
 
- As a final step,
- the replicates can be used to calculate 
+ As a final step, the replicates can be used to calculate 
 \begin_inset Formula $K$
 \end_inset
 
- estimates of the poverty rate for each geographic entity and these estimates can then be averaged to arrive at a final prediction for each area.
- Note that there are multiple versions of the unit-level model,
- distinguished primarily through different treatments of 
+ estimates of the poverty rate for each geographic entity and these estimates
+ can then be averaged to arrive at a final prediction for each area.
+ Note that there are multiple versions of the unit-level model, distinguished
+ primarily through different treatments of 
 \begin_inset Formula $\mu_{ik}^{*}$
 \end_inset
 
@@ -1292,8 +1296,7 @@ census empirical best
 \begin_inset Quotes erd
 \end_inset
 
- method,
- which is a variant of the 
+ method, which is a variant of the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1314,8 +1317,9 @@ literal "false"
 status collapsed
 
 \begin_layout Plain Layout
-As opposed to empirical best estimates,
- census empirical best estimates do not include survey observations when calculating area-level poverty rates.
+As opposed to empirical best estimates, census empirical best estimates
+ do not include survey observations when calculating area-level poverty
+ rates.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1324,8 +1328,8 @@ literal "false"
 
 \end_inset
 
- show that when the sample size is small relative to the population,
- the difference between the two methods is negligible.
+ show that when the sample size is small relative to the population, the
+ difference between the two methods is negligible.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1334,12 +1338,12 @@ literal "false"
 
 \end_inset
 
- also show that the census empirical best method performs quite well in simulations,
- particularly in terms of tracking the variance of the true poverty rates.
- This contrasts with ELL-type methods,
- which have a tendency to underestimate the variance.
- For further discussion of the census empirical best method,
- also see 
+ also show that the census empirical best method performs quite well in
+ simulations, particularly in terms of tracking the variance of the true
+ poverty rates.
+ This contrasts with ELL-type methods, which have a tendency to underestimate
+ the variance.
+ For further discussion of the census empirical best method, also see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "molina2019desagregacion"
@@ -1356,8 +1360,12 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-The key assumption of the unit-level model is that the explanatory variables in the survey and census share the same definitions and have similar distributions across the two data sources.
- This assumption is generally violated if the census is outdated – which is often the case in developing countries – and in this event the application of the unit-level model will lead to similarly outdated poverty maps 
+The key assumption of the unit-level model is that the explanatory variables
+ in the survey and census share the same definitions and have similar distributi
+ons across the two data sources.
+ This assumption is generally violated if the census is outdated – which
+ is often the case in developing countries – and in this event the application
+ of the unit-level model will lead to similarly outdated poverty maps 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "lange2018small"
@@ -1366,11 +1374,12 @@ literal "false"
 \end_inset
 
 .
- Importantly,
- machine-learning approaches to poverty mapping are commonly motivated by the fact that censuses are outdated and are thus viewed as a way to produce timely poverty maps in a data-constrained environment.
- Stated differently,
- given the differing data requirements between the unit-level model and the machine-learning approach,
- the two methods are not generally considered to be direct competitors.
+ Importantly, machine-learning approaches to poverty mapping are commonly
+ motivated by the fact that censuses are outdated and are thus viewed as
+ a way to produce timely poverty maps in a data-constrained environment.
+ Stated differently, given the differing data requirements between the unit-leve
+l model and the machine-learning approach, the two methods are not generally
+ considered to be direct competitors.
  The unit-level model nevertheless serves as a useful performance benchmark,
  as it is often viewed as the 
 \begin_inset Quotes eld
@@ -1384,8 +1393,8 @@ gold standard
 \end_layout
 
 \begin_layout Standard
-In off-census years,
- the area-level model is generally considered the leading traditional method 
+In off-census years, the area-level model is generally considered the leading
+ traditional method 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "corral2022guidelines"
@@ -1402,8 +1411,8 @@ literal "false"
 
 \end_inset
 
-,
- area-level models conduct estimation and prediction using data aggregated to the geographic area of interest.
+, area-level models conduct estimation and prediction using data aggregated
+ to the geographic area of interest.
  The area-level model consists of two basic parts.
  The first part of the model links the actual or true poverty rates 
 \begin_inset Formula $y_{i}^{a}$
@@ -1440,7 +1449,8 @@ where
 \begin_inset Formula $\varepsilon_{i}$
 \end_inset
 
- represents random area-level effects that are assumed to be mean zero with a constant variance 
+ represents random area-level effects that are assumed to be mean zero with
+ a constant variance 
 \begin_inset Formula $\sigma_{\varepsilon}^{2}$
 \end_inset
 
@@ -1449,10 +1459,9 @@ where
 status collapsed
 
 \begin_layout Plain Layout
-While we focus on the original formulation of the model,
- note that several extensions have been proposed,
- particularly to accommodate more complicated error structures (e.g.,
- spatial correlation).
+While we focus on the original formulation of the model, note that several
+ extensions have been proposed, particularly to accommodate more complicated
+ error structures (e.g., spatial correlation).
  See Chapter 3 of 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -1466,19 +1475,20 @@ literal "false"
 
 \end_inset
 
- Since we lack information on the true poverty rates,
- this model cannot be immediately fit.
+ Since we lack information on the true poverty rates, this model cannot
+ be immediately fit.
 \end_layout
 
 \begin_layout Standard
-Instead,
- direct estimates of poverty rates from survey data 
+Instead, direct estimates of poverty rates from survey data 
 \begin_inset Formula $y_{i}^{d}$
 \end_inset
 
  are used as the outcome variable.
- These estimates are nevertheless subject to sampling error because they are based on the area-specific sample data.
- The second part of the model thus assumes that the direct estimates are centered around the true poverty rates as follows:
+ These estimates are nevertheless subject to sampling error because they
+ are based on the area-specific sample data.
+ The second part of the model thus assumes that the direct estimates are
+ centered around the true poverty rates as follows:
 \end_layout
 
 \begin_layout Standard
@@ -1497,19 +1507,21 @@ where
 \begin_inset Formula $\omega_{i}$
 \end_inset
 
- represents measurement or sampling error and is assumed to have heteroskedastic variance 
+ represents measurement or sampling error and is assumed to have heteroskedastic
+ variance 
 \begin_inset Formula $\sigma_{\omega,i}^{2}$
 \end_inset
 
  because sample sizes across areas are often unequal.
- These variances are assumed to be known,
- although in practice they are estimated using the survey data.
- Given the two parts of the model,
- the survey data can then be used to obtain parameter estimates.
+ These variances are assumed to be known, although in practice they are
+ estimated using the survey data.
+ Given the two parts of the model, the survey data can then be used to obtain
+ parameter estimates.
 \end_layout
 
 \begin_layout Standard
-The best linear unbiased predictor (BLUP) is obtained by predicting poverty rates through the model 
+The best linear unbiased predictor (BLUP) is obtained by predicting poverty
+ rates through the model 
 \begin_inset Formula $x_{i}\hat{\beta}+\hat{\varepsilon}_{i}$
 \end_inset
 
@@ -1521,10 +1533,8 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
 \begin_inset Formula $\hat{\varepsilon}_{i}$
 \end_inset
 
- represent the estimated coefficients and area-level effects,
- respectively.
- More specifically,
- the estimated area effect is 
+ represent the estimated coefficients and area-level effects, respectively.
+ More specifically, the estimated area effect is 
 \begin_inset Formula $\hat{\varepsilon}_{i}=\psi_{i}\left(y_{i}^{d}-x_{i}\hat{\beta}\right)$
 \end_inset
 
@@ -1533,8 +1543,8 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
 \end_inset
 
 .
- In essence,
- the final estimates for areas contained in the survey are the weighted average between the direct estimate 
+ In essence, the final estimates for areas contained in the survey are the
+ weighted average between the direct estimate 
 \begin_inset Formula $y_{i}^{d}$
 \end_inset
 
@@ -1542,8 +1552,7 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
 \begin_inset Formula $x_{i}\hat{\beta}$
 \end_inset
 
- where the weights,
- 
+ where the weights, 
 \begin_inset Formula $\psi_{i}$
 \end_inset
 
@@ -1551,16 +1560,18 @@ The best linear unbiased predictor (BLUP) is obtained by predicting poverty rate
 \begin_inset Formula $(1-\psi_{i})$
 \end_inset
 
-,
- are determined by the quality of the model and the sample sizes for each area.
- For the non-sampled entities,
- the area-level model simply uses the synthetic estimator to produce predictions.
- A critical feature of the area-level model is that it is a direct competitor to the machine-learning approach because both methods are intended for use in off-census years and do not rely on household-level data.
+, are determined by the quality of the model and the sample sizes for each
+ area.
+ For the non-sampled entities, the area-level model simply uses the synthetic
+ estimator to produce predictions.
+ A critical feature of the area-level model is that it is a direct competitor
+ to the machine-learning approach because both methods are intended for
+ use in off-census years and do not rely on household-level data.
 \end_layout
 
 \begin_layout Standard
-In summary,
- we use both the unit-level and area-level models as benchmarks in our assessment of the modern approach to poverty mapping.
+In summary, we use both the unit-level and area-level models as benchmarks
+ in our assessment of the modern approach to poverty mapping.
  While the 
 \begin_inset Quotes eld
 \end_inset
@@ -1569,10 +1580,10 @@ gold standard
 \begin_inset Quotes erd
 \end_inset
 
- unit-level model provides an absolute performance benchmark by approximating the upper performance bound,
- the area-level model provides a relative performance benchmark as the leading competitor to the modern approach.
- In our implementations of these models,
- we follow 
+ unit-level model provides an absolute performance benchmark by approximating
+ the upper performance bound, the area-level model provides a relative performan
+ce benchmark as the leading competitor to the modern approach.
+ In our implementations of these models, we follow 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "corral2022guidelines"
@@ -1581,11 +1592,11 @@ literal "false"
 \end_inset
 
  and remove any eligible covariate that is weak or extraneous.
- For example,
- when fitting the area-level model on a given sample,
- we sequentially remove insignificant covariates from the set of eligible variables,
- beginning with the one with the highest p-value.
- We then address collinearity by removing any variable with a variance inflation factor above five.
+ For example, when fitting the area-level model on a given sample, we sequential
+ly remove insignificant covariates from the set of eligible variables, beginning
+ with the one with the highest p-value.
+ We then address collinearity by removing any variable with a variance inflation
+ factor above five.
 \begin_inset Foot
 status collapsed
 
@@ -1614,8 +1625,9 @@ literal "false"
 
 \end_inset
 
- All covariates enter into this procedure linearly because identifying transformations (e.g.,
- quadratic or cubic terms) would substantially complicate our sampling experiments.
+ All covariates enter into this procedure linearly because identifying transform
+ations (e.g., quadratic or cubic terms) would substantially complicate our
+ sampling experiments.
 \end_layout
 
 \begin_layout Section
@@ -1634,7 +1646,8 @@ The coefficient of determination or
 \begin_inset Formula $R^{2}$
 \end_inset
 
- is the most commonly used metric for validating poverty maps generated using machine-learning methods.
+ is the most commonly used metric for validating poverty maps generated
+ using machine-learning methods.
 \begin_inset Foot
 status collapsed
 
@@ -1647,8 +1660,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "pokhriyal2017combining"
@@ -1656,8 +1668,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "steele2017mapping"
@@ -1665,8 +1676,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "lee2020high"
@@ -1674,8 +1684,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "yeh2020using"
@@ -1683,8 +1692,7 @@ literal "false"
 
 \end_inset
 
-,
- or 
+, or 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -1697,23 +1705,27 @@ literal "false"
 
 \end_inset
 
- In this section,
- we first critically assess this validation approach by discussing three ways in which the 
+ In this section, we first critically assess this validation approach by
+ discussing three ways in which the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  can be misleading in terms of model assessment.
- We then motivate our simulation experiments by proposing an alternative approach that remedies many of the limitations of the standard procedure.
- Specifically,
- we propose (1) assessing model performance relative to true poverty measures rather than direct estimates,
- and (2) using mean squared error and targeting performance as the principal validation metrics.
- Our objective is to present a validation procedure that is appropriate for our purposes rather than a general strategy that is feasible for all poverty-mapping exercises.
+ We then motivate our simulation experiments by proposing an alternative
+ approach that remedies many of the limitations of the standard procedure.
+ Specifically, we propose (1) assessing model performance relative to true
+ poverty measures rather than direct estimates, and (2) using mean squared
+ error and targeting performance as the principal validation metrics.
+ Our objective is to present a validation procedure that is appropriate
+ for our purposes rather than a general strategy that is feasible for all
+ poverty-mapping exercises.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For example,
- our validation procedure requires a dataset that is sufficiently large for repeated sampling and such data is unlikely to be available in many contexts.
+For example, our validation procedure requires a dataset that is sufficiently
+ large for repeated sampling and such data is unlikely to be available in
+ many contexts.
  
 \end_layout
 
@@ -1723,8 +1735,7 @@ For example,
 \end_layout
 
 \begin_layout Standard
-Regarding our assessment of the standard procedure,
- let 
+Regarding our assessment of the standard procedure, let 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
@@ -1733,8 +1744,7 @@ Regarding our assessment of the standard procedure,
 \end_inset
 
  geographic entity.
- Further,
- let 
+ Further, let 
 \begin_inset Formula $y_{i}^{d}$
 \end_inset
 
@@ -1744,7 +1754,8 @@ Regarding our assessment of the standard procedure,
 
  denote the direct estimate and model-based prediction of the poverty indicator,
  respectively.
- The standard method for assessing the predictive performance of model-based poverty estimates calculates the 
+ The standard method for assessing the predictive performance of model-based
+ poverty estimates calculates the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -1776,7 +1787,8 @@ where
 status collapsed
 
 \begin_layout Plain Layout
-Note that any regression of this form can only be estimated for the sampled regions with direct estimates.
+Note that any regression of this form can only be estimated for the sampled
+ regions with direct estimates.
 \end_layout
 
 \end_inset
@@ -1813,13 +1825,14 @@ where
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- conveys information about how much of the variance of the direct estimate is explained by the model-based prediction.
+ conveys information about how much of the variance of the direct estimate
+ is explained by the model-based prediction.
  
 \end_layout
 
 \begin_layout Standard
-While unbiased,
- direct estimates can be imprecise estimates of true poverty indicators 
+While unbiased, direct estimates can be imprecise estimates of true poverty
+ indicators 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "rodas2021pull"
@@ -1828,10 +1841,10 @@ literal "false"
 \end_inset
 
 .
- Ideally,
- one would assess the performance of model-based predictions on the basis of the true poverty indicators themselves.
- That is,
- model-based predictions are more appropriately assessed using the 
+ Ideally, one would assess the performance of model-based predictions on
+ the basis of the true poverty indicators themselves.
+ That is, model-based predictions are more appropriately assessed using
+ the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -1904,16 +1917,16 @@ Let
 \end_inset
 
 .
- That is,
- we view this as a classical measurement error problem where the direct estimate of the poverty indicator is a noisy estimate of the true poverty indicator.
+ That is, we view this as a classical measurement error problem where the
+ direct estimate of the poverty indicator is a noisy estimate of the true
+ poverty indicator.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
 The assumption of classical measurement error may be violated in practice.
- For example,
- if poorer households are less likely to be sampled,
- the measurement error will not be independent of the true poverty rates.
+ For example, if poorer households are less likely to be sampled, the measuremen
+t error will not be independent of the true poverty rates.
  
 \end_layout
 
@@ -1936,8 +1949,7 @@ literal "false"
 
 \end_inset
 
-,
- we then define the bias as:
+, we then define the bias as:
 \begin_inset Formula 
 \begin{equation}
 B=R_{a}^{2}-R_{d}^{2}\,.\label{eq:bias}
@@ -1969,8 +1981,7 @@ noprefix "false"
 
 \end_inset
 
-) into our expression for the bias,
- we have:
+) into our expression for the bias, we have:
 \end_layout
 
 \begin_layout Standard
@@ -1981,8 +1992,7 @@ B=\frac{\sigma_{a}^{2}-\sigma_{\upsilon}^{2}}{\sigma_{a}^{2}}-\frac{\sigma_{d}^{
 
 \end_inset
 
-Finally,
- we can substitute Eq.
+Finally, we can substitute Eq.
 \begin_inset space \thinspace{}
 \end_inset
 
@@ -2010,8 +2020,7 @@ noprefix "false"
 
 \end_inset
 
-) and rearrange,
- which gives
+) and rearrange, which gives
 \end_layout
 
 \begin_layout Standard
@@ -2058,8 +2067,7 @@ noprefix "false"
 
 \end_inset
 
-) above,
- we see that 
+) above, we see that 
 \begin_inset Formula $R_{d}^{2}=R_{a}^{2}$
 \end_inset
 
@@ -2067,9 +2075,7 @@ noprefix "false"
 \begin_inset Formula $\sigma_{\omega}^{2}=0$
 \end_inset
 
- or,
- equivalently,
- when 
+ or, equivalently, when 
 \begin_inset Formula $y_{i}^{d}=y_{i}^{a}$
 \end_inset
 
@@ -2082,12 +2088,12 @@ noprefix "false"
 \begin_inset Formula $\sigma_{\omega}^{2}>0$
 \end_inset
 
-,
- we then see that 
+, we then see that 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- will be biased downward and the magnitude of the bias will be determined by the size of 
+ will be biased downward and the magnitude of the bias will be determined
+ by the size of 
 \begin_inset Formula $(\sigma_{d}^{2}-\sigma_{\omega}^{2})/\sigma_{d}^{2}$
 \end_inset
 
@@ -2096,8 +2102,8 @@ noprefix "false"
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- will thus tend to mischaracterize the performance of poverty maps,
- with the resulting estimates of 
+ will thus tend to mischaracterize the performance of poverty maps, with
+ the resulting estimates of 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -2106,11 +2112,11 @@ noprefix "false"
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
- is context-dependent and will generally be influenced by the design of the survey data (e.g.,
- larger sample sizes will tend to reduce measurement error,
- all else equal).
- In particular,
- a poorly performing model applied to a low bias setting may yield an estimate of 
+ is context-dependent and will generally be influenced by the design of
+ the survey data (e.g., larger sample sizes will tend to reduce measurement
+ error, all else equal).
+ In particular, a poorly performing model applied to a low bias setting
+ may yield an estimate of 
 \begin_inset Formula $R_{d}^{2}$
 \end_inset
 
@@ -2123,7 +2129,8 @@ noprefix "false"
 \begin_inset Formula $R^{2}$
 \end_inset
 
- can thus reverse the rank ordering of models when comparisons are made across contexts.
+ can thus reverse the rank ordering of models when comparisons are made
+ across contexts.
 \begin_inset Foot
 status collapsed
 
@@ -2136,8 +2143,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -2145,8 +2151,7 @@ literal "false"
 
 \end_inset
 
-,
- or 
+, or 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "aiken2022machine"
@@ -2171,9 +2176,9 @@ There is a second form of bias in
 \begin_inset Formula $R^{2}$
 \end_inset
 
- that can conversely lead to overoptimistic conclusions regarding model validity.
- To illustrate this,
- note that 
+ that can conversely lead to overoptimistic conclusions regarding model
+ validity.
+ To illustrate this, note that 
 \begin_inset Formula $R_{a}^{2}$
 \end_inset
 
@@ -2191,7 +2196,8 @@ noprefix "false"
 
 \end_inset
 
-) is mathematically equivalent to the squared (Pearson) correlation coefficient between 
+) is mathematically equivalent to the squared (Pearson) correlation coefficient
+ between 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
@@ -2200,8 +2206,9 @@ noprefix "false"
 \end_inset
 
 .
- A well-known property of the correlation coefficient is that it is invariant to any positive affine transformation of its arguments,
- implying that the 
+ A well-known property of the correlation coefficient is that it is invariant
+ to any positive affine transformation of its arguments, implying that the
+ 
 \shape italic
 squared
 \shape default
@@ -2222,12 +2229,12 @@ literal "false"
 status collapsed
 
 \begin_layout Plain Layout
-More specifically,
- the correlation coefficient is invariant to any 
+More specifically, the correlation coefficient is invariant to any 
 \shape italic
 positive
 \shape default
- affine transformation because it changes signs when one of its arguments is scaled by some negative constant.
+ affine transformation because it changes signs when one of its arguments
+ is scaled by some negative constant.
  The 
 \shape italic
 squared
@@ -2263,8 +2270,7 @@ where
 \begin_inset Formula $y_{i}^{u}$
 \end_inset
 
-,
- meaning that 
+, meaning that 
 \begin_inset Formula $E(y_{i}^{u}-y_{i}^{a})=0.$
 \end_inset
 
@@ -2276,8 +2282,7 @@ where
 \begin_inset Formula $y_{i}^{u}$
 \end_inset
 
- up to some locational shift,
- implying that 
+ up to some locational shift, implying that 
 \begin_inset Formula $y_{i}^{b}=y_{i}^{u}+q$
 \end_inset
 
@@ -2290,8 +2295,7 @@ where
 \begin_inset Formula $y_{i}^{b}$
 \end_inset
 
- is biased (i.e.,
- it will systematically over- or under-estimate poverty),
+ is biased (i.e., it will systematically over- or under-estimate poverty),
  it will misleadingly achieve an 
 \begin_inset Formula $R^{2}$
 \end_inset
@@ -2309,9 +2313,9 @@ A third issue related to
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a performance metric is that it is affected by the variance of the true poverty measures.
- To see this,
- consider the following re-expression of 
+ as a performance metric is that it is affected by the variance of the true
+ poverty measures.
+ To see this, consider the following re-expression of 
 \begin_inset Formula $R_{a}^{2}$
 \end_inset
 
@@ -2332,25 +2336,28 @@ where
 \begin_inset Formula $R^{2}$
 \end_inset
 
- can be viewed as a normalized version of the mean squared error with the variance of the true poverty indicator used as the normalization factor.
- This approach to normalization produces an additional source of context-dependence in 
+ can be viewed as a normalized version of the mean squared error with the
+ variance of the true poverty indicator used as the normalization factor.
+ This approach to normalization produces an additional source of context-depende
+nce in 
 \begin_inset Formula $R^{2}$
 \end_inset
 
 .
- Consider two models that perform equally well in that they achieve the same mean squared error.
- However,
- assume that one model is applied to a context where the variance of 
+ Consider two models that perform equally well in that they achieve the
+ same mean squared error.
+ However, assume that one model is applied to a context where the variance
+ of 
 \begin_inset Formula $y_{i}^{a}$
 \end_inset
 
  is large and the other is applied to a low-variance context.
- The above implies that the model applied to the high-variance context will achieve a higher 
+ The above implies that the model applied to the high-variance context will
+ achieve a higher 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-,
- even though the performance of the two models is arguably identical.
+, even though the performance of the two models is arguably identical.
  
 \end_layout
 
@@ -2364,24 +2371,26 @@ The limitations of the standard procedure stem both from the
 \end_inset
 
  to direct poverty estimates rather than true poverty indicators.
- Accordingly,
- we address these limitations by making two modifications to the usual procedure.
- To address the issue related to error in the reference measure,
- we assess our poverty-mapping methods with data that allows us to use true poverty indicators as the reference measure (see the next section for discussion).
- We then address the remaining limitations by focusing on validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
- To be clear,
- one could alternatively attempt to correct the 
+ Accordingly, we address these limitations by making two modifications to
+ the usual procedure.
+ To address the issue related to error in the reference measure, we assess
+ our poverty-mapping methods with data that allows us to use true poverty
+ indicators as the reference measure (see the next section for discussion).
+ We then address the remaining limitations by focusing on validation metrics
+ that are sensitive to systematic biases in the poverty estimates and avoid
+ the normalization issue.
+ To be clear, one could alternatively attempt to correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- for its biases,
- but any adjustments would require approximations that could lessen the credibility of our validation exercises.
+ for its biases, but any adjustments would require approximations that could
+ lessen the credibility of our validation exercises.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For example,
- correcting the bias associated with the measurement error issue would require estimating the variance of the measurement error.
+For example, correcting the bias associated with the measurement error issue
+ would require estimating the variance of the measurement error.
 \end_layout
 
 \end_inset
@@ -2390,13 +2399,12 @@ For example,
 \end_layout
 
 \begin_layout Standard
-Regarding our validation metrics,
- the mean squared error is closely related to the 
+Regarding our validation metrics, the mean squared error is closely related
+ to the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-,
- but sidesteps its most critical limitations.
+, but sidesteps its most critical limitations.
  The mean squared error is defined as follows:
 \end_layout
 
@@ -2412,10 +2420,11 @@ Regarding our validation metrics,
 \end_layout
 
 \begin_layout Standard
-and we immediately see that it provides a direct understanding of the expected squared error of the estimates and thus avoids the normalization issue.
+and we immediately see that it provides a direct understanding of the expected
+ squared error of the estimates and thus avoids the normalization issue.
  It is also sensitive to systematic biases in the predictions.
- Reconsidering the biased and unbiased poverty estimates described above (i.e.,
- 
+ Reconsidering the biased and unbiased poverty estimates described above
+ (i.e., 
 \begin_inset Formula $y_{i}^{u}$
 \end_inset
 
@@ -2423,16 +2432,16 @@ and we immediately see that it provides a direct understanding of the expected s
 \begin_inset Formula $y_{i}^{b}$
 \end_inset
 
-),
- we can write 
+), we can write 
 \begin_inset Formula $\text{{MSE}}(y_{i}^{b},y_{i}^{a})=\text{{MSE}}(y_{i}^{u}+q,y_{i}^{a})=\text{{MSE}}(y_{i}^{u},y_{i}^{a})+q^{2}$
 \end_inset
 
 .
- Systematic biases in the estimates will then be appropriately penalized by the mean squared error.
- Another advantage is that with multiple estimates for each entity,
- one can calculate entity-specific mean squared errors,
- which can be decomposed into parts associated with the bias and variance of the estimates.
+ Systematic biases in the estimates will then be appropriately penalized
+ by the mean squared error.
+ Another advantage is that with multiple estimates for each entity, one
+ can calculate entity-specific mean squared errors, which can be decomposed
+ into parts associated with the bias and variance of the estimates.
  Where 
 \begin_inset Formula $y_{ih}^{p}$
 \end_inset
@@ -2445,8 +2454,7 @@ and we immediately see that it provides a direct understanding of the expected s
 \begin_inset Formula $i^{th}$
 \end_inset
 
- entity,
- we have
+ entity, we have
 \begin_inset Formula 
 \begin{equation}
 \text{{MSE}}_{i}=\frac{{1}}{H}\sum_{h}(y_{i}^{a}-y_{ih}^{p})^{2}=\frac{{1}}{H}\sum_{h}(y_{ih}^{p}-\bar{{y}}_{i}^{p})^{2}+(\bar{{y}}_{i}^{p}-y_{i}^{a})^{2}\label{eq:mseg}
@@ -2454,7 +2462,8 @@ and we immediately see that it provides a direct understanding of the expected s
 
 \end_inset
 
-where the first term on the right-hand side of the above captures the variance of the estimates for entity 
+where the first term on the right-hand side of the above captures the variance
+ of the estimates for entity 
 \begin_inset Formula $i$
 \end_inset
 
@@ -2480,10 +2489,12 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-While calculating the error of the poverty estimates is useful for understanding the accuracy of poverty maps,
- the primary reason for obtaining granular poverty estimates is to improve the targeting of resources.
- As such,
- we complement the mean squared error with an alternative performance metric that focuses on how different methodological choices affect poverty alleviation through influencing the efficiency of targeting.
+While calculating the error of the poverty estimates is useful for understanding
+ the accuracy of poverty maps, the primary reason for obtaining granular
+ poverty estimates is to improve the targeting of resources.
+ As such, we complement the mean squared error with an alternative performance
+ metric that focuses on how different methodological choices affect poverty
+ alleviation through influencing the efficiency of targeting.
  Similar to 
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -2492,8 +2503,9 @@ literal "false"
 
 \end_inset
 
-,
- we simulate a hypothetical poverty-alleviation program that distributes resources to households according to a given poverty map and then calculates the amount of poverty-reduction associated with the map.
+, we simulate a hypothetical poverty-alleviation program that distributes
+ resources to households according to a given poverty map and then calculates
+ the amount of poverty-reduction associated with the map.
 \begin_inset Foot
 status collapsed
 
@@ -2506,8 +2518,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -2515,8 +2526,7 @@ literal "false"
 
 \end_inset
 
-,
- and 
+, and 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "aiken2022machine"
@@ -2529,9 +2539,10 @@ literal "false"
 
 \end_inset
 
- Though using targeting performance as a validation metric has direct policy relevance,
- note that it can be insensitive to systematic biases in the poverty estimates (e.g.,
- rank-based targeting schemes do not depend on the absolute level of the poverty estimates).
+ Though using targeting performance as a validation metric has direct policy
+ relevance, note that it can be insensitive to systematic biases in the
+ poverty estimates (e.g., rank-based targeting schemes do not depend on the
+ absolute level of the poverty estimates).
 \end_layout
 
 \begin_layout Standard
@@ -2548,47 +2559,50 @@ The procedure we use in our simulations is as follows:
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using true household-level incomes,
- calculate the poverty headcount and poverty gap for the country as a whole for some chosen poverty line.
- Using the poverty gap measure,
- determine the budget required to completely eradicate poverty.
- Calculate an individual-level transfer amount by dividing the total budget by the number of people living in poverty.
+Using true household-level incomes, calculate the poverty headcount and
+ poverty gap for the country as a whole for some chosen poverty line.
+ Using the poverty gap measure, determine the budget required to completely
+ eradicate poverty.
+ Calculate an individual-level transfer amount by dividing the total budget
+ by the number of people living in poverty.
  
 \end_layout
 
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using a given poverty map,
- order geographic areas according to their estimated poverty headcounts,
- from most to least poor.
- For the poorest area,
- augment the true per capita income of all households by an amount equal to the transfer (i.e.,
- each household receives an amount equal to the transfer times the number of household members).
- Continue this distribution procedure for the second poorest area,
- the third poorest area,
- and so on until there are not enough resources to cover all households in a given area.
- For the marginal area,
- distribute the remaining budget equally among individuals in that area.
+Using a given poverty map, order geographic areas according to their estimated
+ poverty headcounts, from most to least poor.
+ For the poorest area, augment the true per capita income of all households
+ by an amount equal to the transfer (i.e., each household receives an amount
+ equal to the transfer times the number of household members).
+ Continue this distribution procedure for the second poorest area, the third
+ poorest area, and so on until there are not enough resources to cover all
+ households in a given area.
+ For the marginal area, distribute the remaining budget equally among individual
+s in that area.
  
 \end_layout
 
 \begin_layout Enumerate
 \paragraph_spacing single
 \noindent
-Using the post-transfer household incomes,
- calculate an updated poverty headcount to assess the effects of the distribution scheme on poverty alleviation.
+Using the post-transfer household incomes, calculate an updated poverty
+ headcount to assess the effects of the distribution scheme on poverty alleviati
+on.
 \end_layout
 
 \begin_layout Enumerate
-Repeat steps 2 and 3 for each of the poverty maps generated by the alternative methods.
+Repeat steps 2 and 3 for each of the poverty maps generated by the alternative
+ methods.
 \end_layout
 
 \begin_layout Standard
 \begin_inset VSpace -5bp
 \end_inset
 
-The benchmark poverty alleviation from this scheme corresponds to the results of applying the above to the true poverty rankings.
+The benchmark poverty alleviation from this scheme corresponds to the results
+ of applying the above to the true poverty rankings.
 \end_layout
 
 \begin_layout Section
@@ -2603,37 +2617,39 @@ name "sec:data"
 \end_layout
 
 \begin_layout Standard
-Carried out by the Mexican National Institute of Statistics and Geography (INEGI) in 2015,
- the Mexican Intercensal Survey is a unique dataset that allows us to construct a ground truth for our validation exercises.
- The sample consists of 5.9 million households and is representative at the national,
- state (32 states),
- and municipality level (2,457 municipalities).
- It is also representative for localities with populations of 50,000 or more inhabitants.
- The survey questionnaire gathered information on household income,
- geographic location,
- household demographics,
- and dwelling characteristics,
- among other things.
+Carried out by the Mexican National Institute of Statistics and Geography
+ (INEGI) in 2015, the Mexican Intercensal Survey is a unique dataset that
+ allows us to construct a ground truth for our validation exercises.
+ The sample consists of 5.9 million households and is representative at the
+ national, state (32 states), and municipality level (2,457 municipalities).
+ It is also representative for localities with populations of 50,000 or
+ more inhabitants.
+ The survey questionnaire gathered information on household income, geographic
+ location, household demographics, and dwelling characteristics, among other
+ things.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Income is defined as money received from work performed during the course of the reference period by individuals aged 12 or older.
+Income is defined as money received from work performed during the course
+ of the reference period by individuals aged 12 or older.
 \end_layout
 
 \end_inset
 
- The size of the dataset is especially important,
- as it allows us to conduct simulation experiments with repeated samples that are sufficiently large and diverse.
- We use these samples to estimate municipality-level poverty maps with alternative methods and then assess the maps using the full dataset as the ground truth.
+ The size of the dataset is especially important, as it allows us to conduct
+ simulation experiments with repeated samples that are sufficiently large
+ and diverse.
+ We use these samples to estimate municipality-level poverty maps with alternati
+ve methods and then assess the maps using the full dataset as the ground
+ truth.
 \end_layout
 
 \begin_layout Standard
-Prior to sampling from the intercensus,
- we make three modifications to the data.
- First,
- as a large number of households reported earning no income,
- we randomly remove 90 percent of these households.
+Prior to sampling from the intercensus, we make three modifications to the
+ data.
+ First, as a large number of households reported earning no income, we randomly
+ remove 90 percent of these households.
 \begin_inset Foot
 status collapsed
 
@@ -2644,14 +2660,15 @@ This is done to ensure some missing values are present in the data used,
 
 \end_inset
 
- Second,
- to ensure that all municipalities are sufficiently large,
- municipalities with less than 500 households are removed.
- Finally,
- to ensure that all primary sampling units (PSUs) are also sufficiently large for sampling purposes,
- we combine several neighboring PSUs such that all include at least 300 households.
- Our final census dataset consists of 3.9 million households in 1,865 municipalities and 16,297 PSUs.
- The resulting census is used to draw 500 survey samples that serve as the basis for our simulation experiments (
+ Second, to ensure that all municipalities are sufficiently large, municipalitie
+s with less than 500 households are removed.
+ Finally, to ensure that all primary sampling units (PSUs) are also sufficiently
+ large for sampling purposes, we combine several neighboring PSUs such that
+ all include at least 300 households.
+ Our final census dataset consists of 3.9 million households in 1,865 municipalit
+ies and 16,297 PSUs.
+ The resulting census is used to draw 500 survey samples that serve as the
+ basis for our simulation experiments (
 \begin_inset CommandInset citation
 LatexCommand citealp
 key "tzavidis2018start"
@@ -2660,12 +2677,13 @@ literal "false"
 \end_inset
 
 ).
- In what follows,
- we describe our approach to constructing these samples.
+ In what follows, we describe our approach to constructing these samples.
 \end_layout
 
 \begin_layout Standard
-Our sampling procedure is intended to reflect standard design elements used in many face-to-face household surveys conducted in the developing world 
+Our sampling procedure is intended to reflect standard design elements used
+ in many face-to-face household surveys conducted in the developing world
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "grosh1996manual"
@@ -2674,21 +2692,27 @@ literal "false"
 \end_inset
 
 .
- Mexico's 32 states comprise the intended domains of the sample and the indicator of interest is household income per capita.
- For each sample,
- we seek to achieve a relative standard error (RSE) of 7.5 percent for average household income in each state.
+ Mexico's 32 states comprise the intended domains of the sample and the
+ indicator of interest is household income per capita.
+ For each sample, we seek to achieve a relative standard error (RSE) of
+ 7.5 percent for average household income in each state.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-The desired precision of 7.5 percent is somewhat arbitrary,
- but corresponds to precision targets in similar surveys and yields samples of reasonable sizes.
+The desired precision of 7.5 percent is somewhat arbitrary, but corresponds
+ to precision targets in similar surveys and yields samples of reasonable
+ sizes.
 \end_layout
 
 \end_inset
 
- We use a two-stage clustered design wherein PSUs or clusters are selected within each domain and then a sample of 10 households is selected within each cluster.
- Our decision to select 10 households within each cluster is consistent with the design of other large-scale household surveys conducted in developing countries 
+ We use a two-stage clustered design wherein PSUs or clusters are selected
+ within each domain and then a sample of 10 households is selected within
+ each cluster.
+ Our decision to select 10 households within each cluster is consistent
+ with the design of other large-scale household surveys conducted in developing
+ countries 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "grosh1996manual"
@@ -2697,8 +2721,8 @@ literal "false"
 \end_inset
 
 .
- Under simple random sampling,
- the minimum sample size required for each state is as follows:
+ Under simple random sampling, the minimum sample size required for each
+ state is as follows:
 \end_layout
 
 \begin_layout Standard
@@ -2721,18 +2745,21 @@ where
 \begin_inset Formula $\sigma_{s}$
 \end_inset
 
- represent average household income per capita and the standard deviation of per capita income for state 
+ represent average household income per capita and the standard deviation
+ of per capita income for state 
 \begin_inset Formula $s$
 \end_inset
 
-,
- respectively.
+, respectively.
 \end_layout
 
 \begin_layout Standard
-The minimum sample size under simple random sampling must be adjusted to account for the clustered design.
- The design effect due to clustering is accounted for by estimating the intra-cluster correlation of per capita income within each state.
- The correlation estimates can then be used to adjust the above sample sizes for the clustered design as follows:
+The minimum sample size under simple random sampling must be adjusted to
+ account for the clustered design.
+ The design effect due to clustering is accounted for by estimating the
+ intra-cluster correlation of per capita income within each state.
+ The correlation estimates can then be used to adjust the above sample sizes
+ for the clustered design as follows:
 \end_layout
 
 \begin_layout Standard
@@ -2764,17 +2791,19 @@ where
 \end_inset
 
  is the intra-cluster correlation of per capita income.
- Given the above,
- we can calculate the number of clusters needed to achieve the minimum sample size for each state and then multiply this number by 10 to find the final sample size.
- Taking these sample size requirements as given,
- each of our samples is then drawn in accordance with the two-stage design.
+ Given the above, we can calculate the number of clusters needed to achieve
+ the minimum sample size for each state and then multiply this number by
+ 10 to find the final sample size.
+ Taking these sample size requirements as given, each of our samples is
+ then drawn in accordance with the two-stage design.
 \end_layout
 
 \begin_layout Standard
-Specifically,
- the clusters within each state are selected with probability proportional to size (without replacement) and the households within each cluster are selected via simple random sampling.
- According to this design,
- the inclusion probability for a given household is then approximately:
+Specifically, the clusters within each state are selected with probability
+ proportional to size (without replacement) and the households within each
+ cluster are selected via simple random sampling.
+ According to this design, the inclusion probability for a given household
+ is then approximately:
 \end_layout
 
 \begin_layout Standard
@@ -2801,8 +2830,7 @@ where
 \begin_inset Formula $s$
 \end_inset
 
-,
- 
+, 
 \begin_inset Formula $N_{s}$
 \end_inset
 
@@ -2810,8 +2838,7 @@ where
 \begin_inset Formula $s$
 \end_inset
 
-,
- and 
+, and 
 \begin_inset Formula $\tilde{{n}}_{s}$
 \end_inset
 
@@ -2824,17 +2851,19 @@ where
 status collapsed
 
 \begin_layout Plain Layout
-The equation used to calculate inclusion probabilities assumes sampling with replacement,
- but is used here as an approximation of inclusion probabilities under proportional selection without replacement.
- This should provide a reasonable approximation in this case since there are a relatively large number of clusters present in the frame.
- The design weight for each household is simply the inverse of the inclusion probability.
- In a typical survey,
- the design weights would be further adjusted for nonresponse and calibrated to known population characteristics.
- However,
- since the sampling is only a simulation exercise,
- there is no nonresponse and thus no nonresponse adjustment is required.
- Calibration or post-stratification could be performed,
- but was not implemented to simplify the process.
+The equation used to calculate inclusion probabilities assumes sampling
+ with replacement, but is used here as an approximation of inclusion probabiliti
+es under proportional selection without replacement.
+ This should provide a reasonable approximation in this case since there
+ are a relatively large number of clusters present in the frame.
+ The design weight for each household is simply the inverse of the inclusion
+ probability.
+ In a typical survey, the design weights would be further adjusted for nonrespon
+se and calibrated to known population characteristics.
+ However, since the sampling is only a simulation exercise, there is no
+ nonresponse and thus no nonresponse adjustment is required.
+ Calibration or post-stratification could be performed, but was not implemented
+ to simplify the process.
 \end_layout
 
 \end_inset
@@ -2849,10 +2878,14 @@ noprefix "false"
 
 \end_inset
 
- presents select descriptive statistics related to the full intercensus and the 500 samples.
- We set the poverty line at the 25th percentile of the true income distribution and the first two rows summarize the associated poverty rates at the municipality and PSU levels for the full dataset.
- The remaining rows summarize our samples and show that we draw 23,540 households per sample (2,354 PSUs),
- with an average number of municipalities per sample of roughly 992.
+ presents select descriptive statistics related to the full intercensus
+ and the 500 samples.
+ We set the poverty line at the 25th percentile of the true income distribution
+ and the first two rows summarize the associated poverty rates at the municipali
+ty and PSU levels for the full dataset.
+ The remaining rows summarize our samples and show that we draw 23,540 household
+s per sample (2,354 PSUs), with an average number of municipalities per
+ sample of roughly 992.
  The samples thus have an average of 2.37 PSUs per municipality.
 \end_layout
 
@@ -3247,69 +3280,57 @@ name "tab:desc_stats"
 \end_layout
 
 \begin_layout Standard
-In addition to the intercensus,
- INEGI has also released geo-referenced data that is similar to the remotely-sensed covariates often used in machine-learning applications.
- These geographic variables were calculated by INEGI for the year 2015 (the same year as the intercensus) and the municipality is the lowest administrative level for which the covariates are available.
+In addition to the intercensus, INEGI has also released geo-referenced data
+ that is similar to the remotely-sensed covariates often used in machine-learnin
+g applications.
+ These geographic variables were calculated by INEGI for the year 2015 (the
+ same year as the intercensus) and the municipality is the lowest administrative
+ level for which the covariates are available.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Technically speaking,
- the intercensus does not include identifiers that provide information on geographic location below the municipality level.
- We are thus only able to merge the intercensus and geo-referenced data at the municipality level.
+Technically speaking, the intercensus does not include identifiers that
+ provide information on geographic location below the municipality level.
+ We are thus only able to merge the intercensus and geo-referenced data
+ at the municipality level.
 \end_layout
 
 \end_inset
 
  The geo-referenced data includes 105 indicators.
- Specifically,
- the dataset includes information from 21 different dimensions and each dimension is associated with five summary measures.
+ Specifically, the dataset includes information from 21 different dimensions
+ and each dimension is associated with five summary measures.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-The 21 dimensions are as follows:
- enhanced vegetation index,
- normalized difference vegetation index,
- normalized difference built-up index,
- built-up index,
- simple ratio,
- atmospherically resistant vegetation index,
- urban index,
- index of biological integrity,
- normalized difference water index,
- modified normalized difference water index,
- new built-up index,
- band ratio for built-up area,
- normalized built-up area index,
- built-up area extraction index,
- normalized difference snow index,
- visible atmospherically resistant index,
- soil-adjusted vegetation index,
- optimized soil-adjusted vegetation index,
- normalized difference moisture index,
- digital altitude model,
- and digital slope model.
+The 21 dimensions are as follows: enhanced vegetation index, normalized
+ difference vegetation index, normalized difference built-up index, built-up
+ index, simple ratio, atmospherically resistant vegetation index, urban
+ index, index of biological integrity, normalized difference water index,
+ modified normalized difference water index, new built-up index, band ratio
+ for built-up area, normalized built-up area index, built-up area extraction
+ index, normalized difference snow index, visible atmospherically resistant
+ index, soil-adjusted vegetation index, optimized soil-adjusted vegetation
+ index, normalized difference moisture index, digital altitude model, and
+ digital slope model.
 \end_layout
 
 \end_inset
 
- For example,
- we summarize the atmospherically resistant vegetation index for each municipality using the minimum,
- maximum,
- mean,
- sum,
- and standard deviation of the index.
+ For example, we summarize the atmospherically resistant vegetation index
+ for each municipality using the minimum, maximum, mean, sum, and standard
+ deviation of the index.
  The same procedure is applied to all dimensions.
- The geo-referenced data has one major limitation,
- which is that it does not include information on night-time lights,
- which is a commonly-used covariate in machine-learning applications.
+ The geo-referenced data has one major limitation, which is that it does
+ not include information on night-time lights, which is a commonly-used
+ covariate in machine-learning applications.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-For examples,
- see 
+For examples, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "jean2016combining"
@@ -3317,8 +3338,7 @@ literal "false"
 
 \end_inset
 
-,
- 
+, 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "lee2020high"
@@ -3326,8 +3346,7 @@ literal "false"
 
 \end_inset
 
-,
- or 
+, or 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chi2022microestimates"
@@ -3344,8 +3363,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-We thus augment the INEGI geo-referenced data with night-time lights data produced by the Earth Observation Group (EOG).
- EOG uses the nightly day/night band (DNB) low light imaging data gathered by the NASA/NOAA Visible Infrared Imaging Radiometer Suite (VIIRS) 
+We thus augment the INEGI geo-referenced data with night-time lights data
+ produced by the Earth Observation Group (EOG).
+ EOG uses the nightly day/night band (DNB) low light imaging data gathered
+ by the NASA/NOAA Visible Infrared Imaging Radiometer Suite (VIIRS) 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "elvidge2021annual"
@@ -3354,18 +3375,16 @@ literal "false"
 \end_inset
 
 .
- To match the other geo-referenced covariates,
- we use the night-time lights data from 2015,
- which is available at 15 arc-second resolution (roughly 500 meters at the equator) and then aggregated to the municipality level.
- Also like the other geo-referenced data,
- we summarize night-time lights within each municipality using the minimum,
- maximum,
- mean,
- sum,
- and standard deviation.
- With these additions,
- we then have two alternative sets of covariates that we use in our simulations:
- the remotely-sensed data (including night-time lights) and the standard set of sociodemographic covariates from the intercensus.
+ To match the other geo-referenced covariates, we use the night-time lights
+ data from 2015, which is available at 15 arc-second resolution (roughly
+ 500 meters at the equator) and then aggregated to the municipality level.
+ Also like the other geo-referenced data, we summarize night-time lights
+ within each municipality using the minimum, maximum, mean, sum, and standard
+ deviation.
+ With these additions, we then have two alternative sets of covariates that
+ we use in our simulations: the remotely-sensed data (including night-time
+ lights) and the standard set of sociodemographic covariates from the intercensu
+s.
 \end_layout
 
 \begin_layout Section
@@ -3380,9 +3399,10 @@ name "sec:results"
 \end_layout
 
 \begin_layout Standard
-Recall that our primary objective is to assess the performance of the modern approach to poverty mapping by using the Mexican Intercensal Survey as a ground truth.
- To this end,
- panel (a) in Figure 
+Recall that our primary objective is to assess the performance of the modern
+ approach to poverty mapping by using the Mexican Intercensal Survey as
+ a ground truth.
+ To this end, panel (a) in Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:mse_targeting"
@@ -3392,8 +3412,9 @@ noprefix "false"
 
 \end_inset
 
- presents the mean squared error (MSE) for our closest approximation to the standard implementation of the modern approach:
- gradient boosting with remotely-sensed covariates (covariates labeled 
+ presents the mean squared error (MSE) for our closest approximation to
+ the standard implementation of the modern approach: gradient boosting with
+ remotely-sensed covariates (covariates labeled 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3402,11 +3423,11 @@ GIS
 \end_inset
 
 ).
- We benchmark the performance of this implementation against two traditional mapping methods,
- namely the unit-level and area-level models.
- To approximate how these traditional methods are commonly used,
- each model is implemented with census-based covariates,
- albeit at different levels of analysis (covariates labeled 
+ We benchmark the performance of this implementation against two traditional
+ mapping methods, namely the unit-level and area-level models.
+ To approximate how these traditional methods are commonly used, each model
+ is implemented with census-based covariates, albeit at different levels
+ of analysis (covariates labeled 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3415,10 +3436,11 @@ CEN
 \end_inset
 
 ).
- Importantly,
- as our initial implementations are intended to reflect current practice,
- the modern and traditional approaches differ both in terms of their statistical method and the covariates used.
- The remainder of this section will examine how these differences contribute to performance disparities between the two approaches.
+ Importantly, as our initial implementations are intended to reflect current
+ practice, the modern and traditional approaches differ both in terms of
+ their statistical method and the covariates used.
+ The remainder of this section will examine how these differences contribute
+ to performance disparities between the two approaches.
  
 \end_layout
 
@@ -3510,7 +3532,8 @@ Targeting performance
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error and targeting performance for select implementations 
+Mean squared error and targeting performance for select implementations
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:mse_targeting"
@@ -3541,9 +3564,10 @@ noprefix "false"
 
 \end_inset
 
- shows that gradient boosting with remotely-sensed covariates tends to have the highest MSE of the models considered.
- The associated boxplot summarizes the distribution of MSE values across all municipalities (i.e.,
- the results are based on Eq.
+ shows that gradient boosting with remotely-sensed covariates tends to have
+ the highest MSE of the models considered.
+ The associated boxplot summarizes the distribution of MSE values across
+ all municipalities (i.e., the results are based on Eq.
  [
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3554,11 +3578,11 @@ noprefix "false"
 
 \end_inset
 
-]) and indicates that the gradient-boosting model achieves a median MSE of 0.007.
- The corresponding root MSE is approximately 0.08,
- meaning that the median municipality's error is roughly eight percentage points.
- By contrast,
- the 
+]) and indicates that the gradient-boosting model achieves a median MSE
+ of 0.007.
+ The corresponding root MSE is approximately 0.08, meaning that the median
+ municipality's error is roughly eight percentage points.
+ By contrast, the 
 \begin_inset Quotes eld
 \end_inset
 
@@ -3566,12 +3590,13 @@ gold standard
 \begin_inset Quotes erd
 \end_inset
 
- unit-level achieves a median MSE of 0.003,
- which is roughly 40 percent that of the gradient-boosting model.
- The area-level model performs similarly to the unit-level model,
- with a median MSE of 0.004.
- The fact that the area-level model outperforms the gradient-boosting model is particularly notable,
- as both of these models were developed for use in off-census years and are thus direct competitors.
+ unit-level achieves a median MSE of 0.003, which is roughly 40 percent that
+ of the gradient-boosting model.
+ The area-level model performs similarly to the unit-level model, with a
+ median MSE of 0.004.
+ The fact that the area-level model outperforms the gradient-boosting model
+ is particularly notable, as both of these models were developed for use
+ in off-census years and are thus direct competitors.
 \end_layout
 
 \begin_layout Standard
@@ -3585,24 +3610,29 @@ noprefix "false"
 
 \end_inset
 
- considers the targeting performance of the alternative models and shows a similar result.
- For these simulations,
- we have set the poverty line at the 25th percentile of the (pre-transfer) per capita income distribution,
- which means that the baseline poverty rate is 25 percent.
- The poverty rate falls to 19.9 percent when transfers are delivered to municipalities according to their true poverty rate.
- Across 500 simulations,
- we find that gradient boosting with remotely-sensed covariates achieves a median poverty rate of 20.29,
- which is close to the benchmark rate of 19.9 percent.
- The two traditional methods nevertheless outperform the gradient-boosting model.
- The unit-level model achieves a median poverty rate of 20 percent whereas the area-level model achieves a median rate of 20.04.
- The traditional approach thus outperforms the modern approach by about 0.3 percentage points,
- which in a country the size of Mexico corresponds to about 360,000 additional people escaping poverty.
+ considers the targeting performance of the alternative models and shows
+ a similar result.
+ For these simulations, we have set the poverty line at the 25th percentile
+ of the (pre-transfer) per capita income distribution, which means that
+ the baseline poverty rate is 25 percent.
+ The poverty rate falls to 19.9 percent when transfers are delivered to municipal
+ities according to their true poverty rate.
+ Across 500 simulations, we find that gradient boosting with remotely-sensed
+ covariates achieves a median poverty rate of 20.29, which is close to the
+ benchmark rate of 19.9 percent.
+ The two traditional methods nevertheless outperform the gradient-boosting
+ model.
+ The unit-level model achieves a median poverty rate of 20 percent whereas
+ the area-level model achieves a median rate of 20.04.
+ The traditional approach thus outperforms the modern approach by about
+ 0.3 percentage points, which in a country the size of Mexico corresponds
+ to about 360,000 additional people escaping poverty.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Mexico's population was about 120 million in 2015,
- which is the year that the Mexican Intercensal Survey was conducted.
+Mexico's population was about 120 million in 2015, which is the year that
+ the Mexican Intercensal Survey was conducted.
 \end_layout
 
 \end_inset
@@ -3611,10 +3641,12 @@ Mexico's population was about 120 million in 2015,
 \end_layout
 
 \begin_layout Standard
-As mentioned,
- there are two primary differences between the traditional and modern approaches that could explain these performance disparities:
+As mentioned, there are two primary differences between the traditional
+ and modern approaches that could explain these performance disparities:
  the statistical method and the covariates used.
- We first examine whether using an alternative statistical method could improve upon the performance of our initial implementation of the modern approach.
+ We first examine whether using an alternative statistical method could
+ improve upon the performance of our initial implementation of the modern
+ approach.
  Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -3625,22 +3657,20 @@ noprefix "false"
 
 \end_inset
 
- presents MSE and targeting results for four alternative statistical methods where each uses the same,
- remotely-sensed covariates in order to isolate the influence of the method.
- In addition to gradient boosting,
- we consider two leading non-parametric competitors (i.e.,
- random forest and Bayesian additive regression trees) and the leading parametric competitor (i.e.,
- the area-level model).
+ presents MSE and targeting results for four alternative statistical methods
+ where each uses the same, remotely-sensed covariates in order to isolate
+ the influence of the method.
+ In addition to gradient boosting, we consider two leading non-parametric
+ competitors (i.e., random forest and Bayesian additive regression trees)
+ and the leading parametric competitor (i.e., the area-level model).
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-In terms of non-parametric models,
- both random forests and Bayesian additive regression trees are quite popular and have been shown to perform comparably to,
- and sometimes better than,
- gradient boosting.
- For example,
- see 
+In terms of non-parametric models, both random forests and Bayesian additive
+ regression trees are quite popular and have been shown to perform comparably
+ to, and sometimes better than, gradient boosting.
+ For example, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "chipman2010bart"
@@ -3654,19 +3684,20 @@ literal "false"
 
 \end_inset
 
- We find that the alternative methods do not produce any substantive performance gains.
- In particular,
- the two alternative non-parametric methods perform similarly to gradient boosting whereas the parametric,
- area-level model tends to perform slightly worse when using the same covariates.
+ We find that the alternative methods do not produce any substantive performance
+ gains.
+ In particular, the two alternative non-parametric methods perform similarly
+ to gradient boosting whereas the parametric, area-level model tends to
+ perform slightly worse when using the same covariates.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-Bayesian additive regression trees perform slightly better than gradient boosting,
- but the performance gains are not large.
- For example,
- in terms of targeting performance,
- gradient boosting achieves a median poverty rate of 20.29 whereas the Bayesian method achieves a median rate of 20.26.
+Bayesian additive regression trees perform slightly better than gradient
+ boosting, but the performance gains are not large.
+ For example, in terms of targeting performance, gradient boosting achieves
+ a median poverty rate of 20.29 whereas the Bayesian method achieves a median
+ rate of 20.26.
  
 \end_layout
 
@@ -3763,7 +3794,8 @@ Targeting performance
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error and targeting performance for alternative statistical methods 
+Mean squared error and targeting performance for alternative statistical
+ methods 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:alt_methods"
@@ -3784,8 +3816,7 @@ name "fig:alt_methods"
 \end_layout
 
 \begin_layout Standard
-By contrast,
- Figure 
+By contrast, Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:alt_covariates"
@@ -3795,19 +3826,20 @@ noprefix "false"
 
 \end_inset
 
- shows that implementing gradient boosting with census-based covariates leads to notable performance gains.
- The first two boxplots in panels (a) and (b) present the results for gradient boosting with remotely-sensed and census-based covariates,
- respectively.
- As a benchmark,
- we plot similar results for the area-level model.
- Recall that when using remotely-sensed covariates,
- gradient boosting achieves a median MSE of 0.007 and a median poverty rate of 20.29.
- With census-based covariates,
- the median MSE falls to 0.003 and the median poverty rate falls to 20.02.
- Importantly,
- gradient boosting with census-based covariates slightly outperforms the area-level model,
- which achieves a median MSE of 0.004 and a median poverty rate of 20.04 when using the same covariates.
- The under-performance of the modern approach is thus largely driven by the remotely-sensed covariates.
+ shows that implementing gradient boosting with census-based covariates
+ leads to notable performance gains.
+ The first two boxplots in panels (a) and (b) present the results for gradient
+ boosting with remotely-sensed and census-based covariates, respectively.
+ As a benchmark, we plot similar results for the area-level model.
+ Recall that when using remotely-sensed covariates, gradient boosting achieves
+ a median MSE of 0.007 and a median poverty rate of 20.29.
+ With census-based covariates, the median MSE falls to 0.003 and the median
+ poverty rate falls to 20.02.
+ Importantly, gradient boosting with census-based covariates slightly outperform
+s the area-level model, which achieves a median MSE of 0.004 and a median
+ poverty rate of 20.04 when using the same covariates.
+ The under-performance of the modern approach is thus largely driven by
+ the remotely-sensed covariates.
 \begin_inset Foot
 status collapsed
 
@@ -3820,7 +3852,8 @@ literal "false"
 
 \end_inset
 
- who find that remotely-sensed covariates lose significance once census-based covariates are added to their model.
+ who find that remotely-sensed covariates lose significance once census-based
+ covariates are added to their model.
 \end_layout
 
 \end_inset
@@ -3916,7 +3949,8 @@ Targeting performance
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mean squared error and targeting performance for alternative covariates 
+Mean squared error and targeting performance for alternative covariates
+ 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:alt_covariates"
@@ -3937,19 +3971,20 @@ name "fig:alt_covariates"
 \end_layout
 
 \begin_layout Standard
-Another way to see that the census-based covariates have greater predictive capacity than the remotely-sensed covariates is by looking at feature importance.
- One popular measure of feature importance summarizes the gain (i.e.,
- reduction of the loss function) associated with any given feature.
- That is,
- for a given run of the model,
- feature importance captures the average gain of a given feature,
- where the gains are averaged across all trees in the model.
+Another way to see that the census-based covariates have greater predictive
+ capacity than the remotely-sensed covariates is by looking at feature importanc
+e.
+ One popular measure of feature importance summarizes the gain (i.e., reduction
+ of the loss function) associated with any given feature.
+ That is, for a given run of the model, feature importance captures the
+ average gain of a given feature, where the gains are averaged across all
+ trees in the model.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-In addition,
- the average gains for a given run of the model are normalized by dividing each by the sum of all average gains for that run.
+In addition, the average gains for a given run of the model are normalized
+ by dividing each by the sum of all average gains for that run.
 \end_layout
 
 \end_inset
@@ -3964,7 +3999,8 @@ noprefix "false"
 
 \end_inset
 
- plots the 20 covariates with the highest feature importance after running gradient boosting with both census-based (
+ plots the 20 covariates with the highest feature importance after running
+ gradient boosting with both census-based (
 \begin_inset Quotes eld
 \end_inset
 
@@ -3980,10 +4016,12 @@ GIS
 \begin_inset Quotes erd
 \end_inset
 
-) covariates on each sample and averaging each covariate’s importance across the 500 samples.
- We find that all of the top 10 covariates are census-based,
- with only six remotely-sensed covariates entering the top 20.
- Note also that the feature importances outside the top 10 are relatively small in magnitude.
+) covariates on each sample and averaging each covariate’s importance across
+ the 500 samples.
+ We find that all of the top 10 covariates are census-based, with only six
+ remotely-sensed covariates entering the top 20.
+ Note also that the feature importances outside the top 10 are relatively
+ small in magnitude.
 \end_layout
 
 \begin_layout Standard
@@ -4031,12 +4069,13 @@ name "fig:feature"
 \end_layout
 
 \begin_layout Standard
-The above results suggest that gradient boosting can approximate the performance of the unit-level model and outperform the area-level model when using the same covariates.
- The aggregated nature of our performance comparisons thus far,
- however,
+The above results suggest that gradient boosting can approximate the performance
+ of the unit-level model and outperform the area-level model when using
+ the same covariates.
+ The aggregated nature of our performance comparisons thus far, however,
  mask some important differences between the methods.
- To illustrate these differences,
- we first use the variance-bias decomposition presented in Eq.
+ To illustrate these differences, we first use the variance-bias decomposition
+ presented in Eq.
  (
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -4058,11 +4097,15 @@ noprefix "false"
 
 \end_inset
 
- presents boxplots summarizing the distribution of the variance component across municipalities for select models.
- We see that gradient boosting is associated with lower variance estimates than the area-level model for any given set of covariates.
- For example,
- the median variance for gradient boosting with remotely-sensed covariates is 0.002 whereas the median variance for the area-level model with the same covariates is 0.005.
- This variance reduction is an important advantage of gradient boosting and the reason for its use of regularization.
+ presents boxplots summarizing the distribution of the variance component
+ across municipalities for select models.
+ We see that gradient boosting is associated with lower variance estimates
+ than the area-level model for any given set of covariates.
+ For example, the median variance for gradient boosting with remotely-sensed
+ covariates is 0.002 whereas the median variance for the area-level model
+ with the same covariates is 0.005.
+ This variance reduction is an important advantage of gradient boosting
+ and the reason for its use of regularization.
 \end_layout
 
 \begin_layout Standard
@@ -4174,33 +4217,36 @@ name "fig:decomposition"
 \end_layout
 
 \begin_layout Standard
-Panel (b) presents the bias component of the decomposition for the same set of models and shows that all the models depicted are approximately unbiased at the median.
+Panel (b) presents the bias component of the decomposition for the same
+ set of models and shows that all the models depicted are approximately
+ unbiased at the median.
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-The variance-bias decomposition shows that the MSE is the sum of the variance and the squared bias of the estimates.
- To illustrate both underestimates and overestimates,
- we do not square the bias estimates.
+The variance-bias decomposition shows that the MSE is the sum of the variance
+ and the squared bias of the estimates.
+ To illustrate both underestimates and overestimates, we do not square the
+ bias estimates.
 \end_layout
 
 \end_inset
 
- The models using remotely-sensed covariates nevertheless exhibit wide variation in the bias estimates,
- implying that the estimated poverty rates for some municipalities are severely biased.
- For example,
- the minimum and maximum bias estimates for gradient boosting with remotely-sensed covariates are -45 and 40 percentage points,
- respectively.
- The area-level model exhibits similar variation in the bias estimates when using remotely-sensed covariates,
- indicating that weak predictors can produce considerable biases for both methods,
- at least for some municipalities.
- While gradient boosting and the area-level model appear to be similarly biased for any given covariate set,
- a closer look at the source of these biases reveals an important shortcoming of gradient boosting.
+ The models using remotely-sensed covariates nevertheless exhibit wide variation
+ in the bias estimates, implying that the estimated poverty rates for some
+ municipalities are severely biased.
+ For example, the minimum and maximum bias estimates for gradient boosting
+ with remotely-sensed covariates are -45 and 40 percentage points, respectively.
+ The area-level model exhibits similar variation in the bias estimates when
+ using remotely-sensed covariates, indicating that weak predictors can produce
+ considerable biases for both methods, at least for some municipalities.
+ While gradient boosting and the area-level model appear to be similarly
+ biased for any given covariate set, a closer look at the source of these
+ biases reveals an important shortcoming of gradient boosting.
 \end_layout
 
 \begin_layout Standard
-To this end,
- panel (a) of Figure 
+To this end, panel (a) of Figure 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:poverty_sampling"
@@ -4210,18 +4256,21 @@ noprefix "false"
 
 \end_inset
 
- plots the municipality-level bias estimates from select models on the true municipality poverty rates.
- For each model,
- we fit a lowess curve to the data to show the (weighted) average of the bias estimates at different true poverty rates.
- The figure shows the source of the aforementioned bias variability:
- both models with remotely-sensed covariates severely overestimate poverty in the least poor municipalities and underestimate poverty in the most poor municipalities.
- Stated differently,
- the models with remotely-sensed covariates understate the spatial distribution of poverty.
- This result occurs because the predictions collapse toward the mean in the absence of informative covariates,
- which produces predictable biases in the tails of the distribution.
- Interestingly,
- for both covariate types,
- the area-level model is less biased for the poorest municipalities.
+ plots the municipality-level bias estimates from select models on the true
+ municipality poverty rates.
+ For each model, we fit a lowess curve to the data to show the (weighted)
+ average of the bias estimates at different true poverty rates.
+ The figure shows the source of the aforementioned bias variability: both
+ models with remotely-sensed covariates severely overestimate poverty in
+ the least poor municipalities and underestimate poverty in the most poor
+ municipalities.
+ Stated differently, the models with remotely-sensed covariates understate
+ the spatial distribution of poverty.
+ This result occurs because the predictions collapse toward the mean in
+ the absence of informative covariates, which produces predictable biases
+ in the tails of the distribution.
+ Interestingly, for both covariate types, the area-level model is less biased
+ for the poorest municipalities.
 \end_layout
 
 \begin_layout Standard
@@ -4343,7 +4392,9 @@ noprefix "false"
 
 \end_inset
 
- shows that an important reason for the area-level model's reduced bias is that its in-sample predictions are a weighted average of the model-based estimates and the (unbiased) direct estimates.
+ shows that an important reason for the area-level model's reduced bias
+ is that its in-sample predictions are a weighted average of the model-based
+ estimates and the (unbiased) direct estimates.
 \begin_inset Foot
 status collapsed
 
@@ -4359,32 +4410,38 @@ noprefix "false"
 \end_inset
 
  for details.
- By contrast,
- gradient boosting relies exclusively on the model-based estimates and only incorporates the direct estimates when fitting the model.
+ By contrast, gradient boosting relies exclusively on the model-based estimates
+ and only incorporates the direct estimates when fitting the model.
 \end_layout
 
 \end_inset
 
- For each model depicted,
- we focus on the 20 percent of municipalities with the highest true poverty rate,
- plot the municipality-level bias estimates on the frequency with which a municipality was sampled,
- and then fit a lowess curve to the data.
- The sampling frequencies capture the proportion of samples for which a municipality received an in-sample prediction,
- thus benefitting from the area-level model's averaging procedure.
- As expected,
- we see that the area-level model is less biased for municipalities with higher sampling frequencies.
- The performance disparity is especially pronounced among the models with remotely-sensed covariates,
- as the area-level model is roughly 10 percentage points less biased at the highest sampling frequencies.
+ For each model depicted, we focus on the 20 percent of municipalities with
+ the highest true poverty rate, plot the municipality-level bias estimates
+ on the frequency with which a municipality was sampled, and then fit a
+ lowess curve to the data.
+ The sampling frequencies capture the proportion of samples for which a
+ municipality received an in-sample prediction, thus benefitting from the
+ area-level model's averaging procedure.
+ As expected, we see that the area-level model is less biased for municipalities
+ with higher sampling frequencies.
+ The performance disparity is especially pronounced among the models with
+ remotely-sensed covariates, as the area-level model is roughly 10 percentage
+ points less biased at the highest sampling frequencies.
 \end_layout
 
 \begin_layout Standard
-These latter results highlight an important methodological difference between the modern and traditional approaches.
- In particular,
- the machine-learning methods used for poverty mapping were developed for out-of-sample prediction and ignore the direct estimates after fitting the model.
- The traditional methods,
- by contrast,
- were developed specifically for poverty mapping and recognize that mapping is partly an in-sample prediction problem.
- The traditional methods thus use the direct estimates after fitting the model and weight them more heavily when the covariates are less informative (see Section 
+These latter results highlight an important methodological difference between
+ the modern and traditional approaches.
+ In particular, the machine-learning methods used for poverty mapping were
+ developed for out-of-sample prediction and ignore the direct estimates
+ after fitting the model.
+ The traditional methods, by contrast, were developed specifically for small
+ area estimates of poverty and recognize that the estimation is partly an
+ in-sample prediction problem.
+ The traditional methods thus use the direct estimates after fitting the
+ model and weight them more heavily when the covariates are less informative
+ (see Section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:methods"
@@ -4395,10 +4452,11 @@ noprefix "false"
 \end_inset
 
  for discussion of the BLUP method).
- Interestingly,
- this highlights another concern with using direct estimates to assess model performance:
- traditional methods are designed to be less predictive of direct estimates when the model is more informative.
- The main point here is nevertheless that our results are in line with the expectation that traditional methods will exhibit less in-sample bias,
+ Interestingly, this highlights another concern with using direct estimates
+ to assess model performance: traditional methods are designed to be less
+ predictive of direct estimates when the model is more informative.
+ The main point here is, nevertheless, that our results are in line with
+ the expectation that traditional methods will exhibit less in-sample bias,
  particularly in the presence of weak covariates.
 \end_layout
 
@@ -4414,37 +4472,38 @@ name "sec:conclusion"
 \end_layout
 
 \begin_layout Standard
-Machine-learning approaches to poverty mapping have become increasingly popular in recent years.
- In contrast to traditional mapping procedures,
- modern machine-learning methods rely on non-parametric statistical techniques applied to remotely-sensed data,
- such as satellite imagery or call detail records.
- In addition,
- machine-learning approaches routinely conduct model assessment using the 
+Machine-learning approaches to poverty mapping have become increasingly
+ popular in recent years.
+ In contrast to traditional mapping procedures, modern machine-learning
+ methods rely on non-parametric statistical techniques applied to remotely-sense
+d data, such as satellite imagery or call detail records.
+ In addition, machine-learning approaches routinely conduct model assessment
+ using the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-,
- which is often calculated by regressing direct,
- survey-based poverty estimates on model predictions.
- While direct estimates are unbiased,
- they can be imprecise measures of true poverty rates and,
- as a result,
- it is unclear whether this approach to assessment is informative of model performance.
- In this paper,
- we thus conducted a more rigorous assessment of the machine-learning approach to poverty mapping by using the Mexican Intercensal Survey for several design-based simulation experiments.
+, which is often calculated by regressing direct, survey-based poverty estimates
+ on model predictions.
+ While direct estimates are unbiased, they can be imprecise measures of
+ true poverty rates and, as a result, it is unclear whether this approach
+ to assessment is informative of model performance.
+ In this paper, we thus conducted a more rigorous assessment of the machine-lear
+ning approach to poverty mapping by using the Mexican Intercensal Survey
+ for several design-based simulation experiments.
 \end_layout
 
 \begin_layout Standard
-To motivate our experiments,
- we outlined several ways that the 
+To motivate our experiments, we outlined several ways that the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- can be a misleading measure of model performance:
- it is biased downward when direct estimates are used as the reference measure of model performance,
- it is insensitive to differences in location and scale between the reference measure and the model predictions,
- and it is normalized by the variance of the reference measure.
- The limitations of the standard validation procedure are due both to the 
+ can be a misleading measure of model performance: it is biased downward
+ when direct estimates are used as the reference measure of model performance,
+ it is insensitive to differences in location and scale between the reference
+ measure and the model predictions, and it is normalized by the variance
+ of the reference measure.
+ The limitations of the standard validation procedure are due both to the
+ 
 \begin_inset Formula $R^{2}$
 \end_inset
 
@@ -4453,38 +4512,47 @@ To motivate our experiments,
 \end_inset
 
  to direct poverty estimates rather than true poverty measures.
- Our experiments address these limitations in two ways:
- (1) we assess model performance using data that allows us to use true poverty indicators as the reference measures,
- and (2) we emphasize validation metrics that are sensitive to systematic biases in the poverty estimates and avoid the normalization issue.
+ Our experiments address these limitations in two ways: (1) we assess model
+ performance using data that allows us to use true poverty indicators as
+ the reference measures, and (2) we emphasize validation metrics that are
+ sensitive to systematic biases in the poverty estimates and avoid the normaliza
+tion issue.
 \end_layout
 
 \begin_layout Standard
-Our results showed that the modern approach to poverty mapping under-performs relative to the traditional approach both in terms of mean squared error and poverty reduction.
- We found that this under-performance is driven by the modern approach's reliance on remotely-sensed covariates.
- When using the same covariates,
- machine learning performs comparably to the unit-level model and slightly outperforms the area-level model.
- We then showed that the performance advantage of machine learning relative to the area-level model is due to its variance-reduction properties,
- namely its use of regularization.
- The cost of such variance reduction,
- however,
- is that machine learning exhibits more bias in the tails of the poverty distribution than the area-level model.
- This bias-variance tradeoff is especially stark in the context of remotely-sensed covariates,
- which suggests that the quality of the available data is an important consideration when choosing between parametric and non-parametric mapping methods.
+Our results showed that the modern approach to poverty mapping under-performs
+ relative to the traditional approach both in terms of mean squared error
+ and poverty reduction.
+ We found that this under-performance is driven by the modern approach's
+ reliance on remotely-sensed covariates.
+ When using the same covariates, machine learning performs comparably to
+ the unit-level model and slightly outperforms the area-level model.
+ We then showed that the performance advantage of machine learning relative
+ to the area-level model is due to its variance-reduction properties, namely
+ its use of regularization.
+ The cost of such variance reduction, however, is that machine learning
+ exhibits more bias in the tails of the poverty distribution than the area-level
+ model.
+ This bias-variance tradeoff is especially stark in the context of remotely-sens
+ed covariates, which suggests that the quality of the available data is
+ an important consideration when choosing between parametric and non-parametric
+ mapping methods.
 \end_layout
 
 \begin_layout Standard
 Our analysis has several practical implications for poverty mapping.
- For one,
- producers and users of poverty maps should exercise caution when using 
+ For one, producers and users of poverty maps should exercise caution when
+ using 
 \begin_inset Formula $R^{2}$
 \end_inset
 
- as a model assessment tool,
- especially when it is calculated using direct poverty estimates as the reference measure.
- Poverty maps should ideally be validated using a credible ground truth and alternative validation metrics,
- such as the mean squared error and targeting performance.
- As the survey data used in our experiments is uniquely large,
- researchers may need to consider alternative design-based validation exercises.
+ as a model assessment tool, especially when it is calculated using direct
+ poverty estimates as the reference measure.
+ Poverty maps should ideally be validated using a credible ground truth
+ and alternative validation metrics, such as the mean squared error and
+ targeting performance.
+ As the survey data used in our experiments is uniquely large, researchers
+ may need to consider alternative design-based validation exercises.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -4493,7 +4561,8 @@ literal "false"
 
 \end_inset
 
- recommend using available census data to conduct sampling experiments based on a variable that is correlated with the variable of interest.
+ recommend using available census data to conduct sampling experiments based
+ on a variable that is correlated with the variable of interest.
  
 \begin_inset CommandInset citation
 LatexCommand citet
@@ -4540,50 +4609,56 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Our results also highlight that covariate quality has important implications for the practice of poverty mapping.
- Most obviously,
- the limited predictive capacity of remotely-sensed covariates suggests that researchers should incorporate census-based covariates whenever possible.
- Perhaps more interestingly,
- our results suggest that the quality of the available covariates has implications for the choice of statistical model,
+Our results also highlight that covariate quality has important implications
+ for the practice of poverty mapping.
+ Most obviously, the limited predictive capacity of remotely-sensed covariates
+ suggests that researchers should incorporate census-based covariates whenever
+ possible.
+ Perhaps more interestingly, our results suggest that the quality of the
+ available covariates has implications for the choice of statistical model,
  particularly in off-census years.
- With high-quality covariates,
- there are only minor performance differences between the non-parametric and parametric approaches to estimating poverty maps.
- Machine learning is a reasonable choice in this case,
- as it performs slightly better overall with only minimal increases in bias.
- With lower-quality covariates,
- however,
- the modest overall advantage of machine learning is coupled with substantial increases in bias for some areas.
- Machine learning should be used with caution in this case,
- especially when poverty maps are needed to understand absolute poverty levels.
+ With high-quality covariates, there are only minor performance differences
+ between the non-parametric and parametric approaches to estimating poverty
+ maps.
+ Machine learning is a reasonable choice in this case, as it performs slightly
+ better overall with only minimal increases in bias.
+ With lower-quality covariates, however, the modest overall advantage of
+ machine learning is coupled with substantial increases in bias for some
+ areas.
+ Machine learning should be used with caution in this case, especially when
+ poverty maps are needed to understand absolute poverty levels.
 \end_layout
 
 \begin_layout Standard
-Stated differently,
- there are important tradeoffs to consider when choosing between modern and traditional poverty-mapping methods,
- particularly in off-census years.
- While both approaches require survey-based welfare measures,
- producers of poverty maps must weigh the costs of gathering different types of covariate data against their relative performance benefits.
- For example,
- we found that the traditional approach only slightly outperforms the modern approach in terms of targeting performance.
- The modern approach could potentially be a reasonable choice if there are substantial costs associated with accessing census data.
- Our targeting results nevertheless only depend on each method's rank-ordering of areas and do not consider the levels of poverty estimated by each method.
- In cases where poverty levels are relevant (e.g.,
- determining program quotas),
- producers of poverty maps must additionally navigate the bias-variance tradeoff.
+Stated differently, there are important tradeoffs to consider when choosing
+ between modern and traditional poverty-mapping methods, particularly in
+ off-census years.
+ While both approaches require survey-based welfare measures, producers
+ of poverty maps must weigh the costs of gathering different types of covariate
+ data against their relative performance benefits.
+ For example, we found that the traditional approach only slightly outperforms
+ the modern approach in terms of targeting performance.
+ The modern approach could potentially be a reasonable choice if there are
+ substantial costs associated with accessing census data.
+ Our targeting results nevertheless only depend on each method's rank-ordering
+ of areas and do not consider the levels of poverty estimated by each method.
+ In cases where poverty levels are relevant (e.g., determining program quotas),
+ producers of poverty maps must additionally navigate the bias-variance
+ tradeoff.
  
 \end_layout
 
 \begin_layout Standard
-We have identified several limitations of the modern approach to poverty mapping,
- but our analysis has its own drawbacks.
- We have focused on measuring income poverty and have not considered the performance of the modern approach when used in the context of other welfare measures (e.g.,
- wealth).
+We have identified several limitations of the modern approach to poverty
+ mapping, but our analysis has its own drawbacks.
+ We have focused on measuring income poverty and have not considered the
+ performance of the modern approach when used in the context of other welfare
+ measures (e.g., wealth).
 \begin_inset Foot
 status collapsed
 
 \begin_layout Plain Layout
-In particular,
- see 
+In particular, see 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "hall2023review"
@@ -4591,46 +4666,49 @@ literal "false"
 
 \end_inset
 
- for detailed discussion on the capacity of remotely-sensed data to predict alternative welfare measures.
+ for detailed discussion on the capacity of remotely-sensed data to predict
+ alternative welfare measures.
 \end_layout
 
 \end_inset
 
- We have also only examined the modern approach using the Mexican Intercensal Survey and remotely-sensed data available at the same time.
- Other types of passively-collected data (e.g.,
- call detail records) or experiments using data from other countries could produce different results.
- Finally,
- there are other possible applications of machine learning to poverty mapping that we have not considered,
- such as extracting numerical covariates from high-dimensional data sources.
+ We have also only examined the modern approach using the Mexican Intercensal
+ Survey and remotely-sensed data available at the same time.
+ Other types of passively-collected data (e.g., call detail records) or experiment
+s using data from other countries could produce different results.
+ Finally, there are other possible applications of machine learning to poverty
+ mapping that we have not considered, such as extracting numerical covariates
+ from high-dimensional data sources.
  Each of these limitations suggests a potential area for future research.
  
 \end_layout
 
 \begin_layout Standard
-An additional area for future research would be to develop strategies to correct the 
+An additional area for future research would be to develop strategies to
+ correct the 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  for its various limitations.
- For example,
- one might correct for measurement error in the direct estimates by multiplying the estimated 
+ For example, one might correct for measurement error in the direct estimates
+ by multiplying the estimated 
 \begin_inset Formula $R^{2}$
 \end_inset
 
  by the reciprocal of the bias term.
- This strategy would require estimating the variance of the measurement error associated with the direct estimates.
- Relatedly,
- note that our derivation of this bias relies on the assumption of classical measurement error,
- which may be violated in practice (e.g.,
+ This strategy would require estimating the variance of the measurement
+ error associated with the direct estimates.
+ Relatedly, note that our derivation of this bias relies on the assumption
+ of classical measurement error, which may be violated in practice (e.g.,
  if poorer or richer households are less likely to be sampled).
- Another topic for future research would then be to derive the bias under less stringent assumptions.
- Finally,
- as measurement error in the direct estimates is not the only concern with 
+ Another topic for future research would then be to derive the bias under
+ less stringent assumptions.
+ Finally, as measurement error in the direct estimates is not the only concern
+ with 
 \begin_inset Formula $R^{2}$
 \end_inset
 
-,
- future research could consider applying multiple adjustments simultaneously.
+, future research could consider applying multiple adjustments simultaneously.
  
 \end_layout
 
